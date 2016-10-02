@@ -1,0 +1,18 @@
+doctype
+html
+	head
+		link(href="css/main.min.css",rel="stylesheet")
+		block head	
+
+body
+	div(class="container-fluid")
+		div(class="container")
+			include ../components/navigation	
+	div(id="content")
+		block content
+		
+	div(class="container-fluid")
+		div(class="container")
+			include ../components/footer
+
+	script(src="js/main.min.js",type="text/javascript")
