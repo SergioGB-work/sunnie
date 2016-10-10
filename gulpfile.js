@@ -51,7 +51,7 @@ gulp.task('compressJS', function() {
         .pipe(gulp.dest(path.jsDest));
 });
 
-
+gulp.task('default',['html', 'styles','compressJS']);
 
 gulp.watch('src/jade/**/*.jade', ['html']);
 gulp.watch('src/sass/**/*.scss', ['styles']);
