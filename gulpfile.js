@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 	streamqueue  = require('streamqueue');	
 
 var path = {
-    jade: ['src/jade/**/*.jade'],
+    jade: ['src/jade/*.jade'],
     html: 'public/',
 	sass: ['src/sass/**/main.scss'],
 	css: 'public/css/',
@@ -29,12 +29,12 @@ gulp.task('html', function() {
 gulp.task('styles', function() {
 	gulp.src(path.sass)
 		.pipe(sass().on('error', sass.logError))
-		.pipe(minifyCss())
 		.pipe(concat('main.css'))
 		.pipe(rename({
 			basename: 'main',
 			extname: '.min.css'
 		}))
+		.pipe(minifyCss())		
 		.pipe(gulp.dest(path.css))
 });
 

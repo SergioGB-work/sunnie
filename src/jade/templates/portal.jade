@@ -5,14 +5,15 @@ html
 		block head	
 
 body
-	div(class="container-fluid")
-		div(class="container")
-			include ../components/navigation	
+	div(id="header")
+		div(class="container-fluid")
+			div(class="container")
+			include navigation
 	div(id="content")
 		block content
-		
-	div(class="container-fluid")
-		div(class="container")
-			include ../components/footer
+	div(id="footer")
+		div(class="container-fluid")
+			div(class="container")
+				include footer
 
 	script(src="js/main.min.js",type="text/javascript")

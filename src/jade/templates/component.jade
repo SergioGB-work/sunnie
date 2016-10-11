@@ -1,0 +1,14 @@
+block vars
+- var classesComponent = 'component'
+
+if showTitle  != "true"
+	- var classesComponent = classesComponent + ' component-noTitle'
+
+div(class="#{classesComponent} #{componentName}")
+	if showTitle == "true"
+		div(class="component-title")
+			h2 
+				block component-title
+	
+	div(class="component-content")
+		block component-content
