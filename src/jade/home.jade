@@ -1,7 +1,10 @@
-extends layouts/layout-4-8
+extends layouts/layout-12-8-4
 
 block header
 	title Mi titulo
+	
+block content-upper
+	include components/component-sample
 
 block content-left
 	include components/component-sample
@@ -11,4 +14,4 @@ block content-left
 	include components/component-sample	
 
 block content-right
-	h1 My page6
+	div(class="component") My page6
