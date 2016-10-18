@@ -1,0 +1,191 @@
+*{
+	@include borderRadius0;	
+}
+
+body{
+	background-color: $bodyColor;
+	color: $mainColorText;
+	font-family: Arial,Helvetica,sans-serif;
+	font-size: 14px;
+	line-height:1;
+}
+
+h1{
+	font-size:30px;
+	color:$primaryColor;
+	margin-bottom:20px;	
+}
+
+h2{
+	font-size:24px;
+	color:$primaryColor;
+	margin-bottom:20px;	
+}
+
+h3{
+	font-size:18px;
+	color: $mainColorText;
+	margin-bottom:20px;	
+}
+
+h4{
+	font-size:16px;
+	color: $mainColorText;
+}
+
+h5{
+	font-size:14px;
+	color: $mainColorText;
+}
+
+h6{
+	font-size:14px;
+	color: $mainColorText;
+}
+
+a{
+	color:$primaryColor;
+	
+	&:hover,&:active,&:focus{
+		text-decoration:underline;
+		color:$primaryColor;
+	}
+
+}
+
+p{
+	line-height:1.5;
+	margin-bottom:20px;
+}
+
+img{
+	max-width:100%;
+	border:0;
+}
+
+
+/** FORMS ELEMENTS **/
+form{
+
+}
+
+label{
+	font-size:16px;
+}
+
+::-webkit-input-placeholder {
+   color: $colorPlaceHolder;
+   font-size:18px;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: $colorPlaceHolder;
+  font-size:18px;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: $colorPlaceHolder;
+   font-size:18px;
+}
+
+:-ms-input-placeholder {
+   color: $colorPlaceHolder;
+   font-size:18px;
+}
+
+input{
+
+	&[type="text"],&[type="password"],&[type="mail"],&[type="number"],&[type="search"]{
+	
+	}
+
+	&[type="text"]{
+
+	}
+	
+	&[type="password"]{
+
+	}
+	
+	&[type="mail"]{
+
+	}	
+	
+	&[type="number"]{
+
+	}	
+	
+	&[type="search"]{
+
+	}	
+
+}
+
+textarea{
+
+}
+
+select{
+
+}
+
+/** BUTTONS **/
+button,	input[type="submit"],.btn{
+	
+	border:0;
+	border-width:1px;
+	border-style:solid;
+	padding:10px 20px;
+	text-align:center;
+	line-height:1;
+	@include borderRadius0;
+	@include stylePrimaryButton;	
+
+	&:hover,&:active,&:focus{
+		@include stylePrimaryButtonHover;
+	}	
+
+	&.btn-primary{
+		@include stylePrimaryButton;
+		
+		&:hover,&:active,&:focus{
+			@include stylePrimaryButtonHover;
+		}
+	}
+
+	&.btn-default{
+		background-color:$buttonNegativeColor;
+		border-color:$buttonNegativeColor;
+		color:$buttonNegativeTextColor;
+		
+		&:hover,&:active,&:focus{
+			background-color:$buttonNegativeColorHover;
+			border-color:$buttonNegativeColorHover;
+			color:$buttonNegativeTextColor;
+		}
+	}	
+}
+
+/** TABLE ITEMS **/
+
+table{
+	float:left;
+	width:100%;
+
+	tbody{
+	
+		td{
+		
+		}
+	}
+	
+	thead{	
+		th{
+			background:$tableHeaderBgColor;
+			color:$tableHeaderTextColor;
+		}
+	}
+}
+
+
+	

@@ -1,0 +1,33 @@
+@mixin borderRadius0 {
+	border-radius:0;
+	-webkit-border-radius:0;
+}
+
+@mixin stylePrimaryButton {
+	background-color:$buttonColor;
+	border-color:$buttonColor;
+	color:$buttonTextColor;
+}
+
+@mixin stylePrimaryButtonHover {
+	background-color:$buttonColorHover;
+	border-color:$buttonColorHover;
+	color:$buttonTextColor;
+}
+
+@mixin styleDefaultButton {
+	background-color:$buttonNegativeColor;
+	border-color:$buttonNegativeColor;
+	color:$buttonNegativeTextColor;
+}
+
+@mixin styleDefaultButtonHover {
+	background-color:$buttonNegativeColorHover;
+	border-color:$buttonNegativeColorHover;
+	color:$buttonNegativeTextColor;
+}
+
+@mixin transitionAll{
+	transition: all 0s linear 0.5s;
+	-webkit-transition: all 0s linear 0.5s;
+}

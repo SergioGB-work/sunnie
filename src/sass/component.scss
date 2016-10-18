@@ -1,0 +1,27 @@
+.component{
+	float: left;
+    width: 100%;
+    padding: 20px;
+	margin-bottom:30px;
+	border:1px solid $borderColor;
+	
+	.component-title{
+		float:left;
+		width:100%;
+		
+		h2{
+		
+		}
+	}
+	
+	.component-content{
+		float:left;
+		width:100%;		
+	}
+	
+	&.component-full{
+		padding:0;
+		border:0;
+	}
+
+}

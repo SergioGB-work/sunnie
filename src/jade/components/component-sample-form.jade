@@ -1,0 +1,48 @@
+extends ../templates/component
+block vars
+	- var componentName = 'component-sample'
+	- var showTitle = 'true'
+	- var full = 'false'
+
+block component-title
+	| Sample Form Component
+
+block component-content
+	h3 Basic Example
+
+	form
+		div(class="form-group")
+			label(for="exampleInputEmail1") Email address
+			input(type="email",class="form-control",id="exampleInputEmail1",placeholder="Email")
+
+		div(class="form-group")
+			label(for="exampleInputPassword1") Password
+			input(type="password",class="form-control",id="exampleInputPassword1",placeholder="Password")
+
+		div(class="form-group")
+			label(for="exampleInputFile") File input
+			input(type="file",id="exampleInputFile")
+			p(class="help-block")
+				| Example block-level help text here.
+
+		div(class="checkbox")
+			input(type="checkbox")
+			label Check me out
+
+		div(class="form-group")
+			button(type="submit",class="btn") Submit
+
+
+	h3 Inline Form
+	
+	form(class="form-inline")
+		div(class="form-group")
+			label(for="exampleInputName2") Name
+			input(type="text",class="form-control",id="exampleInputName2",placeholder="Jane Doe")
+
+		div(class="form-group")
+			label(for="exampleInputEmail2") Email
+			input(type="email",class="form-control",id="exampleInputEmail2",placeholder="jane.doe@example.com")
+
+		div(class="form-group")
+			button(type="submit",class="btn btn-default") Send invitation
