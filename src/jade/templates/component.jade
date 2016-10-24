@@ -1,17 +1,25 @@
-block vars
-- var classesComponent = 'component'
+include include_components
 
-if showTitle  != "true"
-	- var classesComponent = classesComponent + ' component-noTitle'
+mixin component(componentType,content,componentTitle,showTitle,full)
 
-if full  == "true"
-	- var classesComponent = classesComponent + ' component-full'
+	- var classesComponent = 'component'
 
-div(class="#{classesComponent} #{componentName}")
-	if showTitle == "true"
-		div(class="component-title")
-			h2 
-				block component-title
+	if showTitle  == "false"
+		- var classesComponent = classesComponent + ' component-noTitle'
 
-	div(class="component-content")
-		block component-content
+	if full  == "true"
+		- var classesComponent = classesComponent + ' component-full'
+
+	div(class="#{classesComponent} #{componentType}")
+		if showTitle != "false"
+			div(class="component-title")
+				h2 #{componentTitle}
+
+		div(class="component-content")
+			+#{componentType}(content)
+
+
+
+
+
+

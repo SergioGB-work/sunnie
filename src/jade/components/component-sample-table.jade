@@ -1,13 +1,4 @@
-extends ../templates/component
-block vars
-	- var componentName = 'component-sample'
-	- var showTitle = 'true'
-	- var full = 'true'
-
-block component-title
-	| Sample Table Component
-
-block component-content
+mixin component-sample-table(content)
 
 	table(class="table table-bordered mb0")
 		thead

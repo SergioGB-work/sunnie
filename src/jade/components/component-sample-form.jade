@@ -1,13 +1,4 @@
-extends ../templates/component
-block vars
-	- var componentName = 'component-sample'
-	- var showTitle = 'true'
-	- var full = 'false'
-
-block component-title
-	| Sample Form Component
-
-block component-content
+mixin component-sample-form(content)
 	h3 Basic Example
 
 	form

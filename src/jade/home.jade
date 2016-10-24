@@ -4,14 +4,19 @@ block header
 	title Mi titulo
 	
 block content-upper
-	include components/component-sample
+
+	+component('component-sample-table','','Sample Component 2','true','true')
 
 block content-left
-	include components/component-sample-table
 
-	include components/component-sample-form
+	+component('component-sample','Hola Paco','Sample Component')
 
-	include components/component-sample	
+	+component('component-sample','Hola Pedro, mi nombre es sancho','Sample Component 2')
+
+	+component('component-sample-form','','Sample Component 2')
+
+	+component('component-sample-table','','Sample Component 2','true','true')
+
 
 block content-right
 	div(class="component") My page6
