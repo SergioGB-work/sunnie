@@ -35,7 +35,9 @@ gulp.task('styles', function() {
 			basename: 'main',
 			extname: '.min.css'
 		}))
-		.pipe(minifyCss())		
+		.pipe(minifyCss({
+            keepSpecialComments: 0
+        }))		
 		.pipe(gulp.dest(path.css))
 });
 
