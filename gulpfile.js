@@ -13,8 +13,9 @@ var path = {
     html: 'public/',
 	sass: ['src/sass/**/main.scss'],
 	css: 'public/css/',
-	js: ['src/javascript/*.js'],
-	jsLibs: ['src/javascript/libs/*.js'],
+	js: ['src/javascript/[^_]*.js'],
+	jsLibs: ['src/javascript/libs/[^_]*.js'],
+	jsPrimaryLibs: ['src/javascript/primaryLibs/[^_]*.js'],
 	jsDest: 'public/js/'
 };
 
@@ -41,6 +42,7 @@ gulp.task('styles', function() {
 
 gulp.task('compressJS', function() {  
     return streamqueue({ objectMode: true },
+		gulp.src(path.jsPrimaryLibs),
 		gulp.src(path.jsLibs),
 		gulp.src(path.js)
 	)
