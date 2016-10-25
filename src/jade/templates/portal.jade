@@ -2,21 +2,30 @@ doctype
 html
 	head
 		link(href="css/main.min.css",rel="stylesheet")
-		block head	
+		block head
 
 body
 
 	include component
 
-	div(id="header")
-		div(class="container-fluid")
-			div(class="container")
-			include navigation
-	div(id="content")
-		block content
-	div(id="footer")
-		div(class="container-fluid")
-			div(class="container")
-				include footer
+	div(id="wrapper")
+
+		header(id="header")
+
+			div(class="container-fluid")
+				div(class="container")
+					include header
+
+				div(id="navigation")
+					div(class="container")
+						include navigation
+
+		section(id="content")
+			block content
+
+		footer(id="footer")
+			div(class="container-fluid")
+				div(class="container")
+					include footer
 
 	script(src="js/main.min.js",type="text/javascript")
