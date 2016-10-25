@@ -7,12 +7,15 @@ var gulp = require('gulp'),
     rename = require('gulp-rename');
 	uglify = require('gulp-uglify'); 	
 	streamqueue  = require('streamqueue');	
+	image  = require('gulp-image');	
 
 var path = {
     jade: ['src/jade/*.jade'],
     html: 'public/',
 	sass: ['src/sass/**/main.scss'],
 	css: 'public/css/',
+	images: 'src/images/**/*.*',
+	imagesDest: 'public/images/',
 	js: ['src/javascript/[^_]*.js'],
 	jsLibs: ['src/javascript/libs/[^_]*.js'],
 	jsPrimaryLibs: ['src/javascript/primaryLibs/[^_]*.js'],
@@ -55,8 +58,26 @@ gulp.task('compressJS', function() {
         .pipe(gulp.dest(path.jsDest));
 });
 
-gulp.task('default',['html', 'styles','compressJS']);
+gulp.task('images', function () {
+  gulp.src(path.images)
+  .pipe(image({
+      pngquant: true,
+      optipng: false,
+      zopflipng: true,
+      jpegRecompress: false,
+      jpegoptim: true,
+      mozjpeg: true,
+      gifsicle: true,
+      svgo: true,
+      concurrent: 10
+    }))
+    .pipe(gulp.dest(path.imagesDest));
+});
+
+
+gulp.task('default',['html', 'styles','compressJS','images']);
 
 gulp.watch('src/jade/**/*.jade', ['html']);
 gulp.watch('src/sass/**/*.scss', ['styles']);
+gulp.watch('src/images/**/*.*', ['images']);
 gulp.watch('src/javascript/**/*.js', ['compressJS']);
