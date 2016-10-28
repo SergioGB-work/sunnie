@@ -5,21 +5,27 @@ block header
 	
 block content-upper
 
-	+component('component-breadcrumbs','','','false','true')
+	+component('component-breadcrumbs','id2','','','false','true')
+
 
 block content-left
 
-	+component('component-sample','Hola Paco','Sample Component')
+	+component('component-sample-basics','id3','','Sample Component Basics')
 
-	+component('component-sample','Hola Pedro, mi nombre es sancho','Sample Component 2')
+	+component('component-sample-table','id4','','Tables','true','true')
+	
+	+component('component-sample-form','id5','','Forms')
 
-	+component('component-sample-form','','Sample Component 2')
+	+component('component-sample','id6','Hola Paco','Sample Component')
 
-	+component('component-sample-table','','Sample Component 2','true','true')
+	+component('component-sample','id7','Hola Pedro, mi nombre es sancho','Sample Component 2')
 
 
 block content-right
 
-	+component('component-image',{'src':'/images/image1.png','alt':'description'},'','false','true')
+	+component('component-image','id8',{'src':'/images/image1.png','alt':'description'},'','false','true')
 
-	div(class="component") My page6
+	+component('component-banner','id8',{'src':'/images/image1.png','alt':'description','href':'./pagina1.html','title':'Ir a la pagina 1'},'','false','true')
+
+	div(class="component") 
+		h2 My page6

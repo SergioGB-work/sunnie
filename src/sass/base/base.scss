@@ -5,46 +5,50 @@
 body{
 	background-color: $bodyColor;
 	color: $mainColorText;
-	font-family: Arial,Helvetica,sans-serif;
-	font-size: 14px;
+	font-family: $font-family;
+	font-size:calculateFontSize(14px);
 	line-height:1;
 }
 
 h1{
-	font-size:30px;
+	font-size:calculateFontSize(30px);
 	color:$primaryColor;
 	margin-bottom:20px;	
 }
 
 h2{
-	font-size:24px;
+	font-size:calculateFontSize(24px);
 	color:$primaryColor;
 	margin-bottom:20px;	
 }
 
 h3{
-	font-size:18px;
+	font-size:calculateFontSize(18px);
 	color: $mainColorText;
 	margin-bottom:20px;	
 }
 
 h4{
-	font-size:16px;
+	font-size:calculateFontSize(16px);
 	color: $mainColorText;
+	margin-bottom:10px;		
 }
 
 h5{
-	font-size:14px;
+	font-size:calculateFontSize(14px);
 	color: $mainColorText;
+	margin-bottom:10px;		
 }
 
 h6{
-	font-size:14px;
+	font-size:calculateFontSize(14px);
 	color: $mainColorText;
+	margin-bottom:10px;		
 }
 
 a{
 	color:$primaryColor;
+	font-size: calculateFontSize(14px);
 	
 	&:hover,&:active,&:focus{
 		text-decoration:underline;
@@ -56,6 +60,11 @@ a{
 p{
 	line-height:1.5;
 	margin-bottom:20px;
+	font-size: calculateFontSize(14px);
+}
+
+strong,b{
+	@include fontWeightBold;	
 }
 
 img{
@@ -63,44 +72,83 @@ img{
 	border:0;
 }
 
+ul,ol{
+	padding-left:30px;
+
+	li{
+		line-height:1.5;
+	}
+}
+
+ul{
+	list-style:disc;
+	
+	ul{
+			list-style:circle;
+		ul{
+			list-style:square;
+		}
+	}
+}
+
+ol{
+	list-style:decimal;
+}	
+
+dl{
+	line-height:1.5;
+	dt{
+		@include fontWeightBold;
+	}
+	dd{
+		
+	}
+}
+
 
 /** FORMS ELEMENTS **/
 form{
-
+	margin-bottom:20px;
 }
 
 label{
-	font-size:16px;
+	font-size: calculateFontSize(14px);
+	@include fontWeightBold;
 }
 
 ::-webkit-input-placeholder {
    color: $colorPlaceHolder;
-   font-size:18px;
+   font-size: calculateFontSize(14px);
 }
 
 :-moz-placeholder { /* Firefox 18- */
    color: $colorPlaceHolder;
-  font-size:18px;
+   font-size: calculateFontSize(14px);
 }
 
 ::-moz-placeholder {  /* Firefox 19+ */
    color: $colorPlaceHolder;
-   font-size:18px;
+   font-size: calculateFontSize(14px);
 }
 
 :-ms-input-placeholder {
    color: $colorPlaceHolder;
-   font-size:18px;
+   font-size: calculateFontSize(14px);
 }
 
 input{
-
-	&[type="text"],&[type="password"],&[type="mail"],&[type="number"],&[type="search"]{
+	font-size: calculateFontSize(14px);
 	
+	&[type="text"],&[type="password"],&[type="email"],&[type="number"],&[type="search"]{
+		@include inputStyle;	
+
+		&:hover,&:focus,&:active{
+			@include inputStyleHover;
+		}
 	}
 
 	&[type="text"]{
-
+		
 	}
 	
 	&[type="password"]{
@@ -118,15 +166,22 @@ input{
 	&[type="search"]{
 
 	}	
-
 }
 
 textarea{
-
+	@include inputStyle;	
+	
+		&:hover,&:focus,&:active{
+			@include inputStyleHover;
+		}		
 }
 
-select{
-
+select{	
+	@include inputStyle;	
+	
+		&:hover,&:focus,&:active{
+			@include inputStyleHover;
+		}	
 }
 
 /** BUTTONS **/
@@ -143,27 +198,7 @@ button,	input[type="submit"],.btn{
 
 	&:hover,&:active,&:focus{
 		@include stylePrimaryButtonHover;
-	}	
-
-	&.btn-primary{
-		@include stylePrimaryButton;
-		
-		&:hover,&:active,&:focus{
-			@include stylePrimaryButtonHover;
-		}
-	}
-
-	&.btn-default{
-		background-color:$buttonNegativeColor;
-		border-color:$buttonNegativeColor;
-		color:$buttonNegativeTextColor;
-		
-		&:hover,&:active,&:focus{
-			background-color:$buttonNegativeColorHover;
-			border-color:$buttonNegativeColorHover;
-			color:$buttonNegativeTextColor;
-		}
-	}	
+	}		
 }
 
 /** TABLE ITEMS **/
@@ -186,6 +221,3 @@ table{
 		}
 	}
 }
-
-
-	

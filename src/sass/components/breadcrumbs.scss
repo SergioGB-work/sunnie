@@ -1,0 +1,31 @@
+.component-breadcrumbs{
+
+	ul{
+		float:left;
+		width:100%;	
+		padding:0;
+		margin:0;
+		
+		li{
+			float:left;
+			
+			h3{
+				float:left;
+				margin:0;
+			}
+			
+			+ li{
+				&:before{
+					padding: 8px 3px 0px 7px;
+					color: #ccc;
+					content: "/\00a0";
+					float: left;
+					line-height: 1;		
+				}
+			}			
+			
+			
+		}
+	}
+
+}

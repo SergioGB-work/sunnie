@@ -1,27 +1,98 @@
 mixin component-sample-table(content)
 
-	table(class="table table-bordered mb0")
-		thead
-			tr
-				th #
-				th First Name
-				th Last Name
-				th Username
-		tbody
-			tr
-				th(scope="row") 1
-				td Mark
-				td Otto
-				td @mdo
+	div
+		div.mb30.fl.w100perc
+			h3 Standar
+			table(class="table mb0")
+				thead
+					tr
+						th #
+						th First Name
+						th Last Name
+						th Username
+				tbody
+					tr
+						th(scope="row") 1
+						td Mark
+						td Otto
+						td @mdo
 
-			tr
-				th(scope="row") 2
-				td Mark
-				td Otto
-				td @mdo
+					tr
+						th(scope="row") 2
+						td Mark
+						td Otto
+						td @mdo
 
-			tr
-				th(scope="row") 3
-				td Mark
-				td Otto
-				td @mdo
+					tr
+						th(scope="row") 3
+						td Mark
+						td Otto
+						td @mdo
+
+		div.mb30.fl.w100perc
+			h3 Striped
+			table(class="table table-bordered mb0")
+				thead
+					tr
+						th #
+						th First Name
+						th Last Name
+						th Username
+				tbody
+					tr
+						th(scope="row") 1
+						td Mark
+						td Otto
+						td @mdo
+
+					tr
+						th(scope="row") 2
+						td Mark
+						td Otto
+						td @mdo
+
+					tr
+						th(scope="row") 3
+						td Mark
+						td Otto
+						td @mdo			
+
+		div.mb30.fl.w100perc
+			h3 Contextual Clases
+			table(class="table table-bordered mb0")
+				thead
+					tr
+						th #
+						th First Name
+						th Last Name
+						th Username
+				tbody
+					tr(class="success")
+						th(scope="row") 1
+						td Mark
+						td Otto
+						td @mdo
+
+					tr(class="active")
+						th(scope="row") 2
+						td Mark
+						td Otto
+						td @mdo
+
+					tr(class="warning")
+						th(scope="row") 3
+						td Mark
+						td Otto
+						td @mdo
+
+					tr(class="info")
+						th(scope="row") 3
+						td Mark
+						td Otto
+						td @mdo
+
+					tr(class="danger")
+						th(scope="row") 3
+						td Mark
+						td Otto
+						td @mdo
