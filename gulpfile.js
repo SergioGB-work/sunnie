@@ -8,6 +8,7 @@ var gulp = require('gulp'),
 	uglify = require('gulp-uglify'); 	
 	streamqueue  = require('streamqueue');	
 	image  = require('gulp-image');	
+	connect = require('gulp-connect');
 
 var path = {
     jade: ['src/jade/*.jade'],
@@ -21,6 +22,10 @@ var path = {
 	jsPrimaryLibs: ['src/javascript/primaryLibs/[^_]*.js'],
 	jsDest: 'public/js/'
 };
+
+gulp.task('connect', function() {
+  connect.server();
+});
 
 gulp.task('html', function() {
     return gulp.src(path.jade)
@@ -75,7 +80,7 @@ gulp.task('images', function () {
 });
 
 
-gulp.task('default',['html', 'styles','compressJS','images']);
+gulp.task('default',['html', 'styles','compressJS','images','connect']);
 
 gulp.watch('src/jade/**/*.jade', ['html']);
 gulp.watch('src/sass/**/*.scss', ['styles']);
