@@ -20,7 +20,9 @@ var path = {
 	js: ['src/javascript/[^_]*.js'],
 	jsLibs: ['src/javascript/libs/[^_]*.js'],
 	jsPrimaryLibs: ['src/javascript/primaryLibs/[^_]*.js'],
-	jsDest: 'public/js/'
+	jsDest: 'public/js/',
+	fonts: 'src/sass/fonts/*.*',
+	fontsDest: 'public/css/fonts/'
 };
 
 gulp.task('connect', function() {
@@ -47,6 +49,11 @@ gulp.task('styles', function() {
             keepSpecialComments: 0
         }))		
 		.pipe(gulp.dest(path.css))
+});
+
+gulp.task('fonts', function() {
+	gulp.src(path.fonts)
+		.pipe(gulp.dest(path.fontsDest))
 });
 
 
@@ -80,7 +87,7 @@ gulp.task('images', function () {
 });
 
 
-gulp.task('default',['html', 'styles','compressJS','images','connect']);
+gulp.task('default',['html', 'styles','fonts','compressJS','images','connect']);
 
 gulp.watch('src/jade/**/*.jade', ['html']);
 gulp.watch('src/sass/**/*.scss', ['styles']);
