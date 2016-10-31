@@ -1,0 +1,38 @@
+#navigation{
+	background:$navBgColor;
+	margin-bottom:20px;
+
+	nav{
+		margin-bottom:0;
+		background: 0;
+		border: 0;
+		min-height:0;
+		@include borderRadius0;		
+	
+		#navigation-list{
+			padding:0;
+			
+			ul{
+				li{
+					a{
+						color:$navTextColor;
+						padding-top: 10px;
+						padding-bottom: 10px;					
+					}
+					&.active{
+						a{
+							color:$navTextColorHover;
+							background:$primaryColorHover;
+						}
+					}
+					&.open{
+						a{
+							color:$navBgColor;
+						}
+					}
+				}
+			}
+			
+		}
+	}	
+}

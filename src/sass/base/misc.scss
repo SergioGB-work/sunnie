@@ -203,3 +203,11 @@ button,	input[type="submit"],.btn{
 		}		
 	}
 }	
+
+/** DROPDOWNS**/
+
+.dropdown-menu{
+	.divider{
+		background:$navBgColor;;
+	}
+}

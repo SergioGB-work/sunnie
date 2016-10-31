@@ -1,24 +1,37 @@
 $font-family:  "Helvetica Neue", Helvetica, Arial, sans-serif;
 
-$primaryColor: #27ae60;
+$primaryColor: #1fa67a;
+$primaryColorHover: #1b926c;
 $secondaryColor: #bdc3c7;
 $borderColor: $secondaryColor;
-$borderColorHover: #27ae60;
+$borderColorHover: #1fa67a;
+
 $navBgColor: $primaryColor;
 $navTextColor: #ffffff;
 $navTextColorHover:#ffffff;
+
+$headerBgColor:#489fdf;
+$headerTextColor:#ffffff;
+
+$footerBgColor:#444444;
+$footerTextColor:#ffffff;
+
 $mainColorText: #444444;
 $bodyColor: #ffffff;
+
 $buttonColor: $primaryColor;
-$buttonColorHover: #2ecc71;
+$buttonColorHover: $primaryColorHover;
 $buttonTextColor: #ffffff;
 $buttonNegativeColor: $secondaryColor;
 $buttonNegativeColorHover: #95a5a6;
 $buttonNegativeTextColor: #444444;
+
 $linkColor: $primaryColor;
-$linkColorHover: #2ecc71;
+$linkColorHover: #1b926c;
+
 $tableHeaderBgColor: $primaryColor;
 $tableHeaderTextColor: #ffffff;
+
 $colorPlaceHolder : #aaaaaa;
 
 $colorSuccess: #3c763d;

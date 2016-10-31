@@ -12,20 +12,18 @@ body
 
 		header(id="header")
 
-			div(class="container-fluid")
-				div(class="container")
-					include header
+			div(class="container")
+				include header
 
-				div(id="navigation")
-					div(class="container")
-						include navigation
+			div(id="navigation")
+				div(class="container")
+					include navigation
 
 		section(id="content")
 			block content
 
 		footer(id="footer")
-			div(class="container-fluid")
-				div(class="container")
-					include footer
+			div(class="container")
+				include footer
 
 	script(src="js/main.min.js",type="text/javascript")
