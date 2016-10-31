@@ -36,3 +36,44 @@
 		}
 	}	
 }
+
+@media (max-width: 767px) {
+	
+	#navigation{
+	
+		nav {
+			.navbar-toggle {
+				border:0;	
+				float:left;
+				@include borderRadius0;	
+				
+				.icon-bar{
+					background:#ffffff;
+				}
+				
+				&:focus,&:hover{
+					background-color:$primaryColorHover;
+				}
+			}
+			
+			#navigation-list{
+				ul {
+					li{
+						&.active {
+							a{
+								background:0;
+							}				
+						}
+						
+						&.open{
+							a{
+								background:0;
+								color:$navTextColor;
+							}
+						}
+					}
+				}	
+			}			
+		}	
+	}	
+}	

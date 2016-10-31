@@ -136,14 +136,25 @@ label{
    font-size: calculateFontSize(14px);
 }
 
+:-webkit-autofill, :-webkit-autofill, :-webkit-autofill{
+	background:0;
+}
+
 input{
 	font-size: calculateFontSize(14px);
+	max-width:100%;
+	
+	
 	
 	&[type="text"],&[type="password"],&[type="email"],&[type="number"],&[type="search"]{
 		@include inputStyle;	
 
 		&:hover,&:focus,&:active{
 			@include inputStyleHover;
+		}
+		
+		&:-webkit-autofill, &:-webkit-autofill, &:-webkit-autofill{
+			background:0;
 		}
 	}
 
