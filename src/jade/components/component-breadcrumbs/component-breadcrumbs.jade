@@ -1,17 +1,17 @@
 mixin component-breadcrumbs(content)
+
+	- var pages = content;
+	- var length = content.length - 1
+	
 	nav(id="breadcrumbs")
 		ul(class="breadcrumb")
-			li
-				h3
-					a(href="#") Home
-			li
-				h3
-					a(href="#") Pagina 1
-
-			li
-				h3
-					a(href="#") Pagina 2
-
-			li(class="active")
-				h3
-					a(href="#") Pagina 3					
+		
+			each item,i in content
+				li
+					h3
+						if i == length
+							a(href="#{item.url}", class="active") #{item.pageName}
+						else
+							a(href="#{item.url}") #{item.pageName}
+				
+							
