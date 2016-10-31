@@ -14,6 +14,7 @@ var path = {
     jade: ['src/jade/*.jade'],
     html: 'public/',
 	sass: ['src/sass/**/main.scss'],
+	cssComponents: ['src/jade/components/**/[^_]*.scss'],
 	css: 'public/css/',
 	images: 'src/images/**/*.*',
 	imagesDest: 'public/images/',
@@ -21,6 +22,7 @@ var path = {
 	jsLibs: ['src/javascript/libs/[^_]*.js'],
 	jsPrimaryLibs: ['src/javascript/primaryLibs/[^_]*.js'],
 	jsDest: 'public/js/',
+	jsComponents: 'src/jade/**/[^_]*.js',
 	fonts: 'src/sass/fonts/*.*',
 	fontsDest: 'public/css/fonts/'
 };
@@ -51,6 +53,20 @@ gulp.task('styles', function() {
 		.pipe(gulp.dest(path.css))
 });
 
+gulp.task('cssComponents', function() {
+	gulp.src(path.cssComponents)
+		.pipe(sass().on('error', sass.logError))
+		.pipe(concat('components.css'))
+		.pipe(rename({
+			basename: 'components',
+			extname: '.min.css'
+		}))
+		.pipe(minifyCss({
+            keepSpecialComments: 0
+        }))		
+		.pipe(gulp.dest(path.css))
+});
+
 gulp.task('fonts', function() {
 	gulp.src(path.fonts)
 		.pipe(gulp.dest(path.fontsDest))
@@ -66,6 +82,17 @@ gulp.task('compressJS', function() {
         .pipe(concat('main.js'))
         .pipe(gulp.dest(path.jsDest))
         .pipe(rename('main.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest(path.jsDest));
+});
+
+gulp.task('jsComponents', function() {  
+    return streamqueue({ objectMode: true },
+		gulp.src(path.jsComponents)
+	)
+        .pipe(concat('components.js'))
+        .pipe(gulp.dest(path.jsDest))
+        .pipe(rename('components.min.js'))
         .pipe(uglify())
         .pipe(gulp.dest(path.jsDest));
 });
@@ -87,7 +114,7 @@ gulp.task('images', function () {
 });
 
 
-gulp.task('default',['html', 'styles','fonts','compressJS','images','connect']);
+gulp.task('default',['html', 'styles','cssComponents','fonts','compressJS','jsComponents','images','connect']);
 
 gulp.watch('src/jade/**/*.jade', ['html']);
 gulp.watch('src/sass/**/*.scss', ['styles']);
