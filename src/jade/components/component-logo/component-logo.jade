@@ -1,3 +1,8 @@
 mixin component-logo(content)
-	a(class="logo",href="/",title="My Site",key="go-to-x")
-		img(alt="Logo My Site",src="images/logo.png")
+	- var url = content.url || '/';
+	- var title = content.title || ''
+	- var alt = content.alt || 'Logo'
+	- var src = content.src || ''
+
+	a(class="logo",href="#{url}",title="#{title}",key="go-to-x")
+		img(alt="#{alt}",src="#{src}")
