@@ -1,6 +1,6 @@
 {
-  "name": "",
-  "version": "0.0.0",
+  "name": "Base Project",
+  "version": "1.0.0",
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
@@ -21,9 +21,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Sergio",
-  "license": ">M",
+  "author": "Sergio Gonzalez Barrios",
+  "license": "MIT",
   "devDependencies": {
-    "gulp-connect": "^5.0.0"
   }
 }
