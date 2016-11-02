@@ -1,5 +1,21 @@
 # base-project
 
+## Specifications
+
+- Based on Jade, Gulp, Node and Sass
+- Create new pages based on layouts. Fill it with components
+- 17 Layouts by defaults
+- 10 Components by default
+- Easy Maintenance
+- HTML Code generalized thanks to Jade.
+- General Structure for components
+- Customize styles
+- Based on Bootstrap 
+- Optimized for SEo and Web Accesibility
+- CSS and JS Compress
+- Images Optimized
+- Js Tablet and Mobile optimized
+
 ## Installation
 
 Run npm install on project folder to launch de installation of all modules required.
@@ -55,8 +71,7 @@ Publish all files from src/images to public/images and compress them. It's inclu
 
 ## Using the enviroment
 
-Base Project te provee de un entorno de desarrollo front que incluye un motor de generación de páginas muy intuitivo basado en un modelo de capas donde se generaliza la creación de páginas facilitando la creación, no solo de páginas nuevas, sino de 
-layouts, componentes y estilos nuevos. 
+Base Project provide a front dev enviroment that include a page generation engine very intuitive based on a layer model where the page generation is generelized facilitating the creation, not only of new pages,  but layouts , components and new styles.
 
 ### Pages
 
@@ -107,11 +122,11 @@ When you create a new page you have to fill the columns of the layout with compo
 
 ##### EXAMPLES
 
-+component('component-sample-basics','id3','','Sample Component Basics')
+> +component('component-sample-basics','id3','','Sample Component Basics')
 
-+component('component-breadcrumbs','id2',[{'pageName':'Pagina1','url':'/pagina1.html'},{'pageName':'Pagina2','url':'/pagina2.html'},{'pageName':'Pagina3','url':'/pagina3.html'}],'','false','true')
+> +component('component-breadcrumbs','id2',[{'pageName':'Pagina1','url':'/pagina1.html'},{'pageName':'Pagina2','url':'/pagina2.html'},{'pageName':'Pagina3','url':'/pagina3.html'}],'','false','true')
 
-+component('component-banner','id8',{'src':'/public/images/image1.jpg','alt':'description','href':'./pagina1.html','title':'Ir a la pagina 1'},'','false','true')
+> +component('component-banner','id8',{'src':'/public/images/image1.jpg','alt':'description','href':'./pagina1.html','title':'Ir a la pagina 1'},'','false','true')
 
 #### Creating new components
 
