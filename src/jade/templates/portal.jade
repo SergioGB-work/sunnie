@@ -9,27 +9,27 @@ html
 		
 		block head
 
-body
+	body
 
-	include component
+		include component
 
-	div(id="wrapper")
+		div(id="wrapper")
 
-		header(id="header")
+			header(id="header")
 
-			div(class="container")
-				include header
-
-			div(id="navigation")
 				div(class="container")
-					include navigation
+					include header
 
-		section(id="content")
-			block content
+				div(id="navigation")
+					div(class="container")
+						include navigation
 
-		footer(id="footer")
-			div(class="container")
-				include footer
+			section(id="content")
+				block content
 
-	script(src="js/main.min.js",type="text/javascript")
-	script(src="js/components.min.js",type="text/javascript")
+			footer(id="footer")
+				div(class="container")
+					include footer
+
+		script(src="js/main.min.js",type="text/javascript")
+		script(src="js/components.min.js",type="text/javascript")
