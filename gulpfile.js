@@ -9,224 +9,348 @@ var gulp = require('gulp'),
 	streamqueue  = require('streamqueue');	
 	image  = require('gulp-image');	
 	connect = require('gulp-connect');
-
+	fs = require('fs');
 var pathBundles = 'app/bundles/src';
 var pathPlugins = 'app/plugins';
 var pathPublic = 'app/public';
 var pathBuild = 'app/build';
 var themeBase = 'sun-theme';
 var theme = 'mitema-theme';
-	
+var sitesDefined=[]; /*[{'site':'default','theme':'mitema-theme','themeParent':'sun-theme'},{'site':'miSite','theme':'mitema-theme','themeParent':'sun-theme'}];	*/
 	
 var path = {
-    jadeBundlesPages: [pathBundles + '/pages/**/*.jade'],
-	jadePluginsPages: [pathPlugins + '/pages/**/*.jade'],
-	jadeBuildPages: [pathBuild + '/pages/**/*.jade'],
-    pagesBuild: pathBuild + '/pages/',
+    sitesBundles: [pathBundles + '/sites/**/*.jade'],
+	sitesPlugins: [pathPlugins + '/sites/**/*.jade'],
+	
+	sitesDeploy: [pathBuild+'/sites/**/*.jade'],
+    sitesBuild: pathBuild + '/sites/',
+	sitesPublic: pathPublic + '/',
 	
 	jadeBundlesLayouts: [pathBundles + '/layouts/**/*.jade'],
 	jadePluginsLayouts: [pathPlugins + '/layouts/**/*.jade'],
-	jadeBuildLayouts: [pathBuild + '/layouts/**/*.jade'],
-	layoutsBuild: pathBuild + '/layouts/',
-	
-	jadeBundlesComponents: [pathBundles + '/components/**/*.*'],
-	jadePluginsComponents: [pathPlugins + '/components/**/*.*'],
-	jadeBuildComponents: [pathBuild + '/components/**/*.*'],
-	componentsBuild: pathBuild + '/components/',	
-	
-    htmlPublic: pathPublic + '/pages/',
-	
-	cssBundles: [pathBundles + '/themes/'+ themeBase +'/css/**/*.*'],
-	cssPlugins: [pathPlugins + '/themes/'+ theme +'/css/**/*.*'],	
-	
-	cssComponentsDeploy: [pathBuild+'/components/**/[^_]*.scss'],
-	cssComponentsPublic: pathPublic + '/css/',
-	
-	cssBuild: pathBuild + '/themes/'+theme+'/css',
-	cssPublic: pathPublic + '/css/',
-	cssDeploy: [pathBuild+'/themes/'+theme+'/css/main.scss'],
-	
-	templatesBundles: [pathBundles + '/themes/'+ themeBase +'/templates/**/*.jade'],
-	templatesPlugins: [pathPlugins + '/themes/'+ theme +'/templates/**/*.jade'],
-	
-	templatesBuild: pathBuild + '/themes/'+theme+'/templates',	
-	
-	imagesBundles: [pathBundles + '/themes/'+ themeBase +'/images/**/*.*'],
-	imagesPlugins: [pathPlugins + '/themes/'+ theme +'/images/**/*.*'],
-	
-	imagesBuild: pathBuild + '/themes/'+theme+'/images',
-	imagesPublic: pathPublic + '/images/',
-	
-	jsBundles: [pathBundles + '/themes/'+ themeBase +'/javascript/**/[^_]*.js'],
-	jsPlugins: [pathBundles + '/themes/'+theme+'/javascript/**/[^_]*.js'],
-	
-	
-	
-	jsBundlesLibs: [pathBundles + '/themes/'+ themeBase +'/javascript/libs/**/[^_]*.js'],
-	jsPluginsLibs: [pathPlugins + '/themes/'+theme+'/javascript/libs/**/[^_]*.js'],
-	
-	jsBundlesPrimaryLibs: [pathBundles + '/themes/'+ themeBase +'/javascript/primaryLibs/**/[^_]*.js'],
-	jsPluginsPrimaryLibs: [pathPlugins + '/themes/'+theme+'/javascript/primaryLibs/**/[^_]*.js'],
 
-	jsBundlesComponents: pathBundles + '/components/'+ themeBase +'/**/[^_]*.js',
-	jsPluginsComponents: pathPlugins + '/components/'+theme+'/**/[^_]*.js',
-	
-	
-	
-	
-	
-	jsBuild: pathBuild + '/themes/'+theme+'/javascript',
-	jsPublic: pathPublic + '/javascript/',
-	
-	fontsDeploy: [pathBuild+'/themes/'+theme+'/css/fonts/**/*.*'],
-	fontsPublic: pathPublic + '/css/fonts/'
+	jadeBundlesComponents: [pathBundles + '/components/**/*.*'],
+	jadePluginsComponents: [pathPlugins + '/components/**/*.*']
+
 };
+
+function getDirectories(path) {
+  return fs.readdirSync(path).filter(function (file) {
+    return fs.statSync(path+'/'+file).isDirectory();
+  });
+}
+
+function getSitesBundles(){
+	
+	var sites = getDirectories(pathBundles + '/sites')
+		
+	for(var i in sites){
+		
+		var jsonSite = JSON.parse(fs.readFileSync(pathBundles +'/sites/' + sites[i] + '/build.json'));
+		
+		var jsonTheme =JSON.parse(fs.readFileSync(pathBundles +'/themes/' + jsonSite.theme + '/templates/build.json'));
+		
+		var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
+		
+		sitesDefined.push(newSite);
+	}	
+}
+
+function getSitesPlugins(){
+	
+	var sites = getDirectories(pathPlugins + '/sites')
+		
+	for(var i in sites){
+		
+		var jsonSite = JSON.parse(fs.readFileSync(pathPlugins +'/sites/' + sites[i] + '/build.json'));
+		
+		var jsonTheme =JSON.parse(fs.readFileSync(pathPlugins +'/themes/' + jsonSite.theme + '/templates/build.json'));
+		
+		var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
+		
+		sitesDefined.push(newSite);
+	}	
+}
+
+getSitesBundles();
+getSitesPlugins();
+
 
 gulp.task('connect', function() {
   connect.server();
 });
 
-gulp.task('cssBundles', function() {
-    return gulp.src(path.cssBundles)
-    .pipe(gulp.dest(path.cssBuild))
+/**********************************CSS*************************************/
+
+var taskCSSBuild = [];
+
+function createTaskCSSBundles(siteName,siteTheme,siteParentTheme){
+	gulp.task('cssBundles' + siteName, function() {
+		return gulp.src(pathBundles + '/themes/' + siteParentTheme + '/css/**/*.*')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/css/'))
+	});
+}
+
+function createTaskCSSPlugins(siteName,siteTheme,siteParentTheme){
+	
+	gulp.task('cssPlugins' + siteName,['cssBundles' + siteName], function() {
+		return 	gulp.src(pathPlugins + '/themes/' + siteTheme + '/css/**/*.*')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/css/'))
+	});
+}
+
+for (var key in sitesDefined)
+{
+    createTaskCSSBundles(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    createTaskCSSPlugins(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    taskCSSBuild.push('cssBundles' + sitesDefined[key].site);
+    taskCSSBuild.push('cssPlugins' + sitesDefined[key].site);
+}
+
+
+/**********************************JS*************************************/
+var taskJSBuild = [];
+
+function createTaskJSBundles(siteName,siteTheme,siteParentTheme){
+	gulp.task('jsBundles' + siteName, function() {
+		return gulp.src(pathBundles + '/themes/' + siteParentTheme + '/javascript/**/[^_]*.js')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/javascript/'))
+	});
+}
+
+function createTaskJSPlugins(siteName,siteTheme,siteParentTheme){
+	
+	gulp.task('jsPlugins' + siteName,['jsBundles' + siteName], function() {
+		return 	gulp.src(pathPlugins + '/themes/' + siteTheme + '/javascript/**/[^_]*.js')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/javascript/'))
+	});
+}
+
+for (var key in sitesDefined)
+{
+    createTaskJSBundles(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    createTaskJSPlugins(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    taskJSBuild.push('jsBundles' + sitesDefined[key].site);
+    taskJSBuild.push('jsPlugins' + sitesDefined[key].site);
+}
+
+
+
+/**********************************IMAGES*************************************/
+
+var taskIMAGESBuild = [];
+
+function createTaskIMAGESBundles(siteName,siteTheme,siteParentTheme){
+	gulp.task('imagesBundles' + siteName, function() {
+		return gulp.src(pathBundles + '/themes/' + siteParentTheme + '/images/**/*.*')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/images/'))
+	});
+}
+
+function createTaskIMAGESPlugins(siteName,siteTheme,siteParentTheme){
+	
+	gulp.task('imagesPlugins' + siteName,['imagesBundles' + siteName], function() {
+		return 	gulp.src(pathPlugins + '/themes/' + siteTheme + '/images/**/*.*')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/images/'))
+	});
+}
+
+for (var key in sitesDefined)
+{
+    createTaskIMAGESBundles(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    createTaskIMAGESPlugins(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    taskIMAGESBuild.push('imagesBundles' + sitesDefined[key].site);
+    taskIMAGESBuild.push('imagesPlugins' + sitesDefined[key].site);
+}
+
+/**********************************TEMPLATES*************************************/
+var taskTEMPLATESBuild = [];
+
+function createTaskTEMPLATESBundles(siteName,siteTheme,siteParentTheme){
+	gulp.task('templatesBundles' + siteName, function() {
+		return gulp.src(pathBundles + '/themes/' + siteParentTheme + '/templates/**/*.jade')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/templates/'))
+	});
+}
+
+function createTaskTEMPLATESPlugins(siteName,siteTheme,siteParentTheme){
+	
+	gulp.task('templatesPlugins' + siteName,['templatesBundles' + siteName], function() {
+		return 	gulp.src(pathPlugins + '/themes/' + siteTheme + '/templates/**/*.jade')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/templates/'))
+	});
+}
+
+for (var key in sitesDefined)
+{
+    createTaskTEMPLATESBundles(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    createTaskTEMPLATESPlugins(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
+    taskTEMPLATESBuild.push('templatesBundles' + sitesDefined[key].site);
+    taskTEMPLATESBuild.push('templatesPlugins' + sitesDefined[key].site);
+}
+
+/************************************LAYOUTS**************************************/
+
+var taskLAYOUTSBuild = [];
+
+function createTaskLAYOUTSBundles(siteName){
+	gulp.task('layoutsBundles' + siteName, function() {
+		return 	gulp.src(path.jadeBundlesLayouts)
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/layouts/'))
+	});
+}
+
+function createTaskLAYOUTSPlugins(siteName){
+	
+	gulp.task('layoutsPlugins' + siteName,['layoutsBundles' + siteName], function() {
+		return 	gulp.src(path.jadePluginsLayouts)
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/layouts/'))
+	});
+}
+
+for (var key in sitesDefined)
+{
+    createTaskLAYOUTSBundles(sitesDefined[key].site);
+    createTaskLAYOUTSPlugins(sitesDefined[key].site);
+    taskLAYOUTSBuild.push('layoutsBundles' + sitesDefined[key].site);
+    taskLAYOUTSBuild.push('layoutsPlugins' + sitesDefined[key].site);
+}
+
+
+
+/************************************COMPONENTS**************************************/
+
+var taskCOMPONENTSBuild = [];
+
+function createTaskCOMPONENTSBundles(siteName){
+	gulp.task('componentsBundles' + siteName, function() {
+		return 	gulp.src(path.jadeBundlesComponents)
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/components/'))
+	});
+}
+
+function createTaskCOMPONENTSPlugins(siteName){
+	
+	gulp.task('componentsPlugins' + siteName,['componentsBundles' + siteName], function() {
+		return 	gulp.src(path.jadePluginsComponents)
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/components/'))
+	});
+}
+
+for (var key in sitesDefined)
+{
+    createTaskCOMPONENTSBundles(sitesDefined[key].site);
+    createTaskCOMPONENTSPlugins(sitesDefined[key].site);
+    taskCOMPONENTSBuild.push('componentsBundles' + sitesDefined[key].site);
+    taskCOMPONENTSBuild.push('componentsPlugins' + sitesDefined[key].site);
+}
+
+
+/************************************SITES**************************************/
+
+
+gulp.task('sitesBundles', function() {
+    return gulp.src(path.sitesBundles)
+    .pipe(gulp.dest(path.sitesBuild))
 });
 
-gulp.task('cssPlugins',['cssBundles'], function() {
-    return gulp.src(path.cssPlugins)
-    .pipe(gulp.dest(path.cssBuild))
-});
-
-gulp.task('jsBundles', function() {
-    return gulp.src(path.jsBundles)
-    .pipe(gulp.dest(path.jsBuild))
-});
-
-gulp.task('jsPlugins',['jsBundles'], function() {
-    return gulp.src(path.jsPlugins)
-    .pipe(gulp.dest(path.jsBuild))
-});
-
-gulp.task('imagesBundles', function() {
-    return gulp.src(path.imagesBundles)
-    .pipe(gulp.dest(path.imagesBuild))
-});
-
-gulp.task('imagesPlugins',['imagesBundles'], function() {
-    return gulp.src(path.imagesPlugins)
-    .pipe(gulp.dest(path.imagesBuild))
-});
-
-gulp.task('templatesBundles', function() {
-    return gulp.src(path.templatesBundles)
-    .pipe(gulp.dest(path.templatesBuild))
-});
-
-gulp.task('templatesPlugins',['templatesBundles'], function() {
-    return gulp.src(path.templatesPlugins)
-    .pipe(gulp.dest(path.templatesBuild))
-});
-
-gulp.task('layoutsBundles', function() {
-    return gulp.src(path.jadeBundlesLayouts)
-    .pipe(gulp.dest(path.layoutsBuild))
-});
-
-gulp.task('layoutsPlugins',['layoutsBundles'], function() {
-    return gulp.src(path.jadePluginsLayouts)
-    .pipe(gulp.dest(path.layoutsBuild))
-});
-
-gulp.task('componentsBundles', function() {
-    return gulp.src(path.jadeBundlesComponents)
-    .pipe(gulp.dest(path.componentsBuild))
-});
-
-gulp.task('componentsPlugins',['componentsBundles'], function() {
-    return gulp.src(path.jadePluginsComponents)
-    .pipe(gulp.dest(path.componentsBuild))
-});
-
-gulp.task('pagesBundles', function() {
-    return gulp.src(path.jadeBundlesPages)
-    .pipe(gulp.dest(path.pagesBuild))
-});
-
-gulp.task('pagesPlugins',['pagesBundles'], function() {
-    return gulp.src(path.jadePluginsPages)
-    .pipe(gulp.dest(path.pagesBuild))
+gulp.task('sitesPlugins',['sitesBundles'], function() {
+    return gulp.src(path.sitesPlugins)
+    .pipe(gulp.dest(path.sitesBuild))
 });
 
 
 /** THEME TASK **/
-gulp.task('cssBuild', ['cssBundles','cssPlugins']);
+gulp.task('cssBuild', taskCSSBuild);
 
-gulp.task('jsBuild', ['jsBundles','jsPlugins']);
+gulp.task('jsBuild', taskJSBuild);
 
-gulp.task('imagesBuild', ['imagesBundles','imagesPlugins']);
+gulp.task('imagesBuild', taskIMAGESBuild);
 
-gulp.task('templatesBuild', ['templatesBundles','templatesPlugins']);
+gulp.task('templatesBuild', taskTEMPLATESBuild);
 
 
 /** BUILD TASKS **/
 gulp.task('themesBuild', ['cssBuild','jsBuild','templatesBuild','imagesBuild']);
 
-gulp.task('layoutsBuild', ['layoutsBundles','layoutsPlugins']);
+gulp.task('layoutsBuild', taskLAYOUTSBuild);
 
-gulp.task('componentsBuild', ['componentsBundles','componentsPlugins']);
+gulp.task('componentsBuild', taskCOMPONENTSBuild);
 
-gulp.task('pagesBuild', ['pagesBundles','pagesPlugins']);
+gulp.task('sitesBuild', ['sitesBundles','sitesPlugins']);
 
 
 /** BUILD **/
-gulp.task('build', ['themesBuild','layoutsBuild','componentsBuild','pagesBuild']);
+gulp.task('build', ['sitesBuild','layoutsBuild','componentsBuild','themesBuild']);
 
 /** CSS DEPLOY TASK **/
-gulp.task('cssTheme', function() {
-	gulp.src(path.cssDeploy)
-		.pipe(sass().on('error', sass.logError))
-		.pipe(concat('main.css'))
-		.pipe(rename({
-			basename: 'main',
-			extname: '.min.css'
-		}))
-		.pipe(minifyCss({
-            keepSpecialComments: 0
-        }))		
-		.pipe(gulp.dest(path.cssPublic))
+gulp.task('cssTheme',['cssBuild'], function() {
+	for (var key in sitesDefined){	
+		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/css/main.scss')
+			.pipe(sass().on('error', sass.logError))
+			.pipe(concat('main.css'))
+			.pipe(rename({
+				basename: 'main',
+				extname: '.min.css'
+			}))
+			.pipe(minifyCss({
+				keepSpecialComments: 0
+			}))		
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/css/'))
+	}	
 });
 
-gulp.task('cssComponents', function() {
-	gulp.src(path.cssComponentsDeploy)
-		.pipe(sass().on('error', sass.logError))
-		.pipe(concat('components.css'))
-		.pipe(rename({
-			basename: 'components',
-			extname: '.min.css'
-		}))
-		.pipe(minifyCss({
-            keepSpecialComments: 0
-        }))		
-		.pipe(gulp.dest(path.cssComponentsPublic))
+gulp.task('cssComponents',['componentsBuild'], function() {
+	for (var key in sitesDefined){	
+		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/components/**/[^_]*.scss')
+			.pipe(sass().on('error', sass.logError))
+			.pipe(concat('components.css'))
+			.pipe(rename({
+				basename: 'components',
+				extname: '.min.css'
+			}))
+			.pipe(minifyCss({
+				keepSpecialComments: 0
+			}))		
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/css/'))
+	}		
 });
 
-gulp.task('fonts', function() {
-	gulp.src(path.fontsDeploy)
-		.pipe(gulp.dest(path.fontsPublic))
+gulp.task('fonts',['cssBuild'], function() {
+	for (var key in sitesDefined){	
+		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/css/fonts/**/*.*')
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/css/fonts/'))
+	}		
 });
 
 
-/** JS DEPLOY TASK **/
-gulp.task('jsDeploy', function() {  
-    return streamqueue({ objectMode: true },
-		gulp.src(path.jsPrimaryLibs),
-		gulp.src(path.jsLibs),
-		gulp.src(path.js)
-	)
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest(path.jsDest))
-        .pipe(rename('main.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(path.jsDest));
+/** JS DEPLOY TASKS **/
+gulp.task('jsTheme',['jsBuild'], function() {  
+	for (var key in sitesDefined){
+		streamqueue({ objectMode: true },
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/primaryLibs/**/[^_]*.js'),
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/libs/**/[^_]*.js'),
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/[^_]*.js')
+		)
+			.pipe(concat('main.js'))
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/javascript/'))
+			.pipe(rename('main.min.js'))
+			.pipe(uglify())
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/javascript/'));
+	}
+});
+
+gulp.task('jsComponents',['componentsBuild'], function() {  
+    for (var key in sitesDefined){
+		streamqueue({ objectMode: true },
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/components/**/[^_]*.js')
+		)
+			.pipe(concat('components.js'))
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/javascript/'))
+			.pipe(rename('components.min.js'))
+			.pipe(uglify())
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/javascript/'))
+	}			
 });
 
 
@@ -235,74 +359,36 @@ gulp.task('cssDeploy', ['cssTheme','cssComponents','fonts']);
 
 gulp.task('jsDeploy', ['jsTheme','jsComponents']);
 
-
-gulp.task('imagesDeploy', function() {
-
+gulp.task('imagesDeploy',['imagesBuild'], function() {
+	for (var key in sitesDefined){	
+		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
+		  .pipe(image({
+			  pngquant: true,
+			  optipng: false,
+			  zopflipng: true,
+			  jpegRecompress: false,
+			  jpegoptim: true,
+			  mozjpeg: true,
+			  gifsicle: true,
+			  svgo: true,
+			  concurrent: 10
+			}))
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/images/'))
+	}		
 });
 
-gulp.task('pagesDeploy', function() {
-
+gulp.task('sitesDeploy',['layoutsBuild','templatesBuild','componentsBuild','sitesBuild'], function() {
+	for (var key in sitesDefined){		
+		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/*.jade')
+		.pipe(jade({
+			pretty: true,
+			basedir: pathBuild + '/sites/' + sitesDefined[key].site
+		}))
+		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site))
+	}	
 });
 
 /** DEPLOY **/
-gulp.task('deploy', ['cssDeploy','jsDeploy','imagesDeploy','pagesDeploy']);
+gulp.task('deploy', ['sitesDeploy','cssDeploy','jsDeploy','imagesDeploy']);
 
-/*
-gulp.task('html', function() {
-    return gulp.src(path.jadeBuildPages)
-    .pipe(jade({
-        pretty: true,
-		basedir: pathBuild
-    }))
-    .pipe(gulp.dest(path.htmlPublic))
-});
-
-/*
-
-gulp.task('compressJS', function() {  
-    return streamqueue({ objectMode: true },
-		gulp.src(path.jsPrimaryLibs),
-		gulp.src(path.jsLibs),
-		gulp.src(path.js)
-	)
-        .pipe(concat('main.js'))
-        .pipe(gulp.dest(path.jsDest))
-        .pipe(rename('main.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(path.jsDest));
-});
-
-gulp.task('jsComponents', function() {  
-    return streamqueue({ objectMode: true },
-		gulp.src(path.jsComponents)
-	)
-        .pipe(concat('components.js'))
-        .pipe(gulp.dest(path.jsDest))
-        .pipe(rename('components.min.js'))
-        .pipe(uglify())
-        .pipe(gulp.dest(path.jsDest));
-});
-
-gulp.task('images', function () {
-  gulp.src(path.images)
-  .pipe(image({
-      pngquant: true,
-      optipng: false,
-      zopflipng: true,
-      jpegRecompress: false,
-      jpegoptim: true,
-      mozjpeg: true,
-      gifsicle: true,
-      svgo: true,
-      concurrent: 10
-    }))
-    .pipe(gulp.dest(path.imagesDest));
-});
-
-
-gulp.task('default',['html', 'styles','cssComponents','fonts','compressJS','jsComponents','images','connect']);
-*/
-gulp.watch('src/jade/**/*.jade', ['html']);
-gulp.watch('src/sass/**/*.scss', ['styles']);
-gulp.watch('src/images/**/*.*', ['images']);
-gulp.watch('src/javascript/**/*.js', ['compressJS']);
+gulp.task('default',['deploy','connect']);
