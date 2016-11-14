@@ -10,8 +10,10 @@
     "gulp-connect": "^5.0.0",
     "gulp-image": "^2.7.2",
     "gulp-jade": "~1.1.0",
+    "gulp-jasmine": "^2.4.2",
     "gulp-minify": "0.0.14",
     "gulp-minify-css": "^1.2.4",
+    "gulp-notify": "^2.2.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
@@ -23,6 +25,5 @@
   },
   "author": "Sergio Gonzalez Barrios",
   "license": "MIT",
-  "devDependencies": {
-  }
+  "devDependencies": {}
 }

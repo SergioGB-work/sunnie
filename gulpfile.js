@@ -9,13 +9,13 @@ var gulp = require('gulp'),
 	streamqueue  = require('streamqueue'),
 	image  = require('gulp-image'),
 	connect = require('gulp-connect'),
+	jasmine = require('gulp-jasmine'),
+	notify = require('gulp-notify'),
 	fs = require('fs'),
 	pathBundles = 'app/bundles/src',
 	pathPlugins = 'app/plugins',
 	pathPublic = 'app/public',
 	pathBuild = 'app/build',
-	themeBase = 'sun-theme',
-	theme = 'mitema-theme',
 	sitesDefined=[];
 	
 var path = {
@@ -242,6 +242,15 @@ gulp.task('connect', function() {
   connect.server();
 });
 
+/** TESTING **/
+gulp.task('test', function () {
+  gulp.src('./tests/*.js')
+    .pipe(jasmine())
+    .on('error', notify.onError({
+      title: 'Jasmine Test Failed',
+      message: 'One or more tests failed, see the cli for details.'
+    }));
+});
 
 
 
@@ -362,14 +371,24 @@ function getSitesBundles(){
 
 function getSitesPlugins(){
 	
-	var sites = getDirectories(pathPlugins + '/sites')
-		
+	var sites = getDirectories(pathPlugins + '/sites');
+	var defaultThemes = getDirectories(pathBundles + '/themes');
+	var jsonTheme;
+	
 	for(var i in sites){
 		
 		var jsonSite = JSON.parse(fs.readFileSync(pathPlugins +'/sites/' + sites[i] + '/build.json'));
 		
-		var jsonTheme =JSON.parse(fs.readFileSync(pathPlugins +'/themes/' + jsonSite.theme + '/templates/build.json'));
+		if(defaultThemes.indexOf(jsonSite.theme) <0){
+			
+			jsonTheme =JSON.parse(fs.readFileSync(pathPlugins +'/themes/' + jsonSite.theme + '/templates/build.json'));
 		
+		}
+		else{
+			
+			jsonTheme =JSON.parse(fs.readFileSync(pathBundles +'/themes/' + jsonSite.theme + '/templates/build.json'));
+			
+		}
 		var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
 		
 		sitesDefined.push(newSite);
