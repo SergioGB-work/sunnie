@@ -1,6 +1,6 @@
-# base-project
+# Sunnie
 
-## Specifications
+## Features
 
 - Based on Jade, Gulp, Node and Sass
 - Create new pages based on layouts. Fill it with components
