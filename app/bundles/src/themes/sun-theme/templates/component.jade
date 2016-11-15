@@ -11,16 +11,27 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full)
 	if full  == "true"
 		- var classesComponent = classesComponent + ' component-full'
 
-	if componentId != ''
-		-var idComponent = componentType + '-' + componentId
-		
-	div(class="#{classesComponent} #{componentType}", id="#{idComponent}")
-		if showTitle != "false"
-			div(class="component-title")
-				h2 #{componentTitle}
 
-		div(class="component-content")
-			+#{componentType}(content)
+	if componentId !=''
+		-var idComponent = componentType + '-' + componentId
+		div(class="#{classesComponent} #{componentType}", id="#{idComponent}")
+		
+			if showTitle != "false"
+					div(class="component-title")
+						h2 #{componentTitle}
+
+			div(class="component-content")
+					+#{componentType}(content)		
+		
+	else
+		div(class="#{classesComponent} #{componentType}")
+
+			if showTitle != "false"
+					div(class="component-title")
+						h2 #{componentTitle}
+
+			div(class="component-content")
+					+#{componentType}(content)
 
 
 
