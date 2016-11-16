@@ -13,6 +13,13 @@
 			a{
 				color:$headerTextColor;
 			}
+			
+			&.active{
+				a{
+					@include fontWeightBold;
+					text-decoration: underline;
+				}
+			}
 		}
 	}
 

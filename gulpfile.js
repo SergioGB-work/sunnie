@@ -1,3 +1,5 @@
+require('events').EventEmitter.prototype._maxListeners = 100;
+
 var gulp = require('gulp'),
     jade = require('gulp-jade'),
     sass = require('gulp-sass'),

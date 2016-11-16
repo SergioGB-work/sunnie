@@ -15,14 +15,14 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full)
 	if componentId !=''
 		-var idComponent = componentType + '-' + componentId
 		div(class="#{classesComponent} #{componentType}", id="#{idComponent}")
-		
+
 			if showTitle != "false"
 					div(class="component-title")
 						h2 #{componentTitle}
 
 			div(class="component-content")
-					+#{componentType}(content)		
-		
+					+#{componentType}(content,componentId)
+
 	else
 		div(class="#{classesComponent} #{componentType}")
 
@@ -31,7 +31,7 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full)
 						h2 #{componentTitle}
 
 			div(class="component-content")
-					+#{componentType}(content)
+					+#{componentType}(content,componentId)
 
 
 

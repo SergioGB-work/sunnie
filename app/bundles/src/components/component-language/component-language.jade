@@ -1,6 +1,56 @@
-mixin component-language(content)
-	ul
-		li(class="active")
-			a(href="#",title="Cambiar idioma a Español") ES
-		li
-			a(href="#",title="Cambiar idioma a Ingles") EN
+mixin component-language(content,id)
+
+	- var displayStyle = content.displayStyle || '0'
+	- var languages = content.languages || [{"name":"ES","url":"/ES","selected":"selected","lang":"es"}]
+	
+	if displayStyle == '0'
+
+		ul
+			each item in languages
+
+				- var cssClass = ''
+
+				if item.selected == 'selected'
+					- var cssClass = 'active'
+
+				li(class="#{cssClass}")
+					a(href="#{item.url}",title="Cambiar idioma a #{item.name}") #{item.name}
+
+
+
+
+
+
+	if displayStyle == '1'
+		- var idForm =  'form-language-' + id
+
+		form(name="form-select-language", method="post", id="#{idForm}")
+			
+			label(class="sr-only") Cambiar idioma a #{item.name} 
+			
+			select
+				each item in languages
+					if item.selected == 'selected'
+						option(value="#{item.url}", selected="#{item.selected}") #{item.name}
+
+					else
+						option(value="#{item.url}") #{item.name}
+
+
+
+
+
+
+	if displayStyle == '2'
+
+		ul
+			each item in languages
+
+				- var cssClass = ''
+
+				if item.selected == 'selected'
+					- var cssClass = 'active'
+
+				li(class="#{cssClass}")
+					a(href="#{item.url}",title="Cambiar idioma a #{lang}") 
+						img(src="./images/common/language/#{item.lang}.png",alt="")
