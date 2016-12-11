@@ -223,10 +223,22 @@ gulp.task('imagesDeploy',['imagesBuild'], function() {
 
 gulp.task('sitesDeploy',['layoutsBuild','templatesBuild','componentsBuild','sitesBuild'], function() {
 	for (var key in sitesDefined){		
+		
+		var  pathSite='';
+
+		if(sitesDefined[key].site == 'default'){
+			pathSite = pathBundles;
+		}
+		else{
+			pathSite = pathPlugins;
+		}
+		
+		
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/*.jade')
 		.pipe(jade({
 			pretty: true,
-			basedir: pathBuild + '/sites/' + sitesDefined[key].site
+			basedir: pathBuild + '/sites/' + sitesDefined[key].site,
+			locals: JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'))
 		}))
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site))
 	}	

@@ -1,0 +1,16 @@
+{
+	"site": [
+		{
+			"name": "default",
+			"url": "/default"
+		}
+	],
+	"pages": [
+		{
+			"name": "Home",
+			"url": "/",
+			"src": "/home.html",
+			"childs": []
+		}
+	]
+}

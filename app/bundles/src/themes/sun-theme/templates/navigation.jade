@@ -1,3 +1,6 @@
+- var pages = locals.pages
+
+
 nav(class="navbar navbar-default",role="navigation")
 
 		div(class="navbar-header")
@@ -10,44 +13,19 @@ nav(class="navbar navbar-default",role="navigation")
 
 		div(class="collapse navbar-collapse",id="navigation-list")
 
-			ul(class="nav navbar-nav")
-				li(class="active")
-					a(href="#") Home
-						span(class="sr-only") (current)
+			each item in pages
+				ul(class="nav navbar-nav")
+					li
+						a(href="#{item.url}") #{item.name}
 
-				li
-					a(href="#") What's News
+						if(item.childs)
+							ul(class="child-menu")
+								each child in item.childs
+									li
+										a(href="#{child.url}") #{child.name}
 
-				li(class="dropdown")
-					a(href="#",class="dropdown-toggle",data-toggle="dropdown",role="button",aria-haspopup="true",aria-expanded="false") Get Started
-						span(class="caret")
-
-						ul(class="dropdown-menu")
-							li
-								a(href="#") Action
-
-							li(role="separator",class="divider")
-
-							li
-								a(href="#") Another action
-
-							li(role="separator",class="divider")
-
-							li
-								a(href="#") Something else here
-
-							li(role="separator",class="divider")
-
-							li
-								a(href="#") Separated link
-
-							li(role="separator",class="divider")
-
-							li
-								a(href="#") One more separated link
-
-				li
-					a(href="#") Blog
-
-				li
-					a(href="#") Forums					
+										if(child.childs)
+											ul(class="grandchild-menu")
+												each grandchild in child.childs
+													li
+														a(href="#{grandchild.url}") #{grandchild.name}										
