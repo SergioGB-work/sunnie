@@ -13,13 +13,13 @@ var gulp = require('gulp'),
 	connect = require('gulp-connect'),
 	jasmine = require('gulp-jasmine'),
 	notify = require('gulp-notify'),
+	modRewrite = require('connect-modrewrite');	
 	fs = require('fs'),
 	pathBundles = 'app/bundles/src',
 	pathPlugins = 'app/plugins',
 	pathPublic = 'app/public',
 	pathBuild = 'app/build',
 	sitesDefined=[];
-	modRewrite = require('connect-modrewrite');	
 	
 var path = {
 	
