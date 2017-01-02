@@ -19,6 +19,7 @@ var gulp = require('gulp'),
 	pathPublic = 'app/public',
 	pathBuild = 'app/build',
 	sitesDefined=[];
+	modRewrite = require('connect-modrewrite');	
 	
 var path = {
 	
@@ -253,7 +254,41 @@ gulp.task('default',['deploy','connect']);
 
 /** CONNECT **/
 gulp.task('connect', function() {
-  connect.server();
+  connect.server({
+	root: './app/public/sites/',
+	middleware: function() {
+	
+		var rewriteRules = [];
+		for (var key in sitesDefined){	
+	
+			var  pathSite='';
+
+			if(sitesDefined[key].site == 'default'){
+				pathSite = pathBundles;
+			}
+			else{
+				pathSite = pathPlugins;
+			}	
+	
+			var sitemap = JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'));
+			var site = sitemap.site[0].url;	
+			var pages = sitemap.pages;
+			var urls = [];
+			for(var i=0;i<pages.length;i++){
+				urls = urls.concat(getURLs(pages[i],[]));	
+			}
+			
+			for(var i=0;i<urls.length;i++){
+				rewriteRules.push('^' + site + urls[i].url + site + urls[i].src + ' [L]');
+			}
+		}
+		console.log(rewriteRules);
+		
+		return [
+			modRewrite(rewriteRules)
+		]	
+	}	
+  });
 });
 
 /** TESTING **/
@@ -407,4 +442,23 @@ function getSitesPlugins(){
 		
 		sitesDefined.push(newSite);
 	}	
+}
+
+function getURLs(json,urls){
+	array = urls;	
+	
+	if(json.childs.length <= 0){
+		array.push({"url":json.url,"src":json.src});
+		return array;
+	}
+	
+	else{
+		array.push({"url":json.url,"src":json.src});
+		for(var i=0;i<json.childs.length;i++){
+			array.concat(getURLs(json.childs[i],array));
+		}
+		
+		return array
+	}
+	
 }
