@@ -13,6 +13,8 @@ var gulp = require('gulp'),
 	connect = require('gulp-connect'),
 	jasmine = require('gulp-jasmine'),
 	notify = require('gulp-notify'),
+	flatten = require('gulp-flatten'),
+	i18n = require('gulp-html-i18n'),
 	modRewrite = require('connect-modrewrite');	
 	fs = require('fs'),
 	pathBundles = 'app/bundles/src',
@@ -25,6 +27,8 @@ var path = {
 	
     sitesBundles: [pathBundles + '/sites/**/*.jade'],
 	sitesPlugins: [pathPlugins + '/sites/**/*.jade'],
+
+    localeBundles: [pathBundles + '/sites/**/locale/**/*.*'],
 	
 	sitesDeploy: [pathBuild+'/sites/**/*.jade'],
     sitesBuild: pathBuild + '/sites/',
@@ -33,9 +37,12 @@ var path = {
 	jadeBundlesLayouts: [pathBundles + '/layouts/**/*.jade'],
 	jadePluginsLayouts: [pathPlugins + '/layouts/**/*.jade'],
 
-	jadeBundlesComponents: [pathBundles + '/components/**/*.*'],
-	jadePluginsComponents: [pathPlugins + '/components/**/*.*']
-
+	jadeBundlesComponents: [pathBundles + '/components/**/**/**/*.*'],
+	jadePluginsComponents: [pathPlugins + '/components/**/**/**/*.*'],
+	
+	localeBundlesComponents: [pathBundles + '/components/**/locale/**/*.*'],
+	localePluginsComponents: [pathPlugins + '/components/**/locale/**/*.*'],	
+	
 };
 
 getSitesBundles();
@@ -47,7 +54,9 @@ var taskCSSBuild = [],
 	taskIMAGESBuild = [],
 	taskTEMPLATESBuild = [],
 	taskLAYOUTSBuild = [],
-	taskCOMPONENTSBuild = [];
+	taskCOMPONENTSBuild = [],
+	taskLOCALESBuild = [];
+	taskLOCALES_COMPONENTSBuild = [];
 
 for (var key in sitesDefined){
 	
@@ -92,6 +101,18 @@ for (var key in sitesDefined){
     taskCOMPONENTSBuild.push('componentsBundles' + sitesDefined[key].site);
     taskCOMPONENTSBuild.push('componentsPlugins' + sitesDefined[key].site);
 	
+/************************************LOCALES**************************************/	
+
+    createTaskLOCALESBundles(sitesDefined[key].site);
+    createTaskLOCALESPlugins(sitesDefined[key].site);
+    taskLOCALESBuild.push('localesBundles' + sitesDefined[key].site);
+    taskLOCALESBuild.push('localesPlugins' + sitesDefined[key].site);	
+	
+    createTaskLOCALES_COMPONENTSBundles(sitesDefined[key].site);
+    createTaskLOCALES_COMPONENTSPlugins(sitesDefined[key].site);
+    taskLOCALES_COMPONENTSBuild.push('localesComponentsBundles' + sitesDefined[key].site);
+    taskLOCALES_COMPONENTSBuild.push('localesComponentsPlugins' + sitesDefined[key].site);	
+	
 }
 
 gulp.task('sitesBundles', function() {
@@ -103,7 +124,6 @@ gulp.task('sitesPlugins',['sitesBundles'], function() {
     return gulp.src(path.sitesPlugins)
     .pipe(gulp.dest(path.sitesBuild))
 });
-
 
 /** THEME TASK **/
 gulp.task('cssBuild', taskCSSBuild);
@@ -124,9 +144,14 @@ gulp.task('componentsBuild', taskCOMPONENTSBuild);
 
 gulp.task('sitesBuild', ['sitesBundles','sitesPlugins']);
 
+gulp.task('localesBuild', taskLOCALESBuild);
+
+gulp.task('localesComponentsBuild', taskLOCALES_COMPONENTSBuild);
+
+
 
 /** BUILD **/
-gulp.task('build', ['sitesBuild','layoutsBuild','componentsBuild','themesBuild']);
+gulp.task('build', ['sitesBuild','localesBuild','localesComponentsBuild','layoutsBuild','componentsBuild','themesBuild']);
 
 /** CSS DEPLOY TASK **/
 gulp.task('cssTheme',['cssBuild'], function() {
@@ -240,6 +265,11 @@ gulp.task('sitesDeploy',['layoutsBuild','templatesBuild','componentsBuild','site
 			pretty: true,
 			basedir: pathBuild + '/sites/' + sitesDefined[key].site,
 			locals: JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'))
+		}))
+		.pipe(i18n({
+		  langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+		  createLangDirs: true,
+		  defaultLang: 'es'
 		}))
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site))
 	}	
@@ -392,6 +422,37 @@ function createTaskCOMPONENTSPlugins(siteName){
 	gulp.task('componentsPlugins' + siteName,['componentsBundles' + siteName], function() {
 		return 	gulp.src(path.jadePluginsComponents)
 		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/components/'))
+	});
+}
+
+function createTaskLOCALESBundles(siteName){
+	gulp.task('localesBundles' + siteName, function() {
+		return gulp.src(path.localeBundles)
+		.pipe(flatten({ includeParents: -1}))
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
+	});
+}
+
+function createTaskLOCALESPlugins(siteName){
+	gulp.task('localesPlugins' + siteName,['localesBundles' + siteName], function() {
+		return gulp.src(pathPlugins + '/sites/' + siteName + '/locale/**/*.*')
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
+	});
+}
+
+function createTaskLOCALES_COMPONENTSBundles(siteName){
+	gulp.task('localesComponentsBundles' + siteName, function() {
+		return 	gulp.src(path.localeBundlesComponents)
+		.pipe(flatten({ includeParents: -1}))
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
+	});
+}
+
+function createTaskLOCALES_COMPONENTSPlugins(siteName){
+	gulp.task('localesComponentsPlugins' + siteName,['localesComponentsBundles' + siteName], function() {
+		return 	gulp.src(path.localePluginsComponents)
+		.pipe(flatten({ includeParents: -1}))
+		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
 	});
 }
 
