@@ -26,5 +26,8 @@
   },
   "author": "Sergio Gonzalez Barrios",
   "license": "MIT",
-  "devDependencies": {}
+  "devDependencies": {
+    "gulp-flatten": "^0.3.1",
+    "gulp-html-i18n": "^0.8.1"
+  }
 }

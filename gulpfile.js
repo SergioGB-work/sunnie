@@ -15,8 +15,10 @@ var gulp = require('gulp'),
 	notify = require('gulp-notify'),
 	flatten = require('gulp-flatten'),
 	i18n = require('gulp-html-i18n'),
-	modRewrite = require('connect-modrewrite');	
+	modRewrite = require('connect-modrewrite'),
 	fs = require('fs'),
+	proxy = require('http-proxy-middleware'),
+	express = require('express'),
 	pathBundles = 'app/bundles/src',
 	pathPlugins = 'app/plugins',
 	pathPublic = 'app/public',
@@ -247,7 +249,7 @@ gulp.task('imagesDeploy',['imagesBuild'], function() {
 	}		
 });
 
-gulp.task('sitesDeploy',['layoutsBuild','templatesBuild','componentsBuild','sitesBuild'], function() {
+gulp.task('sitesDeploy',['localesBuild','localesComponentsBuild','layoutsBuild','templatesBuild','componentsBuild','sitesBuild'], function() {
 	for (var key in sitesDefined){		
 		
 		var  pathSite='';
@@ -283,6 +285,7 @@ gulp.task('default',['deploy','connect']);
 
 
 /** CONNECT **/
+
 gulp.task('connect', function() {
   connect.server({
 	root: './app/public/sites/',
@@ -303,23 +306,27 @@ gulp.task('connect', function() {
 			var sitemap = JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'));
 			var site = sitemap.site[0].url;	
 			var pages = sitemap.pages;
-			var urls = [];
+			var urls = [];/*
 			for(var i=0;i<pages.length;i++){
 				urls = urls.concat(getURLs(pages[i],[]));	
 			}
 			
 			for(var i=0;i<urls.length;i++){
-				rewriteRules.push('^' + site + urls[i].url + site + urls[i].src + ' [L]');
-			}
+				rewriteRules.push('^' + site + urls[i].url + ' ' + site + urls[i].src + ' [L]');
+			}*/
+
 		}
-		console.log(rewriteRules);
-		
+		rewriteRules.push('^/legacy/products/product2/ /legacy/product2.html [L]');
+		rewriteRules.push('^/legacy/products/ /legacy/products.html [L]');
+		rewriteRules.push('^/legacy/ /legacy/home.html [L]');
+				console.log(rewriteRules);
 		return [
 			modRewrite(rewriteRules)
 		]	
 	}	
   });
 });
+
 
 /** TESTING **/
 gulp.task('test', function () {
@@ -427,7 +434,7 @@ function createTaskCOMPONENTSPlugins(siteName){
 
 function createTaskLOCALESBundles(siteName){
 	gulp.task('localesBundles' + siteName, function() {
-		return gulp.src(path.localeBundles)
+		return gulp.src(pathBundles + '/sites/' + siteName + '/locale/**/*.*')
 		.pipe(flatten({ includeParents: -1}))
 		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
 	});
@@ -436,6 +443,7 @@ function createTaskLOCALESBundles(siteName){
 function createTaskLOCALESPlugins(siteName){
 	gulp.task('localesPlugins' + siteName,['localesBundles' + siteName], function() {
 		return gulp.src(pathPlugins + '/sites/' + siteName + '/locale/**/*.*')
+		.pipe(flatten({ includeParents: -1}))
 		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
 	});
 }
