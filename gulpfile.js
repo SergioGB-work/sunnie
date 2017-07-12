@@ -306,19 +306,31 @@ gulp.task('connect', function() {
 			var sitemap = JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'));
 			var site = sitemap.site[0].url;	
 			var pages = sitemap.pages;
-			var urls = [];/*
+			var urls = [];
 			for(var i=0;i<pages.length;i++){
 				urls = urls.concat(getURLs(pages[i],[]));	
 			}
 			
 			for(var i=0;i<urls.length;i++){
 				rewriteRules.push('^' + site + urls[i].url + ' ' + site + urls[i].src + ' [L]');
-			}*/
+			}
 
 		}
+		
+		rewriteRules.push('^/legacy/css/(.*)$ /legacy/css/$1 [L]');
+		rewriteRules.push('^/legacy/images/(.*)$ /legacy/images/$1 [L]');
+		rewriteRules.push('^/legacy/javascript/(.*)$ /legacy/javascript/$1 [L]');
+		/*
 		rewriteRules.push('^/legacy/products/product2/ /legacy/product2.html [L]');
-		rewriteRules.push('^/legacy/products/ /legacy/products.html [L]');
 		rewriteRules.push('^/legacy/ /legacy/home.html [L]');
+		rewriteRules.push('^/legacy/products/ /legacy/products.html [L]');
+		*/
+		rewriteRules = rewriteRules.sort(function(a, b){
+		  // ASC  -> a.length - b.length
+		  // DESC -> b.length - a.length
+		  return b.length - a.length;
+		});
+		
 				console.log(rewriteRules);
 		return [
 			modRewrite(rewriteRules)

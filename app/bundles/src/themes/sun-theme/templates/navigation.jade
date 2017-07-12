@@ -16,16 +16,16 @@ nav(class="navbar navbar-default",role="navigation")
 			each item in pages
 				ul(class="nav navbar-nav")
 					li
-						a(href="#{item.url}") #{item.name}
+						a(href="#{siteURL}#{item.url}") #{item.name}
 
 						if(item.childs)
 							ul(class="child-menu")
 								each child in item.childs
 									li
-										a(href="#{child.url}") #{child.name}
+										a(href="#{siteURL}#{child.url}") #{child.name}
 
 										if(child.childs)
 											ul(class="grandchild-menu")
 												each grandchild in child.childs
 													li
-														a(href="#{grandchild.url}") #{grandchild.name}										
+														a(href="#{siteURL}#{grandchild.url}") #{grandchild.name}										
