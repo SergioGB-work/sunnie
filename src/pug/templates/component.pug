@@ -1,0 +1,29 @@
+include include_components.pug
+
+mixin component(componentType,componentId,content,componentTitle,showTitle,full)
+
+	- var classesComponent = 'component'
+	- var idComponent = ''
+
+	if showTitle  == "false"
+		- var classesComponent = classesComponent + ' component-noTitle'
+
+	if full  == "true"
+		- var classesComponent = classesComponent + ' component-full'
+
+	if componentId != ''
+		-var idComponent = componentType + '-' + componentId
+
+	div(class=classesComponent + ' ' + componentType, id=idComponent)
+		if showTitle != "false"
+			div(class="component-title")
+				h2 #{componentTitle}
+
+		div(class="component-content")
+			+#{componentType}(content)
+
+
+
+
+
+

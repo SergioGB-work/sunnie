@@ -1,0 +1,18 @@
+extends layouts/layout-12-fluid
+
+block header
+	title Mi titulo
+	
+block content-upper
+
+	+component('component-breadcrumbs','id2',[{'pageName':'Pagina1','url':'/pagina1.html'},{'pageName':'Pagina2','url':'/pagina2.html'},{'pageName':'Pagina3','url':'/pagina3.html'}],'','false','true')
+
+	+component('component-sample-basics','id3','','Sample Component Basics','','false','true')
+
+	+component('component-sample-table','id4','','Tables','true','true')
+	
+	+component('component-sample-form','id5','','Forms','true','true')
+
+	+component('component-sample','id6','Hola Paco','Sample Component','true','true')
+
+	+component('component-sample','id7','Hola Pedro, mi nombre es sancho','Sample Component 2','true','true')

@@ -1,0 +1,164 @@
+mixin component-sample-form(content)
+	div
+		h3 Basic Example
+
+		form
+			div(class="form-group")
+				label(for="exampleInputEmail1") Email address
+				input(type="email",class="form-control",id="exampleInputEmail1",placeholder="Email",disabled)
+				span(class="help-block")
+					| This text is a help-block
+
+			div(class="form-group")
+				label(for="exampleInputPassword1") Password
+				input(type="password",class="form-control",id="exampleInputPassword1",placeholder="Password")
+
+			div(class="form-group")
+				label(for="exampleInputComment1") Comment
+				textarea(class="form-control",id="exampleInputComment1") Escribe tu comentario			
+
+			div(class="form-group")
+				label(for="exampleInputComment1") Select an option
+				select(class="form-control",name="select")
+					option(value="option1") Option 1
+					option(value="option2") Option 2
+					option(value="option3") Option 3
+
+			div(class="form-group")
+				label(for="exampleInputFile") File input
+				input(type="file",id="exampleInputFile")
+				p(class="help-block")
+					| Example block-level help text here.
+
+			div(class="checkbox")
+				label 
+					input(type="checkbox")
+					| Check me out
+
+			div(class="form-group")
+				button(type="submit",class="btn") Submit
+
+	div
+		h3 Inline Form
+		h4 EXAMPLE
+		form(class="form-inline")
+			div(class="form-group")
+				label(for="exampleInputName2") Name
+				input(type="text",class="form-control",id="exampleInputName2",placeholder="Jane Doe")
+
+			div(class="form-group")
+				label(for="exampleInputEmail2") Email
+				input(type="email",class="form-control",id="exampleInputEmail2",placeholder="jane.doe@example.com")
+
+			div(class="form-group")
+				button(type="submit",class="btn btn-default") Send invitation
+				
+		h4 EXAMPLE		
+		form(class="form-inline")
+			div(class="form-group")
+				label(for="exampleInputName2",class="sr-only") Name
+				input(type="text",class="form-control",id="exampleInputName2",placeholder="Jane Doe")
+
+			div(class="form-group")
+				label(for="exampleInputEmail2",class="sr-only") Email
+				input(type="email",class="form-control",id="exampleInputEmail2",placeholder="jane.doe@example.com")
+
+			div(class="form-group")
+				button(type="submit",class="btn btn-default") Send invitation
+				
+		h4 EXAMPLE	
+		form(class="form-inline")
+			div(class="form-group")
+				label(class="sr-only",for="exampleInputAmount") Amount (in dollars)
+				div(class="input-group")
+					div(class="input-group-addon") $
+					input(type="text" class="form-control" id="exampleInputAmount" placeholder="Amount")
+					div(class="input-group-addon") .00
+
+			button(type="submit" class="btn btn-primary") Transfer cash
+
+	div
+		h3 Horizontal form
+		form(class="form-horizontal")
+			div(class="form-group")
+				label(for="exampleInputEmail1", class="col-sm-2 control-label") Email address
+				div(class="col-sm-10")
+					input(type="email",class="form-control",id="exampleInputEmail1",placeholder="Email")
+
+			div(class="form-group")
+				label(for="exampleInputEmail1", class="col-sm-2 control-label") Email address
+				div(class="col-sm-10")
+					p(class="form-control-static") email@example.com
+						
+
+			div(class="form-group")
+				label(for="exampleInputPassword1",class="col-sm-2 control-label") Password
+				div(class="col-sm-10")
+					input(type="password",class="form-control",id="exampleInputPassword1",placeholder="Password")
+
+			div(class="form-group")
+				label(for="exampleInputComment1", class="col-sm-2 control-label") Select an option
+				div(class="col-sm-10")
+					select(class="form-control",name="select")
+						option(value="option1") Option 1
+						option(value="option2") Option 2
+						option(value="option3") Option 3
+
+			div(class="form-group")
+				label(for="exampleInputFile",class="col-sm-2 control-label") File input
+				div(class="col-sm-10")
+					input(type="file",id="exampleInputFile")
+					p(class="help-block")
+						| Example block-level help text here.
+
+			div(class="form-group")
+				div(class="checkbox")
+					div(class="col-sm-offset-2 col-sm-10")
+						label 
+							input(type="checkbox")
+							| Check me out
+
+			div(class="form-group")
+				div(class="col-sm-offset-2 col-sm-10")
+					button(type="submit",class="btn") Submit				
+	
+	div
+		h2 Checkboxes and Radios
+		h3 Standar
+		form
+			div(class="checkbox")
+				label
+					input(type="checkbox",value="")
+					| Option one is this and that&mdash;be sure to include why it's great
+
+			div(class="checkbox disabled")
+				label
+					input(type="checkbox",value="", disabled)
+					Option two is disabled
+
+			div(class="radio")
+				label
+					input(type="radio",name="optionsRadios",id="optionsRadios1",value="option1",checked)
+					| Option one is this and that&mdash;be sure to include why it's great
+
+			div(class="radio")
+				label
+					input(type="radio", name="optionsRadios", id="optionsRadios2", value="option2")
+					| Option two can be something else and selecting it will deselect option one
+
+			div(class="radio disabled")
+				label
+					input(type="radio",name="optionsRadios", id="optionsRadios3", value="option3", disabled)
+					| Option three is disabled
+					
+		h3 Inline
+		form
+			div(class="checkbox-inline")
+				label
+					input(type="checkbox",value="")
+					| Option one is this and that&mdash;be sure to include why it's great
+
+			div(class="checkbox-inline")
+				label
+					input(type="checkbox",value="")
+					| Option two is disabled	

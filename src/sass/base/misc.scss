@@ -1,236 +1,158 @@
-/** BUTTONS **/
-button,	input[type="submit"],.btn{
-	
-	border:0;
-	border-width:1px;
-	border-style:solid;
-	padding:10px 20px;
-	text-align:center;
-	line-height:1;
-	@include borderRadius0;
-	@include stylePrimaryButton;	
 
-	&:hover,&:active,&:focus{
-		@include stylePrimaryButtonHover;
-	}	
+.container-fluid{
+	padding: $grid-gutter-width;
+}
 
-	&.btn-primary{
-		@include stylePrimaryButton;
-		
-		&:hover,&:active,&:focus{
-			@include stylePrimaryButtonHover;
-		}
+/** BUTTON **/
+.btn{
+	padding:$btn-padding-vertical $btn-padding-horizontal;
+
+	&.btn-spacing-right{
+		margin-right:$grid-gutter-width;
 	}
-
-	&.btn-default{
-		@include styleDefaultButton;
-		
-		&:hover,&:active,&:focus{
-			@include styleDefaultButtonHover;
-		}
-	}
-
-	&.btn-info{
-		@include styleInfoButton;
-		
-		&:hover,&:active,&:focus{
-			@include styleInfoButtonHover;
-		}
-	}
-	
-	&.btn-warning{
-		@include styleWarningButton;
-		
-		&:hover,&:active,&:focus{
-			@include styleWarningButtonHover;
-		}
-	}
-
-	&.btn-success{
-		@include styleSuccessButton;
-		
-		&:hover,&:active,&:focus{
-			@include styleSuccessButtonHover;
-		}
-	}	
-	
-	&.btn-danger{
-		@include styleDangerButton;
-		
-		&:hover,&:active,&:focus{
-			@include styleDangerButtonHover;
-		}
-	}	
-	
-	&.btn-link{
-		@include styleLinkButton;
-		
-		&:hover,&:active,&:focus{
-			@include styleLinkButtonHover;
-		}
-	}	
 }
 
-/** BG **/
-.bg-success {
-    background-color: $colorBgSuccess;
-}
-
-.bg-warning {
-    background-color: $colorBgWarning;
-}
-
-.bg-primary {
-    background-color: $colorBgPrimary;
-}
-
-.bg-info {
-    background-color: $colorBgInfo;
-}
-
-.bg-danger {
-    background-color: $colorBgDanger;
-}
-
-
-
-/**Form Classes**/
-
+/** FORM **/
 .form-control{
-	@include borderRadius0;		
-}
+	box-shadow: 0 0 0;
 
-.checkbox,.checkbox-inline,.radio,.radio-inline{
-	input[type="checkbox"],input[type="radio"]{
-		margin-top:1px;
+	&[disabled]{
+		border-color: $input-border-disabled;
+		color: $input-color-disabled;	
 	}
 }
 
-.checkbox-inline{
-	margin-bottom:10px;
+.input-group-addon {
+	color:$input-border;
 }
 
-.checkbox-inline + .checkbox-inline, .radio-inline + .radio-inline{
-	margin-left:0;
+.input-group .form-control:first-child{
+	border-right:0;
 }
 
-.form-group label{
-	margin-bottom:5px;
+.help-block{
+	font-size: ceil(($font-size-base * 0.75));
+	font-weight:400;
 }
 
-.form-inline .form-group{
-	margin-bottom:0px;
-	margin-right:20px;
-	
-	label{
-		margin-bottom:0;
-	}
-}
+.checkbox, .radio{
+	input{
+		+ label{
+			&:hover,&:focus{
+				&:before{
+					border-color:$brand-primary;
+				}	
+			}
 
-.has-success{
-	.checkbox,.checkbox-inline, .control-label, .help-block, .radio, .radio-inline, &.checkbox label, &.checkbox-inline label, &.radio label, &.radio-inline label{
-		color: $colorSuccess;
-	}
-	.form-control{
-		border-color: $colorSuccess;
-	}
-}	
-
-.has-warning{
-	.checkbox,.checkbox-inline, .control-label, .help-block, .radio, .radio-inline, &.checkbox label, &.checkbox-inline label, &.radio label, &.radio-inline label{
-		color: $colorWarning;
-	}
-	.form-control{
-		border-color: $colorWarning;
-	}
-}	
-
-.has-error{
-	.checkbox,.checkbox-inline, .control-label, .help-block, .radio, .radio-inline, &.checkbox label, &.checkbox-inline label, &.radio label, &.radio-inline label{
-		color: $colorDanger;
-	}
-	.form-control{
-		border-color: $colorDanger;
-	}
-}
-
-@media (max-width: 767px) {
-	
-	.form-inline .form-group{
-		margin-right:0;
-		margin-bottom:15px;
+			&:before{
+			    content: '';
+			    border: 1px solid #ccc;
+			    border-radius: 2px;
+			    width: 20px;
+			    height: 20px;
+			    position: absolute;
+			    left: 0;
+			    top: 50%;
+			    margin-top: -10px;
+			    display: flex;
+			    align-items: center;
+			    justify-content: center;
+			    transition:all .2s linear 0s;		    
+			}
+		}
 		
-		label{
-			margin-bottom:5px;
+		&:checked + label{
+			&:before{
+				content: '\f00c';
+				color:$brand-primary;
+				border-color:$brand-primary;
+				font-family:FontAwesome;
+			}
 		}
 	}
-	
 }
 
+/** TABLE **/
 
-
-/** TABLES **/
 .table{
-	>tbody,>tfoot,>thead{
-		>tr{
-			&.danger{
-				>td,>th{
-					background-color:$colorTableDanger;
+	margin-bottom:$grid-gutter-width;
+	
+	> tbody, > tfoot, > thead{
+		> tr {
+			> td, > th {
+				vertical-align: middle;
+			}
+			> th{
+				text-transform: uppercase;
+				color: $table-head-color;
+				font-size: ceil(($font-size-base * 0.75));
+				font-weight: $table-head-font-weight;
+			}
+
+			> td{
+				background:$table-cell-bg;
+
+				.dropdown button{
+					color:$table-head-color;
+
+					&:hover,&:focus,&:active,&:active:focus{
+						color: $gray-base;
+						outline:0;
+					}
 				}
 			}
-			>td,th{
-				&.danger{
-					background-color:$colorTableDanger;
-				}
+			&:hover,&:focus{
+				> td{
+					background:$table-bg-hover;
+				}	
 			}
-			&.warning{
-				>td,>th{
-					background-color:$colorTableWarning;
-				}
-			}
-			>td,th{
-				&.warning{
-					background-color:$colorTableWarning;
-				}
-			}	
-			&.info{
-				>td,>th{
-					background-color:$colorTableInfo;
-				}
-			}
-			>td,th{
-				&.info{
-					background-color:$colorTableInfo;
-				}
-			}	
-			&.success{
-				>td,>th{
-					background-color:$colorTableSuccess;
-				}
-			}
-			>td,th{
-				&.success{
-					background-color:$colorTableSuccess;
-				}
-			}	
-			&.active{
-				>td,>th{
-					background-color:$colorTableActive;
-				}
-			}
-			>td,th{
-				&.active{
-					background-color:$colorTableActive;
-				}
-			}	
-		}		
+		}
 	}
 }	
 
-/** DROPDOWNS**/
+/** THUMBNAIL **/
+.thumbnail{
+	width:100%;
+	position:relative;
+	display:inline-block;
+	box-shadow: $box-shadow;
+	border:0;
 
-.dropdown-menu{
-	.divider{
-		background:$navBgColor;;
+	h3{
+		margin:0;
+		font-size: $font-size-base;
 	}
+
+	.actions-bar{
+		position:absolute;
+		top:0;
+		right:0;
+	}
+
+	.caption{
+		float:left;
+		width:100%;
+	}
+}
+
+/** MODALS **/
+.modal-header{
+	background: $modal-header-bg;
+	color: $modal-header-color;
+
+	.close{
+		opacity:$close-opacity;
+		font-size:$close-font-size;
+    	line-height: ceil(($close-font-size / 2));
+	}
+}
+
+/** PAGINATION **/
+.pagination{
+	margin: $pagination-margin;
+}
+
+/** NAVBAR **/
+.navbar-right{
+	margin:0;
 }

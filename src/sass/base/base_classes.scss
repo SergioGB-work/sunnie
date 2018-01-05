@@ -151,6 +151,11 @@
 /*DISPLAY*/
 .db{display:block !important;}
 .dn{display:none !important;}
+.df{display:flex !important;}
+
+@media (min-width: $screen-sm-min) {
+	.df-sm{display:flex !important;}
+}
 
 
 /*WIDTH*/

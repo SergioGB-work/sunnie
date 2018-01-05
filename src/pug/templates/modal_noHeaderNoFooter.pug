@@ -1,0 +1,9 @@
+block vars
+
+- var size = modal_size || ''
+
+div(class="modal fade",id=modal_id,tabindex="-1",role="dialog",aria-labelledby="EditarCliente")
+	div(class="modal-dialog " + size,role="document")
+		div(class="modal-content")
+			div(class="modal-body")
+				block modal-body

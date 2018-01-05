@@ -1,0 +1,43 @@
+nav(class="navbar navbar-default",role="navigation")
+
+	div(class="navbar-header")
+		button(type="button",class="navbar-toggle collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+
+			span(class="sr-only") Toggle navigation
+			span(class="icon-bar")
+			span(class="icon-bar")
+			span(class="icon-bar")
+
+	div(class="navbar-collapse",id="navigation-list")
+
+		ul(class="nav navbar-nav")
+			li
+				a(href="./home.html", title="Ir a Home")
+					span Home
+
+			li
+				a(href="./html-elemments.html", title="Ir a Home", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="html-elements")
+					span HTML Elements
+					span(class="caret")
+
+				ul(class="dropdown-menu",aria-labelledby="html-elements")
+					li
+						a(href="") Typography
+					li
+						a(href="") Lists
+					li
+						a(href="") Tables
+					li
+						a(href="") Buttons	
+					li
+						a(href="") Forms
+					li
+						a(href="") Modals
+
+			li
+				a(href="./layouts.html", title="Ir a Home")
+					span Layouts
+
+			li
+				a(href="./components.html", title="Ir a Home")
+					span Components

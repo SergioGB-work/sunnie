@@ -1,0 +1,16 @@
+include include_fragments.pug
+
+mixin fragment(fragmentType,content)
+
+	- var classesFragment = 'fragment'
+
+	div(class=classesFragment + ' ' + fragmentType)
+
+		div(class="fragment-content")
+			+#{fragmentType}(content)
+
+
+
+
+
+

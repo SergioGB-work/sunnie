@@ -1,12 +1,6 @@
-/** RESET **/
-@import 'base/reset';
-
-
 /** CSS LIBS **/
-@import 'lib/bootstrap.css';
-@import 'lib/owl.carousel.css';
-@import 'lib/owl.theme.css';
-
+@import 'lib/bootstrap';
+@import 'lib/asPieProgress.css';
 
 /** BASE **/
 @import 'base/variables';
@@ -26,9 +20,6 @@
 
 
 /** COMPONENTS **/
-@import 'components/component-breadcrumbs';
-@import 'components/component-language';
-
 
 /** CUSTOMIZING **/
 @import 'custom';

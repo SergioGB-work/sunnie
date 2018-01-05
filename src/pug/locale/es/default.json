@@ -1,0 +1,16 @@
+{
+  "errorLoginTitle" : "Inicio de Sesión Incorrecto",
+  "errorLoginContent" : "El usuario o la contraseña que has introducido son incorrectos",
+  "errorRoleTitle" : "Permiso denegado",
+  "errorRoleContent" : "No estas autorizado para ver este contenido",
+  "operationOK" : "Operación realizada correctamente",
+  "errorAuthenticationTitle" : "Fallo de autenticación",
+  "errorAuthenticationContent" : "Debes iniciar sesión para realizar esa operación",
+  "error":"Error",
+  "errorOcurred":"Se ha producido un error",
+  "unknownError":"Error desconocido",
+  "acept":"Aceptar",
+  "logout":"Salir",
+  "welcome":"Bienvenido",
+  "configuration":"Configuración"
+}

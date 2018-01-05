@@ -1,8 +1,0 @@
-mixin component-logo(content)
-	- var url = content.url || '/';
-	- var title = content.title || ''
-	- var alt = content.alt || 'Logo'
-	- var src = content.src || ''
-
-	a(class="logo",href="#{url}",title="#{title}",key="go-to-x")
-		img(alt="#{alt}",src="#{src}")
