@@ -10,12 +10,14 @@ $grid-gutter-width:						16px;
 $header-height: 						60px;
 $header-bg: 							#22262f;
 
+$line-height-base:						1.5;
+
 $font-family-sans-serif:				'Roboto', sans-serif;
 $font-family-serif:						'Roboto', sans-serif;
 $font-family-monospace:					'Roboto', sans-serif;
 
 $font-size-base:						16px;
-$font-size-h1:							24px;
+$font-size-h1:							ceil($font-size-base * 2.5);;
 $headings-font-weight:					600;
 
 $border-radius-base:					0;

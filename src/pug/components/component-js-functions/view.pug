@@ -1,0 +1,98 @@
+mixin component-js-functions(content)
+	div
+		h1 Javascript Functions
+
+		p Sunnie dispone de una serie de funciones javascript predefinidas que se pueden utilizar para realizar diversas acciones generales.
+
+		p A continuación se detalla el listado de funciones disponibles:
+
+
+		h3 popover()
+
+		p Habilita los elementos popover definidos mediante bootstrap
+
+		h3 getData(service,method,template,target,page,items_per_page,aditionalData,callback,content)
+
+		p Función AJAX genérica que se encarga de todas las peticiones AJAX a servicios REST. Cualquier llamad a un servicio REST debería ser realizada a través de esta función.
+
+		h4 Parámetros
+
+		table(class="table")
+			thead
+				tr
+					th Param
+					th Description
+					th Uso
+			tbody
+				tr
+					td <strong>service</strong>
+					td URL del servicio REST
+					td "/clientes/59/usuarios"
+
+				tr
+					td <strong>method</strong>
+					td Tipo de método con el que se llama al servicio. POST o GET 
+					td "GET"
+
+				tr
+					td <strong>template</strong>
+					td ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.
+					td "#templateClientes"
+
+				tr
+					td <strong>target</strong>
+					td ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.
+					td ".table-clientes tbody"
+
+				tr
+					td <strong>page</strong>
+					td Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+					td "1"					
+
+				tr
+					td <strong>items_per_page</strong>
+					td Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+					td "10"	
+
+				tr
+					td <strong>aditionalData</strong>
+					td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
+					td "{cliente : 55 , usuario : 12}"	
+
+				tr
+					td <strong>callback</strong>
+					td Noombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
+					td "callbackCargaClientes"
+
+				tr
+					td <strong>content</strong>
+					td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
+					td ""											
+
+		h3 dataList(el)
+
+		h3 pagination(el)
+
+		h3 generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content)
+
+		h3 error(code,content)
+
+		h3 showLoading()
+
+		h3 hideLoading()
+
+		h3 showError(title,content)
+
+		h3 showHTMLError(title,content)
+
+		h3 encodeImageFileAsURL(element,target_view)
+
+		h3 filterContentByRol()
+
+		h3 pieProgress(el)
+
+		h3 dataSearch()
+
+		h3 markRol(el,rol)
+
+		h3 markClient(el,client)

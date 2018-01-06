@@ -333,12 +333,10 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 		});
 	}
 
-	service = service.replace('{id_tienda}',$.cookie('id_tienda')).replace('{id_cliente}',$.cookie('id_client'));
-
-	console.log(api + service +"?access_token=" + $.cookie('id_session') + filter);
+	console.log(service +"?access_token=" + $.cookie('id_session') + filter);
 
 	$.ajax({
-		url: api + service +"?access_token=" + $.cookie('id_session') + filter,
+		url: service +"?access_token=" + $.cookie('id_session') + filter,
 		type: method,
 		data: aditionalData,
 		dataType: 'json',

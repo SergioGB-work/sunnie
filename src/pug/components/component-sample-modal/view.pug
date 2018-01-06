@@ -1,0 +1,17 @@
+mixin component-sample-modal(content)
+	
+	h1 Modals
+
+	button(class="btn btn-primary", data-target="#lexDefaultModal" ,data-toggle="modal") Default Modal
+
+	button(class="btn btn-primary", data-target="#lexLargeModal" ,data-toggle="modal") Large Modal
+
+	button(class="btn btn-primary", data-target="#lexSmallModal" ,data-toggle="modal") Small Modal
+
+	button(class="btn btn-primary", data-target="#lexNoHeaderModal" ,data-toggle="modal") Modal Without Header
+
+
+	include templates/modal-default.pug
+	include templates/modal-large.pug
+	include templates/modal-small.pug
+	include templates/modal-noHeaderNoFooter.pug
