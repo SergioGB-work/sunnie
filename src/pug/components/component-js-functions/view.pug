@@ -142,8 +142,46 @@ mixin component-js-functions(content)
 
 		p Permite ejecutar el filtrado de contenidos por rol a partir de los data atributos previamente definidos. Es especialmente útil cuando se cargan contenidos dinámicos que deben ser filtrados según el rol del usuario logueado.
 
-		h3 pieProgress(el)
-
 		h3 dataSearch()
 
-		p Permite inicializar los elementos que tiene definido un <a href="./data-definitions.html#data-definitions-data-search-block>data-search="true"</a>. 
+		p Permite inicializar los elementos que tiene definido un <a href="./data-definitions.html#data-definitions-data-search-block">data-search="true"</a>. 
+
+		h2 checkRol(rol)
+
+		p Función escrita en javascript puro que permite controlar si un usuario tiene acceso a una página. En caso de que el usuario tenga un rol superior al rol pasado como parámetro se redirige al usuario a la pagina de Acceso denegado.
+
+		h3 Ejemplo de uso
+
+		pre
+			| extends ./layouts/layout-12-fluid
+
+			| block header
+			|    title tiendas
+			|    meta(name="keywords",content="pug")
+			|    meta(name="description",content="pug")
+			|    script.
+			|        checkRol(3)
+
+			| block content-upper
+
+			|    +component('component-storesList','id1','','','false','true')		
+
+		h2 checkSession()
+
+		p Función escrita en javascript puro que define si para acceder a una página es necesario estar logueado. Si se usa en la cabecera de una página significa que es necesario que el usuario este logueado para acceder. En caso de no estarlo, se redirige al usuario a la página de error correspondiente.
+
+		pre
+			| extends ./layouts/layout-12-fluid
+
+			| block header
+			|    title tiendas
+			|    meta(name="keywords",content="pug")
+			|    meta(name="description",content="pug")
+			|    script.
+			|        checkSession()
+
+			| block content-upper
+
+			|    +component('component-storesList','id1','','','false','true')	
+
+
