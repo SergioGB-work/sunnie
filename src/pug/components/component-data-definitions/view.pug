@@ -4,10 +4,180 @@ mixin component-data-definitions(content)
 
 		p Sunnie permite automatizar y dinamizar la carga de datos y la generación de ciertas estructuras de datos mediante data attributes.
 
-		h2 Data Loading
+		h2(id="data-definitions-data-loading-block") Data Loading
+		
+		p Permite realizar peticiones a servicios REST, obtener sus datos, estructurarlos mediente plantillas y mostrarlos en un lugar deseado, entre otras cosas.
+
+		p Para habilitar la carga dinámica de datos se debe añadir el atributo data-load="true" y a conntinuación, aquellos atributos que sean necesarios para realizar la operación deseada.
+
+		p A continuación se muestra el listado completo de atributos.
+
+		table(class="table")
+			thead
+				tr
+					th Data-attribute
+					th Description
+					th Default
+					th Uso
+			tbody
+				tr
+					td <strong>service-data</strong>
+					td URL del servicio REST del que obtendrá los datos
+					td ""
+					td data-service-data="/clientes/59/usuarios"
+
+				tr
+					td <strong>method</strong>
+					td Tipo de método con el que se llama al servicio. POST o GET
+					td "GET"
+					td data-method = "POST"
+
+				tr
+					td <strong>template</strong>
+					td ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.
+					td ""
+					td data-template = "#templateClientes"
+
+				tr
+					td <strong>target</strong>
+					td ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.
+					td ""
+					td data-template = ".table-clientes tbody"
+
+				tr
+					td <strong>initial-page</strong>
+					td Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+					td "0"
+					td data-initial-page= "1"					
+
+				tr
+					td <strong>items-per-page</strong>
+					td Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+					td "0"
+					td data-items-per-page = "10"	
+
+				tr
+					td <strong>aditionalData</strong>
+					td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
+					td ""
+					td data-aditionalData = "{cliente : 55 , usuario : 12}"	
+
+				tr
+					td <strong>callback</strong>
+					td Nombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
+					td ""
+					td data-callback = "callbackCargaClientes"
+
+				tr
+					td <strong>content</strong>
+					td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
+					td ""
+					td data-content = ""					
+
+		h3 Ejemplo de Uso
+		
+		pre 
+			| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody")			
+			|     thead
+			|         tr
+			|             th ID
+			|             th Nombre
+			|             th Email
+			|             th Cliente
+			|             th Rol					
+			|     tbody
+
 
 		h2 Pagination
 
+		p Se puede habilitar la paginación de elementos con carga dinámica de datos para que los datos mostrados realicen una paginación real de datos, realizando la petición de datos exclusivamente de los datos necesarios.
+
+		p Es requisito necesario que los datos din´´amico hayan sido cargados mediante <a href="#data-definitions-data-loading-block">Data Loading</a> definido en el apartado anterior.
+
+		p Para habilitar la paginación de datos se debe añadir el atributo data-has-pagination="true" y ,a conntinuación, aquellos atributos que sean necesarios para que la paginación sea como deseamos.
+
+		table(class="table")
+			thead
+				tr
+					th Data-attribute
+					th Description
+					th Default
+					th Uso
+			tbody
+				tr
+					td <strong>pagination-service-data-all</strong>
+					td URL del servicio REST que devuelve el listado completo de datos(sin paginar). Se utiliza para calcular el número de páginas en las que se dividirán los datos a partir de los items-per-page definitidos.
+					td data-service-data || ""
+					td data-pagination-service-data-all="/clientes/59/usuarios"
+
+				tr
+					td <strong>pagination-method</strong>
+					td Tipo de método con el que se llama al servicio. POST o GET
+					td data-method || ""
+					td pagination-data-method = "POST"
+
+				tr
+					td <strong>pagination-template</strong>
+					td ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.
+					td data-template || ""
+					td data-pagination-template = "#templateClientes"
+
+				tr
+					td <strong>pagination-target</strong>
+					td ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.
+					td data-template || ""
+					td data-pagination-template = ".table-clientes tbody"				
+
+				tr
+					td <strong>pagination-container-target</strong>
+					td Selector CSS del contenedor sobre el que se mostrarán las páginas de la paginación
+					td ".pagination"
+					td data-pagination-container-target = ".container-pagination"
+
+				tr
+					td <strong>pagination-initial-page</strong>
+					td Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+					td data-initial-page
+					td data-initial-page= "1"					
+
+				tr
+					td <strong>pagination-items-per-page</strong>
+					td Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+					td "data-items-per-page"
+					td data-pagination-items-per-page = "10"	
+
+				tr
+					td <strong>pagination-aditionalData</strong>
+					td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
+					td data-aditionalData || ""
+					td pagination-data-aditionalData = "{cliente : 55 , usuario : 12}"	
+
+				tr
+					td <strong>pagination-callback</strong>
+					td Nombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
+					td data-callback || ""
+					td pagination-data-callback = "callbackCargaClientes"
+
+				tr
+					td <strong>content</strong>
+					td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
+					td ""
+					td data-content = ""
+		
+		h3 Ejemplo de Uso
+
+		p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parametros del <a href="#data-definitions-data-loading">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 
+		
+		pre 
+			| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-has-pagination="true")			
+			|     thead
+			|         tr
+			|             th ID
+			|             th Nombre
+			|             th Email
+			|             th Cliente
+			|             th Rol					
+			|     tbody
 		h2 Search
 
 		h2 Filters

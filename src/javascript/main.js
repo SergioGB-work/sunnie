@@ -416,9 +416,10 @@ function pagination(el){
 		content = el.data('pagination-content') || el.data('content') || '',
 		template = el.data('pagination-template') || el.data('template') || '',
 		target = el.data('pagination-target') || el.data('target') || '',
-		callback = el.data('pagination-callback') || el.data('callback') || '';
+		callback = el.data('pagination-callback') || el.data('callback') || '',
+		aditionalData = el.data('pagination-aditional-data') || el.data('aditional-data') || '';
 
-    getData(service_data_all,method,'','',0,0,'','generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content);
+    getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content);
 }
 
 function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content){
