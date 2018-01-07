@@ -88,7 +88,7 @@ mixin component-data-definitions(content)
 			|     tbody
 
 
-		h2 Pagination
+		h2 Pagination(id="data-definitions-data-pagination-block")
 
 		p Se puede habilitar la paginación de elementos con carga dinámica de datos para que los datos mostrados realicen una paginación real de datos, realizando la petición de datos exclusivamente de los datos necesarios.
 
@@ -166,7 +166,7 @@ mixin component-data-definitions(content)
 		
 		h3 Ejemplo de Uso
 
-		p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parametros del <a href="#data-definitions-data-loading">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 
+		p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parametros del <a href="#data-definitions-data-loading-block">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 
 		
 		pre 
 			| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-has-pagination="true")			
@@ -178,6 +178,101 @@ mixin component-data-definitions(content)
 			|             th Cliente
 			|             th Rol					
 			|     tbody
-		h2 Search
+		h2 Search(id="data-definitions-data-search-block")
 
-		h2 Filters
+		p Es posible realizar un filtrado de los datos de los datos cargados en los listados de datos mendiante una busqueda por palabras. Gracias al buscador genério de sunnie y sus parametros, se puede definir porque que campos del modelo de datos debe realizarse la busqueda/filtrado de los datos. 
+
+		P Por ejemplo, podemos disponer de un listado de usuarios cargados mediante data loading y un campo texto de búsqueda en el que podemos introducir la palabra a buscar y porque campos queremos que busque(nombre del usuario, identificador, rol, etc...)
+
+		p Gracias al atributo <strong>data-search="true"</strong> podemmos habilitar el buscador. Una vez activemos la busqueda se añadirá a la URL de la página una serie de parámetros y se recargará la página de tal forma que con la nueva recarga los datos que se muestren aparecerán filtrados por el texto, incluyendo su paginación.
+
+		p Para que la búsqueda se realice de forma adecuada, al campo input de busqueda donde escribiremos nuestra busqueda sdebemos añadir una serie de atributos <strong>data-search-fieldN</strong> donde N va de 1a N(data-search-field1, data-search-field2, data-search-field3, etc). El valor de los campos debe coincidir con el campo del modelo de datos por el que queremos buscar.
+
+		h3 Ejemplo
+		pre
+			| form
+			|    div(class="input-group search-box" data-search="true")
+			|       input(type="text",class="form-control",placeholder="Buscar usuario",aria-describedby="buscar_usuario", id="input_searchUser",data-search-field1="username",data-search-field2="email")
+			|       label(for="input_searchUser",  class="sr-only") Buscar usuario
+			|       span(class="input-group-addon",id="buscar_user")
+			|           i(class="fa fa-search icon-2x",aria-hidden="true")		
+
+
+		p Al buscar, reescribirá la URL para añadir los nuevos campos correspondientes a la búsqueda. Por ejemplo: <span class="text-primary">http://midominio.com?query=usuario&searchField1=id_clliente&searchField2=nombreUsuario&searchField3=rolUsuario</span>
+
+		h2 Filters(id="data-definitions-data-filter-block")
+
+		p Al igual que con le buscador, se pueden definir filtros personalizados para aplicar a los listados de datos y que el usuario elija en cada caso cual usar. Por ejemplo, ordenar los datos por orden alfabétco o mostrar solo los usuatios con rol administrador.
+
+		p Se pueden definir los filtros de forma personalizada a través de data atributos y sin necesidad de programar ninguna llamada ajax adicional.
+
+		p Del mismo modo que el buscador, cuando se aplique un filtro se añadirá  un parametro a la URL y se recargará la página con los datos filtrados/ordenados por ese filtro(s).
+
+		p Para definir un bloque de filtros es necesario añadir <strong>data="filters"</strong> al boque contenedor de los filtros y a continuación, en cada filtro añadir <strong>data-filter="NombreDelCampoAFiltrar"</strong>. En el caso de un filtro de tipo ordenación es necesario usar <strong>data-filter="order"</strong>.
+
+		p Por ultimo, cada filtro debe ser un enlace con un <strong>data-filter-value="ValorDelFiltro"</strong> que se corresponderá con el vallor por el que queremos filtrar el campo definido previamente.
+
+		h3 Ejemplo
+
+		pre
+			| ul.filterBar.list-inline(data="filters")
+			|    li.dropdown(data-filter="order")
+			|        a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
+			|            span Ordenar por: <span class="filterValue"></span>
+			|            span(class="caret")
+
+			|        ul(class="dropdown-menu")
+			|            li
+			|                a(href="",data-filter-value="") Todos
+
+			|            li
+			|                a(href="",data-filter-value="username%20ASC") Nombre Asc
+
+			|            li
+			|                a(href="",data-filter-value="username%20DESC") Nombre Desc
+
+			|            li
+			|                a(href="",data-filter-value="email%20ASC") Email Asc
+
+			|            li
+			|                a(href="",data-filter-value="email%20DESC") Email Desc
+				
+			|    li.dropdown(data-filter="activo")
+			|        a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
+			|            span Ordenar por: <span class="filterValue"></span>
+			|            span(class="caret")
+
+			|        ul(class="dropdown-menu")
+			|            li
+			|                a(href="",data-filter-value="") Todos
+
+			|            li
+			|                a(href="",data-filter-value="1") Activado
+
+			|            li
+			|                a(href="",data-filter-value="0") Desactivado
+
+
+		h2 Roles(id="data-definitions-data-roles-block")
+
+		p Sunnie permite filtrar el contenido mostrado y los elementos mostrados mediante roles. Para ello, existen unos data atributos que permiten definir a nivel de elemento HTML para que roles es visible.
+
+		table(class="table")
+			thead
+				tr
+					th Data-attribute
+					th Description
+					th Uso
+			tbody
+				tr
+					td <strong>auth-rol</strong>
+					td El elemento es visible para roles menores o iguales al nivel del rol definido.
+					td data-auth-rol="3"
+
+				tr
+					td <strong>auth-rol-eq</strong>
+					td El elemento solo es visible para un rol igual al nivel del rol definido
+					td data-auth-rol-eq = "2"
+
+
+		p Siendo el rol 1 el rol de administrador, y por tanto el que mas control sobre la aplicación tiene. El rol de cada usuario es guardado en una cookie cuando un usuario se loguea y proviene del reesutado devuelto en la llamada al servicio de login.			

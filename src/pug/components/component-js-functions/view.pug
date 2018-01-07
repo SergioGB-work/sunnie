@@ -71,28 +71,79 @@ mixin component-js-functions(content)
 
 		h3 dataList(el)
 
+		p Inicializa la carga dinámica de datos sobre el selector CSS "el". Se vale de los data atributos definidos en el elemento para realizar la carga de datos.
+
+		p Dichos atributos pueden ser consultados en la sección de <a href="./data-definitions.html#data-definitions-data-loading-block">Data Definitions</a>. 
+
+
 		h3 pagination(el)
 
-		h3 generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content)
+		p Genera la paginación de un listado de datos dinámicos a partir de los data atributos definidos en el selector CSS "el".
+
+		p Dichos atributos pueden ser consultados en la sección de <a href="./data-definitions.html#data-definitions-data-pagination-block">Data Definitions</a>. 
 
 		h3 error(code,content)
 
+		p Está función genérica recibe el código de error ocurrido(200,401,404, etc...) y muestra de forma automática el mensaje de error correspondiente. Es la función genérica que define los errores genéricos del portal. Se puede extender con más códigos de error en función del caso de uso. Algunos errores también admiten la recepción del mensaje de texto a mostrar.
+
+		Utiliza la modal genérica de errores para mostrar dicho error.
+
 		h3 showLoading()
+
+		p Permite mostrar la capa de loading genérica. Por defecto, cualquier petición ajax que se realice mmuestra de forma automática la capa.
 
 		h3 hideLoading()
 
+		p Permite ocultar la capa de loading genérica. Por defecto, cualquier peticion ajax que se completa, ya sea correctamente o con errores oculta la capa.
+
 		h3 showError(title,content)
+
+		p Utiliza la modal genérica de error para mostrar una modal con el title y el content que se le facilita a través de los parametros de la función.
+
+		table(class="table")
+			thead
+				tr
+					th Param
+					th Description
+					th Uso
+			tbody
+				tr
+					td <strong>title</strong>
+					td Título de la modal. Debe seer un String
+					td "Error de login"
+
+				tr
+					td <strong>content</strong>
+					td Texto descriptivo del error que se mostrará en el cuerpo de la modal. Debe ser un String.
+					td "Has introducido un usuario o contraseña incorrecta"
 
 		h3 showHTMLError(title,content)
 
-		h3 encodeImageFileAsURL(element,target_view)
+		p Utiliza la modal genérica de error para mostrar una modal con el title y el content que se le facilita a través de los parametros de la función pero a diferencia de la anterior, esta función admite contenido HTML.
+
+		table(class="table")
+			thead
+				tr
+					th Param
+					th Description
+					th Uso
+			tbody
+				tr
+					td <strong>title</strong>
+					td Título de la modal. Debe seer un String
+					td "Error de login"
+
+				tr
+					td <strong>content</strong>
+					td Contenido del error que se mostrará en el cuerpo de la modal. Admite HTML.
+					td "Has introducido un <strong>usuario o contraseña incorrecta</strong>"
 
 		h3 filterContentByRol()
+
+		p Permite ejecutar el filtrado de contenidos por rol a partir de los data atributos previamente definidos. Es especialmente útil cuando se cargan contenidos dinámicos que deben ser filtrados según el rol del usuario logueado.
 
 		h3 pieProgress(el)
 
 		h3 dataSearch()
 
-		h3 markRol(el,rol)
-
-		h3 markClient(el,client)
+		p Permite inicializar los elementos que tiene definido un <a href="./data-definitions.html#data-definitions-data-search-block>data-search="true"</a>. 
