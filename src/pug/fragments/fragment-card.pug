@@ -1,0 +1,16 @@
+mixin fragment-card(content)
+	- var src = content.src
+	- var alt = content.alt
+	- var header = content.header
+	- var description = content.description
+
+	.thumbnail
+		.aspect-ratio.aspect-ratio-4-to-3
+			img(src=src,alt=alt)
+
+		if(header != '' || description != '')
+			.caption
+				if(header != '')
+					h3 #{alt}
+				if(description != '')	
+					p #{description}

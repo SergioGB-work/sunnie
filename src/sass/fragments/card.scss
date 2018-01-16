@@ -1,0 +1,21 @@
+.fragment-card{	
+    .thumbnail{
+		text-align:center;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: ceil(($grid-gutter-width));
+
+		h3{
+			font-size: ceil(($font-size-base * 1.25));
+			margin-bottom: ceil(($grid-gutter-width * 0.75));
+		}
+
+		p{
+			margin-bottom:0;
+		}
+
+		&:hover,&:focus{
+			text-decoration:none;
+		}
+	}
+}    
