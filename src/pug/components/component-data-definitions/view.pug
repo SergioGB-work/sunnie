@@ -72,12 +72,17 @@ mixin component-data-definitions(content)
 					td <strong>content</strong>
 					td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
 					td ""
-					td data-content = ""					
+					td data-content = ""
+				tr
+					td <strong>enable-get-params</strong>
+					td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
+					td ""
+					td data-enable-get-params = "true"									
 
 		h3 Ejemplo de Uso
 		
 		pre 
-			| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody")			
+			| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-enable-get-params="true")			
 			|     thead
 			|         tr
 			|             th ID
@@ -159,11 +164,17 @@ mixin component-data-definitions(content)
 					td pagination-data-callback = "callbackCargaClientes"
 
 				tr
-					td <strong>content</strong>
+					td <strong>pagination-content</strong>
 					td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
 					td ""
-					td data-content = ""
-		
+					td data-pagination-content = ""
+
+				tr
+					td <strong>pagination-enable-get-params</strong>
+					td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
+					td data-enable-get-params || ""
+					td data-enable-get-params = "true"
+
 		h3 Ejemplo de Uso
 
 		p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parametros del <a href="#data-definitions-data-loading-block">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 

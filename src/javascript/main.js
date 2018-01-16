@@ -293,7 +293,7 @@ function popover(){
 	// @param content -> parametros adicionales a enviar a la función callback
 
 
-function getData(service,method,template,target,page,items_per_page,aditionalData,callback,content){
+function getData(service,method,template,target,page,items_per_page,aditionalData,callback,content,enableGetParams){
 	var filter = '';
 
 	if (page !== undefined && page != '' && page > 0) {
@@ -305,34 +305,36 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 		filter += '&filter[limit]=' + items_per_page;
 	}
 
-	if(Object.keys(getParams).length > 0){
-		var count = 0;
-		$.each(Object.keys(getParams), function(i, val) {
-			
-			if(val=='order'){
-				filter += '&filter['+val+']=' + getParams[val];
-			}
+	if(enableGetParams == true || enableGetParams=="true"){
+		if(Object.keys(getParams).length > 0){
+			var count = 0;
+			$.each(Object.keys(getParams), function(i, val) {
+				
+				if(val=='order'){
+					filter += '&filter['+val+']=' + getParams[val];
+				}
 
-			else if(val=='query'){
-				var n=0;
-				$.each(Object.keys(getParams), function(index, value) {
-					if(value.indexOf('searchField') > -1){	
-						filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
-						n++;;
-					}	
-				})
-				count++;
+				else if(val=='query'){
+					var n=0;
+					$.each(Object.keys(getParams), function(index, value) {
+						if(value.indexOf('searchField') > -1){	
+							filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
+							n++;;
+						}	
+					})
+					count++;
 
 
-			}
+				}
 
-			else if(val.indexOf('searchField') < 0 && val != '' && val.indexOf('action') < 0){
-				filter += '&filter[where][and]['+count+']['+val+']=' + getParams[val];
-				count++;
-			}
-		});
+				else if(val.indexOf('searchField') < 0 && val != '' && val.indexOf('action') < 0){
+					filter += '&filter[where][and]['+count+']['+val+']=' + getParams[val];
+					count++;
+				}
+			});
+		}
 	}
-
+		
 	console.log(service +"?access_token=" + $.cookie('id_session') + filter);
 
 	$.ajax({
@@ -386,9 +388,10 @@ function dataList(el){
 		content = el.data('content') || '',
 		template = el.data('template') || '',
 		target = el.data('target') || '',
-		aditionalData = el.data('aditional-data');
+		aditionalData = el.data('aditional-data'),
+		enableGetParams = el.data('enable-get-params');
 
-		getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content);
+		getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams);
 }
 
 // GENERALIZACION DE PAGINACION
@@ -417,12 +420,13 @@ function pagination(el){
 		template = el.data('pagination-template') || el.data('template') || '',
 		target = el.data('pagination-target') || el.data('target') || '',
 		callback = el.data('pagination-callback') || el.data('callback') || '',
-		aditionalData = el.data('pagination-aditional-data') || el.data('aditional-data') || '';
+		aditionalData = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
+		enableGetParams = el.data('enable-get-params') || el.data('enable-get-params') || '';
 
-    getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content);
+    getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams, enableGetParams);
 }
 
-function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content){
+function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content,enableGetParams){
 	
 	var totalPages = data.length / items_per_page;
 
@@ -446,7 +450,7 @@ function generatePagination(data,service_data,method,template,target,initial_pag
 			$(pagination_target).parents('.fragment-pagination').find('.initInterval').text((num - 1)*items_per_page + 1);
 			$(pagination_target).parents('.fragment-pagination').find('.lastInterval').text(parseInt((num - 1)*items_per_page) + parseInt(items_per_page));
 				
-			getData(service_data,method,template,target,num,items_per_page,'',callback,content)
+			getData(service_data,method,template,target,num,items_per_page,'',callback,content,enableGetParams)
 
 		});
 	}	

@@ -11,7 +11,7 @@ mixin component-js-functions(content)
 
 		p Habilita los elementos popover definidos mediante bootstrap
 
-		h3 getData(service,method,template,target,page,items_per_page,aditionalData,callback,content)
+		h3 getData(service,method,template,target,page,items_per_page,aditionalData,callback,content,enableGetParams)
 
 		p Función AJAX genérica que se encarga de todas las peticiones AJAX a servicios REST. Cualquier llamad a un servicio REST debería ser realizada a través de esta función.
 
@@ -67,7 +67,12 @@ mixin component-js-functions(content)
 				tr
 					td <strong>content</strong>
 					td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
-					td ""											
+					td ""				
+
+				tr
+					td <strong>enableGetParams</strong>
+					td Habilita el servicio para que utilice los parametros get de la url y se los envie al servicio definido.
+					td "true"											
 
 		h3 dataList(el)
 
