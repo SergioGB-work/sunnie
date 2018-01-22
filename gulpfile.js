@@ -220,7 +220,7 @@ gulp.task('buildIMAGES', function () {
 });
 
 gulp.task('deployIMAGES',['buildIMAGES'], function () {
-  var files = gulp.src(path.buildIMAGES + '/*.*');
+  var files = gulp.src(path.buildIMAGES + '/**/*.*');
 
 	for (var key in langs){
         files.pipe(gulp.dest('public/' + langs[key] + '/images/'));

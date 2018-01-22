@@ -1,0 +1,19 @@
+mixin component-login(content)
+
+	.text-center
+		img(src="./images/logo-color.png",alt="Logo")
+			
+	p ${{ login.description }}$
+
+	form(data-toggle="validator",role="form",data-callback="callbackLogin",data-method="POST",data-action=api + "/login")
+		div(class="form-group")
+			label(for="email",class="sr-only") ${{ login.email }}$
+			input(type="email",name="email",id="email",placeholder="${{ login.email }}$",class="form-control",required)
+
+		div(class="form-group")
+			label(for="password",class="sr-only") ${{ login.password }}$
+			input(type="password",name="password",id="password",placeholder="${{ login.password }}$",class="form-control",required)
+
+		div(class="form-group")
+			button(type="submit",class="btn btn-primary") ${{ login.signin }}$
+			a(href="./olvide-contrasena.html",title="",class="btn btn-link") ${{ login.forgotPass }}$

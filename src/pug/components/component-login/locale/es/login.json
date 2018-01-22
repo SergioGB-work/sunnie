@@ -1,0 +1,7 @@
+{
+  "description": "Introduce tu nombre de usuario y contraseña para acceder.",
+  "email": "Correo Electrónico",
+  "password": "Constraseña",
+  "signin": "Iniciar Sesión",
+  "forgotPass": "¿Has olvidado tu contraseña?"
+}

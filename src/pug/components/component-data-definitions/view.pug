@@ -93,7 +93,7 @@ mixin component-data-definitions(content)
 			|     tbody
 
 
-		h2 Pagination(id="data-definitions-data-pagination-block")
+		h2(id="data-definitions-data-pagination-block") Pagination
 
 		p Se puede habilitar la paginación de elementos con carga dinámica de datos para que los datos mostrados realicen una paginación real de datos, realizando la petición de datos exclusivamente de los datos necesarios.
 
@@ -189,7 +189,7 @@ mixin component-data-definitions(content)
 			|             th Cliente
 			|             th Rol					
 			|     tbody
-		h2 Search(id="data-definitions-data-search-block")
+		h2(id="data-definitions-data-search-block") Search
 
 		p Es posible realizar un filtrado de los datos de los datos cargados en los listados de datos mendiante una busqueda por palabras. Gracias al buscador genério de sunnie y sus parametros, se puede definir porque que campos del modelo de datos debe realizarse la busqueda/filtrado de los datos. 
 
@@ -211,7 +211,7 @@ mixin component-data-definitions(content)
 
 		p Al buscar, reescribirá la URL para añadir los nuevos campos correspondientes a la búsqueda. Por ejemplo: <span class="text-primary">http://midominio.com?query=usuario&searchField1=id_clliente&searchField2=nombreUsuario&searchField3=rolUsuario</span>
 
-		h2 Filters(id="data-definitions-data-filter-block")
+		h2(id="data-definitions-data-filter-block") Filters
 
 		p Al igual que con le buscador, se pueden definir filtros personalizados para aplicar a los listados de datos y que el usuario elija en cada caso cual usar. Por ejemplo, ordenar los datos por orden alfabétco o mostrar solo los usuatios con rol administrador.
 
@@ -264,7 +264,7 @@ mixin component-data-definitions(content)
 			|                a(href="",data-filter-value="0") Desactivado
 
 
-		h2 Roles(id="data-definitions-data-roles-block")
+		h2(id="data-definitions-data-roles-block") Roles
 
 		p Sunnie permite filtrar el contenido mostrado y los elementos mostrados mediante roles. Para ello, existen unos data atributos que permiten definir a nivel de elemento HTML para que roles es visible.
 

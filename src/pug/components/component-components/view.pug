@@ -1,0 +1,146 @@
+mixin component-components(content)
+	.row
+		.col-xs-12
+			.panel.panel-default
+				.panel-body
+					h1 Componentes
+					
+					p Todos los componentes de Sunnie se crean en base a la misma estructura HTML ubicada en <span class="text-primary">/src/pug/templates/component.pug</span> y la definición de los mismo para su uso está incluída en <span class="text-primary">/src/pug/templates/include_components.pug</span>.
+
+					h2 Uso
+
+					p Los componentes deben usarse para "rellenar" el contenido de una página web de modo que colocaremos los componentes en cada uno de los huecos definidos por la layout utilizada.
+
+					p La <span class="text-primary">estructura básica</span> de uso de todos los componentes es la siguiente:
+
+					pre
+						| +component( componentType , componentId , content , componentTitle , showTitle , full )
+
+					table(class="table")
+						thead
+							tr
+								th Atributo
+								th Description
+								th Default
+						tbody
+							tr
+								td <strong>componentType</strong>
+								td Nombre del componente a utilizar. Coincide con el nombre de la carpeta del componente
+								td "". Requerido				
+
+							tr
+								td <strong>componentId</strong>
+								td Identifiicador único del componente. El identificador se concatena al nombre del componente cuando se realiza la compilación
+								td ""
+
+							tr
+								td <strong>content</strong>
+								td Contenido dinámico del componente que podemos enviarle como parámetro. Admite cualquier tipo de dato: String, JSON, Array, boolean, etc...
+								td ""
+							tr
+								td <strong>componentTitle</strong>
+								td Titulo del componente. En caso de seleccionar el parámetro showTitle a true este será el texto que muestre como título.
+								td ""
+
+							tr
+								td <strong>showTitle</strong>
+								td En caso de estar a "false" no mostrará el título del componente(componentTitle). Con cualquier otro valor si lo mostrará
+								td ""
+
+							tr
+								td <strong>full</strong>
+								td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
+								td ""
+
+					h2 Ejemplo
+					pre
+						| extends ./layouts/layout-12-fluid
+
+						|     block header
+						|         title Lists
+						|         meta(name="keywords",content="pug")
+						|         meta(name="description",content="pug")
+
+						|     block content-upper
+
+						|         +component("component-sample-list","","","","false","false")
+
+	.row
+		.col-xs-12
+			.panel.panel-default
+				.panel-body
+					h2 Listado de componentes
+					p A continuación se muestra el listado de componentes por defecto disponibles para su uso:
+
+		.col-sm-6
+
+			.thumbnail
+				.text-center
+					i(class="fa fa-user-o text-primary icon-13x",aria-hidden="true")
+				.caption
+					h3 Login
+					p Formulario de inicio de sesión con validación de formato de campos
+					p <strong>Parámetros</strong>
+					ul
+						li Nombre: "component-login"
+
+
+			.thumbnail
+				.text-center
+					i(class="fa fa-image text-primary icon-13x",aria-hidden="true")
+				.caption
+					h3 Banner
+					p Muestra un imagen clicable
+					p <strong>Parámetros</strong>
+					ul
+						li Nombre: "component-banner"							
+						li src: ruta de la imagen							
+						li alt: Texto alternativo de la imagen							
+						li longdesc: Descripción larga							
+						li href: enlace de la imagen							
+						li title: título del enlace							
+						li target: target del enlace							
+						
+
+			.thumbnail
+				.text-center
+					i(class="fa fa-image text-primary icon-13x",aria-hidden="true")
+				.caption
+					h3 Image
+					p Muestra una imagen
+					p <strong>Parámetros</strong>
+					ul
+						li Nombre: "component-banner"							
+						li src: ruta de la imagen							
+						li alt: Texto alternativo de la imagen							
+						li longdesc: Descripción larga
+				
+		.col-sm-6
+			.thumbnail
+				.text-center
+					i(class="fa fa-ellipsis-h text-primary icon-13x",aria-hidden="true")
+				.caption
+					h3 Breadcrumbs
+					p Muestra las migas de pan
+					p <strong>Parámetros</strong>
+					ul
+						li Nombre: "component-banner"							
+						li Array de páginas en formato JSON. Cada JSON se compone de los siguientes parámetros
+							ul
+								li url: url de la página
+								li pageName: nombre de la página
+								
+
+			.thumbnail
+				.text-center
+					i(class="fa fa-ellipsis-h text-primary icon-13x",aria-hidden="true")
+				.caption
+					h3 Logo
+					p Muestra el logotipo del portal
+					p <strong>Parámetros</strong>
+					ul
+						li Nombre: "component-logo"							
+						li src: ruta de la imagen
+						li alt: Texto alternativo de la imagen
+						li url: enlace de la imagen
+						li title: título del enlace

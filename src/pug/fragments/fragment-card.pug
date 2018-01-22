@@ -5,12 +5,12 @@ mixin fragment-card(content)
 	- var description = content.description
 
 	.thumbnail
-		.aspect-ratio.aspect-ratio-4-to-3
+		.aspect-ratio.aspect-ratio-4-to-3.crop-img-center.crop-img-middle
 			img(src=src,alt=alt)
 
 		if(header != '' || description != '')
 			.caption
 				if(header != '')
-					h3 #{alt}
+					h3 #{text}
 				if(description != '')	
 					p #{description}

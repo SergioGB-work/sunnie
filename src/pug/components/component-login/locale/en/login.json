@@ -1,0 +1,7 @@
+{
+  "description": "Type your email and password for Sign In.",
+  "email": "Email",
+  "password": "Password",
+  "signin": "Sign In",
+  "forgotPass": "Forgot your password?"
+}
