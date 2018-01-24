@@ -16,42 +16,45 @@ mixin component-components(content)
 					pre
 						| +component( componentType , componentId , content , componentTitle , showTitle , full )
 
-					table(class="table")
-						thead
-							tr
-								th Atributo
-								th Description
-								th Default
-						tbody
-							tr
-								td <strong>componentType</strong>
-								td Nombre del componente a utilizar. Coincide con el nombre de la carpeta del componente
-								td "". Requerido				
 
-							tr
-								td <strong>componentId</strong>
-								td Identifiicador único del componente. El identificador se concatena al nombre del componente cuando se realiza la compilación
-								td ""
+			table(class="table")
+				thead
+					tr
+						th Atributo
+						th Description
+						th Default
+				tbody
+					tr
+						td <strong>componentType</strong>
+						td Nombre del componente a utilizar. Coincide con el nombre de la carpeta del componente
+						td "". Requerido				
 
-							tr
-								td <strong>content</strong>
-								td Contenido dinámico del componente que podemos enviarle como parámetro. Admite cualquier tipo de dato: String, JSON, Array, boolean, etc...
-								td ""
-							tr
-								td <strong>componentTitle</strong>
-								td Titulo del componente. En caso de seleccionar el parámetro showTitle a true este será el texto que muestre como título.
-								td ""
+					tr
+						td <strong>componentId</strong>
+						td Identifiicador único del componente. El identificador se concatena al nombre del componente cuando se realiza la compilación
+						td ""
 
-							tr
-								td <strong>showTitle</strong>
-								td En caso de estar a "false" no mostrará el título del componente(componentTitle). Con cualquier otro valor si lo mostrará
-								td ""
+					tr
+						td <strong>content</strong>
+						td Contenido dinámico del componente que podemos enviarle como parámetro. Admite cualquier tipo de dato: String, JSON, Array, boolean, etc...
+						td ""
+					tr
+						td <strong>componentTitle</strong>
+						td Titulo del componente. En caso de seleccionar el parámetro showTitle a true este será el texto que muestre como título.
+						td ""
 
-							tr
-								td <strong>full</strong>
-								td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
-								td ""
+					tr
+						td <strong>showTitle</strong>
+						td En caso de estar a "false" no mostrará el título del componente(componentTitle). Con cualquier otro valor si lo mostrará
+						td ""
 
+					tr
+						td <strong>full</strong>
+						td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
+						td ""
+
+			.panel.panel-default
+				.panel-body
 					h2 Ejemplo
 					pre
 						| extends ./layouts/layout-12-fluid
@@ -72,75 +75,63 @@ mixin component-components(content)
 					h2 Listado de componentes
 					p A continuación se muestra el listado de componentes por defecto disponibles para su uso:
 
-		.col-sm-6
-
+		.col-xs-12.col-sm-4
 			.thumbnail
-				.text-center
-					i(class="fa fa-user-o text-primary icon-13x",aria-hidden="true")
 				.caption
-					h3 Login
+					h3.icon-4x Login
 					p Formulario de inicio de sesión con validación de formato de campos
-					p <strong>Parámetros</strong>
+					h4.icon-2x Parámetros
 					ul
-						li Nombre: "component-login"
+						li <strong>Nombre:</strong> "component-login"
 
 
 			.thumbnail
-				.text-center
-					i(class="fa fa-image text-primary icon-13x",aria-hidden="true")
 				.caption
-					h3 Banner
+					h3.icon-4x Banner
 					p Muestra un imagen clicable
-					p <strong>Parámetros</strong>
+					h4.icon-2x Parámetros
 					ul
-						li Nombre: "component-banner"							
-						li src: ruta de la imagen							
-						li alt: Texto alternativo de la imagen							
-						li longdesc: Descripción larga							
-						li href: enlace de la imagen							
-						li title: título del enlace							
-						li target: target del enlace							
-						
+						li <strong>Nombre:</strong> "component-banner"							
+						li <strong>src:</strong> ruta de la imagen							
+						li <strong>alt:</strong> Texto alternativo de la imagen							
+						li <strong>longdesc:</strong> Descripción larga							
+						li <strong>href:</strong> enlace de la imagen							
+						li <strong>title:</strong> título del enlace							
+						li <strong>target:</strong> target del enlace
+
+		.col-xs-12.col-sm-4
+			.thumbnail
+				.caption
+					h3.icon-4x Image
+					p Muestra una imagen
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-banner"							
+						li <strong>src:</strong> ruta de la imagen							
+						li <strong>alt:</strong> Texto alternativo de la imagen							
+						li <strong>longdesc:</strong> Descripción larga
 
 			.thumbnail
-				.text-center
-					i(class="fa fa-image text-primary icon-13x",aria-hidden="true")
 				.caption
-					h3 Image
-					p Muestra una imagen
-					p <strong>Parámetros</strong>
-					ul
-						li Nombre: "component-banner"							
-						li src: ruta de la imagen							
-						li alt: Texto alternativo de la imagen							
-						li longdesc: Descripción larga
-				
-		.col-sm-6
-			.thumbnail
-				.text-center
-					i(class="fa fa-ellipsis-h text-primary icon-13x",aria-hidden="true")
-				.caption
-					h3 Breadcrumbs
+					h3.icon-4x Breadcrumbs
 					p Muestra las migas de pan
-					p <strong>Parámetros</strong>
+					h4.icon-2x Parámetros
 					ul
-						li Nombre: "component-banner"							
+						li <strong>Nombre:</strong> "component-banner"							
 						li Array de páginas en formato JSON. Cada JSON se compone de los siguientes parámetros
 							ul
-								li url: url de la página
-								li pageName: nombre de la página
-								
+								li <strong>url:</strong> url de la página
+								li <strong>pageName:</strong> nombre de la página
 
+		.col-xs-12.col-sm-4
 			.thumbnail
-				.text-center
-					i(class="fa fa-ellipsis-h text-primary icon-13x",aria-hidden="true")
 				.caption
-					h3 Logo
+					h3.icon-4x Logo
 					p Muestra el logotipo del portal
-					p <strong>Parámetros</strong>
+					h4.icon-2x Parámetros
 					ul
-						li Nombre: "component-logo"							
-						li src: ruta de la imagen
-						li alt: Texto alternativo de la imagen
-						li url: enlace de la imagen
-						li title: título del enlace
+						li <strong>Nombre:</strong> "component-logo"							
+						li <strong>src:</strong> ruta de la imagen
+						li <strong>alt:</strong> Texto alternativo de la imagen
+						li <strong>url:</strong> enlace de la imagen
+						li <strong>title:</strong> título del enlace

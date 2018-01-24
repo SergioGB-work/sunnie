@@ -17,7 +17,12 @@ $font-family-serif:						'Roboto', sans-serif;
 $font-family-monospace:					'Roboto', sans-serif;
 
 $font-size-base:						16px;
-$font-size-h1:							ceil($font-size-base * 2.5);;
+$font-size-h1:							ceil($font-size-base * 2.5);
+$font-size-h2:            				ceil($font-size-base * 2.25);
+$font-size-h3:            				ceil($font-size-base * 1.75);
+$font-size-h4:            				ceil($font-size-base * 1.5);
+$font-size-h5:            				ceil($font-size-base * 1.25);
+$font-size-h6:							$font-size-base;
 $headings-font-weight:					600;
 
 $border-radius-base:					0;
@@ -62,6 +67,7 @@ $input-color-disabled:					#cccccc;
 $input-bg-disabled:						#eeeeee;
 $input-color-placeholder:				#ddd;
 
+$table-bg:								$body-bg;
 $table-cell-padding:					ceil(($grid-gutter-width * 1.25)) $grid-gutter-width;
 $table-cell-bg:							#fff;
 $table-border-color:					$body-bg;
@@ -79,7 +85,8 @@ $modal-backdrop-opacity:				0.8;
 $modal-header-bg:						$brand-primary;
 $modal-header-color:					#fff;
 
-$thumbnail-caption-padding:   			$grid-gutter-width;
+$thumbnail-padding:						$grid-gutter-width;
+$thumbnail-caption-padding:   			$grid-gutter-width 0 0 0;
 
 $state-warning-text:					#ec971f;
 $state-danger-text:						#c9302c;
@@ -92,6 +99,8 @@ $component-tools-opacity:				0.3;
 $component-tools-width:					40px;
 $component-tools-height:				40px;
 
+$panel-heading-padding:					ceil(($grid-gutter-width * 0.75)) $grid-gutter-width;
+$panel-body-padding:					$grid-gutter-width;
 
 $close-color:							#fff;
 $close-font-weight:						100;

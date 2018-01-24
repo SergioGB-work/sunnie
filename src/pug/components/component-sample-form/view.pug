@@ -30,10 +30,9 @@ mixin component-sample-form(content)
 				p(class="help-block")
 					| Example block-level help text here.
 
-			div(class="checkbox")
-				label 
-					input(type="checkbox")
-					| Check me out
+			div(class="checkbox custom")
+				input(type="checkbox",id="inputCheckSample")
+				label(for="inputCheckSample") Check me out
 
 			div(class="form-group")
 				button(type="submit",class="btn") Submit

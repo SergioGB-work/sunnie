@@ -36,6 +36,48 @@
 }
 
 .checkbox, .radio{
+	&.custom{
+		input{
+			display:none;
+			+ label{
+				padding-left:ceil(($grid-gutter-width * 1.75));
+
+				&:hover,&:focus{
+					&:before{
+						border-color:$brand-primary;
+					}	
+				}
+
+				&:before{
+				    content: '';
+				    border: 1px solid #ccc;
+				    border-radius: 2px;
+				    width: ceil(($grid-gutter-width * 1.25));
+				    height: ceil(($grid-gutter-width * 1.25));
+				    position: absolute;
+				    left: 0;
+				    top: 50%;
+				    margin-top: ceil(-(($grid-gutter-width * 1.25) / 2));
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+				    transition:all .2s linear 0s;		    
+				}
+			}
+			
+			&:checked + label{
+				&:before{
+					content: '\f00c';
+					color:$brand-primary;
+					border-color:$brand-primary;
+					font-family:FontAwesome;
+				}
+			}
+		}
+	}	
+}
+
+.checkbox, .radio{
 	input{
 		+ label{
 			&:hover,&:focus{
@@ -115,8 +157,10 @@
 	width:100%;
 	position:relative;
 	display:inline-block;
+	float:left;
 	box-shadow: $box-shadow;
 	border:0;
+	margin-bottom:$grid-gutter-width;
 
 	h3{
 		margin:0;
@@ -132,6 +176,21 @@
 	.caption{
 		float:left;
 		width:100%;
+	}
+}
+
+/** PANELS **/
+.panel{
+	border:0;
+	box-shadow: $box-shadow;
+	margin-bottom:$grid-gutter-width;
+
+	.panel-body{
+		>{
+			h1,h2,h3,h4,h5,h6{
+				margin-top:0;
+			}
+		}	
 	}
 }
 
