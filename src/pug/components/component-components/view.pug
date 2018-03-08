@@ -83,6 +83,9 @@ mixin component-components(content)
 					h4.icon-2x Parámetros
 					ul
 						li <strong>Nombre:</strong> "component-login"
+					h4.icon-2x Ejemplo
+					pre
+						| +component('component-login','id1','','','false','false')
 
 
 			.thumbnail
@@ -98,6 +101,9 @@ mixin component-components(content)
 						li <strong>href:</strong> enlace de la imagen							
 						li <strong>title:</strong> título del enlace							
 						li <strong>target:</strong> target del enlace
+					h4.icon-2x Ejemplo
+					pre
+						| +component('component-banner','id1',{'src':'./images/banner1.jpg','alt':'Imagen Ir A Home','href':'./home.html','title':'Ir a Home','target':'_blank'},'','false','false')						
 
 		.col-xs-12.col-sm-4
 			.thumbnail
@@ -110,6 +116,9 @@ mixin component-components(content)
 						li <strong>src:</strong> ruta de la imagen							
 						li <strong>alt:</strong> Texto alternativo de la imagen							
 						li <strong>longdesc:</strong> Descripción larga
+					h4.icon-2x Ejemplo
+					pre
+						| +component('component-image','id1',{'src':'./images/banner1.jpg','alt':'Imagen Ir A Home'},'','false','false')
 
 			.thumbnail
 				.caption
@@ -122,6 +131,9 @@ mixin component-components(content)
 							ul
 								li <strong>url:</strong> url de la página
 								li <strong>pageName:</strong> nombre de la página
+					h4.icon-2x Ejemplo
+					pre
+						| +component('component-breadcrumbs','id1',[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}],'','false','false')
 
 		.col-xs-12.col-sm-4
 			.thumbnail
@@ -135,3 +147,6 @@ mixin component-components(content)
 						li <strong>alt:</strong> Texto alternativo de la imagen
 						li <strong>url:</strong> enlace de la imagen
 						li <strong>title:</strong> título del enlace
+					h4.icon-2x Ejemplo
+					pre
+						| +component('component-logo','',{'url':'/','title':'Sunnie Logo','src':'./images/logo.png','alt':'Site Logo Sunnie'},'','false','true')
