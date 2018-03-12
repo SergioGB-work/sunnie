@@ -1,0 +1,5 @@
+mixin component-cards-list-carousel(content)
+
+	each item,i in content
+
+		+fragment("fragment-card",{"src":item.image.src,"alt":"item.image.alt","header":"item.header","description":"item.content","button":{"href":"item.button.href","title":"item.button.title","text":"item.button.text"}})

@@ -78,7 +78,8 @@ mixin component-components(content)
 		.col-xs-12.col-sm-4
 			.thumbnail
 				.caption
-					h3.icon-4x Login
+					h3.icon-4x
+						a(href="#componentLogin",title="Ir al componente Login") Login
 					p Formulario de inicio de sesión con validación de formato de campos
 					h4.icon-2x Parámetros
 					ul
@@ -90,7 +91,8 @@ mixin component-components(content)
 
 			.thumbnail
 				.caption
-					h3.icon-4x Banner
+					h3.icon-4x
+						a(href="#componentBanner",title="Ir al componente Banner") Banner
 					p Muestra un imagen clicable
 					h4.icon-2x Parámetros
 					ul
@@ -104,11 +106,30 @@ mixin component-components(content)
 					h4.icon-2x Ejemplo
 					pre
 						| +component('component-banner','id1',{'src':'./images/banner1.jpg','alt':'Imagen Ir A Home','href':'./home.html','title':'Ir a Home','target':'_blank'},'','false','false')						
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentHighlightedContent",title="Ir al componente Highlighted Content") Highlighted Content
+					p Muestra un banner promocional compuesto por un contenido y un botón centrados en el contenedor.
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-highlighted-content"							
+						li <strong>content:</strong> Contenido HTML del componente
+						li <strong>button:</strong> JSON con el contenido del botón.
+							ul
+								li <strong>text:</strong> texto del botón
+								li <strong>href:</strong> url a la que enlaza el botón
+								li <strong>title:</strong> título del botón
+
+					h4.icon-2x Ejemplo
+					pre
+						| +component("component-highlighted-content","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
 		.col-xs-12.col-sm-4
 			.thumbnail
 				.caption
-					h3.icon-4x Image
+					h3.icon-4x
+						a(href="#componentImage",title="Ir al componente Image") Image
 					p Muestra una imagen
 					h4.icon-2x Parámetros
 					ul
@@ -122,7 +143,8 @@ mixin component-components(content)
 
 			.thumbnail
 				.caption
-					h3.icon-4x Breadcrumbs
+					h3.icon-4x
+						a(href="#componentBreadcrumbs",title="Ir al componente Bradcrumbs") Breadcrumbs
 					p Muestra las migas de pan
 					h4.icon-2x Parámetros
 					ul
@@ -135,10 +157,35 @@ mixin component-components(content)
 					pre
 						| +component('component-breadcrumbs','id1',[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}],'','false','false')
 
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentHighlightedSideImage",title="Ir al componente Highlighted Side Image") Highlighted Side Image
+					p Muestra un banner promocional compuesto por un contenido , un botón y una imagen que pueddes seleccionar su posición.
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-highlighted-side-image"							
+						li <strong>content:</strong> Contenido HTML del componente
+						li <strong>position:</strong> Posición de la imagen ('left' o 'right')
+						li <strong>button:</strong> JSON con el contenido del botón.
+							ul
+								li <strong>text:</strong> texto del botón
+								li <strong>href:</strong> url a la que enlaza el botón
+								li <strong>title:</strong> título del botón
+						li <strong>image:</strong> JSON con el contenido de la imagen.
+							ul
+								li <strong>alt:</strong> texto alternativo de la imagen
+								li <strong>src:</strong> url de la imagen						
+
+					h4.icon-2x Ejemplo
+					pre +component("component-highlighted-side-image","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
+
+
 		.col-xs-12.col-sm-4
 			.thumbnail
 				.caption
-					h3.icon-4x Logo
+					h3.icon-4x 
+						a(href="#componentLogo",title="Ir al componente Logo") Logo
 					p Muestra el logotipo del portal
 					h4.icon-2x Parámetros
 					ul
@@ -150,3 +197,119 @@ mixin component-components(content)
 					h4.icon-2x Ejemplo
 					pre
 						| +component('component-logo','',{'url':'/','title':'Sunnie Logo','src':'./images/logo.png','alt':'Site Logo Sunnie'},'','false','true')
+
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentHighlightedBanner",title="Ir al componente Highlighted Banner") Highlight Banner
+					p Muestra un bannner promocional compuesto por un texto y un botón.
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-highlighted-banner"							
+						li <strong>content:</strong> Contenido HTML del textodel banner
+						li <strong>button:</strong> JSON con el contenido del botón.
+							ul
+								li <strong>text:</strong> texto del botón
+								li <strong>href:</strong> url a la que enlaza el botón
+								li <strong>title:</strong> título del botón
+
+					h4.icon-2x Ejemplo
+					pre
+						| +component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+
+
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentHighlightedFlips",title="Ir al componente Highlighted Flips") Highlighted Flips
+					p Muestra un array de banners compuestos por un icono, un titular y un texto. El icono puede ser fontawesome, material o glyphicon.
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-highlighted-flips"							
+						li <strong>header:</strong> Titular de cada banner el listado
+						li <strong>content:</strong> Texto del banner
+						li <strong>iconType:</strong> Tipo de icono del banner(material, fontawesome o glyphicon)
+						li <strong>iconCode:</strong> Código del icono del banner
+
+					h4.icon-2x Ejemplo
+					pre
+						| +component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+						
+	.row
+		.col-xs-12
+			h2 Ejemplos
+			.row
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentLogin").nomargin Login
+					.row
+						.col-md-4
+
+						.col-md-4
+							+component("component-login","","","","false","false")
+
+						.col-md-4
+
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentImage").nomargin Image
+					.row
+						.col-md-12
+							+component("component-image","",{"src":"./images/carousel1.jpg","alt":"Image 1"},"","false","true")
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentBanner").nomargin Banner
+					.row
+						.col-md-12
+							+component("component-banner","",{"src":"./images/carousel2.jpg","alt":"Image 1","href":"http://www.google.es", "title":"Ir a Google"},"","false","true")
+
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentBreadcrumbs").nomargin Breadcrumbs
+					.row
+						.col-md-12
+							+component("component-breadcrumbs","",[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}],"","false","false")
+	.row
+		.col-xs-12
+			.panel.panel-default
+				.panel-body
+					h3(id="componentHighlightedBanner").nomargin Highlighted Banner
+			.row
+				.row
+					+component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+						
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentHighlightedContent").nomargin Highlighted Content
+					.row
+						.col-md-12
+							+component("component-highlighted-content","",{"content":"<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentHighlightedFlips").nomargin Highlighted Flips
+					.row
+						.col-md-12
+							+component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentHighlightedSideImage").nomargin Highlighted Side Image
+					.row
+						.col-md-12
+							+component("component-highlighted-side-image","",{"content":"<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
+
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentCardsListCarousel").nomargin Cards List Carousel
+					.row
+						.col-md-12
+							+component("component-cards-list-carousel","",[{"header":"Header 1","content":"Lorem ipsum","image":{"src":"./images/monument.jpg","alt":"Image 1"}}],"false","true")

@@ -1,0 +1,12 @@
+mixin component-highlighted-content(content)
+
+	- var contentHTML = content.content
+	- var button= content.button
+
+	.container
+		.row
+			.col-sm-10.col-sm-offset-1.col-xs-12.text-center
+				div !{contentHTML}
+
+				.row-spacing
+					a.btn.btn-border-primary(href="#{button.href}", title="#{button.title}") #{button.text}

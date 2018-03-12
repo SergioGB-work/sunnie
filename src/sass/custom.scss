@@ -204,9 +204,9 @@
 /** SHORTCODE **/
 @media (min-width: $screen-sm-min) {
 	.flex-center-center-sm{
-	    align-items: center;
-	    display: flex;
-	    justify-content: center;	
+	    align-items: center !important;
+	    display: flex !important;
+	    justify-content: center !important;	
 	}
 
 	.flex-vcenter-sm{

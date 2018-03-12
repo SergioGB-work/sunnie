@@ -1,0 +1,13 @@
+mixin component-highlighted-banner(content)
+
+	- var contentHTML = content.content
+	- var button= content.button
+	
+	.container
+		.row
+			.col-md-9.col-sm-8.col-xs-12
+				div.contentHTML !{contentHTML}
+
+			.col-md-3.col-sm-4.col-xs-12.text-center
+				a.btn.btn-border.btn-primary-color(href="button.href", title="button.title") #{button.text}
+

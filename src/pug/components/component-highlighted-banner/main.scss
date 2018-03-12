@@ -1,0 +1,38 @@
+@import '../../../sass/base/variables';
+@import '../../../sass/lib/bootstrap/variables';
+
+.component.component-highlighted-banner{
+
+	background: $brand-primary;
+    padding: 40px 0;
+	
+	*{
+		color: $btn-primary-color;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	
+	.row{
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+		align-items:center;		
+	}
+	
+	div[class^="col-"]{
+		
+	
+		> *{
+			margin-bottom: 10px;
+			
+			&:last-child{
+				margin-bottom:0;
+			}
+		}
+		
+		.btn{
+			min-width: 75%;
+			font-size: ceil(($font-size-base * 1.25));
+		}
+	}
+}	

@@ -10,6 +10,17 @@
 	&.btn-spacing-right{
 		margin-right:$grid-gutter-width;
 	}
+	
+	&.btn-border{
+		background:transparent;
+		border:1px solid $btn-primary-color;
+	}
+	
+	&.btn-border-primary{
+		background:transparent;
+		border:1px solid $brand-primary;
+		color:$brand-primary;
+	}	
 }
 
 /** FORM **/
@@ -176,6 +187,11 @@
 	.caption{
 		float:left;
 		width:100%;
+		padding-top:0;
+	}
+
+	img + .caption{
+		padding-top: $grid-gutter-width;
 	}
 }
 

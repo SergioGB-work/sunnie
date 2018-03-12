@@ -1,0 +1,43 @@
+@import '../../../sass/base/variables';
+@import '../../../sass/lib/bootstrap/variables';
+
+.component.component-highlighted-flips{
+
+	padding:60px;
+
+	.row + .row{
+		margin-top:60px;
+	}
+
+
+	.icon{
+		display:flex;
+		justify-content:center;
+	}
+
+	.icon i,.icon span{
+		border-radius:50%;
+		background: $gray-base;
+		color:$btn-primary-color;
+		padding:20px;
+		text-align:center;
+		margin-bottom:10px;
+		width:150px;
+		height:150px;
+		max-width:100%;
+		max-height:100%;
+
+	}
+	
+	.info{
+	
+		> *{
+			
+			&:last-child{
+				margin-bottom:0;
+			}
+		}	
+	
+	}
+
+}
