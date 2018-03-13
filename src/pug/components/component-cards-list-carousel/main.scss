@@ -1,0 +1,35 @@
+@import '../../../sass/base/variables';
+@import '../../../sass/lib/bootstrap/variables';
+
+.component-cards-list-carousel{
+	.owl-item{
+		padding: 0 ceil(($grid-gutter-width / 2)) 0 ceil(($grid-gutter-width / 2));
+	}
+
+	.owl-wrapper-outer{
+		width: 90%;
+    	display: inline-block;
+    	margin-left: 5%;
+	}
+
+	.owl-controls{
+		position: absolute;
+    	top: 50%;
+    	margin-top: -35px;
+    	width: 100%;
+    	z-index: 0;
+
+    	.owl-prev{
+			float: left;
+    		z-index: 9999;
+   			position: absolute;
+    		left: 0;    		
+    	}
+
+    	.owl-next{
+			text-align: right;
+    		right: 0;
+    		position: absolute;    		
+    	}
+	}
+}

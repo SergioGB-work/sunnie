@@ -174,7 +174,7 @@
 	margin-bottom:$grid-gutter-width;
 
 	h3{
-		margin:0;
+		margin: $grid-gutter-width 0 0 0;
 		font-size: $font-size-base;
 	}
 
@@ -192,6 +192,10 @@
 
 	img + .caption{
 		padding-top: $grid-gutter-width;
+	}
+
+	&.full{
+		padding:0 0 $grid-gutter-width 0;
 	}
 }
 

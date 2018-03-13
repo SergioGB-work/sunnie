@@ -1,7 +1,8 @@
 $(document).ready(function(){
         
-    $(".component-card-list-carousel").owlCarousel({
-        navigationText:['<span class="glyphicon glyphicon-menu-left" aria-hidden="true"></span>','<span class="glyphicon glyphicon-menu-right" aria-hidden="true"></span>'],
+    $(".component-cards-list-carousel .component-content").owlCarousel({
+        navigation: true,
+        navigationText:['<span class="fa fa-angle-left icon-13x" aria-hidden="true"></span>','<span class="fa fa-angle-right icon-13x" aria-hidden="true"></span>'],
         slideSpeed : 300,
         paginationSpeed : 400,
         pagination: false,

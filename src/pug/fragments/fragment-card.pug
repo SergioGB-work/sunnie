@@ -5,8 +5,8 @@ mixin fragment-card(content)
 	- var description = content.description
 	- var classes= content.classes
 
-	.thumbnail
-		div(class=classes)
+	.thumbnail(class=classes)
+		div
 			img(src=src,alt=alt)
 
 		if(header != '' || description != '')
