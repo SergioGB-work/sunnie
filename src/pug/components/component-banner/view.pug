@@ -1,11 +1,3 @@
 mixin component-banner(content)
 
-	- var src = content.src || '';
-	- var alt = content.alt || '';
-	- var longdesc = content.longdesc || '';
-	- var href = content.href || '#';
-	- var title = content.title || '';
-	- var target = content.target || '';
-
-	a(href=href,title=title target=target)
-		img(src=src, alt=alt, logdesc=longdesc)
+	+fragment('fragment-banner',content)

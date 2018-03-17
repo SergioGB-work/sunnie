@@ -1,0 +1,36 @@
+@import '../../../sass/base/variables';
+@import '../../../sass/lib/bootstrap/variables';
+
+.component-slider{
+	.owl-theme .owl-controls {
+		margin:0;
+
+		.owl-pagination{
+			top:90%;
+			right:0;
+			position:absolute;
+		}
+		.owl-page.active span{
+			background: $brand-primary;
+		}
+		.owl-buttons{ 
+			height:0;
+
+			div{
+				background:0;
+				color:$gray-base;
+				position:absolute;
+				top:50%;
+				margin-top:-63px;
+				font-size: 80px;
+
+				&.owl-next{
+					right:0;
+				}
+				&.owl-prev{
+					left:0;
+				}
+			}	
+		}
+	}
+}
