@@ -125,6 +125,29 @@ mixin component-components(content)
 					pre
 						| +component("component-highlighted-content","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentCardsListCarousel",title="Ir al componente Cards List Carousel") Cards List Carousel
+					p Muestra un carrusel de tarjetas compuestas por una imagen, una cabecera, un texto y un enlace. Adicionalmente se le pueda añadir un precio para convertirlo en <a href="#componentProductsCardsListCarousel" title="Ir a Products Cards List Carousel">carrusel de productos</a>.
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-cards-list-carousel"							
+						li <strong>Array de tarjetas:</strong>
+							ul
+								li <strong>header:</strong> encabezado de la tarjeta
+								li <strong>description:</strong> texto descriptivo
+								li <strong>src:</strong> URL de la imagen
+								li <strong>alt:</strong> texto alternativo de la imagen
+								li <strong>href:</strong> enlace de la tarjeta
+								li <strong>title:</strong> título del botón
+								li <strong>classes:</strong> clases css adicionales a añadir a la tarjeta para alterar su visualización
+								li <strong>price:</strong> precio del contenido de la tarjeta
+
+					h4.icon-2x Ejemplo
+					pre
+						| +component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"}],"","false","true")
+
 		.col-xs-12.col-sm-4
 			.thumbnail
 				.caption
@@ -180,6 +203,25 @@ mixin component-components(content)
 					h4.icon-2x Ejemplo
 					pre +component("component-highlighted-side-image","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
 
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentSlider",title="Ir al componente Slider") Slider
+					p Muestra un Slider de imágenes con navegación y flechas, todo responsivo.
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-slider"							
+
+						li <strong>Array de imágenes:</strong>
+							ul
+								li <strong>src:</strong> URL de la imagen
+								li <strong>alt:</strong> texto alternativo de la imagen
+								li <strong>href:</strong> enlace de la imagen al pulsarla
+								li <strong>title:</strong> título del enlace de la imagen	
+
+					h4.icon-2x Ejemplo
+					pre 
+						| +component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
 
 		.col-xs-12.col-sm-4
 			.thumbnail
@@ -317,7 +359,7 @@ mixin component-components(content)
 				.col-xs-12
 					.panel.panel-default
 						.panel-body
-							h3(id="componentCardsListCarousel").nomargin Product Cards List Carousel
+							h3(id="componentProductsCardsListCarousel").nomargin Product Cards List Carousel
 					.row
 						.col-md-12
 							+component("component-cards-list-carousel","",[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"}],"","false","true")
@@ -326,7 +368,7 @@ mixin component-components(content)
 				.col-xs-12
 					.panel.panel-default
 						.panel-body
-							h3(id="componentCardsListCarousel").nomargin Slider
+							h3(id="componentSlider").nomargin Slider
 					.row
 						.row
 							+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
