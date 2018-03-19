@@ -7,6 +7,16 @@ mixin component-data-definitions(content)
 
 					p Sunnie permite automatizar y dinamizar la carga de datos y la generación de ciertas estructuras de datos mediante data attributes.
 
+					table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-enable-get-params="true")
+						thead
+							tr
+								th ID
+								th Nombre
+								th Email
+								th Cliente
+								th Rol					
+						tbody
+
 	.row
 		.col-xs-12
 			.panel.panel-default
@@ -84,7 +94,18 @@ mixin component-data-definitions(content)
 								td <strong>enable-get-params</strong>
 								td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
 								td ""
-								td data-enable-get-params = "true"									
+								td data-enable-get-params = "true"
+							tr
+								td <strong>live-reload</strong>
+								td Permite al servicio recargarse periódicamente para crear un servicio en tiempo real que recarga los datos cada X milisegundos. El tiempo del intervalo viene definido en el parámetro "time-reload".
+								td "false"
+								td data-live-reload = "true"
+
+							tr
+								td <strong>time-reload</strong>
+								td Establece cada cuanto tiempo se desea que se recargue el servicio. Funciona en conjunto al "life-reload" y el tiempo está especificado en milisegundos. Es necesario establacer el valor de life-reload a 'true' para que este parámetro se active.
+								td "60000"
+								td data-live-reload = 30000
 
 					h3 Ejemplo de Uso
 					
@@ -184,6 +205,18 @@ mixin component-data-definitions(content)
 								td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
 								td data-enable-get-params || ""
 								td data-enable-get-params = "true"
+
+							tr
+								td <strong>pagination-live-reload</strong>
+								td Permite a la paginación recargarse periódicamente para crear un servicio en tiempo real que recarga los datos cada X milisegundos. El tiempo del intervalo viene definido en el parámetro "pagination-time-reload".
+								td data-live-reload || "false"
+								td data-live-reload = "true"
+
+							tr
+								td <strong>pagination-time-reload</strong>
+								td Establece cada cuanto tiempo se desea que se recargue la paginación. Funciona en conjunto al "pagination-life-reload" y el tiempo está especificado en milisegundos. Es necesario establacer el valor de life-reload a 'true' para que este parámetro se active.
+								td time-reload || "60000"
+								td data-live-reload = 30000
 
 					h3 Ejemplo de Uso
 

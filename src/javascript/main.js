@@ -295,22 +295,14 @@ function popover(){
 
 function getData(service,method,template,target,page,items_per_page,aditionalData,callback,content,enableGetParams){
 	var filter = '';
-
-	if (page !== undefined && page != '' && page > 0) {
-		page = ((page - 1)*items_per_page);
-		filter += '&filter[skip]=' + page;
-	}
-
-	if (items_per_page !== undefined && items_per_page != '' && items_per_page > 0) {
-		filter += '&filter[limit]=' + items_per_page;
-	}
+	var access_token = "access_token=" + $.cookie('id_session')
 
 	if(enableGetParams == true || enableGetParams=="true"){
 		if(Object.keys(getParams).length > 0){
 			var count = 0;
 			$.each(Object.keys(getParams), function(i, val) {
 				
-				if(val=='order'){
+				if(val=='order' || val=='group'){
 					filter += '&filter['+val+']=' + getParams[val];
 				}
 
@@ -324,18 +316,37 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 					})
 					count++;
 
-
 				}
 
-				else if(val.indexOf('searchField') < 0 && val != '' && val.indexOf('action') < 0){
+				else if(val.indexOf('searchField') < 0 && val != '' && val.indexOf('action') < 0 && val.indexOf('filter')){
 					filter += '&filter[where][and]['+count+']['+val+']=' + getParams[val];
 					count++;
+				}
+
+				else{
+					filter += '&' + val + '=' + getParams[val];
 				}
 			});
 		}
 	}
-		
-	console.log(service +"?access_token=" + $.cookie('id_session') + filter);
+
+	if (page !== undefined && page != '' && page > 0 && filter.indexOf('filter[skip]') <= -1) {
+		page = ((page - 1)*items_per_page);
+		filter += '&filter[skip]=' + page;
+	}
+
+	if (items_per_page !== undefined && items_per_page != '' && items_per_page > 0  && filter.indexOf('filter[limit]') <= -1) {
+		filter += '&filter[limit]=' + items_per_page;
+	}
+
+	if(service.indexOf('?') <= -1 ){
+		access_token = "?" + access_token;
+	}
+	else{
+		access_token = "&" + access_token;
+	}
+
+	console.log(service + access_token + filter);
 
 	$.ajax({
 		url: service +"?access_token=" + $.cookie('id_session') + filter,
@@ -363,7 +374,7 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 				var f = eval(exec);				
 			}
         }
-	});	
+	});
 }
 
 // GENERALIZACION DE LISTADOS DE DATOS
@@ -377,9 +388,7 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 
 function dataList(el){
 	var el = el;
-
-
-
+	var live;
 	var service = el.data('service-data') || '',
 		items_per_page = el.data('items-per-page'),
 		initial_page = el.data('initial-page'),
@@ -389,9 +398,17 @@ function dataList(el){
 		template = el.data('template') || '',
 		target = el.data('target') || '',
 		aditionalData = el.data('aditional-data'),
-		enableGetParams = el.data('enable-get-params');
+		enableGetParams = el.data('enable-get-params'),
+		liveReload = el.data('live-reload') || 'false',
+		timeReload = el.data('time-reload') || 60000;
 
-		getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams);
+	getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams);
+
+	clearInterval(live);
+
+	if(liveReload=='true'){
+		live=setInterval(getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams),timeReload);
+	}
 }
 
 // GENERALIZACION DE PAGINACION
@@ -410,6 +427,7 @@ function dataList(el){
 
 function pagination(el){
 	var el = el;
+	var live;
 	var service_data_all = el.data('pagination-service-data-all') || el.data('service-data') || '',
 		items_per_page = el.data('pagination-items-per-page') || el.data('items-per-page'),
 		initial_page = el.data('pagination-initial-page') || el.data('initial-page'),
@@ -421,9 +439,17 @@ function pagination(el){
 		target = el.data('pagination-target') || el.data('target') || '',
 		callback = el.data('pagination-callback') || el.data('callback') || '',
 		aditionalData = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
-		enableGetParams = el.data('enable-get-params') || el.data('enable-get-params') || '';
+		enableGetParams = el.data('pagination-enable-get-params') || el.data('enable-get-params') || '',
+		liveReload = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
+		timeReload = el.data('pagination-time-reload') || el.data('time-reload') || 60000;
 
     getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams, enableGetParams);
+
+	clearInterval(live);
+	
+	if(liveReload == 'true'){
+ 		live=setInterval(getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams, enableGetParams),timeReload);
+	}
 }
 
 function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content,enableGetParams){
