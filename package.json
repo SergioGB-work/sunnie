@@ -19,7 +19,7 @@
     "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
-    "gulp-uglify": "^2.0.0",
+    "gulp-uglify-es": "^1.0.1",
     "jade": "~1.11.0",
     "streamqueue": "^1.1.1"
   },
@@ -28,6 +28,5 @@
     "start": "node --max-old-space-size=8192 ./gulpfile.js"
   },
   "author": "Sergio Gonzalez Barrios",
-  "license": "MIT",
-  "devDependencies": {}
+  "license": "MIT"
 }
