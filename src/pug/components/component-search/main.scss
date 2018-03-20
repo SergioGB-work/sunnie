@@ -1,7 +1,21 @@
+@import '../../../sass/base/variables';
+@import '../../../sass/lib/bootstrap/variables';
+
 .component-search{
 	float:right;
 
-	.searchModal{
+	button{
+		color:#fff;
+		text-decoration:none;
+		
+		&:hover,&:active,&:focus{
+			color:#fff;
+			text-decoration:none;
+		}
+
+	}
+
+	#searchModal{
 
 		.modal-dialog{
 		    display: flex;
@@ -11,6 +25,22 @@
 		    justify-content: center;
 		    width: 100%;
 		    margin: 0;
+
+		    .modal-header{
+		    	background: 0;
+    			border: 0;
+
+    			.close{
+				    position: fixed;
+    				top: 0;
+				    right: 0;
+				    padding: $grid-gutter-width;
+
+				    span{
+				    	font-size: ceil(($font-size-base * 5.25));
+				    }
+				}
+		    }
 
 		    .modal-content{
 				min-width: 300px;
@@ -25,6 +55,14 @@
 				    font-size: 34px;
 				    color: #fff;
 				    font-weight: 300;    				
+    			}
+
+    			.input-group-addon{
+    				padding-bottom:0;
+    				border:0;
+    				border-bottom:1px solid #fff;
+    				background:0;
+    				color:#fff;
     			}	    	
 		    }	
 		}

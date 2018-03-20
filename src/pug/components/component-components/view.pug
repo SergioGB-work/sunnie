@@ -276,6 +276,29 @@ mixin component-components(content)
 					h4.icon-2x Ejemplo
 					pre
 						| +component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+
+			.thumbnail
+				.caption
+					h3.icon-4x 
+						a(href="#componentNavigation",title="Ir al componente Navigation") Navigation
+					p Muestra menu de enlaces jerarquizados basado en las clases de bootstrap y con diferentes vistas configurables
+					h4.icon-2x Parámetros
+					ul
+						li <strong>Nombre:</strong> "component-navigation"							
+						li <strong>view:</strong> vista del menu('tabs','pills'). Si se deja vacío se mostrará un menú vertical
+						li <strong>justified:</strong> Aplicable a pills y tabs. Hace que se vean al 100% del ancho del hueco que ocupan y el contenido sale repartido
+						li <strong>stacked:</strong> Apila las pills una encima de otra haciendo un menu vertical
+						li <strong>pages</strong>: Array de páginas a mostrar en el menú
+							ul
+								li <strong>text:</strong> texto de la página
+								li <strong>href:</strong> enlace de la página
+								li <strong>title:</strong> título del enlace
+								li <strong>childs:</strong> Array de páginas hijo de la actual página. Las mostrará como un dropdown siempre y cuando el tipo de navegación lo acepte.
+
+
+					h4.icon-2x Ejemplo
+					pre
+						| +component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")						
 						
 	.row
 		.col-xs-12
@@ -372,3 +395,24 @@ mixin component-components(content)
 					.row
 						.row
 							+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
+
+				.col-xs-12
+					.panel.panel-default
+						.panel-body
+							h3(id="componentSlider").nomargin Navigation
+							.row
+								.col-xs-12.col-md-6
+									h4 Tabs
+									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"tabs"},"","false","true")
+
+								.col-xs-12.col-md-6
+									h4 Pills
+									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[{"text":"Pagina 1-1",href:"/pagina1-1.html",title:"Ir a pagina 1-1"}]},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills"},"","false","true")
+							.row
+								.col-xs-12.col-md-6
+									h4 Pills Justified
+									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"","false","true")
+
+								.col-xs-12.col-md-6
+									h4 Pills stacked
+									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")

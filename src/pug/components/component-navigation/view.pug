@@ -1,0 +1,66 @@
+mixin component-navigation(content)
+	
+	- var view = content.view
+	- var pages = content.pages
+	- var justified = content.justified || ''
+	- var stacked = content.stacked || ''
+	- var classes = ''
+	
+	case view
+		when 'tabs'
+			- var classes = 'nav-tabs'
+
+		when 'pills'
+			- var classes = 'nav-pills'
+
+	if justified == 'true'
+		- var classes = classes + ' nav-justified'		
+			
+
+	if stacked == 'true'
+		- var classes = classes + ' nav-stacked'
+
+
+	ul(class="nav " + classes)
+
+		each item,i in pages
+			- var href = item.href || ""
+			- var title = item.title || ""
+			- var text = item.text || ""
+			- var active = ''
+
+			if(item.active == 'true')
+				- var active = "active"
+
+			li(class=active)
+
+				if(item.childs)
+					if(item.childs.length > 0)
+						a(id="NavMenu-"+i,class="dropdown-toggle",data-toggle="dropdown",href="#",role="button",aria-haspopup="true",aria-expanded="false") 
+							| #{text}
+							span.caret
+					else
+						a(href=href,title=title) #{text}			
+
+				else
+					a(href=href,title=title) #{text}
+
+			if(item.childs)
+				if(item.childs.length > 0)
+					ul.dropdown-menu(aria-labelledby="NavMenu-"+i)
+					each child,i in item.childs
+
+						- var href = item.href || ""
+						- var title = item.title || ""
+						- var text = item.text || ""
+						- var active = ''
+
+						if(item.active == 'true')
+							- var active = "active"
+
+						li(class=active)
+							a(href=href,title=title) #{text}
+
+
+
+
