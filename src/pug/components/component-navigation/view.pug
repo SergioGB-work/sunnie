@@ -16,13 +16,13 @@ mixin component-navigation(content)
 	if justified == 'true'
 		- var classes = classes + ' nav-justified'		
 			
-
 	if stacked == 'true'
 		- var classes = classes + ' nav-stacked'
 
+	if classes == ''
+		- var classes = 'nav-vertical'
 
 	ul(class="nav " + classes)
-
 		each item,i in pages
 			- var href = item.href || ""
 			- var title = item.title || ""
@@ -36,31 +36,52 @@ mixin component-navigation(content)
 
 				if(item.childs)
 					if(item.childs.length > 0)
-						a(id="NavMenu-"+i,class="dropdown-toggle",data-toggle="dropdown",href="#",role="button",aria-haspopup="true",aria-expanded="false") 
-							| #{text}
-							span.caret
+						if(item.childs && view == 'pills' && stacked != 'true')
+							a(id="NavMenu-"+i,class="dropdown-toggle",data-toggle="dropdown",href="#",role="button",aria-haspopup="true",aria-expanded="false")
+								| #{text}
+								span.caret
+						else
+							a(href="#")
+								| #{text}
+
+
 					else
 						a(href=href,title=title) #{text}			
 
 				else
 					a(href=href,title=title) #{text}
 
-			if(item.childs)
-				if(item.childs.length > 0)
-					ul.dropdown-menu(aria-labelledby="NavMenu-"+i)
-					each child,i in item.childs
+				if(item.childs && view == 'pills' && stacked != 'true')
+					if(item.childs.length > 0)
+						ul.dropdown-menu(aria-labelledby="NavMenu-"+i)
+							each child,i in item.childs
 
-						- var href = item.href || ""
-						- var title = item.title || ""
-						- var text = item.text || ""
-						- var active = ''
+								- var childHref = child.href || ""
+								- var childTitle = child.title || ""
+								- var childText = child.text || ""
+								- var childActive = ''
 
-						if(item.active == 'true')
-							- var active = "active"
+								if(child.active == 'true')
+									- var childActive = "active"
 
-						li(class=active)
-							a(href=href,title=title) #{text}
+								li(class=active)
+									a(href=childHref,title=childTitle) #{childText}
 
+				else if(item.childs)
+					if(item.childs.length > 0)
+						ul.child-menu
+							each child,i in item.childs
+
+								- var childHref = child.href || ""
+								- var childTitle = child.title || ""
+								- var childText = child.text || ""
+								- var childActive = ''
+
+								if(child.active == 'true')
+									- var childActive = "active"
+
+								li(class=active)
+									a(href=childHref,title=childTitle) #{childText}									
 
 
 

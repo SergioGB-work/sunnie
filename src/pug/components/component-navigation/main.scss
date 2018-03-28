@@ -1,0 +1,45 @@
+@import '../../../sass/base/variables';
+@import '../../../sass/lib/bootstrap/variables';
+
+.component-navigation{
+	ul{
+		&.nav-vertical{
+			li{
+				a{
+					padding-left:0;
+					padding-right:0;
+					color:$gray-base;
+					
+					&:hover,&:focus,&:active{
+						color:$brand-primary;
+					}
+				}
+				&:hover:before{
+					color:$brand-primary;
+				}
+			}
+
+			ul{
+				padding-left:ceil(($grid-gutter-width / 2));
+
+				li{
+					list-style:none;
+
+					&:before{
+						content: "\f105"; 
+					    font-family: FontAwesome;
+					    display: inline-block;
+					    width: 10px;
+					    height: 10px;
+					    line-height: 1;
+					    font-size: 10px;
+					}
+
+					a{
+						font-size: ceil(($font-size-base * 0.75));
+					}
+				}
+			}
+		}
+	}	
+}

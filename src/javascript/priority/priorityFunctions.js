@@ -7,7 +7,9 @@ function getCookies(){
 
 	cookies.forEach( function(valor, indice, array) {
 		valor = valor.split('=');
-		data[valor[0].trim()]=valor[1].trim();
+		if(valor[0]!='' && valor[0]!== undefined){
+			data[valor[0].trim()]=valor[1].trim();
+		}
 	});
 
 	return data;

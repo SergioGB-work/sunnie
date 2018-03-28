@@ -190,6 +190,7 @@ $(document).ready(function(){
 
 
 	//FILTROS DE LISTADOS
+
 	if($('[data="filters"]').length){
 
 		$('[data="filters"] [data-filter]').each(function(){
@@ -197,7 +198,7 @@ $(document).ready(function(){
 			var filterParent = $(this);
 			var dataFilter = $(this).data('filter');
 			var search = window.location.search.replace('?','');
-
+	
 			filtersSearch = search.split('&');
 
 			$(this).find('[data-filter-value]').each(function(){
@@ -213,7 +214,7 @@ $(document).ready(function(){
 					filter = filtersSearch[i].split('=');
 
 					if($(this).data('filter-value').toString() != ''){
-						if(finalHref.indexOf(filter[0] + '=') < 0){
+						if(finalHref.indexOf(filter[0] + '=') < 0){					
 
 							if(finalHref != ''){
 								finalHref += '&';
@@ -224,6 +225,7 @@ $(document).ready(function(){
 					}
 					
 					else if(filter[0] != dataFilter){
+
 							if(finalHref != ''){
 								finalHref += '&';
 							}
@@ -319,11 +321,18 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 				}
 
 				else if(val.indexOf('searchField') < 0 && val != '' && val.indexOf('action') < 0 && val.indexOf('filter')){
-					filter += '&filter[where][and]['+count+']['+val+']=' + getParams[val];
+
+					var value = getParams[val]; 
+
+					if(value.indexOf('=') < 0 ){
+						value = '=' + value;
+					}
+
+					filter += '&filter[where][and]['+count+']['+val+']' + value;
 					count++;
 				}
 
-				else{
+				else {
 					filter += '&' + val + '=' + getParams[val];
 				}
 			});
