@@ -82,19 +82,19 @@ mixin component-data-definitions(content)
 								td data-content = ""
 							tr
 								td <strong>enable-get-params</strong>
-								td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
+								td Habilita el servicio para que utilice los parámetros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
 								td ""
 								td data-enable-get-params = "true"
 
 							tr
 								td <strong>get-params-list</strong>
-								td Si es definido permite elegir que parametros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
+								td Si es definido permite elegir que parámetros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
 								td ""
 								td data-get-params-list = "order,activo,nombre_cliente"
 
 							tr
 								td <strong>rel</strong>
-								td Este parametro permite agrupar los filtros para que solo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente  puede funciona con el atributo data-get-params-list para definir un número mas límitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filstrados de datos personalizados aplicando multiples parametros de filtrado por cada listado de datos sin que interfieran entre ellos.
+								td Este parámetro permite agrupar los filtros para que sólo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente, puede funciona con el atributo data-get-params-list para definir un número más limitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filtrados de datos personalizados aplicando múltiples parámetros de filtrado por cada listado de datos sin que interfieran entre ellos.
 								td ""
 								td data-rel = "group1"
 
@@ -205,19 +205,19 @@ mixin component-data-definitions(content)
 
 							tr
 								td <strong>pagination-enable-get-params</strong>
-								td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
+								td Habilita el servicio para que utilice los parámetros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
 								td data-enable-get-params || ""
 								td data-pagination-enable-get-params = "true"
 
 							tr
 								td <strong>pagination-get-params-list</strong>
-								td Si es definido permite elegir que parametros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
+								td Si es definido permite elegir que parámetros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
 								td data-get-params-list || ""
 								td data-pagination-get-params-list = "order,activo,nombre_cliente"
 
 							tr
 								td <strong>pagination-rel</strong>
-								td Este parametro permite agrupar los filtros para que solo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente  puede funciona con el atributo data-get-params-list para definir un número mas límitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filstrados de datos personalizados aplicando multiples parametros de filtrado por cada listado de datos sin que interfieran entre ellos.
+								td Este parámetro permite agrupar los filtros para que sólo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente, puede funciona con el atributo data-get-params-list para definir un número más limitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filtrados de datos personalizados aplicando múltiples parámetros de filtrado por cada listado de datos sin que interfieran entre ellos.
 								td data-rel || ""
 								td data-pagination-rel = "group1"
 
@@ -235,7 +235,7 @@ mixin component-data-definitions(content)
 
 					h3 Ejemplo de Uso
 
-					p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parametros del <a href="#data-definitions-data-loading-block">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 
+					p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parámetros del <a href="#data-definitions-data-loading-block">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 
 					
 					pre 
 						| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-has-pagination="true")			
@@ -254,7 +254,7 @@ mixin component-data-definitions(content)
 				.panel-body
 					h2(id="data-definitions-data-search-block") Search
 
-					p Es posible realizar un filtrado de los datos de los datos cargados en los listados de datos mendiante una busqueda por palabras. Gracias al buscador genério de sunnie y sus parametros, se puede definir porque que campos del modelo de datos debe realizarse la busqueda/filtrado de los datos. 
+					p Es posible realizar un filtrado de los datos de los datos cargados en los listados de datos mendiante una busqueda por palabras. Gracias al buscador genério de sunnie y sus parámetros, se puede definir porque que campos del modelo de datos debe realizarse la busqueda/filtrado de los datos. 
 
 					P Por ejemplo, podemos disponer de un listado de usuarios cargados mediante data loading y un campo texto de búsqueda en el que podemos introducir la palabra a buscar y porque campos queremos que busque(nombre del usuario, identificador, rol, etc...)
 
@@ -284,7 +284,7 @@ mixin component-data-definitions(content)
 
 					p Se pueden definir los filtros de forma personalizada a través de data atributos y sin necesidad de programar ninguna llamada ajax adicional.
 
-					p Del mismo modo que el buscador, cuando se aplique un filtro se añadirá  un parametro a la URL y se recargará la página con los datos filtrados/ordenados por ese filtro(s).
+					p Del mismo modo que el buscador, cuando se aplique un filtro se añadirá un parámetro a la URL y se recargará la página con los datos filtrados/ordenados por ese filtro(s).
 
 					p Para definir un bloque de filtros es necesario añadir <strong>data="filters"</strong> al boque contenedor de los filtros y a continuación, en cada filtro añadir <strong>data-filter="NombreDelCampoAFiltrar"</strong>. En el caso de un filtro de tipo ordenación es necesario usar <strong>data-filter="order"</strong>.
 
