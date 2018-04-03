@@ -99,7 +99,7 @@ mixin component-getStarted(content)
 
 					p En esta carpeta es donde deben <span class="text-primary">crearse</span> las diferentes <span class="text-primary">páginas</span> que compondrán el portal web definitivo y sobre los que se compondrán el contenido que lleva cada una.
 
-					p En la <a href="./pages.html" title="Ir a Páginas">sección de páginas</a> puedes una información mas detallada de como se crea una página y cúal es su estructura.
+					p En la <a href="./pages.html" title="Ir a Páginas">sección de páginas</a> puedes ver una información más detallada de cómo se crea una página y cúal es su estructura.
 
 					h4 Components
 					p La carpeta componentes contiene todos los componentes creados en el portal para su uso en las páginas. Cada componente se crea en base a una misma estructura y todo el detalle del mismo se puede ver en la <a href="./components.html" title="Ir a Componentes">sección de componentes</a> de este portal.
@@ -108,7 +108,7 @@ mixin component-getStarted(content)
 					p La carpeta layouts contiene todas las layouts creadas en el portal para su uso a la hora de definir la distribución del contenido de una página. Cada layout se crea en base a una misma estructura y todo el detalle de la misma se puede ver en la <a href="./layouts.html" title="Ir a Layouts">sección de layouts</a> de este portal.
 
 					h4 Fragments
-					p Un fragment es un <span class="text-primary">trozo de código reutilizable</span> entre diferentes componentes. Por ejemplo un botón. En esta carpeta se deben crear lo diferentes fragmentos que se vayan a utilizar en el portal.
+					p Un fragment es un <span class="text-primary">trozo de código reutilizable</span> entre diferentes componentes. Por ejemplo, un botón. En esta carpeta se deben crear lo diferentes fragmentos que se vayan a utilizar en el portal.
 
 					h4 Locale
 					p Contiene la <span class="text-primary">traducciones genéricas</span> del portal guardadas en archivos .json
@@ -121,7 +121,7 @@ mixin component-getStarted(content)
 
 					p Sunnie utiliza <span class="text-primary">Bootstrap 3</span> como base para la organización y maquetado de todo su portal. Es por ello que se recomienda modificar lo menos posible los estilos por defecto que trae Sunnie y extender a partir de los mismos desde el archivo <span class="text-primary">custom.scss</span>
 
-					p Adicionalmente, desde <span class="text-primary">base/variables</span> están todas la <span class="text-primary">variables genéricas</span> del portal que pueden ser usadas para modificar su estilo sin necesidad de modificar ninguna línea de código, consiguiendo asi un <span class="text-primary">código limpio y reducido</span> que penalice lo menos posible la carga del portal.
+					p Adicionalmente, desde <span class="text-primary">base/variables</span> están todas las <span class="text-primary">variables genéricas</span> del portal que pueden ser usadas para modificar su estilo sin necesidad de modificar ninguna línea de código, consiguiendo asi un <span class="text-primary">código limpio y reducido</span>, que penalice lo menos posible la carga del portal.
 
 					p Sunnie lleva incorporado la fuente icónica <a href="http://fontawesome.io/icons/" target="_blank" title="Ir a Font Awesome">Font Awesome</a> para su uso dentro del portal. Asi mismo, se puede utilizar cualquier otra fuente icónica.
 
@@ -129,7 +129,7 @@ mixin component-getStarted(content)
 					p El directorio de javascript está subdividido a su vez en otros directorios, cada uno con un fin específico.
 
 					ul
-						li <strong>primaryLibs</strong> -> Son librerias que deben ser cargadas las primeras debido a que otras librerias pueden tener dependencias con ellas. Por ejemplo jQuery
+						li <strong>primaryLibs</strong> -> Son librerias que deben ser cargadas las primeras debido a que otras librerias pueden tener dependencias con ellas. Por ejemplo: jQuery
 						li <strong>libs</strong> -> Son las librerías genericas del portal.
 						li <strong>priority</strong> -> Son librerias o código JS que debe ejecutarse en la carga inicial del portal desde el <span class="text-primary">head</span>, sin esperar por nada. Están escritas en javascript puro
 						li <strong>main.js</strong> -> Archivo principal de javascript. Contiene todas las funciones genéricas del portal definidas en la <a href="./js-functions.html" title="Ir a JS Functions">página de javascript</a>.
@@ -139,4 +139,4 @@ mixin component-getStarted(content)
 					p No es necesario añadir la etiqueta <span class="text-primary">&lt;script&gt;</span> en la cabecera o pie del portal ya que Sunnie <span class="text-primary">compila</span> automáticamente las librerias que se encuentran en estas carpetas en un orden para luego generar un único <span class="text-primary">archivo javascript minificado</span> con todo el código.	
 
 					h3 Images
-					p Esta carpeta sirve como almacen de imagenes. Todas las imágenes aqui añadidas pasarán directamente a la carpeta <span class="text-primary">public</span> dentro de su correspondiente carpeta de images.
+					p Esta carpeta sirve como almacén de imágenes. Todas las imágenes aquí añadidas pasarán directamente a la carpeta <span class="text-primary">public</span> dentro de su correspondiente carpeta de images.
