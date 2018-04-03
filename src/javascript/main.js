@@ -193,58 +193,63 @@ $(document).ready(function(){
 
 	if($('[data="filters"]').length){
 
-		$('[data="filters"] [data-filter]').each(function(){
+		$('[data="filters"]').each(function(){
 
-			var filterParent = $(this);
-			var dataFilter = $(this).data('filter');
-			var search = window.location.search.replace('?','');
-	
-			filtersSearch = search.split('&');
+			var rel = $(this).data('rel') ? '_' + $(this).data('rel') : '';
 
-			$(this).find('[data-filter-value]').each(function(){
-				
-				var finalHref = '';
+			$(this).find('[data-filter]').each(function(){
 
-				if($(this).data('filter-value').toString() != ''){
-					finalHref = dataFilter + '=' + $(this).data('filter-value');
-				}
-				
-				for(var i=0;i<filtersSearch.length;i++){
+				var filterParent = $(this);
+				var dataFilter = $(this).data('filter') + rel;
+				var search = window.location.search.replace('?','');
+		
+				filtersSearch = search.split('&');
 
-					filter = filtersSearch[i].split('=');
+				$(this).find('[data-filter-value]').each(function(){
+					
+					var finalHref = '';
 
 					if($(this).data('filter-value').toString() != ''){
-						if(finalHref.indexOf(filter[0] + '=') < 0){					
-
-							if(finalHref != ''){
-								finalHref += '&';
-							}
-
-							finalHref += filtersSearch[i];
-						}
+						finalHref = dataFilter + '=' + $(this).data('filter-value');
 					}
 					
-					else if(filter[0] != dataFilter){
+					for(var i=0;i<filtersSearch.length;i++){
 
-							if(finalHref != ''){
-								finalHref += '&';
+						filter = filtersSearch[i].split('=');
+
+						if($(this).data('filter-value').toString() != ''){
+							if(finalHref.indexOf(filter[0] + '=') < 0){					
+
+								if(finalHref != ''){
+									finalHref += '&';
+								}
+
+								finalHref += filtersSearch[i];
 							}
+						}
+						
+						else if(filter[0] != dataFilter){
 
-							finalHref += filtersSearch[i];
+								if(finalHref != ''){
+									finalHref += '&';
+								}
+
+								finalHref += filtersSearch[i];
+						}
+
+						//Comprueba el valor actual del filtro en la URL y lo pone en el filtro
+						if(filter[0] == dataFilter){
+							var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
+							dataFilterValue.parent().addClass('active');
+							filterParent.find('.filterValue').text(dataFilterValue.text());
+						}
 					}
 
-					//Comprueba el valor actual del filtro en la URL y lo pone en el filtro
-					if(filter[0] == dataFilter){
-						var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
-						dataFilterValue.parent().addClass('active');
-						filterParent.find('.filterValue').text(dataFilterValue.text());
-					}
-				}
+					$(this).attr('href','?' + finalHref);
 
-				$(this).attr('href','?' + finalHref);
-
+				});
 			});
-		});
+		});	
 	}
 });
 
@@ -295,46 +300,69 @@ function popover(){
 	// @param content -> parametros adicionales a enviar a la función callback
 
 
-function getData(service,method,template,target,page,items_per_page,aditionalData,callback,content,enableGetParams){
+function getData(service,method,template,target,page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel){
 	var filter = '';
 	var access_token = "access_token=" + $.cookie('id_session')
 
 	if(enableGetParams == true || enableGetParams=="true"){
-		if(Object.keys(getParams).length > 0){
+
+		var params = Object.keys(getParams);
+		if(rel !== undefined && rel != ''){
+			rel = '_' + rel;
+		}
+
+
+		if(getParamsList !== undefined && getParamsList.length > 0){
+			params = getParamsList.split(',');
+		
+			if(rel !== undefined && rel != ''){
+				$.each(params,function(i){
+					params[i] = params[i] + rel
+				});
+			}
+		}
+
+		if(params.length > 0){
 			var count = 0;
-			$.each(Object.keys(getParams), function(i, val) {
-				
-				if(val=='order' || val=='group'){
-					filter += '&filter['+val+']=' + getParams[val];
-				}
+			$.each(params, function(i, val) {
 
-				else if(val=='query'){
-					var n=0;
-					$.each(Object.keys(getParams), function(index, value) {
-						if(value.indexOf('searchField') > -1){	
-							filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
-							n++;;
-						}	
-					})
-					count++;
+				if((getParams[val] !== undefined && getParams[val] != '' && val.indexOf(rel) > -1) || (rel === undefined || rel == '')){
 
-				}
-
-				else if(val.indexOf('searchField') < 0 && val != '' && val.indexOf('action') < 0 && val.indexOf('filter')){
-
-					var value = getParams[val]; 
-
-					if(value.indexOf('=') < 0 ){
-						value = '=' + value;
+					var key = (rel !== undefined && rel != '' && val.indexOf(rel) > -1) ? val.replace(rel,'') : val;
+					alert(key);
+					alert(val);
+					if(key=='order' || key=='group'){
+						filter += '&filter['+key+']=' + getParams[val];
 					}
 
-					filter += '&filter[where][and]['+count+']['+val+']' + value;
-					count++;
-				}
+					else if(key=='query'){
+						var n=0;
+						$.each(params, function(index, value) {
+							if(value.indexOf('searchField') > -1){	
+								filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
+								n++;
+							}	
+						})
+						count++;
 
-				else {
-					filter += '&' + val + '=' + getParams[val];
-				}
+					}
+
+					else if(key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter')){
+
+						var value = getParams[val]; 
+
+						if(value.indexOf('=') < 0 ){
+							value = '=' + value;
+						}
+
+						filter += '&filter[where][and]['+count+']['+key+']' + value;
+						count++;
+					}
+
+					else {
+						filter += '&' + key + '=' + getParams[val];
+					}
+				}	
 			});
 		}
 	}
@@ -408,15 +436,17 @@ function dataList(el){
 		target = el.data('target') || '',
 		aditionalData = el.data('aditional-data'),
 		enableGetParams = el.data('enable-get-params'),
+		getParamsList = el.data('get-params-list'),
 		liveReload = el.data('live-reload') || 'false',
-		timeReload = el.data('time-reload') || 60000;
+		timeReload = el.data('time-reload') || 60000,
+		rel = el.data('rel') || '';
 
-	getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams);
+	getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel);
 
 	clearInterval(live);
 
 	if(liveReload=='true'){
-		live=setInterval(getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams),timeReload);
+		live=setInterval(getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel),timeReload);
 	}
 }
 
@@ -449,19 +479,21 @@ function pagination(el){
 		callback = el.data('pagination-callback') || el.data('callback') || '',
 		aditionalData = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
 		enableGetParams = el.data('pagination-enable-get-params') || el.data('enable-get-params') || '',
+		getParamsList = el.data('pagination-get-params-list') || el.data('get-params-list') || '',
 		liveReload = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
 		timeReload = el.data('pagination-time-reload') || el.data('time-reload') || 60000;
+		rel = el.data('pagination-rel') || el.data('rel') || '';
 
-    getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams, enableGetParams);
+    getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams + '","' + getParamsList + '","' + rel, enableGetParams,getParamsList,rel);
 
 	clearInterval(live);
 	
 	if(liveReload == 'true'){
- 		live=setInterval(getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams, enableGetParams),timeReload);
+ 		live=setInterval(getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams + '","' + getParamsList + '","' + rel, enableGetParams, getParamsList, rel),timeReload);
 	}
 }
 
-function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content,enableGetParams){
+function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content,enableGetParams,getParamsList,rel){
 	
 	var totalPages = data.length / items_per_page;
 
@@ -485,7 +517,7 @@ function generatePagination(data,service_data,method,template,target,initial_pag
 			$(pagination_target).parents('.fragment-pagination').find('.initInterval').text((num - 1)*items_per_page + 1);
 			$(pagination_target).parents('.fragment-pagination').find('.lastInterval').text(parseInt((num - 1)*items_per_page) + parseInt(items_per_page));
 				
-			getData(service_data,method,template,target,num,items_per_page,'',callback,content,enableGetParams)
+			getData(service_data,method,template,target,num,items_per_page,'',callback,content,enableGetParams,getParamsList,rel)
 
 		});
 	}	

@@ -5,7 +5,7 @@ mixin component-data-definitions(content)
 				.panel-body
 					h1 Data Definitions
 
-					p Sunnie permite automatizar y dinamizar la carga de datos y la generación de ciertas estructuras de datos mediante data attributes.						
+					p Sunnie permite automatizar y dinamizar la carga de datos y la generación de ciertas estructuras de datos mediante data attributes.
 
 	.row
 		.col-xs-12
@@ -85,6 +85,19 @@ mixin component-data-definitions(content)
 								td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
 								td ""
 								td data-enable-get-params = "true"
+
+							tr
+								td <strong>get-params-list</strong>
+								td Si es definido permite elegir que parametros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
+								td ""
+								td data-get-params-list = "order,activo,nombre_cliente"
+
+							tr
+								td <strong>rel</strong>
+								td Este parametro permite agrupar los filtros para que solo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente  puede funciona con el atributo data-get-params-list para definir un número mas límitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filstrados de datos personalizados aplicando multiples parametros de filtrado por cada listado de datos sin que interfieran entre ellos.
+								td ""
+								td data-rel = "group1"
+
 							tr
 								td <strong>live-reload</strong>
 								td Permite al servicio recargarse periódicamente para crear un servicio en tiempo real que recarga los datos cada X milisegundos. El tiempo del intervalo viene definido en el parámetro "time-reload".
@@ -95,7 +108,7 @@ mixin component-data-definitions(content)
 								td <strong>time-reload</strong>
 								td Establece cada cuanto tiempo se desea que se recargue el servicio. Funciona en conjunto al "life-reload" y el tiempo está especificado en milisegundos. Es necesario establacer el valor de life-reload a 'true' para que este parámetro se active.
 								td "60000"
-								td data-live-reload = 30000
+								td data-time-reload = 30000
 
 					h3 Ejemplo de Uso
 					
@@ -176,13 +189,13 @@ mixin component-data-definitions(content)
 								td <strong>pagination-aditionalData</strong>
 								td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
 								td data-aditionalData || ""
-								td pagination-data-aditionalData = "{cliente : 55 , usuario : 12}"	
+								td data-pagination-aditionalData = "{cliente : 55 , usuario : 12}"	
 
 							tr
 								td <strong>pagination-callback</strong>
 								td Nombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
 								td data-callback || ""
-								td pagination-data-callback = "callbackCargaClientes"
+								td data-pagination-callback = "callbackCargaClientes"
 
 							tr
 								td <strong>pagination-content</strong>
@@ -194,19 +207,31 @@ mixin component-data-definitions(content)
 								td <strong>pagination-enable-get-params</strong>
 								td Habilita el servicio para que utilice los parametros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
 								td data-enable-get-params || ""
-								td data-enable-get-params = "true"
+								td data-pagination-enable-get-params = "true"
+
+							tr
+								td <strong>pagination-get-params-list</strong>
+								td Si es definido permite elegir que parametros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
+								td data-get-params-list || ""
+								td data-pagination-get-params-list = "order,activo,nombre_cliente"
+
+							tr
+								td <strong>pagination-rel</strong>
+								td Este parametro permite agrupar los filtros para que solo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente  puede funciona con el atributo data-get-params-list para definir un número mas límitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filstrados de datos personalizados aplicando multiples parametros de filtrado por cada listado de datos sin que interfieran entre ellos.
+								td data-rel || ""
+								td data-pagination-rel = "group1"
 
 							tr
 								td <strong>pagination-live-reload</strong>
 								td Permite a la paginación recargarse periódicamente para crear un servicio en tiempo real que recarga los datos cada X milisegundos. El tiempo del intervalo viene definido en el parámetro "pagination-time-reload".
 								td data-live-reload || "false"
-								td data-live-reload = "true"
+								td data-pagination-live-reload = "true"
 
 							tr
 								td <strong>pagination-time-reload</strong>
 								td Establece cada cuanto tiempo se desea que se recargue la paginación. Funciona en conjunto al "pagination-life-reload" y el tiempo está especificado en milisegundos. Es necesario establacer el valor de life-reload a 'true' para que este parámetro se active.
-								td time-reload || "60000"
-								td data-live-reload = 30000
+								td data-time-reload || "60000"
+								td data-pagination-time-reload = 30000
 
 					h3 Ejemplo de Uso
 
@@ -263,12 +288,14 @@ mixin component-data-definitions(content)
 
 					p Para definir un bloque de filtros es necesario añadir <strong>data="filters"</strong> al boque contenedor de los filtros y a continuación, en cada filtro añadir <strong>data-filter="NombreDelCampoAFiltrar"</strong>. En el caso de un filtro de tipo ordenación es necesario usar <strong>data-filter="order"</strong>.
 
+					p Opcionalmente, se puede añadir un atributo <strong>data-rel</strong> que vincula ese filtro a un rel que podrá  ser usado por los datalist para personalizar las búsquedas por grupos de filtros haciendo que esos filtros solo se aplique al rel definido y de forma global a aquellos datalist que no tengan un rel definido ni un data-get-params-list.
+
 					p Por ultimo, cada filtro debe ser un enlace con un <strong>data-filter-value="ValorDelFiltro"</strong> que se corresponderá con el vallor por el que queremos filtrar el campo definido previamente.
 
 					h3 Ejemplo
 
 					pre
-						| ul.filterBar.list-inline(data="filters")
+						| ul.filterBar.list-inline(data="filters",data-rel="group1")
 						|    li.dropdown(data-filter="order")
 						|        a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
 						|            span Ordenar por: <span class="filterValue"></span>
