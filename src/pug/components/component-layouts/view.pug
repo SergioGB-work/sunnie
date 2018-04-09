@@ -20,7 +20,7 @@ mixin component-layouts(content)
 				.panel-body
 					h2 Listado de layouts
 					p A continuación se muestra el listado de layouts por defecto disponibles para su uso:
-	.row
+	.row.layouts-list
 		each item in content
 			.col-lg-2.col-md-3.col-sm-4.col-xs-6
 				+fragment("fragment-card",item)

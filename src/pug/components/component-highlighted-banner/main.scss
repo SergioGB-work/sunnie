@@ -12,13 +12,6 @@
 		margin-bottom:0;
 	}
 	
-	.row{
-		display: -webkit-flex;
-		display: -ms-flexbox;
-		display: flex;
-		align-items:center;		
-	}
-	
 	div[class^="col-"]{
 		
 	
@@ -33,6 +26,17 @@
 		.btn{
 			min-width: 75%;
 			font-size: ceil(($font-size-base * 1.25));
+			margin-top: ceil(($grid-gutter-width * 1.5));
+		}
+	}	
+}	
+
+@media (min-width: $screen-sm-min) {
+	.component.component-highlighted-banner{
+		div[class^="col-"]{
+			.btn{
+				margin-top:0;
+			}
 		}
 	}
-}	
+}

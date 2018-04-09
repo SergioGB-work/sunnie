@@ -1,6 +1,6 @@
 mixin component-highlighted-flips(content)
 	.container
-		.row.flex-center-center-sm
+		.row.flex-center-center
 			each item,i in content
 
 				- var iconType = item.iconType
@@ -9,13 +9,13 @@ mixin component-highlighted-flips(content)
 					.image
 						.icon
 							if iconType=='material'
-								i(class=item.iconSize + ' material-icons flex-center-center-sm') !{item.iconCode}
+								i(class=item.iconSize + ' material-icons flex-center-center') !{item.iconCode}
 						
 							else if iconType=='fontawesome'	
-								span(aria-hidden="true",class=item.iconSize + ' fa flex-center-center-sm ' +  item.iconCode)
+								span(aria-hidden="true",class=item.iconSize + ' fa flex-center-center ' +  item.iconCode)
 							
 							else if iconType=='glyphicon'
-								span(aria-hidden="true",class=item.iconSize + ' glyphicon flex-center-center-sm ' +  item.iconCode)
+								span(aria-hidden="true",class=item.iconSize + ' glyphicon flex-center-center ' +  item.iconCode)
 
 					.info
 						h3.nomargin #{item.header}

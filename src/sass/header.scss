@@ -1,5 +1,11 @@
 #header{
+	border-bottom: 1px solid $border-bg-white;
 	height: $navbar-height;
+
+	#top-bar{
+		position: absolute;
+    	right: 0;
+	}
 
 	.header-content{
 		border-left: 1px solid #fff;
@@ -55,11 +61,9 @@
 
 @media (min-width: $screen-sm-min) {
 	#header{
-		background: $header-bg;
-		border-bottom: 1px solid $border-bg-white;
-		height: $header-height;
 		padding:0 $grid-gutter-width;
-
+		background: $header-bg;
+		
 		.header-content{
 			border-left:0;
 		}

@@ -1,7 +1,6 @@
 #navigation{
     float:left;
-    width:auto;
-    height: $header-height;
+    width:100%;
 
 	.component{
 		margin:0;
@@ -10,15 +9,26 @@
     .navbar{
     	border:0;
 
+        .navbar-header{
+            background:$header-bg;
+        }
+
     	.navbar-collapse{
     		padding-left:0;
     		padding-right:0;
+            background:$header-bg;
+            margin-bottom:$grid-gutter-width;
+
             .navbar-nav{
+                margin:0;
+
                 > li{
                    > a{
-                        height:$header-height;
-                        display:flex;
-                        align-items:center;
+                        height: $header-height;
+                        display: flex;
+                        align-items: center;
+                        padding-left: $grid-gutter-width;
+                        padding-right: $grid-gutter-width;                        
                     }
                 }
             }
@@ -47,5 +57,7 @@
     #navigation{
         display:flex;
         align-items:center;
+        height: $header-height;
+        width:auto;       
     }
 }

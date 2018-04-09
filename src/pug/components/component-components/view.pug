@@ -5,7 +5,7 @@ mixin component-components(content)
 				.panel-body
 					h1#componentes Componentes
 					
-					p Todos los componentes de Sunnie se crean en base a la misma estructura HTML ubicada en <span class="text-primary">/src/pug/templates/component.pug</span> y la definición de los mismo para su uso está incluída en <span class="text-primary">/src/pug/templates/include_components.pug</span>.
+					p Todos los componentes de Sunnie se crean en base a la misma estructura HTML ubicada en <span class="text-primary wbba">/src/pug/templates/component.pug</span> y la definición de los mismo para su uso está incluída en <span class="text-primary wbba">/src/pug/templates/include_components.pug</span>.
 
 					h2#uso Uso
 
@@ -16,42 +16,42 @@ mixin component-components(content)
 					pre
 						| +component( componentType , componentId , content , componentTitle , showTitle , full )
 
+			.table-responsive
+				table(class="table")
+					thead
+						tr
+							th Atributo
+							th Description
+							th Default
+					tbody
+						tr
+							td <strong>componentType</strong>
+							td Nombre del componente a utilizar. Coincide con el nombre de la carpeta del componente
+							td "". Requerido				
 
-			table(class="table")
-				thead
-					tr
-						th Atributo
-						th Description
-						th Default
-				tbody
-					tr
-						td <strong>componentType</strong>
-						td Nombre del componente a utilizar. Coincide con el nombre de la carpeta del componente
-						td "". Requerido				
+						tr
+							td <strong>componentId</strong>
+							td Identifiicador único del componente. El identificador se concatena al nombre del componente cuando se realiza la compilación
+							td ""
 
-					tr
-						td <strong>componentId</strong>
-						td Identifiicador único del componente. El identificador se concatena al nombre del componente cuando se realiza la compilación
-						td ""
+						tr
+							td <strong>content</strong>
+							td Contenido dinámico del componente que podemos enviarle como parámetro. Admite cualquier tipo de dato: String, JSON, Array, boolean, etc...
+							td ""
+						tr
+							td <strong>componentTitle</strong>
+							td Titulo del componente. En caso de seleccionar el parámetro showTitle a true este será el texto que muestre como título.
+							td ""
 
-					tr
-						td <strong>content</strong>
-						td Contenido dinámico del componente que podemos enviarle como parámetro. Admite cualquier tipo de dato: String, JSON, Array, boolean, etc...
-						td ""
-					tr
-						td <strong>componentTitle</strong>
-						td Titulo del componente. En caso de seleccionar el parámetro showTitle a true este será el texto que muestre como título.
-						td ""
+						tr
+							td <strong>showTitle</strong>
+							td En caso de estar a "false" no mostrará el título del componente(componentTitle). Con cualquier otro valor si lo mostrará
+							td ""
 
-					tr
-						td <strong>showTitle</strong>
-						td En caso de estar a "false" no mostrará el título del componente(componentTitle). Con cualquier otro valor si lo mostrará
-						td ""
-
-					tr
-						td <strong>full</strong>
-						td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
-						td ""
+						tr
+							td <strong>full</strong>
+							td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
+							td ""
 
 			.panel.panel-default
 				.panel-body
@@ -394,7 +394,7 @@ mixin component-components(content)
 							h3(id="componentSlider").nomargin Slider
 					.row
 						.row
-							+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
+							+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
 
 				.col-xs-12
 					.panel.panel-default

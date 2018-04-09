@@ -3,12 +3,11 @@
 
 .component.component-highlighted-flips{
 
-	padding:60px;
-
-	.row + .row{
-		margin-top:60px;
+	.row{
+		> div[class^=col]:nth-child(n+3){
+			margin-top:24px;
+		}
 	}
-
 
 	.icon{
 		display:flex;
@@ -41,3 +40,19 @@
 	}
 
 }
+
+@media (min-width: $screen-sm-min) {
+	.component.component-highlighted-flips{
+		padding:60px;
+
+		.row{
+			> div[class^=col]:nth-child(n+3){
+				margin-top:0px;
+			}
+
+			> div[class^=col]:nth-child(n+4){
+				margin-top:60px;
+			}
+		}	
+	}
+}	

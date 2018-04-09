@@ -202,6 +202,20 @@
 }
 
 /** SHORTCODE **/
+
+.flex-center-center{
+	align-items: center !important;
+    display: flex !important;
+    justify-content: center !important;
+    flex-wrap:wrap;
+}
+
+.flex-vcenter{
+    display: flex;
+    align-items:center;	
+    flex-wrap:wrap;
+}
+
 @media (min-width: $screen-sm-min) {
 	.flex-center-center-sm{
 	    align-items: center !important;

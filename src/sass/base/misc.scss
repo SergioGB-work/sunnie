@@ -235,3 +235,9 @@
 .navbar-right{
 	margin:0;
 }
+
+.navbar-toggle{
+	padding: $navbar-toggle-padding;
+	margin: $navbar-toggle-margin;
+	float:left;
+}
