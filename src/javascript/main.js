@@ -410,6 +410,10 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 				
 				var f = eval(exec);				
 			}
+        },
+        error:function(data){
+			dataResponse = data.responseJSON;
+			status = dataResponse.error.status
         }
 	});
 }
@@ -443,6 +447,7 @@ function dataList(el){
 
 	getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel);
 
+	
 	clearInterval(live);
 
 	if(liveReload=='true'){
@@ -523,11 +528,11 @@ function generatePagination(data,service_data,method,template,target,initial_pag
 	}	
 }
 
-function error(code,content){
+function error(status,code,content){
 	var title='',
 		content='';
 	
-	switch(code){
+	switch(status){
 
 		case 200:
 			content = '200: ${{ default.operationOK }}$';
@@ -581,6 +586,13 @@ function error(code,content){
 			content = '500';
 			break;
 
+
+
+		default:
+			content = '${{ default.unknownError }}$ '+code;								
+	}
+
+	switch(code){
 		case 'USER_ERR_NOT_FOUND':
 			break;
 
@@ -590,10 +602,7 @@ function error(code,content){
 		case 'USER_ERR_LOGIN':
 			title="${{ default.errorLoginTitle }}$";
 			content = '${{ default.errorLoginContent }}$';
-			break;	
-
-		default:
-			content = '${{ default.unknownError }}$ '+code;								
+			break;
 	}
 
 	showError(title,content);

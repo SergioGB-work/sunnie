@@ -43,7 +43,7 @@
 
 @media (min-width: $screen-sm-min) {
 	.component.component-highlighted-flips{
-		padding:60px;
+		padding:60px 0;
 
 		.row{
 			> div[class^=col]:nth-child(n+3){

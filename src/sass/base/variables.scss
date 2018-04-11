@@ -3,9 +3,12 @@ $brand-primaryRGB: 						160,206,78;
 $brand-secondary: 						#b3d4fc;
 $gray-base: 							#000000;
 
+$screen-lg:								1280px;
+
 $box-shadow:							0 1px 1px 0 rgba(0, 0, 0, 0.12);
 
 $grid-gutter-width:						16px;
+$grid-float-breakpoint:					$screen-lg;
 
 $header-height: 						60px;
 $header-bg: 							#22262f;
@@ -33,6 +36,10 @@ $border-radius-small:					0;
 
 $body-bg:								#f5f5f5;
 
+$breadcrumb-padding-horizontal:			0;
+$breadcrumb-padding-vertical:			0;
+$breadcrumb-bg:							transparent;
+
 $navbar-default-bg:						transparent;
 $nav-link-padding:						ceil(($grid-gutter-width/2)) ceil(($grid-gutter-width));
 $navbar-height:							60px;
@@ -57,6 +64,7 @@ $navbar-toggle-padding:					10px;
 $navbar-toggle-margin:					12px;
 
 $nav-link-hover-bg:						transparent;
+$nav-tabs-active-link-hover-bg:			#ffffff;
 $nav-tabs-link-hover-border-color:		transparent;
 
 $btn-primary-bg:						$brand-primary;
@@ -68,6 +76,7 @@ $btn-border-radius-base:				4px;
 $input-color:							$gray-base;
 $input-border:							#ddd;
 $input-border-radius:					2px;
+$input-border-focus:					$brand-primary;
 $input-height-base:						44px;
 $input-group-addon-bg:					#fff;
 $input-border-disabled:					#cccccc;

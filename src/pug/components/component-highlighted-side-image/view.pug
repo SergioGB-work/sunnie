@@ -4,28 +4,29 @@ mixin component-highlighted-side-image(content)
 	- var image = content.image
 	- var contentHTML = content.content || ''
 	- var button = content.button || ''
+	
+	.container
+		.row.flex-vcenter-sm
+			if position == 'left'
+				.col-sm-6.col-xs-12
+					img(alt=image.alt,src=image.src)
 
-	.row.flex-vcenter-sm
-		if position == 'left'
-			.col-sm-6.col-xs-12
-				img(alt=image.alt,src=image.src)
+				.col-sm-6.col-xs-12.text-center
+					.row 
+						.col-lg-9.col-lg-offset-1.col-sm-10.col-sm-offset-1.col-xs-12
+							div !{contentHTML}
 
-			.col-sm-6.col-xs-12.text-center
-				.row 
-					.col-lg-9.col-lg-offset-1.col-sm-10.col-sm-offset-1.col-xs-12
-						div !{contentHTML}
+							if button
+								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}             
 
-						if button
-							a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}             
+			else
+				.col-sm-6.col-xs-12.text-center
+					.row
+						.col-lg-9.col-lg-offset-1.col-sm-10.col-sm-offset-1.col-xs-12 
+							div !{contentHTML}
 
-		else
-			.col-sm-6.col-xs-12.text-center
-				.row
-					.col-lg-9.col-lg-offset-1.col-sm-10.col-sm-offset-1.col-xs-12 
-						div !{contentHTML}
+							if button != ''
+								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text} 
 
-						if button != ''
-							a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text} 
-
-			.col-sm-6.col-xs-12
-				img(alt=image.alt,src=image.src)
+				.col-sm-6.col-xs-12
+					img(alt=image.alt,src=image.src)

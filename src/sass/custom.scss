@@ -15,6 +15,12 @@
 	margin-bottom: $grid-gutter-width;
 }
 
+@media (max-width: $screen-xs-max) {
+	.text-center-xs{
+		text-align:center;
+	}
+}
+
 /** LOADING **/
 
 #loading-mask{

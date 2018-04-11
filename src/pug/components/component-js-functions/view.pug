@@ -98,7 +98,7 @@ mixin component-js-functions(content)
 
 		p Dichos atributos pueden ser consultados en la sección de <a href="./data-definitions.html#data-definitions-data-pagination-block">Data Definitions</a>. 
 
-		h3 error(code,content)
+		h3 error( code , content )
 
 		p Está función genérica recibe el código de error ocurrido(200,401,404, etc...) y muestra de forma automática el mensaje de error correspondiente. Es la función genérica que define los errores genéricos del portal. Se puede extender con más códigos de error en función del caso de uso. Algunos errores también admiten la recepción del mensaje de texto a mostrar.
 
@@ -112,11 +112,11 @@ mixin component-js-functions(content)
 
 		p Permite ocultar la capa de loading genérica. Por defecto, cualquier peticion ajax que se completa, ya sea correctamente o con errores oculta la capa.
 
-		h3 showError(title , content)
+		h3 showError( title , content)
 
 		p Utiliza la modal genérica de error para mostrar una modal con el title y el content que se le facilita a través de los parametros de la función.
 
-		.table.responsive
+		.table-responsive
 			table(class="table")
 				thead
 					tr
@@ -134,11 +134,11 @@ mixin component-js-functions(content)
 						td Texto descriptivo del error que se mostrará en el cuerpo de la modal. Debe ser un String.
 						td "Has introducido un usuario o contraseña incorrecta"
 
-		h3 showHTMLError(title , content)
+		h3 showHTMLError( title , content)
 
 		p Utiliza la modal genérica de error para mostrar una modal con el title y el content que se le facilita a través de los parametros de la función pero a diferencia de la anterior, esta función admite contenido HTML.
 
-		.table.responsive
+		.table-responsive
 			table(class="table")
 				thead
 					tr

@@ -17,7 +17,6 @@
     		padding-left:0;
     		padding-right:0;
             background:$header-bg;
-            margin-bottom:$grid-gutter-width;
 
             .navbar-nav{
                 margin:0;
@@ -52,12 +51,27 @@
 	}
 }
 
-@media (min-width: $screen-sm-min) {
+@media (min-width: $screen-sm) {
+    #navigation{
+        width: calc(100% + #{ceil($grid-gutter-width * 2)});
+        margin-left: ceil((- $grid-gutter-width));
+    }
+}
+
+
+@media (min-width: $screen-lg) {
 
     #navigation{
         display:flex;
         align-items:center;
         height: $header-height;
-        width:auto;       
+        width:auto; 
+        margin-left:0;
+
+        .navbar{
+            .navbar-collapse{
+                margin-bottom:0;
+            }
+        }     
     }
 }

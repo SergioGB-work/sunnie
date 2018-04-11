@@ -1,3 +1,6 @@
+.container{
+	max-width:100%;
+}
 
 .container-fluid{
 	padding: $grid-gutter-width;
@@ -20,16 +23,25 @@
 		background:transparent;
 		border:1px solid $brand-primary;
 		color:$brand-primary;
-	}	
+	}
+	&,&:active,&.active {
+		&:focus,&.focus {
+		  outline:none;
+		}
+	}
 }
 
 /** FORM **/
 .form-control{
-	box-shadow: 0 0 0;
+	@include box-shadow(none);
 
 	&[disabled]{
 		border-color: $input-border-disabled;
 		color: $input-color-disabled;	
+	}
+
+	&:focus{
+		@include box-shadow(none);
 	}
 }
 
