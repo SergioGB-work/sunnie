@@ -62,19 +62,9 @@ $(document).ready(function(){
 		method = form.data('method');
 		data = {'data':data};
 
-		url = url.replace('{id_tienda}',$.cookie('id_tienda')).replace('{id_cliente}',$.cookie('id_client'));
-		console.log(url);
-		$.ajax({
-			url: url,
-			type: method,
-			dataType: 'json',
-			data: data,		
-			complete:function(data){
-				
-				var callback = form.data('callback') + '('+ JSON.stringify(data.responseJSON) +')';
-				var f = eval(callback);
-	        }
-		});
+		var params = {"service":url,"method":method, "aditionalData":data,"callback":form.data('callback')};
+
+		getData(params);
 
 	});
 
@@ -108,9 +98,7 @@ $(document).ready(function(){
 	// @param data-has-pagination -> Indica que el elemento tiene paginación 
 
 	$('[data-has-pagination="true"]').each(function(e){
-		
 		pagination($(this));
-
 	});
 
 
@@ -134,10 +122,6 @@ $(document).ready(function(){
 	// GESTION DE CONTENIDO POR ROLES
 	filterContentByRol();
 
-	// PIE PROGRESS
-	$('[data-pieprogress="true"]').each(function(e){
-		pieProgress($(this));
-	});	
 	// LOGOUT DE LA PLATAFORMA
 	$('.logout').click(function(){
 
@@ -187,7 +171,6 @@ $(document).ready(function(){
 		    elems[i].onchange = function(){encodeImageFileAsURL(this,$(this).data('file-view'))};
 		}
 	}
-
 
 	//FILTROS DE LISTADOS
 
@@ -257,7 +240,6 @@ $(window).load(function(){
 	setAllImgDefault();
 });
 
-
 // IMAGENES POR DEFECTO
 // Establece una imagen por defecto para todas las imagenes rotas
 function setAllImgDefault(){
@@ -299,10 +281,21 @@ function popover(){
 	// @param callback -> nombre de la función que se ejecutará al invocarse el evento complete de Ajax. El data devuelvo se le envía a la función como parametro
 	// @param content -> parametros adicionales a enviar a la función callback
 
-
-function getData(service,method,template,target,page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel){
+function getData(el){
 	var filter = '';
 	var access_token = "access_token=" + $.cookie('id_session')
+	var service = el.service,
+		method = el.method,
+		template = el.template,
+		target = el.target,
+		page = el.page,
+		items_per_page = el.items_per_page,
+		aditionalData = el.aditionalData,
+		callback = el.callback,
+		content = el.content,
+		enableGetParams = el.enableGetParams,
+		getParamsList = el.getParamsList,
+		rel = el.rel;
 
 	if(enableGetParams == true || enableGetParams=="true"){
 
@@ -329,16 +322,17 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 				if((getParams[val] !== undefined && getParams[val] != '' && val.indexOf(rel) > -1) || (rel === undefined || rel == '')){
 
 					var key = (rel !== undefined && rel != '' && val.indexOf(rel) > -1) ? val.replace(rel,'') : val;
-					alert(key);
-					alert(val);
+
 					if(key=='order' || key=='group'){
 						filter += '&filter['+key+']=' + getParams[val];
 					}
 
 					else if(key=='query'){
 						var n=0;
+						var regexp = new RegExp("searchField\\d*" + rel,'g');;
+
 						$.each(params, function(index, value) {
-							if(value.indexOf('searchField') > -1){	
+							if(value.search(regexp) > -1){	
 								filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
 								n++;
 							}	
@@ -347,7 +341,7 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 
 					}
 
-					else if(key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter')){
+					else if(key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter') < 0){
 
 						var value = getParams[val]; 
 
@@ -396,7 +390,7 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 
 			console.log(JSON.stringify(data));
 
-			if((target != '') && (template != '')){
+			if((target != '') && (template != '') && (template !== undefined) && (target !== undefined)){
 				$(target).html('');
 				$(template).tmpl(data).appendTo(target);
 			}	
@@ -405,15 +399,26 @@ function getData(service,method,template,target,page,items_per_page,aditionalDat
 				var exec = callback + '('+ JSON.stringify(dataResponse) +')';
 
 				if(content != ''){
-					exec = callback + '('+ JSON.stringify(dataResponse) +',"' + content +'")';
+
+					if(typeof(content)=='object'){
+						content = JSON.stringify(content);
+					}
+
+					exec = callback + '('+ JSON.stringify(dataResponse) +',' + content +')';
 				}
 				
 				var f = eval(exec);				
 			}
         },
         error:function(data){
-			dataResponse = data.responseJSON;
-			status = dataResponse.error.status
+			
+			var dataResponse = data.responseJSON,
+			statusCode = dataResponse.error.statusCode || data.status,
+			code = dataResponse.error.code,
+			message = dataResponse.error.message || data.statusText;
+
+			error(statusCode,code,message);
+
         }
 	});
 }
@@ -445,13 +450,14 @@ function dataList(el){
 		timeReload = el.data('time-reload') || 60000,
 		rel = el.data('rel') || '';
 
-	getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel);
+	var params = {"service":service,"method":method,"template":template,"target":target,"page":initial_page,"items_per_page":items_per_page,"aditionalData":aditionalData,"callback":callback,"content":content,"enableGetParams":enableGetParams,"getParamsList":getParamsList,"rel":rel}
 
-	
+	getData(params);
+
 	clearInterval(live);
 
 	if(liveReload=='true'){
-		live=setInterval(getData(service,method,template,target,initial_page,items_per_page,aditionalData,callback,content,enableGetParams,getParamsList,rel),timeReload);
+		live=setInterval(getData(params),timeReload);
 	}
 }
 
@@ -489,17 +495,25 @@ function pagination(el){
 		timeReload = el.data('pagination-time-reload') || el.data('time-reload') || 60000;
 		rel = el.data('pagination-rel') || el.data('rel') || '';
 
-    getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams + '","' + getParamsList + '","' + rel, enableGetParams,getParamsList,rel);
+	var paramsPagination =	{service:service_data, method:method, template: template, target: target, page: initial_page, pagination_target: pagination_target, items_per_page: items_per_page, callback: callback, content:content, enableGetParams: enableGetParams, getParamsList: getParamsList, rel:rel},	
+		params = {"service":service_data_all,"method":method,"template":"","target":"","page":0,"items_per_page":0,"aditionalData":aditionalData,"callback":"generatePagination","content":paramsPagination,"enableGetParams":enableGetParams,"getParamsList":getParamsList,"rel":rel}
+    
+    getData(params);
 
 	clearInterval(live);
 	
 	if(liveReload == 'true'){
- 		live=setInterval(getData(service_data_all,method,'','',0,0,aditionalData,'generatePagination',service_data + '","' + method + '","' + template + '","' + target + '","' + initial_page + '","' + pagination_target + '","' + items_per_page + '","' + callback + '","' + content + '","' + enableGetParams + '","' + getParamsList + '","' + rel, enableGetParams, getParamsList, rel),timeReload);
+ 		live=setInterval(getData(params),timeReload);
 	}
 }
 
-function generatePagination(data,service_data,method,template,target,initial_page,pagination_target,items_per_page,callback,content,enableGetParams,getParamsList,rel){
+function generatePagination(data,el){
 	
+	var data = data,
+		initial_page = el.page,
+		pagination_target = el.pagination_target,
+		items_per_page = el.items_per_page;
+
 	var totalPages = data.length / items_per_page;
 
 	if(totalPages % 1 != 0){
@@ -521,25 +535,30 @@ function generatePagination(data,service_data,method,template,target,initial_pag
 			$(pagination_target).parents('.fragment-pagination').find('.totalResults').text(data.length);
 			$(pagination_target).parents('.fragment-pagination').find('.initInterval').text((num - 1)*items_per_page + 1);
 			$(pagination_target).parents('.fragment-pagination').find('.lastInterval').text(parseInt((num - 1)*items_per_page) + parseInt(items_per_page));
-				
-			getData(service_data,method,template,target,num,items_per_page,'',callback,content,enableGetParams,getParamsList,rel)
+			
+			el.page = num;
+			getData(el);
 
 		});
 	}	
 }
 
-function error(status,code,content){
+function error(statusCode,code,message){
+
+	message = message === undefined ? '' : message;
+
+
 	var title='',
-		content='';
+		content=message;
 	
-	switch(status){
+	switch(statusCode){
 
 		case 200:
 			content = '200: ${{ default.operationOK }}$';
 			break;
 
 		case 201:
-			content = '201';
+			content = '201: ${{ default.operationOK }}$';
 			break;
 
 		case 204:
@@ -548,7 +567,7 @@ function error(status,code,content){
 			break;
 
 		case 400:
-			content = '400';
+			content = '400:' + message;
 			break;
 
 		case 401:
@@ -559,50 +578,39 @@ function error(status,code,content){
 		case 403:
 			content = '403';
 			title="${{ default.errorRoleTitle }}$";
-			content = '401: ${{ default.errorRoleContent }}$';			
+			content = '401: ${{ default.errorRoleContent }}$';
 			break;
 
 		case 404:
-			content = '404';
+			content = '404:' + message;
 			break;
 
 		case 405:
-			content = '405';
+			content = '405:' + message;
 			break;
 
 		case 406:
-			content = '406';
+			content = '406:' + message;
 			break;	
 
 		case 409:
-			content = '409';
+			content = '409:' + message;
 			break;
 
 		case 415:
-			content = '415';
+			content = '415:' + message;
 			break;	
 					
 		case 500:
-			content = '500';
+			content = '500:' + message;
 			break;
 
-
-
 		default:
-			content = '${{ default.unknownError }}$ '+code;								
+			content = statusCode + ':${{ default.unknownError }}$ .'+ message;
 	}
 
 	switch(code){
-		case 'USER_ERR_NOT_FOUND':
-			break;
-
-		case 'USER_ERR_TOKEN_OUTDATED':
-			break;
-
-		case 'USER_ERR_LOGIN':
-			title="${{ default.errorLoginTitle }}$";
-			content = '${{ default.errorLoginContent }}$';
-			break;
+		//Extend to custom errors
 	}
 
 	showError(title,content);
@@ -676,32 +684,6 @@ function filterContentByRol(){
 			$(this).remove();
 		}
 	});
-}
-
-
-function pieProgress(el){
-	var pie = el;
-	var goal = pie.data('goal') || 100;
-	var size = pie.data('size') || 100;
-	var barsize = pie.data('barsize') || 4;
-	var min = pie.data('min') || 0
-	var max = pie.data('max') || 100;
-	var easing = pie.data('easing') || 'ease';
-	var trackcolor = pie.data('trackcolor') || '#f2f2f2';
-	
-
-	pie.asPieProgress({
-		namespace: 'pie_progress',
-		goal: goal,
-		size: size,
-		barsize: barsize,
-		min: min,
-		max: max,
-		easing: easing,
-		trackcolor: trackcolor
-	});
-
-	pie.asPieProgress('start');
 }
 
 function dataSearch(){	
