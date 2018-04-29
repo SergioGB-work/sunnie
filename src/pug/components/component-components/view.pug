@@ -14,7 +14,7 @@ mixin component-components(content)
 					p La <span class="text-primary">estructura básica</span> de uso de todos los componentes es la siguiente:
 
 					pre
-						| +component( componentType , componentId , content , componentTitle , showTitle , full )
+						| +component( componentType , componentId , content , componentTitle , showTitle , full , classes )
 
 			.table-responsive
 				table(class="table")
@@ -52,6 +52,11 @@ mixin component-components(content)
 							td <strong>full</strong>
 							td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
 							td ""
+
+						tr
+							td <strong>classes</strong>
+							td Parámetro que perite añadir clases adicionales a la raiz componente para alterar su estilo o comportamiento.
+							td ""							
 
 			.panel.panel-default
 				.panel-body

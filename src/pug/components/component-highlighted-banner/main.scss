@@ -5,6 +5,20 @@
 
 	background: $brand-primary;
     padding: 40px 0;
+
+    &.bg-danger{
+    	background: $brand-danger;
+    }
+    &.bg-success{
+    	background: $brand-success;
+    }
+    &.bg-warning{
+    	background: $brand-warning;
+    }
+    &.bg-info{
+    	background: $brand-info;
+    }    
+
 	
 	*{
 		color: $btn-primary-color;
