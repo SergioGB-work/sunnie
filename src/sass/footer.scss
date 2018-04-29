@@ -1,0 +1,9 @@
+#footer{
+	background: $footer-bg;
+	padding: ceil($grid-gutter-width * 1.5) $grid-gutter-width;
+	color: $footer-color;
+
+	a{
+		color: $footer-color;
+	}
+}
