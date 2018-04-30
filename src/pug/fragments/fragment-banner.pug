@@ -8,5 +8,5 @@ mixin fragment-banner(content)
 	- var target = content.target || '';
 	- var responsive_src = content.responsiveSRC || '';
 
-	a(href=href,title=title target=target)
-		img(src=src, alt=alt, logdesc=longdesc, data-src=src , data-responsive-src=responsive_src)
+	a(href=href,title=title,target=target || false)
+		img(src=src, alt=alt, longdesc=longdesc || false, data-src=src , data-responsive-src=responsive_src)

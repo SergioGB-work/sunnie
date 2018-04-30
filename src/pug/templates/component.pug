@@ -4,6 +4,7 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full,
 
 	- var classesComponent = 'component'
 	- var idComponent = ''
+	- var classes = classes || ''
 
 	if showTitle  == "false"
 		- var classesComponent = classesComponent + ' component-noTitle'
@@ -14,14 +15,13 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full,
 	if componentId != ''
 		-var idComponent = componentType + '-' + componentId
 
-	div(class=classesComponent + ' ' + componentType + ' ' + classes, id=idComponent)
+	div(class=classesComponent + ' ' + componentType + ' ' + classes, id=idComponent || false)
 		if showTitle != "false"
 			div(class="component-title")
 				h2 #{componentTitle}
 
 		div(class="component-content")
 			+#{componentType}(content)
-
 
 
 

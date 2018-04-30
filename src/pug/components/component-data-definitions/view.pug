@@ -123,6 +123,34 @@ mixin component-data-definitions(content)
 						|             th Rol					
 						|     tbody
 
+					h3 Plantilla de contenido dinámico
+
+					p A la hora de generar contenido dinámico cargado desde servicios web SunnieJS dispone de Jquery TMPL para generar los datos en base a estructuras HTML.
+
+					p Para ello, se debe crear una plantilla en nuestro HTML con el siguiente formato:
+
+					pre 
+						|script(id="templateUsersList",type="text/x-jquery-tmpl")
+						
+						|	| {%if data.length > 0 %}
+
+						|	| {%each data%}
+
+						|	tr
+						|		td ${$value.idUsuario}
+						|		td ${$value.username}
+						|		td ${$value.email}
+						|		td.text-center ${$value.rol.nombreRol}
+
+						|	| {%/each%}
+
+						|	| {%else%}
+
+						|	tr
+						|		td(class="alert alert-warning",role="alert",colspan="6") No hay usuarios
+
+						|	| {%/if%}	
+
 	.row
 		.col-xs-12
 			.panel.panel-default

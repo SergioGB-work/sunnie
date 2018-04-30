@@ -4,4 +4,4 @@ mixin fragment-image(content)
 	- var longdesc = content.longdesc || '';
 	- var responsive_src = content.responsiveSRC || '';
 	
-	img(src=src, alt=alt, logdesc=longdesc, data-src=src , data-responsive-src=responsive_src)
+	img(src=src, alt=alt, longdesc=longdesc || false, data-src=src , data-responsive-src=responsive_src)

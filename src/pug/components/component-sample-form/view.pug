@@ -18,8 +18,8 @@ mixin component-sample-form(content)
 				textarea(class="form-control",id="exampleInputComment1") Escribe tu comentario			
 
 			div(class="form-group")
-				label(for="exampleInputComment1") Select an option
-				select(class="form-control",name="select")
+				label(for="exampleSelect1") Select an option
+				select(class="form-control",name="select",id="exampleSelect1")
 					option(value="option1") Option 1
 					option(value="option2") Option 2
 					option(value="option3") Option 3
@@ -55,12 +55,12 @@ mixin component-sample-form(content)
 		h4 EXAMPLE		
 		form(class="form-inline")
 			div(class="form-group")
-				label(for="exampleInputName2",class="sr-only") Name
-				input(type="text",class="form-control",id="exampleInputName2",placeholder="Jane Doe")
+				label(for="exampleInputName3",class="sr-only") Name
+				input(type="text",class="form-control",id="exampleInputName3",placeholder="Jane Doe")
 
 			div(class="form-group")
-				label(for="exampleInputEmail2",class="sr-only") Email
-				input(type="email",class="form-control",id="exampleInputEmail2",placeholder="jane.doe@example.com")
+				label(for="exampleInputEmail3",class="sr-only") Email
+				input(type="email",class="form-control",id="exampleInputEmail3",placeholder="jane.doe@example.com")
 
 			div(class="form-group")
 				button(type="submit",class="btn btn-default") Send invitation
@@ -80,33 +80,33 @@ mixin component-sample-form(content)
 		h3 Horizontal form
 		form(class="form-horizontal")
 			div(class="form-group")
-				label(for="exampleInputEmail1", class="col-sm-2 control-label") Email address
+				label(for="exampleInputEmail4", class="col-sm-2 control-label") Email address
 				div(class="col-sm-10")
-					input(type="email",class="form-control",id="exampleInputEmail1",placeholder="Email")
+					input(type="email",class="form-control",id="exampleInputEmail4",placeholder="Email")
 
 			div(class="form-group")
-				label(for="exampleInputEmail1", class="col-sm-2 control-label") Email address
+				label(class="col-sm-2 control-label") Email address
 				div(class="col-sm-10")
 					p(class="form-control-static") email@example.com
 						
 
 			div(class="form-group")
-				label(for="exampleInputPassword1",class="col-sm-2 control-label") Password
+				label(for="exampleInputPassword3",class="col-sm-2 control-label") Password
 				div(class="col-sm-10")
-					input(type="password",class="form-control",id="exampleInputPassword1",placeholder="Password")
+					input(type="password",class="form-control",id="exampleInputPassword3",placeholder="Password")
 
 			div(class="form-group")
-				label(for="exampleInputComment1", class="col-sm-2 control-label") Select an option
+				label(for="exampleInputComment4", class="col-sm-2 control-label") Select an option
 				div(class="col-sm-10")
-					select(class="form-control",name="select")
+					select(class="form-control",name="select",id="exampleInputComment4")
 						option(value="option1") Option 1
 						option(value="option2") Option 2
 						option(value="option3") Option 3
 
 			div(class="form-group")
-				label(for="exampleInputFile",class="col-sm-2 control-label") File input
+				label(for="exampleInputFile1",class="col-sm-2 control-label") File input
 				div(class="col-sm-10")
-					input(type="file",id="exampleInputFile")
+					input(type="file",id="exampleInputFile1")
 					p(class="help-block")
 						| Example block-level help text here.
 
@@ -133,7 +133,7 @@ mixin component-sample-form(content)
 			div(class="checkbox disabled")
 				label
 					input(type="checkbox",value="", disabled)
-					Option two is disabled
+					| Option two is disabled
 
 			div(class="radio")
 				label
