@@ -13,7 +13,8 @@ var gulp = require('gulp'),
 	flatten = require('gulp-flatten'),
 	clean = require('gulp-clean'),
 	postcss = require('gulp-postcss'),
-	autoprefixer = require('autoprefixer');
+	autoprefixer = require('autoprefixer'),
+	compression   = require("compression");
 
 var path = {
     pug: ['src/pug/*.pug'],
@@ -47,7 +48,12 @@ var langs = ['es','en'];
 gulp.task('connect', function() {
 	connect.server({
 		root: './public/',
-		port: 3000
+		port: 3000,
+		middleware: function(req, res, next){
+			return [
+						compression()
+			]
+		}		
 	});
 });
 

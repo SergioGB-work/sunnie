@@ -29,5 +29,8 @@
     "start": "node --max-old-space-size=8192 ./gulpfile.js"
   },
   "author": "Sergio Gonzalez Barrios",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "compression": "^1.7.2"
+  }
 }
