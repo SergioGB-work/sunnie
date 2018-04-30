@@ -127,11 +127,13 @@ mixin component-data-definitions(content)
 
 					p A la hora de generar contenido dinámico cargado desde servicios web SunnieJS dispone de Jquery TMPL para generar los datos en base a estructuras HTML.
 
+					p Puedes crearla como un archivo .pug aparte para incluirlo desde el view.pug o incluirlo directamente en el archivo principal del componente.
+
 					p Para ello, se debe crear una plantilla en nuestro HTML con el siguiente formato:
 
 					pre 
 						|script(id="templateUsersList",type="text/x-jquery-tmpl")
-						
+
 						|	| {%if data.length > 0 %}
 
 						|	| {%each data%}
