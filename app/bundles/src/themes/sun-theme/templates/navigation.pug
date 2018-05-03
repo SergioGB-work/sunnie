@@ -1,0 +1,31 @@
+- var pages = locals.pages
+- var siteURL = locals.site.url
+
+nav(class="navbar navbar-default",role="navigation")
+
+		div(class="navbar-header")
+			button(type="button",class="navbar-toggle collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+
+				span(class="sr-only") Toggle navigation
+				span(class="icon-bar")
+				span(class="icon-bar")
+				span(class="icon-bar")
+
+		div(class="collapse navbar-collapse",id="navigation-list")
+			ul(class="nav navbar-nav")
+				each item in pages
+					li
+
+						if(item.childs.length > 0)
+
+							a(href="./html-elemments.html", title="Ir a " +item.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="html-elements")
+								span #{item.name}
+								span(class="caret")
+
+							ul(class="dropdown-menu",aria-labelledby="html-elements")
+								each child in item.childs
+									li
+										a(href='.' + child.url) #{child.name}
+
+						else			
+							a(href='.' + item.url) #{item.name}

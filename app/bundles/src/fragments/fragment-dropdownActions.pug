@@ -1,0 +1,16 @@
+mixin fragment-dropdownActions(content)
+
+	- var id = content.id
+	- var actions = ' '
+
+	div(class="dropdown")
+		button(id=id,type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="btn btn-link")
+			.sr-only Acciones
+			i(class="fa fa-ellipsis-v icon-2x",aria-hidden="true")
+		ul(class="dropdown-menu",aria-labelledby=id)
+
+
+			each value in content.actions
+
+				li
+					a(href="javascript:void(0)")&attributes(value.data) #{value.text}

@@ -1,79 +1,77 @@
 #navigation{
-	background:$navBgColor;
-	margin-bottom:20px;
+    float:left;
+    width:100%;
 
-	nav{
-		margin-bottom:0;
-		background: 0;
-		border: 0;
-		min-height:0;
-		@include borderRadius0;		
-	
-		#navigation-list{
-			padding:0;
-			
-			ul{
-				li{
-					a{
-						color:$navTextColor;
-						padding-top: 10px;
-						padding-bottom: 10px;					
-					}
-					&.active{
-						a{
-							color:$navTextColorHover;
-							background:$primaryColorHover;
-						}
-					}
-					&.open{
-						a{
-							color:$navBgColor;
-						}
-					}
-				}
-			}
-			
-		}
-	}	
+	.component{
+		margin:0;
+	}
+
+    .navbar{
+    	border:0;
+
+        .navbar-header{
+            background:$header-bg;
+        }
+
+    	.navbar-collapse{
+    		padding-left:0;
+    		padding-right:0;
+            background:$header-bg;
+
+            .navbar-nav{
+                margin:0;
+
+                > li{
+                   > a{
+                        height: $header-height;
+                        display: flex;
+                        align-items: center;
+                        padding-left: $grid-gutter-width;
+                        padding-right: $grid-gutter-width;                        
+                    }
+                }
+            }
+    	}       
+    }  
 }
 
-@media (max-width: 767px) {
-	
-	#navigation{
-	
-		nav {
-			.navbar-toggle {
-				border:0;	
-				float:left;
-				@include borderRadius0;	
-				
-				.icon-bar{
-					background:#ffffff;
-				}
-				
-				&:focus,&:hover{
-					background-color:$primaryColorHover;
-				}
-			}
-			
-			#navigation-list{
-				ul {
-					li{
-						&.active {
-							a{
-								background:0;
-							}				
-						}
-						
-						&.open{
-							a{
-								background:0;
-								color:$navTextColor;
-							}
-						}
-					}
-				}	
-			}			
-		}	
-	}	
-}	
+.logo{
+    float: left;
+    padding: ceil(($grid-gutter-width / 2)) 0;
+
+    img{
+        height:34px;
+    }
+}  
+
+
+.modal-open{
+	.child-menu{
+		padding-right:16px;
+	}
+}
+
+@media (min-width: $screen-sm) {
+    #navigation{
+        width: calc(100% + #{ceil($grid-gutter-width * 2)});
+        margin-left: ceil((- $grid-gutter-width));
+    }
+}
+
+
+@media (min-width: $screen-lg) {
+
+    #navigation{
+        display:flex;
+        align-items:center;
+        height: $header-height;
+        width:auto; 
+        margin-left:0;
+
+        .navbar{
+            .navbar-collapse{
+                margin-bottom:0;
+            }
+        }     
+    }
+}

@@ -1,9 +1,10 @@
 .component{
 	float: left;
     width: 100%;
-    padding: 20px;
-	margin-bottom:30px;
-	border:1px solid $borderColor;
+    padding: $grid-gutter-width;
+	margin-bottom:$grid-gutter-width;
+	background:$component-bg;
+	box-shadow: $box-shadow;
 	
 	.component-title{
 		float:left;
@@ -18,6 +19,54 @@
 	&.component-full{
 		padding:0;
 		border:0;
+		background:0;
+		box-shadow: none;
 	}
 
+	h2{
+		margin:$grid-gutter-width 0 $grid-gutter-width 0;
+	}
+
+	p:last{
+		margin-bottom:0;
+	}
+
+	.component-tools{
+	    position: absolute;
+	    right: 0;
+	    top: -20px;
+	    z-index:9;
+	    transition: all .2s linear 0s;
+	    opacity:0;
+
+	    ul{
+	    	margin:0;
+	    	a{
+			    border: 2px solid $component-tools-color;
+			    border-radius: 50%;
+			    line-height: 0;
+			    color: $component-tools-color;
+			    opacity: $component-tools-opacity;
+			    float: left;
+			    width: $component-tools-width;
+			    height: $component-tools-height;
+			    transition: all .2s linear 0s;    		
+	    		
+	    		&:hover{
+	    			text-decoration:none;
+	    			opacity:1;
+	    		}
+	    		&:focus{
+	    			text-decoration:none;
+	    		}
+	    	}
+	    }	
+	}
+}
+
+.hover{
+	.component-tools{
+		top: ceil(-($component-tools-height));
+		opacity:1;
+	}	
 }

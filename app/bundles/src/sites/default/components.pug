@@ -1,0 +1,14 @@
+extends ./layouts/layout-2-10-fluid
+
+block header
+	title Components
+	meta(name="keywords",content="pug")
+	meta(name="description",content="pug")
+
+block column0
+	+component("component-navigation","",{pages:[{text:"Componentes",href:"#componentes",title:"Ir a Componentes","active":"true"},{text:"Uso",href:"#uso",title:"Ir a Uso"},{text:"Listado de componentes",href:"#listado-de-componentes",title:"Ir al Listado de componentes",childs:[]},{text:"Ejemplos",href:"#ejemplos",title:"Ir a Ejemplos",childs:[{"text":"Login",href:"#componentLogin",title:"Ir a Componente Login"},{"text":"Image",href:"#Image",title:"Ir a Componente Image"},{"text":"Logo",href:"#componentLogo",title:"Ir a Componente Logo"},{"text":"Banner",href:"#componentBanner",title:"Ir a Componente Banner"},{"text":"Breadcrumbs",href:"#componentBreadcrumbs",title:"Ir a Componente Breadcrumbs"},{"text":"Highlighted Banner",href:"#componentHighlightedBanner",title:"Ir a Componente Highlighted Banner"},{"text":"Highlighted Content",href:"#componentHighlightedContent",title:"Ir a Componente Highlighted Content"},{"text":"Highlighted Side Image",href:"#componentHighlightedSideImage",title:"Ir a Componente Highlighted Side Image"},{"text":"Highlighted Flips",href:"#componentHighlightedFlips",title:"Ir a Componente Highlighted Flips"},{"text":"Cards List Carousel",href:"#componentCardsListCarousel",title:"Ir a Componente Cards List Carousel"},{"text":"Slider",href:"#componentSlider",title:"Ir a Componente Slider"},{"text":"Navigation",href:"#componentNavigation",title:"Ir a Componente Navigation"}]}]},"","false","false")
+
+block column1
+
+	+component("component-components","","","","false","true")
+

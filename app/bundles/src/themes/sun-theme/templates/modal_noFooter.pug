@@ -1,0 +1,14 @@
+block vars
+
+- var size = modal_size || ''
+
+div(class="modal fade",id=modal_id,tabindex="-1",role="dialog",aria-labelledby=modal_id+'-title')
+	div(class="modal-dialog " + size,role="document")
+		div(class="modal-content")
+			div(class="modal-header")
+				button(type="button" class="close" data-dismiss="modal" aria-label="Close")
+					span(aria-hidden="true") &times;
+				h4(class="modal-title" id=modal_id+"-title") !{modal_title}
+
+			div(class="modal-body")
+				block modal-body

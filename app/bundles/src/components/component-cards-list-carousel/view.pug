@@ -1,0 +1,7 @@
+mixin component-cards-list-carousel(content)
+
+	each item,i in content
+
+		- var classes = item.classes || ''
+
+		+fragment("fragment-card",item)

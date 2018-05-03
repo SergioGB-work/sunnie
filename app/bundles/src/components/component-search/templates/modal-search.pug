@@ -1,0 +1,18 @@
+extends ../../../theme/templates/modal_noFooter
+
+block vars
+	- var modal_id = "searchModal"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	
+		.row
+			.col-xs-12
+				form()
+					.form-group.nomargin
+						label.sr-only(for="#search-box") Buscar
+						.input-group
+							input(class="form-control",type="search",name="search",placeholder="Buscar...",id="search-box")
+							span(class="input-group-addon")
+								i.material-icons.icon-5x &#xE8B6;
+

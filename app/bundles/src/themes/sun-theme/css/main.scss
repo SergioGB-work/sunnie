@@ -1,12 +1,7 @@
-/** RESET **/
-@import 'base/reset';
-
-
 /** CSS LIBS **/
-@import 'lib/bootstrap.css';
-@import 'lib/owl.carousel.css';
-@import 'lib/owl.theme.css';
-
+@import 'lib/bootstrap';
+@import 'lib/owl.carousel';
+@import 'lib/owl.theme';
 
 /** BASE **/
 @import 'base/variables';
@@ -26,9 +21,9 @@
 
 
 /** COMPONENTS **/
-@import 'components/component-breadcrumbs';
-@import 'components/component-language';
 
+/** FRAGMENTS **/
+@import 'fragment';
 
 /** CUSTOMIZING **/
 @import 'custom';

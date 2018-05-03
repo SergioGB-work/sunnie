@@ -1,0 +1,66 @@
+mixin component-sample-modal(content)
+	.row
+		.col-xs-12
+			.panel.panel-default
+				.panel-body
+					h1 Modals
+
+					p Sunnie provee una serie de plantillas de ventanas modales que permiten estandarizar la creación de modales en base a las estructuras básica de Bootstrap y la forma en que éste las crea.
+
+					p Por defecto existen dos plantillas de Modales(modal_noFooter y modal_noHeaderNoFooter) que como sus propios nombres indican, en el primera caso es una modal sin footer y en el otro caso, no tiene ni header ni footer.
+	.row
+		.col-xs-12
+			.panel.panel-default
+				.panel-body
+					h2 Uso
+
+					p A continuación se muestra un ejemplo de creación de una modal extendiendo de la plantilla modal_noFooter:
+
+					pre
+						| extends ../../../templates/modal_noFooter
+						|
+						| block vars
+						|	- var modal_title = "Large Modal"
+						|	- var modal_id = "lexLargeModal"
+						|	- var modal_size = "modal-lg"
+						|
+						| block modal-body
+						|	
+						|		.row
+						|	
+						|			.col-xs-12
+						|				p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						|
+						|		.row
+						|			.col-xs-12
+						|				div(class="form-group text-right")
+						|					button(type="button",class="btn btn-default",data-dismiss="modal") Cancelar
+						|					button(type="submit",class="btn btn-primary",class="send") Aceptar		
+
+					p Las modales pueden recibir una serie de variables desde <span class="text-primary">block vars</span> que se puedan utilizar para personalizar ciertos aspectos de la estructura genérica de la modal.
+					ul
+						li <strong>modal_title:</strong> título de la modal
+						li <strong>modal_id:</strong> identificador de la modal
+						li <strong>modal_size:</strong> tamaño de la modal, pudiendo elegir entre modal-lg, modal-md, modal-sm. Estos tamaños corresponden a los definidos por Bootstrap
+
+	.row
+		.col-xs-12
+			.panel.panel-default
+				.panel-body
+					h2 Ejemplos
+
+					p Gracias a los diferentes aspectos anteriormente citados, se pueden crear modales estandarizas y robustas como las que se pueden ver a continuación:	
+
+					button(class="btn btn-primary", data-target="#lexDefaultModal" ,data-toggle="modal") Default Modal
+
+					button(class="btn btn-primary", data-target="#lexLargeModal" ,data-toggle="modal") Large Modal
+
+					button(class="btn btn-primary", data-target="#lexSmallModal" ,data-toggle="modal") Small Modal
+
+					button(class="btn btn-primary", data-target="#lexNoHeaderModal" ,data-toggle="modal") Modal Without Header
+
+
+	include templates/modal-default.pug
+	include templates/modal-large.pug
+	include templates/modal-small.pug
+	include templates/modal-noHeaderNoFooter.pug

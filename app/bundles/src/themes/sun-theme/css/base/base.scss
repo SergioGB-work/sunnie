@@ -1,70 +1,56 @@
 *{
-	@include borderRadius0;	
+	outline:0;
 }
 
 body{
-	background-color: $bodyColor;
-	color: $mainColorText;
-	font-family: $font-family;
-	font-size:calculateFontSize(14px);
-	line-height:1;
+	overflow-y:scroll;
 }
 
+
 h1{
-	font-size:calculateFontSize(30px);
-	color:$primaryColor;
-	margin-bottom:20px;	
+	margin-bottom:ceil(($font-size-base * 2));
+	margin-top:0;
+	font-weight:300;
+	color: $brand-primary;
+	line-height:$line-height-base;
 }
 
 h2{
-	font-size:calculateFontSize(24px);
-	color:$primaryColor;
-	margin-bottom:20px;	
+	margin-bottom:ceil(($font-size-base * 2));
+	font-weight:300;
+	line-height:$line-height-base;
 }
 
 h3{
-	font-size:calculateFontSize(18px);
-	color: $mainColorText;
-	margin-bottom:20px;	
+	margin-bottom:ceil(($font-size-base * 2));
+	line-height:$line-height-base;	
+	font-weight:400;
 }
 
 h4{
-	font-size:calculateFontSize(16px);
-	color: $mainColorText;
-	margin-bottom:10px;		
+	margin-bottom:ceil(($font-size-base * 0.75));
+	line-height:$line-height-base;	
 }
 
 h5{
-	font-size:calculateFontSize(14px);
-	color: $mainColorText;
-	margin-bottom:10px;		
+	margin-bottom:ceil(($font-size-base * 0.75));
+	line-height:$line-height-base;
 }
 
 h6{
-	font-size:calculateFontSize(14px);
-	color: $mainColorText;
-	margin-bottom:10px;		
+	margin-bottom:ceil(($font-size-base * 0.75));
+	line-height:$line-height-base;
 }
 
 a{
-	color:$primaryColor;
-	font-size: calculateFontSize(14px);
-	
-	&:hover,&:active,&:focus{
-		text-decoration:underline;
-		color:$primaryColor;
+	color:$brand-primary;
+	&:focus{
+		outline:0;
 	}
-
 }
 
 p{
-	line-height:1.5;
-	margin-bottom:20px;
-	font-size: calculateFontSize(14px);
-}
-
-strong,b{
-	@include fontWeightBold;	
+	margin-bottom:$grid-gutter-width;
 }
 
 img{
@@ -72,163 +58,14 @@ img{
 	border:0;
 }
 
-ul,ol{
-	padding-left:30px;
-
-	li{
-		line-height:1.5;
-	}
-}
-
-ul{
-	list-style:disc;
+table{
+	box-shadow: $table-box-shadow;
 	
-	ul{
-			list-style:circle;
-		ul{
-			list-style:square;
-		}
+	td,th{
+		vertical-align: middle;
 	}
-}
-
-ol{
-	list-style:decimal;
-}	
-
-dl{
-	line-height:1.5;
-	dt{
-		@include fontWeightBold;
-	}
-	dd{
-		
-	}
-}
-
-
-/** FORMS ELEMENTS **/
-form{
-	margin-bottom:20px;
 }
 
 label{
-	font-size: calculateFontSize(14px);
-	@include fontWeightBold;
-}
-
-::-webkit-input-placeholder {
-   color: $colorPlaceHolder;
-   font-size: calculateFontSize(14px);
-}
-
-:-moz-placeholder { /* Firefox 18- */
-   color: $colorPlaceHolder;
-   font-size: calculateFontSize(14px);
-}
-
-::-moz-placeholder {  /* Firefox 19+ */
-   color: $colorPlaceHolder;
-   font-size: calculateFontSize(14px);
-}
-
-:-ms-input-placeholder {
-   color: $colorPlaceHolder;
-   font-size: calculateFontSize(14px);
-}
-
-:-webkit-autofill, :-webkit-autofill, :-webkit-autofill{
-	background:0;
-}
-
-input{
-	font-size: calculateFontSize(14px);
-	max-width:100%;
-	
-	
-	
-	&[type="text"],&[type="password"],&[type="email"],&[type="number"],&[type="search"]{
-		@include inputStyle;	
-
-		&:hover,&:focus,&:active{
-			@include inputStyleHover;
-		}
-		
-		&:-webkit-autofill, &:-webkit-autofill, &:-webkit-autofill{
-			background:0;
-		}
-	}
-
-	&[type="text"]{
-		
-	}
-	
-	&[type="password"]{
-
-	}
-	
-	&[type="mail"]{
-
-	}	
-	
-	&[type="number"]{
-
-	}	
-	
-	&[type="search"]{
-
-	}	
-}
-
-textarea{
-	@include inputStyle;	
-	
-		&:hover,&:focus,&:active{
-			@include inputStyleHover;
-		}		
-}
-
-select{	
-	@include inputStyle;	
-	
-		&:hover,&:focus,&:active{
-			@include inputStyleHover;
-		}	
-}
-
-/** BUTTONS **/
-button,	input[type="submit"],.btn{
-	
-	border:0;
-	border-width:1px;
-	border-style:solid;
-	padding:10px 20px;
-	text-align:center;
-	line-height:1;
-	@include borderRadius0;
-	@include stylePrimaryButton;	
-
-	&:hover,&:active,&:focus{
-		@include stylePrimaryButtonHover;
-	}		
-}
-
-/** TABLE ITEMS **/
-
-table{
-	float:left;
-	width:100%;
-
-	tbody{
-	
-		td{
-		
-		}
-	}
-	
-	thead{	
-		th{
-			background:$tableHeaderBgColor;
-			color:$tableHeaderTextColor;
-		}
-	}
+	cursor:pointer;
 }

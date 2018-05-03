@@ -10,7 +10,6 @@
     "gulp-concat": "^2.6.0",
     "gulp-connect": "^5.0.0",
     "gulp-image": "^2.7.2",
-    "gulp-jade": "~1.1.0",
     "gulp-jasmine": "^2.4.2",
     "gulp-minify": "0.0.14",
     "gulp-minify-css": "^1.2.4",
@@ -18,8 +17,10 @@
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
+    "gulp-pug": "^3.3.0",
     "jade": "~1.11.0",
-    "streamqueue": "^1.1.1"
+    "streamqueue": "^1.1.1",
+    "compression": "^1.7.2"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -27,7 +28,9 @@
   "author": "Sergio Gonzalez Barrios",
   "license": "MIT",
   "devDependencies": {
+    "gulp-clean": "^0.4.0",
     "gulp-flatten": "^0.3.1",
-    "gulp-html-i18n": "^0.8.1"
+    "gulp-html-i18n": "^0.8.1",
+    "http-proxy-middleware": "^0.18.0"
   }
 }

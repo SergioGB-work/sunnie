@@ -1,0 +1,11 @@
+mixin component-slider(content)
+
+	each item,i in content
+
+		- var classes = item.classes || ''
+		- var href = item.href || ''
+
+		if href != ''
+			+fragment("fragment-banner",item)
+		else
+			+fragment("fragment-image",item)

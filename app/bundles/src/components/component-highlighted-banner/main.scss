@@ -1,0 +1,56 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+.component.component-highlighted-banner{
+
+	background: $brand-primary;
+    padding: 40px 0;
+
+    &.bg-danger{
+    	background: $brand-danger;
+    }
+    &.bg-success{
+    	background: $brand-success;
+    }
+    &.bg-warning{
+    	background: $brand-warning;
+    }
+    &.bg-info{
+    	background: $brand-info;
+    }    
+
+	
+	*{
+		color: $btn-primary-color;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	
+	div[class^="col-"]{
+		
+	
+		> *{
+			margin-bottom: 10px;
+			
+			&:last-child{
+				margin-bottom:0;
+			}
+		}
+		
+		.btn{
+			min-width: 75%;
+			font-size: ceil(($font-size-base * 1.25));
+			margin-top: ceil(($grid-gutter-width * 1.5));
+		}
+	}	
+}	
+
+@media (min-width: $screen-sm-min) {
+	.component.component-highlighted-banner{
+		div[class^="col-"]{
+			.btn{
+				margin-top:0;
+			}
+		}
+	}
+}

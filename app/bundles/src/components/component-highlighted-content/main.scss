@@ -1,0 +1,32 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+.component.component-highlighted-content{
+
+    padding: 60px 0;
+	
+	h2{
+		margin-bottom:ceil(($grid-gutter-width));
+	}
+	
+	h3{
+		margin-bottom:ceil(($grid-gutter-width * 1.5));
+	}
+	
+	.btn{
+		margin-top: $grid-gutter-width;
+		min-width: 200px;
+		font-size: ceil(($font-size-base * 1.25));
+	}
+	
+	.container,.container-fluid{
+	
+		> .row{
+			display: -webkit-flex;
+			display: -ms-flexbox;
+			display: flex;
+			align-items:center;
+		}
+	
+	}
+}

@@ -1,0 +1,50 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+.block-language{
+	position: fixed;
+    right: ceil(($btn-padding-horizontal / 2));
+    top: 0;
+    width: auto;	
+}
+
+.component-languageSelector{
+	float:right;
+	width:auto;
+
+	.dropdown{
+		display:inline-block;
+		max-width: 100%;
+		right:0;
+		left:auto;
+
+		button{
+			background:0;
+			border:0;
+			height: $navbar-height;
+			outline:0;
+			display:flex;
+			align-items:center;
+			max-width: 100%;
+			padding-left:0;
+			padding-right:0;
+			color:$navbar-default-toggle-icon-bar-bg;
+
+			i{
+				margin-right: ceil(($grid-gutter-width * 0.75));
+			}
+		}
+	}
+}
+
+@media (min-width: $screen-sm-min) {
+	.component-languageSelector{
+
+		.dropdown{
+
+			button{
+				height: $header-height;
+			}
+		}
+	}
+}

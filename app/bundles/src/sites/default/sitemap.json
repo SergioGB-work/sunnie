@@ -1,16 +1,69 @@
 {
-	"site": [
-		{
-			"name": "default",
-			"url": "/default"
-		}
-	],
+	"site": {
+		"name": "default",
+		"url": "/default"
+	},
 	"pages": [
 		{
 			"name": "Home",
 			"url": "/",
 			"src": "/home.html",
 			"childs": []
-		}
+		},
+		{
+			"name": "Get Started",
+			"url": "/get-started",
+			"src": "/get-started.html",
+			"childs": []
+		},
+		{
+			"name": "HTML Elements",
+			"url": "/html-elements",
+			"src": "/html-elements.html",
+			"childs": [
+				{
+					"name": "Typography",
+					"url": "/typography",
+					"src": "/typography.html",
+					"childs": []
+				},
+				{
+					"name": "Buttons",
+					"url": "/buttons",
+					"src": "/buttons.html",
+					"childs": []
+				}
+			]
+		},				
+		{
+			"name": "Generators",
+			"url": "/generators",
+			"src": "/generators.html",
+			"childs": []
+		},
+		{
+			"name": "Data Definitions",
+			"url": "/data-definitions",
+			"src": "/data-definitions.html",
+			"childs": []
+		},
+		{
+			"name": "Components",
+			"url": "/components",
+			"src": "/components.html",
+			"childs": []
+		},
+		{
+			"name": "Layouts",
+			"url": "/layouts",
+			"src": "/layouts.html",
+			"childs": []
+		},
+		{
+			"name": "Pages",
+			"url": "/pages",
+			"src": "/pages.html",
+			"childs": []
+		}									
 	]
 }

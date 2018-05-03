@@ -1,4 +1,16 @@
 {
-  "heading": "Welcome!",
-  "footer":  "Copyright 2015"
+  "errorLoginTitle" : "Log in failed",
+  "errorLoginContent" : "Your user or password are incorrects",
+  "errorRoleTitle" : "Access denied",
+  "errorRoleContent" : "You are not authorized to access to this content",
+  "operationOK" : "Successful operation",
+  "errorAuthenticationTitle" : "Authentication Failure",
+  "errorAuthenticationContent" : "You must log in if you want to do this operation",
+  "error":"Error",
+  "errorOcurred":"An error has occurred",
+  "unknownError":"Unknown error",
+  "acept":"Acept",
+  "logout":"Logout",
+  "welcome":"Welcome",
+  "configuration":"Settings"  
 }
