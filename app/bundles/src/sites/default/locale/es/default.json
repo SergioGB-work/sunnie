@@ -1,4 +1,5 @@
 {
+  "urlLang":"/es", 
   "errorLoginTitle" : "Inicio de Sesión Incorrecto",
   "errorLoginContent" : "El usuario o la contraseña que has introducido son incorrectos",
   "errorRoleTitle" : "Permiso denegado",

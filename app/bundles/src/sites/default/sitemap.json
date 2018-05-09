@@ -23,13 +23,13 @@
 			"childs": [
 				{
 					"name": "Typography",
-					"url": "/typography",
+					"url": "/html-elements/typography",
 					"src": "/typography.html",
 					"childs": []
 				},
 				{
 					"name": "Buttons",
-					"url": "/buttons",
+					"url": "/html-elements/buttons",
 					"src": "/buttons.html",
 					"childs": []
 				}

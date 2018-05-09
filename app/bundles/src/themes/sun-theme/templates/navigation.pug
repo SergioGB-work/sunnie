@@ -1,6 +1,3 @@
-- var pages = locals.pages
-- var siteURL = locals.site.url
-
 nav(class="navbar navbar-default",role="navigation")
 
 		div(class="navbar-header")
@@ -18,14 +15,14 @@ nav(class="navbar navbar-default",role="navigation")
 
 						if(item.childs.length > 0)
 
-							a(href="./html-elemments.html", title="Ir a " +item.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="html-elements")
+							a(href=fullSiteUrl + item.url, title="Ir a " +item.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id=item.id)
 								span #{item.name}
 								span(class="caret")
 
 							ul(class="dropdown-menu",aria-labelledby="html-elements")
 								each child in item.childs
 									li
-										a(href='.' + child.url) #{child.name}
+										a(href=fullSiteUrl + child.url) #{child.name}
 
 						else			
-							a(href='.' + item.url) #{item.name}
+							a(href=fullSiteUrl +item.url) #{item.name}

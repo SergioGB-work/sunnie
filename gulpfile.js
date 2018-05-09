@@ -239,10 +239,19 @@ gulp.task('jsTheme',['jsBuild'], function() {
 			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/[^_]*.js')
 		);
 
+		var priorityFiles = streamqueue({ objectMode: true },
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/priority/**/[^_]*.js'));
+
 		for (var lang in langs){
 			files.pipe(concat('main.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			.pipe(rename('main.min.js'))
+			.pipe(uglify())
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+
+			priorityFiles.pipe(concat('priority.js'))
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
+			.pipe(rename('priority.min.js'))
 			.pipe(uglify())
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
 		}	
@@ -310,7 +319,7 @@ gulp.task('sitesDeploy',['localesBuild','localesComponentsBuild','layoutsBuild',
 			pathSite = pathPlugins;
 		}
 		
-		console.log(JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json')));
+		//console.log(JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json')));
 
 		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/*.pug')
 		.pipe(pug({
@@ -374,6 +383,7 @@ gulp.task('connect', function() {
 			
 			for(var i=0;i<urls.length;i++){
 				for (var lang in langs){
+					console.log('^' + site + '/' + langs[lang] + urls[i].url + ' ' + site + '/' + langs[lang] + urls[i].src + ' [L]');
 					rewriteRules.push('^' + site + '/' + langs[lang] + urls[i].url + ' ' + site + '/' + langs[lang] + urls[i].src + ' [L]');
 				}	
 			}
@@ -386,7 +396,7 @@ gulp.task('connect', function() {
 		  return b.length - a.length;
 		});
 		
-				console.log(rewriteRules);
+				//console.log(rewriteRules);
 		return [
 			modRewrite(rewriteRules)
 		]	
