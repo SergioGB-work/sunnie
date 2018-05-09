@@ -3,5 +3,6 @@ mixin fragment-image(content)
 	- var alt = content.alt || ''
 	- var longdesc = content.longdesc || '';
 	- var responsive_src = content.responsiveSRC || '';
+	- var srcset = content.srcset || '';
 	
-	img(src=src, alt=alt, longdesc=longdesc || false, data-src=src , data-responsive-src=responsive_src)
+	img(src=src, alt=alt, longdesc=longdesc || false, data-src=src , data-responsive-src=responsive_src, srcset=srcset || false)
