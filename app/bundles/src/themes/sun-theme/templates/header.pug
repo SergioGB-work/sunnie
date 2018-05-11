@@ -1,5 +1,5 @@
 .hidden-md.hidden-sm.hidden-xs
-	+component('component-logo','',{'url':'./home.html','title':'SpotLabel','src':locals.site.url + "${{ default.urlLang }}$" + '/images/logo.png','alt':'Site Logo'},'','false','true')
+	+component('component-logo','',{'url':'./home.html','title':'SpotLabel','src':fullSiteUrl + '/images/logo.png','alt':'Site Logo'},'','false','true')
 
 div(id="navigation")
 		include navigation.pug

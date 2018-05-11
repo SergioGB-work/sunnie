@@ -246,12 +246,22 @@ gulp.task('jsTheme',['jsBuild'], function() {
 			files.pipe(concat('main.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			.pipe(rename('main.min.js'))
+			.pipe(i18n({
+				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				createLangDirs: true,
+				defaultLang: 'es'
+			}))
 			.pipe(uglify())
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
 
 			priorityFiles.pipe(concat('priority.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			.pipe(rename('priority.min.js'))
+			.pipe(i18n({
+				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				createLangDirs: true,
+				defaultLang: 'es'
+			}))			
 			.pipe(uglify())
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
 		}	
@@ -270,6 +280,11 @@ gulp.task('jsComponents',['componentsBuild'], function() {
 			files.pipe(concat('components.js'))
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			.pipe(rename('components.min.js'))
+			.pipe(i18n({
+				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				createLangDirs: true,
+				defaultLang: 'es'
+			}))			
 			.pipe(uglify())
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 		}		
@@ -280,11 +295,11 @@ gulp.task('jsComponents',['componentsBuild'], function() {
 
 
 /**DEPLOY TASKS**/
-gulp.task('cssDeploy', ['cssTheme','cssComponents','fonts']);
+gulp.task('deployCSS', ['cssTheme','cssComponents','fonts']);
 
-gulp.task('jsDeploy', ['jsTheme','jsComponents']);
+gulp.task('deployJS', ['jsTheme','jsComponents']);
 
-gulp.task('imagesDeploy',['imagesBuild'], function() {
+gulp.task('deployImages',['imagesBuild'], function() {
 	for (var key in sitesDefined){	
 		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
 		  /*.pipe(image({
@@ -307,7 +322,31 @@ gulp.task('imagesDeploy',['imagesBuild'], function() {
 	return true;		
 });
 
-gulp.task('sitesDeploy',['localesBuild','localesComponentsBuild','layoutsBuild','templatesBuild','componentsBuild','fragmentsBuild','sitesBuild'], function() {
+gulp.task('deployImagesCompress',['imagesBuild'], function() {
+	for (var key in sitesDefined){	
+		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
+		  .pipe(image({
+			  pngquant: true,
+			  optipng: false,
+			  zopflipng: true,
+			  jpegRecompress: false,
+			  jpegoptim: true,
+			  mozjpeg: true,
+			  gifsicle: true,
+			  svgo: true,
+			  concurrent: 10
+			}));
+
+		for (var lang in langs){  
+			files.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/images/'))
+		}	
+	}
+
+	return true;		
+});
+
+gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild','templatesBuild','componentsBuild','fragmentsBuild','sitesBuild'], function() {
+
 	for (var key in sitesDefined){		
 		
 		var  pathSite='';
@@ -318,7 +357,7 @@ gulp.task('sitesDeploy',['localesBuild','localesComponentsBuild','layoutsBuild',
 		else{
 			pathSite = pathPlugins;
 		}
-		
+	
 		//console.log(JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json')));
 
 		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/*.pug')
@@ -334,12 +373,13 @@ gulp.task('sitesDeploy',['localesBuild','localesComponentsBuild','layoutsBuild',
 		}));
 
 
-		return files.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site));
+		files.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site));
 	}
+	 return true;
 });
 
 /** DEPLOY **/
-gulp.task('deploy', ['sitesDeploy','cssDeploy','jsDeploy','imagesDeploy'],function(){
+gulp.task('deploy', ['deploySites','deployCSS','deployJS','deployImages'],function(){
 	return gulp.start('removeTMP');
 });
 
@@ -355,8 +395,9 @@ gulp.task('connect', function() {
 	middleware: function() {
 	
 		var rewriteRules = [];
+
 		for (var key in sitesDefined){	
-	
+			
 			var  pathSite='';
 
 			if(sitesDefined[key].site == 'default'){
@@ -372,9 +413,9 @@ gulp.task('connect', function() {
 			var urls = [];
 
 			for (var lang in langs){
-				rewriteRules.push('^/'+sitesDefined[key].site+ '/' + langs[lang] +'/css/(.*)$ /'+sitesDefined[key].site + '/' + langs[lang] +'/css/$1 [L]');
-				rewriteRules.push('^/'+sitesDefined[key].site+ '/' + langs[lang] +'/images/(.*)$ /'+sitesDefined[key].site + '/' + langs[lang] +'/images/$1 [L]');
-				rewriteRules.push('^/'+sitesDefined[key].site+ '/' + langs[lang] +'/javascript/(.*)$ /'+sitesDefined[key].site + '/' + langs[lang] +'/javascript/$1 [L]');
+				rewriteRules.push('^'+ site + '/' + langs[lang] +'/css/(.*)$ /'+ site + '/' + langs[lang] +'/css/$1 [L]');
+				rewriteRules.push('^'+ site + '/' + langs[lang] +'/images/(.*)$ /'+ site + '/' + langs[lang] +'/images/$1 [L]');
+				rewriteRules.push('^'+ site + '/' + langs[lang] +'/javascript/(.*)$ /'+ site + '/' + langs[lang] +'/javascript/$1 [L]');
 			}
 				
 			for(var i=0;i<pages.length;i++){
@@ -383,8 +424,8 @@ gulp.task('connect', function() {
 			
 			for(var i=0;i<urls.length;i++){
 				for (var lang in langs){
-					console.log('^' + site + '/' + langs[lang] + urls[i].url + ' ' + site + '/' + langs[lang] + urls[i].src + ' [L]');
-					rewriteRules.push('^' + site + '/' + langs[lang] + urls[i].url + ' ' + site + '/' + langs[lang] + urls[i].src + ' [L]');
+					console.log('^' + site + '/' + langs[lang] + urls[i].url + ' /' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src + ' [L]');
+					rewriteRules.push('^' + site + '/' + langs[lang] + urls[i].url + ' /' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src + ' [L]');
 				}	
 			}
 
@@ -533,7 +574,7 @@ function createTaskFRAGMENTSPlugins(siteName){
 
 function createTaskLOCALESBundles(siteName){
 	gulp.task('localesBundles' + siteName, function() {
-		return gulp.src(pathBundles + '/sites/' + siteName + '/locale/**/*.*')
+		return gulp.src(pathBundles + '/sites/' + 'default' + '/locale/**/*.*')
 		.pipe(flatten({ includeParents: -1}))
 		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/locale/'))
 	});
@@ -591,7 +632,7 @@ function getSitesPlugins(){
 	var sites = getDirectories(pathPlugins + '/sites');
 	var defaultThemes = getDirectories(pathBundles + '/themes');
 	var jsonTheme;
-	
+
 	for(var i in sites){
 		
 		var jsonSite = JSON.parse(fs.readFileSync(pathPlugins +'/sites/' + sites[i] + '/build.json'));

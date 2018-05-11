@@ -1,7 +1,5 @@
 include variables.pug
 
--var api="http://smartretail-api.ttcloud.net:3000/api"
-
 doctype
 html
 	head
@@ -12,21 +10,23 @@ html
 
 		block head
 
+		- var header = showHeader || true;
+			
 	body
 
 		include fragment.pug
 		include component.pug
 
 		div(id="wrapper")
-
-			header(id="header")
-				include header.pug
+			if header == true
+				header(id="header")
+					include header.pug
 
 			section(id="content")
 				block content
 
 			footer(id="footer")
-				include footer.pug					
+				include footer.pug
 
 		div#loading-mask
 		include error.pug
