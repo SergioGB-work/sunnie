@@ -18,6 +18,7 @@ var gulp = require('gulp'),
 	clean = require('gulp-clean'),
 	modRewrite = require('connect-modrewrite'),
 	fs = require('fs'),
+	argv = require('yargs').argv,
 	proxy = require('http-proxy-middleware'),
 	express = require('express'),
 	pathBundles = 'app/bundles/src',
@@ -26,16 +27,19 @@ var gulp = require('gulp'),
 	pathBuild = 'app/build',
 	sitesDefined=[];
 	
+var argv_site = argv.site || false;
+var src_site_deploy = argv_site || '**';
+
 var path = {
 	
-    sitesBundles: [pathBundles + '/sites/**/*.pug'],
-	sitesPlugins: [pathPlugins + '/sites/**/*.pug'],
+    sitesBundles: [pathBundles + '/sites/'+src_site_deploy+'/*.pug'],
+	sitesPlugins: [pathPlugins + '/sites/'+src_site_deploy+'/*.pug'],
 
-    localeBundles: [pathBundles + '/sites/**/locale/**/*.*'],
+    localeBundles: [pathBundles + '/sites/'+src_site_deploy+'/locale/**/*.*'],
 	
-	sitesDeploy: [pathBuild+'/sites/**/*.pug'],
-    sitesBuild: pathBuild + '/sites/',
-	sitesPublic: pathPublic + '/',
+	sitesDeploy: [pathBuild+'/sites/'+src_site_deploy+'/*.pug'],
+    sitesBuild: argv_site ? pathBuild + '/sites/' + argv_site : pathBuild + '/sites/',
+	sitesPublic: argv_site ? pathPublic + '/' + argv_site : pathPublic + '/',
 	
 	pugBundlesLayouts: [pathBundles + '/layouts/**/*.pug'],
 	pugPluginsLayouts: [pathPlugins + '/layouts/**/*.pug'],
@@ -467,6 +471,7 @@ gulp.task('removeTMP', function () {
 
 /**************************FUNCTIONS******************************/
 function createTaskCSSBundles(siteName,siteTheme,siteParentTheme){
+
 	gulp.task('cssBundles' + siteName, function() {
 		return gulp.src(pathBundles + '/themes/' + siteParentTheme + '/css/**/*.*')
 		.pipe(gulp.dest(pathBuild + '/sites/' + siteName + '/theme/css/'))
@@ -613,45 +618,48 @@ function getDirectories(path) {
 
 function getSitesBundles(){
 	
-	var sites = getDirectories(pathBundles + '/sites')
-		
+	var sites = [argv_site] || getDirectories(pathBundles + '/sites')
+
 	for(var i in sites){
-		
-		var jsonSite = JSON.parse(fs.readFileSync(pathBundles +'/sites/' + sites[i] + '/build.json'));
-		
-		var jsonTheme =JSON.parse(fs.readFileSync(pathBundles +'/themes/' + jsonSite.theme + '/templates/build.json'));
-		
-		var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
-		
-		sitesDefined.push(newSite);
-	}	
+		if(JSON.parse(fs.existsSync(pathBundles +'/sites/' + sites[i] + '/build.json'))){
+			var jsonSite = JSON.parse(fs.readFileSync(pathBundles +'/sites/' + sites[i] + '/build.json'));
+			
+			var jsonTheme =JSON.parse(fs.readFileSync(pathBundles +'/themes/' + jsonSite.theme + '/templates/build.json'));
+			
+			var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
+			
+			sitesDefined.push(newSite);
+		}
+	}
 }
 
 function getSitesPlugins(){
-	
-	var sites = getDirectories(pathPlugins + '/sites');
+
+	var sites = [argv_site] || getDirectories(pathPlugins + '/sites');
 	var defaultThemes = getDirectories(pathBundles + '/themes');
 	var jsonTheme;
 
 	for(var i in sites){
-		
-		var jsonSite = JSON.parse(fs.readFileSync(pathPlugins +'/sites/' + sites[i] + '/build.json'));
-		
-		if(defaultThemes.indexOf(jsonSite.theme) <0){
+		if(JSON.parse(fs.existsSync(pathPlugins +'/sites/' + sites[i] + '/build.json'))){
+			var jsonSite = JSON.parse(fs.readFileSync(pathPlugins +'/sites/' + sites[i] + '/build.json'));
 			
-			jsonTheme =JSON.parse(fs.readFileSync(pathPlugins +'/themes/' + jsonSite.theme + '/templates/build.json'));
-		
-		}
-		else{
+			if(defaultThemes.indexOf(jsonSite.theme) <0){
+				
+				jsonTheme =JSON.parse(fs.readFileSync(pathPlugins +'/themes/' + jsonSite.theme + '/templates/build.json'));
 			
-			jsonTheme =JSON.parse(fs.readFileSync(pathBundles +'/themes/' + jsonSite.theme + '/templates/build.json'));
+			}
+			else{
+				
+				jsonTheme =JSON.parse(fs.readFileSync(pathBundles +'/themes/' + jsonSite.theme + '/templates/build.json'));
+				
+			}
+			var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
 			
-		}
-		var newSite = {'site':sites[i],'theme':jsonSite.theme,'themeParent':jsonTheme.baseTheme}
-		
-		sitesDefined.push(newSite);
-	}	
+			sitesDefined.push(newSite);
+		}	
+	}
 }
+
 
 function getURLs(json,urls){
 	array = urls;	
