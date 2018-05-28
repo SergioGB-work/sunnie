@@ -1,7 +1,4 @@
 #navigation{
-    float:left;
-    width:100%;
-
 	.component{
 		margin:0;
 	}
@@ -53,6 +50,7 @@
 
 @media (min-width: $screen-sm) {
     #navigation{
+        float:left;       
         width: calc(100% + #{ceil($grid-gutter-width * 2)});
         margin-left: ceil((- $grid-gutter-width));
     }

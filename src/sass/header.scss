@@ -1,10 +1,11 @@
 #header{
 	border-bottom: 1px solid $border-bg-white;
-	height: $navbar-height;
+	min-height: $navbar-height;
 
 	#top-bar{
 		position: absolute;
     	right: 0;
+    	top:0;
 	}
 
 	.header-content{

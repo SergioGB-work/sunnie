@@ -3,7 +3,7 @@ mixin component-languageSelector(content)
 		button(id="languageSelector",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
 			span.store-name ${{ languageSelector.spanish }}$
 			span(class="caret")
-		ul(class="dropdown-menu",aria-labelledby="languageSelector")
+		ul(class="dropdown-menu dropdown-menu-right nomargin",aria-labelledby="languageSelector")
 			li
 				a(href="/es/", data-lang="es", title="${{ languageSelector.spanishTitle }}$") ${{ languageSelector.spanish }}$
 			li
