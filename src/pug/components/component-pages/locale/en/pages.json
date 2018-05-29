@@ -1,1 +1,12 @@
-{}
+{
+  "pageTitle":"Pages",
+  "paragraph1":"When generating the pages, the simplest way is to use the <a href='./generators.html' title='Ir a Generators'>SunnieJS generator</a> that allows the <span class = 'text- primary'>creation of pages</span> in a very simple way.",
+  "paragraph2":"The structure of all the pages is always the same since they are all created based on a <span class = 'text-primary'>general structure</span> defined in <span class = 'text-primary'>templates/portal.pug</span> and a distribution defined from the <span class = 'text-primary'>layout</span> chosen.",
+  "example":"Example",
+  "paragraph3":"Below is an example of one page content.",
+  "paragraph4":"In the previous example we define the <span class = 'text-primary'>layout</span> that we want to use (layout-home) and a series of <span class = 'text-primary'>hollows</span> (block column-1, block column-2, block column-3) from the layout that we fill in with <span class = 'text-primary'>components</span> (+component(...)).",
+  "paragraph5":"This model allows us to <span class = 'text-primary'>flexibilize</span> enormously the page creation, being able to <span class = 'text-primary'>change</span> quickly from <span class = 'text- primary '>distribution</span>, <span class =' text-primary '>components</span> or make generic changes.",
+  "paragraph6":"Additionally, in the <span class = 'text-primary'>block header</span> you can add as many <span class = 'text-primary'>goals</span> as you wish to facilitate the <span class = ' text-primary '>SEO</span> of the page.",
+  "paragraph7":"From the <a href='./layouts.html' title='Ir to Layouts'>layouts page</a> and the <a href='./components.html' title='Ir a Componentes'>page of components</a> you can see the different <span class = 'text-primary'>layouts and components</span> by default that exist in SunnieJS.",
+  "paragraph8":"Also, thanks to the functions of <span class = 'text-primary'>checkSession()</span> and <span class = 'text-primary'>checkRol(role)</span> you can control the <span class = 'text-primary'>access to the page</span> depending on the user. These functions and their details can be seen in the <a href='./js-functions.html' title='Ir a JS Functions'>page of JS Functions</a>."
+}

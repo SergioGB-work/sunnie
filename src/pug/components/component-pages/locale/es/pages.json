@@ -1,1 +1,12 @@
-{}
+{
+  "pageTitle":"Páginas",
+  "paragraph1":"A la hora de generar las páginas, lo mas sencillo es utilizar el <a href='./generators.html' title='Ir a Generators'>generador de SunnieJS</a> que permite la <span class='text-primary'>creación de páginas</span> de una forma muy sencilla.",
+  "paragraph2":"La estructura de todas las páginas siempre es la misma ya que todas se crean en base a una <span class='text-primary'>estructura general</span> definida en <span class='text-primary'>templates/portal.pug</span> y una distribución definida a partir de la <span class='text-primary'>layout</span> elegida.",
+  "example":"Ejemplo",
+  "paragraph3":"A continuación se muestra un ejemplo de contenido de una página.",
+  "paragraph4":"En el ejemplo anterior se define la <span class='text-primary'>layout</span> que se desea utilizar(layout-home) y una serie de <span class='text-primary'>huecos</span>(block column-1, block column-2, block column-3) provenientes de la layout que rellenamos con unos <span class='text-primary'>componentes</span>(+component(...)).",
+  "paragraph5":"Este modelo nos permite <span class='text-primary'>flexibilizar</span> enormenente la creación de página, pudiendo <span class='text-primary'>cambiar</span> rápidamente de <span class='text-primary'>distribución</span>, <span class='text-primary'>componentes</span> o realizar cambios genéricos.",
+  "paragraph6":"Adicionalmente, en el <span class='text-primary'>block header</span> se pueden añadir tantas <span class='text-primary'>metas</span> como se deseen para facilitar el <span class='text-primary'>SEO</span> de la página.",
+  "paragraph7":"Desde la <a href='./layouts.html' title='Ir a Layouts'>página de layouts</a> y la <a href='./components.html' title='Ir a Componentes'>página de componentes</a> se puede ver las diferentes <span class='text-primary'>layouts y componentes</span> por defecto que existen en SunnieJS.",
+  "paragraph8":"También, gracias a las funciones de <span class='text-primary'>checkSession()</span> y <span class='text-primary'>checkRol(rol)</span> se puede controlar el <span class='text-primary'>acceso a la página</span> en función del usuario. Estás funciones y su detalle se pueden ver en la <a href='./js-functions.html' title='Ir a JS Functions'>página de JS Functions</a>."
+}

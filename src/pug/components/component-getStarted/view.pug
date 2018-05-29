@@ -4,7 +4,7 @@ mixin component-getStarted(content)
 			.panel.panel-default
 				.panel-body
 					h1 Get Started
-					p Sunnie está disponible para su descarga a través del repositorio de git <a href="https://github.com/SergioGB-work/sunnie" target="_blank">https://github.com/SergioGB-work/sunnie</a>.
+					p SunnieJS está disponible para su descarga a través del repositorio de git <a href="https://github.com/SergioGB-work/sunnie" target="_blank">https://github.com/SergioGB-work/SunnieJS</a>.
 
 					p Os recomendamos descargar la <span class="text-primary">última release disponible</span> de la versión 1 (release/1.1.X)
 
@@ -18,7 +18,7 @@ mixin component-getStarted(content)
 					pre
 						| npm install
 
-					p Una vez haya terminado la instalación	ya estarás preparado para comenzar a trabajar con Sunnie.
+					p Una vez haya terminado la instalación	ya estarás preparado para comenzar a trabajar con SunnieJS.
 
 	.row
 		.col-xs-12
@@ -26,7 +26,7 @@ mixin component-getStarted(content)
 				.panel-body
 					h2 Arrancando el Servidor
 					
-					p Sunnie esta construido en base a <span class="text-primary">Gulp</span> para la automatización de tareas y <span class="text-primary">Node</span> para la gestión de paquetes y servidor de aplicaciones.
+					p SunnieJS esta construido en base a <span class="text-primary">Gulp</span> para la automatización de tareas y <span class="text-primary">Node</span> para la gestión de paquetes y servidor de aplicaciones.
 
 					p Si deseas <span class="text-primary">arrancar</span> el <span class="text-primary">servidor</span> tan solo debes ejecutar el siguiente comando:
 
@@ -35,7 +35,7 @@ mixin component-getStarted(content)
 
 					p Esta tarea compilará el proyecto y levantará un servidor local sobre la url <span class="text-primary">http://localhost:3000</span>
 
-					p Gracias a Gulp, Sunnie dispone de una serie de tareas automatizadas que nos permiten realizar las diferentes operaciones de compilación de una manera muy simple.
+					p Gracias a Gulp, SunnieJS dispone de una serie de tareas automatizadas que nos permiten realizar las diferentes operaciones de compilación de una manera muy simple.
 
 					p La estructura de todas las tareas que lanzaremos desde CMD es <span class="text-primary">gulp nombreTarea</span> donde nombre tarea será el nombre de la tarea gulp que ya tenemos precreada para compilara, por ejemplo, el CSS o JS de nuestro proyecto.
 
@@ -77,7 +77,7 @@ mixin component-getStarted(content)
 				.panel-body
 					h2 Estructura de proyecto
 
-					p Todo proyecto desarrollado con Sunnie tiene una estructura similar y prefijada.
+					p Todo proyecto desarrollado con SunnieJS tiene una estructura similar y prefijada.
 					
 					ul
 						li <strong>SRC</strong> -> código fuente del proyecto. Aquí es donde un desarrollador debe trabajar.
@@ -118,13 +118,13 @@ mixin component-getStarted(content)
 					p Contiene la diferentes plantillas a partir de las cuales se crearán los difentes elementos que componen el portal: páginas, componentes, fragmentos, modales, errores, etc...
 
 					h3 SASS
-					p La carpeta sass contiene todos los estilos genéricos del portal. Sunnie ya dispone de una serie de estilo predefinidos que el desarrollador debe adaptar al estilo final de cada portal.
+					p La carpeta sass contiene todos los estilos genéricos del portal. SunnieJS ya dispone de una serie de estilo predefinidos que el desarrollador debe adaptar al estilo final de cada portal.
 
-					p Sunnie utiliza <span class="text-primary">Bootstrap 3</span> como base para la organización y maquetado de todo su portal. Es por ello que se recomienda modificar lo menos posible los estilos por defecto que trae Sunnie y extender a partir de los mismos desde el archivo <span class="text-primary">custom.scss</span>
+					p SunnieJS utiliza <span class="text-primary">Bootstrap 3</span> como base para la organización y maquetado de todo su portal. Es por ello que se recomienda modificar lo menos posible los estilos por defecto que trae SunnieJS y extender a partir de los mismos desde el archivo <span class="text-primary">custom.scss</span>
 
 					p Adicionalmente, desde <span class="text-primary">base/variables</span> están todas las <span class="text-primary">variables genéricas</span> del portal que pueden ser usadas para modificar su estilo sin necesidad de modificar ninguna línea de código, consiguiendo asi un <span class="text-primary">código limpio y reducido</span>, que penalice lo menos posible la carga del portal.
 
-					p Sunnie lleva incorporado la fuente icónica <a href="http://fontawesome.io/icons/" target="_blank" title="Ir a Font Awesome">Font Awesome</a> para su uso dentro del portal. Asi mismo, se puede utilizar cualquier otra fuente icónica.
+					p SunnieJS lleva incorporado la fuente icónica <a href="http://fontawesome.io/icons/" target="_blank" title="Ir a Font Awesome">Font Awesome</a> para su uso dentro del portal. Asi mismo, se puede utilizar cualquier otra fuente icónica.
 
 					h3 Javascript
 					p El directorio de javascript está subdividido a su vez en otros directorios, cada uno con un fin específico.
@@ -137,7 +137,7 @@ mixin component-getStarted(content)
 
 					p Por norma general, cuando desees añadir una nueva librería, deberás añadirla en la carpeta libs.
 					
-					p No es necesario añadir la etiqueta <span class="text-primary">&lt;script&gt;</span> en la cabecera o pie del portal ya que Sunnie <span class="text-primary">compila</span> automáticamente las librerias que se encuentran en estas carpetas en un orden para luego generar un único <span class="text-primary">archivo javascript minificado</span> con todo el código.	
+					p No es necesario añadir la etiqueta <span class="text-primary">&lt;script&gt;</span> en la cabecera o pie del portal ya que SunnieJS <span class="text-primary">compila</span> automáticamente las librerias que se encuentran en estas carpetas en un orden para luego generar un único <span class="text-primary">archivo javascript minificado</span> con todo el código.	
 
 					h3 Images
 					p Esta carpeta sirve como almacén de imágenes. Todas las imágenes aquí añadidas pasarán directamente a la carpeta <span class="text-primary">public</span> dentro de su correspondiente carpeta de images.
