@@ -10,9 +10,9 @@ block modal-body
 			.col-xs-12
 				form()
 					.form-group.nomargin
-						label.sr-only(for="#search-box") Buscar
+						label.sr-only(for="#search-box") ${{ search.search }}$
 						.input-group
-							input(class="form-control",type="search",name="search",placeholder="Buscar...",id="search-box")
+							input(class="form-control",type="search",name="search",placeholder="${{ search.search }}$...",id="search-box")
 							span(class="input-group-addon")
 								i.material-icons.icon-5x &#xE8B6;
 

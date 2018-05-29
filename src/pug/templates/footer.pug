@@ -1,27 +1,27 @@
 .container
 	.row.flex-vcenter
-		.col-md-6
+		.col-md-9.col-xs-12
 			ul.list-inline.nomargin
 				li © Copyright 2012 - 2018 
 				li |
-				li All Rights Reserved
+				li ${{ default.allRightsReserved }}$ 
 				li |
-				li Designed by <span class="text-primary">SunnieJS</span>
+				li ${{ default.designedBy }}$  <span class="text-primary">SunnieJS</span>
 
-		.col-md-6
+		.col-md-3.col-xs-12
 			ul.list-inline.nomargin.text-right
 				li
-					a(href="http://www.facebook.com",title="Ir a Facebook")
+					a(href="http://www.facebook.com",title="${{ default.goTo }}$ Facebook")
 						i(class="fa fa-facebook-square icon-5x")
 				li
-					a(href="http://www.twitter.com",title="Ir a Twitter")
+					a(href="http://www.twitter.com",title="${{ default.goTo }}$ Twitter")
 						i(class="fa fa-twitter icon-5x")
 				li
-					a(href="http://www.google-plus.com",title="Ir a Google Plus")
+					a(href="http://www.google-plus.com",title="${{ default.goTo }}$ Google Plus")
 						i(class="fa fa-google-plus icon-5x")
 				li
-					a(href="http://www.instagram.com",title="Ir a Instagram")
+					a(href="http://www.instagram.com",title="${{ default.goTo }}$ Instagram")
 						i(class="fa fa-instagram icon-5x")
 				li
-					a(href="http://www.youtube.com",title="Ir a Youtube")
+					a(href="http://www.youtube.com",title="${{ default.goTo }}$ Youtube")
 						i(class="fa fa-youtube icon-5x")
