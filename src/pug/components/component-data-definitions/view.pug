@@ -3,114 +3,114 @@ mixin component-data-definitions(content)
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h1 Data Definitions
+					h1 ${{ data-definitions.pageTitle }}$
 
-					p SunnieJS permite automatizar y dinamizar la carga de datos y la generación de ciertas estructuras de datos mediante data attributes.
+					p ${{ data-definitions.paragraph1 }}$
 
 	.row
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2(id="data-definitions-data-loading-block") Data Loading
+					h2(id="data-definitions-data-loading-block") ${{ data-definitions.dataLoadingTitle }}$
 					
-					p Permite realizar peticiones a servicios REST, obtener sus datos, estructurarlos mediente plantillas y mostrarlos en un lugar deseado, entre otras cosas.
+					p ${{ data-definitions.dataLoadingParagraph1 }}$
 
-					p Para habilitar la carga dinámica de datos se debe añadir el atributo data-load="true" y a conntinuación, aquellos atributos que sean necesarios para realizar la operación deseada.
+					p ${{ data-definitions.dataLoadingParagraph2 }}$
 							
-					p A continuación se muestra el listado completo de atributos.
+					p ${{ data-definitions.dataLoadingParagraph3 }}$
 					.table-responsive
 						table(class="table")
 							thead
 								tr
-									th Data-attribute
-									th Description
-									th Default
-									th Uso
+									th ${{ data-definitions.dataLoadingTableTH1 }}$
+									th ${{ data-definitions.dataLoadingTableTH2 }}$
+									th ${{ data-definitions.dataLoadingTableTH3 }}$
+									th ${{ data-definitions.dataLoadingTableTH4 }}$
 							tbody
 								tr
 									td <strong>service-data</strong>
-									td URL del servicio REST del que obtendrá los datos
+									td ${{ data-definitions.dataLoadingTableServiceDataDescription }}$
 									td ""
 									td data-service-data="/clientes/59/usuarios"
 
 								tr
 									td <strong>method</strong>
-									td Tipo de método con el que se llama al servicio. POST o GET
+									td ${{ data-definitions.dataLoadingTableMethodDescription }}$
 									td "GET"
 									td data-method = "POST"
 
 								tr
 									td <strong>template</strong>
-									td ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.
+									td ${{ data-definitions.dataLoadingTableTemplateDescription }}$
 									td ""
 									td data-template = "#templateClientes"
 
 								tr
 									td <strong>target</strong>
-									td ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.
+									td ${{ data-definitions.dataLoadingTableTargetDescription }}$
 									td ""
 									td data-template = ".table-clientes tbody"
 
 								tr
 									td <strong>initial-page</strong>
-									td Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+									td ${{ data-definitions.dataLoadingTableInitialPageDescription }}$
 									td "0"
 									td data-initial-page= "1"					
 
 								tr
 									td <strong>items-per-page</strong>
-									td Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+									td ${{ data-definitions.dataLoadingTableItemsPerPageDescription }}$
 									td "0"
 									td data-items-per-page = "10"	
 
 								tr
 									td <strong>aditionalData</strong>
-									td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
+									td ${{ data-definitions.dataLoadingTableAditionalDataDescription }}$
 									td ""
 									td data-aditionalData = "{cliente : 55 , usuario : 12}"	
 
 								tr
 									td <strong>callback</strong>
-									td Nombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
+									td ${{ data-definitions.dataLoadingTableCallbackDescription }}$
 									td ""
 									td data-callback = "callbackCargaClientes"
 
 								tr
 									td <strong>content</strong>
-									td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
+									td ${{ data-definitions.dataLoadingTableContentDescription }}$
 									td ""
 									td data-content = ""
 								tr
 									td <strong>enable-get-params</strong>
-									td Habilita el servicio para que utilice los parámetros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
+									td ${{ data-definitions.dataLoadingTableEnableGetParamsDescription }}$
 									td ""
 									td data-enable-get-params = "true"
 
 								tr
 									td <strong>get-params-list</strong>
-									td Si es definido permite elegir que parámetros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
+									td ${{ data-definitions.dataLoadingTableGetParamsListDescription }}$
 									td ""
 									td data-get-params-list = "order,activo,nombre_cliente"
 
 								tr
 									td <strong>rel</strong>
-									td Este parámetro permite agrupar los filtros para que sólo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente, puede funciona con el atributo data-get-params-list para definir un número más limitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filtrados de datos personalizados aplicando múltiples parámetros de filtrado por cada listado de datos sin que interfieran entre ellos.
+									td ${{ data-definitions.dataLoadingTableRelDescription }}$
 									td ""
 									td data-rel = "group1"
 
 								tr
 									td <strong>live-reload</strong>
-									td Permite al servicio recargarse periódicamente para crear un servicio en tiempo real que recarga los datos cada X milisegundos. El tiempo del intervalo viene definido en el parámetro "time-reload".
+									td ${{ data-definitions.dataLoadingTableLiveReloadDescription }}$
 									td "false"
 									td data-live-reload = "true"
 
 								tr
 									td <strong>time-reload</strong>
-									td Establece cada cuanto tiempo se desea que se recargue el servicio. Funciona en conjunto al "life-reload" y el tiempo está especificado en milisegundos. Es necesario establacer el valor de life-reload a 'true' para que este parámetro se active.
+									td ${{ data-definitions.dataLoadingTableTimeReloadDescription }}$
 									td "60000"
 									td data-time-reload = 30000
 
-					h3 Ejemplo de Uso
+					h3 ${{ data-definitions.dataExampleTitle }}$
 					
 					pre 
 						| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-enable-get-params="true")			
@@ -123,13 +123,13 @@ mixin component-data-definitions(content)
 						|             th Rol					
 						|     tbody
 
-					h3 Plantilla de contenido dinámico
+					h3 ${{ data-definitions.dataLoadingTemplateContentTitle }}$
 
-					p A la hora de generar contenido dinámico cargado desde servicios web SunnieJS dispone de Jquery TMPL para generar los datos en base a estructuras HTML.
+					p ${{ data-definitions.dataLoadingTemplateContentParagraph1 }}$
 
-					p Puedes crearla como un archivo .pug aparte para incluirlo desde el view.pug o incluirlo directamente en el archivo principal del componente.
+					p ${{ data-definitions.dataLoadingTemplateContentParagraph2 }}$
 
-					p Para ello, se debe crear una plantilla en nuestro HTML con el siguiente formato:
+					p ${{ data-definitions.dataLoadingTemplateContentParagraph3 }}$
 
 					pre 
 						|script(id="templateUsersList",type="text/x-jquery-tmpl")
@@ -157,116 +157,116 @@ mixin component-data-definitions(content)
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2(id="data-definitions-data-pagination-block") Pagination
+					h2(id="data-definitions-data-pagination-block") ${{ data-definitions.dataPaginationTitle }}$
 
-					p Se puede habilitar la paginación de elementos con carga dinámica de datos para que los datos mostrados realicen una paginación real de datos, realizando la petición de datos exclusivamente de los datos necesarios.
+					p ${{ data-definitions.dataPaginationParagraph1 }}$
 
-					p Es requisito necesario que los datos din´´amico hayan sido cargados mediante <a href="#data-definitions-data-loading-block">Data Loading</a> definido en el apartado anterior.
+					p ${{ data-definitions.dataPaginationParagraph2 }}$
 
-					p Para habilitar la paginación de datos se debe añadir el atributo data-has-pagination="true" y ,a conntinuación, aquellos atributos que sean necesarios para que la paginación sea como deseamos.
+					p ${{ data-definitions.dataPaginationParagraph3 }}$
 
 					.table-responsive
 						table(class="table")
 							thead
 								tr
-									th Data-attribute
-									th Description
-									th Default
-									th Uso
+									th ${{ data-definitions.dataPaginationTableTH1 }}$
+									th ${{ data-definitions.dataPaginationTableTH2 }}$
+									th ${{ data-definitions.dataPaginationTableTH3 }}$
+									th ${{ data-definitions.dataPaginationTableTH4 }}$
 							tbody
 								tr
 									td <strong>pagination-service-data-all</strong>
-									td URL del servicio REST que devuelve el listado completo de datos(sin paginar). Se utiliza para calcular el número de páginas en las que se dividirán los datos a partir de los items-per-page definitidos.
+									td ${{ data-definitions.dataPaginationTableSeviceDataDescription }}$
 									td data-service-data || ""
 									td data-pagination-service-data-all="/clientes/59/usuarios"
 
 								tr
 									td <strong>pagination-method</strong>
-									td Tipo de método con el que se llama al servicio. POST o GET
+									td ${{ data-definitions.dataPaginationTableMethodDescription }}$
 									td data-method || ""
 									td pagination-data-method = "POST"
 
 								tr
 									td <strong>pagination-template</strong>
-									td ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.
+									td ${{ data-definitions.dataPaginationTableTemplateDescription }}$
 									td data-template || ""
 									td data-pagination-template = "#templateClientes"
 
 								tr
 									td <strong>pagination-target</strong>
-									td ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.
+									td ${{ data-definitions.dataPaginationTableTargetDescription }}$
 									td data-template || ""
 									td data-pagination-template = ".table-clientes tbody"				
 
 								tr
 									td <strong>pagination-container-target</strong>
-									td Selector CSS del contenedor sobre el que se mostrarán las páginas de la paginación
+									td ${{ data-definitions.dataPaginationTableContainerTargetDescription }}$
 									td ".pagination"
 									td data-pagination-container-target = ".container-pagination"
 
 								tr
 									td <strong>pagination-initial-page</strong>
-									td Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+									td ${{ data-definitions.dataPaginationTableInitialPageDescription }}$
 									td data-initial-page
 									td data-initial-page= "1"					
 
 								tr
 									td <strong>pagination-items-per-page</strong>
-									td Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+									td ${{ data-definitions.dataPaginationTableItemsPerPageDescription }}$
 									td "data-items-per-page"
 									td data-pagination-items-per-page = "10"	
 
 								tr
 									td <strong>pagination-aditionalData</strong>
-									td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
+									td ${{ data-definitions.dataPaginationTableAditionalDataDescription }}$
 									td data-aditionalData || ""
 									td data-pagination-aditionalData = "{cliente : 55 , usuario : 12}"	
 
 								tr
 									td <strong>pagination-callback</strong>
-									td Nombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
+									td ${{ data-definitions.dataPaginationTableCallbackDescription }}$
 									td data-callback || ""
 									td data-pagination-callback = "callbackCargaClientes"
 
 								tr
 									td <strong>pagination-content</strong>
-									td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
+									td ${{ data-definitions.dataPaginationTableContentDescription }}$
 									td ""
 									td data-pagination-content = ""
 
 								tr
 									td <strong>pagination-enable-get-params</strong>
-									td Habilita el servicio para que utilice los parámetros get definidos en la URL. Se suele usar en conjunto con los filtros o buscador para permitir que un listado de datos este ordenado o filtrado.
+									td ${{ data-definitions.dataPaginationTableEnableGetParamsDescription }}$
 									td data-enable-get-params || ""
 									td data-pagination-enable-get-params = "true"
 
 								tr
 									td <strong>pagination-get-params-list</strong>
-									td Si es definido permite elegir que parámetros get afectan al listado de datos que estamos cargando, permitiendo de esta manera la elección de qué parámetros queremos que afecten al listado de datos. Se debe usar junto con enable-get-params.
+									td ${{ data-definitions.dataPaginationTableGetParamsListDescription }}$
 									td data-get-params-list || ""
 									td data-pagination-get-params-list = "order,activo,nombre_cliente"
 
 								tr
 									td <strong>pagination-rel</strong>
-									td Este parámetro permite agrupar los filtros para que sólo le apliquen aquellos publicados en dicho rel. Desde data-filter se debe definir otro data-rel el cual hace que esos filtros queden vinculados a dicho grupo haciendo que aquellos listados de datos que pertenezcan al mismo grupo apliquen esos filtros. Adicionalmente, puede funciona con el atributo data-get-params-list para definir un número más limitado de filtros. Aquellos filtros que pertenezcan al un grupo se mostrarán en la URL como "nombrefiltro_nombreRel" pero al aplicarlo al servicio se envía sin el rel. Gracias a esto podrás realizar filtrados de datos personalizados aplicando múltiples parámetros de filtrado por cada listado de datos sin que interfieran entre ellos.
+									td ${{ data-definitions.dataPaginationTableRelDescription }}$
 									td data-rel || ""
 									td data-pagination-rel = "group1"
 
 								tr
 									td <strong>pagination-live-reload</strong>
-									td Permite a la paginación recargarse periódicamente para crear un servicio en tiempo real que recarga los datos cada X milisegundos. El tiempo del intervalo viene definido en el parámetro "pagination-time-reload".
+									td ${{ data-definitions.dataPaginationTableLiveReloadDescription }}$
 									td data-live-reload || "false"
 									td data-pagination-live-reload = "true"
 
 								tr
 									td <strong>pagination-time-reload</strong>
-									td Establece cada cuanto tiempo se desea que se recargue la paginación. Funciona en conjunto al "pagination-life-reload" y el tiempo está especificado en milisegundos. Es necesario establacer el valor de life-reload a 'true' para que este parámetro se active.
+									td ${{ data-definitions.dataPaginationTableTimeReloadDescription }}$
 									td data-time-reload || "60000"
 									td data-pagination-time-reload = 30000
 
-					h3 Ejemplo de Uso
+					h3 ${{ data-definitions.dataExampleTitle }}$
 
-					p Por norma general, solo es necesario añadir el atributo <strong>data-has-pagination="true"</strong> para habilitar la paginación ya que el resto de valores necesarios los obtiene de los parámetros del <a href="#data-definitions-data-loading-block">Data Loading</a>. Sin embargo, en ocasiones hay casos excepcionales que requieren que se utilice los atributos propios. 
+					p ${{ data-definitions.dataPaginationExampleParagraph1 }}$ 
 					
 					pre 
 						| table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-has-pagination="true")			
@@ -283,17 +283,17 @@ mixin component-data-definitions(content)
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2(id="data-definitions-data-search-block") Search
+					h2(id="data-definitions-data-search-block") ${{ data-definitions.dataSearchTitle }}$
 
-					p Es posible realizar un filtrado de los datos de los datos cargados en los listados de datos mendiante una busqueda por palabras. Gracias al buscador genério de SunnieJS y sus parámetros, se puede definir porque que campos del modelo de datos debe realizarse la busqueda/filtrado de los datos. 
+					p ${{ data-definitions.dataSearchParagraph1 }}$
 
-					P Por ejemplo, podemos disponer de un listado de usuarios cargados mediante data loading y un campo texto de búsqueda en el que podemos introducir la palabra a buscar y porque campos queremos que busque(nombre del usuario, identificador, rol, etc...)
+					P ${{ data-definitions.dataSearchParagraph2 }}$
 
-					p Gracias al atributo <strong>data-search="true"</strong> podemmos habilitar el buscador. Una vez activemos la busqueda se añadirá a la URL de la página una serie de parámetros y se recargará la página de tal forma que con la nueva recarga los datos que se muestren aparecerán filtrados por el texto, incluyendo su paginación.
+					p ${{ data-definitions.dataSearchParagraph3 }}$
 
-					p Para que la búsqueda se realice de forma adecuada, al campo input de busqueda donde escribiremos nuestra busqueda sdebemos añadir una serie de atributos <strong>data-search-fieldN</strong> donde N va de 1a N(data-search-field1, data-search-field2, data-search-field3, etc). El valor de los campos debe coincidir con el campo del modelo de datos por el que queremos buscar.
+					p ${{ data-definitions.dataSearchParagraph4 }}$
 
-					h3 Ejemplo
+					h3 ${{ data-definitions.dataExampleTitle }}$
 					pre
 						| form
 						|    div(class="input-group search-box" data-search="true")
@@ -303,27 +303,27 @@ mixin component-data-definitions(content)
 						|           i(class="fa fa-search icon-2x",aria-hidden="true")		
 
 
-					p Al buscar, reescribirá la URL para añadir los nuevos campos correspondientes a la búsqueda. Por ejemplo: <span class="text-primary wbba">http://midominio.com?query=usuario&searchField1=id_clliente&searchField2=nombreUsuario&searchField3=rolUsuario</span>
+					p ${{ data-definitions.dataSearchParagraph5 }}$
 
 	.row
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2(id="data-definitions-data-filter-block") Filters
+					h2(id="data-definitions-data-filter-block") ${{ data-definitions.dataFilterTitle }}$
 
-					p Al igual que con le buscador, se pueden definir filtros personalizados para aplicar a los listados de datos y que el usuario elija en cada caso cual usar. Por ejemplo, ordenar los datos por orden alfabétco o mostrar solo los usuatios con rol administrador.
+					p ${{ data-definitions.dataFilterParagraph1 }}$
 
-					p Se pueden definir los filtros de forma personalizada a través de data atributos y sin necesidad de programar ninguna llamada ajax adicional.
+					p ${{ data-definitions.dataFilterParagraph2 }}$
 
-					p Del mismo modo que el buscador, cuando se aplique un filtro se añadirá un parámetro a la URL y se recargará la página con los datos filtrados/ordenados por ese filtro(s).
+					p ${{ data-definitions.dataFilterParagraph3 }}$
 
-					p Para definir un bloque de filtros es necesario añadir <strong>data="filters"</strong> al boque contenedor de los filtros y a continuación, en cada filtro añadir <strong>data-filter="NombreDelCampoAFiltrar"</strong>. En el caso de un filtro de tipo ordenación es necesario usar <strong>data-filter="order"</strong>.
+					p ${{ data-definitions.dataFilterParagraph4 }}$
 
-					p Opcionalmente, se puede añadir un atributo <strong>data-rel</strong> que vincula ese filtro a un rel que podrá  ser usado por los datalist para personalizar las búsquedas por grupos de filtros haciendo que esos filtros solo se aplique al rel definido y de forma global a aquellos datalist que no tengan un rel definido ni un data-get-params-list.
+					p ${{ data-definitions.dataFilterParagraph5 }}$
 
-					p Por ultimo, cada filtro debe ser un enlace con un <strong>data-filter-value="ValorDelFiltro"</strong> que se corresponderá con el vallor por el que queremos filtrar el campo definido previamente.
+					p ${{ data-definitions.dataFilterParagraph6 }}$
 
-					h3 Ejemplo
+					h3 ${{ data-definitions.dataExampleTitle }}$
 
 					pre
 						| ul.filterBar.list-inline(data="filters",data-rel="group1")
@@ -334,13 +334,13 @@ mixin component-data-definitions(content)
 
 						|        ul(class="dropdown-menu")
 						|            li
-						|                a(href="",data-filter-value="") Todos
+						|                a(href="",data-filter-value="") All
 
 						|            li
-						|                a(href="",data-filter-value="username%20ASC") Nombre Asc
+						|                a(href="",data-filter-value="username%20ASC") Name Asc
 
 						|            li
-						|                a(href="",data-filter-value="username%20DESC") Nombre Desc
+						|                a(href="",data-filter-value="username%20DESC") Name Desc
 
 						|            li
 						|                a(href="",data-filter-value="email%20ASC") Email Asc
@@ -355,81 +355,81 @@ mixin component-data-definitions(content)
 
 						|        ul(class="dropdown-menu")
 						|            li
-						|                a(href="",data-filter-value="") Todos
+						|                a(href="",data-filter-value="") All
 
 						|            li
-						|                a(href="",data-filter-value="1") Activado
+						|                a(href="",data-filter-value="1") Activated
 
 						|            li
-						|                a(href="",data-filter-value="0") Desactivado
+						|                a(href="",data-filter-value="0") Desactivated
 
 	.row
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2(id="data-definitions-data-roles-block") Roles
+					h2(id="data-definitions-data-roles-block") ${{ data-definitions.dataRoleTitle }}$
 
-					p SunnieJS permite filtrar el contenido mostrado y los elementos mostrados mediante roles. Para ello, existen unos data atributos que permiten definir a nivel de elemento HTML para que roles es visible.
+					p ${{ data-definitions.dataRoleTitle }}$
 
 					.table-responsive
 						table(class="table")
 							thead
 								tr
-									th Data-attribute
-									th Description
-									th Uso
+									th ${{ data-definitions.dataRoleTableTH1 }}$
+									th ${{ data-definitions.dataRoleTableTH2 }}$
+									th ${{ data-definitions.dataRoleTableTH3 }}$
 							tbody
 								tr
 									td <strong>auth-rol</strong>
-									td El elemento es visible para roles menores o iguales al nivel del rol definido.
+									td ${{ data-definitions.dataRoleTableContainerAuthRolDescription }}$
 									td data-auth-rol="3"
 
 								tr
 									td <strong>auth-rol-eq</strong>
-									td El elemento solo es visible para un rol igual al nivel del rol definido
+									td ${{ data-definitions.dataRoleTableContainerAuthRolEqDescription }}$
 									td data-auth-rol-eq = "2"
 
 
-					p Siendo el rol 1 el rol de administrador, y por tanto el que mas control sobre la aplicación tiene. El rol de cada usuario es guardado en una cookie cuando un usuario se loguea y proviene del reesutado devuelto en la llamada al servicio de login.			
+					p ${{ data-definitions.dataRoleParagraph2 }}$
 
 
 	.row
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2(id="data-definitions-data-form-block") Forms
-					p SunnieJS ofrece la posibilidad de automatizar el envío de formularios a servicios rest, validarlos y recoger la respuesta que podrá procesar en una función callback que realice lo que deseemos: mostrar un mensaje de confirmación por ejemplo.
+					h2(id="data-definitions-data-form-block") ${{ data-definitions.dataFormTitle }}$
+					p ${{ data-definitions.dataFormParagraph1 }}$
 
 					.table-responsive
 						table(class="table")
 							thead
 								tr
-									th Data-attribute
-									th Description
-									th Uso
+									th ${{ data-definitions.dataFormTableTH1 }}$
+									th ${{ data-definitions.dataFormTableTH2 }}$
+									th ${{ data-definitions.dataFormTableTH3 }}$
 							tbody
 								tr
 									td <strong>toggle</strong>
-									td Habilita la validación de formularios previa al envío del mismo. El formulario no podrá ser enviado hasta que todas las validaciones sea correctas. La validación está basada en <a href="http://1000hz.github.io/bootstrap-validator/" title="Ir a Bootstrap Validator">Bootstrap Validator</a>
+									td ${{ data-definitions.dataFormTableContainerToggleDescription }}$
 									td data-toggle="validator"
 								tr
 									td <strong>action</strong>
-									td Servicio REST al que se eenviarán los datos para su procesamiento
+									td ${{ data-definitions.dataFormTableContainerActionDescription }}$
 									td data-action=api +"/usuario/add"
 								tr
 									td <strong>method</strong>
-									td Método del servicio invocado
+									td ${{ data-definitions.dataFormTableContainerMethodDescription }}$
 									td data-method="POST"
 								tr
 									td <strong>callback</strong>
-									td Función a ejecutar cuando se reciba la respuesta del servicio al que se han enviado los datos del formulario
+									td ${{ data-definitions.dataFormTableContainerCallbackDescription }}$
 									td data-callback="calllbackAddUser"
 
-					p Todos los datos se envían con el nombre definido en el atributo <span class="text-primary">name</span> del campo, ya sean inputs, textareas, o cuaquier tipo de elemento de formulario.
+					p ${{ data-definitions.dataFormParagraph2 }}$
 
-					p En el caso de los <span class="text-primary">input[type="file"]</span>, de forma automática se envían en formato <span class="text-primary">String</span> transformado en <span class="text-primary">base64</span>.
+					p ${{ data-definitions.dataFormParagraph3 }}$
 
-					h3 Ejemplo
+					h3 ${{ data-definitions.dataExampleTitle }}$
 
 					pre
 						| form(data-toggle="validator",role="form",data-callback="callbackAddUser",data-method="POST",data-action=api + "/usuarios")
@@ -437,8 +437,8 @@ mixin component-data-definitions(content)
 						|    .row
 						|        .col-md-6.col-xs-12
 						|            div(class="form-group")
-						|                label(for="user_name") Nombre
-						|                input(type="text",class="form-control",id="user_name",placeholder="Nombre de tu usuario", name="username",required)
+						|                label(for="user_name") Name
+						|                input(type="text",class="form-control",id="user_name",placeholder="Username", name="username",required)
 
 						|        .col-md-6.col-xs-12
 						|            div(class="form-group")
@@ -448,17 +448,17 @@ mixin component-data-definitions(content)
 						|    .row
 						|        .col-md-6.col-xs-12
 						|            div(class="form-group")
-						|                label(for="user_pass") Contraseña
-						|                input(type="password",class="form-control",id="user_pass",placeholder="Constraseña", name="password",required)
+						|                label(for="user_pass") Password
+						|                input(type="password",class="form-control",id="user_pass",placeholder="Password", name="password",required)
 
 						|        .col-md-6.col-xs-12
 						|            div(class="form-group")
-						|                label(for="user_pass2") Repite Contraseña
-						|                input(type="password",class="form-control",id="user_pass2",placeholder="Repite constraseña",required,data-match="#user_pass" data-match-error="Las contraseñas no coinciden")
+						|                label(for="user_pass2") Repeat Password
+						|                input(type="password",class="form-control",id="user_pass2",placeholder="Repeat password",required,data-match="#user_pass" data-match-error="Password no match")
 						|                div(class="help-block with-errors")
 
 						|    .row
 						|        .col-xs-12
 						|            div(class="form-group text-right")
-						|                button(type="button",class="btn btn-default") Cancelar
-						|                button(type="submit",class="btn btn-primary",class="send") Guardar						
+						|                button(type="button",class="btn btn-default") Cancel
+						|                button(type="submit",class="btn btn-primary",class="send") Save						
