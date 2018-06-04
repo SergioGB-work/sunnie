@@ -1,7 +1,7 @@
 extends ../../../templates/modal_noFooter
 
 block vars
-	- var modal_title = "Small Modal"
+	- var modal_title = "${{ sample-modal.smallModalTitle }}$"
 	- var modal_id = "lexSmallModal"
 	- var modal_size = "modal-xs"
 
@@ -15,5 +15,5 @@ block modal-body
 		.row
 			.col-xs-12
 				div(class="form-group text-right")
-					button(type="button",class="btn btn-default",data-dismiss="modal") Cancelar
-					button(type="submit",class="btn btn-primary",class="send") Aceptar
+					button(type="button",class="btn btn-default",data-dismiss="modal") ${{ sample-modal.cancel }}$
+					button(type="submit",class="btn btn-primary",class="send") ${{ sample-modal.acept }}$

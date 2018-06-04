@@ -1,17 +1,17 @@
 mixin component-sample-basics(content)
 	div
-		h1 Header H1
-			small secondary text
-		h2 Header H2
-		h3 Header H3
-		h4 Header H4
-		h5 Header H5
-		h6 Header H6
+		h1 ${{ sample-basics.header }}$ H1
+			small ${{ sample-basics.secondaryText }}$
+		h2 ${{ sample-basics.header }}$ H2
+		h3 ${{ sample-basics.header }}$ H3
+		h4 ${{ sample-basics.header }}$ H4
+		h5 ${{ sample-basics.header }}$ H5
+		h6 ${{ sample-basics.header }}$ H6
 	
 	div
-		h2 Paragraph
+		h2 ${{ sample-basics.paragraph }}$
 		p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 		
 	div
-		h2 Link
-		a(href="#",title="Link") This is a link
+		h2 ${{ sample-basics.link }}$
+		a(href="#",title="Link") ${{ sample-basics.link }}$

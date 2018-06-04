@@ -5,16 +5,16 @@ mixin component-sample-modal(content)
 				.panel-body
 					h1 Modals
 
-					p SunnieJS provee una serie de plantillas de ventanas modales que permiten estandarizar la creación de modales en base a las estructuras básica de Bootstrap y la forma en que éste las crea.
+					p ${{ sample-modal.paragraph1 }}$
 
-					p Por defecto existen dos plantillas de Modales(modal_noFooter y modal_noHeaderNoFooter) que como sus propios nombres indican, en el primera caso es una modal sin footer y en el otro caso, no tiene ni header ni footer.
+					p ${{ sample-modal.paragraph2 }}$
 	.row
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
 					h2 Uso
 
-					p A continuación se muestra un ejemplo de creación de una modal extendiendo de la plantilla modal_noFooter:
+					p ${{ sample-modal.paragraph3 }}$
 
 					pre
 						| extends ../../../templates/modal_noFooter
@@ -37,27 +37,27 @@ mixin component-sample-modal(content)
 						|					button(type="button",class="btn btn-default",data-dismiss="modal") Cancelar
 						|					button(type="submit",class="btn btn-primary",class="send") Aceptar		
 
-					p Las modales pueden recibir una serie de variables desde <span class="text-primary">block vars</span> que se puedan utilizar para personalizar ciertos aspectos de la estructura genérica de la modal.
+					p ${{ sample-modal.paragraph4 }}$
 					ul
-						li <strong>modal_title:</strong> título de la modal
-						li <strong>modal_id:</strong> identificador de la modal
-						li <strong>modal_size:</strong> tamaño de la modal, pudiendo elegir entre modal-lg, modal-md, modal-sm. Estos tamaños corresponden a los definidos por Bootstrap
+						li <strong>modal_title:</strong> ${{ sample-modal.paragraph5 }}$
+						li <strong>modal_id:</strong> ${{ sample-modal.paragraph6 }}$
+						li <strong>modal_size:</strong> ${{ sample-modal.paragraph7 }}$
 
 	.row
 		.col-xs-12
 			.panel.panel-default
 				.panel-body
-					h2 Ejemplos
+					h2 ${{ sample-modal.example }}$
 
-					p Gracias a los diferentes aspectos anteriormente citados, se pueden crear modales estandarizas y robustas como las que se pueden ver a continuación:	
+					p ${{ sample-modal.paragraph8 }}$
 
-					button(class="btn btn-primary", data-target="#lexDefaultModal" ,data-toggle="modal") Default Modal
+					button(class="btn btn-primary", data-target="#lexDefaultModal" ,data-toggle="modal") ${{ sample-modal.defaultModalTitle }}$
 
-					button(class="btn btn-primary", data-target="#lexLargeModal" ,data-toggle="modal") Large Modal
+					button(class="btn btn-primary", data-target="#lexLargeModal" ,data-toggle="modal") ${{ sample-modal.largeModalTitle }}$
 
-					button(class="btn btn-primary", data-target="#lexSmallModal" ,data-toggle="modal") Small Modal
+					button(class="btn btn-primary", data-target="#lexSmallModal" ,data-toggle="modal") ${{ sample-modal.smallModalTitle }}$l
 
-					button(class="btn btn-primary", data-target="#lexNoHeaderModal" ,data-toggle="modal") Modal Without Header
+					button(class="btn btn-primary", data-target="#lexNoHeaderModal" ,data-toggle="modal") ${{ sample-modal.noHeaderModalTitle }}$
 
 
 	include templates/modal-default.pug
