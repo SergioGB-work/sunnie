@@ -1,13 +1,13 @@
 mixin component-generators(content)
 	.row
 		.col-xs-12
-			h1 Generadores
+			h1 ${{ generators.pageTitle }}$
 			
-			p SunnieJS dispone de su propio <span class="text-primary">generador de código HTML</span> con el que podrás <span class="text-primary">automatizar</span> la creación de <span class="text-primary">componentes</span>, <span class="text-primary">páginas</span> y <span class="text-primary">layouts</span>.
+			p ${{ generators.paragraph1 }}$
 
-			h2 Antes de empezar
+			h2 ${{ generators.beforeStartTitle }}$
 			
-			p Lo primero que debes hacer para usar nuestro generador es asegurarte de que tienes instalado en tu ordenador <span class="text-primary">NodeJS</span> y puedes usar las funciones de <span class="text-primary">npm</span> desde una consola de administración. También es necesario que tengas instalado <span class="text-primary">yeoman</span> y <span class="text-primary">gulp</span>.
+			p ${{ generators.beforeStartParagraph1 }}$
 	.row
 		.col-sm-6.col-xs-12
 				h3 Yeoman
@@ -23,69 +23,70 @@ mixin component-generators(content)
 
 	.row
 		.col-xs-12
-			h2 Instalación
+			h2 ${{ generators.instalationTitle }}$
 			
-			p Debes descargar la <strong>release 1.1.X</strong>(última release disponible de la versión 1) del generador desde nuestro git: <a href="https://github.com/SergioGB-work/generator-sunnie">https://github.com/SergioGB-work/generator-SunnieJS</a> en una carpeta de tu ordenador.
+			p ${{ generators.instalationParagraph1 }}$
 
-			p Una vez descargado instala el proyecto situándote con una consola de administración sobre la carpeta del proyecto y ejecutando:
+			p ${{ generators.instalationParagraph2 }}$
 			
 			pre
 				| npm install
 
-			p Por último vamos a hacer que el generador esté disponible para usarlo en cualquier directorio. Desde la misma carpeta del proyecto ejecutamos:
+			p ${{ generators.instalationParagraph3 }}$
 			
 			pre
 				| npm link
 
-			h2 Empieza a usarlo
+			h2 ${{ generators.startToUseItTitle }}$
 			
-			p Nuestro generador dispone de 3 subgeneradores que te permitirán crear páginas, layouts y componentes nuevos.
+			p ${{ generators.startToUseItParagraph1 }}$
 
 			h3 Layouts
 			
-			p Para generar una nueva layout debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-priimary">/src/pug/layouts</span>.
+			p ${{ generators.layoutsParagraph1 }}$
 			
-			p Desde ahí debes ejecutar lo siguiente:
+			p ${{ generators.layoutsParagraph2 }}$
 			
 			pre
 				| yo sunnie:layout
-			p Esto lanzará el generador de layouts y te irá preguntando una serie de cuestiones para que definas la distribución de dicha layout: <span class="text-primary">filas</span> , <span class="text-primary">columnas</span>, <span class="text-primary">tamaño de columnas</span>, <span class="text-primary">fluidez</span>, etc...
+
+			p ${{ generators.layoutsParagraph3 }}$
 			
 			p.text-center
 				img(src="./images/demo/generator-layout-img.png",alt="")
 
-			p Cuando finalices, obtendras la layout en el directorio en el que te encuentras y con la configuración que has definido sin necesidad de haber escrito <span class="text-primary">ni una sola línea de código</span>.
+			p ${{ generators.layoutsParagraph4 }}$
 
-			h3 Páginas
+			h3 ${{ generators.pagesTitle }}$
 			
-			p Para generar una nueva página debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-primary">/src/pug</span>.
+			p ${{ generators.pagesParagraph1 }}$
 			
-			p Desde ahí debes ejecutar lo siguiente:
+			p ${{ generators.pagesParagraph2 }}$
 			
 			pre
 				| yo sunnie:page
 			
-			p Esto lanzará el generador de páginas y te irá preguntando una serie de cuestiones para que definas tu página: <span class="text-primary">nombre</span>, <span class="text-primary">metas</span>, <span class="text-primary">layout</span> que quieres utilizar de las que tienes definidas en tu carpeta de layouts, etc...
+			p ${{ generators.pagesParagraph3 }}$
 
 			p.text-center
 				img(src="./images/demo/generator-page-img.png",alt="")
 
-			p Esto te permite que el resultado final sea una página nueva, con las metas que has escrito y su contenido, con los huecos definidos en la layout que has elegido y un componente de ejemplo desplegado en esos huecos.
+			p ${{ generators.pagesParagraph4 }}$
 
-			p Lo último que faltaría sería que rellenes los huecos con los componentes que desees y ya estaría listo para publicar.
+			p ${{ generators.pagesParagraph5 }}$
 
-			h3 Componentes
+			h3 ${{ generators.componentsTitle }}$
 
-			p Para generar una nuevo componente debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-primary">/src/pug/components</span>.
+			p ${{ generators.componentsParagraph1 }}$
 			
-			p Desde ahí debes ejecutar lo siguiente:
+			p ${{ generators.componentsParagraph2 }}$
 			
 			pre
 				| yo sunnie:component
 			
-			p Esto lanzará el generador de componentes y te preguntará dos cosas: <span class="text-primary">nombre de tu componente</span> y si quieres sobreescribir el archivo include_components a lo que debes contestar <span class="text-primary">"Y"</span>.
+			p ${{ generators.componentsParagraph3 }}$
 
 			p.text-center
 				img(src="./images/demo/generator-component-img.png",alt="")
 
-			p Esto te creará toda la <span class="text-primary">estructura HTML</span> del componente básica necesaria en su carpeta correspondiente dentro de la carpeta  de componentes y añadir tu componente al archivo <span class="text-primary">include_components</span> para que lo tengas disponible para su uso desde el minuto 0.
+			p ${{ generators.componentsParagraph4 }}$

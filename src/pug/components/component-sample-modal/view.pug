@@ -20,7 +20,7 @@ mixin component-sample-modal(content)
 						| extends ../../../templates/modal_noFooter
 						|
 						| block vars
-						|	- var modal_title = "Large Modal"
+						|	- var modal_title = "${{ sample-modal.largeModalTitle }}$"
 						|	- var modal_id = "lexLargeModal"
 						|	- var modal_size = "modal-lg"
 						|
