@@ -1,178 +1,178 @@
 mixin component-js-functions(content)
 	div
-		h1 Javascript Functions
+		h1 ${{ js-functions.pageTitle }}$
 
-		p SunnieJS dispone de una serie de funciones javascript predefinidas que se pueden utilizar para realizar diversas acciones generales.
+		p ${{ js-functions.paragraph1 }}$
 
-		p A continuación se detalla el listado de funciones disponibles:
+		p ${{ js-functions.paragraph2 }}$
 
 
 		h3 popover()
 
-		p Habilita los elementos popover definidos mediante bootstrap
+		p ${{ js-functions.popoverParagraph }}$
 
 		h3 getData(el)
 
-		p Función AJAX genérica que se encarga de todas las peticiones AJAX a servicios REST. Cualquier llamad a un servicio REST debería ser realizada a través de esta función.
+		p ${{ js-functions.getDataParagraph1 }}$
 
-		p El parámetro <strong class="text-primary">"el"</strong> es un <strong>JSON</strong> cuyos campos se definen a continuación:
+		p ${{ js-functions.getDataParagraph2 }}$
 
-		h4 Parámetros JSON
+		h4 ${{ js-functions.jsonParamsTitle }}$
 		
 		.table-responsive
 			table(class="table")
 				thead
 					tr
-						th Param
-						th Description
-						th Uso
+						th ${{ js-functions.param }}$
+						th ${{ js-functions.description }}$
+						th ${{ js-functions.howTo }}$
 				tbody
 					tr
 						td <strong>service</strong>
-						td URL del servicio REST
+						td ${{ js-functions.serviceDescription }}$
 						td "/clientes/59/usuarios"
 
 					tr
 						td <strong>method</strong>
-						td Tipo de método con el que se llama al servicio. POST o GET 
+						td ${{ js-functions.methodDescription }}$
 						td "GET"
 
 					tr
 						td <strong>template</strong>
-						td ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.
+						td ${{ js-functions.templateDescription }}$
 						td "#templateClientes"
 
 					tr
 						td <strong>target</strong>
-						td ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.
+						td ${{ js-functions.targetDescription }}$
 						td ".table-clientes tbody"
 
 					tr
 						td <strong>page</strong>
-						td Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+						td ${{ js-functions.pageDescription }}$
 						td "1"					
 
 					tr
 						td <strong>items_per_page</strong>
-						td Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.
+						td ${{ js-functions.itemsPerPageDescription }}$
 						td "10"	
 
 					tr
 						td <strong>aditionalData</strong>
-						td Datos adicionales que se desea enviar a través del body del servicio. Utiliza el parámetro "data" de $.AJAX para enviar los datos adicionales en formato JSON.
+						td ${{ js-functions.aditionalDataDescription }}$
 						td "{cliente : 55 , usuario : 12}"
 
 					tr
 						td <strong>callback</strong>
-						td Noombre de la función adicional a ejecutar una vez realizada la petición al servicio REST y este devuelve el resultado. Por defecto la función recibe los datos devueltos por el servicio invocado. Dejar vacío si no se desea ejecutar nada.
+						td ${{ js-functions.callbackDescription }}$
 						td "callbackCargaClientes"
 
 					tr
 						td <strong>content</strong>
-						td Parámetros o contenido adicional enviado a la funcion callback definida. Dejar vacío si no es necesario enviar ningún dato adicional.
+						td ${{ js-functions.contentDescription }}$
 						td ""				
 
 					tr
 						td <strong>enableGetParams</strong>
-						td Habilita el servicio para que utilice los parametros get de la url y se los envie al servicio definido.
+						td ${{ js-functions.enableGetParamsDescription }}$
 						td "true"
 
 					tr
 						td <strong>getParamsList</strong>
-						td Listado de parametros GET que se desea que apliquen a la generación de la petición al servicio rest.
+						td ${{ js-functions.getParamsListDescription }}$
 						td "order,activo,grupo"
 
 					tr
 						td <strong>rel</strong>
-						td Establece el grupo de filtros al que pertenece la petición. Si se define, al realizar la petición solo usaraá aquellos parámetros GET que tengan asociado el "rel" definido. Por ejemplo, order_group1. En el ejemplo anterior el parámetro sería "order" y el "rel" sería "group1". En caso de existir "getParamsList", además de filtrar los parámetros get por el "rel" también lo hará por el listado de atributos definidos en "getParamsList".
+						td ${{ js-functions.relDescription }}$
 						td "group1"					
 
 		h3 dataList(el)
 
-		p Inicializa la carga dinámica de datos sobre el selector CSS "el". Se vale de los data atributos definidos en el elemento para realizar la carga de datos.
+		p ${{ js-functions.dataListParagraph1 }}$
 
-		p Dichos atributos pueden ser consultados en la sección de <a href="./data-definitions.html#data-definitions-data-loading-block">Data Definitions</a>. 
+		p ${{ js-functions.dataListParagraph2 }}$
 
 
 		h3 pagination(el)
 
-		p Genera la paginación de un listado de datos dinámicos a partir de los data atributos definidos en el selector CSS "el".
+		p ${{ js-functions.paginationParagraph1 }}$
 
-		p Dichos atributos pueden ser consultados en la sección de <a href="./data-definitions.html#data-definitions-data-pagination-block">Data Definitions</a>. 
+		p ${{ js-functions.paginationParagraph2 }}$
 
 		h3 error( status, code , message )
 
-		p Está función genérica recibe el código de error(status) ocurrido(200,401,404, etc...) y muestra de forma automática el mensaje de error correspondiente. Es la función genérica que define los errores genéricos del portal. Se puede extender con más códigos de error en función del caso de uso. Algunos errores también admiten la recepción del mensaje de texto a mostrar.
+		p ${{ js-functions.errorParagraph1 }}$
 
-		p Si se desea utilizar errores personalizados, existe el parámetro code que permite capturar un codigo de error personalizado, LOGIN_FAILED por ejemplo, y procesarlo. En caso de que haya tanto un status como un code, se mostrará el código de error mas restrictivo, es decir, code junto con el mensaje definido para él.
+		p ${{ js-functions.errorParagraph2 }}$
 
-		p Utiliza la modal genérica de errores para mostrar dicho error.
+		p ${{ js-functions.errorParagraph3 }}$
 
 		h3 showLoading()
 
-		p Permite mostrar la capa de loading genérica. Por defecto, cualquier petición ajax que se realice mmuestra de forma automática la capa.
+		p ${{ js-functions.showLoadingParagraph1 }}$
 
 		h3 hideLoading()
 
-		p Permite ocultar la capa de loading genérica. Por defecto, cualquier peticion ajax que se completa, ya sea correctamente o con errores oculta la capa.
+		p ${{ js-functions.hideLoadingParagraph1 }}$
 
 		h3 showError( title , content)
 
-		p Utiliza la modal genérica de error para mostrar una modal con el title y el content que se le facilita a través de los parametros de la función.
+		p ${{ js-functions.showErrorParagraph1 }}$
 
 		.table-responsive
 			table(class="table")
 				thead
 					tr
-						th Param
-						th Description
-						th Uso
+						th ${{ js-functions.param }}$
+						th ${{ js-functions.description }}$
+						th ${{ js-functions.howTo }}$
 				tbody
 					tr
 						td <strong>title</strong>
-						td Título de la modal. Debe seer un String
-						td "Error de login"
+						td ${{ js-functions.modalTitle }}$
+						td ${{ js-functions.modalTitleHowTo }}$
 
 					tr
 						td <strong>content</strong>
-						td Texto descriptivo del error que se mostrará en el cuerpo de la modal. Debe ser un String.
-						td "Has introducido un usuario o contraseña incorrecta"
+						td ${{ js-functions.modalContentTitle }}$
+						td ${{ js-functions.modalContentHowTo }}$
 
 		h3 showHTMLError( title , content)
 
-		p Utiliza la modal genérica de error para mostrar una modal con el title y el content que se le facilita a través de los parametros de la función pero a diferencia de la anterior, esta función admite contenido HTML.
+		p ${{ js-functions.showErrorHTMLParagraph1 }}$
 
 		.table-responsive
 			table(class="table")
 				thead
 					tr
-						th Param
-						th Description
-						th Uso
+						th ${{ js-functions.param }}$
+						th ${{ js-functions.description }}$
+						th ${{ js-functions.howTo }}$
 				tbody
 					tr
 						td <strong>title</strong>
-						td Título de la modal. Debe seer un String
-						td "Error de login"
+						td ${{ js-functions.modalTitle }}$
+						td ${{ js-functions.modalTitleHowTo }}$
 
 					tr
 						td <strong>content</strong>
-						td Contenido del error que se mostrará en el cuerpo de la modal. Admite HTML.
-						td "Has introducido un <strong>usuario o contraseña incorrecta</strong>"
+						td ${{ js-functions.modalHTMLContentTitle }}$
+						td ${{ js-functions.modalHTMLContentHowTo }}$
 
 		h3 filterContentByRol()
 
-		p Permite ejecutar el filtrado de contenidos por rol a partir de los data atributos previamente definidos. Es especialmente útil cuando se cargan contenidos dinámicos que deben ser filtrados según el rol del usuario logueado.
+		p ${{ js-functions.filterContentByRolParagraph1 }}$
 
 		h3 dataSearch()
 
-		p Permite inicializar los elementos que tiene definido un <a href="./data-definitions.html#data-definitions-data-search-block">data-search="true"</a>. 
+		p ${{ js-functions.dataSearchParagraph1 }}$ 
 
 		h2 checkRol(rol)
 
-		p Función escrita en javascript puro que permite controlar si un usuario tiene acceso a una página. En caso de que el usuario tenga un rol superior al rol pasado como parámetro se redirige al usuario a la pagina de Acceso denegado.
+		p ${{ js-functions.checkRolParagraph1 }}$ 
 
-		h3 Ejemplo de uso
+		h3 ${{ js-functions.example }}$ 
 
 		pre
 			| extends ./layouts/layout-12-fluid
@@ -190,7 +190,7 @@ mixin component-js-functions(content)
 
 		h2 checkSession()
 
-		p Función escrita en javascript puro que define si para acceder a una página es necesario estar logueado. Si se usa en la cabecera de una página significa que es necesario que el usuario este logueado para acceder. En caso de no estarlo, se redirige al usuario a la página de error correspondiente.
+		p ${{ js-functions.checkSessionParagraph1 }}$
 
 		pre
 			| extends ./layouts/layout-12-fluid

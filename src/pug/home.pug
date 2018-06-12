@@ -7,37 +7,37 @@ block content-upper
 
 	.row
 		.row
-			+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
+			+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"${{ default.goHome }}$","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
 
 	.row
 		.col-xs-12
-			+component("component-highlighted-side-image","",{"content":"<h2 class='text-primary'>Based on Bootstrap 3</h2><h3>Easy to extend and customise</h3><p>SunnieJS está basado en Bootstrap 3 por lo que con unos simples ajustes podrás disponer de un portal totalmente reformado sin apenas esfuerzo. Además, gracias a Bootstrap, tus aplicaciones web serán 100% responsive adaptandose a todo tipo de dispositivos móviles.</p>","image":{"src":"./images/bootstrap-stack.png","alt":"Imagen Monument"},"position":"left"},"","false","true")
+			+component("component-highlighted-side-image","",{"content":"<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>","image":{"src":"./images/bootstrap-stack.png","alt":"Image Monument"},"position":"left"},"","false","true")
 	
 	.row
 		.row
-			+component("component-highlighted-banner","",{"content":"<h2>Mas que un tema de apariencia</h2><p>SunnieJS es un entorno completo de desarrollo ágil de aplicaciones web front. Es capaz de integrarse a través de servicios web para obtener datos de forma dinámica e interactuar con ellos.</p>","button":{"text":"Conoce SunnieJS a fondo","href":"./data-definitions.html","title":"Ir a Data Definitions"}},"","false","true","nomargin")
+			+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"${{ default.homeBannerThemeButtonText }}$","href":"./data-definitions.html","title":"${{ default.goDataDefinitions }}$"}},"","false","true","nomargin")
 
 	.row
 		.row
-			+component("component-highlighted-content","",{"content":"<h2>Generadores propios</h2><h3>Una forma muy fácil de crear código</h3><p>SunnieJS dispone de sus propios generadores de código creados en Yeoman que te permitirán crear componentes, plantillas de página y páginas dejándolos listos para su uso en tu portal ya que se crearán todas las dependencias y estructuras de código necesarios para su uso si que necesidad de que conozcas como se hace. Tan solo debes rellenar el contenido de tu componente y elegir que plantilla y componentes conformarán tu página. No esperes mas y echa un vistazo a nuestros generadores. </p>","button":{"text":"Conoce nuestros Generadores","href":"./generators.html","title":"Ir a Generators"}},"","false","false")
+			+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"${{ default.homeOwnGeneratorsButtonText }}$","href":"./generators.html","title":"${{ default.goGenerators }}$"}},"","false","false")
 
 	.row
 		.col-md-3
-			+fragment("fragment-card",{"src":"./images/internacionalizacion.jpg","alt":"Internacionalización","header":"Internacionalización","description":"¿Quieres traducir tu página web a varios idiomas? Te lo ponemos fácil gracias al sistema de internacionalización nativo en HTML5.","classes":"full"})
+			+fragment("fragment-card",{"src":"./images/internacionalizacion.jpg","alt":"${{ default.homeCardInternationalizationTitle }}$","header":"${{ default.homeCardInternationalizationTitle }}$","description":"${{ default.homeCardInternationalizationContent }}$","classes":"full"})
 
 		.col-md-3
-			+fragment("fragment-card",{"src":"./images/code.jpg","alt":"Código Limpio y Estructurado","header":"Código limpio y estructurado","description":"Dispone de un código limpio y estructurado en base a diferentes que capas que, compiladas, conforman el código final.","classes":"full","href":"./generators.html"})
+			+fragment("fragment-card",{"src":"./images/code.jpg","alt":"${{ default.homeCardCodeTitle }}$","header":"${{ default.homeCardCodeTitle }}$","description":"${{ default.homeCardCodeContent }}$","classes":"full","href":"./generators.html"})
 
 		.col-md-3
-			+fragment("fragment-card",{"src":"./images/shortcodes.jpg","alt":"ShortCodes","header":"Short Codes","description":"Usa los shortcodes de bootstrap y todos los nuevos que te ofrecemos con esta herramienta","classes":"full",})
+			+fragment("fragment-card",{"src":"./images/shortcodes.jpg","alt":"ShortCodes","header":"Short Codes","description":"${{ default.homeCardShortcodesContent }}$","classes":"full",})
 
 		.col-md-3
-			+fragment("fragment-card",{"src":"./images/seo.jpg","alt":"SEO Friendly","header":"SEO Friendly","description":"SunnieJS al completo es SEO Friendly, incluyendo la personalización de metadatos por página.","classes":"full"})
+			+fragment("fragment-card",{"src":"./images/seo.jpg","alt":"SEO Friendly","header":"SEO Friendly","description":"${{ default.homeCardSEOContent }}$","classes":"full"})
 
 	.row
 		.row
-			+component("component-highlighted-banner","",{"content":"<h2>Decenas de componentes te esperan. Úsalos o crea los tuyos propios.</h2>","button":{"text":"Ver componentes","href":"./components.html","title":"Ir a Componentes"}},"","false","true","bg-info")
+			+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerComponentsContent }}$</h2>","button":{"text":"${{ default.homeBannerComponentsButtonText }}$","href":"./components.html","title":"${{ default.homeBannerComponentsButtonTitle }}$"}},"","false","true","bg-info")
 
 	.row
 		.col-xs-12
-			+component("component-highlighted-side-image","",{"content":"<h2>Biblioteca de <span class='text-primary'>Componentes</span> propia</h2><p>Por defecto, te ofrecemos una amplia variedad de componentes para que los utilices: <span class='text-primary'>carruseles</span>, <span class='text-primary'>tarjetas</span>, <span class='text-primary'>imagenes</span>, <span class='text-primary'>banners</span>, <span class='text-primary'>destacados</span>, <span class='text-primary'>navegación</span>, <span class='text-primary'>login</span>...y muchos más! <strong>Tu eliges!</strong> Puedes usar uno que te guste o crear el tuyo propio pero no te preocupes porque si eliges crear el tuyo podrás usar el <strong>generador de componentes</strong> para que te resulte muy sencillo. </p><p>Cada día disponemos de más y más componentes que podrás disfrutar sin límite.</p>","image":{"src":"./images/componentes.png","alt":"Imagen Monument"},"position":"right"},"","false","true")
+			+component("component-highlighted-side-image","",{"content":"<h2>${{ default.homeComponentLibraryComponentTitle }}$</h2><p>${{ default.homeComponentLibraryComponentContent1 }}$ </p><p>${{ default.homeComponentLibraryComponentContent2 }}$</p>","image":{"src":"./images/componentes.png","alt":"Imagen Monument"},"position":"right"},"","false","true")
