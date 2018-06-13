@@ -55,5 +55,13 @@
   "homeBannerComponentsButtonTitle":"Go to Components",
   "homeComponentLibraryComponentTitle":"Library <span class='text-primary'>Components</span> own",
   "homeComponentLibraryComponentContent1":"By default, we offer a wide variety of components for you to use: <span class='text-primary'>carousels</span>, <span class='text-primary'>cards</span>, <span class='text-primary'>images</span>, <span class='text-primary'> banners </span>, <span class='text-primary'>highlights</span>, <span class='text-primary'>navigation</span>, <span class='text-primary'>login</span>... and many more! <strong>You choose!</strong> You can use one that you like or create your own but do not worry because if you choose to create yours you can use the <strong>component generator</strong> to make it easy for you.",
-  "homeComponentLibraryComponentContent2":"Every day we have more and more components that you can enjoy without limit."
+  "homeComponentLibraryComponentContent2":"Every day we have more and more components that you can enjoy without limit.",
+  "howToUse":"How to use",
+  "goHowToUse":"Go to How to use",
+  "componentsList":"Components List",
+  "goToComponentsList":"Go to Components List",
+  "examples":"Examples",
+  "goToExamples":"Go to Examples",
+  "goToComponent":"Go to the component: ",
+  "goComponents":"Go to Components"  
 }

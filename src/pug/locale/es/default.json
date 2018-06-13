@@ -55,5 +55,13 @@
   "homeBannerComponentsButtonTitle":"Ir a Componentes",
   "homeComponentLibraryComponentTitle":"Biblioteca de <span class='text-primary'>Componentes</span> propia",
   "homeComponentLibraryComponentContent1":"Por defecto, te ofrecemos una amplia variedad de componentes para que los utilices: <span class='text-primary'>carruseles</span>, <span class='text-primary'>tarjetas</span>, <span class='text-primary'>imagenes</span>, <span class='text-primary'>banners</span>, <span class='text-primary'>destacados</span>, <span class='text-primary'>navegación</span>, <span class='text-primary'>login</span>...y muchos más! <strong>Tu eliges!</strong> Puedes usar uno que te guste o crear el tuyo propio pero no te preocupes porque si eliges crear el tuyo podrás usar el <strong>generador de componentes</strong> para que te resulte muy sencillo.",
-  "homeComponentLibraryComponentContent2":"Cada día disponemos de más y más componentes que podrás disfrutar sin límite."
+  "homeComponentLibraryComponentContent2":"Cada día disponemos de más y más componentes que podrás disfrutar sin límite.",
+  "howToUse":"Uso",
+  "goHowToUse":"Ir a Uso",
+  "componentsList":"Listado de componentes",
+  "goToComponentsList":"Ir al listado de componentes",
+  "examples":"Ejemplos",
+  "goToExamples":"Ir a Ejemplos",
+  "goToComponent":"Ir al Componente",
+  "goComponents":"Ir a Componentes"
 }
