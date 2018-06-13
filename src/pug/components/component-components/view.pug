@@ -350,7 +350,7 @@ mixin component-components(content)
 					h3(id="componentHighlightedBanner").nomargin Highlighted Banner
 			.row
 				.row
-					+component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+					+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 						
 				.col-xs-12
 					.panel.panel-default
@@ -358,7 +358,7 @@ mixin component-components(content)
 							h3(id="componentHighlightedContent").nomargin Highlighted Content
 					.row
 						.col-md-12
-							+component("component-highlighted-content","",{"content":"<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+							+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
 				.col-xs-12
 					.panel.panel-default
@@ -374,7 +374,7 @@ mixin component-components(content)
 							h3(id="componentHighlightedSideImage").nomargin Highlighted Side Image
 					.row
 						.col-md-12
-							+component("component-highlighted-side-image","",{"content":"<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
+							+component("component-highlighted-side-image","",{"content":"<h2>${{ default.homeComponentLibraryComponentTitle }}$</h2><p>${{ default.homeComponentLibraryComponentContent1 }}$ </p><p>${{ default.homeComponentLibraryComponentContent2 }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
 
 				.col-xs-12
 					.panel.panel-default
