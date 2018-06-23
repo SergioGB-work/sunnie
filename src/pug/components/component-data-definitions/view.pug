@@ -328,8 +328,9 @@ mixin component-data-definitions(content)
 					pre
 						| ul.filterBar.list-inline(data="filters",data-rel="group1")
 						|    li.dropdown(data-filter="order")
-						|        a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
-						|            span Ordenar por: <span class="filterValue"></span>
+						|        a(href="javascript:void(0)", aria-expanded="false", class="dropdown-toggle", data-toggle="dropdown")
+						|            span Ordenar por: 
+						|				span(class="filterValue")
 						|            span(class="caret")
 
 						|        ul(class="dropdown-menu")

@@ -7,5 +7,57 @@ block header
 
 block content-upper
 
+	ul.filterBar.list-inline(data="filters",data-rel="group1,group2")
+		li.dropdown(data-filter="order")
+			a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
+				span Ordenar por: 
+				span(class="caret")
+			ul(class="dropdown-menu")
+				li
+					a(href="",data-filter-value="") All
+				li
+					a(href="",data-filter-value="username%20ASC") Name Asc
+				li
+					a(href="",data-filter-value="username%20DESC") Name Desc
+				li
+					a(href="",data-filter-value="email%20ASC") Email Asc
+				li
+					a(href="",data-filter-value="email%20DESC") Email Desc
+
+		li.dropdown(data-filter="activo_dispositivo")
+			a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
+				span Ordenar por: 
+				span(class="caret")
+			ul(class="dropdown-menu")
+				li
+					a(href="",data-filter-value="") All
+				li
+					a(href="",data-filter-value="[lt]%3D1") Activated
+				li
+					a(href="",data-filter-value="0") Desactivated
+
+	ul.filterBar.list-inline(data="filters",data-rel="group3")
+		li.dropdown(data-filter="activo")
+			a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
+				span Ordenar por: 
+				span(class="caret")
+			ul(class="dropdown-menu")
+				li
+					a(href="",data-filter-value="") All
+				li
+					a(href="",data-filter-value="[eq]%3D1") Activated
+				li
+					a(href="",data-filter-value="0") Desactivated				
+
+	table(class="table table-usersList",data-load="true",data-service-data=api + "/clientes",data-method="GET",data-template="#templateUsersList",data-items-per-page="10",data-initial-page="1",data-target=".table-usersList tbody",data-enable-get-params="true",data-rel="group1,group3")
+		thead
+			tr
+				th ID
+				th Nombre
+				th Email
+				th Cliente
+				th Rol
+		tbody
+
 	+component("component-data-definitions","","","","false","true")
 

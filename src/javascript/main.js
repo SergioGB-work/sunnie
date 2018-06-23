@@ -178,12 +178,19 @@ $(document).ready(function(){
 
 		$('[data="filters"]').each(function(){
 
-			var rel = $(this).data('rel') ? '_' + $(this).data('rel') : '';
+			var rels = $(this).data('rel') ? $(this).data('rel').split(',') : [];
 
 			$(this).find('[data-filter]').each(function(){
 
 				var filterParent = $(this);
-				var dataFilter = $(this).data('filter') + rel;
+
+
+				var dataFilter = [$(this).data('filter')];
+
+				for(var i=0; i<rels.length;i++){
+					dataFilter[i] = $(this).data('filter') + '_' + rels[i];
+				}
+
 				var search = window.location.search.replace('?','');
 		
 				filtersSearch = search.split('&');
@@ -193,8 +200,20 @@ $(document).ready(function(){
 					var finalHref = '';
 
 					if($(this).data('filter-value').toString() != ''){
-						finalHref = dataFilter + '=' + $(this).data('filter-value');
+
+						for(var i=0;i<dataFilter.length;i++){
+
+							var filterValue = $(this).data('filter-value');
+
+							if($(this).data('filter-value').toString().indexOf('=') < 0){
+								filterValue =  '=' + $(this).data('filter-value');
+							}
+
+							finalHref += dataFilter[i] +  filterValue + '&';
+						}
 					}
+
+					finalHref = finalHref.substring(0, finalHref.length - 1);
 					
 					for(var i=0;i<filtersSearch.length;i++){
 
@@ -211,7 +230,7 @@ $(document).ready(function(){
 							}
 						}
 						
-						else if(filter[0] != dataFilter){
+						else if(dataFilter.indexOf(filter[0]) < 0){
 
 								if(finalHref != ''){
 									finalHref += '&';
@@ -221,7 +240,8 @@ $(document).ready(function(){
 						}
 
 						//Comprueba el valor actual del filtro en la URL y lo pone en el filtro
-						if(filter[0] == dataFilter){
+						
+						if(dataFilter.indexOf(filter[0]) >= 0){
 							var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
 							dataFilterValue.parent().addClass('active');
 							filterParent.find('.filterValue').text(dataFilterValue.text());
@@ -348,7 +368,7 @@ function getData(el){
 						if(value.indexOf('=') < 0 ){
 							value = '=' + value;
 						}
-
+						alert(key);
 						filter += '&filter[where][and]['+count+']['+key+']' + value;
 						count++;
 					}
