@@ -6,7 +6,7 @@ mixin component-sample-form(content)
 			div(class="form-group")
 				label(for="exampleInputEmail1") ${{ sample-form.email }}$
 				input(type="email",class="form-control",id="exampleInputEmail1",placeholder="${{ sample-form.email }}$",disabled)
-				span(class="help-block") ${{ sample-form.helpText }}$
+				span(class="form-text") ${{ sample-form.helpText }}$
 
 			div(class="form-group")
 				label(for="exampleInputPassword1") ${{ sample-form.password }}$
@@ -26,7 +26,7 @@ mixin component-sample-form(content)
 			div(class="form-group")
 				label(for="exampleInputFile") ${{ sample-form.fileInput }}$
 				input(type="file",id="exampleInputFile")
-				p(class="help-block") ${{ sample-form.helpTextBlock }}$.
+				p(class="form-text") ${{ sample-form.helpTextBlock }}$.
 
 			div(class="checkbox custom")
 				input(type="checkbox",id="inputCheckSample")
@@ -48,7 +48,7 @@ mixin component-sample-form(content)
 				input(type="email",class="form-control",id="exampleInputEmail2",placeholder="jane.doe@example.com")
 
 			div(class="form-group")
-				button(type="submit",class="btn btn-default") ${{ sample-form.sendInvitation }}$
+				button(type="submit",class="btn btn-secondary") ${{ sample-form.sendInvitation }}$
 				
 		h4 ${{ sample-form.example }}$	
 		form(class="form-inline")
@@ -63,25 +63,25 @@ mixin component-sample-form(content)
 
 	div
 		h3 Horizontal form
-		form(class="form-horizontal")
+		form(class="form-group row")
 			div(class="form-group")
-				label(for="exampleInputEmail4", class="col-sm-2 control-label") ${{ sample-form.email }}$
+				label(for="exampleInputEmail4", class="col-sm-2 col-form-label") ${{ sample-form.email }}$
 				div(class="col-sm-10")
 					input(type="email",class="form-control",id="exampleInputEmail4",placeholder="${{ sample-form.email }}$")
 
 			div(class="form-group")
-				label(class="col-sm-2 control-label") ${{ sample-form.email }}$
+				label(class="col-sm-2 col-form-label") ${{ sample-form.email }}$
 				div(class="col-sm-10")
-					p(class="form-control-static") email@example.com
+					p(class="form-control-plaintext") email@example.com
 						
 
 			div(class="form-group")
-				label(for="exampleInputPassword3",class="col-sm-2 control-label") ${{ sample-form.password }}$
+				label(for="exampleInputPassword3",class="col-sm-2 col-form-label") ${{ sample-form.password }}$
 				div(class="col-sm-10")
 					input(type="password",class="form-control",id="exampleInputPassword3",placeholder="${{ sample-form.password }}$")
 
 			div(class="form-group")
-				label(for="exampleInputComment4", class="col-sm-2 control-label") ${{ sample-form.selectOption }}$
+				label(for="exampleInputComment4", class="col-sm-2 col-form-label") ${{ sample-form.selectOption }}$
 				div(class="col-sm-10")
 					select(class="form-control",name="select",id="exampleInputComment4")
 						option(value="option1") ${{ sample-form.option }}$ 1
@@ -89,10 +89,10 @@ mixin component-sample-form(content)
 						option(value="option3") ${{ sample-form.option }}$ 3
 
 			div(class="form-group")
-				label(for="exampleInputFile1",class="col-sm-2 control-label") ${{ sample-form.fileInput }}$
+				label(for="exampleInputFile1",class="col-sm-2 col-form-label") ${{ sample-form.fileInput }}$
 				div(class="col-sm-10")
 					input(type="file",id="exampleInputFile1")
-					p(class="help-block")
+					p(class="form-text")
 						| ${{ sample-form.helpTextBlock }}$
 
 			div(class="form-group")
@@ -137,12 +137,12 @@ mixin component-sample-form(content)
 					
 		h3 Inline
 		form
-			div(class="checkbox-inline")
+			div(class="form-check")
 				label
 					input(type="checkbox",value="")
 					| ${{ sample-form.optionOne }}$
 
-			div(class="checkbox-inline")
+			div(class="form-check")
 				label
 					input(type="checkbox",value="")
 					| ${{ sample-form.optionTwo }}$	

@@ -24,7 +24,7 @@
 }
 
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 
     .component-cards-list-carousel{
 

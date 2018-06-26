@@ -7,7 +7,7 @@ mixin component-breadcrumbs(content)
 		ol(class="breadcrumb nomargin")
 		
 			each item,i in content
-				li
+				li.breadcrumb-item
 					if i == length
 						a(href=item.url, class="active") #{item.pageName}
 					else

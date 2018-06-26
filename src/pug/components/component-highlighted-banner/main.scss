@@ -3,20 +3,20 @@
 
 .component.component-highlighted-banner{
 
-	background: $brand-primary;
+	background: $primary;
     padding: 40px 0;
 
     &.bg-danger{
-    	background: $brand-danger;
+    	background: $danger;
     }
     &.bg-success{
-    	background: $brand-success;
+    	background: $success;
     }
     &.bg-warning{
-    	background: $brand-warning;
+    	background: $warning;
     }
     &.bg-info{
-    	background: $brand-info;
+    	background: $info;
     }    
 
 	
@@ -45,7 +45,7 @@
 	}	
 }	
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	.component.component-highlighted-banner{
 		div[class^="col-"]{
 			.btn{

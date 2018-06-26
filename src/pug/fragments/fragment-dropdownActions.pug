@@ -4,7 +4,7 @@ mixin fragment-dropdownActions(content)
 	- var actions = ' '
 
 	div(class="dropdown")
-		button(id=id,type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="btn btn-link")
+		button(id=id,type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="btn btn-link dropdown-toggle")
 			.sr-only Acciones
 			i(class="fa fa-ellipsis-v icon-2x",aria-hidden="true")
 		ul(class="dropdown-menu",aria-labelledby=id)
@@ -12,5 +12,5 @@ mixin fragment-dropdownActions(content)
 
 			each value in content.actions
 
-				li
+				li.dropdown-item
 					a(href="javascript:void(0)")&attributes(value.data) #{value.text}

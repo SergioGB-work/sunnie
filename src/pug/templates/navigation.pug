@@ -1,63 +1,62 @@
-nav(class="navbar navbar-default",role="navigation")
+nav(class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar",role="navigation")
 
 	div(class="navbar-header")
-		button(type="button",class="navbar-toggle collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+		button(type="button",class="navbar-toggler collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
 
 			span(class="sr-only") Toggle navigation
 			span(class="icon-bar")
 			span(class="icon-bar")
 			span(class="icon-bar")
 
-	div(class="navbar-collapse collapse",id="navigation-list", aria-expanded="false")
+	div(class="navbar-nav-scroll",id="navigation-list", aria-expanded="false")
 
-		ul(class="nav navbar-nav")
-			li
-				a(href="./home.html", title="${{ default.goTo }}$ ${{ default.home }}$")
+		ul(class="navbar-nav bd-navbar-nav flex-row")
+			li.nav-item
+				a(href="./home.html", title="${{ default.goTo }}$ ${{ default.home }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.home }}$
 
-			li
-				a(href="./get-started.html", title="${{ default.goTo }}$ ${{ default.getStarted }}$")
+			li.nav-item
+				a(href="./get-started.html", title="${{ default.goTo }}$ ${{ default.getStarted }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.getStarted }}$
 
-			li
-				a(href="./html-elemments.html", title="${{ default.goTo }}$ ${{ default.htmlElements }}$", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="html-elements")
+			li.nav-item.dropdown
+				a(href="./html-elemments.html", title="${{ default.goTo }}$ ${{ default.htmlElements }}$", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="html-elements", class="nav-link dropdown-toggle d-flex d-flex align-items-center")
 					span ${{ default.htmlElements }}$
-					span(class="caret")
 
 				ul(class="dropdown-menu",aria-labelledby="html-elements")
-					li
+					li.dropdown-item
 						a(href="./typography.html", title="${{ default.goTo }}$ ${{ default.typography }}$") ${{ default.typography }}$
-					li
+					li.dropdown-item
 						a(href="./lists.html", title="${{ default.goTo }}$ ${{ default.lists }}$") ${{ default.lists }}$
-					li
+					li.dropdown-item
 						a(href="./tables.html", title="${{ default.goTo }}$ ${{ default.tables }}$") ${{ default.tables }}$
-					li
+					li.dropdown-item
 						a(href="./buttons.html", title="${{ default.goTo }}$ ${{ default.buttons }}$") ${{ default.buttons }}$	
-					li
+					li.dropdown-item
 						a(href="./forms.html", title="${{ default.goTo }}$ ${{ default.forms }}$") ${{ default.forms }}$
-					li
+					li.dropdown-item
 						a(href="./modals.html", title="${{ default.goTo }}$ ${{ default.modals }}$") ${{ default.modals }}$
 
-			li
-				a(href="./layouts.html", title="${{ default.goTo }}$ ${{ default.layouts }}$")
+			li.nav-item
+				a(href="./layouts.html", title="${{ default.goTo }}$ ${{ default.layouts }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.layouts }}$
 
-			li
-				a(href="./components.html", title="${{ default.goTo }}$ ${{ default.components }}$")
+			li.nav-item
+				a(href="./components.html", title="${{ default.goTo }}$ ${{ default.components }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.components }}$
 
-			li
-				a(href="./pages.html", title="${{ default.goTo }}$ ${{ default.pages }}$")
+			li.nav-item
+				a(href="./pages.html", title="${{ default.goTo }}$ ${{ default.pages }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.pages }}$
 
-			li
-				a(href="./data-definitions.html", title="${{ default.goTo }}$ ${{ default.dataDefinitions }}$")
+			li.nav-item
+				a(href="./data-definitions.html", title="${{ default.goTo }}$ ${{ default.dataDefinitions }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.dataDefinitions }}$
 
-			li
-				a(href="./js-functions.html", title="${{ default.goTo }}$ ${{ default.jsFunctions }}$")
+			li.nav-item
+				a(href="./js-functions.html", title="${{ default.goTo }}$ ${{ default.jsFunctions }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.jsFunctions }}$
 
-			li
-				a(href="./generators.html", title="${{ default.goTo }}$ ${{ default.generators }}$")
+			li.nav-item
+				a(href="./generators.html", title="${{ default.goTo }}$ ${{ default.generators }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.generators }}$					

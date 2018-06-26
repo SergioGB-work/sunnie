@@ -1,16 +1,16 @@
 mixin component-data-definitions(content)
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h1 ${{ data-definitions.pageTitle }}$
 
 					p ${{ data-definitions.paragraph1 }}$
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2(id="data-definitions-data-loading-block") ${{ data-definitions.dataLoadingTitle }}$
 					
 					p ${{ data-definitions.dataLoadingParagraph1 }}$
@@ -18,97 +18,97 @@ mixin component-data-definitions(content)
 					p ${{ data-definitions.dataLoadingParagraph2 }}$
 							
 					p ${{ data-definitions.dataLoadingParagraph3 }}$
-					.table-responsive
-						table(class="table")
-							thead
-								tr
-									th ${{ data-definitions.dataLoadingTableTH1 }}$
-									th ${{ data-definitions.dataLoadingTableTH2 }}$
-									th ${{ data-definitions.dataLoadingTableTH3 }}$
-									th ${{ data-definitions.dataLoadingTableTH4 }}$
-							tbody
-								tr
-									td <strong>service-data</strong>
-									td ${{ data-definitions.dataLoadingTableServiceDataDescription }}$
-									td ""
-									td data-service-data="/clientes/59/usuarios"
 
-								tr
-									td <strong>method</strong>
-									td ${{ data-definitions.dataLoadingTableMethodDescription }}$
-									td "GET"
-									td data-method = "POST"
+					table(class="table table-responsive")
+						thead
+							tr
+								th ${{ data-definitions.dataLoadingTableTH1 }}$
+								th ${{ data-definitions.dataLoadingTableTH2 }}$
+								th ${{ data-definitions.dataLoadingTableTH3 }}$
+								th ${{ data-definitions.dataLoadingTableTH4 }}$
+						tbody
+							tr
+								td <strong>service-data</strong>
+								td ${{ data-definitions.dataLoadingTableServiceDataDescription }}$
+								td ""
+								td data-service-data="/clientes/59/usuarios"
 
-								tr
-									td <strong>template</strong>
-									td ${{ data-definitions.dataLoadingTableTemplateDescription }}$
-									td ""
-									td data-template = "#templateClientes"
+							tr
+								td <strong>method</strong>
+								td ${{ data-definitions.dataLoadingTableMethodDescription }}$
+								td "GET"
+								td data-method = "POST"
 
-								tr
-									td <strong>target</strong>
-									td ${{ data-definitions.dataLoadingTableTargetDescription }}$
-									td ""
-									td data-template = ".table-clientes tbody"
+							tr
+								td <strong>template</strong>
+								td ${{ data-definitions.dataLoadingTableTemplateDescription }}$
+								td ""
+								td data-template = "#templateClientes"
 
-								tr
-									td <strong>initial-page</strong>
-									td ${{ data-definitions.dataLoadingTableInitialPageDescription }}$
-									td "0"
-									td data-initial-page= "1"					
+							tr
+								td <strong>target</strong>
+								td ${{ data-definitions.dataLoadingTableTargetDescription }}$
+								td ""
+								td data-template = ".table-clientes tbody"
 
-								tr
-									td <strong>items-per-page</strong>
-									td ${{ data-definitions.dataLoadingTableItemsPerPageDescription }}$
-									td "0"
-									td data-items-per-page = "10"	
+							tr
+								td <strong>initial-page</strong>
+								td ${{ data-definitions.dataLoadingTableInitialPageDescription }}$
+								td "0"
+								td data-initial-page= "1"					
 
-								tr
-									td <strong>aditionalData</strong>
-									td ${{ data-definitions.dataLoadingTableAditionalDataDescription }}$
-									td ""
-									td data-aditionalData = "{cliente : 55 , usuario : 12}"	
+							tr
+								td <strong>items-per-page</strong>
+								td ${{ data-definitions.dataLoadingTableItemsPerPageDescription }}$
+								td "0"
+								td data-items-per-page = "10"	
 
-								tr
-									td <strong>callback</strong>
-									td ${{ data-definitions.dataLoadingTableCallbackDescription }}$
-									td ""
-									td data-callback = "callbackCargaClientes"
+							tr
+								td <strong>aditionalData</strong>
+								td ${{ data-definitions.dataLoadingTableAditionalDataDescription }}$
+								td ""
+								td data-aditionalData = "{cliente : 55 , usuario : 12}"	
 
-								tr
-									td <strong>content</strong>
-									td ${{ data-definitions.dataLoadingTableContentDescription }}$
-									td ""
-									td data-content = ""
-								tr
-									td <strong>enable-get-params</strong>
-									td ${{ data-definitions.dataLoadingTableEnableGetParamsDescription }}$
-									td ""
-									td data-enable-get-params = "true"
+							tr
+								td <strong>callback</strong>
+								td ${{ data-definitions.dataLoadingTableCallbackDescription }}$
+								td ""
+								td data-callback = "callbackCargaClientes"
 
-								tr
-									td <strong>get-params-list</strong>
-									td ${{ data-definitions.dataLoadingTableGetParamsListDescription }}$
-									td ""
-									td data-get-params-list = "order,activo,nombre_cliente"
+							tr
+								td <strong>content</strong>
+								td ${{ data-definitions.dataLoadingTableContentDescription }}$
+								td ""
+								td data-content = ""
+							tr
+								td <strong>enable-get-params</strong>
+								td ${{ data-definitions.dataLoadingTableEnableGetParamsDescription }}$
+								td ""
+								td data-enable-get-params = "true"
 
-								tr
-									td <strong>rel</strong>
-									td ${{ data-definitions.dataLoadingTableRelDescription }}$
-									td ""
-									td data-rel = "group1"
+							tr
+								td <strong>get-params-list</strong>
+								td ${{ data-definitions.dataLoadingTableGetParamsListDescription }}$
+								td ""
+								td data-get-params-list = "order,activo,nombre_cliente"
 
-								tr
-									td <strong>live-reload</strong>
-									td ${{ data-definitions.dataLoadingTableLiveReloadDescription }}$
-									td "false"
-									td data-live-reload = "true"
+							tr
+								td <strong>rel</strong>
+								td ${{ data-definitions.dataLoadingTableRelDescription }}$
+								td ""
+								td data-rel = "group1"
 
-								tr
-									td <strong>time-reload</strong>
-									td ${{ data-definitions.dataLoadingTableTimeReloadDescription }}$
-									td "60000"
-									td data-time-reload = 30000
+							tr
+								td <strong>live-reload</strong>
+								td ${{ data-definitions.dataLoadingTableLiveReloadDescription }}$
+								td "false"
+								td data-live-reload = "true"
+
+							tr
+								td <strong>time-reload</strong>
+								td ${{ data-definitions.dataLoadingTableTimeReloadDescription }}$
+								td "60000"
+								td data-time-reload = 30000
 
 					h3 ${{ data-definitions.dataExampleTitle }}$
 					
@@ -154,9 +154,9 @@ mixin component-data-definitions(content)
 						|	| {%/if%}	
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2(id="data-definitions-data-pagination-block") ${{ data-definitions.dataPaginationTitle }}$
 
 					p ${{ data-definitions.dataPaginationParagraph1 }}$
@@ -165,104 +165,104 @@ mixin component-data-definitions(content)
 
 					p ${{ data-definitions.dataPaginationParagraph3 }}$
 
-					.table-responsive
-						table(class="table")
-							thead
-								tr
-									th ${{ data-definitions.dataPaginationTableTH1 }}$
-									th ${{ data-definitions.dataPaginationTableTH2 }}$
-									th ${{ data-definitions.dataPaginationTableTH3 }}$
-									th ${{ data-definitions.dataPaginationTableTH4 }}$
-							tbody
-								tr
-									td <strong>pagination-service-data-all</strong>
-									td ${{ data-definitions.dataPaginationTableSeviceDataDescription }}$
-									td data-service-data || ""
-									td data-pagination-service-data-all="/clientes/59/usuarios"
 
-								tr
-									td <strong>pagination-method</strong>
-									td ${{ data-definitions.dataPaginationTableMethodDescription }}$
-									td data-method || ""
-									td pagination-data-method = "POST"
+					table(class="table table-responsive")
+						thead
+							tr
+								th ${{ data-definitions.dataPaginationTableTH1 }}$
+								th ${{ data-definitions.dataPaginationTableTH2 }}$
+								th ${{ data-definitions.dataPaginationTableTH3 }}$
+								th ${{ data-definitions.dataPaginationTableTH4 }}$
+						tbody
+							tr
+								td <strong>pagination-service-data-all</strong>
+								td ${{ data-definitions.dataPaginationTableSeviceDataDescription }}$
+								td data-service-data || ""
+								td data-pagination-service-data-all="/clientes/59/usuarios"
 
-								tr
-									td <strong>pagination-template</strong>
-									td ${{ data-definitions.dataPaginationTableTemplateDescription }}$
-									td data-template || ""
-									td data-pagination-template = "#templateClientes"
+							tr
+								td <strong>pagination-method</strong>
+								td ${{ data-definitions.dataPaginationTableMethodDescription }}$
+								td data-method || ""
+								td pagination-data-method = "POST"
 
-								tr
-									td <strong>pagination-target</strong>
-									td ${{ data-definitions.dataPaginationTableTargetDescription }}$
-									td data-template || ""
-									td data-pagination-template = ".table-clientes tbody"				
+							tr
+								td <strong>pagination-template</strong>
+								td ${{ data-definitions.dataPaginationTableTemplateDescription }}$
+								td data-template || ""
+								td data-pagination-template = "#templateClientes"
 
-								tr
-									td <strong>pagination-container-target</strong>
-									td ${{ data-definitions.dataPaginationTableContainerTargetDescription }}$
-									td ".pagination"
-									td data-pagination-container-target = ".container-pagination"
+							tr
+								td <strong>pagination-target</strong>
+								td ${{ data-definitions.dataPaginationTableTargetDescription }}$
+								td data-template || ""
+								td data-pagination-template = ".table-clientes tbody"				
 
-								tr
-									td <strong>pagination-initial-page</strong>
-									td ${{ data-definitions.dataPaginationTableInitialPageDescription }}$
-									td data-initial-page
-									td data-initial-page= "1"					
+							tr
+								td <strong>pagination-container-target</strong>
+								td ${{ data-definitions.dataPaginationTableContainerTargetDescription }}$
+								td ".pagination"
+								td data-pagination-container-target = ".container-pagination"
 
-								tr
-									td <strong>pagination-items-per-page</strong>
-									td ${{ data-definitions.dataPaginationTableItemsPerPageDescription }}$
-									td "data-items-per-page"
-									td data-pagination-items-per-page = "10"	
+							tr
+								td <strong>pagination-initial-page</strong>
+								td ${{ data-definitions.dataPaginationTableInitialPageDescription }}$
+								td data-initial-page
+								td data-initial-page= "1"					
 
-								tr
-									td <strong>pagination-aditionalData</strong>
-									td ${{ data-definitions.dataPaginationTableAditionalDataDescription }}$
-									td data-aditionalData || ""
-									td data-pagination-aditionalData = "{cliente : 55 , usuario : 12}"	
+							tr
+								td <strong>pagination-items-per-page</strong>
+								td ${{ data-definitions.dataPaginationTableItemsPerPageDescription }}$
+								td "data-items-per-page"
+								td data-pagination-items-per-page = "10"	
 
-								tr
-									td <strong>pagination-callback</strong>
-									td ${{ data-definitions.dataPaginationTableCallbackDescription }}$
-									td data-callback || ""
-									td data-pagination-callback = "callbackCargaClientes"
+							tr
+								td <strong>pagination-aditionalData</strong>
+								td ${{ data-definitions.dataPaginationTableAditionalDataDescription }}$
+								td data-aditionalData || ""
+								td data-pagination-aditionalData = "{cliente : 55 , usuario : 12}"	
 
-								tr
-									td <strong>pagination-content</strong>
-									td ${{ data-definitions.dataPaginationTableContentDescription }}$
-									td ""
-									td data-pagination-content = ""
+							tr
+								td <strong>pagination-callback</strong>
+								td ${{ data-definitions.dataPaginationTableCallbackDescription }}$
+								td data-callback || ""
+								td data-pagination-callback = "callbackCargaClientes"
 
-								tr
-									td <strong>pagination-enable-get-params</strong>
-									td ${{ data-definitions.dataPaginationTableEnableGetParamsDescription }}$
-									td data-enable-get-params || ""
-									td data-pagination-enable-get-params = "true"
+							tr
+								td <strong>pagination-content</strong>
+								td ${{ data-definitions.dataPaginationTableContentDescription }}$
+								td ""
+								td data-pagination-content = ""
 
-								tr
-									td <strong>pagination-get-params-list</strong>
-									td ${{ data-definitions.dataPaginationTableGetParamsListDescription }}$
-									td data-get-params-list || ""
-									td data-pagination-get-params-list = "order,activo,nombre_cliente"
+							tr
+								td <strong>pagination-enable-get-params</strong>
+								td ${{ data-definitions.dataPaginationTableEnableGetParamsDescription }}$
+								td data-enable-get-params || ""
+								td data-pagination-enable-get-params = "true"
 
-								tr
-									td <strong>pagination-rel</strong>
-									td ${{ data-definitions.dataPaginationTableRelDescription }}$
-									td data-rel || ""
-									td data-pagination-rel = "group1"
+							tr
+								td <strong>pagination-get-params-list</strong>
+								td ${{ data-definitions.dataPaginationTableGetParamsListDescription }}$
+								td data-get-params-list || ""
+								td data-pagination-get-params-list = "order,activo,nombre_cliente"
 
-								tr
-									td <strong>pagination-live-reload</strong>
-									td ${{ data-definitions.dataPaginationTableLiveReloadDescription }}$
-									td data-live-reload || "false"
-									td data-pagination-live-reload = "true"
+							tr
+								td <strong>pagination-rel</strong>
+								td ${{ data-definitions.dataPaginationTableRelDescription }}$
+								td data-rel || ""
+								td data-pagination-rel = "group1"
 
-								tr
-									td <strong>pagination-time-reload</strong>
-									td ${{ data-definitions.dataPaginationTableTimeReloadDescription }}$
-									td data-time-reload || "60000"
-									td data-pagination-time-reload = 30000
+							tr
+								td <strong>pagination-live-reload</strong>
+								td ${{ data-definitions.dataPaginationTableLiveReloadDescription }}$
+								td data-live-reload || "false"
+								td data-pagination-live-reload = "true"
+
+							tr
+								td <strong>pagination-time-reload</strong>
+								td ${{ data-definitions.dataPaginationTableTimeReloadDescription }}$
+								td data-time-reload || "60000"
+								td data-pagination-time-reload = 30000
 
 					h3 ${{ data-definitions.dataExampleTitle }}$
 
@@ -280,9 +280,9 @@ mixin component-data-definitions(content)
 						|     tbody
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2(id="data-definitions-data-search-block") ${{ data-definitions.dataSearchTitle }}$
 
 					p ${{ data-definitions.dataSearchParagraph1 }}$
@@ -306,9 +306,9 @@ mixin component-data-definitions(content)
 					p ${{ data-definitions.dataSearchParagraph5 }}$
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2(id="data-definitions-data-filter-block") ${{ data-definitions.dataFilterTitle }}$
 
 					p ${{ data-definitions.dataFilterParagraph1 }}$
@@ -327,103 +327,101 @@ mixin component-data-definitions(content)
 
 					pre
 						| ul.filterBar.list-inline(data="filters",data-rel="group1")
-						|    li.dropdown(data-filter="order")
+						|    li.dropdown.list-inline-item(data-filter="order")
 						|        a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
 						|            span Ordenar por: <span class="filterValue"></span>
 						|            span(class="caret")
 
 						|        ul(class="dropdown-menu")
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="") All
 
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="username%20ASC") Name Asc
 
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="username%20DESC") Name Desc
 
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="email%20ASC") Email Asc
 
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="email%20DESC") Email Desc
 							
-						|    li.dropdown(data-filter="activo")
+						|    li.dropdown.list-inline-item(data-filter="activo")
 						|        a(href="javascript:void(0)",aria-expanded="false",class="dropdown-toggle",data-toggle="dropdown")
 						|            span Ordenar por: <span class="filterValue"></span>
 						|            span(class="caret")
 
 						|        ul(class="dropdown-menu")
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="") All
 
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="1") Activated
 
-						|            li
+						|            li.dropdown-item
 						|                a(href="",data-filter-value="0") Desactivated
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2(id="data-definitions-data-roles-block") ${{ data-definitions.dataRoleTitle }}$
 
 					p ${{ data-definitions.dataRoleTitle }}$
 
-					.table-responsive
-						table(class="table")
-							thead
-								tr
-									th ${{ data-definitions.dataRoleTableTH1 }}$
-									th ${{ data-definitions.dataRoleTableTH2 }}$
-									th ${{ data-definitions.dataRoleTableTH3 }}$
-							tbody
-								tr
-									td <strong>auth-rol</strong>
-									td ${{ data-definitions.dataRoleTableContainerAuthRolDescription }}$
-									td data-auth-rol="3"
+					table(class="table table-responsive")
+						thead
+							tr
+								th ${{ data-definitions.dataRoleTableTH1 }}$
+								th ${{ data-definitions.dataRoleTableTH2 }}$
+								th ${{ data-definitions.dataRoleTableTH3 }}$
+						tbody
+							tr
+								td <strong>auth-rol</strong>
+								td ${{ data-definitions.dataRoleTableContainerAuthRolDescription }}$
+								td data-auth-rol="3"
 
-								tr
-									td <strong>auth-rol-eq</strong>
-									td ${{ data-definitions.dataRoleTableContainerAuthRolEqDescription }}$
-									td data-auth-rol-eq = "2"
+							tr
+								td <strong>auth-rol-eq</strong>
+								td ${{ data-definitions.dataRoleTableContainerAuthRolEqDescription }}$
+								td data-auth-rol-eq = "2"
 
 
 					p ${{ data-definitions.dataRoleParagraph2 }}$
 
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2(id="data-definitions-data-form-block") ${{ data-definitions.dataFormTitle }}$
 					p ${{ data-definitions.dataFormParagraph1 }}$
 
-					.table-responsive
-						table(class="table")
-							thead
-								tr
-									th ${{ data-definitions.dataFormTableTH1 }}$
-									th ${{ data-definitions.dataFormTableTH2 }}$
-									th ${{ data-definitions.dataFormTableTH3 }}$
-							tbody
-								tr
-									td <strong>toggle</strong>
-									td ${{ data-definitions.dataFormTableContainerToggleDescription }}$
-									td data-toggle="validator"
-								tr
-									td <strong>action</strong>
-									td ${{ data-definitions.dataFormTableContainerActionDescription }}$
-									td data-action=api +"/usuario/add"
-								tr
-									td <strong>method</strong>
-									td ${{ data-definitions.dataFormTableContainerMethodDescription }}$
-									td data-method="POST"
-								tr
-									td <strong>callback</strong>
-									td ${{ data-definitions.dataFormTableContainerCallbackDescription }}$
-									td data-callback="calllbackAddUser"
+					table(class="table table-responsive")
+						thead
+							tr
+								th ${{ data-definitions.dataFormTableTH1 }}$
+								th ${{ data-definitions.dataFormTableTH2 }}$
+								th ${{ data-definitions.dataFormTableTH3 }}$
+						tbody
+							tr
+								td <strong>toggle</strong>
+								td ${{ data-definitions.dataFormTableContainerToggleDescription }}$
+								td data-toggle="validator"
+							tr
+								td <strong>action</strong>
+								td ${{ data-definitions.dataFormTableContainerActionDescription }}$
+								td data-action=api +"/usuario/add"
+							tr
+								td <strong>method</strong>
+								td ${{ data-definitions.dataFormTableContainerMethodDescription }}$
+								td data-method="POST"
+							tr
+								td <strong>callback</strong>
+								td ${{ data-definitions.dataFormTableContainerCallbackDescription }}$
+								td data-callback="calllbackAddUser"
 
 					p ${{ data-definitions.dataFormParagraph2 }}$
 
@@ -435,30 +433,30 @@ mixin component-data-definitions(content)
 						| form(data-toggle="validator",role="form",data-callback="callbackAddUser",data-method="POST",data-action=api + "/usuarios")
 
 						|    .row
-						|        .col-md-6.col-xs-12
+						|        .col-md-6.col-12
 						|            div(class="form-group")
 						|                label(for="user_name") Name
 						|                input(type="text",class="form-control",id="user_name",placeholder="Username", name="username",required)
 
-						|        .col-md-6.col-xs-12
+						|        .col-md-6.col-12
 						|            div(class="form-group")
 						|                label(for="user_email") Email
 						|                input(type="email",class="form-control",id="user_email",placeholder="Email", name="email",required)
 
 						|    .row
-						|        .col-md-6.col-xs-12
+						|        .col-md-6.col-12
 						|            div(class="form-group")
 						|                label(for="user_pass") Password
 						|                input(type="password",class="form-control",id="user_pass",placeholder="Password", name="password",required)
 
-						|        .col-md-6.col-xs-12
+						|        .col-md-6.col-12
 						|            div(class="form-group")
 						|                label(for="user_pass2") Repeat Password
 						|                input(type="password",class="form-control",id="user_pass2",placeholder="Repeat password",required,data-match="#user_pass" data-match-error="Password no match")
-						|                div(class="help-block with-errors")
+						|                div(class="form-text with-errors")
 
 						|    .row
-						|        .col-xs-12
+						|        .col-12
 						|            div(class="form-group text-right")
-						|                button(type="button",class="btn btn-default") Cancel
+						|                button(type="button",class="btn btn-secondary") Cancel
 						|                button(type="submit",class="btn btn-primary",class="send") Save						

@@ -46,10 +46,6 @@
 				align-items:center;
 				padding-left:$grid-gutter-width;
 				float:right;
-
-				i{
-					color:$navbar-default-toggle-icon-bar-bg;
-				}
 			}
 
 			.dropdown-menu{
@@ -60,7 +56,7 @@
 	}	
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	#header{
 		padding:0 $grid-gutter-width;
 		background: $header-bg;

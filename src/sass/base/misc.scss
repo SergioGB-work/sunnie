@@ -21,8 +21,8 @@
 	
 	&.btn-border-primary{
 		background:transparent;
-		border:1px solid $brand-primary;
-		color:$brand-primary;
+		border:1px solid $primary;
+		color:$primary;
 	}
 	&,&:active,&.active {
 		&:focus,&.focus {
@@ -53,7 +53,7 @@
 	border-right:0;
 }
 
-.help-block{
+.form-text{
 	font-size: ceil(($font-size-base * 0.75));
 	font-weight:400;
 }
@@ -67,7 +67,7 @@
 
 				&:hover,&:focus{
 					&:before{
-						border-color:$brand-primary;
+						border-color:$primary;
 					}	
 				}
 
@@ -91,8 +91,8 @@
 			&:checked + label{
 				&:before{
 					content: '\f00c';
-					color:$brand-primary;
-					border-color:$brand-primary;
+					color:$primary;
+					border-color:$primary;
 					font-family:FontAwesome;
 				}
 			}
@@ -105,7 +105,7 @@
 		+ label{
 			&:hover,&:focus{
 				&:before{
-					border-color:$brand-primary;
+					border-color:$primary;
 				}	
 			}
 
@@ -129,8 +129,8 @@
 		&:checked + label{
 			&:before{
 				content: '\f00c';
-				color:$brand-primary;
-				border-color:$brand-primary;
+				color:$primary;
+				border-color:$primary;
 				font-family:FontAwesome;
 			}
 		}
@@ -212,12 +212,12 @@
 }
 
 /** PANELS **/
-.panel{
+.card{
 	border:0;
 	box-shadow: $box-shadow;
 	margin-bottom:$grid-gutter-width;
 
-	.panel-body{
+	.card-body{
 		>{
 			h1,h2,h3,h4,h5,h6{
 				margin-top:0;
@@ -248,7 +248,7 @@
 	margin:0;
 }
 
-.navbar-toggle{
+.navbar-toggler{
 	padding: $navbar-toggle-padding;
 	margin: $navbar-toggle-margin;
 	float:left;

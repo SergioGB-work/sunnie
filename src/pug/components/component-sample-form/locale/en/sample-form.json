@@ -1,7 +1,7 @@
 {
   "pageTitle":"Forms",
   "email":"Email address",
-  "helpText":"This text is a help-block",
+  "helpText":"This text is a form-text",
   "password":"Password",
   "comment":"Comment",
   "typeComment":"Type your comment",

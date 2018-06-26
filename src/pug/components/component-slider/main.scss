@@ -11,7 +11,7 @@
 			position:absolute;
 		}
 		.owl-page.active span{
-			background: $brand-primary;
+			background: $primary;
 		}
 
 		.owl-buttons{
@@ -24,7 +24,7 @@
 	}	
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	.component-slider{
 		.owl-theme .owl-controls {
 			.owl-buttons{ 

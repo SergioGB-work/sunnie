@@ -2,9 +2,9 @@ mixin component-layouts(content)
 	- var content = content;
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h1 Layouts
 
 					p ${{ layouts.paragraph1 }}$
@@ -15,27 +15,27 @@ mixin component-layouts(content)
 
 					p ${{ layouts.layoutsDefinitionParagraph2 }}$
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2 ${{ layouts.layoutsListTitle }}$
 					p ${{ layouts.layoutsListTitleParagraph1 }}$
 	.row.layouts-list
 		each item in content
-			.col-lg-2.col-md-3.col-sm-4.col-xs-6
+			.col-lg-2.col-md-3.col-sm-4.col-6
 				+fragment("fragment-card",item)
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2 ${{ layouts.layoutsLocalizationTitle }}$
 
 					p ${{ layouts.layoutsLocalizationParagraph1 }}$
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2 ${{ layouts.layoutsGeneratorTitle }}$
 
 					p ${{ layouts.layoutsGeneratorParagraph1 }}$

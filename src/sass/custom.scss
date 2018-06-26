@@ -15,7 +15,7 @@
 	margin-bottom: $grid-gutter-width;
 }
 
-@media (max-width: $screen-xs-max) {
+@include media-breakpoint-down(xs) {
 	.text-center-xs{
 		text-align:center;
 	}
@@ -29,7 +29,7 @@
 	&.active{
 		display:block;	
 	    position: fixed;
-	    background: $brand-primary;
+	    background: $primary;
 	    top: 0;
 	    width: 0%;
 	    height: 2px;		
@@ -94,7 +94,7 @@
 .action-edit,.action-delete,.action-view{
 	&:hover,&:focus{
 		&:before{
-			color:$brand-primary;
+			color:$primary;
 		}
 	}
 }	
@@ -222,7 +222,7 @@
     flex-wrap:wrap;
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	.flex-center-center-sm{
 	    align-items: center !important;
 	    display: flex !important;
@@ -243,7 +243,7 @@ input{
 			cursor:pointer;
 
 			&:before{
-				background:$brand-primary;
+				background:$primary;
 				opacity:0.2;
 				position: absolute;
 			    width: 100%;
@@ -265,10 +265,10 @@ input{
 			    margin-top: -26px;
 			    left: 50%;
 			    margin-left: -26px;
-			    border: 2px solid $brand-primary;
+			    border: 2px solid $primary;
 			    border-radius: 50%;
 			    padding: ceil(($font-size-base / 2));
-			    color:$brand-primary;
+			    color:$primary;
 			    opacity:0;
 			    transition: all 0.2s linear 0s;
 			}
@@ -317,7 +317,7 @@ input{
 
 
 /** FRAGMENTS **/
-@media (max-width: $screen-xs-max) {
+@include media-breakpoint-down(xs) {
 	.fragment-dropdownActions{
 		.dropdown-menu{
 			right:0;

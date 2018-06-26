@@ -41,7 +41,7 @@
 
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	.component.component-highlighted-flips{
 		padding:60px 0;
 

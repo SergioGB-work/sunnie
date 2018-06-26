@@ -1,8 +1,8 @@
 mixin component-getStarted(content)
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h1 ${{ getStarted.pageTitle }}$
 
 					p ${{ getStarted.paragraph1 }}$
@@ -10,9 +10,9 @@ mixin component-getStarted(content)
 					p ${{ getStarted.paragraph2 }}$
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2 ${{ getStarted.installationTitle }}$
 
 					p ${{ getStarted.installationParagraph1 }}$
@@ -23,9 +23,9 @@ mixin component-getStarted(content)
 					p ${{ getStarted.installationParagraph2 }}$
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2 ${{ getStarted.initServerTitle }}$
 					
 					p ${{ getStarted.initServerParagraph1 }}$
@@ -43,40 +43,39 @@ mixin component-getStarted(content)
 
 					p ${{ getStarted.initServerParagraph6 }}$
 
-					.table-responsive
-						table(class="table")
-							thead
-								tr
-									th ${{ getStarted.initServerTableTH1 }}$
-									th ${{ getStarted.initServerTableTH2 }}$
-									th ${{ getStarted.initServerTableTH3 }}$
-							tbody
-								tr
-									td <strong>deploy</strong>
-									td ${{ getStarted.initServerTableContainerDeployDescription }}$
-									td gulp deploy
+					table(class="table table-responsive")
+						thead
+							tr
+								th ${{ getStarted.initServerTableTH1 }}$
+								th ${{ getStarted.initServerTableTH2 }}$
+								th ${{ getStarted.initServerTableTH3 }}$
+						tbody
+							tr
+								td <strong>deploy</strong>
+								td ${{ getStarted.initServerTableContainerDeployDescription }}$
+								td gulp deploy
 
-								tr
-									td <strong>deployCSS</strong>
-									td ${{ getStarted.initServerTableContainerDeployCSSDescription }}$
-									td gulp deployCSS					
+							tr
+								td <strong>deployCSS</strong>
+								td ${{ getStarted.initServerTableContainerDeployCSSDescription }}$
+								td gulp deployCSS					
 
-								tr
-									td <strong>deployJS</strong>
-									td ${{ getStarted.initServerTableContainerDeployJSDescription }}$
-									td gulp deployJS
+							tr
+								td <strong>deployJS</strong>
+								td ${{ getStarted.initServerTableContainerDeployJSDescription }}$
+								td gulp deployJS
 
-								tr
-									td <strong>deployPUG</strong>
-									td ${{ getStarted.initServerTableContainerDeployPUGDescription }}$
-									td gulp deployPUG
+							tr
+								td <strong>deployPUG</strong>
+								td ${{ getStarted.initServerTableContainerDeployPUGDescription }}$
+								td gulp deployPUG
 
 					p ${{ getStarted.initServerParagraph7 }}$		
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h2 ${{ getStarted.structureProjectTitle }}$
 
 					p ${{ getStarted.structureProjectParagraph1 }}$

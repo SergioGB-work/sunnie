@@ -1,13 +1,13 @@
 mixin component-sample-list(content)
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h1.nomargin ${{ sample-list.lists }}$
 
-		.col-sm-6.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-sm-6.col-12
+			.card
+				.card-body
 					h3 Unordered List
 					ul
 						li Lorem ipsum dolor sit amet
@@ -24,8 +24,8 @@ mixin component-sample-list(content)
 						li Aenean sit amet erat nunc
 						li Eget porttitor lorem
 
-			.panel.panel-default
-				.panel-body
+			.card
+				.card-body
 					h3 Ordenered List	
 					ol
 						li Lorem ipsum dolor sit amet
@@ -42,10 +42,10 @@ mixin component-sample-list(content)
 						li Aenean sit amet erat nunc
 						li Eget porttitor lorem
 
-			.panel.panel-default
-				.panel-body
+			.card
+				.card-body
 					h3 Horizontal Definition List
-					dl(class="dl-horizontal")
+					dl(class="row")
 						dt Description lists
 						dd A description list is perfect for defining terms.
 						dt Euismod
@@ -54,9 +54,9 @@ mixin component-sample-list(content)
 						dt Malesuada porta
 						dd Etiam porta sem malesuada magna mollis euismod.
 
-		.col-sm-6.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-sm-6.col-12
+			.card
+				.card-body
 					h3 List Unstyled
 					ul(class="list-unstyled")
 							li Lorem ipsum dolor sit amet
@@ -73,18 +73,18 @@ mixin component-sample-list(content)
 							li Aenean sit amet erat nunc
 							li Eget porttitor lorem
 
-		.col-sm-6.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-sm-6.col-12
+			.card
+				.card-body
 					h3 List Inline
 					ul(class="list-inline")
-						li Lorem ipsum
-						li Lorem ipsum
-						li Lorem ipsum
+						li.list-inline-item Lorem ipsum
+						li.list-inline-item Lorem ipsum
+						li.list-inline-item Lorem ipsum
 				
-		.col-sm-6.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-sm-6.col-12
+			.card
+				.card-body
 					h3 Definition List Standar
 					dl 
 						dt Description lists

@@ -64,7 +64,7 @@ mixin component-navigation(content)
 								if(child.active == 'true')
 									- var childActive = "active"
 
-								li(class=active)
+								li(class="dropdown-item" + active)
 									a(href=childHref,title=childTitle) #{childText}
 
 				else if(item.childs)
