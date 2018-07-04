@@ -98,7 +98,7 @@
 			
 			&:hover,&:focus{
 				&:before{
-					border-color:$brand-primary;
+					border-color:$primary;
 				}	
 			}	
 			&:before{
@@ -121,8 +121,8 @@
 			a{
 				&:before{
 					content: '\f00c';
-					color:$brand-primary;
-					border-color:$brand-primary;
+					color:$primary;
+					border-color:$primary;
 					font-family:FontAwesome;
 				}				
 			}
