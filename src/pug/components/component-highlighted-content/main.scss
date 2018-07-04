@@ -16,17 +16,6 @@
 	.btn{
 		margin-top: $grid-gutter-width;
 		min-width: 200px;
-		font-size: ceil(($font-size-base * 1.25));
-	}
-	
-	.container,.container-fluid{
-	
-		> .row{
-			display: -webkit-flex;
-			display: -ms-flexbox;
-			display: flex;
-			align-items:center;
-		}
-	
+		font-size: 1.25rem;
 	}
 }

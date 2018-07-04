@@ -20,7 +20,7 @@ mixin component-layouts(content)
 				.card-body
 					h2 ${{ layouts.layoutsListTitle }}$
 					p ${{ layouts.layoutsListTitleParagraph1 }}$
-	.row.layouts-list
+	.row.layouts-list.d-flex.flex-wrap
 		each item in content
 			.col-lg-2.col-md-3.col-sm-4.col-6
 				+fragment("fragment-card",item)

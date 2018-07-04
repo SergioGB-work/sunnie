@@ -23,7 +23,10 @@
 				padding-left:ceil(($grid-gutter-width / 2));
 
 				li{
-					list-style:none;
+				    list-style: none;
+				    position: relative;
+				    display: flex;
+				    align-items: center;
 
 					&:before{
 						content: "\f105"; 
@@ -36,7 +39,8 @@
 					}
 
 					a{
-						font-size: ceil(($font-size-base * 0.75));
+						font-size: 0.75rem;
+						padding: $grid-gutter-width/4 0;
 					}
 				}
 			}

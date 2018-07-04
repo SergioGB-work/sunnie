@@ -1,16 +1,12 @@
-nav(class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar",role="navigation")
+nav(class="navbar navbar-expand-xl navbar-dark p-0 p-3-xl",role="navigation")
 
 	div(class="navbar-header")
 		button(type="button",class="navbar-toggler collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+			span.navbar-toggler-icon
 
-			span(class="sr-only") Toggle navigation
-			span(class="icon-bar")
-			span(class="icon-bar")
-			span(class="icon-bar")
+	div(class="collapse navbar-collapse",id="navigation-list", aria-expanded="false")
 
-	div(class="navbar-nav-scroll",id="navigation-list", aria-expanded="false")
-
-		ul(class="navbar-nav bd-navbar-nav flex-row")
+		ul(class="navbar-nav bd-navbar-nav")
 			li.nav-item
 				a(href="./home.html", title="${{ default.goTo }}$ ${{ default.home }}$", class="nav-link d-flex d-flex align-items-center")
 					span ${{ default.home }}$

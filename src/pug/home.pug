@@ -5,38 +5,35 @@ block header
 	
 block content-upper
 
-	.row
-		.row
-			+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"${{ default.goHome }}$","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
+	.row.mx-6.mx-md-7
+		+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"${{ default.goHome }}$","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
 
 	.row
 		.col-12
 			+component("component-highlighted-side-image","",{"content":"<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>","image":{"src":"./images/bootstrap-stack.png","alt":"Image Monument"},"position":"left"},"","false","true")
 	
-	.row
-		.row
-			+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"${{ default.homeBannerThemeButtonText }}$","href":"./data-definitions.html","title":"${{ default.goDataDefinitions }}$"}},"","false","true","nomargin")
+	.row.mx-6.mx-md-7
+		+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"${{ default.homeBannerThemeButtonText }}$","href":"./data-definitions.html","title":"${{ default.goDataDefinitions }}$"}},"","false","true","m-0")
 
 	.row
-		.row
-			+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"${{ default.homeOwnGeneratorsButtonText }}$","href":"./generators.html","title":"${{ default.goGenerators }}$"}},"","false","false")
+		+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"${{ default.homeOwnGeneratorsButtonText }}$","href":"./generators.html","title":"${{ default.goGenerators }}$"}},"","false","false")
 
 	.row
-		.col-md-3
-			+fragment("fragment-card",{"src":"./images/internacionalizacion.jpg","alt":"${{ default.homeCardInternationalizationTitle }}$","header":"${{ default.homeCardInternationalizationTitle }}$","description":"${{ default.homeCardInternationalizationContent }}$","classes":"full"})
+		.col-md-12.d-flex.flex-row.flex-wrap
+			.col-12.col-sm-6.col-md-3
+				+fragment("fragment-card",{"src":"./images/internacionalizacion.jpg","alt":"${{ default.homeCardInternationalizationTitle }}$","header":"${{ default.homeCardInternationalizationTitle }}$","description":"${{ default.homeCardInternationalizationContent }}$","classes":"full"})
 
-		.col-md-3
-			+fragment("fragment-card",{"src":"./images/code.jpg","alt":"${{ default.homeCardCodeTitle }}$","header":"${{ default.homeCardCodeTitle }}$","description":"${{ default.homeCardCodeContent }}$","classes":"full","href":"./generators.html"})
+			.col-12.col-sm-6.col-md-3
+				+fragment("fragment-card",{"src":"./images/code.jpg","alt":"${{ default.homeCardCodeTitle }}$","header":"${{ default.homeCardCodeTitle }}$","description":"${{ default.homeCardCodeContent }}$","classes":"full","href":"./generators.html"})
 
-		.col-md-3
-			+fragment("fragment-card",{"src":"./images/shortcodes.jpg","alt":"ShortCodes","header":"Short Codes","description":"${{ default.homeCardShortcodesContent }}$","classes":"full",})
+			.col-12.col-sm-6.col-md-3
+				+fragment("fragment-card",{"src":"./images/shortcodes.jpg","alt":"ShortCodes","header":"Short Codes","description":"${{ default.homeCardShortcodesContent }}$","classes":"full",})
 
-		.col-md-3
-			+fragment("fragment-card",{"src":"./images/seo.jpg","alt":"SEO Friendly","header":"SEO Friendly","description":"${{ default.homeCardSEOContent }}$","classes":"full"})
+			.col-12.col-sm-6.col-md-3
+				+fragment("fragment-card",{"src":"./images/seo.jpg","alt":"SEO Friendly","header":"SEO Friendly","description":"${{ default.homeCardSEOContent }}$","classes":"full"})
 
-	.row
-		.row
-			+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerComponentsContent }}$</h2>","button":{"text":"${{ default.homeBannerComponentsButtonText }}$","href":"./components.html","title":"${{ default.homeBannerComponentsButtonTitle }}$"}},"","false","true","bg-info")
+	.row.mx-6.mx-md-7
+		+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerComponentsContent }}$</h2>","button":{"text":"${{ default.homeBannerComponentsButtonText }}$","href":"./components.html","title":"${{ default.homeBannerComponentsButtonTitle }}$"}},"","false","true","bg-info")
 
 	.row
 		.col-12

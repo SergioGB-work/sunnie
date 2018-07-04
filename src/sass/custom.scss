@@ -3,24 +3,6 @@
     to {width: 100%;}
 }
 
-.nopadding {
-   padding: 0 !important;
-}
-
-.nomargin {
-   margin: 0 !important;
-}
-
-.row-spacing{
-	margin-bottom: $grid-gutter-width;
-}
-
-@include media-breakpoint-down(xs) {
-	.text-center-xs{
-		text-align:center;
-	}
-}
-
 /** LOADING **/
 
 #loading-mask{
@@ -100,69 +82,17 @@
 }	
 
 /** ASPECT RATIO **/	
-.aspect-ratio {
-    display: block;
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 100%;
-
-	img {
-	    bottom: 0;
-	    left: 0;
-	    position: absolute;
-	    min-width: 100%;
-	    min-height:100%;
-	    max-width:100%;
-	}
-
-	&.aspect-ratio-3-to-2{
-		padding-bottom: percentage(2/3);
-	}
-
-	&.aspect-ratio-4-to-3 {
-		padding-bottom: percentage(3/4);
-	}
-
-	&.aspect-ratio-8-to-5 {
-		padding-bottom: percentage(5/8);
-	}
-
-	&.aspect-ratio-16-to-9{
-		padding-bottom: percentage(9/16);
-	}
-	&.aspect-ratio-top{
-		img {
-		    bottom: auto;
-		    top: 0;
-		}	
-	}
-	&.aspect-ratio-vertical{
-		&.aspect-ratio-3-to-2{
-			padding-bottom: percentage(3/2);
+.embed-responsive{
+	&.crop-img {
+		img{
+			height:100%;
+			width:auto;
 		}
-
-		&.aspect-ratio-4-to-3 {
-			padding-bottom: percentage(4/3);
-		}
-
-		&.aspect-ratio-8-to-5 {
-			padding-bottom: percentage(8/5);
-		}
-
-		&.aspect-ratio-16-to-9{
-			padding-bottom: percentage(16/9);
-		}
-		&.crop-img {
-			img{
-				height:100%;
-				width:auto;
-			}
-		}
-	}	
+	}
 }
 
-/** CROP **/
 
+/** CROP **/
 .crop-img {
     overflow: hidden;
     position: relative;
@@ -196,95 +126,8 @@
     top: auto;
 }
 
-/** BTN **/
-.btn-add{
-    position: fixed;
-    right: ceil(($grid-gutter-width * 1.5));
-    bottom: ceil(($grid-gutter-width * 1.5));
-    align-items: center;
-    width: ceil(($grid-gutter-width * 4.5));
-    height: ceil(($grid-gutter-width * 4.5));
-    z-index:9;
-}
-
-/** SHORTCODE **/
-
-.flex-center-center{
-	align-items: center !important;
-    display: flex !important;
-    justify-content: center !important;
-    flex-wrap:wrap;
-}
-
-.flex-vcenter{
-    display: flex;
-    align-items:center;	
-    flex-wrap:wrap;
-}
-
-@include media-breakpoint-up(sm) {
-	.flex-center-center-sm{
-	    align-items: center !important;
-	    display: flex !important;
-	    justify-content: center !important;	
-	}
-
-	.flex-vcenter-sm{
-	    display: flex;
-	    align-items:center;	
-	}
-}
 
 /** FORM **/
-input{
-	&[type="checkbox"],&[type="radio"]{
-		
-		& + .thumbnail{
-			cursor:pointer;
-
-			&:before{
-				background:$primary;
-				opacity:0.2;
-				position: absolute;
-			    width: 100%;
-			    height: 100%;
-			    top: 0;
-			    content: "";
-			    left: 0;
-			    opacity:0;
-			    transition: all 0.2s linear 0s;
-			}
-			&:after{
-			    content: "\f00c";
-			    background:#fff;
-			    font-family: FontAwesome;
-			    font-size: ceil(($font-size-base * 2));
-			    position: absolute;
-			    line-height: 1;
-			    top: 50%;
-			    margin-top: -26px;
-			    left: 50%;
-			    margin-left: -26px;
-			    border: 2px solid $primary;
-			    border-radius: 50%;
-			    padding: ceil(($font-size-base / 2));
-			    color:$primary;
-			    opacity:0;
-			    transition: all 0.2s linear 0s;
-			}
-		}
-
-		&:checked + .thumbnail, & + .thumbnail:hover,& + .thumbnail:focus{
-			&:before{
-				opacity:0.2;
-			}
-			&:after{
-				opacity:1;
-			}	
-		}		
-	}
-}
-
 .form-group-full-file{
     padding: 16px;
     background: #eee;
@@ -310,7 +153,6 @@ input{
 }
 
 /** FILTER TOOLBAR **/
-
 .filterBar{
 	margin:0;
 }

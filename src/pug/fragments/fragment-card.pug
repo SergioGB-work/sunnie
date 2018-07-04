@@ -8,31 +8,30 @@ mixin fragment-card(content)
 	- var href = content.href || ''
 	- var price = content.price || ''
 
-	.thumbnail(class=classes)
+	.card(class=classes)
 		if(button != '')	
 			a(href=href,title=title)
-				div
-					img(src=src,alt=alt)
+				img.card-img-top(src=src,alt=alt)
 
 				if(header != '' || description != '')
-					.caption
+					.card-body
 						if(header != '')
-							h3 #{header}
+							h3.card-title #{header}
 						if(description != '')	
-							p !{description}
+							p.card-text !{description}
 
 						if(price != '')	
 							p.price.text-primary #{price}
 
 		else
-			div
-				img(src=src,alt=alt)
+
+			img.card-img-top(src=src,alt=alt)
 
 			if(header != '' || description != '')
-				.caption
+				.card-body
 					if(header != '')
-						h3 #{header}
+						h3.card-title #{header}
 					if(description != '')	
-						p !{description}
+						p.card-text !{description}
 					if(price != '')
 						p.price.text-primary #{price}

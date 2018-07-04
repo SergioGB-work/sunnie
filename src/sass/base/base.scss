@@ -69,3 +69,20 @@ table{
 label{
 	cursor:pointer;
 }
+
+button{
+	&:focus{
+		outline:0;
+	}
+}
+
+pre{
+    display: block;
+    padding: 1rem;
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: $body-bg;
+    border: 1px solid $input-border;
+}

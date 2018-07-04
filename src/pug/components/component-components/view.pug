@@ -80,9 +80,9 @@ mixin component-components(content)
 					h2#listado-de-componentes ${{ components.componentsList }}$
 					p ${{ components.componentsListParagraph1 }}$
 
-		.col-12.col-sm-4
-			.thumbnail
-				.caption
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
 					h3.icon-4x
 						a(href="#componentLogin",title="${{ components.goToComponent }}$ Login") Login
 					p ${{ components.loginParagraph1 }}$
@@ -94,8 +94,8 @@ mixin component-components(content)
 						| +component('component-login','id1','','','false','false')
 
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x
 						a(href="#componentBanner",title="${{ components.goToComponent }}$ Banner") Banner
 					p ${{ components.showLinkedImage }}$
@@ -111,8 +111,8 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component('component-banner','id1',{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$','href':'./home.html','title':'Ir a Home','target':'_blank'},'','false','false')						
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentHighlightedContent",title="${{ components.goToComponent }}$ Highlighted Content") Highlighted Content
 					p ${{ components.highlightedContentComponentDescription }}$
@@ -130,8 +130,8 @@ mixin component-components(content)
 					pre
 						| +component("component-highlighted-content","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentCardsListCarousel",title="${{ components.goToComponent }}$ Cards List Carousel") Cards List Carousel
 					p ${{ components.cardCarouselDescription }}$
@@ -151,11 +151,11 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"}],"","false","true")
+						| +component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}],"","false","true")
 
-		.col-12.col-sm-4
-			.thumbnail
-				.caption
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
 					h3.icon-4x
 						a(href="#componentImage",title="${{ components.goToComponent }}$ Image") Image
 					p ${{ components.imageComponentDescription }}$
@@ -169,8 +169,8 @@ mixin component-components(content)
 					pre
 						| +component('component-image','id1',{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$'},'','false','false')
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x
 						a(href="#componentBreadcrumbs",title="${{ components.goToComponent }}$ Bradcrumbs") Breadcrumbs
 					p ${{ components.breadcrumbsComponentDescription }}$
@@ -185,8 +185,8 @@ mixin component-components(content)
 					pre
 						| +component('component-breadcrumbs','id1',[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}],'','false','false')
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentHighlightedSideImage",title="${{ components.goToComponent }}$ Highlighted Side Image") Highlighted Side Image
 					p ${{ components.highlightedSideImageComponentDescription }}$
@@ -208,8 +208,8 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.example }}$
 					pre +component("component-highlighted-side-image","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentSlider",title="${{ components.goToComponent }}$ Slider") Slider
 					p ${{ components.sliderComponentDescription }}$
@@ -228,9 +228,9 @@ mixin component-components(content)
 					pre 
 						| +component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
 
-		.col-12.col-sm-4
-			.thumbnail
-				.caption
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentLogo",title="${{ components.goToComponent }}$ Logo") Logo
 					p ${{ components.logoComponentDescription }}$
@@ -245,8 +245,8 @@ mixin component-components(content)
 					pre
 						| +component('component-logo','',{'url':'/','title':'SunnieJS Logo','src':'./images/logo.png','alt':'Site Logo SunnieJS'},'','false','true')
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentHighlightedBanner",title="${{ components.goToComponent }}$ Highlighted Banner") Highlighted Banner
 					p ${{ components.highlightedBannerComponentDescription }}$
@@ -265,8 +265,8 @@ mixin component-components(content)
 						| +component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentHighlightedFlips",title="${{ components.goToComponent }}$ Highlighted Flips") Highlighted Flips
 					p ${{ components.highlightedFlipsComponentDescription }}$
@@ -282,8 +282,8 @@ mixin component-components(content)
 					pre
 						| +component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
 						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Navigation
 					p ${{ components.navigationComponentDescription }}$
@@ -312,7 +312,7 @@ mixin component-components(content)
 				.col-12
 					.card
 						.card-body
-							h3(id="componentLogin").nomargin Login
+							h3(id="componentLogin").m-0 Login
 					.row
 						.col-md-3.col-sm-2
 
@@ -324,14 +324,14 @@ mixin component-components(content)
 				.col-12
 					.card
 						.card-body
-							h3(id="componentImage").nomargin Image
+							h3(id="componentImage").m-0 Image
 					.row
 						.col-md-12
 							+component("component-image","",{"src":"./images/carousel1.jpg","alt":"Image 1"},"","false","true")
 				.col-12
 					.card
 						.card-body
-							h3(id="componentBanner").nomargin Banner
+							h3(id="componentBanner").m-0 Banner
 					.row
 						.col-md-12
 							+component("component-banner","",{"src":"./images/carousel2.jpg","alt":"Image 1","href":"http://www.google.es", "title":"Ir a Google"},"","false","true")
@@ -339,7 +339,7 @@ mixin component-components(content)
 				.col-12
 					.card
 						.card-body
-							h3(id="componentBreadcrumbs").nomargin Breadcrumbs
+							h3(id="componentBreadcrumbs").m-0 Breadcrumbs
 					.row
 						.col-md-12
 							+component("component-breadcrumbs","",[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}],"","false","false")
@@ -347,77 +347,75 @@ mixin component-components(content)
 		.col-12
 			.card
 				.card-body
-					h3(id="componentHighlightedBanner").nomargin Highlighted Banner
-			.row
-				.row
-					+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+					h3(id="componentHighlightedBanner").m-0 Highlighted Banner
+			.row.mx-6.mx-md-7
+				+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 						
-				.col-12
-					.card
-						.card-body
-							h3(id="componentHighlightedContent").nomargin Highlighted Content
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedContent").m-0 Highlighted Content
+			.row
+				.col-md-12
+					+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedFlips").m-0 Highlighted Flips
+			.row
+				.col-md-12
+					+component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-align-center", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedSideImage").m-0 Highlighted Side Image
+			.row
+				.col-md-12
+					+component("component-highlighted-side-image","",{"content":"<h2>${{ default.homeComponentLibraryComponentTitle }}$</h2><p>${{ default.homeComponentLibraryComponentContent1 }}$ </p><p>${{ default.homeComponentLibraryComponentContent2 }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentCardsListCarousel").m-0 Cards List Carousel
+			.row
+				.col-md-12
+					+component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}],"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentProductsCardsListCarousel").m-0 Product Cards List Carousel
+			.row
+				.col-md-12
+					+component("component-cards-list-carousel","",[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"}],"","false","true")
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSlider").m-0 Slider
+			.row.mx-6.mx-md-7
+				+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentNavigation").m-0 Navigation
 					.row
-						.col-md-12
-							+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+						.col-12.col-md-6
+							h4 Tabs
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"tabs"},"","false","true")
 
-				.col-12
-					.card
-						.card-body
-							h3(id="componentHighlightedFlips").nomargin Highlighted Flips
+						.col-12.col-md-6
+							h4 Pills
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[{"text":"Pagina 1-1",href:"/pagina1-1.html",title:"Ir a pagina 1-1"}]},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills"},"","false","true")
 					.row
-						.col-md-12
-							+component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+						.col-12.col-md-6
+							h4 Pills Justified
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"","false","true")
 
-				.col-12
-					.card
-						.card-body
-							h3(id="componentHighlightedSideImage").nomargin Highlighted Side Image
-					.row
-						.col-md-12
-							+component("component-highlighted-side-image","",{"content":"<h2>${{ default.homeComponentLibraryComponentTitle }}$</h2><p>${{ default.homeComponentLibraryComponentContent1 }}$ </p><p>${{ default.homeComponentLibraryComponentContent2 }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
-
-				.col-12
-					.card
-						.card-body
-							h3(id="componentCardsListCarousel").nomargin Cards List Carousel
-					.row
-						.col-md-12
-							+component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin"}],"","false","true")
-
-				.col-12
-					.card
-						.card-body
-							h3(id="componentProductsCardsListCarousel").nomargin Product Cards List Carousel
-					.row
-						.col-md-12
-							+component("component-cards-list-carousel","",[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full nomargin","price":"15,95€"}],"","false","true")
-
-
-				.col-12
-					.card
-						.card-body
-							h3(id="componentSlider").nomargin Slider
-					.row
-						.row
-							+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
-
-				.col-12
-					.card
-						.card-body
-							h3(id="componentNavigation").nomargin Navigation
-							.row
-								.col-12.col-md-6
-									h4 Tabs
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"tabs"},"","false","true")
-
-								.col-12.col-md-6
-									h4 Pills
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[{"text":"Pagina 1-1",href:"/pagina1-1.html",title:"Ir a pagina 1-1"}]},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills"},"","false","true")
-							.row
-								.col-12.col-md-6
-									h4 Pills Justified
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"","false","true")
-
-								.col-12.col-md-6
-									h4 Pills stacked
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")
+						.col-12.col-md-6
+							h4 Pills stacked
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")

@@ -6,20 +6,6 @@
 	background: $primary;
     padding: 40px 0;
 
-    &.bg-danger{
-    	background: $danger;
-    }
-    &.bg-success{
-    	background: $success;
-    }
-    &.bg-warning{
-    	background: $warning;
-    }
-    &.bg-info{
-    	background: $info;
-    }    
-
-	
 	*{
 		color: $btn-primary-color;
 		margin-top:0;
@@ -39,7 +25,7 @@
 		
 		.btn{
 			min-width: 75%;
-			font-size: ceil(($font-size-base * 1.25));
+			font-size: 1.25rem;
 			margin-top: ceil(($grid-gutter-width * 1.5));
 		}
 	}	

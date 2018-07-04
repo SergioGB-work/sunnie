@@ -5,12 +5,12 @@
 .component-cards-list-carousel{
 
     .owl-item{
-        padding: 0 ceil(($grid-gutter-width / 2)) 0 ceil(($grid-gutter-width / 2));
+        padding: 0 $grid-gutter-width/2 0 $grid-gutter-width/2;
     }
 
     .owl-carousel {
         .owl-wrapper{
-            margin-left:ceil((- $grid-gutter-width / 2));
+            margin-left: -($grid-gutter-width / 2);
         }
 
         .owl-wrapper-outer{

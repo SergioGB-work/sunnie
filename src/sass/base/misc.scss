@@ -1,7 +1,3 @@
-.container{
-	max-width:100%;
-}
-
 .container-fluid{
 	padding: $grid-gutter-width;
 }
@@ -175,54 +171,36 @@
 	}
 }	
 
-/** THUMBNAIL **/
-.thumbnail{
-	width:100%;
-	position:relative;
-	display:inline-block;
-	float:left;
-	box-shadow: $box-shadow;
-	border:0;
-	margin-bottom:$grid-gutter-width;
-
-	h3{
-		margin: $grid-gutter-width 0 0 0;
-		font-size: $font-size-base;
-	}
-
-	.actions-bar{
-		position:absolute;
-		top:0;
-		right:0;
-	}
-
-	.caption{
-		float:left;
-		width:100%;
-		padding-top:0;
-	}
-
-	img + .caption{
-		padding-top: $grid-gutter-width;
-	}
-
-	&.full{
-		padding:0 0 $grid-gutter-width 0;
-	}
-}
-
 /** PANELS **/
 .card{
 	border:0;
 	box-shadow: $box-shadow;
 	margin-bottom:$grid-gutter-width;
 
+	> a{
+		color: $gray-base;
+		text-decoration:none;
+		
+		&:hover{
+			text-decoration:none;
+		}
+	}
+
 	.card-body{
-		>{
-			h1,h2,h3,h4,h5,h6{
-				margin-top:0;
+
+		.card-title{
+			margin-bottom:0;
+
+			+ .card-text{
+				margin-top:$card-spacer-y;
 			}
 		}	
+	}
+
+	&.img-padding{
+		.card-img-top,.card-img-bottom{
+			padding: 1rem 1rem 0;
+		}
 	}
 }
 
@@ -230,12 +208,6 @@
 .modal-header{
 	background: $modal-header-bg;
 	color: $modal-header-color;
-
-	.close{
-		opacity:$close-opacity;
-		font-size:$close-font-size;
-    	line-height: ceil(($close-font-size / 2));
-	}
 }
 
 /** PAGINATION **/
@@ -250,6 +222,49 @@
 
 .navbar-toggler{
 	padding: $navbar-toggle-padding;
-	margin: $navbar-toggle-margin;
 	float:left;
 }
+
+.navbar-toggler-icon{
+	height:1.7em;
+}
+
+.dropdown-menu{
+	.dropdown-item{
+		a{
+			color: $dropdown-link-color;
+
+			&:hover{
+				text-decoration: none;
+			}
+		}
+		&.active{
+			a{
+				color: $dropdown-link-active-color;
+				text-decoration: none;
+			}
+		}	
+	}
+}
+
+.close{
+	opacity:$close-opacity;
+	height: 60px;
+
+	@include hover-focus {
+	  opacity: 1;
+	}
+
+	span{
+	    height: 25px;
+	    float: right;
+	    line-height: 15px;
+	}
+}
+
+@include media-breakpoint-up(sm) {
+	.container-fluid{
+		padding-left: $grid-gutter-width/2;
+		padding-right: $grid-gutter-width/2;
+	}
+}	

@@ -3,7 +3,7 @@ mixin component-sample-list(content)
 		.col-12
 			.card
 				.card-body
-					h1.nomargin ${{ sample-list.lists }}$
+					h1.m-0 ${{ sample-list.lists }}$
 
 		.col-sm-6.col-12
 			.card
@@ -45,14 +45,22 @@ mixin component-sample-list(content)
 			.card
 				.card-body
 					h3 Horizontal Definition List
-					dl(class="row")
-						dt Description lists
-						dd A description list is perfect for defining terms.
-						dt Euismod
-						dd Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
-						dd Donec id elit non mi porta gravida at eget metus.
-						dt Malesuada porta
-						dd Etiam porta sem malesuada magna mollis euismod.
+					dl.row
+						dt.col-sm-3 Description lists
+						dd.col-sm-9 A description list is perfect for defining terms.
+
+						dt.col-sm-3 Euismod
+						dd.col-sm-9
+							p Vestibulum id ligula porta felis euismod semper eget lacinia odio sem nec elit.
+							p Donec id elit non mi porta gravida at eget metus.
+
+
+						dt.col-sm-3 Malesuada porta
+						dd.col-sm-9 Etiam porta sem malesuada magna mollis euismod.
+
+						dt.col-sm-3 text-truncate" Truncated term is truncated
+						dd.col-sm-9 Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.
+					
 
 		.col-sm-6.col-12
 			.card
@@ -73,7 +81,6 @@ mixin component-sample-list(content)
 							li Aenean sit amet erat nunc
 							li Eget porttitor lorem
 
-		.col-sm-6.col-12
 			.card
 				.card-body
 					h3 List Inline
@@ -82,7 +89,6 @@ mixin component-sample-list(content)
 						li.list-inline-item Lorem ipsum
 						li.list-inline-item Lorem ipsum
 				
-		.col-sm-6.col-12
 			.card
 				.card-body
 					h3 Definition List Standar

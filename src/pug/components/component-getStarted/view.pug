@@ -43,32 +43,33 @@ mixin component-getStarted(content)
 
 					p ${{ getStarted.initServerParagraph6 }}$
 
-					table(class="table table-responsive")
-						thead
-							tr
-								th ${{ getStarted.initServerTableTH1 }}$
-								th ${{ getStarted.initServerTableTH2 }}$
-								th ${{ getStarted.initServerTableTH3 }}$
-						tbody
-							tr
-								td <strong>deploy</strong>
-								td ${{ getStarted.initServerTableContainerDeployDescription }}$
-								td gulp deploy
+					.table-responsive-md
+						table(class="table")
+							thead
+								tr
+									th ${{ getStarted.initServerTableTH1 }}$
+									th ${{ getStarted.initServerTableTH2 }}$
+									th ${{ getStarted.initServerTableTH3 }}$
+							tbody
+								tr
+									td <strong>deploy</strong>
+									td ${{ getStarted.initServerTableContainerDeployDescription }}$
+									td gulp deploy
 
-							tr
-								td <strong>deployCSS</strong>
-								td ${{ getStarted.initServerTableContainerDeployCSSDescription }}$
-								td gulp deployCSS					
+								tr
+									td <strong>deployCSS</strong>
+									td ${{ getStarted.initServerTableContainerDeployCSSDescription }}$
+									td gulp deployCSS					
 
-							tr
-								td <strong>deployJS</strong>
-								td ${{ getStarted.initServerTableContainerDeployJSDescription }}$
-								td gulp deployJS
+								tr
+									td <strong>deployJS</strong>
+									td ${{ getStarted.initServerTableContainerDeployJSDescription }}$
+									td gulp deployJS
 
-							tr
-								td <strong>deployPUG</strong>
-								td ${{ getStarted.initServerTableContainerDeployPUGDescription }}$
-								td gulp deployPUG
+								tr
+									td <strong>deployPUG</strong>
+									td ${{ getStarted.initServerTableContainerDeployPUGDescription }}$
+									td gulp deployPUG
 
 					p ${{ getStarted.initServerParagraph7 }}$		
 

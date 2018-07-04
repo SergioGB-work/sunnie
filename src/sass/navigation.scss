@@ -5,9 +5,34 @@
 
     .navbar{
     	border:0;
+        min-height:$header-height;
 
         .navbar-header{
             background:$header-bg;
+        }
+
+        .navbar-collapse{
+            padding-left: 0;
+            padding-right: 0;
+            background: #22262f;
+
+            .navbar-nav{
+                margin:0;
+                > li > a{
+                    height: $header-height;;
+                    display: flex;
+                    align-items: center;
+                    padding-left: $grid-gutter-width;
+                    padding-right: $grid-gutter-width;                    
+                }
+
+                .dropdown-menu{
+                    background-color:transparent;
+                    box-shadow:0 0 0;
+                    a{
+                        color:$navbar-dark-color;
+                }   }
+            } 
         }
     }  
 }
@@ -28,16 +53,8 @@
 	}
 }
 
-@include media-breakpoint-up(sm) {
-    #navigation{
-        float:left;       
-        width: calc(100% + #{ceil($grid-gutter-width * 2)});
-        margin-left: ceil((- $grid-gutter-width));
-    }
-}
 
-
-@include media-breakpoint-up(lg) {
+@include media-breakpoint-up(xl) {
 
     #navigation{
         display:flex;

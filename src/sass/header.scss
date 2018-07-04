@@ -1,6 +1,7 @@
 #header{
 	border-bottom: 1px solid $border-bg-white;
 	min-height: $navbar-height;
+	background: $header-bg;
 
 	#top-bar{
 		position: absolute;
@@ -56,10 +57,9 @@
 	}	
 }
 
-@include media-breakpoint-up(sm) {
+@include media-breakpoint-up(md) {
 	#header{
 		padding:0 $grid-gutter-width;
-		background: $header-bg;
 		
 		.header-content{
 			border-left:0;
