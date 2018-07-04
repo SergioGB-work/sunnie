@@ -178,12 +178,19 @@ $(document).ready(function(){
 
 		$('[data="filters"]').each(function(){
 
-			var rel = $(this).data('rel') ? '_' + $(this).data('rel') : '';
+			var rels = $(this).data('rel') ? $(this).data('rel').split(',') : [];
 
 			$(this).find('[data-filter]').each(function(){
 
 				var filterParent = $(this);
-				var dataFilter = $(this).data('filter') + rel;
+
+
+				var dataFilter = [$(this).data('filter')];
+
+				for(var i=0; i<rels.length;i++){
+					dataFilter[i] = $(this).data('filter') + '_' + rels[i];
+				}
+
 				var search = window.location.search.replace('?','');
 		
 				filtersSearch = search.split('&');
@@ -192,15 +199,37 @@ $(document).ready(function(){
 					
 					var finalHref = '';
 
-					if($(this).data('filter-value').toString() != ''){
-						finalHref = dataFilter + '=' + $(this).data('filter-value');
-					}
-					
 					for(var i=0;i<filtersSearch.length;i++){
 
 						filter = filtersSearch[i].split('=');
 
-						if($(this).data('filter-value').toString() != ''){
+						if(dataFilter.indexOf(filter[0]) >= 0){
+							var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
+							dataFilterValue.parent().addClass('active');
+							filterParent.find('.filterValue').text(dataFilterValue.text());
+						}	
+					}	
+
+					if(($(this).data('filter-value').toString() != '' && !filterParent.hasClass('checkbox')) || ($(this).data('filter-value').toString() != '' && filterParent.hasClass('checkbox') && !filterParent.hasClass('active'))){
+
+						for(var i=0;i<dataFilter.length;i++){
+
+							var filterValue = $(this).data('filter-value');
+
+							if($(this).data('filter-value').toString().indexOf('=') < 0 ){
+								filterValue =  '=' + $(this).data('filter-value');
+							}
+
+							finalHref += dataFilter[i] +  filterValue + '&';
+						}
+						finalHref = finalHref.substring(0, finalHref.length - 1);
+					}
+					
+					for(var i=0;i<filtersSearch.length;i++){
+
+						filter = filtersSearch[i].split('=');					
+
+						if(($(this).data('filter-value').toString() != '' && (!filterParent.hasClass('checkbox'))) || ($(this).data('filter-value').toString() != '' && (filterParent.hasClass('checkbox')) && (!filterParent.hasClass('active')))){
 							if(finalHref.indexOf(filter[0] + '=') < 0){					
 
 								if(finalHref != ''){
@@ -208,24 +237,19 @@ $(document).ready(function(){
 								}
 
 								finalHref += filtersSearch[i];
-							}
+							}									
+
 						}
 						
-						else if(filter[0] != dataFilter){
+						else if((dataFilter.indexOf(filter[0]) < 0 && !filterParent.hasClass('checkbox')) || (dataFilter.indexOf(filter[0]) < 0 && filterParent.hasClass('checkbox') && filterParent.hasClass('active'))) {
 
-								if(finalHref != ''){
-									finalHref += '&';
-								}
 
-								finalHref += filtersSearch[i];
-						}
+							if(finalHref != ''){
+								finalHref += '&';
+							}
+							finalHref += filtersSearch[i];						
+						}					
 
-						//Comprueba el valor actual del filtro en la URL y lo pone en el filtro
-						if(filter[0] == dataFilter){
-							var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
-							dataFilterValue.parent().addClass('active');
-							filterParent.find('.filterValue').text(dataFilterValue.text());
-						}
 					}
 
 					$(this).attr('href','?' + finalHref);
@@ -233,7 +257,7 @@ $(document).ready(function(){
 				});
 			});
 		});	
-	}
+	};
 });
 
 $(window).load(function(){
@@ -295,70 +319,75 @@ function getData(el){
 		content = el.content,
 		enableGetParams = el.enableGetParams,
 		getParamsList = el.getParamsList,
-		rel = el.rel;
+		rel_group = el.rel.split(',');
 
 	if(enableGetParams == true || enableGetParams=="true"){
 
 		var params = Object.keys(getParams);
-		if(rel !== undefined && rel != ''){
-			rel = '_' + rel;
-		}
 
+		$.each(rel_group,function(index){
+			var rel = rel_group[index];
 
-		if(getParamsList !== undefined && getParamsList.length > 0){
-			params = getParamsList.split(',');
-		
 			if(rel !== undefined && rel != ''){
-				$.each(params,function(i){
-					params[i] = params[i] + rel
-				});
+				rel = '_' + rel;
 			}
-		}
 
-		if(params.length > 0){
-			var count = 0;
-			$.each(params, function(i, val) {
 
-				if((getParams[val] !== undefined && getParams[val] != '' && val.indexOf(rel) > -1) || (rel === undefined || rel == '')){
+			if(getParamsList !== undefined && getParamsList.length > 0){
+				params = getParamsList.split(',');
+			
+				if(rel !== undefined && rel != ''){
+					$.each(params,function(i){
+						params[i] = params[i] + rel
+					});
+				}
+			}
 
-					var key = (rel !== undefined && rel != '' && val.indexOf(rel) > -1) ? val.replace(rel,'') : val;
+			if(params.length > 0){
+				var count = 0;
+				$.each(params, function(i, val) {
 
-					if(key=='order' || key=='group'){
-						filter += '&filter['+key+']=' + getParams[val];
-					}
+					if((getParams[val] !== undefined && getParams[val] != '' && val.indexOf(rel) > -1) || (rel === undefined || rel == '')){
 
-					else if(key=='query'){
-						var n=0;
-						var regexp = new RegExp("searchField\\d*" + rel,'g');;
+						var key = (rel !== undefined && rel != '' && val.indexOf(rel) > -1) ? val.replace(rel,'') : val;
 
-						$.each(params, function(index, value) {
-							if(value.search(regexp) > -1){	
-								filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
-								n++;
-							}	
-						})
-						count++;
-
-					}
-
-					else if(key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter') < 0){
-
-						var value = getParams[val]; 
-
-						if(value.indexOf('=') < 0 ){
-							value = '=' + value;
+						if(key=='order' || key=='group'){
+							filter += '&filter['+key+']=' + getParams[val];
 						}
 
-						filter += '&filter[where][and]['+count+']['+key+']' + value;
-						count++;
-					}
+						else if(key=='query'){
+							var n=0;
+							var regexp = new RegExp("searchField\\d*" + rel,'g');;
 
-					else {
-						filter += '&' + key + '=' + getParams[val];
-					}
-				}	
-			});
-		}
+							$.each(params, function(index, value) {
+								if(value.search(regexp) > -1){	
+									filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
+									n++;
+								}	
+							})
+							count++;
+
+						}
+
+						else if(key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter') < 0){
+
+							var value = getParams[val]; 
+
+							if(value.indexOf('=') < 0 ){
+								value = '=' + value;
+							}
+					
+							filter += '&filter[where][and]['+count+']['+key+']' + value;
+							count++;
+						}
+
+						else {
+							filter += '&' + key + '=' + getParams[val];
+						}
+					}	
+				});
+			}
+		});	
 	}
 
 	if (page !== undefined && page != '' && page > 0 && filter.indexOf('filter[skip]') <= -1) {
