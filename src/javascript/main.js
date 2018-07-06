@@ -33,39 +33,130 @@ $(document).ready(function(){
 
 	$('form').submit(function(e){
 		e.preventDefault();
-		var url,method;
-		var data = {};
-		var form = $(this);
+
+			var url,method;
+			var data = {};
+			var form = $(this);
+			var rel = $(this).find('[data="filters"][data-rel]').data('rel') || '';
+
+			if(rel != ''){
+				rel = rel.split(',');
+
+				$.each(rel,function(index,elem){
+					rel[index]= '_' + rel[index];
+				});			
+			}
+
+			var emptyVars = '';
+
+			form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]),select,textarea,input[type="radio"]:checked').each(function(){
+
+				var value = $(this).val();
+				var name = $(this).attr('name');
+
+				if(form.data('form-filter') != true || value != ''){
+					if(rel != ''){
+						$.each(rel,function(index,elem){
+							data[name + elem ] = value;
+						})
+					}
+					else{
+						data[name] = value;
+					}	
+				}
+
+				else if(form.data('form-filter') == true && value == ''){
+					if(rel != ''){
+						$.each(rel,function(index,elem){
+
+							if(value==''){
+								emptyVars += name + elem + '&';
+							}
+
+						})
+					}
+					else{
+
+						if(value==''){
+							emptyVars += name + '&';
+						}
+					}	
+				}	
+
+			});
+
+			form.find('input[name$="-fileHidden"]').each(function(){
+				var value = $(this).val();
+				var name = $(this).attr('name').split('-');
+				
+				if(form.data('form-filter') != true  || value != ''){
+					if(rel != ''){
+						$.each(rel,function(index,elem){
+							data[name[0] + elem ] = value;
+						})
+					}
+					else{
+						data[name[0]] = value;
+					}					
+				}
+
+				else if(form.data('form-filter') == true && value == ''){
+					if(rel != ''){
+						$.each(rel,function(index,elem){
+
+							if(value==''){
+								emptyVars += name[0] + elem + '&';
+							}
+
+						})
+					}
+					else{
+
+						if(value==''){
+							emptyVars += name[0] + '&';
+						}
+					}	
+				}	
 
 
-		form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]),select,textarea,input[type="radio"]:checked').each(function(){
+			})
 
-			var value = $(this).val();
-			var name = $(this).attr('name');
+			if(form.data('form-filter') != true){
+				if($.cookie('id_session')!=''){
+					data['idSession'] = $.cookie('id_session');
+				}
 
-			data[name] = value;
+				url = form.attr('data-action') + '?access_token=' + data['idSession'];
+				method = form.data('method');
+				data = {'data':data};
 
-		});
+				var params = {"service":url,"method":method, "aditionalData":data,"callback":form.data('callback')};
 
-		form.find('input[name$="-fileHidden"]').each(function(){
-			var value = $(this).val();
-			var name = $(this).attr('name').split('-');
+				getData(params);
+			}
+			else{
+				var filters = JSON.stringify(data);
+				filters = filters.replace(/:/g,'=').replace(/"/g,'').replace(/,/g,'&').replace('{','').replace('}','');
 
-			data[name[0]] = value;
-		})	
+				var search = window.location.search.replace('?','');
+		
+				filtersSearch = search.split('&');
 
-		if($.cookie('id_session')!=''){
-			data['idSession'] = $.cookie('id_session');
-		}
+				for(var i=0;i<filtersSearch.length;i++){
 
-		url = form.attr('data-action') + '?access_token=' + data['idSession'];
-		method = form.data('method');
-		data = {'data':data};
+					filter = filtersSearch[i].split('=');
 
-		var params = {"service":url,"method":method, "aditionalData":data,"callback":form.data('callback')};
+					if(filters.indexOf(filter[0] + '=') < 0 && emptyVars.indexOf(filter[0]) < 0){
+						filters += '&' + filter[0] + '=' + filter[1]
+					}	
+				}	
 
-		getData(params);
+				filters = (filters[0] =='&') ? filters.substr(1) : filters; 
 
+
+				url = form.attr('data-action') + '?' + filters;
+				window.location.href=url;
+			}	
 	});
 
 	//VALIDACION DE FORMILARIO PREVIO ENVIO
@@ -183,8 +274,6 @@ $(document).ready(function(){
 			$(this).find('[data-filter]').each(function(){
 
 				var filterParent = $(this);
-
-
 				var dataFilter = [$(this).data('filter')];
 
 				for(var i=0; i<rels.length;i++){
@@ -196,7 +285,7 @@ $(document).ready(function(){
 				filtersSearch = search.split('&');
 
 				$(this).find('[data-filter-value]').each(function(){
-					
+
 					var finalHref = '';
 
 					for(var i=0;i<filtersSearch.length;i++){
@@ -205,7 +294,13 @@ $(document).ready(function(){
 
 						if(dataFilter.indexOf(filter[0]) >= 0){
 							var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
-							dataFilterValue.parent().addClass('active');
+							if(dataFilterValue.parent().is('select')){
+								dataFilterValue.prop('selected','selected');
+							}
+							else{	
+								dataFilterValue.parent().addClass('active');
+							}
+							
 							filterParent.find('.filterValue').text(dataFilterValue.text());
 						}	
 					}	
@@ -251,8 +346,9 @@ $(document).ready(function(){
 						}					
 
 					}
-
-					$(this).attr('href','?' + finalHref);
+					if($(this).is('a')){
+						$(this).attr('href','?' + finalHref);
+					}
 
 				});
 			});
