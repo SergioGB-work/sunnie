@@ -82,6 +82,7 @@
   "dataFormTableContainerActionDescription":"REST service to which the data will be sent for processing",
   "dataFormTableContainerMethodDescription":"Invoked service method",
   "dataFormTableContainerCallbackDescription":"Function to execute when the response of the service to which the form data has been sent is received",
+  "dataFormTableContainerFormFilterDescription":"If it is enabled, the form will work as a filter and instead of sending the form to the indicated service, the page will be reloaded by applying the inputs as parameters of the URL taking the name of each input as the name of the parameter",
   "dataFormParagraph2":"All data is sent with the name defined in the attribute <span class='text-primary'> name </span> of the field, whether they are inputs, textareas, or any type of form element.",
   "dataFormParagraph3":"In the case of <span class='text-primary'>input[type='file']</span>, they are automatically sent in <span class='text-primary'>String</span> format transformed into <span class='text-primary'>base64</span>."
 }

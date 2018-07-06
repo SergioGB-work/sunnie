@@ -82,6 +82,7 @@
   "dataFormTableContainerActionDescription":"Servicio REST al que se eenviarán los datos para su procesamiento",
   "dataFormTableContainerMethodDescription":"Método del servicio invocado",
   "dataFormTableContainerCallbackDescription":"Función a ejecutar cuando se reciba la respuesta del servicio al que se han enviado los datos del formulario",
+  "dataFormTableContainerFormFilterDescription":"Si se habilita, el formulariio funcionará como un filtro y en vez de enviar el formulario al servicio indicado se recargará la pagina aplicando los inputs como parametros de la URL tomando como nombre de parametro el name de cada input",
   "dataFormParagraph2":"Todos los datos se envían con el nombre definido en el atributo <span class='text-primary'>name</span> del campo, ya sean inputs, textareas, o cuaquier tipo de elemento de formulario.",
   "dataFormParagraph3":"En el caso de los <span class='text-primary'>input[type='file']</span>, de forma automática se envían en formato <span class='text-primary'>String</span> transformado en <span class='text-primary'>base64</span>."
 }
