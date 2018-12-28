@@ -1,4 +1,4 @@
-var api = "http://smartretail-api.ttcloud.net:3000/api";
+var api = "http://localhost:3000";
 var items_per_page_default = 10;
 var defaultImg = './images/default-img.png';
 
@@ -31,167 +31,99 @@ $(document).ready(function(){
 	// @param data-method -> Método de envío del formulario (GET/POST)
 	// @param data-callback -> Nombre de la función que se ejecutará al invocarse el evento complete de Ajax. El data devuelvo se le envía a la función como parametro
 
-	$('form').submit(function(e){
+	$(document).on('submit','form',function (e) {
 		e.preventDefault();
 
-			var url,method;
-			var data = {};
-			var form = $(this);
-			var rel = $(this).find('[data="filters"][data-rel]').data('rel') || '';
+		var url, method;
+		var data = {};
+		var form = $(this);
 
-			if(rel != ''){
-				rel = rel.split(',');
+		var rel = $(this).find('[data="filters"][data-rel]').data('rel') || '';
 
-				$.each(rel,function(index,elem){
-					rel[index]= '_' + rel[index];
-				});			
+		if (rel != '' && rel !== undefined) {
+			rel = rel.split(',');
+
+			$.each(rel, function (index, elem) {
+				rel[index] = '_' + rel[index];
+			});
+		}
+
+		var emptyVars = '';
+
+		form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked').each(function () {
+
+			var value = $(this).val();
+			var name = $(this).attr('name');
+			if (form.data('form-filter') != true || value != '') {
+				if (rel != '') {
+					$.each(rel, function (index, elem) {
+						data[name + elem] = value;
+					})
+				}
+				else {
+					data[name] = value;
+				}
 			}
 
-			var emptyVars = '';
+			else if (form.data('form-filter') == true && value == '') {
+				if (rel != '') {
+					$.each(rel, function (index, elem) {
 
-			form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]),select,textarea,input[type="radio"]:checked').each(function(){
-
-				var value = $(this).val();
-				var name = $(this).attr('name');
-
-				if(form.data('form-filter') != true || value != ''){
-					if(rel != ''){
-						$.each(rel,function(index,elem){
-							data[name + elem ] = value;
-						})
-					}
-					else{
-						data[name] = value;
-					}	
-				}
-
-				else if(form.data('form-filter') == true && value == ''){
-					if(rel != ''){
-						$.each(rel,function(index,elem){
-
-							if(value==''){
-								emptyVars += name + elem + '&';
-							}
-
-						})
-					}
-					else{
-
-						if(value==''){
-							emptyVars += name + '&';
+						if (value == '') {
+							emptyVars += name + elem + '&';
 						}
-					}	
-				}	
 
+					})
+				}
+				else {
+
+					if (value == '') {
+						emptyVars += name + '&';
+					}
+				}
+			}
+
+		});
+
+
+		var filesInput = form.find('input[type="file"]');
+
+		if(filesInput.length > 0){
+			var dataFormData = new FormData();	
+
+			form.find('input[type="file"]').each(function(){
+				dataFormData.append($(this).attr('name'), $(this).get(0).files[0]);
 			});
 
-			form.find('input[name$="-fileHidden"]').each(function(){
-				var value = $(this).val();
-				var name = $(this).attr('name').split('-');
-				
-				if(form.data('form-filter') != true  || value != ''){
-					if(rel != ''){
-						$.each(rel,function(index,elem){
-							data[name[0] + elem ] = value;
-						})
-					}
-					else{
-						data[name[0]] = value;
-					}					
-				}
-
-				else if(form.data('form-filter') == true && value == ''){
-					if(rel != ''){
-						$.each(rel,function(index,elem){
-
-							if(value==''){
-								emptyVars += name[0] + elem + '&';
-							}
-
-						})
-					}
-					else{
-
-						if(value==''){
-							emptyVars += name[0] + '&';
-						}
-					}	
-				}	
-
-
-			})
-
-			if(form.data('form-filter') != true){
-				if($.cookie('id_session')!=''){
-					data['idSession'] = $.cookie('id_session');
-				}
-
-				url = form.attr('data-action') + '?access_token=' + data['idSession'];
-				method = form.data('method');
-				data = {'data':data};
-
-				var params = {"service":url,"method":method, "aditionalData":data,"callback":form.data('callback')};
-
-				getData(params);
+			for ( var key in data ) {
+    			dataFormData.append(key, data[key]);
 			}
-			else{
-				var filters = JSON.stringify(data);
-				filters = filters.replace(/:/g,'=').replace(/"/g,'').replace(/,/g,'&').replace('{','').replace('}','');
 
-				var search = window.location.search.replace('?','');
-		
-				filtersSearch = search.split('&');
+			data = dataFormData;
+		}	
 
-				for(var i=0;i<filtersSearch.length;i++){
-
-					filter = filtersSearch[i].split('=');
-
-					if(filters.indexOf(filter[0] + '=') < 0 && emptyVars.indexOf(filter[0]) < 0){
-						filters += '&' + filter[0] + '=' + filter[1]
-					}	
-				}	
-
-				filters = (filters[0] =='&') ? filters.substr(1) : filters; 
-
-
-				url = form.attr('data-action') + '?' + filters;
-				window.location.href=url;
-			}	
-	});
-
-	//VALIDACION DE FORMILARIO PREVIO ENVIO
-	//Aquellos formularios que requieran de validación deberan disponer de un button[type="submit"] y declarar un atributo data-toggle="validator" en su etiqueta <form>
-	
-	//@param data-toggle="validator" -> si de define en un etiqueta <form> hace que el formulario se valide automáticamente
-	
-	$('button[type="submit"]').click(function(e){
-
-		if($(this).closest('form[data-toggle="validator"]').length > 0){
-			
-			e.preventDefault();
-			var form = $(this).closest('form');
-
-			if (!form.data("bs.validator").validate().hasErrors()) {
-			        form.submit();
-			        showLoading();
-			}		
+		if (form.data('form-filter') != true) {
+			url = form.attr('data-action');
+			method = form.data('method');				
+			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback') };
+			getData(params);
 		}
-		else{
-			var form = $(this).closest('form');
-			form.submit();
+		else {
+			var filters = JSON.stringify(data);
+			filters = filters.replace(/:/g, '=').replace(/"/g, '').replace(/,/g, '&').replace('{', '').replace('}', '').replace(/%5Blike%3D%5D=/g, '=[like]%3D');
+			var search = window.location.search.replace('?', '');
+			filtersSearch = search.split('&');
+			for (var i = 0; i < filtersSearch.length; i++) {
+				filter = filtersSearch[i].split('=');
+				if (filters.indexOf(filter[0] + '=') < 0 && emptyVars.indexOf(filter[0]) < 0 && filter[0] != 'filter[skip]') {
+					filters += '&' + filter[0] + '=' + filter[1]
+				}
+			}
+			filters = (filters[0] == '&') ? filters.substr(1) : filters;
+			url = form.attr('data-action') + '?' + filters;
+			window.location.href = url;
 		}
-
 	});
-
-
-	// GENERALIZACION DE PAGINACION
-	// Se puede establacer una paginación automática para aquellos listados de datos que haya definido un data-has-pagination="true"
-	// @param data-has-pagination -> Indica que el elemento tiene paginación 
-
-	$('[data-has-pagination="true"]').each(function(e){
-		pagination($(this));
-	});
-
 
 	// GENERALIZACION DE LISTADOS DE DATOS
 	// @param data-load -> Indica que el elemento se cargará con datos dinamicos 
@@ -222,11 +154,8 @@ $(document).ready(function(){
 			dataType: 'json',
 			data: {idSession: $.cookie('id_session')},
 			complete:function(data){	
-				$.removeCookie('id_session');
-				$.removeCookie('username');
-				$.removeCookie('id_rol');
-				$.removeCookie('id_client');
-				window.location.href="./";
+				clearBrowserData();
+				window.location.href = "/${{ default.lang }}$";
 	        }
 		});			
 
@@ -253,107 +182,15 @@ $(document).ready(function(){
 	    setAllImgDefault();
 	});	
 
-	//PROCESA LOS FICHEROS DE LOS FORMULARIOS
-	if($('input[type="file"]').length > 0){
-
-		var elems = document.querySelectorAll('input[type="file"]');
-
-		for(var i=0;i<elems.length;i++){
-		    elems[i].onchange = function(){encodeImageFileAsURL(this,$(this).data('file-view'))};
-		}
-	}
-
 	//FILTROS DE LISTADOS
 
-	if($('[data="filters"]').length){
+	if ($('[data="filters"]').length > 0) {
 
-		$('[data="filters"]').each(function(){
+		$('[data="filters"]').each(function () {
+			filters($(this));
+		});
+	};	
 
-			var rels = $(this).data('rel') ? $(this).data('rel').split(',') : [];
-
-			$(this).find('[data-filter]').each(function(){
-
-				var filterParent = $(this);
-				var dataFilter = [$(this).data('filter')];
-
-				for(var i=0; i<rels.length;i++){
-					dataFilter[i] = $(this).data('filter') + '_' + rels[i];
-				}
-
-				var search = window.location.search.replace('?','');
-		
-				filtersSearch = search.split('&');
-
-				$(this).find('[data-filter-value]').each(function(){
-
-					var finalHref = '';
-
-					for(var i=0;i<filtersSearch.length;i++){
-
-						filter = filtersSearch[i].split('=');
-
-						if(dataFilter.indexOf(filter[0]) >= 0){
-							var dataFilterValue = filterParent.find('[data-filter-value="'+ filter[1] +'"]');
-							if(dataFilterValue.parent().is('select')){
-								dataFilterValue.prop('selected','selected');
-							}
-							else{	
-								dataFilterValue.parent().addClass('active');
-							}
-							
-							filterParent.find('.filterValue').text(dataFilterValue.text());
-						}	
-					}	
-
-					if(($(this).data('filter-value').toString() != '' && !filterParent.hasClass('checkbox')) || ($(this).data('filter-value').toString() != '' && filterParent.hasClass('checkbox') && !filterParent.hasClass('active'))){
-
-						for(var i=0;i<dataFilter.length;i++){
-
-							var filterValue = $(this).data('filter-value');
-
-							if($(this).data('filter-value').toString().indexOf('=') < 0 ){
-								filterValue =  '=' + $(this).data('filter-value');
-							}
-
-							finalHref += dataFilter[i] +  filterValue + '&';
-						}
-						finalHref = finalHref.substring(0, finalHref.length - 1);
-					}
-					
-					for(var i=0;i<filtersSearch.length;i++){
-
-						filter = filtersSearch[i].split('=');					
-
-						if(($(this).data('filter-value').toString() != '' && (!filterParent.hasClass('checkbox'))) || ($(this).data('filter-value').toString() != '' && (filterParent.hasClass('checkbox')) && (!filterParent.hasClass('active')))){
-							if(finalHref.indexOf(filter[0] + '=') < 0){					
-
-								if(finalHref != ''){
-									finalHref += '&';
-								}
-
-								finalHref += filtersSearch[i];
-							}									
-
-						}
-						
-						else if((dataFilter.indexOf(filter[0]) < 0 && !filterParent.hasClass('checkbox')) || (dataFilter.indexOf(filter[0]) < 0 && filterParent.hasClass('checkbox') && filterParent.hasClass('active'))) {
-
-
-							if(finalHref != ''){
-								finalHref += '&';
-							}
-							finalHref += filtersSearch[i];						
-						}					
-
-					}
-					if($(this).is('a')){
-						$(this).attr('href','?' + finalHref);
-					}
-
-				});
-			});
-		});	
-	};
 });
 
 $(window).load(function(){
@@ -401,9 +238,10 @@ function popover(){
 	// @param callback -> nombre de la función que se ejecutará al invocarse el evento complete de Ajax. El data devuelvo se le envía a la función como parametro
 	// @param content -> parametros adicionales a enviar a la función callback
 
-function getData(el){
+function getData(el) {
+
 	var filter = '';
-	var access_token = "access_token=" + $.cookie('id_session')
+	var access_token = $.cookie('id_session') !== undefined ? "Bearer " + $.cookie('id_session') : '';
 	var service = el.service,
 		method = el.method,
 		template = el.template,
@@ -415,137 +253,180 @@ function getData(el){
 		content = el.content,
 		enableGetParams = el.enableGetParams,
 		getParamsList = el.getParamsList,
+		cache = el.cache,
+		rel_group = [''],
+		dynamicField = el.dynamicField;
+
+	if (el.rel != '' && el.rel !== undefined) {
 		rel_group = el.rel.split(',');
-
-	if(enableGetParams == true || enableGetParams=="true"){
-
-		var params = Object.keys(getParams);
-
-		$.each(rel_group,function(index){
-			var rel = rel_group[index];
-
-			if(rel !== undefined && rel != ''){
-				rel = '_' + rel;
-			}
-
-
-			if(getParamsList !== undefined && getParamsList.length > 0){
-				params = getParamsList.split(',');
-			
-				if(rel !== undefined && rel != ''){
-					$.each(params,function(i){
-						params[i] = params[i] + rel
-					});
-				}
-			}
-
-			if(params.length > 0){
-				var count = 0;
-				$.each(params, function(i, val) {
-
-					if((getParams[val] !== undefined && getParams[val] != '' && val.indexOf(rel) > -1) || (rel === undefined || rel == '')){
-
-						var key = (rel !== undefined && rel != '' && val.indexOf(rel) > -1) ? val.replace(rel,'') : val;
-
-						if(key=='order' || key=='group'){
-							filter += '&filter['+key+']=' + getParams[val];
-						}
-
-						else if(key=='query'){
-							var n=0;
-							var regexp = new RegExp("searchField\\d*" + rel,'g');;
-
-							$.each(params, function(index, value) {
-								if(value.search(regexp) > -1){	
-									filter += '&filter[where][and]['+count+'][or]['+n+']['+getParams[value]+'][like]=%' + getParams[val]+'%';
-									n++;
-								}	
-							})
-							count++;
-
-						}
-
-						else if(key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter') < 0){
-
-							var value = getParams[val]; 
-
-							if(value.indexOf('=') < 0 ){
-								value = '=' + value;
-							}
-					
-							filter += '&filter[where][and]['+count+']['+key+']' + value;
-							count++;
-						}
-
-						else {
-							filter += '&' + key + '=' + getParams[val];
-						}
-					}	
-				});
-			}
-		});	
 	}
 
-	if (page !== undefined && page != '' && page > 0 && filter.indexOf('filter[skip]') <= -1) {
-		page = ((page - 1)*items_per_page);
+	if (enableGetParams == true || enableGetParams == "true") {
+		var params = Object.keys(getParams);
+		//Solo para elementos agrupados
+		if (rel_group !== undefined) {
+
+			$.each(rel_group, function (index) {
+
+				var rel = rel_group[index];
+
+				if (rel !== undefined && rel != '') {
+					rel = '_' + rel;
+				}
+
+
+				if (getParamsList !== undefined && getParamsList.length > 0) {
+					params = getParamsList.split(',');
+
+					if (rel !== undefined && rel != '') {
+						$.each(params, function (i) {
+							params[i] = params[i] + rel
+						});
+					}
+				}
+
+				if (params.length > 0) {
+					var count = 0;
+					$.each(params, function (i, val) {
+
+						if ((getParams[val] !== undefined && getParams[val] != '' && val.indexOf(rel) > -1)) {
+
+							var key = (rel !== undefined && rel != '' && val.indexOf(rel) > -1) ? val.replace(rel, '') : val;
+
+							if (key == 'order' || key == 'group') {
+								filter += '&filter[' + key + ']=' + getParams[val];
+							}
+
+							else if (key == 'query') {
+								var regexp = new RegExp("searchField\\d*" + rel, 'g');;
+								var n = 0;
+								$.each(params, function (index, value) {
+									if (value.search(regexp) > -1) {
+										filter += '&filter[where][and][' + n + '][' + getParams[value] + '][like]=%' + getParams[val] + '%';
+										n++;
+									}
+								})
+								count++;
+							}
+
+							else if (key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter') < 0) {
+								key = completeGtLtParams(key);
+								var value = getParams[val] || '';
+								if (value != '') {
+									if (value.indexOf('=') < 0) {
+										value = '=' + value;
+									}
+
+									filter += '&filter[where][and][' + count + '][' + key + ']' + value;
+								}
+								count++;
+							}
+
+							else if (((key != 'filter[limit]') || (key == 'filter[limit]' && (getParams[val] > 0))) && key.indexOf('searchField') < 0) {
+								filter += '&' + key + '=' + getParams[val];
+							}
+						}
+					});
+				}
+			});
+		}
+
+	}
+	if (page !== undefined && page != '' && page > 0 && filter.indexOf('filter[skip]') <= -1 && getParams['filter[limit]'] != 0) {
+		page = ((page - 1) * items_per_page);
 		filter += '&filter[skip]=' + page;
 	}
 
-	if (items_per_page !== undefined && items_per_page != '' && items_per_page > 0  && filter.indexOf('filter[limit]') <= -1) {
+	if (items_per_page !== undefined && items_per_page != '' && items_per_page > 0 && filter.indexOf('filter[limit]') <= -1 && (getParams['filter[limit]'] < 0 || getParams['filter[limit]'] === undefined)) {
 		filter += '&filter[limit]=' + items_per_page;
 	}
 
-	if(service.indexOf('?') <= -1 ){
-		access_token = "?" + access_token;
-	}
-	else{
-		access_token = "&" + access_token;
-	}
+	var serviceParams = service.split('?');
 
-	console.log(service + access_token + filter);
 
-	$.ajax({
-		url: service +"?access_token=" + $.cookie('id_session') + filter,
-		type: method,
-		data: aditionalData,
-		dataType: 'json',
-		complete:function(data){
-			dataResponse = data.responseJSON;
-			data = {"data":dataResponse};
+	if (serviceParams.length > 1) {
+		serviceParams = serviceParams[1].split('&');
+		$.each(serviceParams, function (index, value) {
 
-			console.log(JSON.stringify(data));
-
-			if((target != '') && (template != '') && (template !== undefined) && (target !== undefined)){
-				$(target).html('');
-				$(template).tmpl(data).appendTo(target);
-			}	
-			if((callback != '') && (callback !== undefined)){
-
-				var exec = callback + '('+ JSON.stringify(dataResponse) +')';
-
-				if(content != ''){
-
-					if(typeof(content)=='object'){
-						content = JSON.stringify(content);
-					}
-
-					exec = callback + '('+ JSON.stringify(dataResponse) +',' + content +')';
-				}
-				
-				var f = eval(exec);				
+			var key = value.split('=')[0];
+			if (filter.indexOf(key) < 0 && getParamsList !== undefined && getParamsList.indexOf(key) > -1) {
+				filter += '&' + value;
 			}
-        },
-        error:function(data){
-			
-			var dataResponse = data.responseJSON,
-			statusCode = dataResponse.error.statusCode || data.status,
-			code = dataResponse.error.code,
-			message = dataResponse.error.message || data.statusText;
+			else if ((filter.indexOf(key) < 0) && (getParamsList === undefined || getParamsList.length == '')) {
+				filter += '&' + value;
+			}
+		});
+	}
 
-			error(statusCode,code,message);
+	filter = filter.indexOf('&') == 0 ? '?' + filter.substring(1, filter.length) : filter;
 
-        }
-	});
+	var url = service.split('?')[0] + filter;
+	
+
+	if (cache != true || cache == undefined || sessionStorage.getItem(url + '_${{ default.lang }}$') == '' || sessionStorage.getItem(url  + '_${{ default.lang }}$') == null) {
+
+		var jsonData = aditionalData instanceof FormData ? aditionalData : JSON.stringify(aditionalData);
+		var contentType = aditionalData instanceof FormData ? false : "application/json";
+		var timeout = 600000; // tiempo de espera por defecto de la peticion	
+
+		var getURL = $.ajax({
+			url: url,
+			type: method,
+			data: jsonData,
+			crossDomain: true,
+			processData: false,
+			contentType: contentType,
+			cache: false,
+			xhrFields:  {
+				withCredentials: true
+			},
+			timeout: timeout,
+			headers: {	
+				"Authorization": access_token,
+				"Accept-Language": '${{ default.lang }}$'
+			},
+			success: function (data, textStatus, xhr) {
+				console.log(url);
+				console.log(jsonData);
+				console.log("content:");				
+				console.log(content);
+				console.log("response:");
+				console.log(data);
+				console.log("--------------------------------------");
+				var dataResponse = data;
+				if (cache == true) {
+					sessionStorage.setItem(url + '_${{ default.lang }}$', JSON.stringify(dataResponse));
+				}
+				processData(dataResponse, target, template, callback, content, xhr.getResponseHeader('Pagination-Count'), dynamicField);
+	
+				if(el.pagination != undefined && el.pagination!=null){
+					generatePagination(dataResponse,el.pagination,xhr.getResponseHeader('Pagination-Count'));
+				}
+			},
+			error: function (data) {
+				console.log(url);
+				console.log(jsonData);
+				console.log("content:");				
+				console.log(content);
+				console.log("response:");
+				console.log(data);
+				console.log("--------------------------------------");
+				var statusCode = data.error.statusCode || data.status,
+					code = data.error.code,
+					message = data.error.message || data.statusText,
+					dataMessage = '';
+				if (data.responseJSON != undefined && data.responseJSON !== null) {
+					statusCode = data.responseJSON.statusCode;
+					message = code = data.responseJSON.code;
+					dataMessage = data.responseJSON.data || '';
+				}
+				error(statusCode, code, message,dataMessage);
+			}
+		});
+	}
+	else {
+		processData(JSON.parse(sessionStorage.getItem(url + '_${{ default.lang }}$')), target, template, callback, content, '', dynamicField)
+	}
 }
 
 // GENERALIZACION DE LISTADOS DE DATOS
@@ -586,6 +467,40 @@ function dataList(el){
 	}
 }
 
+function processData(dataResponse, target, template, callback, content, totalItems, dynamicFieldName) {
+	var data = { "data": dataResponse };
+	var total = 1;
+	if (totalItems !== null && totalItems !== undefined && totalItems > 1) {
+		total = totalItems;
+		data.data['totalItems'] = total;
+	}
+
+	if ((target != '') && (template != '') && (template !== undefined) && (target !== undefined)) {
+		$(target).html('');
+		$(template).tmpl(data).appendTo(target);
+	}
+
+	if ((dynamicFieldName != '') && (dynamicFieldName !== undefined)) {
+		setDefaultGetParams(dynamicFieldName);
+	}
+
+	if ((callback != '') && (callback !== undefined)) {
+
+		var exec = callback + '(' + JSON.stringify(dataResponse) + ')';
+
+		if (content != '') {
+
+			if (typeof (content) == 'object') {
+				content = JSON.stringify(content);
+			}
+
+			exec = callback + '(' + JSON.stringify(dataResponse) + ',' + content + ',' + total + ')';
+		}
+
+		var f = eval(exec);
+	}
+}
+
 // GENERALIZACION DE PAGINACION
 // Se puede establacer una paginación automática para aquellos listados de datos que haya definido un data-has-pagination="true"
 // Los parametros data deben colocarse en elemento raiz del listado
@@ -600,83 +515,219 @@ function dataList(el){
 // @param data-template -> selector CSS de la Template Jquery tmpl sobre la que se cargarán los datos devueltos
 // @param data-content-target -> selector CSS donde se cargara el contenido estructurado con la template
 
-function pagination(el){
+function dataList(el) {
 	var el = el;
 	var live;
-	var service_data_all = el.data('pagination-service-data-all') || el.data('service-data') || '',
-		items_per_page = el.data('pagination-items-per-page') || el.data('items-per-page'),
-		initial_page = el.data('pagination-initial-page') || el.data('initial-page'),
-		pagination_target = el.data('pagination-container-target') || '.pagination',
-		service_data = el.data('pagination-service-data') || el.data('service-data') || '',
-		method = el.data('pagination-method') || el.data('method') || '',
-		content = el.data('pagination-content') || el.data('content') || '',
-		template = el.data('pagination-template') || el.data('template') || '',
-		target = el.data('pagination-target') || el.data('target') || '',
-		callback = el.data('pagination-callback') || el.data('callback') || '',
-		aditionalData = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
-		enableGetParams = el.data('pagination-enable-get-params') || el.data('enable-get-params') || '',
-		getParamsList = el.data('pagination-get-params-list') || el.data('get-params-list') || '',
-		liveReload = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
-		timeReload = el.data('pagination-time-reload') || el.data('time-reload') || 60000;
-		rel = el.data('pagination-rel') || el.data('rel') || '';
+	var service = el.data('service-data') || '',
+		items_per_page = el.data('items-per-page'),
+		initial_page = el.data('initial-page'),
+		callback = el.data('callback') || '',
+		method = el.data('method') || 'GET',
+		content = el.data('content') || '',
+		template = el.data('template') || '',
+		target = el.data('target') || '',
+		aditionalData = el.data('aditional-data'),
+		enableGetParams = el.data('enable-get-params'),
+		getParamsList = el.data('get-params-list'),
+		liveReload = el.data('live-reload') || 'false',
+		timeReload = el.data('time-reload') || 60000,
+		cache = el.data('cache') || 'false',
+		rel = el.data('rel') || ''
+		dynamicField = el.data('get-default-value') || '';
+	
+	var params = { "service": service, "method": method, "template": template, "target": target, "page": initial_page, "items_per_page": items_per_page, "aditionalData": aditionalData, "callback": callback, "content": content, "enableGetParams": enableGetParams, "getParamsList": getParamsList, "rel": rel, "cache": cache, "dynamicField": dynamicField};
 
-	var paramsPagination =	{service:service_data, method:method, template: template, target: target, page: initial_page, pagination_target: pagination_target, items_per_page: items_per_page, callback: callback, content:content, enableGetParams: enableGetParams, getParamsList: getParamsList, rel:rel},	
-		params = {"service":service_data_all,"method":method,"template":"","target":"","page":0,"items_per_page":0,"aditionalData":aditionalData,"callback":"generatePagination","content":paramsPagination,"enableGetParams":enableGetParams,"getParamsList":getParamsList,"rel":rel}
-    
-    getData(params);
+	if(el.data('has-pagination')==true){	
+		var	service_data_all_pagination = el.data('pagination-service-data-all') || el.data('service-data') || '',
+			items_per_page_pagination = el.data('pagination-items-per-page') || el.data('items-per-page'),
+			initial_page_pagination = el.data('pagination-initial-page') || el.data('initial-page'),
+			pagination_target_pagination = el.data('pagination-container-target') || '.pagination',
+			service_data_pagination = el.data('pagination-service-data') || el.data('service-data') || '',
+			method_pagination = el.data('pagination-method') || el.data('method') || '',
+			content_pagination = el.data('pagination-content') || el.data('content') || '',
+			template_pagination = el.data('pagination-template') || el.data('template') || '',
+			target_pagination = el.data('pagination-target') || el.data('target') || '',
+			callback_pagination = el.data('pagination-callback') || el.data('callback') || '',
+			aditionalData_pagination = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
+			enableGetParams_pagination = el.data('pagination-enable-get-params') || el.data('enable-get-params') || '',
+			getParamsList_pagination = el.data('pagination-get-params-list') || el.data('get-params-list') || '',
+			liveReload_pagination = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
+			timeReload_pagination = el.data('pagination-time-reload') || el.data('time-reload') || 60000,
+			cache_pagination = el.data('pagination-cache') || el.data('cache') || 'false',
+			rel_pagination = el.data('pagination-rel') || el.data('rel') || '',
+			dynamicField_pagination = el.data('get-default-value') || '';
+		var paramsPagination = { service: service_data_pagination, method_pagination: method, template: template_pagination, target: target_pagination, page: initial_page_pagination, pagination_target: pagination_target_pagination, items_per_page: items_per_page_pagination, callback: callback_pagination, content: content_pagination, enableGetParams: enableGetParams_pagination, getParamsList: getParamsList_pagination, rel: rel_pagination, cache: cache_pagination };
+		params['pagination'] = paramsPagination;
+	}		
+
+	getData(params);
 
 	clearInterval(live);
-	
-	if(liveReload == 'true'){
- 		live=setInterval(getData(params),timeReload);
+
+	if (liveReload == 'true') {
+		live = setInterval(getData(params), timeReload);
 	}
 }
 
-function generatePagination(data,el){
-	
+function generatePagination(data, el, totalItems) {
+
 	var data = data,
-		initial_page = el.page,
 		pagination_target = el.pagination_target,
-		items_per_page = el.items_per_page;
+		target = el.target,
+		items_per_page = getParams['filter[limit]'] || el.items_per_page;
 
-	var totalPages = data.length / items_per_page;
+	var totalPages = totalItems / items_per_page;
 
-	if(totalPages % 1 != 0){
+	if(items_per_page == 0){
+		items_per_page=totalItems;
+	}
+
+	if (totalPages % 1 != 0) {
 		totalPages = parseInt(totalPages) + 1;
 	}
 
-	if($(pagination_target + ' .bootpag').length <= 0){
 
-		$(pagination_target).parents('.fragment-pagination').find('.totalResults').text(data.length);
-		$(pagination_target).parents('.fragment-pagination').find('.initInterval').text((initial_page - 1)*items_per_page + 1);
-		$(pagination_target).parents('.fragment-pagination').find('.lastInterval').text(parseInt((initial_page - 1)*items_per_page) + parseInt(items_per_page));
+	var search = window.location.search.replace('?', '');
 
-		$(pagination_target).bootpag({
-		   total: totalPages,
-		   page: initial_page,
-		   maxVisible: 5
-		}).on('page', function(event, num){
-			showLoading()
-			$(pagination_target).parents('.fragment-pagination').find('.totalResults').text(data.length);
-			$(pagination_target).parents('.fragment-pagination').find('.initInterval').text((num - 1)*items_per_page + 1);
-			$(pagination_target).parents('.fragment-pagination').find('.lastInterval').text(parseInt((num - 1)*items_per_page) + parseInt(items_per_page));
-			
-			el.page = num;
-			getData(el);
+	var filtersSearch = search.split('&');
 
-		});
-	}	
+	var href = '';
+	var currentPage = 1;
+
+	for (var i = 0; i < filtersSearch.length; i++) {
+
+		filter = filtersSearch[i].split('=');
+
+		if (filter[0].indexOf("filter[skip]") < 0 && filter[0] != '') {
+			href += '&' + filtersSearch[i];
+		}
+		else if (filter[0] != '') {
+			currentPage = (filter[1] / items_per_page) + 1;
+		}
+	}
+
+	if ($(pagination_target + ' .bootpag').length <= 0) {
+
+		$(pagination_target).parents(target).find('.totalResults').text(totalItems);
+		$(pagination_target).parents(target).find('.initInterval').text(parseInt((currentPage - 1) * items_per_page + 1));
+		$(pagination_target).parents(target).find('.lastInterval').text(totalItems < parseInt((currentPage - 1) * items_per_page) + parseInt(items_per_page) ? totalItems : parseInt((currentPage - 1) * items_per_page) + parseInt(items_per_page));
+
+		if (totalPages > 1) {
+			$(pagination_target).bootpag({
+				total: totalPages,
+				maxVisible: 5,
+				page: currentPage
+			}).on('page', function (event, num) {				
+				showLoading();
+				tabsPagination(event);
+				window.location.href = '?filter[skip]=' + parseInt((num - 1) * items_per_page) + href;
+
+			});
+		}
+	}
 }
 
-function error(statusCode,code,message){
+function filters(el) {
+	var rels = el.data('rel') ? el.data('rel').split(',') : [];
+
+	el.find('[data-filter]').each(function () {
+
+		var filterParent = $(this);
+		var dataFilter = [$(this).data('filter')];
+
+		for (var i = 0; i < rels.length; i++) {
+			dataFilter[i] = $(this).data('filter') + '_' + rels[i];
+		}
+
+		var search = window.location.search.replace('?', '');
+
+		filtersSearch = search.split('&');
+
+		$(this).find('[data-filter-value]').each(function () {
+
+			var finalHref = '';
+
+			for (var i = 0; i < filtersSearch.length; i++) {
+
+				filter = filtersSearch[i].split('=');
+
+				if (dataFilter.indexOf(filter[0]) >= 0) {
+					var dataFilterValue = filterParent.find('[data-filter-value="' + filter[1] + '"]');
+					if (dataFilterValue.parent().is('select')) {
+						dataFilterValue.prop('selected', 'selected');
+					}
+					else {
+						dataFilterValue.parent().addClass('active');
+					}
+
+					filterParent.find('.filterValue').text(dataFilterValue.text());
+				}
+			}
+
+			if (($(this).data('filter-value').toString() != '' && !filterParent.hasClass('checkbox')) || ($(this).data('filter-value').toString() != '' && filterParent.hasClass('checkbox') && !filterParent.hasClass('active'))) {
+
+				for (var i = 0; i < dataFilter.length; i++) {
+
+					var filterValue = $(this).data('filter-value');
+
+					if ($(this).data('filter-value').toString().indexOf('=') < 0) {
+						filterValue = '=' + $(this).data('filter-value');
+					}
+
+					finalHref += dataFilter[i] + filterValue + '&';
+				}
+				finalHref = finalHref.substring(0, finalHref.length - 1);
+			}
+
+			for (var i = 0; i < filtersSearch.length; i++) {
+
+				filter = filtersSearch[i].split('=');
+
+				if (filter[0] != "filter[skip]") {
+					if (($(this).data('filter-value').toString() != '' && (!filterParent.hasClass('checkbox'))) || ($(this).data('filter-value').toString() != '' && (filterParent.hasClass('checkbox')) && (!filterParent.hasClass('active')))) {
+						if (finalHref.indexOf(filter[0] + '=') < 0) {
+
+							if (finalHref != '') {
+								finalHref += '&';
+							}
+
+							finalHref += filtersSearch[i];
+						}
+
+					}
+
+					else if ((dataFilter.indexOf(filter[0]) < 0 && !filterParent.hasClass('checkbox')) || (dataFilter.indexOf(filter[0]) < 0 && filterParent.hasClass('checkbox') && filterParent.hasClass('active'))) {
+
+
+						if (finalHref != '') {
+							finalHref += '&';
+						}
+						finalHref += filtersSearch[i];
+					}
+
+				}
+
+			}
+			if ($(this).is('a')) {
+				$(this).attr('href', '?' + finalHref);
+				if (filterParent.hasClass('active')) {
+					$(this).attr("href", $(this).attr("href").replace('%20ASC', '%20DESC'));
+					$(this).children("i.order").addClass('orderUp');
+				}
+			}
+
+		});
+	});
+}
+
+function error(statusCode, code, message, dataMessage) {
 
 	message = message === undefined ? '' : message;
+	var title = '',
+		content = message,
+		HTML = false;
 
-
-	var title='',
-		content=message;
-	
-	switch(statusCode){
+	switch (statusCode) {
 
 		case 200:
 			content = '200: ${{ default.operationOK }}$';
@@ -734,11 +785,16 @@ function error(statusCode,code,message){
 			content = statusCode + ':${{ default.unknownError }}$ .'+ message;
 	}
 
-	switch(code){
+	switch (code) {
 		//Extend to custom errors
 	}
 
-	showError(title,content);
+	if(HTML){
+		showHTMLError(title, content);
+	}
+	else{
+		showError(title, content);
+	}
 }
 
 // FUNCION QUE MUESTRA LA CAPA DE LOADING
@@ -769,32 +825,6 @@ function showHTMLError(title,content){
 		modal.find('.customContent').html(content);
 	}
 	modal.modal('show');
-}
-
-// Codificacion a Base64 de input file
-// Codifica el fichero en Base64 y lo guarda en un input hidden a continuacion del input file correspondiente.
-function encodeImageFileAsURL(element,target_view) {
-
-	var file = element.files[0];
-	var reader = new FileReader();
-
-	var name = $(element).attr('name');
-	var id = $(element).attr('id');
-
-	reader.onloadend = function() {
-
-		var form = $(element).closest('form');
-		if(form.find('input[name="'+name+'-fileHidden"]').length > 0){
-			form.find('input[name="'+name+'-fileHidden"]').attr('value',reader.result);
-		}
-		else{
-			$('<input type="hidden" value="'+reader.result+'" name="'+name+'-fileHidden" />').insertAfter($(element));
-		}
-
-		$(target_view).attr("src",reader.result).removeClass('hidden');
-
-	}
-	reader.readAsDataURL(file);
 }
 
 function filterContentByRol(){
@@ -872,14 +902,19 @@ function dataSearch(){
 	});
 }
 
-function markRol(el,rol){
-	var rol = rol;
-	var el = el;
-	el.find('[id^="rol_'+rol+'"]').attr( "checked", true );
-}
-
-function markClient(el,client){
-	var rol = rol;
-	var el = el;
-	el.find('.select_id_cliente').val(client);
+function setDefaultGetParams(fieldName) {
+	var params = JSON.parse(JSON.stringify(getParams));
+	for (i = 0; i < Object.keys(params).length; i++) {
+		if (Object.keys(params)[i] != "filter[skip]" && Object.keys(params)[i] != "filter[limit]") {
+			var value = Object.values(params)[i];
+			var key = Object.keys(params)[i];
+			if (value.includes("[like]=")) {
+				value = value.split("[like]=")[1];
+				key += '%5Blike%3D%5D';
+			}
+			if (key == fieldName) {
+				$('[name="' + key + '"]').val(value);
+			}
+		}
+	}
 }

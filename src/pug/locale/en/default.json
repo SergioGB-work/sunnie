@@ -1,4 +1,5 @@
 {
+  "lang":"en",
   "errorLoginTitle" : "Log in failed",
   "errorLoginContent" : "Your user or password are incorrects",
   "errorRoleTitle" : "Access denied",
