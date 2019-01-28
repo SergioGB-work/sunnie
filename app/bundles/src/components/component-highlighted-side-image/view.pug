@@ -6,27 +6,27 @@ mixin component-highlighted-side-image(content)
 	- var button = content.button || ''
 	
 	.container
-		.row.flex-vcenter-sm
+		.row.d-sm-flex.align-items-sm-center
 			if position == 'left'
-				.col-sm-6.col-xs-12
-					img(alt=image.alt,src=image.src)
+				.col-md-6.col-12
+					img(alt=image.alt,src=image.src,class="w-100")
 
-				.col-sm-6.col-xs-12.text-center
+				.col-md-6.col-12.text-center
 					.row 
-						.col-lg-9.col-lg-offset-1.col-sm-10.col-sm-offset-1.col-xs-12
+						.col-xl-9.offset-xl-1.col-md-10.offset-md-1.col-12
 							div !{contentHTML}
 
 							if button
 								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}             
 
 			else
-				.col-sm-6.col-xs-12.text-center
+				.col-md-6.col-12.text-center
 					.row
-						.col-lg-9.col-lg-offset-1.col-sm-10.col-sm-offset-1.col-xs-12 
+						.col-xl-9.offset-xl-1.col-md-10.offset-md-1.col-12 
 							div !{contentHTML}
 
 							if button != ''
 								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text} 
 
-				.col-sm-6.col-xs-12
-					img(alt=image.alt,src=image.src)
+				.col-md-6.col-12
+					img(alt=image.alt,src=image.src,class="w-100")

@@ -1,13 +1,11 @@
-extends ../theme/templates/portal
+mixin layout-12(content)
+	- var content_upper = content.content_upper	
 
-block head
-	block header
-
-block content
 	div(id="layout-12",class="layout",role="main")
 		div(class="container")
 
 			div(class="layout-row row")
 			
 				div(class="column col-md-12")
-					block content-upper
+					each component in content_upper
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')

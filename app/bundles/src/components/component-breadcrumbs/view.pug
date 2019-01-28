@@ -4,10 +4,10 @@ mixin component-breadcrumbs(content)
 	- var length = content.length - 1
 	
 	nav(id="breadcrumbs")
-		ol(class="breadcrumb nomargin")
+		ol(class="breadcrumb m-0 p-0")
 		
 			each item,i in content
-				li
+				li.breadcrumb-item
 					if i == length
 						a(href=item.url, class="active") #{item.pageName}
 					else

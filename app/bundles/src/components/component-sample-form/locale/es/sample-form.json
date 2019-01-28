@@ -1,1 +1,24 @@
-{}
+{
+  "pageTitle":"Formularios",
+  "email":"Correo Electrónico",
+  "helpText":"Este texto es un bloque de ayuda",
+  "password":"Contraseña",
+  "comment":"Comentario",
+  "typeComment":"Escribe tu comentario",
+  "selectOption":"Selecciona una opción",
+  "option":"Opción",
+  "fileInput":"Fichero",
+  "helpTextBlock":"Ejemplo de bloque de texto de ayuda",
+  "submit":"Enviar",
+  "example":"Ejemplo",
+  "name":"Nombre",
+  "sendInvitation":"SEnviar Invitación",
+  "amount":"Cantidad (en dollares)",
+  "transferCash":"Transferir efectivo",
+  "standar":"Estandar",
+  "optionOne":"La opción uno es esta asi que asegurate de incluirla porque es genial",
+  "optionTwoDisabled":"Opción dos deshabilitada",
+  "optionTwo":"La opción dos puede ser otra cosa y seleccionarla deseleccionará la opción uno",
+  "optionThreeDisabled":"Opción tres deshabilitada",
+  "checkout":"Marcarme"
+}

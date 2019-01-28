@@ -1,1 +1,7 @@
-{}
+{
+  "header":"Header",
+  "secondaryText":"Secondary text",
+  "link":"Link",
+  "linkText":"This is a link",
+  "paragraph":"Paragraph"  
+}

@@ -5,12 +5,16 @@
 	float:right;
 
 	button{
-		color:#fff;
+		color:$white;
 		text-decoration:none;
 		
 		&:hover,&:active,&:focus{
-			color:#fff;
+			color:$white;
 			text-decoration:none;
+			box-shadow:0 0 0;
+		}
+		&:not(:disabled):not(.disabled):active:focus{
+			box-shadow:0 0 0;
 		}
 
 	}
@@ -24,6 +28,7 @@
 		    position: fixed;
 		    justify-content: center;
 		    width: 100%;
+		    max-width: 100%;
 		    margin: 0;
 
 		    .modal-header{
@@ -32,12 +37,12 @@
 
     			.close{
 				    position: fixed;
-    				top: 0;
-				    right: 0;
+    				top: $grid-gutter-width;
+				    right: $grid-gutter-width;
 				    padding: $grid-gutter-width;
 
 				    span{
-				    	font-size: ceil(($font-size-base * 5.25));
+				    	font-size: 5.25rem;
 				    }
 				}
 		    }
@@ -51,18 +56,23 @@
     			input[type="search"]{
 				    background: 0;
 				    border: 0;
-				    border-bottom: 1px solid #fff;
-				    font-size: 34px;
-				    color: #fff;
-				    font-weight: 300;    				
+				    border-bottom: 1px solid $white;
+				    font-size: 2rem;
+				    color: $white;
+				    font-weight: 300;
+				    line-height:1;
+
+    				&::placeholder{
+						color: $white;
+    				}
     			}
 
-    			.input-group-addon{
+    			.input-group-text{
     				padding-bottom:0;
     				border:0;
-    				border-bottom:1px solid #fff;
+    				border-bottom:1px solid $white;
     				background:0;
-    				color:#fff;
+    				color:$white;
     			}	    	
 		    }	
 		}

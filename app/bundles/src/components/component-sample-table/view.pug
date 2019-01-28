@@ -1,108 +1,108 @@
 mixin component-sample-table(content)
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h1.nomargin Tables
+		.col-12
+			.card
+				.card-body
+					h1.m-0 Tables
 
 			div
-				.panel.panel-default
-					.panel-body
-						h2.nomargin Standar
-						.table-responsive
-							table(class="table")
-								thead
-									tr
-										th First Name
-										th Last Name
-										th Username
-								tbody
-									tr
-										td Mark
-										td Otto
-										td @mdo
+				.card
+					.card-body
+						h2.m-0 Standar
 
-									tr
-										td Mark
-										td Otto
-										td @mdo
+						table(class="table")
+							thead
+								tr
+									th First Name
+									th Last Name
+									th Username
+							tbody
+								tr
+									td Mark
+									td Otto
+									td @mdo
 
-									tr
-										td Mark
-										td Otto
-										td @mdo
+								tr
+									td Mark
+									td Otto
+									td @mdo
 
-			div
-				.panel.panel-default
-					.panel-body
-						h2.nomargin Striped
-						.table-responsive
-							table(class="table table-bordered")
-								thead
-									tr
-										th #
-										th First Name
-										th Last Name
-										th Username
-								tbody
-									tr
-										th(scope="row") 1
-										td Mark
-										td Otto
-										td @mdo
-
-									tr
-										th(scope="row") 2
-										td Mark
-										td Otto
-										td @mdo
-
-									tr
-										th(scope="row") 3
-										td Mark
-										td Otto
-										td @mdo			
+								tr
+									td Mark
+									td Otto
+									td @mdo
 
 			div
-				.panel.panel-default
-					.panel-body
-						h2.nomargin Contextual Clases
-						.table-responsive
-							table(class="table table-bordered")
-								thead
-									tr
-										th #
-										th First Name
-										th Last Name
-										th Username
-								tbody
-									tr(class="success")
-										th(scope="row") 1
-										td Mark
-										td Otto
-										td @mdo
+				.card
+					.card-body
+						h2.m-0 Striped
 
-									tr(class="active")
-										th(scope="row") 2
-										td Mark
-										td Otto
-										td @mdo
+						table(class="table table-bordered")
+							thead
+								tr
+									th #
+									th First Name
+									th Last Name
+									th Username
+							tbody
+								tr
+									th(scope="row") 1
+									td Mark
+									td Otto
+									td @mdo
 
-									tr(class="warning")
-										th(scope="row") 3
-										td Mark
-										td Otto
-										td @mdo
+								tr
+									th(scope="row") 2
+									td Mark
+									td Otto
+									td @mdo
 
-									tr(class="info")
-										th(scope="row") 3
-										td Mark
-										td Otto
-										td @mdo
+								tr
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo			
 
-									tr(class="danger")
-										th(scope="row") 3
-										td Mark
-										td Otto
-										td @mdo
+			div
+				.card
+					.card-body
+						h2.m-0 Contextual Clases
+
+						table(class="table table-bordered")
+							thead
+								tr
+									th #
+									th First Name
+									th Last Name
+									th Username
+							tbody
+								tr(class="table-success")
+									th(scope="row") 1
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-active")
+									th(scope="row") 2
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-warning")
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-info")
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-danger")
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo

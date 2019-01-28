@@ -5,11 +5,11 @@ block vars
 	- var modal_id = "modal-error"
 block modal-body
 	.error
-		h2 ${{ #{siteName}.error }}$
-		p ${{ #{siteName}.errorOcurred }}$
+		h2 ${{ default.error }}$
+		p ${{ default.errorOcurred }}$
 		div(class="customContent")
 
 		.row
-			.col-xs-12
+			.col-12
 				.text-right
-					button(class="btn btn-primary",data-dismiss="modal") ${{ #{siteName}.acept }}$
+					button(class="btn btn-primary",data-dismiss="modal") ${{ default.acept }}$

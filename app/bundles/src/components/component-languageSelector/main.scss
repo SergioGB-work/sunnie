@@ -23,13 +23,10 @@
 			border:0;
 			height: $navbar-height;
 			outline:0;
-			display:flex;
-			align-items:center;
 			max-width: 100%;
 			padding-left:0;
 			padding-right:0;
-			color:$navbar-default-toggle-icon-bar-bg;
-
+			color:$white;
 			i{
 				margin-right: ceil(($grid-gutter-width * 0.75));
 			}
@@ -37,7 +34,7 @@
 	}
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	.component-languageSelector{
 
 		.dropdown{

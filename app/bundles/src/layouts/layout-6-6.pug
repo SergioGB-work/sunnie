@@ -1,16 +1,16 @@
-extends ../theme/templates/portal
+mixin layout-6-6(content)
+	- var content_left = content.content_left	
+	- var content_right = content.content_right
 
-block head
-	block header
-
-block content
 	div(id="layout-6-6",class="layout",role="main")
 		div(class="container")
 
 			div(class="layout-row row")
 
-				div(class="column col-md-6 col-xs-12")
-					block content-left
+				div(class="column col-md-6 col-12")
+					each component in content_left
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
-				div(class="column col-md-6 col-xs-12")
-					block content-right
+				div(class="column col-md-6 col-12")
+					each component in content_right
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')

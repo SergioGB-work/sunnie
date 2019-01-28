@@ -1,25 +1,12 @@
 @import '../../theme/css/base/variables';
 @import '../../theme/css/lib/bootstrap/variables';
 
+
 .component.component-highlighted-banner{
 
-	background: $brand-primary;
+	background: $primary;
     padding: 40px 0;
 
-    &.bg-danger{
-    	background: $brand-danger;
-    }
-    &.bg-success{
-    	background: $brand-success;
-    }
-    &.bg-warning{
-    	background: $brand-warning;
-    }
-    &.bg-info{
-    	background: $brand-info;
-    }    
-
-	
 	*{
 		color: $btn-primary-color;
 		margin-top:0;
@@ -39,13 +26,13 @@
 		
 		.btn{
 			min-width: 75%;
-			font-size: ceil(($font-size-base * 1.25));
+			font-size: 1.25rem;
 			margin-top: ceil(($grid-gutter-width * 1.5));
 		}
 	}	
 }	
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(sm) {
 	.component.component-highlighted-banner{
 		div[class^="col-"]{
 			.btn{

@@ -15,7 +15,17 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full,
 	if componentId != ''
 		-var idComponent = componentType + '-' + componentId
 
+
 	div(class=classesComponent + ' ' + componentType + ' ' + classes, id=idComponent || false)
+		if locals.development == true
+			.dropdown.action-bar
+				button(class="dropdown-toggle border-0 p-0",type="button",id="dropdownMenuButton",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
+					i.fa.fa-ellipsis-v
+
+				.dropdown-menu.dropdown-menu-right
+					a.dropdown-item(href="") Editar
+					a.dropdown-item(href="") Eliminar
+
 		if showTitle != "false"
 			div(class="component-title")
 				h2 #{componentTitle}

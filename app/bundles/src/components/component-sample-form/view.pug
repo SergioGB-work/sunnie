@@ -1,163 +1,163 @@
 mixin component-sample-form(content)
 	div
-		h1 Forms
+		h1 ${{ sample-form.pageTitle }}$
 
 		form
 			div(class="form-group")
-				label(for="exampleInputEmail1") Email address
-				input(type="email",class="form-control",id="exampleInputEmail1",placeholder="Email",disabled)
-				span(class="help-block")
-					| This text is a help-block
+				label(for="exampleInputEmail1") ${{ sample-form.email }}$
+				input(type="email",class="form-control",id="exampleInputEmail1",placeholder="${{ sample-form.email }}$",disabled)
+				small(class="form-text text-muted") ${{ sample-form.helpText }}$
 
 			div(class="form-group")
-				label(for="exampleInputPassword1") Password
-				input(type="password",class="form-control",id="exampleInputPassword1",placeholder="Password")
+				label(for="exampleInputPassword1") ${{ sample-form.password }}$
+				input(type="password",class="form-control",id="exampleInputPassword1",placeholder="${{ sample-form.password }}$")
 
 			div(class="form-group")
-				label(for="exampleInputComment1") Comment
-				textarea(class="form-control",id="exampleInputComment1") Escribe tu comentario			
+				label(for="exampleInputComment1") ${{ sample-form.comment }}$
+				textarea(class="form-control",id="exampleInputComment1") ${{ sample-form.typeComment }}$			
 
 			div(class="form-group")
-				label(for="exampleSelect1") Select an option
+				label(for="exampleSelect1") ${{ sample-form.selectOption }}$
 				select(class="form-control",name="select",id="exampleSelect1")
-					option(value="option1") Option 1
-					option(value="option2") Option 2
-					option(value="option3") Option 3
+					option(value="option1") ${{ sample-form.option }}$ 1
+					option(value="option2") ${{ sample-form.option }}$ 2
+					option(value="option3") ${{ sample-form.option }}$ 3
 
 			div(class="form-group")
-				label(for="exampleInputFile") File input
+				label(for="exampleInputFile") ${{ sample-form.fileInput }}$
 				input(type="file",id="exampleInputFile")
-				p(class="help-block")
-					| Example block-level help text here.
+				small(class="form-text text-muted") ${{ sample-form.helpTextBlock }}$.
 
-			div(class="checkbox custom")
-				input(type="checkbox",id="inputCheckSample")
-				label(for="inputCheckSample") Check me out
+			div(class="custom-control custom-checkbox my-1 mr-sm-2")
+				input(type="checkbox",id="inputCheckSample",class="custom-control-input")
+				label(for="inputCheckSample",class="custom-control-label") ${{ sample-form.checkout }}$
 
 			div(class="form-group")
-				button(type="submit",class="btn") Submit
+				button(type="submit",class="btn btn-primary") ${{ sample-form.submit }}$
 
 	div
 		h3 Inline Form
-		h4 EXAMPLE
 		form(class="form-inline")
 			div(class="form-group")
-				label(for="exampleInputName2") Name
-				input(type="text",class="form-control",id="exampleInputName2",placeholder="Jane Doe")
+				label(for="exampleInputName2") ${{ sample-form.name }}$
+				input(type="text",class="form-control mx-sm-3",id="exampleInputName2",placeholder="Jane Doe")
 
 			div(class="form-group")
-				label(for="exampleInputEmail2") Email
-				input(type="email",class="form-control",id="exampleInputEmail2",placeholder="jane.doe@example.com")
+				label(for="exampleInputEmail2") ${{ sample-form.email }}$
+				input(type="email",class="form-control mx-sm-3",id="exampleInputEmail2",placeholder="jane.doe@example.com")
 
 			div(class="form-group")
-				button(type="submit",class="btn btn-default") Send invitation
-				
-		h4 EXAMPLE		
-		form(class="form-inline")
-			div(class="form-group")
-				label(for="exampleInputName3",class="sr-only") Name
-				input(type="text",class="form-control",id="exampleInputName3",placeholder="Jane Doe")
+				button(type="submit",class="btn btn-secondary") ${{ sample-form.sendInvitation }}$
 
-			div(class="form-group")
-				label(for="exampleInputEmail3",class="sr-only") Email
-				input(type="email",class="form-control",id="exampleInputEmail3",placeholder="jane.doe@example.com")
+		div(class="input-group mb-3")
+			div(class="input-group-prepend")
+				span(class="input-group-text" id="basic-addon1") @
+			input(type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1")
+		
+		div(class="input-group mb-3")
+			input(type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2")
+			div(class="input-group-append")
+				span(class="input-group-text" id="basic-addon2") @example.com
+		
+		
 
-			div(class="form-group")
-				button(type="submit",class="btn btn-default") Send invitation
-				
-		h4 EXAMPLE	
-		form(class="form-inline")
-			div(class="form-group")
-				label(class="sr-only",for="exampleInputAmount") Amount (in dollars)
-				div(class="input-group")
-					div(class="input-group-addon") $
-					input(type="text" class="form-control" id="exampleInputAmount" placeholder="Amount")
-					div(class="input-group-addon") .00
+		label(for="basic-url") Your vanity URL
+		div(class="input-group mb-3")
+			div(class="input-group-prepend")
+				span(class="input-group-text" id="basic-addon3") https://example.com/users/
+			input(type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3")
+		
 
-			button(type="submit" class="btn btn-primary") Transfer cash
+		div(class="input-group mb-3")
+			div(class="input-group-prepend")
+				span(class="input-group-text") $
+			input(type="text" class="form-control" aria-label="Amount (to the nearest dollar)")
+			div(class="input-group-append")
+				span(class="input-group-text") .00
+		
+		
+
+		div(class="input-group")
+			div(class="input-group-prepend")
+				span(class="input-group-text") With textarea
+			textarea(class="form-control" aria-label="With textarea")
+		
 
 	div
 		h3 Horizontal form
-		form(class="form-horizontal")
-			div(class="form-group")
-				label(for="exampleInputEmail4", class="col-sm-2 control-label") Email address
+		form
+			div(class="form-group row")
+				label(for="exampleInputEmail4", class="col-sm-2 col-form-label") ${{ sample-form.email }}$
 				div(class="col-sm-10")
-					input(type="email",class="form-control",id="exampleInputEmail4",placeholder="Email")
+					input(type="email",class="form-control",id="exampleInputEmail4",placeholder="${{ sample-form.email }}$")
 
-			div(class="form-group")
-				label(class="col-sm-2 control-label") Email address
+			div(class="form-group row")
+				label(class="col-sm-2 col-form-label") ${{ sample-form.email }}$
 				div(class="col-sm-10")
-					p(class="form-control-static") email@example.com
+					p(class="form-control-plaintext") email@example.com
 						
 
-			div(class="form-group")
-				label(for="exampleInputPassword3",class="col-sm-2 control-label") Password
+			div(class="form-group row")
+				label(for="exampleInputPassword3",class="col-sm-2 col-form-label") ${{ sample-form.password }}$
 				div(class="col-sm-10")
-					input(type="password",class="form-control",id="exampleInputPassword3",placeholder="Password")
+					input(type="password",class="form-control",id="exampleInputPassword3",placeholder="${{ sample-form.password }}$")
 
-			div(class="form-group")
-				label(for="exampleInputComment4", class="col-sm-2 control-label") Select an option
+			div(class="form-group row")
+				label(for="exampleInputComment4", class="col-sm-2 col-form-label") ${{ sample-form.selectOption }}$
 				div(class="col-sm-10")
 					select(class="form-control",name="select",id="exampleInputComment4")
-						option(value="option1") Option 1
-						option(value="option2") Option 2
-						option(value="option3") Option 3
+						option(value="option1") ${{ sample-form.option }}$ 1
+						option(value="option2") ${{ sample-form.option }}$ 2
+						option(value="option3") ${{ sample-form.option }}$ 3
 
-			div(class="form-group")
-				label(for="exampleInputFile1",class="col-sm-2 control-label") File input
+			div(class="form-group row")
+				label(for="exampleInputFile1",class="col-sm-2 col-form-label") ${{ sample-form.fileInput }}$
 				div(class="col-sm-10")
 					input(type="file",id="exampleInputFile1")
-					p(class="help-block")
-						| Example block-level help text here.
+					p(class="form-text")
+						| ${{ sample-form.helpTextBlock }}$
 
-			div(class="form-group")
-				div(class="checkbox")
-					div(class="col-sm-offset-2 col-sm-10")
-						label 
-							input(type="checkbox")
-							| Check me out
-
-			div(class="form-group")
-				div(class="col-sm-offset-2 col-sm-10")
-					button(type="submit",class="btn") Submit				
+			div(class="form-group row")
+				div(class="offset-sm-2 col-sm-10")
+					button(type="submit",class="btn btn-primary") ${{ sample-form.submit }}$				
 	
 	div
 		h2 Checkboxes and Radios
-		h3 Standar
+		h3 ${{ sample-form.standar }}$
 		form
 			div(class="checkbox")
 				label
 					input(type="checkbox",value="")
-					| Option one is this and that&mdash;be sure to include why it's great
+					| ${{ sample-form.optionOne }}$
 
 			div(class="checkbox disabled")
 				label
 					input(type="checkbox",value="", disabled)
-					| Option two is disabled
+					| ${{ sample-form.optionTwoDisabled }}$
 
 			div(class="radio")
 				label
 					input(type="radio",name="optionsRadios",id="optionsRadios1",value="option1",checked)
-					| Option one is this and that&mdash;be sure to include why it's great
+					| ${{ sample-form.optionOne }}$
 
 			div(class="radio")
 				label
 					input(type="radio", name="optionsRadios", id="optionsRadios2", value="option2")
-					| Option two can be something else and selecting it will deselect option one
+					| ${{ sample-form.optionTwo }}$
 
 			div(class="radio disabled")
 				label
 					input(type="radio",name="optionsRadios", id="optionsRadios3", value="option3", disabled)
-					| Option three is disabled
+					| ${{ sample-form.optionThreeDisabled }}$
 					
 		h3 Inline
 		form
-			div(class="checkbox-inline")
+			div(class="form-check")
 				label
 					input(type="checkbox",value="")
-					| Option one is this and that&mdash;be sure to include why it's great
+					| ${{ sample-form.optionOne }}$
 
-			div(class="checkbox-inline")
+			div(class="form-check")
 				label
 					input(type="checkbox",value="")
-					| Option two is disabled	
+					| ${{ sample-form.optionTwo }}$	

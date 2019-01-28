@@ -1,66 +1,66 @@
 mixin component-components(content)
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h1#componentes Componentes
+		.col-12
+			.card
+				.card-body
+					h1#componentes ${{ components.pageTitle }}$
 					
-					p Todos los componentes de Sunnie se crean en base a la misma estructura HTML ubicada en <span class="text-primary wbba">/src/pug/templates/component.pug</span> y la definición de los mismo para su uso está incluída en <span class="text-primary wbba">/src/pug/templates/include_components.pug</span>.
+					p ${{ components.paragraph1 }}$
 
-					h2#uso Uso
+					h2#uso ${{ components.howToUseTitle }}$
 
-					p Los componentes deben usarse para "rellenar" el contenido de una página web de modo que colocaremos los componentes en cada uno de los huecos definidos por la layout utilizada.
+					p ${{ components.howToUseParagraph1 }}$
 
-					p La <span class="text-primary">estructura básica</span> de uso de todos los componentes es la siguiente:
+					p ${{ components.howToUseParagraph2 }}$
 
 					pre
 						| +component( componentType , componentId , content , componentTitle , showTitle , full , classes )
 
-			.table-responsive
-				table(class="table")
-					thead
-						tr
-							th Atributo
-							th Description
-							th Default
-					tbody
-						tr
-							td <strong>componentType</strong>
-							td Nombre del componente a utilizar. Coincide con el nombre de la carpeta del componente
-							td "". Requerido				
 
-						tr
-							td <strong>componentId</strong>
-							td Identifiicador único del componente. El identificador se concatena al nombre del componente cuando se realiza la compilación
-							td ""
+			table(class="table table-responsive")
+				thead
+					tr
+						th ${{ components.param }}$
+						th ${{ components.description }}$
+						th ${{ components.default }}$
+				tbody
+					tr
+						td <strong>componentType</strong>
+						td ${{ components.componentTypeDescription }}$
+						td "". Requerido				
 
-						tr
-							td <strong>content</strong>
-							td Contenido dinámico del componente que podemos enviarle como parámetro. Admite cualquier tipo de dato: String, JSON, Array, boolean, etc...
-							td ""
-						tr
-							td <strong>componentTitle</strong>
-							td Titulo del componente. En caso de seleccionar el parámetro showTitle a true este será el texto que muestre como título.
-							td ""
+					tr
+						td <strong>componentId</strong>
+						td ${{ components.componentIdDescription }}$
+						td ""
 
-						tr
-							td <strong>showTitle</strong>
-							td En caso de estar a "false" no mostrará el título del componente(componentTitle). Con cualquier otro valor si lo mostrará
-							td ""
+					tr
+						td <strong>content</strong>
+						td ${{ components.componentContentDescription }}$
+						td ""
+					tr
+						td <strong>componentTitle</strong>
+						td ${{ components.componentComponentTitleDescription }}$
+						td ""
 
-						tr
-							td <strong>full</strong>
-							td Parámetro de estilo. En caso de estar a true el componente se mostrará al 100% del hueco donde está situado, sin definir paddings ni fondo. Se añade la clase component-full al componente.
-							td ""
+					tr
+						td <strong>showTitle</strong>
+						td ${{ components.componentShowTitleDescription }}$
+						td ""
 
-						tr
-							td <strong>classes</strong>
-							td Parámetro que perite añadir clases adicionales a la raiz componente para alterar su estilo o comportamiento.
-							td ""							
+					tr
+						td <strong>full</strong>
+						td ${{ components.componentFullDescription }}$
+						td ""
 
-			.panel.panel-default
-				.panel-body
-					h2 Ejemplo
+					tr
+						td <strong>classes</strong>
+						td ${{ components.componentClassesDescription }}$
+						td ""							
+
+			.card
+				.card-body
+					h2 ${{ components.example }}$
 					pre
 						| extends ./layouts/layout-12-fluid
 
@@ -74,245 +74,245 @@ mixin component-components(content)
 						|         +component("component-sample-list","","","","false","false")
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2#listado-de-componentes Listado de componentes
-					p A continuación se muestra el listado de componentes por defecto disponibles para su uso:
+		.col-12
+			.card
+				.card-body
+					h2#listado-de-componentes ${{ components.componentsList }}$
+					p ${{ components.componentsListParagraph1 }}$
 
-		.col-xs-12.col-sm-4
-			.thumbnail
-				.caption
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
 					h3.icon-4x
-						a(href="#componentLogin",title="Ir al componente Login") Login
-					p Formulario de inicio de sesión con validación de formato de campos
-					h4.icon-2x Parámetros
+						a(href="#componentLogin",title="${{ components.goToComponent }}$ Login") Login
+					p ${{ components.loginParagraph1 }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-login"
-					h4.icon-2x Ejemplo
+						li <strong>${{ components.name }}$:</strong> "component-login"
+					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component('component-login','id1','','','false','false')
 
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x
-						a(href="#componentBanner",title="Ir al componente Banner") Banner
-					p Muestra un imagen clicable
-					h4.icon-2x Parámetros
+						a(href="#componentBanner",title="${{ components.goToComponent }}$ Banner") Banner
+					p ${{ components.showLinkedImage }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-banner"							
-						li <strong>src:</strong> ruta de la imagen							
-						li <strong>alt:</strong> Texto alternativo de la imagen							
-						li <strong>longdesc:</strong> Descripción larga							
-						li <strong>href:</strong> enlace de la imagen							
-						li <strong>title:</strong> título del enlace							
-						li <strong>target:</strong> target del enlace
-					h4.icon-2x Ejemplo
+						li <strong>${{ components.name }}$:</strong> "component-banner"							
+						li <strong>src:</strong> ${{ components.imageURL }}$							
+						li <strong>alt:</strong> ${{ components.altText }}$						
+						li <strong>longdesc:</strong> ${{ components.longDesc }}$							
+						li <strong>href:</strong> ${{ components.imageLink }}$							
+						li <strong>title:</strong> ${{ components.titleLink }}$							
+						li <strong>target:</strong> ${{ components.linkTarget }}$
+					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-banner','id1',{'src':'./images/banner1.jpg','alt':'Imagen Ir A Home','href':'./home.html','title':'Ir a Home','target':'_blank'},'','false','false')						
-			.thumbnail
-				.caption
+						| +component('component-banner','id1',{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$','href':'./home.html','title':'Ir a Home','target':'_blank'},'','false','false')						
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentHighlightedContent",title="Ir al componente Highlighted Content") Highlighted Content
-					p Muestra un banner promocional compuesto por un contenido y un botón centrados en el contenedor.
-					h4.icon-2x Parámetros
+						a(href="#componentHighlightedContent",title="${{ components.goToComponent }}$ Highlighted Content") Highlighted Content
+					p ${{ components.highlightedContentComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-highlighted-content"							
-						li <strong>content:</strong> Contenido HTML del componente
-						li <strong>button:</strong> JSON con el contenido del botón.
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-content"							
+						li <strong>content:</strong> ${{ components.htmlContent }}$
+						li <strong>button:</strong> ${{ components.jsonContentButton }}$
 							ul
-								li <strong>text:</strong> texto del botón
-								li <strong>href:</strong> url a la que enlaza el botón
-								li <strong>title:</strong> título del botón
+								li <strong>text:</strong> ${{ components.buttonText }}$
+								li <strong>href:</strong> ${{ components.buttonURL }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component("component-highlighted-content","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentCardsListCarousel",title="Ir al componente Cards List Carousel") Cards List Carousel
-					p Muestra un carrusel de tarjetas compuestas por una imagen, una cabecera, un texto y un enlace. Adicionalmente se le pueda añadir un precio para convertirlo en <a href="#componentProductsCardsListCarousel" title="Ir a Products Cards List Carousel">carrusel de productos</a>.
-					h4.icon-2x Parámetros
+						a(href="#componentCardsListCarousel",title="${{ components.goToComponent }}$ Cards List Carousel") Cards List Carousel
+					p ${{ components.cardCarouselDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-cards-list-carousel"							
-						li <strong>Array de tarjetas:</strong>
+						li <strong>${{ components.name }}$:</strong> "component-cards-list-carousel"							
+						li <strong>${{ components.arrayCards }}$:</strong>
 							ul
-								li <strong>header:</strong> encabezado de la tarjeta
-								li <strong>description:</strong> texto descriptivo
-								li <strong>src:</strong> URL de la imagen
-								li <strong>alt:</strong> texto alternativo de la imagen
-								li <strong>href:</strong> enlace de la tarjeta
-								li <strong>title:</strong> título del botón
-								li <strong>classes:</strong> clases css adicionales a añadir a la tarjeta para alterar su visualización
-								li <strong>price:</strong> precio del contenido de la tarjeta
+								li <strong>header:</strong> ${{ components.cardHeader }}$
+								li <strong>description:</strong> ${{ components.descriptionText }}$
+								li <strong>src:</strong> ${{ components.imageURL }}$
+								li <strong>alt:</strong> ${{ components.altText }}$
+								li <strong>href:</strong> ${{ components.cardLink }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
+								li <strong>classes:</strong> ${{ components.cardClasses }}$
+								li <strong>price:</strong> ${{ components.cardPrice }}$
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"}],"","false","true")
+						| +component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}],"","false","true")
 
-		.col-xs-12.col-sm-4
-			.thumbnail
-				.caption
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
 					h3.icon-4x
-						a(href="#componentImage",title="Ir al componente Image") Image
-					p Muestra una imagen
-					h4.icon-2x Parámetros
+						a(href="#componentImage",title="${{ components.goToComponent }}$ Image") Image
+					p ${{ components.imageComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-banner"							
-						li <strong>src:</strong> ruta de la imagen							
-						li <strong>alt:</strong> Texto alternativo de la imagen							
-						li <strong>longdesc:</strong> Descripción larga
-					h4.icon-2x Ejemplo
+						li <strong>${{ components.name }}$:</strong> "component-banner"							
+						li <strong>src:</strong> ${{ components.imageURL }}$								
+						li <strong>alt:</strong> ${{ components.altText }}$							
+						li <strong>longdesc:</strong> ${{ components.longDesc }}$	
+					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-image','id1',{'src':'./images/banner1.jpg','alt':'Imagen Ir A Home'},'','false','false')
+						| +component('component-image','id1',{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$'},'','false','false')
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x
-						a(href="#componentBreadcrumbs",title="Ir al componente Bradcrumbs") Breadcrumbs
-					p Muestra las migas de pan
-					h4.icon-2x Parámetros
+						a(href="#componentBreadcrumbs",title="${{ components.goToComponent }}$ Bradcrumbs") Breadcrumbs
+					p ${{ components.breadcrumbsComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-banner"							
-						li Array de páginas en formato JSON. Cada JSON se compone de los siguientes parámetros
+						li <strong>${{ components.name }}$:</strong> "component-banner"							
+						li ${{ components.breadcrumbsComponentArray }}$
 							ul
-								li <strong>url:</strong> url de la página
-								li <strong>pageName:</strong> nombre de la página
-					h4.icon-2x Ejemplo
+								li <strong>url:</strong> ${{ components.pageURL }}$
+								li <strong>pageName:</strong> ${{ components.pageName }}$
+					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component('component-breadcrumbs','id1',[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}],'','false','false')
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentHighlightedSideImage",title="Ir al componente Highlighted Side Image") Highlighted Side Image
-					p Muestra un banner promocional compuesto por un contenido , un botón y una imagen que pueddes seleccionar su posición.
-					h4.icon-2x Parámetros
+						a(href="#componentHighlightedSideImage",title="${{ components.goToComponent }}$ Highlighted Side Image") Highlighted Side Image
+					p ${{ components.highlightedSideImageComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-highlighted-side-image"							
-						li <strong>content:</strong> Contenido HTML del componente
-						li <strong>position:</strong> Posición de la imagen ('left' o 'right')
-						li <strong>button:</strong> JSON con el contenido del botón.
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-side-image"							
+						li <strong>content:</strong> ${{ components.htmlContentComponent }}$
+						li <strong>position:</strong> ${{ components.imagePosition }}$
+						li <strong>button:</strong> ${{ components.jsonContentButton }}$
 							ul
-								li <strong>text:</strong> texto del botón
-								li <strong>href:</strong> url a la que enlaza el botón
-								li <strong>title:</strong> título del botón
-						li <strong>image:</strong> JSON con el contenido de la imagen.
+								li <strong>text:</strong> ${{ components.buttonText }}$
+								li <strong>href:</strong> ${{ components.buttonURL }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
+						li <strong>image:</strong> ${{ components.jsonContentImage }}$
 							ul
-								li <strong>alt:</strong> texto alternativo de la imagen
-								li <strong>src:</strong> url de la imagen						
+								li <strong>alt:</strong> ${{ components.altText }}$
+								li <strong>src:</strong> ${{ components.imageURL }}$						
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre +component("component-highlighted-side-image","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentSlider",title="Ir al componente Slider") Slider
-					p Muestra un Slider de imágenes con navegación y flechas, todo responsivo.
-					h4.icon-2x Parámetros
+						a(href="#componentSlider",title="${{ components.goToComponent }}$ Slider") Slider
+					p ${{ components.sliderComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-slider"							
+						li <strong>${{ components.name }}$:</strong> "component-slider"							
 
-						li <strong>Array de imágenes:</strong>
+						li <strong>${{ components.arrayImages }}$:</strong>
 							ul
-								li <strong>src:</strong> URL de la imagen
-								li <strong>alt:</strong> texto alternativo de la imagen
-								li <strong>href:</strong> enlace de la imagen al pulsarla
-								li <strong>title:</strong> título del enlace de la imagen	
+								li <strong>src:</strong> ${{ components.imageURL }}$
+								li <strong>alt:</strong> ${{ components.altText }}$
+								li <strong>href:</strong> ${{ components.imageLink }}$
+								li <strong>title:</strong> ${{ components.imageTitleLink }}$
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre 
 						| +component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
 
-		.col-xs-12.col-sm-4
-			.thumbnail
-				.caption
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentLogo",title="Ir al componente Logo") Logo
-					p Muestra el logotipo del portal
-					h4.icon-2x Parámetros
+						a(href="#componentLogo",title="${{ components.goToComponent }}$ Logo") Logo
+					p ${{ components.logoComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-logo"							
-						li <strong>src:</strong> ruta de la imagen
-						li <strong>alt:</strong> Texto alternativo de la imagen
-						li <strong>url:</strong> enlace de la imagen
-						li <strong>title:</strong> título del enlace
-					h4.icon-2x Ejemplo
+						li <strong>${{ components.name }}$:</strong> "component-logo"							
+						li <strong>src:</strong> ${{ components.imageURL }}$
+						li <strong>alt:</strong> ${{ components.altText }}$
+						li <strong>url:</strong> ${{ components.imageLink }}$
+						li <strong>title:</strong> ${{ components.titleLink }}$
+					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-logo','',{'url':'/','title':'Sunnie Logo','src':'./images/logo.png','alt':'Site Logo Sunnie'},'','false','true')
+						| +component('component-logo','',{'url':'/','title':'SunnieJS Logo','src':'./images/logo.png','alt':'Site Logo SunnieJS'},'','false','true')
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentHighlightedBanner",title="Ir al componente Highlighted Banner") Highlight Banner
-					p Muestra un bannner promocional compuesto por un texto y un botón.
-					h4.icon-2x Parámetros
+						a(href="#componentHighlightedBanner",title="${{ components.goToComponent }}$ Highlighted Banner") Highlighted Banner
+					p ${{ components.highlightedBannerComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-highlighted-banner"							
-						li <strong>content:</strong> Contenido HTML del textodel banner
-						li <strong>button:</strong> JSON con el contenido del botón.
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-banner"							
+						li <strong>content:</strong> ${{ components.htmlContent }}$
+						li <strong>button:</strong> ${{ components.jsonContentButton }}$
 							ul
-								li <strong>text:</strong> texto del botón
-								li <strong>href:</strong> url a la que enlaza el botón
-								li <strong>title:</strong> título del botón
+								li <strong>text:</strong> ${{ components.buttonText }}$
+								li <strong>href:</strong> ${{ components.buttonURL }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentHighlightedFlips",title="Ir al componente Highlighted Flips") Highlighted Flips
-					p Muestra un array de banners compuestos por un icono, un titular y un texto. El icono puede ser fontawesome, material o glyphicon.
-					h4.icon-2x Parámetros
+						a(href="#componentHighlightedFlips",title="${{ components.goToComponent }}$ Highlighted Flips") Highlighted Flips
+					p ${{ components.highlightedFlipsComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-highlighted-flips"							
-						li <strong>header:</strong> Titular de cada banner el listado
-						li <strong>content:</strong> Texto del banner
-						li <strong>iconType:</strong> Tipo de icono del banner(material, fontawesome o glyphicon)
-						li <strong>iconCode:</strong> Código del icono del banner
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-flips"							
+						li <strong>header:</strong> ${{ components.bannerHeader }}$
+						li <strong>content:</strong> ${{ components.bannerDescription }}$
+						li <strong>iconType:</strong> ${{ components.bannerIconType }}$
+						li <strong>iconCode:</strong> ${{ components.bannerIconCode }}$
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
 
-			.thumbnail
-				.caption
+			.card
+				.card-body
 					h3.icon-4x 
-						a(href="#componentNavigation",title="Ir al componente Navigation") Navigation
-					p Muestra menu de enlaces jerarquizados basado en las clases de bootstrap y con diferentes vistas configurables
-					h4.icon-2x Parámetros
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Navigation
+					p ${{ components.navigationComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>Nombre:</strong> "component-navigation"							
-						li <strong>view:</strong> vista del menu('tabs','pills'). Si se deja vacío se mostrará un menú vertical
-						li <strong>justified:</strong> Aplicable a pills y tabs. Hace que se vean al 100% del ancho del hueco que ocupan y el contenido sale repartido
-						li <strong>stacked:</strong> Apila las pills una encima de otra haciendo un menu vertical
-						li <strong>pages</strong>: Array de páginas a mostrar en el menú
+						li <strong>${{ components.name }}$:</strong> "component-navigation"
+						li <strong>view:</strong> ${{ components.navigationView }}$
+						li <strong>justified:</strong> ${{ components.navigationJustified }}$
+						li <strong>stacked:</strong> ${{ components.navigationStacked }}$
+						li <strong>pages</strong>: ${{ components.navigationPages }}$
 							ul
-								li <strong>text:</strong> texto de la página
-								li <strong>href:</strong> enlace de la página
-								li <strong>title:</strong> título del enlace
-								li <strong>childs:</strong> Array de páginas hijo de la actual página. Las mostrará como un dropdown siempre y cuando el tipo de navegación lo acepte.
+								li <strong>text:</strong> ${{ components.pageName }}$
+								li <strong>href:</strong> ${{ components.pageURL }}$
+								li <strong>title:</strong> ${{ components.titleLink }}$
+								li <strong>childs:</strong> ${{ components.childsPages }}$
 
 
-					h4.icon-2x Ejemplo
+					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")						
 						
 	.row
-		.col-xs-12
-			h2#ejemplos Ejemplos
+		.col-12
+			h2#ejemplos ${{ components.examples }}$
 			.row
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentLogin").nomargin Login
+				.col-12
+					.card
+						.card-body
+							h3(id="componentLogin").m-0 Login
 					.row
 						.col-md-3.col-sm-2
 
@@ -321,103 +321,101 @@ mixin component-components(content)
 
 						.col-md-3.col-sm-2
 
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentImage").nomargin Image
+				.col-12
+					.card
+						.card-body
+							h3(id="componentImage").m-0 Image
 					.row
 						.col-md-12
 							+component("component-image","",{"src":"./images/carousel1.jpg","alt":"Image 1"},"","false","true")
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentBanner").nomargin Banner
+				.col-12
+					.card
+						.card-body
+							h3(id="componentBanner").m-0 Banner
 					.row
 						.col-md-12
 							+component("component-banner","",{"src":"./images/carousel2.jpg","alt":"Image 1","href":"http://www.google.es", "title":"Ir a Google"},"","false","true")
 
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentBreadcrumbs").nomargin Breadcrumbs
+				.col-12
+					.card
+						.card-body
+							h3(id="componentBreadcrumbs").m-0 Breadcrumbs
 					.row
 						.col-md-12
 							+component("component-breadcrumbs","",[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}],"","false","false")
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h3(id="componentHighlightedBanner").nomargin Highlighted Banner
-			.row
-				.row
-					+component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedBanner").m-0 Highlighted Banner
+			.row.mx-6.mx-md-7
+				+component("component-highlighted-banner","",{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
 						
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentHighlightedContent").nomargin Highlighted Content
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedContent").m-0 Highlighted Content
+			.row
+				.col-md-12
+					+component("component-highlighted-content","",{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedFlips").m-0 Highlighted Flips
+			.row
+				.col-md-12
+					+component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-align-center", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedSideImage").m-0 Highlighted Side Image
+			.row
+				.col-md-12
+					+component("component-highlighted-side-image","",{"content":"<h2>${{ default.homeComponentLibraryComponentTitle }}$</h2><p>${{ default.homeComponentLibraryComponentContent1 }}$ </p><p>${{ default.homeComponentLibraryComponentContent2 }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentCardsListCarousel").m-0 Cards List Carousel
+			.row
+				.col-md-12
+					+component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}],"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentProductsCardsListCarousel").m-0 Product Cards List Carousel
+			.row
+				.col-md-12
+					+component("component-cards-list-carousel","",[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"}],"","false","true")
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSlider").m-0 Slider
+			.row.mx-6.mx-md-7
+				+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentNavigation").m-0 Navigation
 					.row
-						.col-md-12
-							+component("component-highlighted-content","",{"content":"<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+						.col-12.col-md-6
+							h4 Tabs
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"tabs"},"","false","true")
 
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentHighlightedFlips").nomargin Highlighted Flips
+						.col-12.col-md-6
+							h4 Pills
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[{"text":"Pagina 1-1",href:"/pagina1-1.html",title:"Ir a pagina 1-1"}]},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills"},"","false","true")
 					.row
-						.col-md-12
-							+component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+						.col-12.col-md-6
+							h4 Pills Justified
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"","false","true")
 
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentHighlightedSideImage").nomargin Highlighted Side Image
-					.row
-						.col-md-12
-							+component("component-highlighted-side-image","",{"content":"<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
-
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentCardsListCarousel").nomargin Cards List Carousel
-					.row
-						.col-md-12
-							+component("component-cards-list-carousel","",[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin"}],"","false","true")
-
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentProductsCardsListCarousel").nomargin Product Cards List Carousel
-					.row
-						.col-md-12
-							+component("component-cards-list-carousel","",[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a Sunnie","classes":"full nomargin","price":"15,95€"}],"","false","true")
-
-
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentSlider").nomargin Slider
-					.row
-						.row
-							+component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"","false","true")
-
-				.col-xs-12
-					.panel.panel-default
-						.panel-body
-							h3(id="componentNavigation").nomargin Navigation
-							.row
-								.col-xs-12.col-md-6
-									h4 Tabs
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"tabs"},"","false","true")
-
-								.col-xs-12.col-md-6
-									h4 Pills
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[{"text":"Pagina 1-1",href:"/pagina1-1.html",title:"Ir a pagina 1-1"}]},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills"},"","false","true")
-							.row
-								.col-xs-12.col-md-6
-									h4 Pills Justified
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"","false","true")
-
-								.col-xs-12.col-md-6
-									h4 Pills stacked
-									+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")
+						.col-12.col-md-6
+							h4 Pills stacked
+							+component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")

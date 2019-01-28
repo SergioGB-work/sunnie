@@ -1,29 +1,35 @@
-extends ../theme/templates/portal
+mixin layout-home(content)	
+	-var column1 = content.column1	|| ''
+	-var column1 = content.column2	|| ''
+	-var column1 = content.column3	|| ''
+	-var column1 = content.column4	|| ''
+	-var content_right = content.content_right	|| ''
 
-block head
-	block header
-
-block content
 	div(id="layout-9-3",class="layout",role="main")
 		div(class="container-fluid")
 
 			div(class="layout-row row")
 
-				div(class="column col-md-9 col-xs-12")
+				div(class="column col-md-9 col-12")
 					div(class="layout-row row")
-						div(class="column col-md-12 col-xs-12")
-							block column-1
+						div(class="column col-md-12 col-12")
+							each component in column1
+								+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
 					div(class="layout-row row df-sm")
-						div(class="column col-md-6 col-xs-12 df-sm")
-							block column-2
+						div(class="column col-md-6 col-12 df-sm")
+							each component in column2
+								+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
-						div(class="column col-md-6 col-xs-12 df-sm")
-							block column-3
+						div(class="column col-md-6 col-12 df-sm")
+							each component in column3
+								+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
 					div(class="layout-row row df")
-						div(class="column col-md-12 col-xs-12")
-							block column-4
+						div(class="column col-md-12 col-12")
+							each component in column4
+								+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
-				div(class="column col-md-3 col-xs-12")
-					block content-right
+				div(class="column col-md-3 col-12")
+					each component in content_right
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')

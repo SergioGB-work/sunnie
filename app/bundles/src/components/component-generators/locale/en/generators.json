@@ -1,1 +1,27 @@
-{}
+{
+  "pageTitle":"Generators",
+  "paragraph1":"SunnieJS has its own <span class='text-primary'>HTML code generator</span> with which you can <span class='text-primary'>automate</span> the creation of <span class='text-primary'>components</span>, <span class='text-primary'>pages</span> and <span class='text-primary'>layouts</span>.",
+  "beforeStartTitle":"Before starting",
+  "beforeStartParagraph1":"The first thing you should do to use our generator is to make sure you have installed on your computer <span class='text-primary'>NodeJS</span> and you can use the functions of <span class='text-primary'>npm</span> from an administration console. It is also necessary that you have installed <span class='text-primary'>yeoman</span> and <span class='text-primary'>gulp</span>.",
+  "instalationTitle":"Instalation",
+  "instalationParagraph1":"You must download the <strong>release 1.1.X</strong>(last available version 1 release) of the generator from our git: <a href='https://github.com/SergioGB-work/generator-sunnie'>https://github.com/SergioGB-work/generator-SunnieJS</a> in a folder on your computer.",
+  "instalationParagraph2":"Once downloaded, install the project by placing an administration console over the project folder and executing:",
+  "instalationParagraph3":"Finally we are going to make the generator available for use in any directory. From the same project folder we execute:",
+  "startToUseItTitle":"Start using it",
+  "startToUseItParagraph1":"Our generator has 3 sub-generators that will allow you to create pages, layouts and new components.",
+  "layoutsParagraph1":"To generate a new layout, you must locate your administration console(CMD) on the folder of your SunnieJS project <span class='text-priimary'>/src/pug/layouts</ span>.",
+  "layoutsParagraph2":"From there you must execute the following:",
+  "layoutsParagraph3":"This will launch the layout builder and you will be asked a series of questions so you can define the layout distribution: <span class='text-primary'>rows</span>, <span class='text-primary'>columns</span>, <span class='text-primary'>column size</ span>, <span class='text-primary'>fluency</span>, etc...",
+  "layoutsParagraph4":"When you finish, you will get the layout in the directory where you are and with the configuration you have defined without having to type <span class='text-primary'>or a single line of code</span>.",
+  "pagesTitle":"Pages",
+  "pagesParagraph1":"To generate a new page, you must locate your administration console(CMD) on the folder of your SunnieJS project <span class='text-primary'>/src/pug</span>.",
+  "pagesParagraph2":"From there you must execute the following:",
+  "pagesParagraph3":"This will launch the page generator and you will be asked a series of questions to define your page: <span class='text-primary'>name</span>, <span class='text-primary'> metas </span >, <span class='text-primary'>layout</span> that you want to use from the ones you have defined in your layouts folder, etc...",
+  "pagesParagraph4":"This allows the final result to be a new page, with the metas you have written and its content, with the gaps defined in the layout you have chosen and an example component displayed in those gaps.",
+  "pagesParagraph5":"The last thing that would be missing would be to fill in the gaps with the components you want and I would be ready to publish.",
+  "componentsTitle":"Components",
+  "componentsParagraph1":"To generate a new component you must locate with your administration console(CMD) on the folder of your SunnieJS project <span class='text-primary'>/src/pug/components</span>.",
+  "componentsParagraph2":"From there you must execute the following:",
+  "componentsParagraph3":"This will launch the component generator and ask you two things: <span class='text-primary'>name of your component</span> and if you want to overwrite the include_components file what you should answer <span class='text-primary'>'Y'</span>.",
+  "componentsParagraph4":"This will create all the <span class='text-primary'>HTML structure</span> of the necessary basic component in its corresponding folder within the component folder and add your component to the file <span class='text-primary' >include_components</span> so you have it available for use from minute 0."
+}

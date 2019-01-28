@@ -19,6 +19,7 @@ var gulp = require('gulp'),
 	modRewrite = require('connect-modrewrite'),
 	fs = require('fs'),
 	argv = require('yargs').argv,
+	runSequence = require('run-sequence'),
 	proxy = require('http-proxy-middleware'),
 	express = require('express'),
 	pathBundles = 'app/bundles/src',
@@ -32,8 +33,8 @@ var src_site_deploy = argv_site || '**';
 
 var path = {
 	
-    sitesBundles: [pathBundles + '/sites/'+src_site_deploy+'/*.pug'],
-	sitesPlugins: [pathPlugins + '/sites/'+src_site_deploy+'/*.pug'],
+    sitesBundles: [pathBundles + '/sites/'+src_site_deploy+'/*.*'],
+	sitesPlugins: [pathPlugins + '/sites/'+src_site_deploy+'/*.*'],
 
     localeBundles: [pathBundles + '/sites/'+src_site_deploy+'/locale/**/*.*'],
 	
@@ -351,7 +352,7 @@ gulp.task('deployImagesCompress',['imagesBuild'], function() {
 
 gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild','templatesBuild','componentsBuild','fragmentsBuild','sitesBuild'], function() {
 
-	for (var key in sitesDefined){		
+	for (var key in sitesDefined){
 		
 		var  pathSite='';
 
@@ -360,31 +361,44 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 		}
 		else{
 			pathSite = pathPlugins;
-		}
+		}	
 	
 		//console.log(JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json')));
+		
+		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/portal.pug');
 
-		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/*.pug')
-		.pipe(pug({
-			pretty: true,
-			basedir: pathBuild + '/sites/' + sitesDefined[key].site,
-			locals: JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'))
-		}))
-		.pipe(i18n({
-		  langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
-		  createLangDirs: true,
-		  defaultLang: 'es'
-		}));
+		var sitemap = JSON.parse(fs.readFileSync(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json'));
+		sitemap = sitemap.pages;
+		
+		for(var page in sitemap){
+			var filename = sitemap[page].src.replace('/','').split('.');
+			if(sitemap[page].layout != undefined){
+				gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/templates/portal.pug')
+				.pipe(pug({
+					data: sitemap[page],
+					pretty: true,
+					locals: Object.assign(JSON.parse(fs.readFileSync(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')), {"development":true})
+				}))
+				.pipe(rename({
+					basename: filename[0],
+					extname: '.'+filename[1]
+				}))
+				.pipe(i18n({
+				  langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				  createLangDirs: true,
+				  defaultLang: 'es'
+				}))
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site));				
+			}	
+		}	
 
-
-		files.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site));
 	}
-	 return true;
+	return true;
 });
 
 /** DEPLOY **/
-gulp.task('deploy', ['deploySites','deployCSS','deployJS','deployImages'],function(){
-	return gulp.start('removeTMP');
+gulp.task('deploy',function(callback){
+	runSequence(['deploySites','deployCSS','deployJS','deployImages'],'removeTMP',callback)
 });
 
 /** DEFAULT **/
@@ -462,9 +476,12 @@ gulp.task('test', function () {
 
 
 gulp.task('removeTMP', function () {
-  return gulp.src(pathPublic + '/sites/default/*.html', {read: false})
-    .pipe(clean());
 
+	for (var key in sitesDefined){
+ 		gulp.src(pathPublic + '/sites/'+sitesDefined[key].site+'/*.html', {read: false})
+    	.pipe(clean());
+    }
+    return true;	
 });
 
 
@@ -618,7 +635,7 @@ function getDirectories(path) {
 
 function getSitesBundles(){
 	
-	var sites = [argv_site] || getDirectories(pathBundles + '/sites')
+	var sites = argv_site ? [argv_site] : getDirectories(pathBundles + '/sites')
 
 	for(var i in sites){
 		if(JSON.parse(fs.existsSync(pathBundles +'/sites/' + sites[i] + '/build.json'))){
@@ -635,7 +652,7 @@ function getSitesBundles(){
 
 function getSitesPlugins(){
 
-	var sites = [argv_site] || getDirectories(pathPlugins + '/sites');
+	var sites = argv_site ? [argv_site] : getDirectories(pathPlugins + '/sites');
 	var defaultThemes = getDirectories(pathBundles + '/themes');
 	var jsonTheme;
 

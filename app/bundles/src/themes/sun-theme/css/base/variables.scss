@@ -1,40 +1,54 @@
-$brand-primary: 						#a0ce4e;
-$brand-primaryRGB: 						160,206,78;
-$brand-secondary: 						#b3d4fc;
-$gray-base: 							#000000;
+$enable-shadows:						true;
 
-$screen-lg:								1280px;
+$primary: 								#a0ce4e;
+$primaryRGB: 							160,206,78;
+$secondary: 							#8c8c8c;
+$black:    								#000;
+$white:    								#fff;
+$gray-base: 							$black;
 
 $box-shadow:							0 1px 1px 0 rgba(0, 0, 0, 0.12);
+$grid-gutter-width:						1rem;
 
-$grid-gutter-width:						16px;
-$grid-float-breakpoint:					$screen-lg;
+$spacer: 1rem !default;
+$spacers: () !default;
+$spacers: map-merge((
+  0: 0,
+  1: ($spacer * .25),
+  2: ($spacer * .5),
+  3: $spacer,
+  4: ($spacer * 1.5),
+  5: ($spacer * 3),
+  6: (-$spacer),
+  7: (-$spacer * .5)
+), $spacers);
+
+
 
 $header-height: 						60px;
 $header-bg: 							#22262f;
 $footer-bg: 							$header-bg;
 $footer-color: 							#777777;
 
-$line-height-base:						1.5;
-
 $icon-font-path: 						"./fonts/";
 
+$font-family-base:						'Roboto', sans-serif;
 $font-family-sans-serif:				'Roboto', sans-serif;
 $font-family-serif:						'Roboto', sans-serif;
 $font-family-monospace:					'Roboto', sans-serif;
 
-$font-size-base:						16px;
-$font-size-h1:							ceil($font-size-base * 2.5);
-$font-size-h2:            				ceil($font-size-base * 2.25);
-$font-size-h3:            				ceil($font-size-base * 1.75);
-$font-size-h4:            				ceil($font-size-base * 1.5);
-$font-size-h5:            				ceil($font-size-base * 1.25);
-$font-size-h6:							$font-size-base;
+$font-size-base:              			1rem;
+$h1-font-size:							$font-size-base * 2.5;
+$h2-font-size:            				$font-size-base * 2.25;
+$h3-font-size:            				$font-size-base * 1.75;
+$h4-font-size:            				$font-size-base * 1.5;
+$h5-font-size:            				$font-size-base * 1.25;
+$h6-font-size:							$font-size-base;
 $headings-font-weight:					600;
 
-$border-radius-base:					0;
-$border-radius-large:					0;
-$border-radius-small:					0;
+$border-radius:							0;
+$border-radius-lg:            			0;
+$border-radius-sm:            			0;
 
 $body-bg:								#f5f5f5;
 
@@ -44,32 +58,38 @@ $breadcrumb-bg:							transparent;
 
 $navbar-default-bg:						transparent;
 $nav-link-padding:						ceil(($grid-gutter-width/2)) ceil(($grid-gutter-width));
-$navbar-height:							60px;
-$navbar-border-radius:					0;
-$navbar-default-border: 				0;
-$navbar-default-link-color:				#ccced1;
-$navbar-default-link-active-bg: 		0;
-$navbar-default-link-active-color:  	$brand-primary;
-$navbar-default-link-hover-color:       #ffffff;
-$navbar-default-toggle-icon-bar-bg:		#ffffff;
-$navbar-default-toggle-border-color: 	transparent;
-$navbar-default-toggle-hover-bg:		transparent;
 
+$navbar-height:							3.75rem;
+$nav-link-height:						$navbar-height;
+$nav-link-padding-y:                	$grid-gutter-width / 2;
+$nav-link-padding-x:                	$grid-gutter-width;
+$navbar-nav-link-padding-x:				$grid-gutter-width;
+$navbar-dark-color:                	 	#ccced1;
+$navbar-dark-hover-color:          		#ffffff;
+$navbar-dark-active-color:          	$primary;
+$navbar-dark-disabled-color:        	#f5f5f5;
+$navbar-dark-toggler-border-color:  	transparent;
 $navbar-margin-bottom:					0;
-$navbar-padding-horizontal :			ceil(($grid-gutter-width * 0.75));
-$navbar-padding-vertical: 				ceil(($grid-gutter-width * 0.75));
+$navbar-padding-horizontal :			$grid-gutter-width * 0.75;
+$navbar-padding-vertical: 				$grid-gutter-width * 0.75;
 $navbar-default-border:					0;
-
 $navbar-child-menu-default-link-bg: 	#ffffff;
-
-$navbar-toggle-padding:					10px;
-$navbar-toggle-margin:					12px;
-
+$navbar-toggle-padding:					12px;
 $nav-link-hover-bg:						transparent;
 $nav-tabs-active-link-hover-bg:			#ffffff;
 $nav-tabs-link-hover-border-color:		transparent;
 
-$btn-primary-bg:						$brand-primary;
+$nav-tabs-link-active-bg:				$white;
+
+$dropdown-link-color:					$black;
+$dropdown-padding-y:					0;
+$dropdown-spacer:						0;
+$dropdown-box-shadow:					0 6px 12px rgba(0,0,0,.175);
+$dropdown-link-active-color:			$white;
+$dropdown-link-active-bg:				$primary;
+
+$btn-primary-bg:						$primary;
+$btn-primary-color:						$white;
 $btn-padding-vertical:					12px;
 $btn-padding-horizontal:				20px;
 $btn-border-radius-base:				7px;
@@ -78,7 +98,7 @@ $btn-border-radius-base:				4px;
 $input-color:							$gray-base;
 $input-border:							#ddd;
 $input-border-radius:					2px;
-$input-border-focus:					$brand-primary;
+$input-border-focus:					$primary;
 $input-height-base:						44px;
 $input-group-addon-bg:					#fff;
 $input-border-disabled:					#cccccc;
@@ -92,7 +112,7 @@ $table-cell-bg:							#fff;
 $table-border-color:					$body-bg;
 $table-head-color:						#788195;
 $table-head-font-weight:				400;
-$table-bg-hover:						lighten($brand-primary,50%);
+$table-bg-hover:						lighten($primary,50%);
 $table-box-shadow:						0 1px 3px 0 rgba(0,0,0,.2);
 
 $modal-title-padding:					$grid-gutter-width;
@@ -101,7 +121,7 @@ $modal-content-border-color:			transparent;
 $modal-content-fallback-border-color: 	transparent;
 $modal-backdrop-bg:						#333;
 $modal-backdrop-opacity:				0.8;
-$modal-header-bg:						$brand-primary;
+$modal-header-bg:						$primary;
 $modal-header-color:					#fff;
 
 $thumbnail-padding:						$grid-gutter-width;
@@ -118,14 +138,17 @@ $component-tools-opacity:				0.3;
 $component-tools-width:					40px;
 $component-tools-height:				40px;
 
-$panel-heading-padding:					ceil(($grid-gutter-width * 0.75)) $grid-gutter-width;
-$panel-body-padding:					$grid-gutter-width;
+$card-spacer-x:							$grid-gutter-width;
+$card-spacer-y:							$grid-gutter-width;
 
-$close-color:							#fff;
-$close-font-weight:						100;
-$close-opacity:							1;
-$close-font-size:						44px;
+$close-font-size:                   	$font-size-base * 2.75;
+$close-font-weight:                 	100;
+$close-color:                      	 	$white;
+$close-text-shadow:                 	0;
+$close-opacity:                 		1;
 
 $pagination-margin:						0;
 
 $thumbnail-bg:							#ffffff;
+
+@import "../lib/bootstrap/variables";

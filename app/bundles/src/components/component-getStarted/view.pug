@@ -1,143 +1,145 @@
 mixin component-getStarted(content)
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h1 Get Started
-					p Sunnie está disponible para su descarga a través del repositorio de git <a href="https://github.com/SergioGB-work/sunnie" target="_blank">https://github.com/SergioGB-work/sunnie</a>.
+		.col-12
+			.card
+				.card-body
+					h1 ${{ getStarted.pageTitle }}$
 
-					p Os recomendamos descargar la <span class="text-primary">última release disponible</span> de la versión 1 (release/1.1.X)
+					p ${{ getStarted.paragraph1 }}$
+
+					p ${{ getStarted.paragraph2 }}$
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2 Instalación
-					p Lo primero que debes hacer una vez descargado el código sobre una carpeta es <span class="text-primary">instalar el proyecto</span>. AL ser un proyecto tipo <span class="text-primary">npm</span> lo único que debes hacer es ejecutar desde la <span class="text-primary">consola de administración(CMD)</span>, situándote sobre la carpeta del proyecto:
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.installationTitle }}$
+
+					p ${{ getStarted.installationParagraph1 }}$
 
 					pre
 						| npm install
 
-					p Una vez haya terminado la instalación	ya estarás preparado para comenzar a trabajar con Sunnie.
+					p ${{ getStarted.installationParagraph2 }}$
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2 Arrancando el Servidor
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.initServerTitle }}$
 					
-					p Sunnie esta construido en base a <span class="text-primary">Gulp</span> para la automatización de tareas y <span class="text-primary">Node</span> para la gestión de paquetes y servidor de aplicaciones.
+					p ${{ getStarted.initServerParagraph1 }}$
 
-					p Si deseas <span class="text-primary">arrancar</span> el <span class="text-primary">servidor</span> tan solo debes ejecutar el siguiente comando:
+					p ${{ getStarted.initServerParagraph2 }}$
 
 					pre
 						| gulp
 
-					p Esta tarea compilará el proyecto y levantará un servidor local sobre la url <span class="text-primary">http://localhost:3000</span>
+					p ${{ getStarted.initServerParagraph3 }}$
 
-					p Gracias a Gulp, Sunnie dispone de una serie de tareas automatizadas que nos permiten realizar las diferentes operaciones de compilación de una manera muy simple.
+					p ${{ getStarted.initServerParagraph4 }}$
 
-					p La estructura de todas las tareas que lanzaremos desde CMD es <span class="text-primary">gulp nombreTarea</span> donde nombre tarea será el nombre de la tarea gulp que ya tenemos precreada para compilara, por ejemplo, el CSS o JS de nuestro proyecto.
+					p ${{ getStarted.initServerParagraph5 }}$
 
-					p A continuación se muestra el listado principal de <span class="text-primary">tareas disponibles</span>:
+					p ${{ getStarted.initServerParagraph6 }}$
 
-					.table-responsive
+					.table-responsive-md
 						table(class="table")
 							thead
 								tr
-									th Nombre Tarea
-									th Descripción
-									th Uso
+									th ${{ getStarted.initServerTableTH1 }}$
+									th ${{ getStarted.initServerTableTH2 }}$
+									th ${{ getStarted.initServerTableTH3 }}$
 							tbody
 								tr
 									td <strong>deploy</strong>
-									td Tarea general de compilación. Realiza una compilación completa del proyecto, incluyendo todos sus archivos: JS, CSS, HTML, etc...
+									td ${{ getStarted.initServerTableContainerDeployDescription }}$
 									td gulp deploy
 
 								tr
 									td <strong>deployCSS</strong>
-									td Compila sólo el CSS del proyecto, transformando el SASS en código CSS limpio y minificado
+									td ${{ getStarted.initServerTableContainerDeployCSSDescription }}$
 									td gulp deployCSS					
 
 								tr
 									td <strong>deployJS</strong>
-									td Compila sólo el JS del proyecto, transformando el javascript en código js limpio y minificado
+									td ${{ getStarted.initServerTableContainerDeployJSDescription }}$
 									td gulp deployJS
 
 								tr
 									td <strong>deployPUG</strong>
-									td Compila solo el PUG del proyecto, transformando el pug en código HTML limpio y aplicando la internacionalización de variables si es que la hubiese.
+									td ${{ getStarted.initServerTableContainerDeployPUGDescription }}$
 									td gulp deployPUG
 
-					p El objetivo de las tareas anteriores es <span class="text-primary">agilizar el trabajo</span> de cualquier desarrollador permitiendole compilar solo una parte del proyecto lo que conlleva un tiempo mucho menor de <span class="text-primary">compilación</span> y una mayor <span class="text-primary">agilidad</span> de desarrollo.		
+					p ${{ getStarted.initServerParagraph7 }}$		
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2 Estructura de proyecto
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.structureProjectTitle }}$
 
-					p Todo proyecto desarrollado con Sunnie tiene una estructura similar y prefijada.
+					p ${{ getStarted.structureProjectParagraph1 }}$
 					
 					ul
-						li <strong>SRC</strong> -> código fuente del proyecto. Aquí es donde un desarrollador debe trabajar.
-						li <strong>BUILD</strong> -> código precompilado. Es una carpeta con código precompilado previo al código final de public. Le falta la aplicación de la internacionalización.
-						li <strong>PUBLIC</strong> -> código final del proyecto compilado. El resultado solo es html, css y javascript distribuidos en carpetas de idiomas(1 por cada idioma definido en el portal) y es aquií donde apunta el localhost.
-						li <strong>node_modules</strong> -> carpeta que almacena todos los módulos de node instalados en el proyecto
+						li <strong>SRC</strong> -> ${{ getStarted.structureProjectLis11 }}$
+						li <strong>BUILD</strong> -> ${{ getStarted.structureProjectLis12 }}$
+						li <strong>PUBLIC</strong> -> ${{ getStarted.structureProjectLis13 }}$
+						li <strong>node_modules</strong> -> ${{ getStarted.structureProjectLis14 }}$
 
-					p Adicionalmente, es necesario conocer la estructura interna dé la carpeta SRC ya que es en ella donde todo desarrollador debe trabajar.
+					p ${{ getStarted.structureProjectParagraph2 }}$
 
-					p La estructura básica de la carpeta SRC es la siguiente:
+					p ${{ getStarted.structureProjectParagraph3 }}$
 
 					ul
-						li <strong>pug</strong> -> Contiene todo el código escrito en pug de componentes, layouts, paginas, etc que posteriormente se transformará en HTML
-						li <strong>sass</strong> -> Contiene todos los estilos genéricos del portal escritos en SASS que posteriormente se transformarán en CSS.
-						li <strong>javascript</strong> -> Contiene todo el javascript genérico del portal.
-						li <strong>images</strong> -> Contiene todas las imágenes del portal.
+						li <strong>pug</strong> -> ${{ getStarted.structureProjectLis21 }}$
+						li <strong>sass</strong> -> ${{ getStarted.structureProjectLis22 }}$
+						li <strong>javascript</strong> -> ${{ getStarted.structureProjectLis23 }}$
+						li <strong>images</strong> -> ${{ getStarted.structureProjectLis24 }}$
 
 					h3 PUG
-					p La carpeta de pug contiene una serie de subcarpetas y archivos con unos objetivos prefijados. 
+					p ${{ getStarted.pugParagraph1 }}$ 
 
-					p En esta carpeta es donde deben <span class="text-primary">crearse</span> las diferentes <span class="text-primary">páginas</span> que compondrán el portal web definitivo y sobre los que se compondrán el contenido que lleva cada una.
+					p ${{ getStarted.pugParagraph2 }}$ 
 
-					p En la <a href="./pages.html" title="Ir a Páginas">sección de páginas</a> puedes ver una información más detallada de cómo se crea una página y cúal es su estructura.
+					p ${{ getStarted.pugParagraph3 }}$
 
 					h4 Components
-					p La carpeta componentes contiene todos los componentes creados en el portal para su uso en las páginas. Cada componente se crea en base a una misma estructura y todo el detalle del mismo se puede ver en la <a href="./components.html" title="Ir a Componentes">sección de componentes</a> de este portal.
+					p ${{ getStarted.componentsParagraph1 }}$
 
 					h4 Layouts
-					p La carpeta layouts contiene todas las layouts creadas en el portal para su uso a la hora de definir la distribución del contenido de una página. Cada layout se crea en base a una misma estructura y todo el detalle de la misma se puede ver en la <a href="./layouts.html" title="Ir a Layouts">sección de layouts</a> de este portal.
+					p ${{ getStarted.layoutsParagraph1 }}$
 
 					h4 Fragments
-					p Un fragment es un <span class="text-primary">trozo de código reutilizable</span> entre diferentes componentes. Por ejemplo, un botón. En esta carpeta se deben crear lo diferentes fragmentos que se vayan a utilizar en el portal.
+					p ${{ getStarted.fragmentsParagraph1 }}$
 
 					h4 Locale
-					p Contiene la <span class="text-primary">traducciones genéricas</span> del portal guardadas en archivos .json
+					p ${{ getStarted.localeParagraph1 }}$
 
 					h4 Templates
-					p Contiene la diferentes plantillas a partir de las cuales se crearán los difentes elementos que componen el portal: páginas, componentes, fragmentos, modales, errores, etc...
+					p ${{ getStarted.templatesParagraph1 }}$
 
 					h3 SASS
-					p La carpeta sass contiene todos los estilos genéricos del portal. Sunnie ya dispone de una serie de estilo predefinidos que el desarrollador debe adaptar al estilo final de cada portal.
+					p ${{ getStarted.sassParagraph1 }}$
 
-					p Sunnie utiliza <span class="text-primary">Bootstrap 3</span> como base para la organización y maquetado de todo su portal. Es por ello que se recomienda modificar lo menos posible los estilos por defecto que trae Sunnie y extender a partir de los mismos desde el archivo <span class="text-primary">custom.scss</span>
+					p ${{ getStarted.sassParagraph2 }}$
 
-					p Adicionalmente, desde <span class="text-primary">base/variables</span> están todas las <span class="text-primary">variables genéricas</span> del portal que pueden ser usadas para modificar su estilo sin necesidad de modificar ninguna línea de código, consiguiendo asi un <span class="text-primary">código limpio y reducido</span>, que penalice lo menos posible la carga del portal.
+					p ${{ getStarted.sassParagraph3 }}$
 
-					p Sunnie lleva incorporado la fuente icónica <a href="http://fontawesome.io/icons/" target="_blank" title="Ir a Font Awesome">Font Awesome</a> para su uso dentro del portal. Asi mismo, se puede utilizar cualquier otra fuente icónica.
+					p ${{ getStarted.sassParagraph4 }}$
 
 					h3 Javascript
-					p El directorio de javascript está subdividido a su vez en otros directorios, cada uno con un fin específico.
+					p ${{ getStarted.javascriptParagraph1 }}$
 
 					ul
-						li <strong>primaryLibs</strong> -> Son librerias que deben ser cargadas las primeras debido a que otras librerias pueden tener dependencias con ellas. Por ejemplo: jQuery
-						li <strong>libs</strong> -> Son las librerías genericas del portal.
-						li <strong>priority</strong> -> Son librerias o código JS que debe ejecutarse en la carga inicial del portal desde el <span class="text-primary">head</span>, sin esperar por nada. Están escritas en javascript puro
-						li <strong>main.js</strong> -> Archivo principal de javascript. Contiene todas las funciones genéricas del portal definidas en la <a href="./js-functions.html" title="Ir a JS Functions">página de javascript</a>.
+						li <strong>primaryLibs</strong> -> ${{ getStarted.javascriptList11 }}$
+						li <strong>libs</strong> -> ${{ getStarted.javascriptList12 }}$
+						li <strong>priority</strong> -> ${{ getStarted.javascriptList13 }}$
+						li <strong>main.js</strong> -> ${{ getStarted.javascriptList14 }}$
 
-					p Por norma general, cuando desees añadir una nueva librería, deberás añadirla en la carpeta libs.
+					p  ${{ getStarted.javascriptParagraph2 }}$
 					
-					p No es necesario añadir la etiqueta <span class="text-primary">&lt;script&gt;</span> en la cabecera o pie del portal ya que Sunnie <span class="text-primary">compila</span> automáticamente las librerias que se encuentran en estas carpetas en un orden para luego generar un único <span class="text-primary">archivo javascript minificado</span> con todo el código.	
+					p  ${{ getStarted.javascriptParagraph3 }}$
 
 					h3 Images
-					p Esta carpeta sirve como almacén de imágenes. Todas las imágenes aquí añadidas pasarán directamente a la carpeta <span class="text-primary">public</span> dentro de su correspondiente carpeta de images.
+					p ${{ getStarted.imagesParagraph1 }}$

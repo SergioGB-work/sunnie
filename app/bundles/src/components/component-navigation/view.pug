@@ -20,7 +20,7 @@ mixin component-navigation(content)
 		- var classes = classes + ' nav-stacked'
 
 	if classes == ''
-		- var classes = 'nav-vertical'
+		- var classes = 'flex-column nav-vertical'
 
 	ul(class="nav " + classes)
 		each item,i in pages
@@ -28,28 +28,34 @@ mixin component-navigation(content)
 			- var title = item.title || ""
 			- var text = item.text || ""
 			- var active = ''
+			- var dropdown = ''
 
 			if(item.active == 'true')
 				- var active = "active"
 
-			li(class=active)
+			if(item.childs)
+				if(item.childs.length > 0)
+					if(item.childs && view == 'pills' && stacked != 'true')
+						- var dropdown = "dropdown"
+
+			li(class='nav-item ' + dropdown)
 
 				if(item.childs)
 					if(item.childs.length > 0)
 						if(item.childs && view == 'pills' && stacked != 'true')
-							a(id="NavMenu-"+i,class="dropdown-toggle",data-toggle="dropdown",href="#",role="button",aria-haspopup="true",aria-expanded="false")
+							a.nav-link(class=active + " dropdown-toggle",id="NavMenu-"+i,data-toggle="dropdown",href="#",role="button",aria-haspopup="true",aria-expanded="false")
 								| #{text}
 								span.caret
 						else
-							a(href="#")
+							a.nav-link(class=active,href="#")
 								| #{text}
 
 
 					else
-						a(href=href,title=title) #{text}			
+						a.nav-link(class=active,href=href,title=title) #{text}			
 
 				else
-					a(href=href,title=title) #{text}
+					a.nav-link(class=active,href=href,title=title) #{text}
 
 				if(item.childs && view == 'pills' && stacked != 'true')
 					if(item.childs.length > 0)
@@ -64,7 +70,7 @@ mixin component-navigation(content)
 								if(child.active == 'true')
 									- var childActive = "active"
 
-								li(class=active)
+								li(class="dropdown-item " + active)
 									a(href=childHref,title=childTitle) #{childText}
 
 				else if(item.childs)
@@ -81,7 +87,7 @@ mixin component-navigation(content)
 									- var childActive = "active"
 
 								li(class=active)
-									a(href=childHref,title=childTitle) #{childText}									
+									a.nav-link(class=active,href=childHref,title=childTitle) #{childText}									
 
 
 

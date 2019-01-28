@@ -1,0 +1,22 @@
+mixin layout-4-4-4-noHeader(content)
+	-var column0 = content.column0 || ''	
+	-var column1 = content.column1	|| ''
+	-var column1 = content.column2	|| ''
+
+	div(id="layout-4-4-4-noHeader",class="layout",role="main")
+		div(class="container-fluid")
+
+			div(class="layout-row row")
+
+				div(class="column col-md-4 col-12")
+					each component in column0
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+
+				div(class="column col-md-4 col-12")
+					each component in column1
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+
+				div(class="column col-md-4 col-12")
+					each component in column2
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+

@@ -1,16 +1,12 @@
 .fragment-card{	
-    .thumbnail{
+    .card{
 		text-align:center;
 		display: flex;
 		flex-direction: column;
 		margin-bottom: ceil(($grid-gutter-width));
 
-		.caption{
-			padding:0 ceil(($grid-gutter-width));
-		}
-
 		h3{
-			font-size: ceil(($font-size-base * 1.25));
+			font-size: 1.25rem;
 			margin-bottom: 0;
 		}
 
@@ -23,7 +19,7 @@
 		}
 
 		.price{
-			font-size: ceil(($font-size-base * 1.5));
+			font-size: 1.5rem;
 		}
 	}
 }    

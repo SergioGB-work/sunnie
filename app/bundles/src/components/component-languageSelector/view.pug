@@ -1,10 +1,9 @@
 mixin component-languageSelector(content)
 	div(class="dropdown")
-		button(id="languageSelector",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
-			span.store-name ${{ languageSelector.spanish }}$
-			span(class="caret")
-		ul(class="dropdown-menu",aria-labelledby="languageSelector")
-			li
-				a(href="", data-lang="es", title="${{ languageSelector.spanishTitle }}$") ${{ languageSelector.spanish }}$
-			li
-				a(href="", data-lang="en", title="${{ languageSelector.englishTitle }}$") ${{ languageSelector.english }}$		
+		button(id="languageSelector",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="dropdown-toggle d-flex align-items-center")
+			span.store-name ${{ languageSelector.currentLanguage }}$
+		ul(class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="languageSelector")
+			li.dropdown-item
+				a(href="/es/", data-lang="es", title="${{ languageSelector.spanishTitle }}$") ${{ languageSelector.spanish }}$
+			li.dropdown-item
+				a(href="/en/", data-lang="en", title="${{ languageSelector.englishTitle }}$") ${{ languageSelector.english }}$		

@@ -2,48 +2,47 @@ mixin component-layouts(content)
 	- var content = content;
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
+		.col-12
+			.card
+				.card-body
 					h1 Layouts
 
-					p Sunnie tiene disponible una serie de layouts por defecto que pueden utilizarse para la creación de páginas y la organización del contenido de cada página lo hace sumamente sencillo el definir una pagina o modificar su distribución. 
+					p ${{ layouts.paragraph1 }}$
 				
-					h2 ¿Qué es una Layout?
+					h2 ${{ layouts.layoutsDefinitionTitle }}$
 
-					p Las Layouts definen la distribución del contenido dentro de una página mediante columnas o huecos que podemos "rellenar" con componentes.
+					p ${{ layouts.layoutsDefinitionParagraph1 }}$
 
-					p Todas las layouts definidas por defecto son responsive y utilizan las clases de bootstrap para definir su distribución.
+					p ${{ layouts.layoutsDefinitionParagraph2 }}$
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2 Listado de layouts
-					p A continuación se muestra el listado de layouts por defecto disponibles para su uso:
-	.row.layouts-list
+		.col-12
+			.card
+				.card-body
+					h2 ${{ layouts.layoutsListTitle }}$
+					p ${{ layouts.layoutsListTitleParagraph1 }}$
+	.row.layouts-list.d-flex.flex-wrap
 		each item in content
-			.col-lg-2.col-md-3.col-sm-4.col-xs-6
+			.col-lg-2.col-md-3.col-sm-4.col-6
 				+fragment("fragment-card",item)
 
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2 Ubicación
+		.col-12
+			.card
+				.card-body
+					h2 ${{ layouts.layoutsLocalizationTitle }}$
 
-					p El código fuente de cada una de las layouts se encuentra en la carpeta <span class="text-primary">src/pug/layouts</span> organizado según el nombre de cada una de ellas. Es este mismo nombre de archivo(sin la extensión) el que debe usarse para la creación de una página en base a una layout.
-
+					p ${{ layouts.layoutsLocalizationParagraph1 }}$
 	.row
-		.col-xs-12
-			.panel.panel-default
-				.panel-body
-					h2 Generador de layouts
-					p Gracias al <span class="text-primary">generador de layouts</span> de Sunnie, puedes <span class="text-primary">crear</span> tus <span class="text-primary">propias layouts</span> sin escribir una sola linea de código.
+		.col-12
+			.card
+				.card-body
+					h2 ${{ layouts.layoutsGeneratorTitle }}$
 
-					p Para ello, debes abrir una <span class="text-primary">consola de administración(CMD)</span> y situarte sobre la carpeta <span class="text-primary">layouts</span>. Una vez en ella debes ejecutar el siguiente <span class="text-primary">comando</span>:
+					p ${{ layouts.layoutsGeneratorParagraph1 }}$
+
+					p ${{ layouts.layoutsGeneratorParagraph2 }}$
 
 					pre 
 						| yo sunnie:layout						
 
-					p Esto lanzará un <span class="text-primary">asistente de creación</span> que te guiará en tu labor de creación de layouts, te irá preguntando lo que deseas hacer...si quieres añadir una fila, una columna, cuántas columnas, qué tamaño tienen, etc... y cuando termines te <span class="text-primary">generará</span> la nueva layout que has diseñado en la carpeta de layouts sin necesidad de que hayas escrito una sola línea de código y <span class="text-primary">lista para usarse</span>.
-
+					p ${{ layouts.layoutsGeneratorParagraph3 }}$

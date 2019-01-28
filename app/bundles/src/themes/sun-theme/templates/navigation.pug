@@ -1,28 +1,23 @@
-nav(class="navbar navbar-default",role="navigation")
+nav(class="navbar navbar-expand-xl navbar-dark p-0 p-3-xl",role="navigation")
 
-		div(class="navbar-header")
-			button(type="button",class="navbar-toggle collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+	div(class="navbar-header")
+		button(type="button",class="navbar-toggler collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+			span.navbar-toggler-icon
 
-				span(class="sr-only") Toggle navigation
-				span(class="icon-bar")
-				span(class="icon-bar")
-				span(class="icon-bar")
+	div(class="collapse navbar-collapse",id="navigation-list", aria-expanded="false")
 
-		div(class="collapse navbar-collapse",id="navigation-list")
-			ul(class="nav navbar-nav")
-				each item in pages
-					li
+		ul(class="navbar-nav bd-navbar-nav")
+			each item,index in pages
+				if(item.childs.length > 0)
+					li.nav-item.dropdown
+						a(href=fullSiteUrl + item.url, title="${{ default.goTo }}$ " + item.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="html-elements", class="nav-link dropdown-toggle d-flex d-flex align-items-center")
+							span #{item.name}
 
-						if(item.childs.length > 0)
-
-							a(href=fullSiteUrl + item.url, title="Ir a " +item.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id=item.id)
-								span #{item.name}
-								span(class="caret")
-
-							ul(class="dropdown-menu",aria-labelledby="html-elements")
-								each child in item.childs
-									li
-										a(href=fullSiteUrl + child.url) #{child.name}
-
-						else			
-							a(href=fullSiteUrl +item.url) #{item.name}
+						ul(class="dropdown-menu",aria-labelledby="html-elements")
+							each child in item.childs
+								li.dropdown-item
+									a(href=fullSiteUrl + child.url, title="${{ default.goTo }}$ " + child.name) #{child.name}
+				else
+					li.nav-item
+						a(href=fullSiteUrl + item.url, class="nav-link d-flex d-flex align-items-center", title="${{ default.goTo }}$ " + item.name)
+							span #{item.name}

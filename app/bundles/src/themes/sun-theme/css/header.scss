@@ -1,10 +1,12 @@
 #header{
 	border-bottom: 1px solid $border-bg-white;
-	height: $navbar-height;
+	min-height: $navbar-height;
+	background: $header-bg;
 
 	#top-bar{
 		position: absolute;
     	right: 0;
+    	top:0;
 	}
 
 	.header-content{
@@ -45,10 +47,6 @@
 				align-items:center;
 				padding-left:$grid-gutter-width;
 				float:right;
-
-				i{
-					color:$navbar-default-toggle-icon-bar-bg;
-				}
 			}
 
 			.dropdown-menu{
@@ -59,10 +57,9 @@
 	}	
 }
 
-@media (min-width: $screen-sm-min) {
+@include media-breakpoint-up(md) {
 	#header{
 		padding:0 $grid-gutter-width;
-		background: $header-bg;
 		
 		.header-content{
 			border-left:0;

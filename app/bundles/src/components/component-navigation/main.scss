@@ -1,6 +1,7 @@
 @import '../../theme/css/base/variables';
 @import '../../theme/css/lib/bootstrap/variables';
 
+
 .component-navigation{
 	ul{
 		&.nav-vertical{
@@ -11,11 +12,11 @@
 					color:$gray-base;
 					
 					&:hover,&:focus,&:active{
-						color:$brand-primary;
+						color:$primary;
 					}
 				}
 				&:hover:before{
-					color:$brand-primary;
+					color:$primary;
 				}
 			}
 
@@ -23,7 +24,10 @@
 				padding-left:ceil(($grid-gutter-width / 2));
 
 				li{
-					list-style:none;
+				    list-style: none;
+				    position: relative;
+				    display: flex;
+				    align-items: center;
 
 					&:before{
 						content: "\f105"; 
@@ -36,7 +40,8 @@
 					}
 
 					a{
-						font-size: ceil(($font-size-base * 0.75));
+						font-size: 0.75rem;
+						padding: $grid-gutter-width/4 0;
 					}
 				}
 			}

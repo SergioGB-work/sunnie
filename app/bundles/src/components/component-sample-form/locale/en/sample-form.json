@@ -1,1 +1,24 @@
-{}
+{
+  "pageTitle":"Forms",
+  "email":"Email address",
+  "helpText":"This text is a form-text",
+  "password":"Password",
+  "comment":"Comment",
+  "typeComment":"Type your comment",
+  "selectOption":"Select an option",
+  "option":"Option",
+  "fileInput":"File input",
+  "helpTextBlock":"Example block-level help text here.",
+  "submit":"Submit",
+  "example":"Example",
+  "name":"Name",
+  "sendInvitation":"Send invitation",
+  "amount":"Amount (in dollars)",
+  "transferCash":"Transfer cash",
+  "standar":"Standar",
+  "optionOne":"Option one is this and that&mdash;be sure to include why it's great",
+  "optionTwoDisabled":"Option two is disabled",
+  "optionTwo":"Option two can be something else and selecting it will deselect option one",
+  "optionThreeDisabled":"Option three is disabled",
+  "checkout":"Check me out"
+}

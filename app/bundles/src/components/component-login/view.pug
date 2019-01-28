@@ -11,6 +11,6 @@ mixin component-login(content)
 			label(for="password",class="sr-only") ${{ login.password }}$
 			input(type="password",name="password",id="password",placeholder="${{ login.password }}$",class="form-control",required)
 
-		div(class="form-group text-center-xs nomargin")
+		div(class="form-group m-0")
 			button(type="submit",class="btn btn-primary") ${{ login.signin }}$
 			a(href="./olvide-contrasena.html",title="",class="btn btn-link") ${{ login.forgotPass }}$

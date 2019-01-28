@@ -1,21 +1,23 @@
-extends ../theme/templates/portal
+mixin layout-12-9-3(content)
+	- var content_upper = content.content_upper	
+	- var content_left = content.content_left	
+	- var content_right = content.content_right	
 
-block head
-	block header
-
-block content
 	div(id="layout-12-9-3",class="layout",role="main")
 		div(class="container")
 
 			div(class="layout-row row")
 
 				div(class="column col-md-12")
-					block content-upper
+					each component in content_upper
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
 			div(class="layout-row row")
 
-				div(class="column col-md-9 col-xs-12")
-					block content-left
+				div(class="column col-md-9 col-12")
+					each component in content_left
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
 
-				div(class="column col-md-3 col-xs-12")
-					block content-right
+				div(class="column col-md-3 col-12")
+					each component in content_right
+						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
