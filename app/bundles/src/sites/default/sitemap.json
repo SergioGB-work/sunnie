@@ -22,7 +22,33 @@
 							"content":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"${{ default.goHome }}$","responsiveSRC":"./images/carousel3-responsive.jpg"}],
 							"showTitle":"false",
 							"full":"true"
-						}
+						},
+						{
+							"name":"component-highlighted-side-image",
+							"content":{"content":"<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>","image":{"src":"./images/bootstrap-stack.png","alt":"Image Monument"},"position":"left"},
+							"showTitle":"false",
+							"full":"true"
+						},
+						{
+							"name":"component-highlighted-banner",
+							"content":{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"${{ default.homeBannerThemeButtonText }}$","href":"./data-definitions.html","title":"${{ default.goDataDefinitions }}$"}},
+							"showTitle":"false",
+							"full":"true",
+							"classes":"m-0"
+						},
+						{
+							"name":"component-highlighted-content",
+							"content":{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"${{ default.homeOwnGeneratorsButtonText }}$","href":"./generators.html","title":"${{ default.goGenerators }}$"}},
+							"showTitle":"false",
+							"full":"false"
+						},
+						{
+							"name":"component-highlighted-banner",
+							"content":{"content":"<h2>${{ default.homeBannerComponentsContent }}$</h2>","button":{"text":"${{ default.homeBannerComponentsButtonText }}$","href":"./components.html","title":"${{ default.homeBannerComponentsButtonTitle }}$"}},
+							"showTitle":"false",
+							"full":"true",
+							"classes":"bg-info"
+						}																		
 					]
 				}
 			},
@@ -53,15 +79,27 @@
 		},
 		{
 			"name": "HTML Elements",
-			"url": "/html-elements",
-			"src": "/html-elements.html",
+			"url": "",
+			"src": "",
 			"attributes":{
 				"title":"",
 				"description":"",
 				"keywords":"",
 				"script":"checkRol(4);"
 			},
-			"childs": [
+			"layout":{
+				"name":"layout-12-fluid",
+				"content":{
+					"content_upper":[
+						{
+							"name":"component-getStarted",
+							"showTitle":"false",
+							"full":"true"
+						}
+					]
+				}
+			},
+			"childs": [			
 				{
 					"name": "Typography",
 					"url": "/html-elements/typography",
@@ -82,7 +120,7 @@
 								}
 							]
 						}
-					},						
+					},
 					"childs": []
 				},
 				{
@@ -90,9 +128,9 @@
 					"url": "/html-elements/lists",
 					"src": "/lists.html",
 					"attributes":{
-						"title":"",
-						"description":"",
-						"keywords":""
+						"title":"Lists",
+						"description":"Lorem ipsum",
+						"keywords":"Lists"
 					},
 					"layout":{
 						"name":"layout-12-fluid",
@@ -105,7 +143,7 @@
 								}
 							]
 						}
-					},					
+					},
 					"childs": []
 				},
 				{
@@ -130,7 +168,7 @@
 						}
 					},					
 					"childs": []
-				}				,
+				},
 				{
 					"name": "Buttons",
 					"url": "/html-elements/buttons",
@@ -174,7 +212,7 @@
 								}
 							]
 						}
-					},					
+					},
 					"childs": []
 				},
 				{
@@ -197,7 +235,7 @@
 								}
 							]
 						}
-					},					
+					},
 					"childs": []
 				}
 			]

@@ -4,23 +4,23 @@
   "description": "",
   "main": "gulpfile.js",
   "dependencies": {
+    "compression": "^1.7.2",
     "connect-modrewrite": "^0.9.0",
-    "express": "~4.14.0",
+    "express": "^4.16.4",
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.0",
-    "gulp-connect": "^5.0.0",
+    "gulp-connect": "^5.7.0",
     "gulp-image": "^2.7.2",
     "gulp-jasmine": "^2.4.2",
     "gulp-minify": "0.0.14",
     "gulp-minify-css": "^1.2.4",
     "gulp-notify": "^2.2.0",
+    "gulp-pug": "^3.3.0",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
-    "gulp-pug": "^3.3.0",
     "jade": "~1.11.0",
-    "streamqueue": "^1.1.1",
-    "compression": "^1.7.2"
+    "streamqueue": "^1.1.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
