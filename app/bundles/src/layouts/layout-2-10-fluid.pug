@@ -7,11 +7,11 @@ mixin layout-2-10-fluid(content)
 
 			div(class="layout-row row")
 
-				div(class="column col-xl-2 col-lg-3 col-md-4 d-none d-md-block")
-					each component in column0
-						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+				div(class="column col-xl-2 col-lg-3 col-md-4 d-none d-md-block",data-layout-column="column0")
+					each component,index in column0
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
 
-				div(class="column col-xl-10 col-lg-9 col-md-8 col-12")
-					each component in column1
-						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+				div(class="column col-xl-10 col-lg-9 col-md-8 col-12",data-layout-column="column1")
+					each component,index in column1
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
 

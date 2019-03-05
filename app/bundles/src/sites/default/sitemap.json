@@ -5,6 +5,7 @@
 	},
 	"pages": [
 		{
+			"id":"home",
 			"name": "Home",
 			"url": "/",
 			"src": "/home.html",
@@ -18,18 +19,21 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-slider",
 							"content":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"${{ default.goHome }}$","responsiveSRC":"./images/carousel3-responsive.jpg"}],
 							"showTitle":"false",
 							"full":"true"
 						},
 						{
+							"id":"1",
 							"name":"component-highlighted-side-image",
 							"content":{"content":"<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>","image":{"src":"./images/bootstrap-stack.png","alt":"Image Monument"},"position":"left"},
 							"showTitle":"false",
 							"full":"true"
 						},
 						{
+							"id":"1",
 							"name":"component-highlighted-banner",
 							"content":{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"${{ default.homeBannerThemeButtonText }}$","href":"./data-definitions.html","title":"${{ default.goDataDefinitions }}$"}},
 							"showTitle":"false",
@@ -37,12 +41,14 @@
 							"classes":"m-0"
 						},
 						{
+							"id":"1",
 							"name":"component-highlighted-content",
 							"content":{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"${{ default.homeOwnGeneratorsButtonText }}$","href":"./generators.html","title":"${{ default.goGenerators }}$"}},
 							"showTitle":"false",
 							"full":"false"
 						},
 						{
+							"id":"2",
 							"name":"component-highlighted-banner",
 							"content":{"content":"<h2>${{ default.homeBannerComponentsContent }}$</h2>","button":{"text":"${{ default.homeBannerComponentsButtonText }}$","href":"./components.html","title":"${{ default.homeBannerComponentsButtonTitle }}$"}},
 							"showTitle":"false",
@@ -55,6 +61,7 @@
 			"childs": []
 		},
 		{
+			"id":"getStarted",	
 			"name": "Get Started",
 			"url": "/get-started",
 			"src": "/get-started.html",
@@ -68,6 +75,7 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-getStarted",
 							"showTitle":"false",
 							"full":"true"
@@ -78,6 +86,7 @@
 			"childs": []
 		},
 		{
+			"id":"htmlElements",
 			"name": "HTML Elements",
 			"url": "",
 			"src": "",
@@ -92,6 +101,7 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-getStarted",
 							"showTitle":"false",
 							"full":"true"
@@ -101,6 +111,7 @@
 			},
 			"childs": [			
 				{
+					"id":"typography",	
 					"name": "Typography",
 					"url": "/html-elements/typography",
 					"src": "/typography.html",
@@ -110,6 +121,7 @@
 						"keywords":"Typography"
 					},
 					"layout":{
+						"id":"1",
 						"name":"layout-12-fluid",
 						"content":{
 							"content_upper":[
@@ -124,6 +136,7 @@
 					"childs": []
 				},
 				{
+					"id":"lists",
 					"name": "Lists",
 					"url": "/html-elements/lists",
 					"src": "/lists.html",
@@ -133,6 +146,7 @@
 						"keywords":"Lists"
 					},
 					"layout":{
+						"id":"1",
 						"name":"layout-12-fluid",
 						"content":{
 							"content_upper":[
@@ -147,6 +161,7 @@
 					"childs": []
 				},
 				{
+					"id":"tables",
 					"name": "Tables",
 					"url": "/html-elements/tables",
 					"src": "/tables.html",
@@ -156,6 +171,7 @@
 						"keywords":"Tables"
 					},
 					"layout":{
+						"id":"1",
 						"name":"layout-12-fluid",
 						"content":{
 							"content_upper":[
@@ -170,6 +186,7 @@
 					"childs": []
 				},
 				{
+					"id":"buttons",
 					"name": "Buttons",
 					"url": "/html-elements/buttons",
 					"src": "/buttons.html",
@@ -179,6 +196,7 @@
 						"keywords":"Buttons"
 					},
 					"layout":{
+						"id":"1",
 						"name":"layout-12-fluid",
 						"content":{
 							"content_upper":[
@@ -193,6 +211,7 @@
 					"childs": []
 				},
 				{
+					"id":"forms",
 					"name": "Forms",
 					"url": "/html-elements/forms",
 					"src": "/forms.html",
@@ -202,6 +221,7 @@
 						"keywords":"Forms"
 					},
 					"layout":{
+						"id":"1",
 						"name":"layout-12-fluid",
 						"content":{
 							"content_upper":[
@@ -216,6 +236,7 @@
 					"childs": []
 				},
 				{
+					"id":"modals",
 					"name": "Modals",
 					"url": "/html-elements/modals",
 					"src": "/modals.html",
@@ -225,6 +246,7 @@
 						"keywords":"Modals"
 					},
 					"layout":{
+						"id":"1",
 						"name":"layout-12-fluid",
 						"content":{
 							"content_upper":[
@@ -241,6 +263,7 @@
 			]
 		},				
 		{
+			"id":"generators",
 			"name": "Generators",
 			"url": "/generators",
 			"src": "/generators.html",
@@ -254,6 +277,7 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-generators",
 							"showTitle":"false",
 							"full":"false"
@@ -264,6 +288,7 @@
 			"childs": []
 		},
 		{
+			"id":"dataDefinitions",
 			"name": "Data Definitions",
 			"url": "/data-definitions",
 			"src": "/data-definitions.html",
@@ -277,6 +302,7 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-data-definitions",
 							"showTitle":"false",
 							"full":"false"
@@ -287,6 +313,7 @@
 			"childs": []
 		},
 		{
+			"id":"components",
 			"name": "Components",
 			"url": "/components",
 			"src": "/components.html",
@@ -300,6 +327,7 @@
 				"content":{
 					"column0":[
 						{
+							"id":"1",
 							"name":"component-navigation",
 							"content":{"pages":[{"text":"${{ default.components }}$","href":"#componentes","title":"${{ default.goComponents }}$","active":"true"},{"text":"${{ default.howToUse }}$","href":"#uso","title":"${{ default.goHowToUse }}$"},{"text":"${{ default.componentsList }}$","href":"#listado-de-componentes","title":"${{ default.goToComponentsList }}$","childs":[]},{"text":"${{ default.examples }}$","href":"#ejemplos","title":"${{ default.goToExamples }}$","childs":[{"text":"Login","href":"#componentLogin","title":"${{ default.goToComponent }}$ Login"},{"text":"Image","href":"#Image","title":"${{ default.goToComponent }}$ Image"},{"text":"Logo","href":"#componentLogo","title":"${{ default.goToComponent }}$ Logo"},{"text":"Banner","href":"#componentBanner","title":"${{ default.goToComponent }}$ Banner"},{"text":"Breadcrumbs","href":"#componentBreadcrumbs","title":"${{ default.goToComponent }}$ Breadcrumbs"},{"text":"Highlighted Banner","href":"#componentHighlightedBanner","title":"${{ default.goToComponent }}$ Highlighted Banner"},{"text":"Highlighted Content","href":"#componentHighlightedContent","title":"${{ default.goToComponent }}$ Highlighted Content"},{"text":"Highlighted Side Image","href":"#componentHighlightedSideImage","title":"${{ default.goToComponent }}$ Highlighted Side Image"},{"text":"Highlighted Flips","href":"#componentHighlightedFlips","title":"Ir a Componente Highlighted Flips"},{"text":"Cards List Carousel","href":"#componentCardsListCarousel","title":"${{ default.goToComponent }}$ Cards List Carousel"},{"text":"Slider","href":"#componentSlider","title":"${{ default.goToComponent }}$ Slider"},{"text":"Navigation","href":"#componentNavigation","title":"${{ default.goToComponent }}$ Navigation"}]}]},
 							"showTitle":"false",
@@ -308,6 +336,7 @@
 					],
 					"column1":[
 						{
+							"id":"1",
 							"name":"component-components",
 							"showTitle":"false",
 							"full":"true"
@@ -319,6 +348,7 @@
 			"childs": []
 		},
 		{
+			"id":"layouts",
 			"name": "Layouts",
 			"url": "/layouts",
 			"src": "/layouts.html",
@@ -332,6 +362,7 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-layouts",
 							"content":[{"src":"./images/layouts/layout-12-3-9-12.png","alt":"Layout 12 3 9 12","header":"layout-12-3-9-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-3-9.png","alt":"Layout 12 3 9","header":"layout-12-3-9","classes":"img-padding"},{"src":"./images/layouts/layout-12-4-8-12.png","alt":"Layout 12 4 8 12","header":"layout-12-4-8-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-4-8.png","alt":"Layout 12 4 8","header":"layout-12-4-8","classes":"img-padding"},{"src":"./images/layouts/layout-12-6-6-12.png","alt":"Layout 12 6 6 12","header":"layout-12-6-6-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-6-6.png","alt":"Layout 12 6 6","header":"layout-12-6-6","classes":"img-padding"},{"src":"./images/layouts/layout-12-8-4-12.png","alt":"Layout 12 8 4 12","header":"layout-12-8-4-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-8-4.png","alt":"Layout 12 8 4","header":"layout-12-8-4","classes":"img-padding"},{"src":"./images/layouts/layout-12-9-3-12.png","alt":"Layout 12 9 3 12","header":"layout-12-9-3-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-9-3.png","alt":"Layout 12 9 3","header":"layout-12-9-3","classes":"img-padding"},{"src":"./images/layouts/layout-12-fluid.png","alt":"Layout 12 Fluid","header":"layout-12-fluid","classes":"img-padding"},{"src":"./images/layouts/layout-12.png","alt":"Layout 12","header":"layout-12","classes":"img-padding"},{"src":"./images/layouts/layout-3-9.png","alt":"Layout 3 9","header":"layout-3-9","classes":"img-padding"},{"src":"./images/layouts/layout-4-4-4-noHeader.png","alt":"Layout 4 4 4 No Header","header":"layout-4-4-4-noHeader","classes":"img-padding"},{"src":"./images/layouts/layout-4-8.png","alt":"Layout 4 8","header":"layout-4-8","classes":"img-padding"},{"src":"./images/layouts/layout-6-6.png","alt":"Layout 6 6","header":"layout-6-6","classes":"img-padding"},{"src":"./images/layouts/layout-8-4.png","alt":"Layout 8 4","header":"layout-8-4","classes":"img-padding"},{"src":"./images/layouts/layout-9-3.png","alt":"Layout 9 3","header":"layout-9-3","classes":"img-padding"}],
 							"showTitle":"false",
@@ -343,6 +374,7 @@
 			"childs": []
 		},
 		{
+			"id":"pages",
 			"name": "Pages",
 			"url": "/pages",
 			"src": "/pages.html",
@@ -356,6 +388,7 @@
 				"content":{
 					"content_upper":[
 						{
+							"id":"1",
 							"name":"component-pages",
 							"showTitle":"false",
 							"full":"true"

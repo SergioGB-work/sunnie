@@ -1,10 +1,10 @@
 .d-none.d-xl-block
-	+component('component-logo','',{'url':'/${{ default.lang}}$/','title':'SunnisJS','src':fullSiteUrl+'/images/logo.png','alt':'SunnieJS Logo'},'','false','true')
+	+component({'name':'component-logo','content':{'url':'/${{ default.lang}}$/','title':'SunnisJS','src':fullSiteUrl+'/images/logo.png','alt':'SunnieJS Logo'},'showTitle':'false','full':'true'})
 
 div(id="navigation")
 		include navigation.pug
 
 div(id="top-bar")
-	+component('component-search','id1','','','false','')
+	+component({'name':'component-search','id':'id1','showTitle':'false'})
 
-	+component('component-languageSelector','id1','','','false','')
+	+component({'name':'component-languageSelector','id':'id1','showTitle':'false'})

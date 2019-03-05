@@ -1,10 +1,19 @@
 include ../../components/include_components.pug
 
-mixin component(componentType,componentId,content,componentTitle,showTitle,full,classes)
-
+mixin component(content)
+	
 	- var classesComponent = 'component'
 	- var idComponent = ''
 	- var classes = classes || ''
+
+	- var componentName=content.name
+	- var componentId = content.id
+	- var componentContent = content.content
+	- var componentTitle = content.title
+	- var showTitle = content.showTitle
+	- var full = content.full
+	- var classes = content.classes
+	- var index = content.index || '0'
 
 	if showTitle  == "false"
 		- var classesComponent = classesComponent + ' component-noTitle'
@@ -13,25 +22,25 @@ mixin component(componentType,componentId,content,componentTitle,showTitle,full,
 		- var classesComponent = classesComponent + ' component-full'
 
 	if componentId != ''
-		-var idComponent = componentType + '-' + componentId
+		-var idComponent = componentName + '-' + componentId
 
 
-	div(class=classesComponent + ' ' + componentType + ' ' + classes, id=idComponent || false)
+	div(class=classesComponent + ' ' + componentName + ' ' + classes, id=idComponent || false,data-layout-position = index)
 		if locals.development == true
 			.dropdown.action-bar
 				button(class="dropdown-toggle border-0 p-0",type="button",id="dropdownMenuButton",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
 					i.fa.fa-ellipsis-v
 
 				.dropdown-menu.dropdown-menu-right
-					a.dropdown-item(href="") Editar
-					a.dropdown-item(href="") Eliminar
+					a.dropdown-item.edit(data-toggle="modal", data-target="#modal-edit-component") Editar
+					a.dropdown-item.delete(data-toggle="modal", data-target="#modal-delete-component") Eliminar
 
 		if showTitle != "false"
 			div(class="component-title")
 				h2 #{componentTitle}
 
 		div(class="component-content")
-			+#{componentType}(content)
+			+#{componentName}(componentContent)
 
 
 

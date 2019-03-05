@@ -8,16 +8,16 @@ mixin layout-12-3-9(content)
 
 			div(class="layout-row row")
 
-				div(class="column col-md-12")
-					each component in content_upper
-						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+				div(class="column col-md-12",data-layout-column="content_upper")
+					each component,index in content_upper
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
 
 			div(class="layout-row row")
 
-				div(class="column col-md-3 col-12")
-					each component in content_left
-						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+				div(class="column col-md-3 col-12",data-layout-column="content_left")
+					each component,index in content_left
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
 
-				div(class="column col-md-9 col-12")
-					each component in content_right
-						+component(component.name || '',component.id || '',component.content || '',component.title || '',component.showTitle || 'true',component.full || 'false',component.classes || '')
+				div(class="column col-md-9 col-12",data-layout-column="content_right")
+					each component,index in content_right
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})

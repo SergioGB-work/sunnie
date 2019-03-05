@@ -105,7 +105,7 @@ $(document).ready(function(){
 		if (form.data('form-filter') != true) {
 			url = form.attr('data-action');
 			method = form.data('method');				
-			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback') };
+			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback'), "content":form.data('content')};
 			getData(params);
 		}
 		else {
@@ -495,8 +495,9 @@ function processData(dataResponse, target, template, callback, content, totalIte
 			}
 
 			exec = callback + '(' + JSON.stringify(dataResponse) + ',' + content + ',' + total + ')';
-		}
+			
 
+		}
 		var f = eval(exec);
 	}
 }

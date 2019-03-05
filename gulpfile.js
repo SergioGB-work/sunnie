@@ -22,11 +22,15 @@ var gulp = require('gulp'),
 	runSequence = require('run-sequence'),
 	proxy = require('http-proxy-middleware'),
 	express = require('express'),
+	requireDir = require('require-dir')
+	bodyParser = require("body-parser"),
 	pathBundles = 'app/bundles/src',
 	pathPlugins = 'app/plugins',
 	pathPublic = 'app/public',
 	pathBuild = 'app/build',
 	sitesDefined=[];
+
+	requireDir('server');
 	
 var argv_site = argv.site || false;
 var src_site_deploy = argv_site || '**';
@@ -247,6 +251,9 @@ gulp.task('jsTheme',['jsBuild'], function() {
 		var priorityFiles = streamqueue({ objectMode: true },
 			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/priority/**/[^_]*.js'));
 
+		var developFiles = streamqueue({ objectMode: true },
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/[^_]*.js'));
+
 		for (var lang in langs){
 			files.pipe(concat('main.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
@@ -269,6 +276,17 @@ gulp.task('jsTheme',['jsBuild'], function() {
 			}))			
 			.pipe(uglify())
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+
+			developFiles.pipe(concat('develop.js'))
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
+			.pipe(rename('develop.min.js'))
+			.pipe(i18n({
+				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				createLangDirs: true,
+				defaultLang: 'es'
+			}))
+			.pipe(uglify())
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));			
 		}	
 	}
 
@@ -464,7 +482,6 @@ gulp.task('removeTMP', function () {
     }
     return true;	
 });
-
 
 
 /**************************FUNCTIONS******************************/
