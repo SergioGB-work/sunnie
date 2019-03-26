@@ -1,0 +1,7 @@
+script(id="templateComponentList",type="text/x-jquery-tmpl")
+	| {%if data.length > 0 %}
+	option(value="") Selecciona un component	
+	| {%each data%}
+	option(value="${$value}") ${$value}
+	| {%/each%}
+	| {%/if%}

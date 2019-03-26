@@ -1,0 +1,10 @@
+script(id="templateLayoutList",type="text/x-jquery-tmpl")
+	| {%if data.length > 0 %}
+	| {%each data%}
+	| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+	.col-4.form-group
+		div(class="custom-control custom-radio")
+			input(type="radio" class="custom-control-input" id="layoutPage${id}" name="layout" value="${$value}")
+			label(class="custom-control-label" for="layoutPage${id}") ${$value}
+	| {%/each%}
+	| {%/if%}

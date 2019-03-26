@@ -1,8 +1,8 @@
 mixin layout-12-4-8-12(content)
-	- var content_upper = content.content_upper	
-	- var content_left = content.content_left	
-	- var content_right = content.content_right	
-	- var content_lower = content.content_lower
+	- var content_upper = content.content_upper	|| ''
+	- var content_left = content.content_left || ''
+	- var content_right = content.content_right	|| ''
+	- var content_lower = content.content_lower	|| ''
 
 	div(id="layout-12-4-8",class="layout",role="main")
 		div(class="container")

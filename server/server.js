@@ -1,6 +1,7 @@
 var gulp = require('gulp'),
 	express = require('express'),
-	fs = require('fs');
+	fs = require('fs'),
+	path = require('path');
 
 
 /** API SERVER **/
@@ -23,30 +24,38 @@ gulp.task('apiServer', function() {
 	//FALTA DEFINIR LOS PARAMETROS DE CREACION
 	app.post('/page/add', function (req, res) {
 		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
-		var position = req.body.position || [sitemap.pages.length] ;
+		var position = [req.body.position] || [sitemap.pages.length] ;
 		var patron = "sitemap.pages";
 
+		var name = req.body.name,
+			id = normaliza(name) + '-' + parseInt(Math.random() * (9999 - 0) + 0),
+			url = req.body.url || '/' + name,
+			src = "/" + normaliza(name) + '.html',
+			title = req.body.title || name,
+			description = req.body.description || '',
+			keywords = req.body.keywords || '',
+			layout = req.body.layout || '';
+
+		var columns = getLayoutColumns(layout);
+		var pageColumns = {};
+
+		columns.forEach(function(element){
+			pageColumns[element]=[];
+		});
+
 		var newPage = {
-			"id":"pages2",
-			"name": "Pages",
-			"url": "/pages",
-			"src": "/pages.html",
+			"id":id,
+			"name": name,
+			"url": url.indexOf('/') < 0 || url.indexOf('/') > 0 ? "/" + url : url,
+			"src": src,
 			"attributes":{
-				"title":"Pages",
-				"description":"Lorem Ipsum Pages",
-				"keywords":"Pages key"
+				"title":title,
+				"description":description,
+				"keywords":keywords
 			},
 			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"name":"component-pages",
-							"showTitle":"false",
-							"full":"true"
-						}
-					]
-				}
+				"name":layout.split('.')[0],
+				"content": pageColumns
 			},
 			"childs": []
 		};
@@ -61,21 +70,53 @@ gulp.task('apiServer', function() {
 		});
 
 		eval(patron);
-		res.send(sitemap);
+
+		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+
+		deployPage('--site default --page ' + src.split('.')[0].split('/')[1] , res)
 	});
 
 	//FALTA DEFINIR LOS PARAMETROS DE EDICION
 	app.post('/page/edit/:id', function (req, res) {
 		
 		var id = req.params.id,
-			name = req.body.name,
 			sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json')),
 			editedPage = findPage(sitemap.pages,id),
-			index = findIndex(sitemap.pages,id);
+			index = findIndex(sitemap.pages,id),
+			name = req.body.name,
+			url = req.body.url || '/' + name,
+			title = req.body.title || name,
+			description = req.body.description || '',
+			keywords = req.body.keywords || '',
+			layout = req.body.layout || '',
+			position = [req.body.position] || [sitemap.pages.length];
 
 		editedPage['name'] = name;
+		editedPage['url'] = url;
+		editedPage.attributes['title'] = title;
+		editedPage.attributes['description'] = description;
+		editedPage.attributes['keywords'] = keywords;
 
-		var position = req.body.position || '';
+		//Comprobamos si la layout ha cambiado
+		if(editedPage.layout['name'] != layout.split('.')[0]){
+
+			var columns = getLayoutColumns(layout);
+			var pageColumns = {};
+			var components = [];
+
+			Object.keys(editedPage.layout['content']).forEach(function(key){
+				components = components.concat(editedPage.layout['content'][key]);
+			});
+
+			columns.forEach(function(element){
+				pageColumns[element]=[];
+			});
+
+			pageColumns[Object.keys(pageColumns)[0]]=components;
+			editedPage.layout['name'] = layout.split('.')[0];
+			editedPage.layout['content'] = pageColumns;
+		}
+
 		var patron = "sitemap.pages";
 
 		index.forEach(function(element,i){
@@ -118,9 +159,11 @@ gulp.task('apiServer', function() {
 			});
 
 			eval(patronEdit);
-		}	
+		}
 
-		res.send(sitemap);
+		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+
+		deployPage('--site default --page ' + editedPage['src'].split('.')[0].split('/')[1] , res)
 	});
 
 	//TERMINADO A FALTA DE GUARDAR EN EL FICHERO FINAL
@@ -141,8 +184,22 @@ gulp.task('apiServer', function() {
 			}
 		})
 		eval(patron);
-		res.send(sitemap);
+
+		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		deploySites('--site default' , res);
 	});
+
+	app.get('/page/detail/:id', function (req, res) {
+		var idPage = req.params.id;
+
+		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var detailPage = findPage(sitemap.pages,idPage);
+		var positionPage = findIndex(sitemap.pages,idPage);
+
+		detailPage['position'] = positionPage[positionPage.length - 1]
+
+		res.send(detailPage);
+	});		
 
 	app.post('/page/:idPage/component/add', function (req, res) {
 		//Configuracion de colocacion
@@ -152,7 +209,7 @@ gulp.task('apiServer', function() {
 
 		//Datos del componente
 		var componentName = req.body.name || 'Component';
-		var componentId = req.body.id || '';
+		var componentId = normaliza(componentName) + '-' + parseInt(Math.random() * (9999 - 0) + 0);
 		var componentContent = req.body.content || '';
 		var componentTitle = req.body.title || componentName;
 		var componentShowTitle = req.body.showTitle || 'true';
@@ -188,7 +245,9 @@ gulp.task('apiServer', function() {
 		})
 
 		eval(patron +'= editedPage');
-		res.send(sitemap);
+		
+		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		deploySites('--site default' , res);
 
 	});
 
@@ -266,15 +325,66 @@ gulp.task('apiServer', function() {
 		res.send(sitemap);
 	});
 
-
-
 	app.listen(8082,function(req, res){
   		console.log('API running on 8082!');
 	});
 
+
+	app.get('/layout/list', function (req, res) {
+		var dirLayoutsBundles = fs.readdirSync('./app/bundles/src/layouts/');
+		var dirLayoutsPlugins = fs.readdirSync('./app/plugins/layouts/');
+
+		res.send(dirLayoutsBundles.concat(dirLayoutsPlugins));
+	});
+
+	app.get('/layout/detail/:id', function (req, res) {
+		var idLayout = req.params.id;
+		var columns = getLayoutColumns(idLayout);
+		var responseParams = {"columns": columns};
+
+		res.send(responseParams);
+	});	
+
+	app.get('/component/list', function (req, res) {
+		var dirComponentsBundles = getDirectories(pathBundles + '/components/');
+		var dirComponentsPlugins = getDirectories(pathPlugins + '/components/');
+
+		res.send(dirComponentsBundles.concat(dirComponentsPlugins));
+	});
+
 });
 
+function getLayoutColumns(id){
+	id = id.split('.pug')[0];
+	var filePath = pathBundles + '/layouts/' + id + '.pug';
 
+	try{
+		if(fs.existsSync(filePath)){
+			var blocks = [];
+			var file = fs.readFileSync(filePath).toString();
+			file = file.split('data-layout-column="');
+			file.forEach(function(element,index){
+				if(index>0){
+					var slots = element.split('"');
+					blocks.push(slots[0]);
+				}
+			})
+			return blocks;
+		}
+		else{
+			return 'La layout no existe';
+		}
+	}
+	catch(e){
+		console.log(e);
+	}
+}
+
+function getDirectories(path) {
+  return fs.readdirSync(path).filter(function (file) {
+    return fs.statSync(path+'/'+file).isDirectory();
+  });
+}
 
 function findPage(pages , id){
 	//var page = pages.filter(page => page.id == id)[0];
@@ -313,3 +423,58 @@ function findIndex(pages , id){
 		}
 	};
 }
+
+function deployPage(argv,res){
+	const { exec } = require('child_process');
+	console.log('START DEPLOY gulp deploy ' + argv);
+	exec('gulp deploy ' + argv, (err, stdout, stderr) => {
+	  if (err) {
+	    // node couldn't execute the command
+	    console.log('DEPLOY ERROR');
+	    res.send('ERROR');
+	  }
+
+	  // the *entire* stdout and stderr (buffered)
+	  console.log('DEPLOY FINISHED');
+	  res.status(200).send('SUCCESSFULL');
+	});
+}
+
+function deploySites(argv,res){
+	const { exec } = require('child_process');
+	console.log('START DEPLOY SITES gulp deploy ' + argv);
+	exec('gulp deploySites ' + argv, (err, stdout, stderr) => {
+	  if (err) {
+	    // node couldn't execute the command
+	    console.log('DEPLOY ERROR');
+	    res.send('ERROR');
+	  }
+
+	  // the *entire* stdout and stderr (buffered)
+	  console.log('DEPLOY FINISHED');
+	  res.status(200).send('SUCCESSFULL');
+	});
+}
+
+function normaliza(str) {
+ 	str = str.replace(/^\s+|\s+$/g, ''); // trim
+  	str = str.toLowerCase();
+ 
+  	// remove accents, swap ñ for n, etc
+  	var from = "ãàáäâẽèéëêìíïîõòóöôùúüûñç·/_,:;";
+  	var to   = "aaaaaeeeeeiiiiooooouuuunc------";
+  	for (var i=0, l=from.length ; i<l ; i++) {
+    	str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+  	}
+ 
+  	str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+    	.replace(/\s+/g, '-') // collapse whitespace and replace by -
+    	.replace(/-+/g, '-'); // collapse dashes
+ 
+
+    if(str.substr(str.length -1,str.length) == '-'){
+    	str = str.substr(0,str.length -1)
+    }	
+
+  	return str;
+};

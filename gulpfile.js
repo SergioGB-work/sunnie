@@ -24,6 +24,7 @@ var gulp = require('gulp'),
 	express = require('express'),
 	requireDir = require('require-dir')
 	bodyParser = require("body-parser"),
+	pathModule = require('path'),
 	pathBundles = 'app/bundles/src',
 	pathPlugins = 'app/plugins',
 	pathPublic = 'app/public',
@@ -32,8 +33,11 @@ var gulp = require('gulp'),
 
 	requireDir('server');
 	
-var argv_site = argv.site || false;
+var argv_site = argv.site !== undefined ? argv.site : false;
+var argv_page = argv.page !== undefined ? argv.page + '.pug' : '*.*';
+
 var src_site_deploy = argv_site || '**';
+var src_page_deploy = argv.page + '.pug' || '*.pug';
 
 var path = {
 	
@@ -42,7 +46,7 @@ var path = {
 
     localeBundles: [pathBundles + '/sites/'+src_site_deploy+'/locale/**/*.*'],
 	
-	sitesDeploy: [pathBuild+'/sites/'+src_site_deploy+'/*.pug'],
+	sitesDeploy: [pathBuild+'/sites/'+src_site_deploy+'/'+src_page_deploy],
     sitesBuild: argv_site ? pathBuild + '/sites/' + argv_site : pathBuild + '/sites/',
 	sitesPublic: argv_site ? pathPublic + '/' + argv_site : pathPublic + '/',
 	
@@ -142,6 +146,8 @@ for (var key in sitesDefined){
 }
 
 gulp.task('sitesBundles', function() {
+	console.log(path.sitesBundles);
+	console.log(path.sitesBuild);
     return gulp.src(path.sitesBundles)
     .pipe(gulp.dest(path.sitesBuild))
 });
@@ -386,9 +392,16 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 		var files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/portal.pug');
 
 		var sitemap = JSON.parse(fs.readFileSync(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json'));
-		sitemap = sitemap.pages;
 		
-		buildPage(sitemap);	
+		sitemap = sitemap.pages;
+
+		if(argv_page != '*.*'){
+			sitemap = [findPage(sitemap,argv_page)];
+		}
+		buildPage(sitemap);
+
+		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
+		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
 
 	}
 	return true;
@@ -406,62 +419,40 @@ gulp.task('default',['deploy','connect']);
 /** CONNECT **/
 
 gulp.task('connect', function() {
-  connect.server({
-	root: './app/public/sites/',
-	middleware: function() {
-	
-		var rewriteRules = [];
 
-		for (var key in sitesDefined){	
-			
-			var  pathSite='';
+	app = express();
+	var router = express.Router();
+	var rules = buildRules();
 
-			if(sitesDefined[key].site == 'default'){
-				pathSite = pathBundles;
+	app.get('*', function (req, res) {
+		var rules = buildRules();
+		var url = rules[req.url];
+		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
+			url = req.url.split('?')[0];
+			res.sendFile(url,{ root: pathModule.join(__dirname, './app/public/sites/') });
+		}
+		else{
+
+			if(url !== undefined){//Si ya existe la ruta en el sitemap
+				res.sendFile(url,{ root: pathModule.join(__dirname, './app/public/sites/') });
 			}
 			else{
-				pathSite = pathPlugins;
-			}	
-	
-			var sitemap = JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'));
-			var site = sitemap.site.url;	
-			var pages = sitemap.pages;
-			var urls = [];
-
-			for (var lang in langs){
-				rewriteRules.push('^'+ site + '/' + langs[lang] +'/css/(.*)$ /'+ site + '/' + langs[lang] +'/css/$1 [L]');
-				rewriteRules.push('^'+ site + '/' + langs[lang] +'/images/(.*)$ /'+ site + '/' + langs[lang] +'/images/$1 [L]');
-				rewriteRules.push('^'+ site + '/' + langs[lang] +'/javascript/(.*)$ /'+ site + '/' + langs[lang] +'/javascript/$1 [L]');
-			}
-				
-			for(var i=0;i<pages.length;i++){
-				urls = urls.concat(getURLs(pages[i],[]));
-			}
-			
-			for(var i=0;i<urls.length;i++){
-				for (var lang in langs){
-					rewriteRules.push('^' + site + '/' + langs[lang] + urls[i].url + ' /' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src + ' [L]');
+				rules = buildRules();//Vuelve a cargar el sitemap por si hubiese alguna ruta nueva
+				url = rules[req.url];
+				if(url !== undefined){//Comprueba si la ruta solicitada existe y si no da un 404
+					res.status(200).sendFile(url,{ root: pathModule.join(__dirname, './app/public/sites/') });
+				}
+				else{
+					res.status(404).send();
 				}	
 			}
-
 		}
+	});	
 
-		rewriteRules = rewriteRules.sort(function(a, b){
-		  // ASC  -> a.length - b.length
-		  // DESC -> b.length - a.length
-		  return b.split(' ')[0].length - a.split(' ')[0].length;
-		});
+	//console.log(app._router.stack);	
+	app.listen(8080);
 
-		console.log(rewriteRules);
-		
-				//console.log(rewriteRules);
-		return [
-			modRewrite(rewriteRules)
-		]	
-	}	
-  });
 });
-
 
 /** TESTING **/
 gulp.task('test', function () {
@@ -475,11 +466,11 @@ gulp.task('test', function () {
 
 
 gulp.task('removeTMP', function () {
-
+	/*
 	for (var key in sitesDefined){
  		gulp.src(pathPublic + '/sites/'+sitesDefined[key].site+'/*.html', {read: false})
     	.pipe(clean());
-    }
+    }*/
     return true;	
 });
 
@@ -723,4 +714,63 @@ function buildPage(sitemap){
 		}
 
 	}	
+}
+
+function findPage(pages , pageName){
+	//var page = pages.filter(page => page.id == id)[0];
+
+	var page = '';
+	
+	for( var i=0; i<pages.length; i++) {
+
+		console.log(pages[i]);
+		console.log(pages[i].src);
+		console.log('/' + pageName.split('.')[0] + '.html');
+
+		if(pages[i].childs.length > 0){
+			page = findPage(pages[i].childs , pageName);
+		}
+
+		if(page != '' && page !== undefined){
+			return page;
+		}
+
+		else if(pages[i].src == '/' + pageName.split('.')[0] + '.html'){
+			return pages[i];
+		}
+	};
+}
+
+function buildRules(){
+	var rewriteRules = {};
+
+	for (var key in sitesDefined){	
+		
+		var  pathSite='';
+
+		if(sitesDefined[key].site == 'default'){
+			pathSite = pathBundles;
+		}
+		else{
+			pathSite = pathPlugins;
+		}	
+
+		var sitemap = JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'));
+		var site = sitemap.site.url;	
+		var pages = sitemap.pages;
+		var urls = [];
+	
+		for(var i=0;i<pages.length;i++){
+			urls = urls.concat(getURLs(pages[i],[]));
+		}
+		
+		for(var i=0;i<urls.length;i++){
+			for (var lang in langs){
+			//rewriteRules.push('^' + site + '/' + langs[lang] + urls[i].url + ' /' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src + ' [L]');
+			rewriteRules[site + '/' + langs[lang] + urls[i].url]='/' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src;
+			}	
+		}
+	}
+
+	return rewriteRules;
 }

@@ -1,402 +1,704 @@
 {
-	"site": {
-		"name": "default",
-		"url": "/default"
-	},
-	"pages": [
-		{
-			"id":"home",
-			"name": "Home",
-			"url": "/",
-			"src": "/home.html",
-			"attributes":{
-				"title":"SunnieJS3",
-				"description":"Lorem ipsum4",
-				"keywords":"SunnieJS2"
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-slider",
-							"content":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"${{ default.goHome }}$","responsiveSRC":"./images/carousel3-responsive.jpg"}],
-							"showTitle":"false",
-							"full":"true"
-						},
-						{
-							"id":"1",
-							"name":"component-highlighted-side-image",
-							"content":{"content":"<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>","image":{"src":"./images/bootstrap-stack.png","alt":"Image Monument"},"position":"left"},
-							"showTitle":"false",
-							"full":"true"
-						},
-						{
-							"id":"1",
-							"name":"component-highlighted-banner",
-							"content":{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"${{ default.homeBannerThemeButtonText }}$","href":"./data-definitions.html","title":"${{ default.goDataDefinitions }}$"}},
-							"showTitle":"false",
-							"full":"true",
-							"classes":"m-0"
-						},
-						{
-							"id":"1",
-							"name":"component-highlighted-content",
-							"content":{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"${{ default.homeOwnGeneratorsButtonText }}$","href":"./generators.html","title":"${{ default.goGenerators }}$"}},
-							"showTitle":"false",
-							"full":"false"
-						},
-						{
-							"id":"2",
-							"name":"component-highlighted-banner",
-							"content":{"content":"<h2>${{ default.homeBannerComponentsContent }}$</h2>","button":{"text":"${{ default.homeBannerComponentsButtonText }}$","href":"./components.html","title":"${{ default.homeBannerComponentsButtonTitle }}$"}},
-							"showTitle":"false",
-							"full":"true",
-							"classes":"bg-info"
-						}																		
-					]
-				}
-			},
-			"childs": []
-		},
-		{
-			"id":"getStarted",	
-			"name": "Get Started",
-			"url": "/get-started",
-			"src": "/get-started.html",
-			"attributes":{
-				"title":"Get Started",
-				"description":"Lorem ipsum",
-				"keywords":"Get Started"
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-getStarted",
-							"showTitle":"false",
-							"full":"true"
-						}
-					]
-				}
-			},			
-			"childs": []
-		},
-		{
-			"id":"htmlElements",
-			"name": "HTML Elements",
-			"url": "",
-			"src": "",
-			"attributes":{
-				"title":"",
-				"description":"",
-				"keywords":"",
-				"script":"checkRol(4);"
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-getStarted",
-							"showTitle":"false",
-							"full":"true"
-						}
-					]
-				}
-			},
-			"childs": [			
-				{
-					"id":"typography",	
-					"name": "Typography",
-					"url": "/html-elements/typography",
-					"src": "/typography.html",
-					"attributes":{
-						"title":"Typography",
-						"description":"Lorem ipsum",
-						"keywords":"Typography"
-					},
-					"layout":{
-						"id":"1",
-						"name":"layout-12-fluid",
-						"content":{
-							"content_upper":[
-								{
-									"name":"component-sample-basics",
-									"showTitle":"false",
-									"full":"true"
-								}
-							]
-						}
-					},
-					"childs": []
-				},
-				{
-					"id":"lists",
-					"name": "Lists",
-					"url": "/html-elements/lists",
-					"src": "/lists.html",
-					"attributes":{
-						"title":"Lists",
-						"description":"Lorem ipsum",
-						"keywords":"Lists"
-					},
-					"layout":{
-						"id":"1",
-						"name":"layout-12-fluid",
-						"content":{
-							"content_upper":[
-								{
-									"name":"component-sample-list",
-									"showTitle":"false",
-									"full":"true"
-								}
-							]
-						}
-					},
-					"childs": []
-				},
-				{
-					"id":"tables",
-					"name": "Tables",
-					"url": "/html-elements/tables",
-					"src": "/tables.html",
-					"attributes":{
-						"title":"Tables",
-						"description":"Lorem ipsum",
-						"keywords":"Tables"
-					},
-					"layout":{
-						"id":"1",
-						"name":"layout-12-fluid",
-						"content":{
-							"content_upper":[
-								{
-									"name":"component-sample-table",
-									"showTitle":"false",
-									"full":"true"
-								}
-							]
-						}
-					},					
-					"childs": []
-				},
-				{
-					"id":"buttons",
-					"name": "Buttons",
-					"url": "/html-elements/buttons",
-					"src": "/buttons.html",
-					"attributes":{
-						"title":"Buttons",
-						"description":"Lorem ipsum",
-						"keywords":"Buttons"
-					},
-					"layout":{
-						"id":"1",
-						"name":"layout-12-fluid",
-						"content":{
-							"content_upper":[
-								{
-									"name":"component-sample-button",
-									"showTitle":"false",
-									"full":"false"
-								}
-							]
-						}
-					},					
-					"childs": []
-				},
-				{
-					"id":"forms",
-					"name": "Forms",
-					"url": "/html-elements/forms",
-					"src": "/forms.html",
-					"attributes":{
-						"title":"Forms",
-						"description":"Lorem ipsum",
-						"keywords":"Forms"
-					},
-					"layout":{
-						"id":"1",
-						"name":"layout-12-fluid",
-						"content":{
-							"content_upper":[
-								{
-									"name":"component-sample-form",
-									"showTitle":"false",
-									"full":"false"
-								}
-							]
-						}
-					},
-					"childs": []
-				},
-				{
-					"id":"modals",
-					"name": "Modals",
-					"url": "/html-elements/modals",
-					"src": "/modals.html",
-					"attributes":{
-						"title":"Modals",
-						"description":"Lorem ipsum",
-						"keywords":"Modals"
-					},
-					"layout":{
-						"id":"1",
-						"name":"layout-12-fluid",
-						"content":{
-							"content_upper":[
-								{
-									"name":"component-sample-modal",
-									"showTitle":"false",
-									"full":"true"
-								}
-							]
-						}
-					},
-					"childs": []
-				}
-			]
-		},				
-		{
-			"id":"generators",
-			"name": "Generators",
-			"url": "/generators",
-			"src": "/generators.html",
-			"attributes":{
-				"title":"Generators",
-				"description":"Lorem ipsum",
-				"keywords":"Generators"
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-generators",
-							"showTitle":"false",
-							"full":"false"
-						}
-					]
-				}
-			},			
-			"childs": []
-		},
-		{
-			"id":"dataDefinitions",
-			"name": "Data Definitions",
-			"url": "/data-definitions",
-			"src": "/data-definitions.html",
-			"attributes":{
-				"title":"Data Definitions",
-				"description":"Lorem ipsum",
-				"keywords":"Data Definitions"
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-data-definitions",
-							"showTitle":"false",
-							"full":"false"
-						}
-					]
-				}
-			},
-			"childs": []
-		},
-		{
-			"id":"components",
-			"name": "Components",
-			"url": "/components",
-			"src": "/components.html",
-			"attributes":{
-				"title":"Components",
-				"description":"Lorem ipsum",
-				"keywords":"Components"
-			},
-			"layout":{
-				"name":"layout-2-10-fluid",
-				"content":{
-					"column0":[
-						{
-							"id":"1",
-							"name":"component-navigation",
-							"content":{"pages":[{"text":"${{ default.components }}$","href":"#componentes","title":"${{ default.goComponents }}$","active":"true"},{"text":"${{ default.howToUse }}$","href":"#uso","title":"${{ default.goHowToUse }}$"},{"text":"${{ default.componentsList }}$","href":"#listado-de-componentes","title":"${{ default.goToComponentsList }}$","childs":[]},{"text":"${{ default.examples }}$","href":"#ejemplos","title":"${{ default.goToExamples }}$","childs":[{"text":"Login","href":"#componentLogin","title":"${{ default.goToComponent }}$ Login"},{"text":"Image","href":"#Image","title":"${{ default.goToComponent }}$ Image"},{"text":"Logo","href":"#componentLogo","title":"${{ default.goToComponent }}$ Logo"},{"text":"Banner","href":"#componentBanner","title":"${{ default.goToComponent }}$ Banner"},{"text":"Breadcrumbs","href":"#componentBreadcrumbs","title":"${{ default.goToComponent }}$ Breadcrumbs"},{"text":"Highlighted Banner","href":"#componentHighlightedBanner","title":"${{ default.goToComponent }}$ Highlighted Banner"},{"text":"Highlighted Content","href":"#componentHighlightedContent","title":"${{ default.goToComponent }}$ Highlighted Content"},{"text":"Highlighted Side Image","href":"#componentHighlightedSideImage","title":"${{ default.goToComponent }}$ Highlighted Side Image"},{"text":"Highlighted Flips","href":"#componentHighlightedFlips","title":"Ir a Componente Highlighted Flips"},{"text":"Cards List Carousel","href":"#componentCardsListCarousel","title":"${{ default.goToComponent }}$ Cards List Carousel"},{"text":"Slider","href":"#componentSlider","title":"${{ default.goToComponent }}$ Slider"},{"text":"Navigation","href":"#componentNavigation","title":"${{ default.goToComponent }}$ Navigation"}]}]},
-							"showTitle":"false",
-							"full":"false"
-						}
-					],
-					"column1":[
-						{
-							"id":"1",
-							"name":"component-components",
-							"showTitle":"false",
-							"full":"true"
-						}
-					]
-
-				}
-			},			
-			"childs": []
-		},
-		{
-			"id":"layouts",
-			"name": "Layouts",
-			"url": "/layouts",
-			"src": "/layouts.html",
-			"attributes":{
-				"title":"",
-				"description":"",
-				"keywords":""
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-layouts",
-							"content":[{"src":"./images/layouts/layout-12-3-9-12.png","alt":"Layout 12 3 9 12","header":"layout-12-3-9-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-3-9.png","alt":"Layout 12 3 9","header":"layout-12-3-9","classes":"img-padding"},{"src":"./images/layouts/layout-12-4-8-12.png","alt":"Layout 12 4 8 12","header":"layout-12-4-8-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-4-8.png","alt":"Layout 12 4 8","header":"layout-12-4-8","classes":"img-padding"},{"src":"./images/layouts/layout-12-6-6-12.png","alt":"Layout 12 6 6 12","header":"layout-12-6-6-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-6-6.png","alt":"Layout 12 6 6","header":"layout-12-6-6","classes":"img-padding"},{"src":"./images/layouts/layout-12-8-4-12.png","alt":"Layout 12 8 4 12","header":"layout-12-8-4-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-8-4.png","alt":"Layout 12 8 4","header":"layout-12-8-4","classes":"img-padding"},{"src":"./images/layouts/layout-12-9-3-12.png","alt":"Layout 12 9 3 12","header":"layout-12-9-3-12","classes":"img-padding"},{"src":"./images/layouts/layout-12-9-3.png","alt":"Layout 12 9 3","header":"layout-12-9-3","classes":"img-padding"},{"src":"./images/layouts/layout-12-fluid.png","alt":"Layout 12 Fluid","header":"layout-12-fluid","classes":"img-padding"},{"src":"./images/layouts/layout-12.png","alt":"Layout 12","header":"layout-12","classes":"img-padding"},{"src":"./images/layouts/layout-3-9.png","alt":"Layout 3 9","header":"layout-3-9","classes":"img-padding"},{"src":"./images/layouts/layout-4-4-4-noHeader.png","alt":"Layout 4 4 4 No Header","header":"layout-4-4-4-noHeader","classes":"img-padding"},{"src":"./images/layouts/layout-4-8.png","alt":"Layout 4 8","header":"layout-4-8","classes":"img-padding"},{"src":"./images/layouts/layout-6-6.png","alt":"Layout 6 6","header":"layout-6-6","classes":"img-padding"},{"src":"./images/layouts/layout-8-4.png","alt":"Layout 8 4","header":"layout-8-4","classes":"img-padding"},{"src":"./images/layouts/layout-9-3.png","alt":"Layout 9 3","header":"layout-9-3","classes":"img-padding"}],
-							"showTitle":"false",
-							"full":"true"
-						}
-					]
-				}
-			},			
-			"childs": []
-		},
-		{
-			"id":"pages",
-			"name": "Pages",
-			"url": "/pages",
-			"src": "/pages.html",
-			"attributes":{
-				"title":"Pages",
-				"description":"Lorem Ipsum Pages",
-				"keywords":"Pages key"
-			},
-			"layout":{
-				"name":"layout-12-fluid",
-				"content":{
-					"content_upper":[
-						{
-							"id":"1",
-							"name":"component-pages",
-							"showTitle":"false",
-							"full":"true"
-						}
-					]
-				}
-			},
-			"childs": []
-		}									
-	]
+    "site": {
+        "name": "default",
+        "url": "/default"
+    },
+    "pages": [
+        {
+            "id": "home",
+            "name": "Home",
+            "url": "/",
+            "src": "/home.html",
+            "attributes": {
+                "title": "SunnieJS3",
+                "description": "Lorem ipsum4",
+                "keywords": "SunnieJS2"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-slider",
+                            "content": [
+                                {
+                                    "src": "./images/carousel1.jpg",
+                                    "alt": "",
+                                    "href": "./",
+                                    "title": "Ir a Home",
+                                    "responsiveSRC": "./images/carousel1-responsive.jpg"
+                                },
+                                {
+                                    "src": "./images/carousel2.jpg",
+                                    "alt": "",
+                                    "href": "./",
+                                    "title": "Ir a Home",
+                                    "responsiveSRC": "./images/carousel2-responsive.jpg"
+                                },
+                                {
+                                    "src": "./images/carousel3.jpg",
+                                    "alt": "",
+                                    "href": "./",
+                                    "title": "${{ default.goHome }}$",
+                                    "responsiveSRC": "./images/carousel3-responsive.jpg"
+                                }
+                            ],
+                            "showTitle": "false",
+                            "full": "true"
+                        },
+                        {
+                            "id": "1",
+                            "name": "component-highlighted-side-image",
+                            "content": {
+                                "content": "<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>",
+                                "image": {
+                                    "src": "./images/bootstrap-stack.png",
+                                    "alt": "Image Monument"
+                                },
+                                "position": "left"
+                            },
+                            "showTitle": "false",
+                            "full": "true"
+                        },
+                        {
+                            "id": "1",
+                            "name": "component-highlighted-banner",
+                            "content": {
+                                "content": "<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>",
+                                "button": {
+                                    "text": "${{ default.homeBannerThemeButtonText }}$",
+                                    "href": "./data-definitions.html",
+                                    "title": "${{ default.goDataDefinitions }}$"
+                                }
+                            },
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "m-0"
+                        },
+                        {
+                            "id": "1",
+                            "name": "component-highlighted-content",
+                            "content": {
+                                "content": "<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>",
+                                "button": {
+                                    "text": "${{ default.homeOwnGeneratorsButtonText }}$",
+                                    "href": "./generators.html",
+                                    "title": "${{ default.goGenerators }}$"
+                                }
+                            },
+                            "showTitle": "false",
+                            "full": "false"
+                        },
+                        {
+                            "id": "2",
+                            "name": "component-highlighted-banner",
+                            "content": {
+                                "content": "<h2>${{ default.homeBannerComponentsContent }}$</h2>",
+                                "button": {
+                                    "text": "${{ default.homeBannerComponentsButtonText }}$",
+                                    "href": "./components.html",
+                                    "title": "${{ default.homeBannerComponentsButtonTitle }}$"
+                                }
+                            },
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "bg-info"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "getStarted",
+            "name": "Get Started",
+            "url": "/get-started",
+            "src": "/get-started.html",
+            "attributes": {
+                "title": "Get Started",
+                "description": "Lorem ipsum",
+                "keywords": "Get Started"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-getStarted",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "htmlElements",
+            "name": "HTML Elements",
+            "url": "",
+            "src": "",
+            "attributes": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "script": "checkRol(4);"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-getStarted",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": [
+                {
+                    "id": "typography",
+                    "name": "Typography",
+                    "url": "/html-elements/typography",
+                    "src": "/typography.html",
+                    "attributes": {
+                        "title": "Typography",
+                        "description": "Lorem ipsum",
+                        "keywords": "Typography"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-basics",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "lists",
+                    "name": "Lists",
+                    "url": "/html-elements/lists",
+                    "src": "/lists.html",
+                    "attributes": {
+                        "title": "Lists",
+                        "description": "Lorem ipsum",
+                        "keywords": "Lists"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-list",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "tables",
+                    "name": "Tables",
+                    "url": "/html-elements/tables",
+                    "src": "/tables.html",
+                    "attributes": {
+                        "title": "Tables",
+                        "description": "Lorem ipsum",
+                        "keywords": "Tables"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-table",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "buttons",
+                    "name": "Buttons",
+                    "url": "/html-elements/buttons",
+                    "src": "/buttons.html",
+                    "attributes": {
+                        "title": "Buttons",
+                        "description": "Lorem ipsum",
+                        "keywords": "Buttons"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-button",
+                                    "showTitle": "false",
+                                    "full": "false"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "forms",
+                    "name": "Forms",
+                    "url": "/html-elements/forms",
+                    "src": "/forms.html",
+                    "attributes": {
+                        "title": "Forms",
+                        "description": "Lorem ipsum",
+                        "keywords": "Forms"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-form",
+                                    "showTitle": "false",
+                                    "full": "false"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "modals",
+                    "name": "Modals",
+                    "url": "/html-elements/modals",
+                    "src": "/modals.html",
+                    "attributes": {
+                        "title": "Modals",
+                        "description": "Lorem ipsum",
+                        "keywords": "Modals"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-modal",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                }
+            ]
+        },
+        {
+            "id": "generators",
+            "name": "Generators",
+            "url": "/generators",
+            "src": "/generators.html",
+            "attributes": {
+                "title": "Generators",
+                "description": "Lorem ipsum",
+                "keywords": "Generators"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-generators",
+                            "showTitle": "false",
+                            "full": "false"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "dataDefinitions",
+            "name": "Data Definitions",
+            "url": "/data-definitions",
+            "src": "/data-definitions.html",
+            "attributes": {
+                "title": "Data Definitions",
+                "description": "Lorem ipsum",
+                "keywords": "Data Definitions"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-data-definitions",
+                            "showTitle": "false",
+                            "full": "false"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "components",
+            "name": "Components",
+            "url": "/components",
+            "src": "/components.html",
+            "attributes": {
+                "title": "Components",
+                "description": "Lorem ipsum",
+                "keywords": "Components"
+            },
+            "layout": {
+                "name": "layout-2-10-fluid",
+                "content": {
+                    "column0": [
+                        {
+                            "id": "1",
+                            "name": "component-navigation",
+                            "content": {
+                                "pages": [
+                                    {
+                                        "text": "${{ default.components }}$",
+                                        "href": "#componentes",
+                                        "title": "${{ default.goComponents }}$",
+                                        "active": "true"
+                                    },
+                                    {
+                                        "text": "${{ default.howToUse }}$",
+                                        "href": "#uso",
+                                        "title": "${{ default.goHowToUse }}$"
+                                    },
+                                    {
+                                        "text": "${{ default.componentsList }}$",
+                                        "href": "#listado-de-componentes",
+                                        "title": "${{ default.goToComponentsList }}$",
+                                        "childs": []
+                                    },
+                                    {
+                                        "text": "${{ default.examples }}$",
+                                        "href": "#ejemplos",
+                                        "title": "${{ default.goToExamples }}$",
+                                        "childs": [
+                                            {
+                                                "text": "Login",
+                                                "href": "#componentLogin",
+                                                "title": "${{ default.goToComponent }}$ Login"
+                                            },
+                                            {
+                                                "text": "Image",
+                                                "href": "#Image",
+                                                "title": "${{ default.goToComponent }}$ Image"
+                                            },
+                                            {
+                                                "text": "Logo",
+                                                "href": "#componentLogo",
+                                                "title": "${{ default.goToComponent }}$ Logo"
+                                            },
+                                            {
+                                                "text": "Banner",
+                                                "href": "#componentBanner",
+                                                "title": "${{ default.goToComponent }}$ Banner"
+                                            },
+                                            {
+                                                "text": "Breadcrumbs",
+                                                "href": "#componentBreadcrumbs",
+                                                "title": "${{ default.goToComponent }}$ Breadcrumbs"
+                                            },
+                                            {
+                                                "text": "Highlighted Banner",
+                                                "href": "#componentHighlightedBanner",
+                                                "title": "${{ default.goToComponent }}$ Highlighted Banner"
+                                            },
+                                            {
+                                                "text": "Highlighted Content",
+                                                "href": "#componentHighlightedContent",
+                                                "title": "${{ default.goToComponent }}$ Highlighted Content"
+                                            },
+                                            {
+                                                "text": "Highlighted Side Image",
+                                                "href": "#componentHighlightedSideImage",
+                                                "title": "${{ default.goToComponent }}$ Highlighted Side Image"
+                                            },
+                                            {
+                                                "text": "Highlighted Flips",
+                                                "href": "#componentHighlightedFlips",
+                                                "title": "Ir a Componente Highlighted Flips"
+                                            },
+                                            {
+                                                "text": "Cards List Carousel",
+                                                "href": "#componentCardsListCarousel",
+                                                "title": "${{ default.goToComponent }}$ Cards List Carousel"
+                                            },
+                                            {
+                                                "text": "Slider",
+                                                "href": "#componentSlider",
+                                                "title": "${{ default.goToComponent }}$ Slider"
+                                            },
+                                            {
+                                                "text": "Navigation",
+                                                "href": "#componentNavigation",
+                                                "title": "${{ default.goToComponent }}$ Navigation"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "showTitle": "false",
+                            "full": "false"
+                        }
+                    ],
+                    "column1": [
+                        {
+                            "id": "1",
+                            "name": "component-components",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "layouts",
+            "name": "Layouts",
+            "url": "/layouts",
+            "src": "/layouts.html",
+            "attributes": {
+                "title": "",
+                "description": "",
+                "keywords": ""
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-layouts",
+                            "content": [
+                                {
+                                    "src": "./images/layouts/layout-12-3-9-12.png",
+                                    "alt": "Layout 12 3 9 12",
+                                    "header": "layout-12-3-9-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-3-9.png",
+                                    "alt": "Layout 12 3 9",
+                                    "header": "layout-12-3-9",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-4-8-12.png",
+                                    "alt": "Layout 12 4 8 12",
+                                    "header": "layout-12-4-8-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-4-8.png",
+                                    "alt": "Layout 12 4 8",
+                                    "header": "layout-12-4-8",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-6-6-12.png",
+                                    "alt": "Layout 12 6 6 12",
+                                    "header": "layout-12-6-6-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-6-6.png",
+                                    "alt": "Layout 12 6 6",
+                                    "header": "layout-12-6-6",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-8-4-12.png",
+                                    "alt": "Layout 12 8 4 12",
+                                    "header": "layout-12-8-4-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-8-4.png",
+                                    "alt": "Layout 12 8 4",
+                                    "header": "layout-12-8-4",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-9-3-12.png",
+                                    "alt": "Layout 12 9 3 12",
+                                    "header": "layout-12-9-3-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-9-3.png",
+                                    "alt": "Layout 12 9 3",
+                                    "header": "layout-12-9-3",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-fluid.png",
+                                    "alt": "Layout 12 Fluid",
+                                    "header": "layout-12-fluid",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12.png",
+                                    "alt": "Layout 12",
+                                    "header": "layout-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-3-9.png",
+                                    "alt": "Layout 3 9",
+                                    "header": "layout-3-9",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-4-4-4-noHeader.png",
+                                    "alt": "Layout 4 4 4 No Header",
+                                    "header": "layout-4-4-4-noHeader",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-4-8.png",
+                                    "alt": "Layout 4 8",
+                                    "header": "layout-4-8",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-6-6.png",
+                                    "alt": "Layout 6 6",
+                                    "header": "layout-6-6",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-8-4.png",
+                                    "alt": "Layout 8 4",
+                                    "header": "layout-8-4",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-9-3.png",
+                                    "alt": "Layout 9 3",
+                                    "header": "layout-9-3",
+                                    "classes": "img-padding"
+                                }
+                            ],
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "pages",
+            "name": "Pages",
+            "url": "/pages",
+            "src": "/pages.html",
+            "attributes": {
+                "title": "Pages",
+                "description": "Lorem Ipsum Pages",
+                "keywords": "Pages key"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-pages",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "pruebas-5384",
+            "name": "Pruebas",
+            "url": "/pruebas",
+            "src": "/pruebas.html",
+            "attributes": {
+                "title": "Pruebas",
+                "description": "",
+                "keywords": ""
+            },
+            "layout": {
+                "name": "layout-12-6-6",
+                "content": {
+                    "content_upper": [],
+                    "content_left": [],
+                    "content_right": [
+                        {
+                            "name": "component-sample",
+                            "id": "component-sample-6203",
+                            "content": "Esta es la primera 1",
+                            "title": "component-sample",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-sample",
+                            "id": "component-sample-6206",
+                            "content": "este es el 3",
+                            "title": "component-sample",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-sample",
+                            "id": "component-sample-1747",
+                            "content": "El 4",
+                            "title": "component-sample",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-sample",
+                            "id": "component-sample-192",
+                            "content": "",
+                            "title": "component-sample",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        }
+    ]
 }

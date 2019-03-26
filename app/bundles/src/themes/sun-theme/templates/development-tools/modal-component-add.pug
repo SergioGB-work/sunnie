@@ -1,0 +1,63 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Añadir Componente"
+	- var modal_id = "modal-component-add"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	form(id="form-add-component",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/page/{idPage}/component/add", data-callback="addComponentCallback")
+		
+		.row
+			div(class="form-group col-4")
+				label(for="componentName",class="uppercase") Nombre
+				select(type="text",name="name",id="componentName",class="form-control",required,data-load="true",data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentList",data-target="#modal-component-add #componentName")
+
+			div(class="form-group col-4")
+				label(for="componentTitle",class="uppercase") Título
+				input(type="text",name="title",id="componentTitle",class="form-control")
+
+			div(class="form-group col-4")
+				fielset
+					legend Mostrar Título
+					div(class="custom-control custom-radio")
+						input(type="radio",name="showTitle",id="componentShowTitleSi",class="form-control custom-control-input",required,value="true")
+						label(for="componentShowTitleSi",class="uppercase custom-control-label") Si
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="showTitle",id="componentShowTitleNo",class="form-control custom-control-input",required, value="false", checked)
+						label(for="componentShowTitleNo",class="uppercase custom-control-label") No
+
+			div(class="form-group col-4")
+				fielset
+					legend Fullsize
+					div(class="custom-control custom-radio")
+						input(type="radio",name="full",id="componentFullSi",class="custom-control-input",required, value="true")
+						label(for="componentFullSi",class="uppercase custom-control-label") Si
+					div(class="custom-control custom-radio")
+						input(type="radio",name="full",id="componentFullNo",class="custom-control-input",required, value="false", checked)
+						label(for="componentFullNo",class="uppercase custom-control-label") No
+
+			div(class="form-group col-4")
+				label(for="componentClasses",class="uppercase") Clases
+				input(type="text",name="classes",id="componentClasses",class="form-control")
+
+			div(class="form-group col-4")
+				label(for="componentContent",class="uppercase") Contenido
+				input(type="text",name="content",id="componentContent",class="form-control")
+
+		.row
+			div(class="form-group col-4")
+				label(for="layoutColumnPosition",class="uppercase") Layout Position
+				input(type="text",name="layoutColumnPosition",id="layoutColumnPosition",class="form-control",required)
+
+			div(class="form-group col-4")
+				label(for="layoutColumn",class="uppercase") Layout Column
+				input(type="text",name="layoutColumn",id="layoutColumn",class="form-control",required)
+
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Añadir componente
+
+	include componentList-template			

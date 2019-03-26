@@ -1,0 +1,53 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Editar Página"
+	- var modal_id = "modal-page-edit"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	form(id="form-edit-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/page/edit/{idPage}", data-callback="editPageCallback")
+
+		div(id="edit-page-block",data-service-data=apiDevelopment + "/page/detail/{idPage}",data-method="GET",data-template="#templateEditPage",data-target="#edit-page-block",data-callback="dataEditPageLoadedCallback")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Guardar
+
+	script(id="templateEditPage",type="text/x-jquery-tmpl")
+		.row
+			div(class="form-group col-4")
+				label(for="user",class="uppercase") ID
+				input(type="text",name="id",id="pageId",class="form-control",required ,disabled, value="${data.id}")
+
+			div(class="form-group col-4")
+				label(for="user",class="uppercase") Nombre
+				input(type="text",name="name",id="pageName",class="form-control",required, value="${data.name}")
+		.row
+			div(class="form-group col-4")
+				label(for="user",class="uppercase") SRC
+				input(type="text",name="src",id="pageSRC",class="form-control",required, disabled,value="${data.src}")
+			div(class="form-group col-4")
+				label(for="user",class="uppercase") Url
+				input(type="text",name="url",id="pageURL",class="form-control",required,value="${data.url}")
+			div(class="form-group col-4")
+				label(for="pagePosition",class="uppercase") Posición
+				input(type="number",name="position",min=0,id="pagePosition",class="form-control",required,value="${data.position}")
+		.row
+			div(class="form-group col-4")
+				label(for="pageTitle",class="uppercase") Page Title
+				input(type="text",name="title",id="pageTitle",class="form-control",required,value="${data.attributes.title}")
+
+			div(class="form-group col-4")
+				label(for="pageDescription",class="uppercase") Description
+				textarea(type="text",name="description",id="pageDescription",class="form-control") ${data.attributes.description}
+
+			div(class="form-group col-4")
+				label(for="pageKeywords",class="uppercase") Keywords
+				textarea(type="text",name="keywords",id="pageKeywords",class="form-control") ${data.attributes.keywords}
+		.row
+			.col-12
+				h3 Seleciona una plantilla de página
+		.row(id="layoutEditList",data-load="true",data-service-data=apiDevelopment + "/layout/list",data-method="GET",data-template="#templateLayoutList",data-items-per-page="0",data-initial-page="0",data-target="#modal-page-edit #layoutEditList",data-content='"${data.layout.name}' + '.pug"',data-callback="checkLayoutSelected")
+
+	include layoutList-template
