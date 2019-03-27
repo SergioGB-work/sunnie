@@ -1,0 +1,80 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Añadir Componente"
+	- var modal_id = "modal-component-edit"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	form(id="form-edit-component",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/page/{idPage}/component/edit", data-callback="editComponentCallback")
+		
+		div(id="edit-component-block")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Editar componente
+
+	script(id="templateEditComponent",type="text/x-jquery-tmpl")
+
+		.row
+			div(class="form-group col-4")
+				label(for="componentID",class="uppercase") ID
+				input(type="text",name="id",id="componentID",class="form-control", value="${data.id}", disabled)
+
+			div(class="form-group col-4")
+				label(for="componentName",class="uppercase") Nombre
+				select(type="text",name="name",id="componentName",class="form-control", required, data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentList",data-target="#modal-component-edit #componentName", data-callback="checkComponentEdited", data-content='"${data.name}"')
+
+			div(class="form-group col-4")
+				label(for="componentTitle",class="uppercase") Título
+				input(type="text",name="title",id="componentTitle",class="form-control", value="${data.title}")
+
+			div(class="form-group col-4")
+				| ${( $data.showTitle = data.showTitle == 'true' ? "checked" : "" ) ,''}
+				| ${( $data.full = data.full == 'true' ? "checked" : "" ) ,''}
+				| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
+				fielset
+					legend Mostrar Título
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="showTitle",id="componentShowTitleNo${id}",class="form-control custom-control-input",required, value="false", checked)
+						label(for="componentShowTitleNo${id}",class="uppercase custom-control-label") No
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="showTitle",id="componentShowTitleSi${id}",class="form-control custom-control-input",required,value="true",${showTitle})
+						label(for="componentShowTitleSi${id}",class="uppercase custom-control-label") Si
+
+			div(class="form-group col-4")
+				fielset
+					legend Fullsize
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="full",id="componentFullNo${id}",class="custom-control-input",required, value="false", checked)
+						label(for="componentFullNo${id}",class="uppercase custom-control-label") No
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="full",id="componentFullSi${id}",class="custom-control-input",required, value="true", ${full})
+						label(for="componentFullSi${id}",class="uppercase custom-control-label") Si
+
+			div(class="form-group col-4")
+				label(for="componentClasses",class="uppercase") Clases
+				input(type="text",name="classes",id="componentClasses",class="form-control", value="${data.classes}")
+
+			div(class="form-group col-4")
+				label(for="componentContent",class="uppercase") Contenido
+				input(type="text",name="content",id="componentContent",class="form-control",value="${data.content}")
+
+		.row
+			div(class="form-group col-4")
+				label(for="layoutColumnPosition",class="uppercase") Layout Position
+				input(type="text",name="layoutColumnPosition",id="layoutColumnPosition",class="form-control", required, value="${data.position}")
+				input(type="hidden",name="oldPosition",value="${data.position}")
+			div(class="form-group col-4")
+				label(for="layoutColumn",class="uppercase") Layout Column
+				input(type="text",name="layoutColumn",id="layoutColumn",class="form-control",required,value="${data.layoutColumn}")
+				input(type="hidden",name="oldLayoutColumn",value="${data.layoutColumn}")
+
+
+
+	include componentList-template

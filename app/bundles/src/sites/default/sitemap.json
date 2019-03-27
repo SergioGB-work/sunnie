@@ -654,48 +654,29 @@
                 "keywords": ""
             },
             "layout": {
-                "name": "layout-12-6-6",
+                "name": "layout-3-9",
                 "content": {
-                    "content_upper": [],
-                    "content_left": [],
-                    "content_right": [
+                    "content_left": [
                         {
                             "name": "component-sample",
-                            "id": "component-sample-6203",
-                            "content": "Esta es la primera 1",
-                            "title": "component-sample",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
+                            "id": "component-sample-1134",
+                            "content": "completo2",
+                            "title": "hjghjg3",
+                            "showTitle": "true",
+                            "full": "true",
+                            "classes": "paco3"
                         },
                         {
                             "name": "component-sample",
-                            "id": "component-sample-6206",
-                            "content": "este es el 3",
-                            "title": "component-sample",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-sample",
-                            "id": "component-sample-1747",
-                            "content": "El 4",
-                            "title": "component-sample",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-sample",
-                            "id": "component-sample-192",
-                            "content": "",
-                            "title": "component-sample",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
+                            "id": "component-sample-8753",
+                            "content": "completo5",
+                            "title": "hjghjg5",
+                            "showTitle": "true",
+                            "full": "true",
+                            "classes": "paco5"
                         }
-                    ]
+                    ],
+                    "content_right": []
                 }
             },
             "childs": []

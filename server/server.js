@@ -256,33 +256,30 @@ gulp.task('apiServer', function() {
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn || '';
 		var layoutColumnPosition = req.body.layoutColumnPosition || 0;
+		var oldPosition = req.body.oldPosition;
+		var oldlLayoutColumn = req.body.oldLayoutColumn;
 
 		//Datos del componente
 		var componentName = req.body.name || 'Component';
-		var componentId = req.body.id || '';
 		var componentContent = req.body.content || '';
 		var componentTitle = req.body.title || componentName;
 		var componentShowTitle = req.body.showTitle || 'true';
 		var componentFull = req.body.full || 'false';
 		var componentClasses = req.body.classes || '';
 
-		var newComponent = {
-			"name":componentName,
-			"id":componentId,
-			"content":componentContent,
-			"title":componentTitle,
-			"showTitle":componentShowTitle,
-			"full":componentFull,
-			"classes":componentClasses
-		}
-
 		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 		var index = findIndex(sitemap.pages,idPage);
 
-		editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,1);
-		editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,0,newComponent);
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].name = componentName;
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].content = componentContent;
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].title = componentTitle;
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].showTitle = componentShowTitle;
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].full = componentFull;
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].classes = componentClasses;
 
+		editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,0,editedPage.layout.content[oldlLayoutColumn][oldPosition])
+		editedPage.layout.content[oldlLayoutColumn].splice(oldPosition,1);
 		//Generamos la posicion de edicion
 		var patron = "sitemap.pages";
 		index.forEach(function(element,i){
@@ -293,9 +290,9 @@ gulp.task('apiServer', function() {
 				patron += '.childs['+element+']';
 			}
 		})
-
-		eval(patron +'= editedPage');
-		res.send(sitemap);
+		
+		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		deploySites('--site default' , res);
 	});
 
 	app.post('/page/:idPage/component/delete', function (req, res) {
@@ -322,7 +319,8 @@ gulp.task('apiServer', function() {
 		})
 
 		eval(patron +'= editedPage');
-		res.send(sitemap);
+		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		deploySites('--site default' , res,{"column":layoutColumn,"position":componentPosition});
 	});
 
 	app.listen(8082,function(req, res){
@@ -350,6 +348,19 @@ gulp.task('apiServer', function() {
 		var dirComponentsPlugins = getDirectories(pathPlugins + '/components/');
 
 		res.send(dirComponentsBundles.concat(dirComponentsPlugins));
+	});
+
+	app.post('/page/:idPage/component/detail', function (req, res) {
+
+		var idPage = req.params.idPage || '';
+		var layoutColumn = req.body.layoutColumn;
+		var componentPosition = parseInt(req.body.componentPosition);
+		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var editedPage = findPage(sitemap.pages,idPage);
+
+		editedPage.layout.content[layoutColumn][componentPosition].position = componentPosition;
+		editedPage.layout.content[layoutColumn][componentPosition].layoutColumn = layoutColumn;
+		res.status(200).send(editedPage.layout.content[layoutColumn][componentPosition]);
 	});
 
 });
@@ -440,7 +451,7 @@ function deployPage(argv,res){
 	});
 }
 
-function deploySites(argv,res){
+function deploySites(argv,res,argv_res){
 	const { exec } = require('child_process');
 	console.log('START DEPLOY SITES gulp deploy ' + argv);
 	exec('gulp deploySites ' + argv, (err, stdout, stderr) => {
@@ -452,7 +463,7 @@ function deploySites(argv,res){
 
 	  // the *entire* stdout and stderr (buffered)
 	  console.log('DEPLOY FINISHED');
-	  res.status(200).send('SUCCESSFULL');
+	  res.status(200).send(argv_res);
 	});
 }
 

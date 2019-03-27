@@ -36,6 +36,24 @@ $(document).ready(function(){
 		showError('','Añadiendo componente, espere por favor...');
 	});
 
+	$('#modal-component-edit .send').click(function(){
+		$(this).closest('#modal-component-edit').modal('hide');
+		showError('','Aplicando cambios del componente, espere por favor...');
+	});	
+
+	$('#modal-component-edit').on('show.bs.modal',function(event){
+
+		var position = $(event.relatedTarget).closest('[data-layout-position]').data('layout-position');
+		var column = $(event.relatedTarget).closest('[data-layout-column]').data('layout-column');
+
+		getData({
+			"service": apiDevelop + "/page/{idPage}/component/detail",
+			"method": "POST", "template": "#templateEditComponent",
+			"target": "#edit-component-block", "callback": "dataComponentLoadedCallback",
+			"aditionalData":{"componentPosition":position,"layoutColumn":column}
+		});
+	});	
+
 	$('#modal-component-delete .send').click(function(){
 		$(this).closest('#modal-component-delete').modal('hide');
 		showError('','Eliminando componente, espere por favor...');
@@ -48,7 +66,6 @@ $(document).ready(function(){
 		$(this).find('[name="layoutColumn"]').val(column);
 		$(this).find('[name="componentPosition"]').val(position);
 
-		showError('','Eliminando página, espere por favor...');
 	});	
 
 });
@@ -75,6 +92,7 @@ function editPageCallback(data){
 function deletePageCallback(data){
 	dataList($('#navigation-list ul'));
 	$('#modal-error').modal('hide');
+	$('[data-layout-column="'+data.column+'"] [data-layout-position="'+data.position+'"]').remove();
 }
 
 function dataEditPageLoadedCallback(data){
@@ -85,12 +103,22 @@ function addComponentCallback(data){
 	var modal = $('#modal-component-add');
 	modal.find('form')[0].reset();
 	$('#modal-error').modal('hide');
-}
-
-function addComponentCallback(data){
-	$('#modal-error').modal('hide');
+	location.reload();
 }
 
 function checkLayoutSelected(data,idLayout){
 	$('#modal-page-edit #layoutEditList input[value="'+idLayout+'"]').attr('checked','checked');
+}
+
+function dataComponentLoadedCallback(data){
+	dataList($('#modal-component-edit #componentName'));
+}
+
+function checkComponentEdited(data, nameComponent){
+	$('#modal-component-edit #componentName option[value="'+nameComponent+'"]').attr('selected','selected');
+}
+
+function editComponentCallback(data){
+	$('#modal-error').modal('hide');
+	location.reload();
 }
