@@ -1,0 +1,20 @@
+{
+	"config":[
+		{
+			"label":"Pages",
+			"type":"loop",
+			"loopContent":[
+				{
+					"label":"URL",
+					"name":"url",
+					"type":"text",
+				},
+				{
+					"label":"Page Name",
+					"name":"pageName",
+					"type":"text",
+				}
+			]
+		}
+	]
+}

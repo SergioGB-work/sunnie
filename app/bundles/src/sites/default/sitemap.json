@@ -654,29 +654,34 @@
                 "keywords": ""
             },
             "layout": {
-                "name": "layout-3-9",
+                "name": "layout-12-fluid",
                 "content": {
-                    "content_left": [
+                    "content_upper": [
                         {
-                            "name": "component-sample",
-                            "id": "component-sample-1134",
-                            "content": "completo2",
-                            "title": "hjghjg3",
-                            "showTitle": "true",
+                            "name": "component-banner",
+                            "id": "component-banner-7401",
+                            "content": {
+                                "pages": [
+                                    {
+                                        "url": "",
+                                        "pageName": ""
+                                    }
+                                ],
+                                "src": "./images/carousel1.jpg",
+                                "alt": "Alternative 2",
+                                "longdesc": "",
+                                "href": "www.google.es",
+                                "title": "Title 1",
+                                "target": "_blank",
+                                "responsive_src": "./images/carousel1-responsive.jpg",
+                                "srcset": ""
+                            },
+                            "title": "component-banner",
+                            "showTitle": "false",
                             "full": "true",
-                            "classes": "paco3"
-                        },
-                        {
-                            "name": "component-sample",
-                            "id": "component-sample-8753",
-                            "content": "completo5",
-                            "title": "hjghjg5",
-                            "showTitle": "true",
-                            "full": "true",
-                            "classes": "paco5"
+                            "classes": ""
                         }
-                    ],
-                    "content_right": []
+                    ]
                 }
             },
             "childs": []

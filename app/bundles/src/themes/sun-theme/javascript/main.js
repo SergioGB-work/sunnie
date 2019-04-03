@@ -33,7 +33,6 @@ $(document).ready(function(){
 
 	$(document).on('submit','form',function (e) {
 		e.preventDefault();
-
 		var url, method;
 		var data = {};
 		var form = $(this);
@@ -49,19 +48,77 @@ $(document).ready(function(){
 		}
 
 		var emptyVars = '';
+		var loopsArrays = [];
 
 		form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked').each(function () {
 
 			var value = $(this).val();
 			var name = $(this).attr('name');
+			var groups = $(this).closest('[data-form-group]').length > 0 ? $(this).parents('[data-form-group]') : '';	
+			var loop = $(this).closest('[data-block-type]').length > 0 ? true : false ; 
+			var loopID = $(this).closest('[data-loop-id]').length > 0 ? $(this).closest('[data-loop-id]').data('loop-id') : '' ; 
+		    
+			var group = '';
+			if(groups != ''){
+				$($(this).parents('[data-form-group]').get().reverse()).each(function(){
+
+					var current = ('["'+$(this).data("form-group")+'"]');	
+					group = group.concat(current);
+
+					eval("data" + group +" = " + "data" + group +" != '' && "+ "data" + group + " !== undefined ? "+ "data" + group + " : {} ");
+
+
+				});
+				 
+
+				if(loop){
+					alert("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
+					eval("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
+					alert(JSON.stringify(data));
+				}
+				else if(group != ''){
+					eval("data" + group +" = " + "data" + group +" != '' && "+ "data" + group + " !== undefined ? "+ "data" + group + " : {} ");
+				}
+
+				group = "data" + group;
+
+			}	
+
 			if (form.data('form-filter') != true || value != '') {
 				if (rel != '') {
 					$.each(rel, function (index, elem) {
-						data[name + elem] = value;
+						if(group != ''){
+							var key = name + element;
+							var newValue = {};
+							newValue[name] = value;
+							data[group] = Object.assign(data[group], newValue);
+						}
+						else{
+							data[name + elem] = value;
+						}
 					})
 				}
 				else {
-					data[name] = value;
+
+					if(loop){
+						alert(JSON.stringify(data));
+						alert(group +"[loopID] = "+group+"[loopID] != '' && "+group+"[loopID] !== undefined ? "+group+"[loopID] : {} ");	
+						eval(group +"[loopID] = "+group+"[loopID] != '' && "+group+"[loopID] !== undefined ? "+group+"[loopID] : {} ");
+						var newValue = {};
+						newValue[name] = value;
+
+						eval(group+"[loopID] = Object.assign("+group+"[loopID],newValue)");
+						alert(JSON.stringify(data));
+					}
+
+					else if(group != ''){
+						var newValue = {};
+						newValue[name] = value;
+						eval(group+" = Object.assign("+group+", newValue)");
+					}
+					else{
+						data[name] = value;
+					}
 				}
 			}
 
@@ -85,6 +142,7 @@ $(document).ready(function(){
 
 		});
 
+		console.log(data);
 
 		var filesInput = form.find('input[type="file"]');
 
@@ -100,7 +158,7 @@ $(document).ready(function(){
 			}
 
 			data = dataFormData;
-		}	
+		}
 
 		if (form.data('form-filter') != true) {
 			url = form.attr('data-action');
@@ -368,7 +426,7 @@ function getData(el) {
 
 		var jsonData = aditionalData instanceof FormData ? aditionalData : JSON.stringify(aditionalData);
 		var contentType = aditionalData instanceof FormData ? false : "application/json";
-		var timeout = 600000; // tiempo de espera por defecto de la peticion	
+		var timeout = 600000; // tiempo de espera por defecto de la peticion
 
 		var getURL = $.ajax({
 			url: url,

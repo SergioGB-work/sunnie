@@ -1,0 +1,27 @@
+script(id="templateInput",type="text/x-jquery-tmpl")
+
+	| ${( $data.requiredField = data.required == true ? "required" : "" ) ,''}
+	| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
+
+	| {%if data.type == 'checkbox' || data.type == 'radio' %}
+
+
+	| {%elseif data.type == 'loop'%}
+
+	fielset
+		legend ${data.label}
+
+		.row
+			div(class="form-group col-12")
+				| {%each(key,val) data.loopContent%}
+
+					
+
+				| {%/each%}
+
+	| {%else%}
+	div(class="form-group col-4")
+		label(for="input${id}",class="uppercase") ${data.label}
+		input(type="${data.type}",name="${data.name}",id="input${id}",class="form-control", ${requiredField})
+	| {%/if%}

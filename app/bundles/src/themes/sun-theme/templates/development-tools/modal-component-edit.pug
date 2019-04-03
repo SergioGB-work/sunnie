@@ -61,10 +61,6 @@ block modal-body
 				label(for="componentClasses",class="uppercase") Clases
 				input(type="text",name="classes",id="componentClasses",class="form-control", value="${data.classes}")
 
-			div(class="form-group col-4")
-				label(for="componentContent",class="uppercase") Contenido
-				input(type="text",name="content",id="componentContent",class="form-control",value="${data.content}")
-
 		.row
 			div(class="form-group col-4")
 				label(for="layoutColumnPosition",class="uppercase") Layout Position
@@ -75,6 +71,38 @@ block modal-body
 				input(type="text",name="layoutColumn",id="layoutColumn",class="form-control",required,value="${data.layoutColumn}")
 				input(type="hidden",name="oldLayoutColumn",value="${data.layoutColumn}")
 
+		.row
+			fieldset(id="dynamicConfigComponent",data-form-group="content", class="col-12")
+				legend Contenido
+				.row
+					| {%each data.config%}
+
+					| {%if $value.type == "checkbox" || $value.type =="radio" %}
+
+					| {%elseif $value.type == "loop" %}
+					fielset(class="col-12", data-block-type="loop" data-form-group="${$value.name}")
+						legend ${$value.label}
+						.row(data-loop-id="0")
+							| {%each(key,val) $value.loopContent%}
+							
+							| {%if val.type == "checkbox" || val.type =="radio" %}
+
+							| {%else%}
+							div(class="form-group col-4")
+								label(for="input",class="uppercase") ${val.label}
+								input(type="${val.type}",name="${val.name}",id="input",class="form-control")
+							| {%/if%}		
+							| {%/each%}
+
+					| {%else%}
+					div(class="form-group col-4")
+						label(for="input",class="uppercase") ${$value.label}
+						input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="input",class="form-control")
+
+					| {%/if%}
+
+					| {%/each%}
 
 
 	include componentList-template
+	include input-template

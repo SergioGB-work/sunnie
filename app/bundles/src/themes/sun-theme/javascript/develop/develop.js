@@ -120,5 +120,5 @@ function checkComponentEdited(data, nameComponent){
 
 function editComponentCallback(data){
 	$('#modal-error').modal('hide');
-	location.reload();
+	//location.reload();
 }
