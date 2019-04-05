@@ -1,22 +1,5 @@
 {
-	"config":[
-		{
-			"label":"Pages",
-			"name":"pages",
-			"type":"loop",
-			"loopContent":[
-				{
-					"label":"URL",
-					"name":"url",
-					"type":"text"
-				},
-				{
-					"label":"Page Name",
-					"name":"pageName",
-					"type":"text"
-				}
-			]
-		},	
+	"config":[	
 		{
 			"label":"URL Image",
 			"name":"src",

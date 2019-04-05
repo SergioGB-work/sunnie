@@ -97,6 +97,42 @@
 	margin:0;
 }
 
+
+/** LOOPS **/
+[data-block-type="array"]{
+	.addItem{
+	    color: $white;
+	    background: $primary;
+	    padding: $grid-gutter-width * 0.25;
+	    border-radius: 50%;
+	    height: $grid-gutter-width * 1.25;
+	    width: $grid-gutter-width * 1.25;
+	    font-size: $font-size-base * 0.75;
+	    align-items: center;
+	    display: flex;
+	    justify-content: center;
+    	align-self: center;
+	}
+	.deleteItem{
+	    color: $white;
+	    background: $danger;
+	    padding: $grid-gutter-width * 0.25;
+	    border-radius: 50%;
+	    height: $grid-gutter-width * 1.25;
+	    width: $grid-gutter-width * 1.25;
+	    font-size: $font-size-base * 0.75;
+	    align-items: center;
+	    display: flex;
+	    justify-content: center;
+    	align-self: center;
+	}	
+}
+
+[data-loop-id]{
+	background:$body-bg;
+}
+
+
 /** FRAGMENTS **/
 @include media-breakpoint-down(xs) {
 	.fragment-dropdownActions{
@@ -105,4 +141,4 @@
 			left:auto;
 		}
 	}
-}	
+}

@@ -167,6 +167,15 @@
 	}
 }
 
+fieldset,.fieldset{
+	border: 1px solid $input-border;
+	padding:$grid-gutter-width;
+}
+
+legend{
+	margin-bottom:0;
+}
+
 /** TABLE **/
 
 .table{

@@ -66,9 +66,34 @@ $(document).ready(function(){
 		$(this).find('[name="layoutColumn"]').val(column);
 		$(this).find('[name="componentPosition"]').val(position);
 
-	});	
+	});
+	
+	$(document).on('click','[data-block-type="array"] [data-array-id] .addItem',function(){
+		var array_item = $(this).closest('[data-array-id]').clone();
+
+		array_item.insertBefore($(this).closest('[data-array-id]'));
+		$(this).closest('[data-array-id]').find('input').val('');
+
+		reloadArrayIndex($(this).closest('[data-block-type="array"]'));
+	});
+
+	$(document).on('click','[data-block-type="array"] [data-array-id] .deleteItem',function(){
+		var dataArray = $(this).closest('[data-block-type="array"]')
+		
+		if(dataArray.find('[data-array-id]').length > 1){
+			$(this).closest('[data-array-id]').remove();
+			reloadArrayIndex(dataArray);
+		}
+
+	});
 
 });
+
+function reloadArrayIndex(el){
+	el.find('[data-array-id]').each(function(index,el){
+		$(this).attr('data-array-id',index);
+	});
+}
 
 function callbackDeleteComponent(data,component){
 	$('#confirmDeleteComponent').modal('hide');

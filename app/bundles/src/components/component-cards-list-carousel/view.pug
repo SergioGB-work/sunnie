@@ -1,6 +1,8 @@
 mixin component-cards-list-carousel(content)
 
-	each item,i in content
+	- var items = content.items || []
+
+	each item,i in items
 
 		- var classes = item.classes || ''
 

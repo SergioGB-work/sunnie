@@ -2,17 +2,18 @@
 	"config":[
 		{
 			"label":"Pages",
-			"type":"loop",
-			"loopContent":[
+			"name":"pages",
+			"type":"array",
+			"arrayContent":[
 				{
 					"label":"URL",
 					"name":"url",
-					"type":"text",
+					"type":"text"
 				},
 				{
 					"label":"Page Name",
 					"name":"pageName",
-					"type":"text",
+					"type":"text"
 				}
 			]
 		}

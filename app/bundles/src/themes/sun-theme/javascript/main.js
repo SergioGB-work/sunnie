@@ -48,15 +48,15 @@ $(document).ready(function(){
 		}
 
 		var emptyVars = '';
-		var loopsArrays = [];
+		var arraysArrays = [];
 
 		form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked').each(function () {
 
 			var value = $(this).val();
 			var name = $(this).attr('name');
 			var groups = $(this).closest('[data-form-group]').length > 0 ? $(this).parents('[data-form-group]') : '';	
-			var loop = $(this).closest('[data-block-type]').length > 0 ? true : false ; 
-			var loopID = $(this).closest('[data-loop-id]').length > 0 ? $(this).closest('[data-loop-id]').data('loop-id') : '' ; 
+			var array = $(this).closest('[data-block-type]').length > 0 ? true : false ; 
+			var arrayID = $(this).closest('[data-array-id]').length > 0 ? $(this).closest('[data-array-id]').data('array-id') : '' ; 
 		    
 			var group = '';
 			if(groups != ''){
@@ -71,7 +71,7 @@ $(document).ready(function(){
 				});
 				 
 
-				if(loop){
+				if(array){
 					alert("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
 					eval("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
 					alert(JSON.stringify(data));
@@ -100,14 +100,14 @@ $(document).ready(function(){
 				}
 				else {
 
-					if(loop){
+					if(array){
 						alert(JSON.stringify(data));
-						alert(group +"[loopID] = "+group+"[loopID] != '' && "+group+"[loopID] !== undefined ? "+group+"[loopID] : {} ");	
-						eval(group +"[loopID] = "+group+"[loopID] != '' && "+group+"[loopID] !== undefined ? "+group+"[loopID] : {} ");
+						alert(group +"[arrayID] = "+group+"[arrayID] != '' && "+group+"[arrayID] !== undefined ? "+group+"[arrayID] : {} ");	
+						eval(group +"[arrayID] = "+group+"[arrayID] != '' && "+group+"[arrayID] !== undefined ? "+group+"[arrayID] : {} ");
 						var newValue = {};
 						newValue[name] = value;
 
-						eval(group+"[loopID] = Object.assign("+group+"[loopID],newValue)");
+						eval(group+"[arrayID] = Object.assign("+group+"[arrayID],newValue)");
 						alert(JSON.stringify(data));
 					}
 

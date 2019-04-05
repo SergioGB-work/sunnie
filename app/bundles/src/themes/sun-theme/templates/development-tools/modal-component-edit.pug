@@ -17,19 +17,19 @@ block modal-body
 	script(id="templateEditComponent",type="text/x-jquery-tmpl")
 
 		.row
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				label(for="componentID",class="uppercase") ID
 				input(type="text",name="id",id="componentID",class="form-control", value="${data.id}", disabled)
 
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				label(for="componentName",class="uppercase") Nombre
 				select(type="text",name="name",id="componentName",class="form-control", required, data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentList",data-target="#modal-component-edit #componentName", data-callback="checkComponentEdited", data-content='"${data.name}"')
 
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				label(for="componentTitle",class="uppercase") Título
 				input(type="text",name="title",id="componentTitle",class="form-control", value="${data.title}")
 
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				| ${( $data.showTitle = data.showTitle == 'true' ? "checked" : "" ) ,''}
 				| ${( $data.full = data.full == 'true' ? "checked" : "" ) ,''}
 				| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
@@ -45,7 +45,7 @@ block modal-body
 						input(type="radio",name="showTitle",id="componentShowTitleSi${id}",class="form-control custom-control-input",required,value="true",${showTitle})
 						label(for="componentShowTitleSi${id}",class="uppercase custom-control-label") Si
 
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				fielset
 					legend Fullsize
 
@@ -57,51 +57,70 @@ block modal-body
 						input(type="radio",name="full",id="componentFullSi${id}",class="custom-control-input",required, value="true", ${full})
 						label(for="componentFullSi${id}",class="uppercase custom-control-label") Si
 
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				label(for="componentClasses",class="uppercase") Clases
 				input(type="text",name="classes",id="componentClasses",class="form-control", value="${data.classes}")
 
 		.row
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				label(for="layoutColumnPosition",class="uppercase") Layout Position
 				input(type="text",name="layoutColumnPosition",id="layoutColumnPosition",class="form-control", required, value="${data.position}")
 				input(type="hidden",name="oldPosition",value="${data.position}")
-			div(class="form-group col-4")
+			div(class="form-group col-md-4 col-12")
 				label(for="layoutColumn",class="uppercase") Layout Column
 				input(type="text",name="layoutColumn",id="layoutColumn",class="form-control",required,value="${data.layoutColumn}")
 				input(type="hidden",name="oldLayoutColumn",value="${data.layoutColumn}")
 
 		.row
-			fieldset(id="dynamicConfigComponent",data-form-group="content", class="col-12")
-				legend Contenido
-				.row
-					| {%each data.config%}
+			.col-12
+				fieldset(id="dynamicConfigComponent",data-form-group="content", class="md-3")
+					legend Contenido
+					.row
+						| {%each data.config%}
 
-					| {%if $value.type == "checkbox" || $value.type =="radio" %}
+						| {%if $value.type == "checkbox" || $value.type =="radio" %}
 
-					| {%elseif $value.type == "loop" %}
-					fielset(class="col-12", data-block-type="loop" data-form-group="${$value.name}")
-						legend ${$value.label}
-						.row(data-loop-id="0")
-							| {%each(key,val) $value.loopContent%}
-							
-							| {%if val.type == "checkbox" || val.type =="radio" %}
+						| {%elseif $value.type == "textarea" %}
+						div(class="form-group col-md-4 col-12")
+							label(for="input",class="uppercase") ${$value.label}
+							textarea(name="${$value.name}", id="input",class="form-control") ${data.content[name]}
 
-							| {%else%}
-							div(class="form-group col-4")
-								label(for="input",class="uppercase") ${val.label}
-								input(type="${val.type}",name="${val.name}",id="input",class="form-control")
-							| {%/if%}		
-							| {%/each%}
+						| {%elseif $value.type == "select" %}
 
-					| {%else%}
-					div(class="form-group col-4")
-						label(for="input",class="uppercase") ${$value.label}
-						input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="input",class="form-control")
+						| {%elseif $value.type == "array" %}
+						.col-12.form-group
+							fieldset(data-block-type="array" data-form-group="${$value.name}")
+								legend ${$value.label}
+								.row.position-relative
+									.col-12
+										.fieldset(data-array-id="0",class="mt-3")
+											.row
 
-					| {%/if%}
+												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
 
-					| {%/each%}
+												| {%each(key,val) $value.dataContent%}
+												
+												| {%if val.type == "checkbox" || val.type =="radio" %}
+
+												| {%else%}
+												div(class="form-group col-md-4 col-12 mb-md-0")
+													label(for="input",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="input",class="form-control")
+												| {%/if%}		
+												| {%/each%}
+
+												| {%if val.type == "array"%}
+												div(class="addItem fa fa-plus mr-1")
+												div(class="deleteItem fa fa-minus")
+												| {%/if%}	
+						| {%else%}
+						div(class="form-group col-md-4 col-12")
+							label(for="input",class="uppercase") ${$value.label}
+							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="input",class="form-control")
+
+						| {%/if%}
+
+						| {%/each%}
 
 
 	include componentList-template

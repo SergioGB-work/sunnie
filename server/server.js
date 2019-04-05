@@ -361,7 +361,6 @@ gulp.task('apiServer', function() {
 		editedPage.layout.content[layoutColumn][componentPosition].position = componentPosition;
 		editedPage.layout.content[layoutColumn][componentPosition].layoutColumn = layoutColumn;
 		editedPage.layout.content[layoutColumn][componentPosition] = Object.assign(editedPage.layout.content[layoutColumn][componentPosition],getComponentConfig(editedPage.layout.content[layoutColumn][componentPosition].name));
-
 		res.status(200).send(editedPage.layout.content[layoutColumn][componentPosition]);
 	});
 
@@ -493,7 +492,6 @@ function normaliza(str) {
 };
 
 function getComponentConfig(idComponent){
-
 	var config = JSON.parse(fs.readFileSync(pathBundles + '/components/'+idComponent+'/config.json'));
 
 	return config;
