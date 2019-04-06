@@ -36,6 +36,17 @@ $(document).ready(function(){
 		showError('','Añadiendo componente, espere por favor...');
 	});
 
+	$('#modal-component-add #componentName').change(function(){
+		var component = $(this).val();
+
+		getData({
+			"service": apiDevelop + "/component/config/" + component,
+			"method": "GET", "template": "#templateDynamicConfigComponent",
+			"target": "#dynamicConfig"
+		});
+
+	});
+
 	$('#modal-component-edit .send').click(function(){
 		$(this).closest('#modal-component-edit').modal('hide');
 		showError('','Aplicando cambios del componente, espere por favor...');

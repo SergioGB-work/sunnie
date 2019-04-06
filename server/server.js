@@ -23,7 +23,8 @@ gulp.task('apiServer', function() {
 
 	//FALTA DEFINIR LOS PARAMETROS DE CREACION
 	app.post('/page/add', function (req, res) {
-		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var siteURL = pathBundles + '/sites/default';
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var position = [req.body.position] || [sitemap.pages.length] ;
 		var patron = "sitemap.pages";
 
@@ -71,16 +72,16 @@ gulp.task('apiServer', function() {
 
 		eval(patron);
 
-		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
 		deployPage('--site default --page ' + src.split('.')[0].split('/')[1] , res)
 	});
 
 	//FALTA DEFINIR LOS PARAMETROS DE EDICION
 	app.post('/page/edit/:id', function (req, res) {
-		
+		var siteURL = pathBundles + '/sites/default';
 		var id = req.params.id,
-			sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json')),
+			sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json')),
 			editedPage = findPage(sitemap.pages,id),
 			index = findIndex(sitemap.pages,id),
 			name = req.body.name,
@@ -161,16 +162,16 @@ gulp.task('apiServer', function() {
 			eval(patronEdit);
 		}
 
-		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
 		deployPage('--site default --page ' + editedPage['src'].split('.')[0].split('/')[1] , res)
 	});
 
 	//TERMINADO A FALTA DE GUARDAR EN EL FICHERO FINAL
 	app.post('/page/delete/:id', function (req, res) {
-		
+		var siteURL = pathBundles + '/sites/default';
 		var id = req.params.id,
-			sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json')),
+			sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json')),
 			index = findIndex(sitemap.pages,id);
 
 		var patron = "sitemap.pages";
@@ -185,14 +186,14 @@ gulp.task('apiServer', function() {
 		})
 		eval(patron);
 
-		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 		deploySites('--site default' , res);
 	});
 
 	app.get('/page/detail/:id', function (req, res) {
 		var idPage = req.params.id;
-
-		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var siteURL = pathBundles + '/sites/default';
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var detailPage = findPage(sitemap.pages,idPage);
 		var positionPage = findIndex(sitemap.pages,idPage);
 
@@ -206,7 +207,7 @@ gulp.task('apiServer', function() {
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn || '';
 		var layoutColumnPosition = req.body.layoutColumnPosition || 0;
-
+		var siteURL = pathBundles + '/sites/default';
 		//Datos del componente
 		var componentName = req.body.name || 'Component';
 		var componentId = normaliza(componentName) + '-' + parseInt(Math.random() * (9999 - 0) + 0);
@@ -226,7 +227,7 @@ gulp.task('apiServer', function() {
 			"classes":componentClasses
 		}
 
-		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 		var index = findIndex(sitemap.pages,idPage);
 
@@ -246,7 +247,7 @@ gulp.task('apiServer', function() {
 
 		eval(patron +'= editedPage');
 		
-		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 		deploySites('--site default' , res);
 
 	});
@@ -258,7 +259,7 @@ gulp.task('apiServer', function() {
 		var layoutColumnPosition = req.body.layoutColumnPosition || 0;
 		var oldPosition = req.body.oldPosition;
 		var oldlLayoutColumn = req.body.oldLayoutColumn;
-		console.log(req.body.content);
+
 		//Datos del componente
 		var componentName = req.body.name || 'Component';
 		var componentContent = req.body.content || '';
@@ -266,8 +267,8 @@ gulp.task('apiServer', function() {
 		var componentShowTitle = req.body.showTitle || 'true';
 		var componentFull = req.body.full || 'false';
 		var componentClasses = req.body.classes || '';
-
-		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var siteURL = pathBundles + '/sites/default';
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 		var index = findIndex(sitemap.pages,idPage);
 
@@ -291,7 +292,7 @@ gulp.task('apiServer', function() {
 			}
 		})
 		
-		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 		deploySites('--site default' , res);
 	});
 
@@ -300,8 +301,9 @@ gulp.task('apiServer', function() {
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn || '';
 		var componentPosition = req.body.componentPosition || '';
+		var siteURL = pathBundles + '/sites/default';
 
-		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 		var index = findIndex(sitemap.pages,idPage);
 		var patron = "sitemap.pages";
@@ -319,7 +321,7 @@ gulp.task('apiServer', function() {
 		})
 
 		eval(patron +'= editedPage');
-		fs.writeFileSync(pathBundles + '/sites/default/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 		deploySites('--site default' , res,{"column":layoutColumn,"position":componentPosition});
 	});
 
@@ -355,7 +357,8 @@ gulp.task('apiServer', function() {
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn;
 		var componentPosition = parseInt(req.body.componentPosition);
-		var sitemap = JSON.parse(fs.readFileSync(pathBundles + '/sites/default/sitemap.json'));
+		var siteURL = pathBundles + '/sites/default';
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 
 		editedPage.layout.content[layoutColumn][componentPosition].position = componentPosition;
@@ -364,14 +367,30 @@ gulp.task('apiServer', function() {
 		res.status(200).send(editedPage.layout.content[layoutColumn][componentPosition]);
 	});
 
+	app.get('/component/config/:idComponent', function (req, res) {
+
+		var idComponent = req.params.idComponent;
+		var config = getComponentConfig(idComponent);
+		console.log(config);
+		res.status(200).send(config);
+	});
+
+
 });
 
 function getLayoutColumns(id){
 	id = id.split('.pug')[0];
-	var filePath = pathBundles + '/layouts/' + id + '.pug';
+	var filePath = '';
+	if(fs.existsSync(pathBundles + '/layouts/' + id + '.pug')){
+		filePath = pathBundles + '/layouts/' + id + '.pug';
+	}
+
+	if(fs.existsSync(pathPlugins + '/layouts/' + id + '.pug')){
+		filePath = pathPlugins + '/layouts/' + id + '.pug';
+	}
 
 	try{
-		if(fs.existsSync(filePath)){
+		if(filepath != ''){
 			var blocks = [];
 			var file = fs.readFileSync(filePath).toString();
 			file = file.split('data-layout-column="');
@@ -492,7 +511,27 @@ function normaliza(str) {
 };
 
 function getComponentConfig(idComponent){
-	var config = JSON.parse(fs.readFileSync(pathBundles + '/components/'+idComponent+'/config.json'));
 
+	var config = {};
+
+	if(fs.existsSync(pathBundles + '/components/'+idComponent+'/config.json')){
+		config = JSON.parse(fs.readFileSync(pathBundles + '/components/'+idComponent+'/config.json'));
+	}
+	
+	if(fs.existsSync(pathPlugins + '/components/'+idComponent+'/config.json')){
+		config = JSON.parse(fs.readFileSync(pathPlugins + '/components/'+idComponent+'/config.json'));
+	}	
+		
 	return config;
+}
+
+function getURLSite(site){
+	
+	if(site == defaultSite){
+		return pathBundles + '/sites/' + site;
+	}
+	else{
+		return pathPlugins + '/sites/' + site;
+	}
+
 }

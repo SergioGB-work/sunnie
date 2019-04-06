@@ -771,22 +771,6 @@
                             "classes": ""
                         },
                         {
-                            "name": "component-highlighted-content",
-                            "id": "component-highlighted-content-5853",
-                            "content": {
-                                "content": "<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
-                                "button": {
-                                    "href": "http://www.google.es",
-                                    "title": "Ir a SunnieJS",
-                                    "text": "Click!"
-                                }
-                            },
-                            "title": "component-highlighted-content",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
                             "name": "component-highlighted-banner",
                             "id": "component-highlighted-banner-6278",
                             "content": {
@@ -798,42 +782,6 @@
                                 }
                             },
                             "title": "component-highlighted-banner",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-cards-list-carousel",
-                            "id": "component-cards-list-carousel-9023",
-                            "content": {
-                                "items": [
-                                    {
-                                        "src": "./images/monument.jpg",
-                                        "alt": "Image 1",
-                                        "header": "Header 1",
-                                        "description": "Lorem ipsum",
-                                        "classes": "full m-0",
-                                        "title": "Ir a SunnieJS"
-                                    },
-                                    {
-                                        "src": "./images/monument.jpg",
-                                        "alt": "Image 2",
-                                        "header": "Header 2",
-                                        "description": "Lorem ipsum",
-                                        "classes": "full m-0",
-                                        "title": "Ir a SunnieJS"
-                                    },
-                                    {
-                                        "src": "./images/monument.jpg",
-                                        "alt": "Image 3",
-                                        "header": "Header 3",
-                                        "description": "Lorem ipsum",
-                                        "classes": "full m-0",
-                                        "title": "Ir a SunnieJS"
-                                    }
-                                ]
-                            },
-                            "title": "component-cards-list-carousel",
                             "showTitle": "false",
                             "full": "false",
                             "classes": ""
@@ -852,25 +800,6 @@
                             "title": "component-breadcrumbs",
                             "showTitle": "false",
                             "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-banner",
-                            "id": "component-banner-7401",
-                            "content": {
-                                "pages": [],
-                                "src": "./images/carousel1.jpg",
-                                "alt": "Alternative 2",
-                                "longdesc": "",
-                                "href": "www.google.es",
-                                "title": "Title 1",
-                                "target": "_blank",
-                                "responsive_src": "./images/carousel1-responsive.jpg",
-                                "srcset": ""
-                            },
-                            "title": "component-banner",
-                            "showTitle": "false",
-                            "full": "true",
                             "classes": ""
                         }
                     ]
