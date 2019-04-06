@@ -1,7 +1,7 @@
 extends ../modal_noFooter
 
 block vars
-	- var modal_title = "Añadir Componente"
+	- var modal_title = "Editar Componente"
 	- var modal_id = "modal-component-edit"
 	- var modal_size = "modal-lg"
 
@@ -68,7 +68,7 @@ block modal-body
 				input(type="hidden",name="oldPosition",value="${data.position}")
 			div(class="form-group col-md-4 col-12")
 				label(for="layoutColumn",class="uppercase") Layout Column
-				input(type="text",name="layoutColumn",id="layoutColumn",class="form-control",required,value="${data.layoutColumn}")
+				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-callback="checkLayoutColumn", data-content='"${data.layoutColumn}"')
 				input(type="hidden",name="oldLayoutColumn",value="${data.layoutColumn}")
 
 		.row

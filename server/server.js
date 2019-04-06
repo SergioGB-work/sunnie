@@ -387,19 +387,19 @@ gulp.task('apiServer', function() {
 
 function getLayoutColumns(id){
 	id = id.split('.pug')[0];
-	var filePath = '';
+	var filepath = '';
 	if(fs.existsSync(pathBundles + '/layouts/' + id + '.pug')){
-		filePath = pathBundles + '/layouts/' + id + '.pug';
+		filepath = pathBundles + '/layouts/' + id + '.pug';
 	}
 
 	if(fs.existsSync(pathPlugins + '/layouts/' + id + '.pug')){
-		filePath = pathPlugins + '/layouts/' + id + '.pug';
+		filepath = pathPlugins + '/layouts/' + id + '.pug';
 	}
 
 	try{
 		if(filepath != ''){
 			var blocks = [];
-			var file = fs.readFileSync(filePath).toString();
+			var file = fs.readFileSync(filepath).toString();
 			file = file.split('data-layout-column="');
 			file.forEach(function(element,index){
 				if(index>0){

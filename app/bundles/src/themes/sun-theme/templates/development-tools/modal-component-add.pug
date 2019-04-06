@@ -49,7 +49,7 @@ block modal-body
 
 			div(class="form-group col-4")
 				label(for="layoutColumn",class="uppercase") Layout Column
-				input(type="text",name="layoutColumn",id="layoutColumn",class="form-control",required)
+				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-add #layoutColumn")
 
 
 		div(id="dynamicConfig")
@@ -125,3 +125,4 @@ block modal-body
 
 
 	include componentList-template			
+	include layoutColumnsList-template

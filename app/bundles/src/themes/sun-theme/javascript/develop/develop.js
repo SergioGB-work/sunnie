@@ -148,13 +148,18 @@ function checkLayoutSelected(data,idLayout){
 
 function dataComponentLoadedCallback(data){
 	dataList($('#modal-component-edit #componentName'));
+	dataList($('#modal-component-edit #layoutColumn'));
 }
 
 function checkComponentEdited(data, nameComponent){
 	$('#modal-component-edit #componentName option[value="'+nameComponent+'"]').attr('selected','selected');
 }
 
+function checkLayoutColumn(data, column){
+	$('#modal-component-edit #layoutColumn option[value="'+column+'"]').attr('selected','selected');
+}
+
 function editComponentCallback(data){
 	$('#modal-error').modal('hide');
-	//location.reload();
+	location.reload();
 }
