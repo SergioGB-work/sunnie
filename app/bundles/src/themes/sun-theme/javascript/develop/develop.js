@@ -58,7 +58,7 @@ $(document).ready(function(){
 		var column = $(event.relatedTarget).closest('[data-layout-column]').data('layout-column');
 
 		getData({
-			"service": apiDevelop + "/page/{idPage}/component/detail",
+			"service": apiDevelop + "/site/{idSite}/page/{idPage}/component/detail",
 			"method": "POST", "template": "#templateEditComponent",
 			"target": "#edit-component-block", "callback": "dataComponentLoadedCallback",
 			"aditionalData":{"componentPosition":position,"layoutColumn":column}

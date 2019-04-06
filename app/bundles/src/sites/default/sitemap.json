@@ -717,6 +717,26 @@
                             "classes": ""
                         },
                         {
+                            "name": "component-breadcrumbs",
+                            "id": "component-breadcrumbs-5073",
+                            "content": {
+                                "pages": [
+                                    {
+                                        "url": "dfkgjdfk",
+                                        "pageName": "Pagina 8"
+                                    },
+                                    {
+                                        "url": "dfgsdfg",
+                                        "pageName": "Pagina 9"
+                                    }
+                                ]
+                            },
+                            "title": "component-breadcrumbs",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
                             "name": "component-highlighted-side-image",
                             "id": "component-highlighted-side-image-6548",
                             "content": {
@@ -776,9 +796,9 @@
                             "content": {
                                 "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                                 "button": {
-                                    "href": "http://www.google2.es",
-                                    "title": "Ir a SunnieJS2",
-                                    "text": "Click2!"
+                                    "href": "fgsdf",
+                                    "title": "dffgdfs",
+                                    "text": "Clicameee"
                                 }
                             },
                             "title": "component-highlighted-banner",

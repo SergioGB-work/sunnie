@@ -6,7 +6,7 @@ block vars
 	- var modal_size = "modal-lg"
 
 block modal-body
-	form(id="form-add-component",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/page/{idPage}/component/add", data-callback="addComponentCallback")
+	form(id="form-add-component",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/{idPage}/component/add", data-callback="addComponentCallback")
 		
 		.row
 			div(class="form-group col-4")

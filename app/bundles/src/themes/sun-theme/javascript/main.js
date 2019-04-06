@@ -421,6 +421,7 @@ function getData(el) {
 	var url = service.split('?')[0] + filter;
 
 	url = url.replace("{idPage}" , $("body").data("page-id"));
+	url = url.replace("{idSite}" , $("body").data("site-id"));
 
 	if (cache != true || cache == undefined || sessionStorage.getItem(url + '_${{ default.lang }}$') == '' || sessionStorage.getItem(url  + '_${{ default.lang }}$') == null) {
 

@@ -3,6 +3,7 @@ var gulp = require('gulp'),
 	fs = require('fs'),
 	path = require('path');
 
+var defaultSite = 'default';
 
 /** API SERVER **/
 gulp.task('apiServer', function() {
@@ -22,8 +23,9 @@ gulp.task('apiServer', function() {
 	});
 
 	//FALTA DEFINIR LOS PARAMETROS DE CREACION
-	app.post('/page/add', function (req, res) {
-		var siteURL = pathBundles + '/sites/default';
+	app.post('/site/:idSite/page/add', function (req, res) {
+		var site = req.params.idSite;
+		var siteURL = getURLSite(site);
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var position = [req.body.position] || [sitemap.pages.length] ;
 		var patron = "sitemap.pages";
@@ -78,8 +80,9 @@ gulp.task('apiServer', function() {
 	});
 
 	//FALTA DEFINIR LOS PARAMETROS DE EDICION
-	app.post('/page/edit/:id', function (req, res) {
-		var siteURL = pathBundles + '/sites/default';
+	app.post('/site/:idSite/page/edit/:id', function (req, res) {
+		var site = req.params.idSite;
+		var siteURL = getURLSite(site);
 		var id = req.params.id,
 			sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json')),
 			editedPage = findPage(sitemap.pages,id),
@@ -168,8 +171,9 @@ gulp.task('apiServer', function() {
 	});
 
 	//TERMINADO A FALTA DE GUARDAR EN EL FICHERO FINAL
-	app.post('/page/delete/:id', function (req, res) {
-		var siteURL = pathBundles + '/sites/default';
+	app.post('/site/:idSite/page/delete/:id', function (req, res) {
+		var site = req.params.idSite;
+		var siteURL = getURLSite(site);
 		var id = req.params.id,
 			sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json')),
 			index = findIndex(sitemap.pages,id);
@@ -190,9 +194,10 @@ gulp.task('apiServer', function() {
 		deploySites('--site default' , res);
 	});
 
-	app.get('/page/detail/:id', function (req, res) {
+	app.get('/site/:idSite/page/detail/:id', function (req, res) {
+		var site = req.params.idSite;
 		var idPage = req.params.id;
-		var siteURL = pathBundles + '/sites/default';
+		var siteURL = getURLSite(site);
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var detailPage = findPage(sitemap.pages,idPage);
 		var positionPage = findIndex(sitemap.pages,idPage);
@@ -202,12 +207,13 @@ gulp.task('apiServer', function() {
 		res.send(detailPage);
 	});		
 
-	app.post('/page/:idPage/component/add', function (req, res) {
+	app.post('/site/:idSite/page/:idPage/component/add', function (req, res) {
 		//Configuracion de colocacion
+		var site = req.params.idSite;
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn || '';
 		var layoutColumnPosition = req.body.layoutColumnPosition || 0;
-		var siteURL = pathBundles + '/sites/default';
+		var siteURL = getURLSite(site);
 		//Datos del componente
 		var componentName = req.body.name || 'Component';
 		var componentId = normaliza(componentName) + '-' + parseInt(Math.random() * (9999 - 0) + 0);
@@ -252,8 +258,8 @@ gulp.task('apiServer', function() {
 
 	});
 
-	app.post('/page/:idPage/component/edit', function (req, res) {
-
+	app.post('/site/:idSite/page/:idPage/component/edit', function (req, res) {
+		var site = req.params.idSite;
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn || '';
 		var layoutColumnPosition = req.body.layoutColumnPosition || 0;
@@ -267,7 +273,7 @@ gulp.task('apiServer', function() {
 		var componentShowTitle = req.body.showTitle || 'true';
 		var componentFull = req.body.full || 'false';
 		var componentClasses = req.body.classes || '';
-		var siteURL = pathBundles + '/sites/default';
+		var siteURL = getURLSite(site);
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 		var index = findIndex(sitemap.pages,idPage);
@@ -296,12 +302,13 @@ gulp.task('apiServer', function() {
 		deploySites('--site default' , res);
 	});
 
-	app.post('/page/:idPage/component/delete', function (req, res) {
+	app.post('/site/:idSite/page/:idPage/component/delete', function (req, res) {
 		//Configuracion de colocacion
+		var site = req.params.idSite;
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn || '';
 		var componentPosition = req.body.componentPosition || '';
-		var siteURL = pathBundles + '/sites/default';
+		var siteURL = getURLSite(site);
 
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
@@ -352,12 +359,12 @@ gulp.task('apiServer', function() {
 		res.send(dirComponentsBundles.concat(dirComponentsPlugins));
 	});
 
-	app.post('/page/:idPage/component/detail', function (req, res) {
-
+	app.post('/site/:idSite/page/:idPage/component/detail', function (req, res) {
+		var site = req.params.idSite;
 		var idPage = req.params.idPage || '';
 		var layoutColumn = req.body.layoutColumn;
 		var componentPosition = parseInt(req.body.componentPosition);
-		var siteURL = pathBundles + '/sites/default';
+		var siteURL = getURLSite(site);
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var editedPage = findPage(sitemap.pages,idPage);
 
