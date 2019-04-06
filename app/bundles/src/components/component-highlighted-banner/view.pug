@@ -1,7 +1,7 @@
 mixin component-highlighted-banner(content)
 
-	- var contentHTML = content.content
-	- var button= content.button
+	- var contentHTML = content.content || ''
+	- var button= content.button || ''
 	
 	.container
 		.row

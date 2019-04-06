@@ -1,7 +1,10 @@
 mixin component-highlighted-flips(content)
+
+	- var items = content.items || []
+
 	.container
 		.row.d-flex.justify-content-center.align-items-center.flex-wrap
-			each item,i in content
+			each item,i in items
 
 				- var iconType = item.iconType
 

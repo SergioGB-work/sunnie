@@ -21,29 +21,31 @@
                         {
                             "id": "1",
                             "name": "component-slider",
-                            "content": [
-                                {
-                                    "src": "./images/carousel1.jpg",
-                                    "alt": "",
-                                    "href": "./",
-                                    "title": "Ir a Home",
-                                    "responsiveSRC": "./images/carousel1-responsive.jpg"
-                                },
-                                {
-                                    "src": "./images/carousel2.jpg",
-                                    "alt": "",
-                                    "href": "./",
-                                    "title": "Ir a Home",
-                                    "responsiveSRC": "./images/carousel2-responsive.jpg"
-                                },
-                                {
-                                    "src": "./images/carousel3.jpg",
-                                    "alt": "",
-                                    "href": "./",
-                                    "title": "${{ default.goHome }}$",
-                                    "responsiveSRC": "./images/carousel3-responsive.jpg"
-                                }
-                            ],
+                            "content": {
+                                "items": [
+                                    {
+                                        "src": "./images/carousel1.jpg",
+                                        "alt": "",
+                                        "href": "./",
+                                        "title": "Ir a Home",
+                                        "responsiveSRC": "./images/carousel1-responsive.jpg"
+                                    },
+                                    {
+                                        "src": "./images/carousel2.jpg",
+                                        "alt": "",
+                                        "href": "./",
+                                        "title": "Ir a Home",
+                                        "responsiveSRC": "./images/carousel2-responsive.jpg"
+                                    },
+                                    {
+                                        "src": "./images/carousel3.jpg",
+                                        "alt": "",
+                                        "href": "./",
+                                        "title": "${{ default.goHome }}$",
+                                        "responsiveSRC": "./images/carousel3-responsive.jpg"
+                                    }
+                                ]
+                            },
                             "showTitle": "false",
                             "full": "true"
                         },
@@ -657,6 +659,149 @@
                 "name": "layout-12-fluid",
                 "content": {
                     "content_upper": [
+                        {
+                            "name": "component-slider",
+                            "id": "component-slider-6282",
+                            "content": {
+                                "items": [
+                                    {
+                                        "src": "./images/carousel1.jpg",
+                                        "alt": "Imagen 1",
+                                        "longdesc": "",
+                                        "href": "www.google.es",
+                                        "title": "",
+                                        "target": "_blank",
+                                        "responsiveSRC": "",
+                                        "srcset": ""
+                                    },
+                                    {
+                                        "src": "./images/carousel2.jpg",
+                                        "alt": "",
+                                        "longdesc": "",
+                                        "href": "http://www.google.es",
+                                        "title": "Ir a SunnieJS",
+                                        "target": "",
+                                        "responsiveSRC": "",
+                                        "srcset": ""
+                                    },
+                                    {
+                                        "src": "./images/carousel3.jpg",
+                                        "alt": "",
+                                        "longdesc": "",
+                                        "href": "www.google.s",
+                                        "title": "Ir a SunnieJS2",
+                                        "target": "",
+                                        "responsiveSRC": "",
+                                        "srcset": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-slider",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-image",
+                            "id": "component-image-7839",
+                            "content": {
+                                "src": "./images/carousel1.jpg",
+                                "alt": "Imagen 1",
+                                "longdesc": "lorem ipsum dolor",
+                                "responsiveSRC": "",
+                                "srcset": ""
+                            },
+                            "title": "component-image",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-highlighted-side-image",
+                            "id": "component-highlighted-side-image-6548",
+                            "content": {
+                                "position": "right",
+                                "image": {
+                                    "src": "./images/monument.jpg",
+                                    "alt": "Imagen 1"
+                                },
+                                "content": "<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+                                "button": {
+                                    "href": "http://www.google.es",
+                                    "title": "Ir a SunnieJS",
+                                    "text": "Click!"
+                                }
+                            },
+                            "title": "component-highlighted-side-image",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-highlighted-flips",
+                            "id": "component-highlighted-flips-5363",
+                            "content": {
+                                "items": [
+                                    {
+                                        "header": "Header 1",
+                                        "iconType": "fontawesome",
+                                        "iconCode": "fa-ellipsis-v",
+                                        "iconSize": "icon-6x",
+                                        "content": "Lorem ipsum dolor sit amet"
+                                    },
+                                    {
+                                        "header": "Header 2",
+                                        "iconType": "glyphicon",
+                                        "iconCode": "glyphicon-star",
+                                        "iconSize": "icon-6x",
+                                        "content": "Lorem ipsum dolor sit amet"
+                                    },
+                                    {
+                                        "header": "Header 3",
+                                        "iconType": "material",
+                                        "iconCode": "&#xE84F;",
+                                        "iconSize": "icon-6x",
+                                        "content": "Lorem ipsum dolor sit amet"
+                                    }
+                                ]
+                            },
+                            "title": "component-highlighted-flips",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-highlighted-content",
+                            "id": "component-highlighted-content-5853",
+                            "content": {
+                                "content": "<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
+                                "button": {
+                                    "href": "http://www.google.es",
+                                    "title": "Ir a SunnieJS",
+                                    "text": "Click!"
+                                }
+                            },
+                            "title": "component-highlighted-content",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-highlighted-banner",
+                            "id": "component-highlighted-banner-6278",
+                            "content": {
+                                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                                "button": {
+                                    "href": "http://www.google2.es",
+                                    "title": "Ir a SunnieJS2",
+                                    "text": "Click2!"
+                                }
+                            },
+                            "title": "component-highlighted-banner",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
                         {
                             "name": "component-cards-list-carousel",
                             "id": "component-cards-list-carousel-9023",

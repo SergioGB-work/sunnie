@@ -1,0 +1,31 @@
+{
+	"config":[
+		{
+			"label":"Content",
+			"name":"content",
+			"type":"textarea"
+		},
+		{
+			"label":"Button",
+			"name":"button",
+			"type":"group",
+			"content":[
+				{
+					"label":"Href",
+					"name":"href",
+					"type":"text"
+				},
+				{
+					"label":"Title",
+					"name":"title",
+					"type":"text"
+				},
+				{
+					"label":"Text",
+					"name":"text",
+					"type":"text"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,36 @@
+{
+	"config":[
+		{
+			"label":"Items",
+			"name":"items",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"Header",
+					"name":"header",
+					"type":"text"
+				},
+				{
+					"label":"Icon Type",
+					"name":"iconType",
+					"type":"text"
+				},
+				{
+					"label":"Icon Code",
+					"name":"iconCode",
+					"type":"text"
+				},
+				{
+					"label":"Icon Size",
+					"name":"iconSize",
+					"type":"text"
+				},
+				{
+					"label":"Content",
+					"name":"content",
+					"type":"text"
+				}
+			]
+		}
+	]			
+}

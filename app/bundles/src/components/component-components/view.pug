@@ -226,7 +226,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre 
-						| +component("component-slider","",[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}],"","false","true")
+						| +component("component-slider","",{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}]},"","false","true")
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -280,7 +280,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-highlighted-flips","",[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"","false","true")
+						| +component("component-highlighted-flips","",{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"","false","true")
 
 			.card
 				.card-body
@@ -365,7 +365,7 @@ mixin component-components(content)
 					h3(id="componentHighlightedFlips").m-0 Highlighted Flips
 			.row
 				.col-md-12
-					+component({"name":"component-highlighted-flips","content":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-align-center", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}],"showTitle":"false","full":"true"})
+					+component({"name":"component-highlighted-flips","content":{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-align-center", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"showTitle":"false","full":"true"})
 		.col-12
 			.card
 				.card-body
@@ -395,7 +395,7 @@ mixin component-components(content)
 				.card-body
 					h3(id="componentSlider").m-0 Slider
 			.row.mx-6.mx-md-7
-				+component({"name":"component-slider","content":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}],"showTitle":"false","full":"true"})
+				+component({"name":"component-slider","content":{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}]},"showTitle":"false","full":"true"})
 
 		.col-12
 			.card

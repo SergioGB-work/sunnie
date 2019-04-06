@@ -87,9 +87,21 @@ block modal-body
 
 						| {%elseif $value.type == "select" %}
 
-						| {%elseif $value.type == "array" %}
+						div(class="form-group col-md-4 col-12")
+							
+							label(for="input",class="uppercase") ${$value.label}
+							select(name="${$value.name}", id="input", class="form-control")
+
+								| {%each(key,val) $value.options%}
+								option(value="${val.value}") ${val.label}
+								| {%/each%}
+
+						| {%elseif $value.type == "array" || $value.type == "group"  %}
 						.col-12.form-group
-							fieldset(data-block-type="array" data-form-group="${$value.name}")
+
+							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
+
+							fieldset( ${isArray} data-form-group="${$value.name}")
 								legend ${$value.label}
 								.row.position-relative
 									.col-12
@@ -98,7 +110,7 @@ block modal-body
 
 												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
 
-												| {%each(key,val) $value.dataContent%}
+												| {%each(key,val) $data.dataContent%}
 												
 												| {%if val.type == "checkbox" || val.type =="radio" %}
 
@@ -109,7 +121,7 @@ block modal-body
 												| {%/if%}		
 												| {%/each%}
 
-												| {%if val.type == "array"%}
+												| {%if $value.type == "array"%}
 												div(class="addItem fa fa-plus mr-1")
 												div(class="deleteItem fa fa-minus")
 												| {%/if%}	
