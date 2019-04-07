@@ -15,7 +15,13 @@ gulp.task('apiServer', function() {
 	app.use(bodyParser.json());
 
 	app.use(function(req, res, next) {
-  		res.setHeader("Access-Control-Allow-Origin", "http://localhost:8080");
+
+		var whiteList = ["http://localhost:8080","http://localhost:8081"]
+
+  		var origin = req.headers.origin;
+		if (whiteList.indexOf(origin) > -1) {
+			res.setHeader('Access-Control-Allow-Origin', origin);
+		}
     	res.setHeader("Access-Control-Allow-Credentials", "true");
     	res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     	res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization");
@@ -76,7 +82,7 @@ gulp.task('apiServer', function() {
 
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-		deployPage('--site default --page ' + src.split('.')[0].split('/')[1] , res)
+		deployPage('--site '+ site +' --env dev --page ' + src.split('.')[0].split('/')[1] , res)
 	});
 
 	//FALTA DEFINIR LOS PARAMETROS DE EDICION
@@ -167,7 +173,7 @@ gulp.task('apiServer', function() {
 
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-		deployPage('--site default --page ' + editedPage['src'].split('.')[0].split('/')[1] , res)
+		deployPage('--site '+ site +' --env dev --page ' + editedPage['src'].split('.')[0].split('/')[1] , res)
 	});
 
 	//TERMINADO A FALTA DE GUARDAR EN EL FICHERO FINAL
@@ -191,7 +197,7 @@ gulp.task('apiServer', function() {
 		eval(patron);
 
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--site default' , res);
+		deploySites('--env dev --site ' + site , res);
 	});
 
 	app.get('/site/:idSite/page/detail/:id', function (req, res) {
@@ -254,7 +260,7 @@ gulp.task('apiServer', function() {
 		eval(patron +'= editedPage');
 		
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--site default' , res);
+		deploySites('--env dev --site ' + site , res);
 
 	});
 
@@ -299,7 +305,7 @@ gulp.task('apiServer', function() {
 		})
 		
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--site default' , res);
+		deploySites('--env dev --site ' + site , res);
 	});
 
 	app.post('/site/:idSite/page/:idPage/component/delete', function (req, res) {
@@ -329,7 +335,7 @@ gulp.task('apiServer', function() {
 
 		eval(patron +'= editedPage');
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--site default' , res,{"column":layoutColumn,"position":componentPosition});
+		deploySites('--env dev --site ' + site , res,{"column":layoutColumn,"position":componentPosition});
 	});
 
 	app.listen(8082,function(req, res){
@@ -382,6 +388,10 @@ gulp.task('apiServer', function() {
 		res.status(200).send(config);
 	});
 
+	app.post('/site/:idSite/publish', function (req, res) {
+		var site = req.params.idSite;
+		deploySites('--site ' + site  , res,{"column":layoutColumn,"position":componentPosition});
+	});
 
 });
 

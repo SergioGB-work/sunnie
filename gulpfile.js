@@ -26,18 +26,23 @@ var gulp = require('gulp'),
 	bodyParser = require("body-parser"),
 	pathModule = require('path'),
 	pathBundles = 'app/bundles/src',
-	pathPlugins = 'app/plugins',
-	pathPublic = 'app/public',
-	pathBuild = 'app/build',
-	sitesDefined=[];
+	pathPlugins = 'app/plugins';
 
 	requireDir('server');
-	
+
 var argv_site = argv.site !== undefined ? argv.site : false;
 var argv_page = argv.page !== undefined ? argv.page + '.pug' : '*.*';
+var argv_env = argv.env !== undefined ? argv.env : '';
 
 var src_site_deploy = argv_site || '**';
 var src_page_deploy = argv.page + '.pug' || '*.pug';
+
+
+
+var	pathPublic = argv_env == 'dev' ? 'app/development' : 'app/public',
+	pathDevelopment = 'app/delopment',
+	pathBuild = 'app/build',
+	sitesDefined=[];
 
 var path = {
 	
@@ -49,6 +54,7 @@ var path = {
 	sitesDeploy: [pathBuild+'/sites/'+src_site_deploy+'/'+src_page_deploy],
     sitesBuild: argv_site ? pathBuild + '/sites/' + argv_site : pathBuild + '/sites/',
 	sitesPublic: argv_site ? pathPublic + '/' + argv_site : pathPublic + '/',
+	sitesDevelopment: argv_site ? pathDevelopment + '/' + argv_site : pathDevelopment + '/',
 	
 	pugBundlesLayouts: [pathBundles + '/layouts/**/*.pug'],
 	pugPluginsLayouts: [pathPlugins + '/layouts/**/*.pug'],
@@ -398,7 +404,10 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 		if(argv_page != '*.*'){
 			sitemap = [findPage(sitemap,argv_page)];
 		}
-		buildPage(sitemap);
+
+		var developMode = argv_env == 'dev' ? true : false;
+
+		buildPage(sitemap,developMode);
 
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
@@ -407,13 +416,14 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 	return true;
 });
 
+
 /** DEPLOY **/
 gulp.task('deploy',function(callback){
 	runSequence(['deploySites','deployCSS','deployJS','deployImages'],'removeTMP',callback)
 });
 
 /** DEFAULT **/
-gulp.task('default',['deploy','connect']);
+gulp.task('default',['deploy','connect','connectDev']);
 
 
 /** CONNECT **/
@@ -451,6 +461,42 @@ gulp.task('connect', function() {
 
 	//console.log(app._router.stack);	
 	app.listen(8080);
+
+});
+
+gulp.task('connectDev', function() {
+
+	app = express();
+	var router = express.Router();
+	var rules = buildRules();
+
+	app.get('*', function (req, res) {
+		var rules = buildRules();
+		var url = rules[req.url];
+		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
+			url = req.url.split('?')[0];
+			res.sendFile(url,{ root: pathModule.join(__dirname, './app/development/sites/') });
+		}
+		else{
+
+			if(url !== undefined){//Si ya existe la ruta en el sitemap
+				res.sendFile(url,{ root: pathModule.join(__dirname, './app/development/sites/') });
+			}
+			else{
+				rules = buildRules();//Vuelve a cargar el sitemap por si hubiese alguna ruta nueva
+				url = rules[req.url];
+				if(url !== undefined){//Comprueba si la ruta solicitada existe y si no da un 404
+					res.status(200).sendFile(url,{ root: pathModule.join(__dirname, './app/development/sites/') });
+				}
+				else{
+					res.status(404).send();
+				}	
+			}
+		}
+	});	
+
+	//console.log(app._router.stack);	
+	app.listen(8081);
 
 });
 
@@ -687,7 +733,8 @@ function getURLs(json,urls){
 	
 }
 
-function buildPage(sitemap){
+function buildPage(sitemap,development){
+
 	for(var page in sitemap){
 		var filename = sitemap[page].src.replace('/','').split('.');
 		if(sitemap[page].layout != undefined){
@@ -695,7 +742,7 @@ function buildPage(sitemap){
 			.pipe(pug({
 				data: sitemap[page],
 				pretty: true,
-				locals: Object.assign(JSON.parse(fs.readFileSync(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')), {"development":true})
+				locals: Object.assign(JSON.parse(fs.readFileSync(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')), {"development":development})
 			}))
 			.pipe(rename({
 				basename: filename[0],
@@ -710,7 +757,7 @@ function buildPage(sitemap){
 		}	
 		
 		if(sitemap[page].childs != undefined && sitemap[page].childs.length > 0){
-			buildPage(sitemap[page].childs);
+			buildPage(sitemap[page].childs,development);
 		}
 
 	}	

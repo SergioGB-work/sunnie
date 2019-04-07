@@ -2,3 +2,4 @@ node_modules/
 app/public/
 app/build/
 app/plugins/
+app/development/
