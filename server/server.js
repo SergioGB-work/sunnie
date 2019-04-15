@@ -380,6 +380,13 @@ gulp.task('apiServer', function() {
 		res.status(200).send(editedPage.layout.content[layoutColumn][componentPosition]);
 	});
 
+	app.get('/theme/list', function (req, res) {
+		var dirThemesBundles = getDirectories(pathBundles + '/themes/');
+		var dirThemesPlugins = getDirectories(pathPlugins + '/themes/');
+
+		res.send(dirThemesBundles.concat(dirThemesPlugins));
+	});
+
 	app.get('/component/config/:idComponent', function (req, res) {
 
 		var idComponent = req.params.idComponent;
@@ -390,7 +397,62 @@ gulp.task('apiServer', function() {
 
 	app.post('/site/:idSite/publish', function (req, res) {
 		var site = req.params.idSite;
-		deploySites('--site ' + site  , res,{"column":layoutColumn,"position":componentPosition});
+		deploySites('--site ' + site  , res);
+	});
+
+	app.post('/site/add', function (req, res) {
+		var siteName = req.body.name;
+		var siteURL = req.body.url;
+		var siteTheme = {"theme": req.body.theme};
+
+		if(siteURL[0]!= '/'){
+			siteURL= '/' + siteURL;
+		}
+
+		var sitemap = {
+			"site":{
+				"name": siteName,
+				"url": siteURL
+			},
+			"pages": [
+				{
+					"id": "home",
+		            "name": "Home",
+		            "url": "/",
+		            "src": "/home.html",
+		            "attributes": {
+		                "title": "SunnieJS3",
+		                "description": "Lorem ipsum4",
+		                "keywords": "SunnieJS2"
+		            },
+		            "layout": {
+		                "name": "layout-12-fluid",
+		                "content": {
+		                    "content_upper": [
+		                        {
+		                            "id": "1",
+		                            "name": "component-sample",
+		                            "content": "Lorem ipsum dolor sit amet",
+		                            "showTitle": "false",
+		                            "full": "true"
+		                        }
+		                    ]
+		                }
+		            },
+		            "childs": []
+				}
+			]
+		};	
+		fs.mkdirSync(pathPlugins + '/sites/' + siteName);
+		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/build.json', JSON.stringify(siteTheme,null,4),function(err){});
+		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/sitemap.json', JSON.stringify(sitemap,null,4),function(err){});
+		fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale');	
+		fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/es');	
+		fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/en');	
+		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/lang.json', JSON.stringify({},null,4),function(err){});
+		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/lang.json', JSON.stringify({},null,4),function(err){});
+
+		deploySites('--site ' + siteName  , res);
 	});
 
 });

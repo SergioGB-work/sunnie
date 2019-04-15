@@ -1,0 +1,28 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Crear Site"
+	- var modal_id = "modal-site-add"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	form(id="form-add-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/add", data-callback="addPageCallback")
+		.row
+			div(class="form-group col-4")
+				label(for="siteName",class="uppercase") Nombre
+				input(type="text",name="name",id="siteName",class="form-control",required)
+
+			div(class="form-group col-4")
+				label(for="siteURL",class="uppercase") URL
+				input(type="text",name="url",id="siteURL",class="form-control",required)
+		
+		.row
+			.col-12
+				h3 Seleciona un tema de apariencia
+		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-add #themeList")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Crear
+
+	include themeList-template			
