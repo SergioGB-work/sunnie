@@ -96,7 +96,7 @@ block modal-body
 								option(value="${val.value}") ${val.label}
 								| {%/each%}
 
-						| {%elseif $value.type == "array" || $value.type == "group"  %}
+						| {%elseif $value.type == "array" %}
 						.col-12.form-group
 
 							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
@@ -105,7 +105,10 @@ block modal-body
 								legend ${$value.label}
 								.row.position-relative
 									.col-12
-										.fieldset(data-array-id="0",class="mt-3")
+
+										| {%each(itemKey, itemVal) data.content[name] %}
+										
+										.fieldset(data-array-id="${itemKey}",class="mt-3")
 											.row
 
 												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
@@ -117,14 +120,46 @@ block modal-body
 												| {%else%}
 												div(class="form-group col-md-4 col-12 mb-md-0")
 													label(for="input",class="uppercase") ${val.label}
-													input(type="${val.type}",name="${val.name}",id="input",class="form-control")
+													input(type="${val.type}",name="${val.name}",id="input",class="form-control", value="${itemVal[val.name]}")
 												| {%/if%}		
 												| {%/each%}
 
 												| {%if $value.type == "array"%}
 												div(class="addItem fa fa-plus mr-1")
 												div(class="deleteItem fa fa-minus")
-												| {%/if%}	
+												| {%/if%}
+										| {%/each%}		
+						| {%elseif $value.type == "group"  %}
+						.col-12.form-group
+
+							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
+
+							fieldset( ${isArray} data-form-group="${$value.name}")
+								legend ${$value.label}
+								.row.position-relative
+									.col-12
+										
+										.fieldset(data-array-id="0",class="mt-3")
+											.row
+
+												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
+												| ${( $data.itemVal = data.content[name] ) ,''}
+
+												| {%each(key,val) $data.dataContent%}
+												
+												| {%if val.type == "checkbox" || val.type =="radio" %}
+
+												| {%else%}
+												div(class="form-group col-md-4 col-12 mb-md-0")
+													label(for="input",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="input",class="form-control", value="${itemVal[val.name]}")
+												| {%/if%}		
+												| {%/each%}
+
+												| {%if $value.type == "array"%}
+												div(class="addItem fa fa-plus mr-1")
+												div(class="deleteItem fa fa-minus")
+												| {%/if%}													
 						| {%else%}
 						div(class="form-group col-md-4 col-12")
 							label(for="input",class="uppercase") ${$value.label}
