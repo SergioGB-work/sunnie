@@ -98,6 +98,10 @@ $(document).ready(function(){
 
 	});
 
+	$('#modal-menu-tools .card').click(function(){
+		$(this).closest('.modal').modal('hide');
+	});
+
 });
 
 function reloadArrayIndex(el){

@@ -1,0 +1,49 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+	- var modal_id = "modal-menu-tools"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	.row.mb-3
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-site-add')
+				.card-body
+					i.fa.fa-sitemap.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Añadir Site
+
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-site-add')
+				.card-body
+					i.fa.fa-upload.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Publicar Site					
+
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-component-add')
+				.card-body
+					i.fa.fa-puzzle-piece.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Añadir Componente
+
+	.row.mb-3
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-page-add')
+				.card-body
+					i.fa.fa-file.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Añadir Página
+
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-page-edit')
+				.card-body
+					i.fa.fa-edit.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Editar Página
+
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-page-delete')
+				.card-body
+					i.fa.fa-trash.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Borrar Página
+	.row
+		div(class="col-12 d-flex justify-content-end mb-0")
+			button(class="btn btn-primary send text-white" data-dismiss="modal") Cerrar
+
+	include themeList-template
