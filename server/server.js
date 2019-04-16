@@ -16,7 +16,7 @@ gulp.task('apiServer', function() {
 
 	app.use(function(req, res, next) {
 
-		var whiteList = ["http://localhost:8080","http://localhost:8081"]
+		var whiteList = ["http://localhost:8080","http://localhost:8081","http://localhost:8083"]
 
   		var origin = req.headers.origin;
 		if (whiteList.indexOf(origin) > -1) {
@@ -82,7 +82,7 @@ gulp.task('apiServer', function() {
 
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-		deployPage('--site '+ site +' --env dev --page ' + src.split('.')[0].split('/')[1] , res)
+		deploySites('--site '+ site +' --env dev --page ' + src.split('.')[0].split('/')[1] , res)
 	});
 
 	//FALTA DEFINIR LOS PARAMETROS DE EDICION
@@ -404,6 +404,7 @@ gulp.task('apiServer', function() {
 		var siteName = req.body.name;
 		var siteURL = req.body.url;
 		var siteTheme = {"theme": req.body.theme};
+		var defaultSiteURL = getURLSite(defaultSite);
 
 		if(siteURL[0]!= '/'){
 			siteURL= '/' + siteURL;
@@ -449,10 +450,10 @@ gulp.task('apiServer', function() {
 		fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale');	
 		fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/es');	
 		fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/en');	
-		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/lang.json', JSON.stringify({},null,4),function(err){});
-		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/lang.json', JSON.stringify({},null,4),function(err){});
+		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/'+siteName+'.json', JSON.stringify(JSON.parse(fs.readFileSync(defaultSiteURL + '/locale/es/'+defaultSite+'.json')),null,4),function(err){});
+		fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/'+siteName+'.json', JSON.stringify(JSON.parse(fs.readFileSync(defaultSiteURL + '/locale/es/'+defaultSite+'.json')),null,4),function(err){});
 
-		deploySites('--site ' + siteName  , res);
+		deployPage('--env dev --site ' + siteName , res);
 	});
 
 });

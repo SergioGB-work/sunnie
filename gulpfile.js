@@ -87,7 +87,7 @@ var taskCSSBuild = [],
 	taskLOCALES_COMPONENTSBuild = [];
 
 for (var key in sitesDefined){
-	
+
 /**********************************CSS*************************************/	
     createTaskCSSBundles(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
     createTaskCSSPlugins(sitesDefined[key].site,sitesDefined[key].theme,sitesDefined[key].themeParent);
@@ -152,8 +152,6 @@ for (var key in sitesDefined){
 }
 
 gulp.task('sitesBundles', function() {
-	console.log(path.sitesBundles);
-	console.log(path.sitesBuild);
     return gulp.src(path.sitesBundles)
     .pipe(gulp.dest(path.sitesBuild))
 });
@@ -381,7 +379,6 @@ gulp.task('deployImagesCompress',['imagesBuild'], function() {
 });
 
 gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild','templatesBuild','componentsBuild','fragmentsBuild','sitesBuild'], function() {
-
 	for (var key in sitesDefined){
 		
 		var  pathSite='';
@@ -407,7 +404,7 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 
 		var developMode = argv_env == 'dev' ? true : false;
 
-		buildPage(sitemap,developMode);
+		buildPage(sitemap,developMode,sitesDefined[key]);
 
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
@@ -435,8 +432,10 @@ gulp.task('connect', function() {
 	var rules = buildRules();
 
 	app.get('*', function (req, res) {
+		getSitesPlugins();
 		var rules = buildRules();
 		var url = rules[req.url];
+
 		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
 			res.sendFile(url,{ root: pathModule.join(__dirname, './app/public/sites/') });
@@ -471,14 +470,15 @@ gulp.task('connectDev', function() {
 	var rules = buildRules();
 
 	app.get('*', function (req, res) {
+		getSitesPlugins();
 		var rules = buildRules();
 		var url = rules[req.url];
 		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
+			
 			res.sendFile(url,{ root: pathModule.join(__dirname, './app/development/sites/') });
 		}
 		else{
-
 			if(url !== undefined){//Si ya existe la ruta en el sitemap
 				res.sendFile(url,{ root: pathModule.join(__dirname, './app/development/sites/') });
 			}
@@ -490,13 +490,13 @@ gulp.task('connectDev', function() {
 				}
 				else{
 					res.status(404).send();
-				}	
+				}
 			}
 		}
 	});	
 
-	//console.log(app._router.stack);	
-	app.listen(8081);
+	console.log('Dev Server on 8081');	
+	app.listen(8083);
 
 });
 
@@ -669,7 +669,7 @@ function getDirectories(path) {
 }
 
 function getSitesBundles(){
-	
+		
 	var sites = argv_site ? [argv_site] : getDirectories(pathBundles + '/sites')
 
 	for(var i in sites){
@@ -686,10 +686,10 @@ function getSitesBundles(){
 }
 
 function getSitesPlugins(){
-
 	var sites = argv_site ? [argv_site] : getDirectories(pathPlugins + '/sites');
 	var defaultThemes = getDirectories(pathBundles + '/themes');
 	var jsonTheme;
+	sitesDefined = sitesDefined[0] !== undefined ? [sitesDefined[0]] : [];
 
 	for(var i in sites){
 		if(JSON.parse(fs.existsSync(pathPlugins +'/sites/' + sites[i] + '/build.json'))){
@@ -733,31 +733,32 @@ function getURLs(json,urls){
 	
 }
 
-function buildPage(sitemap,development){
+function buildPage(sitemap,development,site){
 
 	for(var page in sitemap){
+
 		var filename = sitemap[page].src.replace('/','').split('.');
 		if(sitemap[page].layout != undefined){
-			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/templates/portal.pug')
+			gulp.src(pathBuild + '/sites/' + site.site + '/theme/templates/portal.pug')
 			.pipe(pug({
 				data: sitemap[page],
 				pretty: true,
-				locals: Object.assign(JSON.parse(fs.readFileSync(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')), {"development":development})
+				locals: Object.assign(JSON.parse(fs.readFileSync(pathBuild + '/sites/' + site.site +'/sitemap.json')), {"development":development})
 			}))
 			.pipe(rename({
 				basename: filename[0],
 				extname: '.'+filename[1]
 			}))
 			.pipe(i18n({
-			  langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+			  langDir: pathBuild + '/sites/' + site.site + '/locale',
 			  createLangDirs: true,
 			  defaultLang: 'es'
 			}))
-			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site));				
+			.pipe(gulp.dest(pathPublic + '/sites/' + site.site));				
 		}	
 		
 		if(sitemap[page].childs != undefined && sitemap[page].childs.length > 0){
-			buildPage(sitemap[page].childs,development);
+			buildPage(sitemap[page].childs,development,site);
 		}
 
 	}	
@@ -800,7 +801,7 @@ function buildRules(){
 		}
 		else{
 			pathSite = pathPlugins;
-		}	
+		}
 
 		var sitemap = JSON.parse(fs.readFileSync(pathSite +'/sites/'+ sitesDefined[key].site +'/sitemap.json'));
 		var site = sitemap.site.url;	
