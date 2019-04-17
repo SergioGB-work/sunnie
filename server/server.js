@@ -478,6 +478,7 @@ gulp.task('apiServer', function() {
 		var siteURL = getURLSite(site);
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 		var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));
+		var oldUrl = sitemap.site.url;
 
 		sitemap.site.name = name;
 		sitemap.site.url = url;
@@ -506,7 +507,7 @@ gulp.task('apiServer', function() {
 		    if ( err ) console.log('ERROR: ' + err);
 		});
 
-		deployPage('--env dev --site ' + name , res,{"name":name, "url":url});
+		deployPage('--env dev --site ' + name , res,{"name":name, "url":url, "oldUrl": oldUrl});
 	});
 
 	app.post('/site/delete/:id', function (req, res) {

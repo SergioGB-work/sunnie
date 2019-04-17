@@ -107,6 +107,14 @@ $(document).ready(function(){
 		showError('','Publicando site, espere por favor...');
 	});
 
+	$('#modal-site-add .send').click(function(){
+		showError('','Creando site, espere por favor...');
+	});
+
+	$('#modal-site-edit .send').click(function(){
+		showError('','Editando site, espere por favor...');
+	});	
+
 	$('#modal-site-edit').on('show.bs.modal',function(event){
 		dataList($('#edit-site-block'));
 	});
@@ -190,8 +198,23 @@ function editComponentCallback(data){
 	location.reload();
 }
 
-
-
 function publishSiteCallback(){
 	$('#modal-error').modal('hide');
+}
+
+function addSiteCallback(data){
+	$('#modal-error').modal('hide');
+}
+
+function editSiteCallback(data){
+	$('#modal-error').modal('hide');
+	
+	if(data.oldUrl == '/'){
+		location.href = data.url + location.pathname
+	}
+	else{
+		var newLocation = location.pathname.split(data.oldUrl);
+		newLocation.shift();
+		location.href = newLocation.join('');
+	}
 }
