@@ -20,6 +20,7 @@
     "gulp-sass": "^2.3.2",
     "gulp-uglify": "^2.0.0",
     "jade": "~1.11.0",
+    "rimraf": "^2.6.3",
     "streamqueue": "^1.1.1"
   },
   "scripts": {

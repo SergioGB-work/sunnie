@@ -13,11 +13,23 @@ block modal-body
 					h5.card-title.mt-3.h6 Añadir Site
 
 		div(class="col-6 col-md-3")
-			.card.text-center.h-100(data-toggle='modal' data-target='#modal-site-add')
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-site-edit')
+				.card-body
+					i.fa.fa-sitemap.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Editar Site
+
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-site-delete')
+				.card-body
+					i.fa.fa-sitemap.icon-9x.text-primary
+					h5.card-title.mt-3.h6 Eliminar Site
+
+		div(class="col-6 col-md-3")
+			.card.text-center.h-100(data-toggle='modal' data-target='#modal-site-confirm-publish')
 				.card-body
 					i.fa.fa-upload.icon-9x.text-primary
 					h5.card-title.mt-3.h6 Publicar Site					
-
+	.row.mb-3
 		div(class="col-6 col-md-3")
 			.card.text-center.h-100(data-toggle='modal' data-target='#modal-component-add')
 				.card-body

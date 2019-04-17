@@ -1,7 +1,8 @@
 var gulp = require('gulp'),
 	express = require('express'),
 	fs = require('fs'),
-	path = require('path');
+	path = require('path'),
+	rimraf = require("rimraf");
 
 var defaultSite = 'default';
 
@@ -397,7 +398,7 @@ gulp.task('apiServer', function() {
 
 	app.post('/site/:idSite/publish', function (req, res) {
 		var site = req.params.idSite;
-		deploySites('--site ' + site  , res);
+		deployPage('--site ' + site  , res);
 	});
 
 	app.post('/site/add', function (req, res) {
@@ -455,6 +456,75 @@ gulp.task('apiServer', function() {
 
 		deployPage('--env dev --site ' + siteName , res);
 	});
+
+	app.get('/site/detail/:id', function (req, res) {
+		
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));		
+		var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));	
+
+		res.status(200).send(Object.assign(sitemap.site, build));
+		
+	});
+
+	app.post('/site/edit/:id', function (req, res) {
+		
+		var site = req.params.id;
+		var name = req.body.name;
+		var url = req.body.url;
+		var theme = req.body.theme;
+
+		var siteURL = getURLSite(site);
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+		var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));
+
+		sitemap.site.name = name;
+		sitemap.site.url = url;
+		build.theme = theme;
+
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
+		fs.writeFileSync(siteURL + '/build.json', JSON.stringify(build,null,4));
+
+		//Renombro los archivos del site en src. Se encadenan para que no se bloqueen entre ellas
+		fs.rename(siteURL + '/locale/es/' + site + '.json', siteURL + '/locale/es/' + name + '.json', function(err) {
+		    if ( err ) console.log('ERROR: ' + err);
+		    else{
+				fs.rename(siteURL + '/locale/en/' + site + '.json', siteURL + '/locale/en/' + name + '.json', function(err) {
+				    if ( err ) console.log('ERROR: ' + err);
+				    else{
+						fs.rename(siteURL, siteURL + '/../' + name, function(err) {
+						    if ( err ) console.log('ERROR: ' + err);
+						});
+				    }
+				});
+		    }
+		});
+					
+		//Renombro la carpeta el site en development
+		fs.rename( siteURL + '/../../../development/sites/' + site, siteURL + '/../../../development/sites/' + name, function(err) {
+		    if ( err ) console.log('ERROR: ' + err);
+		});
+
+		deployPage('--env dev --site ' + name , res,{"name":name, "url":url});
+	});
+
+	app.post('/site/delete/:id', function (req, res) {
+			
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+
+		rimraf(siteURL,function () {
+			rimraf(siteURL + '/../../../build/sites/' + site,function () {
+				rimraf(siteURL + '/../../../development/sites/' + site,function () {
+					rimraf(siteURL + '/../../../public/sites/' + site,function () {
+						console.log("ELIMINADO SITE -> " + site);
+						res.status(200).send();
+					});
+				});
+			});
+		});
+	});	
 
 });
 

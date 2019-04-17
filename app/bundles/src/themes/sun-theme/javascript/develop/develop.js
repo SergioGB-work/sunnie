@@ -102,6 +102,20 @@ $(document).ready(function(){
 		$(this).closest('.modal').modal('hide');
 	});
 
+	$('#modal-site-confirm-publish .send').click(function(){
+		$(this).closest('.modal').modal('hide');
+		showError('','Publicando site, espere por favor...');
+	});
+
+	$('#modal-site-edit').on('show.bs.modal',function(event){
+		dataList($('#edit-site-block'));
+	});
+
+	$('#modal-site-delete .send').click(function(event){
+		$(this).closest('.modal').modal('hide');
+		showError('','Site Eliminado');
+	});
+
 });
 
 function reloadArrayIndex(el){
@@ -139,6 +153,10 @@ function dataEditPageLoadedCallback(data){
 	dataList($('#modal-page-edit #layoutEditList'));
 }
 
+function dataEditSiteLoadedCallback(data){
+	dataList($('#modal-site-edit #themeList'));
+}
+
 function addComponentCallback(data){
 	var modal = $('#modal-component-add');
 	modal.find('form')[0].reset();
@@ -148,6 +166,10 @@ function addComponentCallback(data){
 
 function checkLayoutSelected(data,idLayout){
 	$('#modal-page-edit #layoutEditList input[value="'+idLayout+'"]').attr('checked','checked');
+}
+
+function checkThemeSelected(data,idTheme){
+	$('#modal-site-edit #themeList input[value="'+idTheme+'"]').attr('checked','checked');
 }
 
 function dataComponentLoadedCallback(data){
@@ -166,4 +188,10 @@ function checkLayoutColumn(data, column){
 function editComponentCallback(data){
 	$('#modal-error').modal('hide');
 	location.reload();
+}
+
+
+
+function publishSiteCallback(){
+	$('#modal-error').modal('hide');
 }

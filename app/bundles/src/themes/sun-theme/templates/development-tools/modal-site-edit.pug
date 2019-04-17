@@ -1,0 +1,35 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Editar Site"
+	- var modal_id = "modal-site-edit"
+	- var modal_size = "modal-lg"
+
+block modal-body
+	form(id="form-edit-site",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/edit/{idSite}", data-callback="editSiteCallback")
+		
+		div(id="edit-site-block",data-service-data=apiDevelopment + "/site/detail/{idSite}",data-method="GET",data-template="#templateEditSite",data-target="#edit-site-block",data-callback="dataEditSiteLoadedCallback")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Editar
+
+
+	script(id="templateEditSite",type="text/x-jquery-tmpl")
+
+		.row
+			div(class="form-group col-4")
+				label(for="siteName",class="uppercase") Nombre
+				input(type="text",name="name",id="siteName",class="form-control",value="${data.name}",required)
+
+			div(class="form-group col-4")
+				label(for="siteURL",class="uppercase") URL
+				input(type="text",name="url",id="siteURL",class="form-control",value="${data.url}",required)
+		
+		.row
+			.col-12
+				h3 Seleciona un tema de apariencia
+		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-content='"${data.theme}' + '"',data-callback="checkThemeSelected")
+
+
+	include themeList-template		
