@@ -108,10 +108,12 @@ $(document).ready(function(){
 	});
 
 	$('#modal-site-add .send').click(function(){
+		$(this).closest('.modal').modal('hide');
 		showError('','Creando site, espere por favor...');
 	});
 
 	$('#modal-site-edit .send').click(function(){
+		$(this).closest('.modal').modal('hide');
 		showError('','Editando site, espere por favor...');
 	});	
 

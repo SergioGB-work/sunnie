@@ -138,7 +138,7 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-cards-list-carousel"							
-						li <strong>${{ components.arrayCards }}$:</strong>
+						li <strong>items:</strong>
 							ul
 								li <strong>header:</strong> ${{ components.cardHeader }}$
 								li <strong>description:</strong> ${{ components.descriptionText }}$
@@ -177,7 +177,7 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-banner"							
-						li <strong>Pages:</strong>${{ components.breadcrumbsComponentArray }}$
+						li <strong>pages:</strong>${{ components.breadcrumbsComponentArray }}$
 							ul
 								li <strong>url:</strong> ${{ components.pageURL }}$
 								li <strong>pageName:</strong> ${{ components.pageName }}$
@@ -217,7 +217,7 @@ mixin component-components(content)
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-slider"							
 
-						li <strong>${{ components.arrayImages }}$:</strong>
+						li <strong>items:</strong>
 							ul
 								li <strong>src:</strong> ${{ components.imageURL }}$
 								li <strong>alt:</strong> ${{ components.altText }}$
@@ -272,11 +272,13 @@ mixin component-components(content)
 					p ${{ components.highlightedFlipsComponentDescription }}$
 					h4.icon-2x ${{ components.params }}$
 					ul
-						li <strong>${{ components.name }}$:</strong> "component-highlighted-flips"							
-						li <strong>header:</strong> ${{ components.bannerHeader }}$
-						li <strong>content:</strong> ${{ components.bannerDescription }}$
-						li <strong>iconType:</strong> ${{ components.bannerIconType }}$
-						li <strong>iconCode:</strong> ${{ components.bannerIconCode }}$
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-flips"						
+						li <strong>items:</strong>						
+							ul
+								li <strong>header:</strong> ${{ components.bannerHeader }}$
+								li <strong>content:</strong> ${{ components.bannerDescription }}$
+								li <strong>iconType:</strong> ${{ components.bannerIconType }}$
+								li <strong>iconCode:</strong> ${{ components.bannerIconCode }}$
 
 					h4.icon-2x ${{ components.example }}$
 					pre
