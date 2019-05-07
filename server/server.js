@@ -17,7 +17,7 @@ gulp.task('apiServer', function() {
 
 	app.use(function(req, res, next) {
 
-		var whiteList = ["http://localhost:8080","http://localhost:8081","http://localhost:8083"]
+		var whiteList = ["http://localhost:8080","https://localhost:8080","http://localhost:8081","http://localhost:8083","https://localhost:8083"]
 
   		var origin = req.headers.origin;
 		if (whiteList.indexOf(origin) > -1) {
@@ -261,7 +261,7 @@ gulp.task('apiServer', function() {
 		eval(patron +'= editedPage');
 		
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--env dev --site ' + site , res);
+		deploySites('--env dev --site ' + site + ' --page ' + editedPage['src'].split('.')[0].split('/')[1], res);
 
 	});
 
@@ -292,8 +292,22 @@ gulp.task('apiServer', function() {
 		editedPage.layout.content[oldlLayoutColumn][oldPosition].full = componentFull;
 		editedPage.layout.content[oldlLayoutColumn][oldPosition].classes = componentClasses;
 
-		editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,0,editedPage.layout.content[oldlLayoutColumn][oldPosition])
-		editedPage.layout.content[oldlLayoutColumn].splice(oldPosition,1);
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].classes = componentClasses;
+
+		if((oldPosition > layoutColumnPosition) || (oldlLayoutColumn != layoutColumn ) ){
+			editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,0,editedPage.layout.content[oldlLayoutColumn][oldPosition]);
+		}
+		else{
+			editedPage.layout.content[layoutColumn].splice(parseInt(layoutColumnPosition) + 1,0,editedPage.layout.content[oldlLayoutColumn][oldPosition]);
+		}
+
+
+		if((oldPosition > layoutColumnPosition) && (oldlLayoutColumn == layoutColumn)){
+			editedPage.layout.content[oldlLayoutColumn].splice(parseInt(oldPosition) + 1,1);
+		}
+		else{
+			editedPage.layout.content[oldlLayoutColumn].splice(oldPosition,1);
+		}	
 		//Generamos la posicion de edicion
 		var patron = "sitemap.pages";
 		index.forEach(function(element,i){
@@ -306,7 +320,7 @@ gulp.task('apiServer', function() {
 		})
 		
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--env dev --site ' + site , res);
+		deploySites('--env dev --site ' + site + ' --page ' + editedPage['src'].split('.')[0].split('/')[1] , res);
 	});
 
 	app.post('/site/:idSite/page/:idPage/component/delete', function (req, res) {
@@ -336,7 +350,8 @@ gulp.task('apiServer', function() {
 
 		eval(patron +'= editedPage');
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-		deploySites('--env dev --site ' + site , res,{"column":layoutColumn,"position":componentPosition});
+		deploySites('--env dev --site ' + site + ' --page ' + editedPage['src'].split('.')[0].split('/')[1] , res,{"column":layoutColumn,"position":componentPosition});
+
 	});
 
 	app.listen(8082,function(req, res){
@@ -609,7 +624,7 @@ function findIndex(pages , id){
 function deployPage(argv,res){
 	const { exec } = require('child_process');
 	console.log('START DEPLOY gulp deploy ' + argv);
-	exec('gulp deploy ' + argv, (err, stdout, stderr) => {
+	exec('gulp deploy ' + argv + ' && gulp removeTMP', (err, stdout, stderr) => {
 	  if (err) {
 	    // node couldn't execute the command
 	    console.log('DEPLOY ERROR');
@@ -624,8 +639,8 @@ function deployPage(argv,res){
 
 function deploySites(argv,res,argv_res){
 	const { exec } = require('child_process');
-	console.log('START DEPLOY SITES gulp deploy ' + argv);
-	exec('gulp deploySites ' + argv, (err, stdout, stderr) => {
+	console.log('START DEPLOY SITES gulp deploySites ' + argv);
+	exec('gulp deploySites ' + argv + ' && gulp removeTMP', (err, stdout, stderr) => {
 	  if (err) {
 	    // node couldn't execute the command
 	    console.log('DEPLOY ERROR');

@@ -70,5 +70,7 @@
   "navigationJustified":"Aplicable a pills y tabs. Hace que se vean al 100% del ancho del hueco que ocupan y el contenido sale repartido",
   "navigationStacked":"Apila las pills una encima de otra haciendo un menu vertical",
   "navigationPages":"Array de páginas a mostrar en el menú",
-  "childsPages":"Array de páginas hijo de la actual página. Las mostrará como un dropdown siempre y cuando el tipo de navegación lo acepte."
+  "childsPages":"Array de páginas hijo de la actual página. Las mostrará como un dropdown siempre y cuando el tipo de navegación lo acepte.",
+  "htmlContentDescription":"Permite mostrar cualquier tipo de contenido HTML",
+  "htmlContentParamHTMLContent": "Contenido HTML a mostrar"
 }

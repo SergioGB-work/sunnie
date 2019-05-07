@@ -26,7 +26,8 @@ var gulp = require('gulp'),
 	bodyParser = require("body-parser"),
 	pathModule = require('path'),
 	pathBundles = 'app/bundles/src',
-	pathPlugins = 'app/plugins';
+	pathPlugins = 'app/plugins',
+	compression = require('compression');
 
 	requireDir('server');
 
@@ -34,13 +35,15 @@ var argv_site = argv.site !== undefined ? argv.site : false;
 var argv_page = argv.page !== undefined ? argv.page + '.pug' : '*.*';
 var argv_env = argv.env !== undefined ? argv.env : '';
 
+var developMode = argv_env == 'dev' ? true : false;
+
 var src_site_deploy = argv_site || '**';
 var src_page_deploy = argv.page + '.pug' || '*.pug';
 
 
 
 var	pathPublic = argv_env == 'dev' ? 'app/development' : 'app/public',
-	pathDevelopment = 'app/delopment',
+	pathDevelopment = 'app/development',
 	pathBuild = 'app/build',
 	sitesDefined=[];
 
@@ -260,10 +263,12 @@ gulp.task('jsTheme',['jsBuild'], function() {
 
 		var priorityFiles = streamqueue({ objectMode: true },
 			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/priority/**/[^_]*.js'));
-
-		var developFiles = streamqueue({ objectMode: true },
-			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/[^_]*.js'));
-
+		var developFiles;
+		if(developMode){
+			var developFiles = streamqueue({ objectMode: true },
+				gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/[^_]*.js'));
+		}
+			
 		for (var lang in langs){
 			files.pipe(concat('main.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
@@ -287,16 +292,18 @@ gulp.task('jsTheme',['jsBuild'], function() {
 			.pipe(uglify())
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
 
-			developFiles.pipe(concat('develop.js'))
-			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
-			.pipe(rename('develop.min.js'))
-			.pipe(i18n({
-				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
-				createLangDirs: true,
-				defaultLang: 'es'
-			}))
-			.pipe(uglify())
-			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));			
+			if(developMode){
+				developFiles.pipe(concat('develop.js'))
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
+				.pipe(rename('develop.min.js'))
+				.pipe(i18n({
+					langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+					createLangDirs: true,
+					defaultLang: 'es'
+				}))
+				.pipe(uglify())
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));			
+			}
 		}	
 	}
 
@@ -402,13 +409,10 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 			sitemap = [findPage(sitemap,argv_page)];
 		}
 
-		var developMode = argv_env == 'dev' ? true : false;
-
 		buildPage(sitemap,developMode,sitesDefined[key]);
 
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
-		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
-
+		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'));
 	}
 	return true;
 });
@@ -430,6 +434,7 @@ gulp.task('connect', function() {
 	app = express();
 	var router = express.Router();
 	var rules = buildRules();
+	app.use(compression());
 
 	app.get('*', function (req, res) {
 		getSitesPlugins();
@@ -468,6 +473,8 @@ gulp.task('connectDev', function() {
 	app = express();
 	var router = express.Router();
 	var rules = buildRules();
+	app.use(compression());
+
 
 	app.get('*', function (req, res) {
 		getSitesPlugins();
@@ -495,8 +502,8 @@ gulp.task('connectDev', function() {
 		}
 	});	
 
-	console.log('Dev Server on 8081');	
-	app.listen(8083);
+	console.log('Dev Server on 8083');	
+	app.listen(8083);	
 
 });
 
@@ -512,13 +519,31 @@ gulp.task('test', function () {
 
 
 gulp.task('removeTMP', function () {
-	/*
-	for (var key in sitesDefined){
- 		gulp.src(pathPublic + '/sites/'+sitesDefined[key].site+'/*.html', {read: false})
-    	.pipe(clean());
-    }*/
+	deleteTMPFiles()
     return true;	
 });
+
+function deleteTMPFiles(){
+	for (var key in sitesDefined){
+ 		gulp.src(pathPublic + '/sites/'+sitesDefined[key].site+'/*.*', {read: false})
+    	.pipe(clean());
+
+    	gulp.src(pathPublic + '/sites/'+sitesDefined[key].site+'/**/javascript/en', {read: false})
+    	.pipe(clean());
+
+    	gulp.src(pathPublic + '/sites/'+sitesDefined[key].site+'/**/javascript/es', {read: false})
+    	.pipe(clean());
+
+    	gulp.src(pathDevelopment + '/sites/'+sitesDefined[key].site+'/*.*', {read: false})
+    	.pipe(clean());
+
+    	gulp.src(pathDevelopment + '/sites/'+sitesDefined[key].site+'/**/javascript/en', {read: false})
+    	.pipe(clean());
+
+    	gulp.src(pathDevelopment + '/sites/'+sitesDefined[key].site+'/**/javascript/es', {read: false})
+    	.pipe(clean());
+    }
+}
 
 
 /**************************FUNCTIONS******************************/
@@ -754,7 +779,7 @@ function buildPage(sitemap,development,site){
 			  createLangDirs: true,
 			  defaultLang: 'es'
 			}))
-			.pipe(gulp.dest(pathPublic + '/sites/' + site.site));				
+			.pipe(gulp.dest(pathPublic + '/sites/' + site.site));
 		}	
 		
 		if(sitemap[page].childs != undefined && sitemap[page].childs.length > 0){

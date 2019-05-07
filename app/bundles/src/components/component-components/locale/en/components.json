@@ -70,5 +70,7 @@
   "navigationJustified":"Applicable to pills and tabs. Makes them look 100% of the width of the hole they occupy and the content is distributed",
   "navigationStacked":"Stack the pills one on top of the other making a vertical menu",
   "navigationPages":"Array of pages to show in the menu",
-  "childsPages":"Array of child pages of the current page. It will show them as a dropdown as long as the type of navigation accepts it."
+  "childsPages":"Array of child pages of the current page. It will show them as a dropdown as long as the type of navigation accepts it.",
+  "htmlContentDescription":"Allow to display any type of HTML content",
+  "htmlContentParamHTMLContent": "HTML content to show"  
 }

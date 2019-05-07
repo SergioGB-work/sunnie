@@ -6,7 +6,7 @@ block vars
 	- var modal_size = "modal-lg"
 
 block modal-body
-	form(id="form-add-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/add", data-callback="addSiteCallback")
+	form(id="form-site-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/add", data-callback="addSiteCallback")
 		.row
 			div(class="form-group col-4")
 				label(for="siteName",class="uppercase") Nombre
@@ -23,6 +23,4 @@ block modal-body
 
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
-				button(type="submit",class="btn btn-primary send") Crear
-
-	include themeList-template			
+				button(type="submit",class="btn btn-primary send") Crear		

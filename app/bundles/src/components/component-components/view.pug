@@ -152,6 +152,18 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component("component-cards-list-carousel","",{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"","false","true")
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") HTML Content
+					p ${{ components.htmlContentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-html-content"							
+						li <strong>HTMLcontent:</strong> ${{ components.htmlContentParamHTMLContent }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component('component-banner','id1',{'HTMLcontent':'&lt;h2&gt;Hellow World&lt;/h2&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;'},'','false','false')
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -282,7 +294,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-highlighted-flips","",{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"","false","true")
+						| +component("component-highlighted-flips","",{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"","false","true")						
 
 			.card
 				.card-body
@@ -305,7 +317,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")						
+						| +component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")
 						
 	.row
 		.col-12
@@ -418,3 +430,11 @@ mixin component-components(content)
 						.col-12.col-md-6
 							h4 Pills stacked
 							+component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHTMLContent").m-0 HTML Content
+			.row
+				.col-12
+					+component({"name":"component-html-content","content":{"HTMLcontent":"<h2>Hello World</h2><p>Lorem ipsum dolor sit</p>"},"showTitle":"false","full":"false"})

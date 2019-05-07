@@ -20,7 +20,8 @@ $spacers: map-merge((
   4: ($spacer * 1.5),
   5: ($spacer * 3),
   6: (-$spacer),
-  7: (-$spacer * .5)
+  7: (-$spacer * .5),
+  8: ($spacer * 2.5)
 ), $spacers);
 
 

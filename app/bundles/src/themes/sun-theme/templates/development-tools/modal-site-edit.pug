@@ -30,6 +30,3 @@ block modal-body
 			.col-12
 				h3 Seleciona un tema de apariencia
 		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-content='"${data.theme}' + '"',data-callback="checkThemeSelected")
-
-
-	include themeList-template		

@@ -1,4 +1,4 @@
-var apiDevelop = "http://localhost:8082";
+var apiDevelop = "http://localhost:8083";
 
 $(document).ready(function(){
 	$('#confirmDeleteComponent').on('show.bs.modal',function(event){
@@ -13,13 +13,17 @@ $(document).ready(function(){
 	})
 
 	$('#modal-page-add .send').click(function(){
-		$(this).closest('#modal-page-add').modal('hide');
-		showError('','Creando página, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-page-add').modal('hide');
+			showError('','Creando página, espere por favor...');
+		}
 	});
 
 	$('#modal-page-edit .send').click(function(){
-		$(this).closest('#modal-page-edit').modal('hide');
-		showError('','Editando y desplegando página, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-page-edit').modal('hide');
+			showError('','Editando y desplegando página, espere por favor...');
+		}
 	});
 
 	$('#modal-page-edit').on('show.bs.modal',function(event){
@@ -27,13 +31,17 @@ $(document).ready(function(){
 	});
 
 	$('#modal-page-delete .send').click(function(event){
-		$(this).closest('#modal-page-delete').modal('hide');
-		showError('','Eliminando página, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-page-delete').modal('hide');
+			showError('','Eliminando página, espere por favor...');
+		}
 	});
 
 	$('#modal-component-add .send').click(function(){
-		$(this).closest('#modal-component-add').modal('hide');
-		showError('','Añadiendo componente, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-component-add').modal('hide');
+			showError('','Añadiendo componente, espere por favor...');
+		}
 	});
 
 	$('#modal-component-add #componentName').change(function(){
@@ -48,8 +56,10 @@ $(document).ready(function(){
 	});
 
 	$('#modal-component-edit .send').click(function(){
-		$(this).closest('#modal-component-edit').modal('hide');
-		showError('','Aplicando cambios del componente, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-component-edit').modal('hide');
+			showError('','Aplicando cambios del componente, espere por favor...');
+		}	
 	});	
 
 	$('#modal-component-edit').on('show.bs.modal',function(event){
@@ -66,8 +76,10 @@ $(document).ready(function(){
 	});	
 
 	$('#modal-component-delete .send').click(function(){
-		$(this).closest('#modal-component-delete').modal('hide');
-		showError('','Eliminando componente, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-component-delete').modal('hide');
+			showError('','Eliminando componente, espere por favor...');
+		}	
 	});	
 
 	$('#modal-component-delete').on('show.bs.modal',function(event){
@@ -100,21 +112,32 @@ $(document).ready(function(){
 
 	$('#modal-menu-tools .card').click(function(){
 		$(this).closest('.modal').modal('hide');
+		$($(this).data('target')).modal('show');
+
+		$($(this).data('target')).on('shown.bs.modal',function(event){
+			$('body').addClass('modal-open');
+		});	
 	});
 
 	$('#modal-site-confirm-publish .send').click(function(){
-		$(this).closest('.modal').modal('hide');
-		showError('','Publicando site, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Publicando site, espere por favor...');
+		}	
 	});
 
 	$('#modal-site-add .send').click(function(){
-		$(this).closest('.modal').modal('hide');
-		showError('','Creando site, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Creando site, espere por favor...');
+		}	
 	});
 
 	$('#modal-site-edit .send').click(function(){
-		$(this).closest('.modal').modal('hide');
-		showError('','Editando site, espere por favor...');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Editando site, espere por favor...');
+		}	
 	});	
 
 	$('#modal-site-edit').on('show.bs.modal',function(event){
@@ -122,8 +145,10 @@ $(document).ready(function(){
 	});
 
 	$('#modal-site-delete .send').click(function(event){
-		$(this).closest('.modal').modal('hide');
-		showError('','Site Eliminado');
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Site Eliminado');
+		}
 	});
 
 });
@@ -147,10 +172,7 @@ function addPageCallback(data){
 }
 
 function editPageCallback(data){
-	var modal = $('#modal-page-edit');
-	modal.find('form')[0].reset();
-	dataList($('#navigation-list ul'));
-	$('#modal-error').modal('hide');
+	location.reload();
 }
 
 function deletePageCallback(data){

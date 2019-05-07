@@ -50,7 +50,7 @@ $(document).ready(function(){
 		var emptyVars = '';
 		var arraysArrays = [];
 
-		form.find('input:not([type="radio"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked').each(function () {
+		form.find('input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked,input[type="checkbox"]:checked').each(function () {
 
 			var value = $(this).val();
 			var name = $(this).attr('name');
@@ -72,9 +72,7 @@ $(document).ready(function(){
 				 
 
 				if(array){
-					alert("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
 					eval("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
-					alert(JSON.stringify(data));
 				}
 				else if(group != ''){
 					eval("data" + group +" = " + "data" + group +" != '' && "+ "data" + group + " !== undefined ? "+ "data" + group + " : {} ");
@@ -100,15 +98,12 @@ $(document).ready(function(){
 				}
 				else {
 
-					if(array){
-						alert(JSON.stringify(data));
-						alert(group +"[arrayID] = "+group+"[arrayID] != '' && "+group+"[arrayID] !== undefined ? "+group+"[arrayID] : {} ");	
+					if(array){	
 						eval(group +"[arrayID] = "+group+"[arrayID] != '' && "+group+"[arrayID] !== undefined ? "+group+"[arrayID] : {} ");
 						var newValue = {};
 						newValue[name] = value;
 
 						eval(group+"[arrayID] = Object.assign("+group+"[arrayID],newValue)");
-						alert(JSON.stringify(data));
 					}
 
 					else if(group != ''){
@@ -141,8 +136,6 @@ $(document).ready(function(){
 			}
 
 		});
-
-		console.log(data);
 
 		var filesInput = form.find('input[type="file"]');
 
@@ -978,4 +971,15 @@ function setDefaultGetParams(fieldName) {
 			}
 		}
 	}
+}
+
+function validateForm(el){
+
+	if(el.find('textarea:required:invalid,input:required:invalid,select:required:invalid').length > 0){
+		return false;
+	}
+	else{
+		return true;
+	}
+
 }

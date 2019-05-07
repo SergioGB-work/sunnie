@@ -77,20 +77,28 @@ block modal-body
 					legend Contenido
 					.row
 						| {%each data.config%}
+						| ${( $data.requiredField = $value.required == true ? "required" : "" ) ,''}
+						| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
 
 						| {%if $value.type == "checkbox" || $value.type =="radio" %}
 
+						| ${( $data.checked = data.content[name] == 'true' ? "checked" : "" ) ,''}
+						div(class="form-group col-md-4 col-12 pt-8")
+							div(class="custom-control custom-${$value.type}")
+								input(class="custom-control-input",type="${$value.type}",id="input${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
+								label(class="custom-control-label" for="input${id}") ${$value.label}
+
 						| {%elseif $value.type == "textarea" %}
-						div(class="form-group col-md-4 col-12")
-							label(for="input",class="uppercase") ${$value.label}
-							textarea(name="${$value.name}", id="input",class="form-control") ${data.content[name]}
+						div(class="form-group col-md-8 col-12")
+							label(for="input${id}",class="uppercase") ${$value.label}
+							textarea(name="${$value.name}", id="input${id}",class="form-control",${requiredField}) ${data.content[name]}
 
 						| {%elseif $value.type == "select" %}
 
 						div(class="form-group col-md-4 col-12")
 							
-							label(for="input",class="uppercase") ${$value.label}
-							select(name="${$value.name}", id="input", class="form-control")
+							label(for="input${id}",class="uppercase") ${$value.label}
+							select(name="${$value.name}", id="input${id}", class="form-control",${requiredField})
 
 								| {%each(key,val) $value.options%}
 								option(value="${val.value}") ${val.label}
@@ -114,13 +122,18 @@ block modal-body
 												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
 
 												| {%each(key,val) $data.dataContent%}
-												
-												| {%if val.type == "checkbox" || val.type =="radio" %}
+												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
+												| ${( $data.id2 = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
 
+												| {%if val.type == "checkbox" || val.type =="radio" %}
+												div(class="form-group col-md-4 col-12 pt-8")
+													div(class="custom-control custom-${$val.type}")
+														input(class="custom-control-input",type="${$val.type}",id="input${id2}",name="${$val.name}",value="${$val.value}",${requiredField},${checked})
+														label(class="custom-control-label" for="input${id2}") ${$val.label}
 												| {%else%}
 												div(class="form-group col-md-4 col-12 mb-md-0")
-													label(for="input",class="uppercase") ${val.label}
-													input(type="${val.type}",name="${val.name}",id="input",class="form-control", value="${itemVal[val.name]}")
+													label(for="input${id2}",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="input${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
 												| {%/if%}		
 												| {%/each%}
 
@@ -146,13 +159,15 @@ block modal-body
 												| ${( $data.itemVal = data.content[name] ) ,''}
 
 												| {%each(key,val) $data.dataContent%}
-												
+												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
+												| ${( $data.id2 = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
 												| {%if val.type == "checkbox" || val.type =="radio" %}
 
 												| {%else%}
 												div(class="form-group col-md-4 col-12 mb-md-0")
-													label(for="input",class="uppercase") ${val.label}
-													input(type="${val.type}",name="${val.name}",id="input",class="form-control", value="${itemVal[val.name]}")
+													label(for="input${id2}",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="input${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
 												| {%/if%}		
 												| {%/each%}
 
@@ -162,13 +177,12 @@ block modal-body
 												| {%/if%}													
 						| {%else%}
 						div(class="form-group col-md-4 col-12")
-							label(for="input",class="uppercase") ${$value.label}
-							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="input",class="form-control")
+							label(for="input${id}",class="uppercase") ${$value.label}
+							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="input${id}",class="form-control",${requiredField})
 
 						| {%/if%}
 
 						| {%/each%}
 
 
-	include componentList-template
 	include input-template

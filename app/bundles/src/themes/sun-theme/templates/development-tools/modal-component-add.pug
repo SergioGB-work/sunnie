@@ -67,19 +67,21 @@ block modal-body
 					.row
 						| {%each data.config%}
 
+						| ${( $data.requiredField = $value.required == true ? "required" : "" ) ,''}
+						| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
 						| {%if $value.type == "checkbox" || $value.type =="radio" %}
 
 						| {%elseif $value.type == "textarea" %}
-						div(class="form-group col-md-4 col-12")
-							label(for="input",class="uppercase") ${$value.label}
-							textarea(name="${$value.name}", id="input",class="form-control") ${data.content[name]}
+						div(class="form-group col-md-8 col-12")
+							label(for="input${id}",class="uppercase") ${$value.label}
+							textarea(name="${$value.name}", id="input${id}",class="form-control", ${requiredField})
 
 						| {%elseif $value.type == "select" %}
 
 						div(class="form-group col-md-4 col-12")
 							
-							label(for="input",class="uppercase") ${$value.label}
-							select(name="${$value.name}", id="input", class="form-control")
+							label(for="input${id}",class="uppercase") ${$value.label}
+							select(name="${$value.name}", id="input${id}", class="form-control", ${requiredField})
 
 								| {%each(key,val) $value.options%}
 								option(value="${val.value}") ${val.label}
@@ -101,12 +103,15 @@ block modal-body
 
 												| {%each(key,val) $data.dataContent%}
 												
+												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
+												| ${( $data.id2 = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+												
 												| {%if val.type == "checkbox" || val.type =="radio" %}
 
 												| {%else%}
 												div(class="form-group col-md-4 col-12 mb-md-0")
-													label(for="input",class="uppercase") ${val.label}
-													input(type="${val.type}",name="${val.name}",id="input",class="form-control")
+													label(for="input${id2}",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="input${id2}",class="form-control", ${requiredField2})
 												| {%/if%}		
 												| {%/each%}
 
@@ -116,13 +121,12 @@ block modal-body
 												| {%/if%}	
 						| {%else%}
 						div(class="form-group col-md-4 col-12")
-							label(for="input",class="uppercase") ${$value.label}
-							input(type="${$value.type}",name="${$value.name}",id="input",class="form-control")
+							label(for="input${id}",class="uppercase") ${$value.label}
+							input(type="${$value.type}",name="${$value.name}",id="input${id}",class="form-control", ${requiredField})
 
 						| {%/if%}
 
 						| {%/each%}
 
-
-	include componentList-template			
+			
 	include layoutColumnsList-template

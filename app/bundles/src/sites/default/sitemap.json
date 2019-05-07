@@ -464,6 +464,11 @@
                                                 "text": "Navigation",
                                                 "href": "#componentNavigation",
                                                 "title": "${{ default.goToComponent }}$ Navigation"
+                                            },
+                                            {
+                                                "text": "HTML Content",
+                                                "href": "#componentHTMLContent",
+                                                "title": "${{ default.goToComponent }}$ HTML Content"
                                             }
                                         ]
                                     }
@@ -656,168 +661,84 @@
                 "keywords": ""
             },
             "layout": {
-                "name": "layout-12-fluid",
+                "name": "layout-8-4",
                 "content": {
-                    "content_upper": [
+                    "content_left": [
                         {
-                            "name": "component-slider",
-                            "id": "component-slider-6282",
+                            "name": "component-html-content",
+                            "id": "component-html-content-6928",
                             "content": {
-                                "items": [
+                                "HTMLcontent": "1"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-1919",
+                            "content": {
+                                "HTMLcontent": "0"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
+                        },
+                        {
+                            "name": "component-navigation",
+                            "id": "component-navigation-9138",
+                            "content": {
+                                "fill": "true",
+                                "view": "tabs",
+                                "classes": "",
+                                "pages": [
                                     {
-                                        "src": "./images/carousel1.jpg",
-                                        "alt": "Imagen 1234",
-                                        "longdesc": "",
                                         "href": "www.google.es",
-                                        "title": "",
-                                        "target": "_blank",
-                                        "responsiveSRC": "",
-                                        "srcset": ""
+                                        "text": "Hola1",
+                                        "title": "Title1",
+                                        "childs": ""
                                     },
                                     {
-                                        "src": "./images/carousel2.jpg",
-                                        "alt": "",
-                                        "longdesc": "",
-                                        "href": "http://www.google.es",
-                                        "title": "Ir a SunnieJS",
-                                        "target": "",
-                                        "responsiveSRC": "",
-                                        "srcset": ""
+                                        "href": "www.google.es",
+                                        "text": "Hola2",
+                                        "title": "Title2",
+                                        "childs": ""
                                     },
                                     {
-                                        "src": "./images/carousel3.jpg",
-                                        "alt": "",
-                                        "longdesc": "",
-                                        "href": "www.google.s",
-                                        "title": "Ir a SunnieJS2",
-                                        "target": "",
-                                        "responsiveSRC": "",
-                                        "srcset": ""
+                                        "href": "www.google.es",
+                                        "text": "Hola3",
+                                        "title": "Title3",
+                                        "childs": ""
                                     }
                                 ]
                             },
-                            "title": "component-slider",
+                            "title": "component-navigation",
                             "showTitle": "false",
-                            "full": "true",
+                            "full": "false",
                             "classes": ""
-                        },
+                        }
+                    ],
+                    "content_right": [
                         {
-                            "name": "component-image",
-                            "id": "component-image-7839",
+                            "name": "component-html-content",
+                            "id": "component-html-content-126",
                             "content": {
-                                "src": "./images/carousel1.jpg",
-                                "alt": "Imagen 1",
-                                "longdesc": "lorem ipsum dolor",
-                                "responsiveSRC": "",
-                                "srcset": ""
+                                "HTMLcontent": "2"
                             },
-                            "title": "component-image",
+                            "title": "component-html-content",
                             "showTitle": "false",
                             "full": "false",
                             "classes": ""
                         },
                         {
-                            "name": "component-breadcrumbs",
-                            "id": "component-breadcrumbs-5073",
+                            "name": "component-html-content",
+                            "id": "component-html-content-8353",
                             "content": {
-                                "pages": [
-                                    {
-                                        "url": "dfkgjdfk",
-                                        "pageName": "Pagina 8"
-                                    },
-                                    {
-                                        "url": "dfgsdfg",
-                                        "pageName": "Pagina 9"
-                                    }
-                                ]
+                                "HTMLcontent": "3"
                             },
-                            "title": "component-breadcrumbs",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-highlighted-side-image",
-                            "id": "component-highlighted-side-image-6548",
-                            "content": {
-                                "position": "right",
-                                "image": {
-                                    "src": "./images/monument.jpg",
-                                    "alt": "Imagen 1"
-                                },
-                                "content": "<h2>Pre-Built Dummy Websites</h2><h3>easy to install and customise</h3><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>",
-                                "button": {
-                                    "href": "http://www.google.es",
-                                    "title": "Ir a SunnieJS",
-                                    "text": "Click!"
-                                }
-                            },
-                            "title": "component-highlighted-side-image",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-highlighted-flips",
-                            "id": "component-highlighted-flips-5363",
-                            "content": {
-                                "items": [
-                                    {
-                                        "header": "Header 1",
-                                        "iconType": "fontawesome",
-                                        "iconCode": "fa-ellipsis-v",
-                                        "iconSize": "icon-6x",
-                                        "content": "Lorem ipsum dolor sit amet"
-                                    },
-                                    {
-                                        "header": "Header 2",
-                                        "iconType": "glyphicon",
-                                        "iconCode": "glyphicon-star",
-                                        "iconSize": "icon-6x",
-                                        "content": "Lorem ipsum dolor sit amet"
-                                    },
-                                    {
-                                        "header": "Header 3",
-                                        "iconType": "material",
-                                        "iconCode": "&#xE84F;",
-                                        "iconSize": "icon-6x",
-                                        "content": "Lorem ipsum dolor sit amet"
-                                    }
-                                ]
-                            },
-                            "title": "component-highlighted-flips",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-highlighted-banner",
-                            "id": "component-highlighted-banner-6278",
-                            "content": {
-                                "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-                                "button": {
-                                    "href": "fgsdf",
-                                    "title": "dffgdfs",
-                                    "text": "Clicameee"
-                                }
-                            },
-                            "title": "component-highlighted-banner",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-breadcrumbs",
-                            "id": "component-breadcrumbs-2891",
-                            "content": {
-                                "pages": [
-                                    {
-                                        "url": "http://www.google.es",
-                                        "pageName": "Pagina1"
-                                    }
-                                ]
-                            },
-                            "title": "component-breadcrumbs",
+                            "title": "component-html-content",
                             "showTitle": "false",
                             "full": "false",
                             "classes": ""
