@@ -1,0 +1,77 @@
+mixin component-themes(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 ${{ themes.pageTitle }}$
+
+					p Un tema de apariencia es la pieza que le da estructura a la página a nivel general(cabecera, menu, footer, etc...), contiene los estilos y las funcionalidades javascript transversales del site.
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Templates
+					p Las templates son plantillas funcionales de contenido reutilizable. Pueden ser tanto estáticas como dinámicas con jQuery TMPL. Asi, por defecto, disponemos por ejemplo de una template para el header, otro para las modales, otro para los mensajes de error, etc...
+
+					p La mas importante a destacar es <span class="text-primary">portal.pug </span>que se encarga de definir la estructura global de las páginas(head, body, cabecera, menu, footer). Todas las páginas se crean en base a esta plantilla y se rellenar en base a lo configurado para cada una de ellas a nivel de componentes y layout.
+
+					p Están desarrolladas en PUG y posteriormente en la fase de compilación se convierten a HTML.
+
+					h3 Variables disponibles
+
+					p Existen una serie de variables que pueden resultar de utilidad para el desarrollador. Se pueden usar tanto en los archivos pug del tema de apariencia como en los componentes.
+
+					p A continuación se listan las variables disponibles que también puede encontrar en el archivo templates/variables.pug:
+
+					ul
+						li <strong>pages:</strong> array de págians del site
+						li <strong>siteURL:</strong> URL del site. Por ejemplo "/default"
+						li <strong>siteName:</strong> Nombre del site. Por ejemplo "default"
+						li <strong>fullSiteURL:</strong> URL completa del site. Por ejemplo "/default/es"
+						li <strong>api:</strong> Si es necesario integrarse con una API diferente a la del CMS, se puede utilizar esta variable. Por ejemplo http://api.google.com/v1/
+						li <strong>apiLocal:</strong> Si es necesario integrarse con una API Local se puede usar esta variable. Por ejemplo http://localhost:8080
+						li <strong>apiDevelopment:</strong> URL de la API del CMS. Por defecto http://localhost:8082
+
+					p Se pueden crear todas las variables que se consideren necesarias pero no se recomienda eliminar ninguna de las existentes.
+
+					h3 Herencia
+
+					p Una de las novedades de SunnieJS 3 es que los temas de apariencia que crees nuevos pueden tomar como base otro creado, un padre, que sirva como base, de tal forma que puedas solo modificar aquello que necesites y lo demás dejar que lo herede del padre.
+
+					p Por defecto, existe un tema de apariencia básico llamada <span class="text-primary">"sun-theme"</span> del cual heredan todos los temas personalizados que crees, pero esta herencia se puede modificar en el archivo <span class="text-primary">templates/build.pug</span> para que tu tema herede de otro.
+
+					p Si deseas modificar algo en tu tema de apariencia solo tienes que replicar la ruta del archivo que quieres modificar dentro de tu tema de apariencia y cuando se compile, el resultado será todo el código del padre excepto aquello que hayas redefinido.
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 CSS
+					p ${{ themes.cssParagraph1 }}$
+
+					p ${{ themes.cssParagraph2 }}$
+
+					p ${{ themes.cssParagraph3 }}$
+
+					p ${{ themes.cssParagraph4 }}$
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Javascript
+					p ${{ themes.javascriptParagraph1 }}$
+
+					ul
+						li <strong>primaryLibs</strong> -> ${{ themes.javascriptList11 }}$
+						li <strong>libs</strong> -> ${{ themes.javascriptList12 }}$
+						li <strong>priority</strong> -> ${{ themes.javascriptList13 }}$
+						li <strong>main.js</strong> -> ${{ themes.javascriptList14 }}$
+
+					p  ${{ themes.javascriptParagraph2 }}$
+					
+					p  ${{ themes.javascriptParagraph3 }}$
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Images
+					p ${{ themes.imagesParagraph1 }}$

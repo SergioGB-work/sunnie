@@ -404,7 +404,7 @@ gulp.task('apiServer', function() {
 	});
 
 	app.get('/component/config/:idComponent', function (req, res) {
-
+		console.log(req.params.idComponent);
 		var idComponent = req.params.idComponent;
 		var config = getComponentConfig(idComponent);
 		console.log(config);
@@ -415,6 +415,22 @@ gulp.task('apiServer', function() {
 		var site = req.params.idSite;
 		deployPage('--site ' + site  , res);
 	});
+
+	app.get('/site/list', function (req, res) {
+		var dirSitesBundles = fs.readdirSync('./app/bundles/src/sites/');
+		var dirSitesPlugins = fs.readdirSync('./app/plugins/sites/');
+
+		var dirSites = dirSitesBundles.concat(dirSitesPlugins);
+		var sites = [];
+
+		dirSites.forEach(function(element,index){
+			var siteURL = getURLSite(element);
+			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+			sites.push({'name':element,'url':sitemap.site.url});
+		});	
+
+		res.send(sites);
+	});	
 
 	app.post('/site/add', function (req, res) {
 		var siteName = req.body.name;

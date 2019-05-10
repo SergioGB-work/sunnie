@@ -1,0 +1,55 @@
+mixin component-sites(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 Sites
+					p SunnieJS 3 es un entorno <span class="text-primary">multisite</span>, esto quiere decir que en un solo entorno somos capaces de gestionar varios portales web simultáneamente, cada uno con sus propias <span class="text-primary"><span class="text-primary">características</span> y <span class="text-primary">configuraciones</span>.
+
+					p Cada uno de los sites esta compuesto por diferentes <span class="text-primary">páginas</span> y estas a su vez se rellenan con <span class="text-primary">componentes</span> distribuido a partir de la distribución definida por una <span class="text-primary">layout</span>. Adicionalmente, cada site tiene asociado un <span class="text-primary">tema de apariencia</span> que es el que le da su estilo y estructura global.
+
+					p Para ello, cada site dispone de un archivo <span class="text-primary">sitemap.json</span> donde se van definiendo todas las configuraciones del site. Por supuesto, no es necesario gestionarlo manualmente sino que a través de las <span class="text-primary">herramientas de CMS</span> se puede gestionar de forma automatizada para <span class="text-primary">añadir páginas</span>, moverlas de sitio en el arbol de navegación, gestionar los componentes que las forman, su tema de apariencia o la layout que usa cada página.
+
+					p Si lo prefieres, también puedes editar el sitemap manualmente pero no te olvide luego de compilar el site para que tus cambios se vean reflejados en el navegador. Te recomendamos no editar a mano el sitemap ya que peude ser complejo y es fácil cometer algún error en la sintaxis o el formato. 
+
+					p A partir del sitemap, se puede indicar para cada página los <span class="text-primary">componentes</span> que incluye, su <span class="text-primary">configuración</span>, en que posición van, cuáles son los <span class="text-primary">metadatios</span> de la página y mucho más!
+
+					h3 Ejemplo de Sitemap
+					pre
+						|	{
+						|	    "site": {
+						|	        "name": "default",
+						|	        "url": "/default"
+						|	    },
+						|	    "pages": [
+						|	        {
+						|	            "id": "home",
+						|	            "name": "Home",
+						|	            "url": "/",
+						|	            "src": "/home.html",
+						|	            "attributes": {
+						|	                "title": "SunnieJS3",
+						|	                "description": "Lorem ipsum4",
+						|	                "keywords": "SunnieJS2"
+						|	            },
+						|	            "layout": {
+						|	                "name": "layout-12-fluid",
+						|	                "content": {
+						|	                    "content_upper": [
+						|	                        {
+						|                            	"name": "component-html-content",
+						|                            	"id": "component-html-content-8353",
+						|                            	"content": {
+						|                                	"HTMLcontent": "Hello World"
+						|			                    }
+						|	                        }
+						|	                    ]
+						|	                }
+						|	            }
+						|	        }
+						|	    ]
+						|	}                           					
+
+					p El objeto <span class="text-primary">site</span> define tanto el <span class="text-primary">nombre</span> del site como la <span class="text-primary">URL</span> con la que accederemos.
+
+					p El objeto <span class="text-primary">pages</span> define todas las páginas de que dispone el site asi como su <span class="text-primary">configuración</span>.

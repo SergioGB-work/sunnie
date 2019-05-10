@@ -1,0 +1,14 @@
+mixin component-siteSelector(content)
+	div(class="dropdown")
+		button(id="siteSelector",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="dropdown-toggle d-flex align-items-center")
+			span.site-name #{siteName}
+		ul(id="siteList",class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="siteSelector",data-load="true",data-service-data=apiDevelopment + "/site/list",data-method="GET",data-template="#templateSitesList",data-target="#siteList")
+
+
+	script(id="templateSitesList",type="text/x-jquery-tmpl")
+		| {%if data.length > 0 %}	
+		| {%each data%}
+		li.dropdown-item
+			a(href="${$value.url}/${{ default.lang }}$/") ${$value.name}
+		| {%/each%}
+		| {%/if%}		

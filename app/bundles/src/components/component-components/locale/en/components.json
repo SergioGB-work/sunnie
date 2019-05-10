@@ -2,8 +2,6 @@
   "pageTitle":"Components",
   "paragraph1":"All the components of SunnieJS are created based on the same HTML structure located in <span class='text-primary wbba'>/src/pug/templates/component.pug</span> and the definition of them for their use it is included in <span class='text-primary wbba'>/src/pug/templates/include_components.pug</span>.",
   "howToUseTitle":"How to",
-  "howToUseParagraph1":"The components must be used to 'fill in' the content of a web page so that we will place the components in each of the gaps defined by the layout used.",
-  "howToUseParagraph2":"The <span class='text-primary'>basic structure</span> of use of all the components is as follows:",
   "param":"Param",
   "description":"Description",
   "default":"Default",

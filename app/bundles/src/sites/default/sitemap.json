@@ -76,7 +76,7 @@
                             },
                             "showTitle": "false",
                             "full": "true",
-                            "classes": "m-0"
+                            "classes": "row"
                         },
                         {
                             "id": "1",
@@ -93,6 +93,17 @@
                             "full": "false"
                         },
                         {
+                            "name": "component-html-content",
+                            "id": "component-html-content-4537",
+                            "content": {
+                                "HTMLcontent": "                <div class=\"row d-flex flex-wrap mb-3\">\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"Internacionalización\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Multisite</h3>\n                                      <p class=\"card-text\">Ahora SunnieJS te ofrece la posibilidad de tener mas de un portal web en un mismo servidor</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"Internacionalización\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">CMS propio</h3>\n                                      <p class=\"card-text\">Como novedad, ahora prodrás gestionar el contenido gracias a un nuevo CMS y todo sin una base de datos.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"Internacionalización\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Nueva estructura</h3>\n                                      <p class=\"card-text\">Como novedad también hemos cambiado la estructura de SunnieJS para facilitar el mantenimiento y la extensibilidad. Dispondrás de un CORE que podrás extender hasta donde tu quieras.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div> \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"Internacionalización\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Dos entornos de trabajo</h3>\n                                      <p class=\"card-text\">Podrás trabajar en un entorno previo de desarrollo y publicar tus cambios cuando quieras en producción con un sólo click!</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>\n                <div class=\"row d-flex flex-wrap\">                             \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"Internacionalización\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Internacionalización</h3>\n                                      <p class=\"card-text\">¿Quieres traducir tu página web a varios idiomas? Te lo ponemos fácil gracias al sistema de internacionalización nativo en HTML5.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/code.jpg\" alt=\"Código Limpio y Estructurado\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title \">Código Limpio y Estructurado</h3>\n                                      <p class=\"card-text\">Dispone de un código limpio y estructurado en base a diferentes que capas que, compiladas, conforman el código final.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/shortcodes.jpg\" alt=\"ShortCodes\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Short Codes</h3>\n                                      <p class=\"card-text\">Usa los shortcodes de bootstrap y todos los nuevos que te ofrecemos con esta herramienta</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/seo.jpg\" alt=\"SEO Friendly\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">SEO Friendly</h3>\n                                      <p class=\"card-text\">SunnieJS al completo es SEO Friendly, incluyendo la personalización de metadatos por página.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": ""
+                        },
+                        {
                             "id": "2",
                             "name": "component-highlighted-banner",
                             "content": {
@@ -105,7 +116,28 @@
                             },
                             "showTitle": "false",
                             "full": "true",
-                            "classes": "bg-info"
+                            "classes": "bg-info row"
+                        },
+                        {
+                            "name": "component-highlighted-side-image",
+                            "id": "component-highlighted-side-image-5202",
+                            "content": {
+                                "position": "right",
+                                "image": {
+                                    "src": "./images/componentes.png",
+                                    "alt": "Componentes"
+                                },
+                                "content": "<h2>Biblioteca de <span class=\"text-primary\">Componentes</span> propia</h2><p>Por defecto, te ofrecemos una amplia variedad de componentes para que los utilices: <span class=\"text-primary\">carruseles</span>, <span class=\"text-primary\">tarjetas</span>, <span class=\"text-primary\">imagenes</span>, <span class=\"text-primary\">banners</span>, <span class=\"text-primary\">destacados</span>, <span class=\"text-primary\">navegación</span>, <span class=\"text-primary\">login</span>...y muchos más! <strong>Tu eliges!</strong> Puedes usar uno que te guste o crear el tuyo propio pero no te preocupes porque si eliges crear el tuyo podrás usar el <strong>generador de componentes</strong> para que te resulte muy sencillo. </p><p>Cada día disponemos de más y más componentes que podrás disfrutar sin límite.</p>",
+                                "button": {
+                                    "href": "",
+                                    "title": "",
+                                    "text": ""
+                                }
+                            },
+                            "title": "component-highlighted-side-image",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": ""
                         }
                     ]
                 }
@@ -357,7 +389,32 @@
                             "id": "1",
                             "name": "component-data-definitions",
                             "showTitle": "false",
-                            "full": "false"
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "themes",
+            "name": "Themes",
+            "url": "/themes",
+            "src": "/themes.html",
+            "attributes": {
+                "title": "Themes | SunnieJS",
+                "description": "themes",
+                "keywords": "themes, sunniejs"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-themes",
+                            "showTitle": "false",
+                            "full": "true"
                         }
                     ]
                 }
@@ -496,9 +553,9 @@
             "url": "/layouts",
             "src": "/layouts.html",
             "attributes": {
-                "title": "",
-                "description": "",
-                "keywords": ""
+                "title": "Layouts | SunnieJS",
+                "description": "Lorem ipsum",
+                "keywords": "layout, sunniejs"
             },
             "layout": {
                 "name": "layout-12-fluid",
@@ -626,14 +683,14 @@
             "childs": []
         },
         {
-            "id": "pages",
-            "name": "Pages",
-            "url": "/pages",
-            "src": "/pages.html",
+            "id": "sites",
+            "name": "Sites",
+            "url": "/sites",
+            "src": "/sites.html",
             "attributes": {
-                "title": "Pages",
-                "description": "Lorem Ipsum Pages",
-                "keywords": "Pages key"
+                "title": "Sites",
+                "description": "Sites",
+                "keywords": "sites"
             },
             "layout": {
                 "name": "layout-12-fluid",
@@ -641,107 +698,9 @@
                     "content_upper": [
                         {
                             "id": "1",
-                            "name": "component-pages",
+                            "name": "component-sites",
                             "showTitle": "false",
                             "full": "true"
-                        }
-                    ]
-                }
-            },
-            "childs": []
-        },
-        {
-            "id": "pruebas-5384",
-            "name": "Pruebas",
-            "url": "/pruebas",
-            "src": "/pruebas.html",
-            "attributes": {
-                "title": "Pruebas",
-                "description": "",
-                "keywords": ""
-            },
-            "layout": {
-                "name": "layout-8-4",
-                "content": {
-                    "content_left": [
-                        {
-                            "name": "component-html-content",
-                            "id": "component-html-content-6928",
-                            "content": {
-                                "HTMLcontent": "1"
-                            },
-                            "title": "component-html-content",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-html-content",
-                            "id": "component-html-content-1919",
-                            "content": {
-                                "HTMLcontent": "0"
-                            },
-                            "title": "component-html-content",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-navigation",
-                            "id": "component-navigation-9138",
-                            "content": {
-                                "fill": "true",
-                                "view": "tabs",
-                                "classes": "",
-                                "pages": [
-                                    {
-                                        "href": "www.google.es",
-                                        "text": "Hola1",
-                                        "title": "Title1",
-                                        "childs": ""
-                                    },
-                                    {
-                                        "href": "www.google.es",
-                                        "text": "Hola2",
-                                        "title": "Title2",
-                                        "childs": ""
-                                    },
-                                    {
-                                        "href": "www.google.es",
-                                        "text": "Hola3",
-                                        "title": "Title3",
-                                        "childs": ""
-                                    }
-                                ]
-                            },
-                            "title": "component-navigation",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        }
-                    ],
-                    "content_right": [
-                        {
-                            "name": "component-html-content",
-                            "id": "component-html-content-126",
-                            "content": {
-                                "HTMLcontent": "2"
-                            },
-                            "title": "component-html-content",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
-                        },
-                        {
-                            "name": "component-html-content",
-                            "id": "component-html-content-8353",
-                            "content": {
-                                "HTMLcontent": "3"
-                            },
-                            "title": "component-html-content",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": ""
                         }
                     ]
                 }

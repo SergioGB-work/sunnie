@@ -90,7 +90,25 @@ mixin component-getStarted(content)
 								tr
 									td <strong>--site site</strong>
 									td Donde site es el nombre del site definido(nombre de su carpeta). Si no es definido, compilará todos los sites del servidor.
-									td gulp deploySites --env dev --site default							
+									td gulp deploySites --env dev --site default
+								tr
+									td <strong>--page page</strong>
+									td Donde page es el nombre de la página a compilar(campo id en el sitemap del site). Si no es definido, compilará todas las página del servidor. Este parámetro es necesario usarlo junto al de --site para evitar problemas.
+									td gulp deploySites --env dev --site default --page getStared
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Arrancando la API
+					p SunnieJS 3 dispone de una completa API para la gestión del portal. A través de ella podrás gestionar los sites, las páginas y los componentes, pudiendo añadir nuevos elementos, editarlos o borrarlos o incluso publicar el site de desarrollo y todo a través del nuevo CMS que incorpora.
+
+					p Para arrancar la API y poder empezar a usar el CMS es suficiente con lanzar la siguiente tarea de gulp:
+
+					pre
+						| gulp apiServer
+
+					p Una vez arrancada, el CMS estará disponible en el entorno de desarrollo y todos los cambios que se vayan realizando solo tendrán validez en dicho entorno. En el momento que el usuario desee publicar esos cambios en en entorno de producción exite la opción de Publicar en el CMS que traasladará todos esos cambios al otro entorno.
 
 	.row
 		.col-12
@@ -101,30 +119,30 @@ mixin component-getStarted(content)
 					p ${{ getStarted.structureProjectParagraph1 }}$
 					
 					ul
-						li <strong>SRC</strong> -> ${{ getStarted.structureProjectLis11 }}$
-						li <strong>BUILD</strong> -> ${{ getStarted.structureProjectLis12 }}$
-						li <strong>PUBLIC</strong> -> ${{ getStarted.structureProjectLis13 }}$
-						li <strong>node_modules</strong> -> ${{ getStarted.structureProjectLis14 }}$
+						li <strong>app:</strong> código fuente del proyecto. Aquí es donde un desarrollador debe trabajar
+							
+						li <strong>server:</strong> código fuente de la API del CMS
 
-					p ${{ getStarted.structureProjectParagraph2 }}$
+						li <strong>node_modules:</strong> carpeta que almacena todos los módulos de node instalados en el proyecto
 
-					p ${{ getStarted.structureProjectParagraph3 }}$
-
+					p A su vez, app dispone de otra serie de subcarpetas:
+					
 					ul
-						li <strong>pug</strong> -> ${{ getStarted.structureProjectLis21 }}$
-						li <strong>sass</strong> -> ${{ getStarted.structureProjectLis22 }}$
-						li <strong>javascript</strong> -> ${{ getStarted.structureProjectLis23 }}$
-						li <strong>images</strong> -> ${{ getStarted.structureProjectLis24 }}$
+						li <strong>bundles:</strong> es el código CORE de la aplicación. A partir de él todos los elementos del sistema se extenderán. Aquello que no haya sido redefinido en plugins será utilizado tal cual desde bundles. El código de esta carpeta no debe ser modificado.
+						
+						li <strong>plugins:</strong> esta carpeta alberga todos los nuevos elementos que se creen, ya sean sites, componentes, temas de apariencia, etc... Aquí es donde los desarrolladores deben trabajar para extender la funcionalidad.
+						
+						li <strong>development:</strong> código final con herramientas de desarrollo compilado. El resultado solo es html, css y javascript distribuidos en carpetas de idiomas y sites(1 carpeta por cad site y a su vez 1 carpeta por cada idioma definido en el portal) y es aquí donde apunta el localhost:8083. A diferencia de public, esta carpeta contiene todo el código generado para el CMS y muestra las herramientas de edición del CMS.
+						
+						li <strong>public:</strong> código final del proyecto compilado. El resultado solo es html, css y javascript distribuidos en carpetas de idiomas y sites(1 carpeta por cad site y a su vez 1 carpeta por cada idioma definido en el portal) y es aquí donde apunta el localhost:8080.
+						
+						li <strong>build:</strong> código precompilado. Es una carpeta con código precompilado previo al código final de public. Aqui se genera el código final, resultado de la mezcla de bundles y el		
 
-					h3 PUG
-					p ${{ getStarted.pugParagraph1 }}$ 
-
-					p ${{ getStarted.pugParagraph2 }}$ 
-
-					p ${{ getStarted.pugParagraph3 }}$
+					h4 Sites
+					p La carpeta sites contiene todos los sites creados en el portal. Cada site está compuesto de N páginas y cada página a su vez está compuesta por N componentes colocados bajo una cierta distribución física. Tanto los componentes, las layouts, fragments y themes son compartidos por todos los sites de forma transversal. Cada site a su vez dispone de su propio sitemap con una cierta configuración y de sus propias traducciones genéricas.
 
 					h4 Components
-					p ${{ getStarted.componentsParagraph1 }}$
+					p La carpeta components contendrá todos aquellos componentes que formarán las páginas. Un componente es una pieza funcional e independiente que realiza cierta función dentro de un portal como una agenda, un carrusel de fotos o algo tan simple como un contenido HTML plano. Para saber más sobre componentes visita su <a href="./components" title="Ir a componentes">sección</a>.
 
 					h4 Layouts
 					p ${{ getStarted.layoutsParagraph1 }}$
@@ -132,33 +150,6 @@ mixin component-getStarted(content)
 					h4 Fragments
 					p ${{ getStarted.fragmentsParagraph1 }}$
 
-					h4 Locale
-					p ${{ getStarted.localeParagraph1 }}$
 
-					h4 Templates
-					p ${{ getStarted.templatesParagraph1 }}$
-
-					h3 SASS
-					p ${{ getStarted.sassParagraph1 }}$
-
-					p ${{ getStarted.sassParagraph2 }}$
-
-					p ${{ getStarted.sassParagraph3 }}$
-
-					p ${{ getStarted.sassParagraph4 }}$
-
-					h3 Javascript
-					p ${{ getStarted.javascriptParagraph1 }}$
-
-					ul
-						li <strong>primaryLibs</strong> -> ${{ getStarted.javascriptList11 }}$
-						li <strong>libs</strong> -> ${{ getStarted.javascriptList12 }}$
-						li <strong>priority</strong> -> ${{ getStarted.javascriptList13 }}$
-						li <strong>main.js</strong> -> ${{ getStarted.javascriptList14 }}$
-
-					p  ${{ getStarted.javascriptParagraph2 }}$
-					
-					p  ${{ getStarted.javascriptParagraph3 }}$
-
-					h3 Images
-					p ${{ getStarted.imagesParagraph1 }}$
+					h4 Themes
+					p La carpeta themes contiene todos los temas de apariencia disponibles en el portal. Un tema de apariencia es la pieza que le da estructura a la página a nivel general(cabecera, menu, footer, etc...), contiene los estilos y las funcionalidades javascript transversales del site.

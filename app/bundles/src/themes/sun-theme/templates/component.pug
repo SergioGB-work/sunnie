@@ -4,15 +4,14 @@ mixin component(content)
 	
 	- var classesComponent = 'component'
 	- var idComponent = ''
-	- var classes = classes || ''
 
-	- var componentName=content.name
-	- var componentId = content.id
-	- var componentContent = content.content
-	- var componentTitle = content.title
-	- var showTitle = content.showTitle
-	- var full = content.full
-	- var classes = content.classes
+	- var componentName=content.name || ''
+	- var componentId = content.id || ''
+	- var componentContent = content.content || ''
+	- var componentTitle = content.title || ''
+	- var showTitle = content.showTitle || 'true'
+	- var full = content.full || 'false'
+	- var classes = content.classes || ''
 	- var index = content.index || '0'
 
 	if showTitle  == "false"

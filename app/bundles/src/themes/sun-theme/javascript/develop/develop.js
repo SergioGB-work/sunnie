@@ -1,4 +1,4 @@
-var apiDevelop = "http://localhost:8083";
+var apiDevelop = "http://localhost:8082";
 
 $(document).ready(function(){
 	$('#confirmDeleteComponent').on('show.bs.modal',function(event){

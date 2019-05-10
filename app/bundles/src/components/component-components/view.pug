@@ -9,12 +9,15 @@ mixin component-components(content)
 
 					h2#uso ${{ components.howToUseTitle }}$
 
-					p ${{ components.howToUseParagraph1 }}$
+					p A diferencia de versiones anteriores, donde disponíamos de un archivo físico por página, en la nueva versión de SunnieJS toda la definición de las páginas y el uso de cada componente viene definida en el sitemap de cada site.
 
-					p ${{ components.howToUseParagraph2 }}$
+					p Para agregar un componente a una página, la opción más sencilla e intuitiva es utilizar la herramienta de CMS a través de la cual con un simple formulario podremos agregar, editar o borrar componentes a una página y configurarlos.
 
-					pre
-						| +component( componentType , componentId , content , componentTitle , showTitle , full , classes )
+					p Por otro lado, existe la opción de editar directamente el archivo sitemap.json del site y por cada página y hueco de la layout definir los componentes que van y su configuración.
+
+					p Cada componente con contenido configurable dispone de un archivo config.json donde se especfican todos los parámetros de configuración de que dispone y que deben configurarse en el objeto content del contenido.
+
+					P También existen una serie de parámetros genéricos configurables para agregar un componente y que se listan a continuación:
 
 
 			table(class="table table-responsive")
@@ -25,12 +28,12 @@ mixin component-components(content)
 						th ${{ components.default }}$
 				tbody
 					tr
-						td <strong>componentType</strong>
+						td <strong>name</strong>
 						td ${{ components.componentTypeDescription }}$
 						td "". Requerido				
 
 					tr
-						td <strong>componentId</strong>
+						td <strong>id</strong>
 						td ${{ components.componentIdDescription }}$
 						td ""
 
@@ -39,7 +42,7 @@ mixin component-components(content)
 						td ${{ components.componentContentDescription }}$
 						td ""
 					tr
-						td <strong>componentTitle</strong>
+						td <strong>title</strong>
 						td ${{ components.componentComponentTitleDescription }}$
 						td ""
 
@@ -56,22 +59,54 @@ mixin component-components(content)
 					tr
 						td <strong>classes</strong>
 						td ${{ components.componentClassesDescription }}$
-						td ""							
+						td ""						
 
 			.card
 				.card-body
 					h2 ${{ components.example }}$
+
+					p Existen don opciones para agregar un componente, por un lado lo puedes agregar directamente a la página a través del sitemap y por otro lado puedes hacer su llamada directamente desde PUG si por ejemplo queires añadir un componente dentro de otro.
+
+					h3 Agregar componente a página
+
 					pre
-						| extends ./layouts/layout-12-fluid
+						|	{
+						|	    "site": {
+						|	        "name": "default",
+						|	        "url": "/default"
+						|	    },
+						|	    "pages": [
+						|	        {
+						|	            "id": "home",
+						|	            "name": "Home",
+						|	            "url": "/",
+						|	            "src": "/home.html",
+						|	            "attributes": {
+						|	                "title": "SunnieJS3",
+						|	                "description": "Lorem ipsum4",
+						|	                "keywords": "SunnieJS2"
+						|	            },
+						|	            "layout": {
+						|	                "name": "layout-12-fluid",
+						|	                "content": {
+						|	                    "content_upper": [
+						|	                        {
+						|	                            "name": "component-html-content",
+						|	                            "id": "component-html-content-8353",
+						|	                            "content": {
+						|	                                "HTMLcontent": "Hello World"
+						|	                            }
+						|	                        }
+						|	                    ]
+						|	                }
+						|	            }
+						|	        }
+						|	    ]
+						|	}
 
-						|     block header
-						|         title Lists
-						|         meta(name="keywords",content="pug")
-						|         meta(name="description",content="pug")
-
-						|     block content-upper
-
-						|         +component("component-sample-list","","","","false","false")
+					h3 Agregar componente a PUG
+					pre 
+						| +component({"name":"component-breadcrumbs","content":{"pages":[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}]},"showTitle":"false","full":"false"})
 
 	.row
 		.col-12
@@ -110,7 +145,7 @@ mixin component-components(content)
 						li <strong>target:</strong> ${{ components.linkTarget }}$
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-banner','id1',{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$','href':'./home.html','title':'Ir a Home','target':'_blank'},'','false','false')						
+						| +component({'name':'component-banner','id':id1','content':{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$','href':'./home.html','title':'Ir a Home','target':'_blank'},'showTitle':false','full':'false'})						
 			.card
 				.card-body
 					h3.icon-4x 
@@ -128,7 +163,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-highlighted-content","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+						| +component({"name":component-highlighted-content","content":{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"showTitle":"false","full":"true"})
 
 			.card
 				.card-body
@@ -151,7 +186,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-cards-list-carousel","",{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"","false","true")
+						| +component({"name":"component-cards-list-carousel","content":{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"showTitle":"false","full":"true"})
 			.card
 				.card-body
 					h3.icon-4x
@@ -163,7 +198,7 @@ mixin component-components(content)
 						li <strong>HTMLcontent:</strong> ${{ components.htmlContentParamHTMLContent }}$
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-banner','id1',{'HTMLcontent':'&lt;h2&gt;Hellow World&lt;/h2&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;'},'','false','false')
+						| +component({'name':'component-banner','id':'id1','content':{'HTMLcontent':'&lt;h2&gt;Hellow World&lt;/h2&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;'},'showTitle':'false','full':'false'})
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -179,7 +214,7 @@ mixin component-components(content)
 						li <strong>longdesc:</strong> ${{ components.longDesc }}$	
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-image','id1',{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$'},'','false','false')
+						| +component({'name':'component-image','id':'id1','content':{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$'},'showTitle':'false','full':'false'})
 
 			.card
 				.card-body
@@ -195,7 +230,7 @@ mixin component-components(content)
 								li <strong>pageName:</strong> ${{ components.pageName }}$
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-breadcrumbs','id1',{'pages':[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}]},'','false','false')
+						| +component({'name':'component-breadcrumbs','name':'id1','content':{'pages':[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}]},'showTitle':'false','full':'false'})
 
 			.card
 				.card-body
@@ -218,7 +253,7 @@ mixin component-components(content)
 								li <strong>src:</strong> ${{ components.imageURL }}$						
 
 					h4.icon-2x ${{ components.example }}$
-					pre +component("component-highlighted-side-image","",{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"","false","true")
+					pre +component({"name":"component-highlighted-side-image","content":{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"showTitle":"false","full":"true"})
 
 			.card
 				.card-body
@@ -238,7 +273,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre 
-						| +component("component-slider","",{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}]},"","false","true")
+						| +component({"name":"component-slider","content":{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}]},"showTitle":"false","full":"true"})
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -255,7 +290,7 @@ mixin component-components(content)
 						li <strong>title:</strong> ${{ components.titleLink }}$
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component('component-logo','',{'url':'/','title':'SunnieJS Logo','src':'./images/logo.png','alt':'Site Logo SunnieJS'},'','false','true')
+						| +component({'name':'component-logo','content':{'url':'/','title':'SunnieJS Logo','src':'./images/logo.png','alt':'Site Logo SunnieJS'},'showTitle':'false','full':'true'})
 
 			.card
 				.card-body
@@ -274,7 +309,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-highlighted-banner","",{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"","false","true")
+						| +component({"name":"component-highlighted-banner","content":{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"showTitle":"false","full":"true"})
 
 
 			.card
@@ -294,7 +329,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-highlighted-flips","",{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"","false","true")						
+						| +component({"name":"component-highlighted-flips","content":{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"showTitle":"false","full":"true"})						
 
 			.card
 				.card-body
@@ -317,7 +352,7 @@ mixin component-components(content)
 
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component("component-navigation","",{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"","false","true")
+						| +component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
 						
 	.row
 		.col-12
@@ -394,7 +429,7 @@ mixin component-components(content)
 					h3(id="componentCardsListCarousel").m-0 Cards List Carousel
 			.row
 				.col-md-12
-					+component({"name":"component-cards-list-carousel","content":{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"showTitle":"false","full":"true"})
+					+component({"name":"component-cards-list-carousel","id":"cards","content":{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"showTitle":"false","full":"true"})
 
 		.col-12
 			.card
@@ -402,7 +437,7 @@ mixin component-components(content)
 					h3(id="componentProductsCardsListCarousel").m-0 Product Cards List Carousel
 			.row
 				.col-md-12
-					+component({"name":"component-cards-list-carousel","content":{"items":[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"}]},"showTitle":"false","full":"true"})
+					+component({"name":"component-cards-list-carousel","id":"products","content":{"items":[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"}]},"showTitle":"false","full":"true"})
 
 		.col-12
 			.card
@@ -418,18 +453,18 @@ mixin component-components(content)
 					.row
 						.col-12.col-md-6
 							h4 Tabs
-							+component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"tabs"},"showTitle":"false","full":"true"})
+							+component({"name":"component-navigation","id":"tabs","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"tabs"},"showTitle":"false","full":"true"})
 						.col-12.col-md-6
 							h4 Pills
-							+component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[{"text":"Pagina 1-1","href":"/pagina1-1.html","title":"Ir a pagina 1-1"}]},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills"},"showTitle":"false","full":"true"})
+							+component({"name":"component-navigation","id":"pills","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[{"text":"Pagina 1-1","href":"/pagina1-1.html","title":"Ir a pagina 1-1"}]},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills"},"showTitle":"false","full":"true"})
 					.row
 						.col-12.col-md-6
 							h4 Pills Justified
-							+component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"showTitle":"false","full":"true"})
+							+component({"name":"component-navigation","id":"pills-justified","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"showTitle":"false","full":"true"})
 
 						.col-12.col-md-6
 							h4 Pills stacked
-							+component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
+							+component({"name":"component-navigation","id":"pills-stacked","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
 
 		.col-12
 			.card

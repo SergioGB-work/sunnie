@@ -1,0 +1,15 @@
+{
+  "pageTitle":"Get Started",
+  "cssParagraph1":"The css folder contains all the generic styles of the portal. SunnieJS already has a series of predefined styles that the developer must adapt to the final style of each portal.",
+  "cssParagraph2":"SunnieJS uses <span class = 'text-primary'>Bootstrap 4</span> as the basis for the organization and layout of your entire portal. That is why it is recommended to modify as little as possible the default styles that SunnieJS brings and to extend from them from the file <span class='text-primary'>custom.scss</span>",
+  "cssParagraph3":"Additionally, from <span class='text-primary'>base/variables</span> are all the <span class='text-primary'> generic variables </span> of the portal that can be used to modify their style without need to modify any line of code, thus achieving a <span class = 'text-primary'>clean and reduced code</span>, which penalizes as little as possible the loading of the portal.",
+  "cssParagraph4":"SunnieJS incorporates the iconic font <a href='http://fontawesome.io/icons/'' target='_blank' title='Go to Font Awesome' rel='noreferrer'>Font Awesome</a> for use within the portal. Likewise, any other iconic font can be used.",
+  "javascriptParagraph1":"The javascript directory is subdivided in turn into other directories, each with a specific purpose.",
+  "javascriptList11":"They are libraries that must be loaded first because other libraries can have dependencies with them. For example: jQuery",
+  "javascriptList12":"They are the generic libraries of the portal.",
+  "javascriptList13":"They are libraries or JS code that must be executed in the initial load of the portal from the <span class='text-primary'>head</span>, without waiting for anything. They are written in pure javascript",
+  "javascriptList14":"Main javascript file. It contains all the generic functions of the portal defined in the <a href='./js-functions.html' title='Go to JS Functions'>javascript page</a>.",
+  "javascriptParagraph2":"As a general rule, when you want to add a new library, you must add it to the libs folder.",
+  "javascriptParagraph3":"It is not necessary to add the tag <span class = 'text-primary'>&lt;script&gt;</span> in the header or footer of the portal because SunnieJS <span class = 'text-primary'>compiles</span> automatically the libraries that are in these folders in an order to then generate a single <span class = 'text-primary'>miniscript javascript file</span> with all the code.",
+  "imagesParagraph1":"This folder serves as an image store. All the images added here will go directly to the folder <span class = 'text-primary'>public</span> within its corresponding folder of images."
+}

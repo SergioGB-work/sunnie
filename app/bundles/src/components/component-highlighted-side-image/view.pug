@@ -16,7 +16,7 @@ mixin component-highlighted-side-image(content)
 						.col-xl-9.offset-xl-1.col-md-10.offset-md-1.col-12
 							div !{contentHTML}
 
-							if button
+							if button.text
 								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}             
 
 			else
@@ -25,7 +25,7 @@ mixin component-highlighted-side-image(content)
 						.col-xl-9.offset-xl-1.col-md-10.offset-md-1.col-12 
 							div !{contentHTML}
 
-							if button != ''
+							if button.text != ''
 								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text} 
 
 				.col-md-6.col-12
