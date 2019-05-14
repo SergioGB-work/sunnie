@@ -4,7 +4,7 @@
   "beforeStartTitle":"Antes de empezar",
   "beforeStartParagraph1":"Lo primero que debes hacer para usar nuestro generador es asegurarte de que tienes instalado en tu ordenador <span class='text-primary'>NodeJS</span> y puedes usar las funciones de <span class='text-primary'>npm</span> desde una consola de administración. También es necesario que tengas instalado <span class='text-primary'>yeoman</span> y <span class='text-primary'>gulp</span>.",
   "instalationTitle":"Instalación",
-  "instalationParagraph1":"Debes descargar la <strong>release 1.1.X</strong>(última release disponible de la versión 1) del generador desde nuestro git: <a href='https://github.com/SergioGB-work/generator-sunnie'>https://github.com/SergioGB-work/generator-SunnieJS</a> en una carpeta de tu ordenador.",
+  "instalationParagraph1":"Debes descargar la <strong>release 3.X.X</strong>(última release disponible de la versión 3) del generador desde nuestro git: <a href='https://github.com/SergioGB-work/generator-sunnie'>https://github.com/SergioGB-work/generator-SunnieJS</a> en una carpeta de tu ordenador.",
   "instalationParagraph2":"Una vez descargado instala el proyecto situándote con una consola de administración sobre la carpeta del proyecto y ejecutando:",
   "instalationParagraph3":"Por último vamos a hacer que el generador esté disponible para usarlo en cualquier directorio. Desde la misma carpeta del proyecto ejecutamos:",
   "startToUseItTitle":"Empieza a usarlo",

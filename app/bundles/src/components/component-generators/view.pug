@@ -1,92 +1,113 @@
 mixin component-generators(content)
 	.row
 		.col-12
-			h1 ${{ generators.pageTitle }}$
-			
-			p ${{ generators.paragraph1 }}$
+			.card
+				.card-body
+					h1 ${{ generators.pageTitle }}$
+					
+					p ${{ generators.paragraph1 }}$
 
-			h2 ${{ generators.beforeStartTitle }}$
-			
-			p ${{ generators.beforeStartParagraph1 }}$
+					h2 ${{ generators.beforeStartTitle }}$
+					
+					p ${{ generators.beforeStartParagraph1 }}$
 	.row
 		.col-sm-6.col-12
-				h3 Yeoman
-				
-				pre
-					| npm install -g yo
+			.card
+				.card-body
+					h3 Yeoman
+					
+					pre
+						| npm install -g yo
 
 		.col-sm-6.col-12
-				h3 Gulp
-				
-				pre
-					| npm install -g gulp
+			.card
+				.card-body
+					h3 Gulp
+					
+					pre
+						| npm install -g gulp
 
 	.row
 		.col-12
-			h2 ${{ generators.instalationTitle }}$
-			
-			p ${{ generators.instalationParagraph1 }}$
+			.card
+				.card-body
+					h2 ${{ generators.instalationTitle }}$
+					
+					p ${{ generators.instalationParagraph1 }}$
 
-			p ${{ generators.instalationParagraph2 }}$
-			
-			pre
-				| npm install
+					p ${{ generators.instalationParagraph2 }}$
+					
+					pre
+						| npm install
 
-			p ${{ generators.instalationParagraph3 }}$
-			
-			pre
-				| npm link
+					p ${{ generators.instalationParagraph3 }}$
+					
+					pre
+						| npm link
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ generators.startToUseItTitle }}$
+					
+					p ${{ generators.startToUseItParagraph1 }}$
 
-			h2 ${{ generators.startToUseItTitle }}$
-			
-			p ${{ generators.startToUseItParagraph1 }}$
+					h3 Layouts
+					
+					p ${{ generators.layoutsParagraph1 }}$
+					
+					p ${{ generators.layoutsParagraph2 }}$
+					
+					pre
+						| yo sunnie:layout
 
-			h3 Layouts
-			
-			p ${{ generators.layoutsParagraph1 }}$
-			
-			p ${{ generators.layoutsParagraph2 }}$
-			
-			pre
-				| yo sunnie:layout
+					p ${{ generators.layoutsParagraph3 }}$
+					
+					p.text-center
+						img(src="./images/demo/generator-layout-img.png",alt="")
 
-			p ${{ generators.layoutsParagraph3 }}$
-			
-			p.text-center
-				img(src="./images/demo/generator-layout-img.png",alt="")
+					p ${{ generators.layoutsParagraph4 }}$
 
-			p ${{ generators.layoutsParagraph4 }}$
+					h3 ${{ generators.componentsTitle }}$
 
-			h3 ${{ generators.pagesTitle }}$
-			
-			p ${{ generators.pagesParagraph1 }}$
-			
-			p ${{ generators.pagesParagraph2 }}$
-			
-			pre
-				| yo sunnie:page
-			
-			p ${{ generators.pagesParagraph3 }}$
+					p ${{ generators.componentsParagraph1 }}$
+					
+					p ${{ generators.componentsParagraph2 }}$
+					
+					pre
+						| yo sunnie:component
+					
+					p ${{ generators.componentsParagraph3 }}$
 
-			p.text-center
-				img(src="./images/demo/generator-page-img.png",alt="")
+					p.text-center
+						img(src="./images/demo/generator-component-img.png",alt="")
 
-			p ${{ generators.pagesParagraph4 }}$
+					p ${{ generators.componentsParagraph4 }}$
 
-			p ${{ generators.pagesParagraph5 }}$
+					h3 Sites
 
-			h3 ${{ generators.componentsTitle }}$
+					p Para generar un nuevo site debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-primary">app/plugins/sites/</span>.
 
-			p ${{ generators.componentsParagraph1 }}$
-			
-			p ${{ generators.componentsParagraph2 }}$
-			
-			pre
-				| yo sunnie:component
-			
-			p ${{ generators.componentsParagraph3 }}$
+					p Desde ahí debes ejecutar lo siguiente:
 
-			p.text-center
-				img(src="./images/demo/generator-component-img.png",alt="")
+					pre
+						| yo sunnie:site
 
-			p ${{ generators.componentsParagraph4 }}$
+					p.text-center
+						img(src="./images/demo/generator-site-img.png",alt="")
+
+					p Esto lanzará el generador de sites y te irá preguntando una serie de cuestiones para que definas tu site: nombre, url, theme que quieres utilizar de los que tienes definidos en tu portal, etc...	
+
+					h3 Themes
+
+					p Para generar un nuevo theme debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-primary">app/plugins/themes/</span>.
+
+					p Desde ahí debes ejecutar lo siguiente:			
+
+					pre
+						| yo sunnie:theme
+
+					p.text-center
+						img(src="./images/demo/generator-theme-img.png",alt="")
+
+					p Esto lanzará el generador de themes y te preguntará que nombre quieres asignarle y cual es el tema padre del que quieres que herede los estilos. Recuerda que todos los themes se deben crear en base a otro tema padre pero luego podrás modificar todo lo que desees.

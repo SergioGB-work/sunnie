@@ -364,7 +364,7 @@
                             "id": "1",
                             "name": "component-generators",
                             "showTitle": "false",
-                            "full": "false"
+                            "full": "true"
                         }
                     ]
                 }
