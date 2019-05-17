@@ -151,6 +151,10 @@ $(document).ready(function(){
 		}
 	});
 
+	$('.sunniejs-addButton').click(function(){
+		$('body').toggleClass('show-sidebar-menu-tools');
+	})
+
 });
 
 function reloadArrayIndex(el){

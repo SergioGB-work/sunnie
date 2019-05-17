@@ -1,4 +1,44 @@
+@import 'variables';
+@import '../lib/bootstrap/variables';
+
 .sunniejs-addButton{
 	right:1em;
 	bottom:1em;
+	transition: 0.3s 0s all;
+}
+
+
+/** SIDEBAR MENU **/
+#sidebar-menu-tools{
+	width:$sidebar-menu-tools-width;
+	right:-($sidebar-menu-tools-width);
+	top:0;
+	z-index:9;
+	overflow-y:auto;
+
+	transition: all .2s linear 0s;
+
+	ul{
+		li{
+			font-size:0.75rem;
+		}
+	}
+}
+
+#wrapper{
+	transition: all .2s linear 0s;
+}
+
+.show-sidebar-menu-tools{
+	#wrapper{
+		padding-right:#{$sidebar-menu-tools-width};
+	}
+
+	.sunniejs-addButton{
+		right:calc(1rem + #{$sidebar-menu-tools-width});
+	}
+
+	#sidebar-menu-tools{
+		right:0;
+	}
 }
