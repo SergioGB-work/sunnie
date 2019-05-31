@@ -1,0 +1,16 @@
+script(id="templateNewComponent",type="text/x-jquery-tmpl")
+
+	div(class="component component-new")
+		.dropdown.action-bar
+			button(class="dropdown-toggle border-0 p-0",type="button",id="dropdownMenuButton",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
+				.sr-only Actions for component
+				i.fa.fa-ellipsis-v
+
+			.dropdown-menu.dropdown-menu-right
+				a.dropdown-item.edit(data-toggle="modal", data-target="#modal-component-edit") Editar
+				a.dropdown-item.delete(data-toggle="modal", data-target="#modal-component-delete") Eliminar		
+		div(class="component-title")
+			h2.text-capitalize ${data}
+
+		div(class="component-content")
+			div(class="alert alert-info text-center mb-0") Debes configurar el componente

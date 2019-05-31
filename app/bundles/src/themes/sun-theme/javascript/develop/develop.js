@@ -155,7 +155,72 @@ $(document).ready(function(){
 		$('body').toggleClass('show-sidebar-menu-tools');
 	})
 
+	$('#ToolsComponentList').on('dragstart','[draggable="true"]', function(evt) {
+		evt.originalEvent.dataTransfer.setData("id", $(this).data('id-component'));
+		evt.originalEvent.dataTransfer.setData("origin", 'new');
+		$('#templateLayoutDropZone').tmpl().appendTo($('.layout .layout-column'));
+	});
+
+
+	$('.layout .layout-column').on('dragover','.component', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		$(this).addClass('dragging-over');
+	});
+
+	$('.layout .layout-column').on('dragleave','.component', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		$(this).removeClass('dragging-over');
+	});
+
+	$('.layout .layout-column').on('drop','.component', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		$(this).removeClass('dragging-over');
+		
+		var id = evt.originalEvent.dataTransfer.getData("id");
+		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
+		var layoutPosition = $(this).data("layout-position");
+
+		$('.layout .layout-drop-zone').remove();
+		$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
+
+		addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
+
+	});
+
+
+	$('.layout .layout-column').on('dragover dragleave','.layout-drop-zone', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+	});
+
+	$('.layout .layout-column').on('drop','.layout-drop-zone', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		var id = evt.originalEvent.dataTransfer.getData("id");
+		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
+
+		$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
+		$('.layout .layout-drop-zone').remove();
+		addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":0,"name":id})
+	});		
+
 });
+
+function addComponentToPage(el){
+
+	var layoutColumn = el.layoutColumn || '';
+	var position = el.position || 0;
+	var name = el.name || '';
+
+	getData({
+		"service": apiDevelop + "/site/{idSite}/page/{idPage}/component/add",
+		"method": "POST",
+		"aditionalData":{"layoutColumn":layoutColumn,"layoutColumnPosition":position,"name":name,"newComponent":"true"}
+	});	
+}
 
 function reloadArrayIndex(el){
 	el.find('[data-array-id]').each(function(index,el){

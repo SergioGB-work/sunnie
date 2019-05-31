@@ -537,10 +537,14 @@
                     ],
                     "column1": [
                         {
-                            "id": "1",
                             "name": "component-components",
+                            "id": "component-components-1699",
+                            "content": "",
+                            "title": "component-components",
                             "showTitle": "false",
-                            "full": "true"
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
                         }
                     ]
                 }
@@ -701,6 +705,79 @@
                             "name": "component-sites",
                             "showTitle": "false",
                             "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "pruebas-132",
+            "name": "Pruebas",
+            "url": "/pruebas",
+            "src": "/pruebas.html",
+            "attributes": {
+                "title": "Pruebas",
+                "description": "",
+                "keywords": ""
+            },
+            "layout": {
+                "name": "layout-12-8-4",
+                "content": {
+                    "content_upper": [
+                        {
+                            "name": "component-sample",
+                            "id": "component-sample-5763",
+                            "content": "",
+                            "title": "component-sample",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-image",
+                            "id": "component-image-5577",
+                            "content": "",
+                            "title": "component-image",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        }
+                    ],
+                    "content_left": [
+                        {
+                            "name": "component-sample-list",
+                            "id": "component-sample-list-4459",
+                            "content": "",
+                            "title": "component-sample-list",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-banner",
+                            "id": "component-banner-3803",
+                            "content": "",
+                            "title": "component-banner",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        }
+                    ],
+                    "content_right": [
+                        {
+                            "name": "component-image",
+                            "id": "component-image-9444",
+                            "content": "",
+                            "title": "component-image",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
                         }
                     ]
                 }

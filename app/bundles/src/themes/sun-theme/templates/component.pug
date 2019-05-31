@@ -13,6 +13,7 @@ mixin component(content)
 	- var full = content.full || 'false'
 	- var classes = content.classes || ''
 	- var index = content.index || '0'
+	- var newComponent = content.new || 'false'
 
 	if showTitle  == "false"
 		- var classesComponent = classesComponent + ' component-noTitle'
@@ -23,6 +24,8 @@ mixin component(content)
 	if componentId != ''
 		-var idComponent = componentName + '-' + componentId
 
+	if newComponent  == "true"
+		- var classesComponent = classesComponent + ' component-new'		
 
 	div(class=classesComponent + ' ' + componentName + ' ' + classes, id=idComponent || false,data-layout-position = index)
 		if locals.development == true
@@ -35,12 +38,20 @@ mixin component(content)
 					a.dropdown-item.edit(data-toggle="modal", data-target="#modal-component-edit") Editar
 					a.dropdown-item.delete(data-toggle="modal", data-target="#modal-component-delete") Eliminar
 
-		if showTitle != "false"
-			div(class="component-title")
-				h2 #{componentTitle}
+		if newComponent != 'true'	
+			if showTitle != "false"
+				div(class="component-title")
+					h2 #{componentTitle}
 
-		div(class="component-content")
-			+#{componentName}(componentContent)
+			div(class="component-content")
+				+#{componentName}(componentContent)
+
+		else	
+			div(class="component-title")
+				h2.text-capitalize #{componentTitle}
+
+			div(class="component-content")
+				div(class="alert alert-info text-center mb-0") Debes configurar el componente					
 
 
 

@@ -8,16 +8,16 @@ mixin layout-12-4-8(content)
 		div(class="container")
 
 			div(class="layout-row row")
-				div(class="column col-md-12",data-layout-column="content_upper")
+				div(class="layout-column col-md-12",data-layout-column="content_upper")
 					each component,index in content_upper
-						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
 
 			div(class="layout-row row")
 
-				div(class="column col-md-4 col-12",data-layout-column="content_left")
+				div(class="layout-column col-md-4 col-12",data-layout-column="content_left")
 					each component,index in content_left
-						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
 
-				div(class="column col-md-8 col-12",data-layout-column="content_right")
+				div(class="layout-column col-md-8 col-12",data-layout-column="content_right")
 					each component,index in content_right
-						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})

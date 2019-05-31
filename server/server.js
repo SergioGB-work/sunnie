@@ -229,6 +229,7 @@ gulp.task('apiServer', function() {
 		var componentShowTitle = req.body.showTitle || 'true';
 		var componentFull = req.body.full || 'false';
 		var componentClasses = req.body.classes || '';
+		var componentNew = req.body.newComponent || 'false';
 
 		var newComponent = {
 			"name":componentName,
@@ -237,7 +238,8 @@ gulp.task('apiServer', function() {
 			"title":componentTitle,
 			"showTitle":componentShowTitle,
 			"full":componentFull,
-			"classes":componentClasses
+			"classes":componentClasses,
+			"new":componentNew
 		}
 
 		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
@@ -291,8 +293,8 @@ gulp.task('apiServer', function() {
 		editedPage.layout.content[oldlLayoutColumn][oldPosition].showTitle = componentShowTitle;
 		editedPage.layout.content[oldlLayoutColumn][oldPosition].full = componentFull;
 		editedPage.layout.content[oldlLayoutColumn][oldPosition].classes = componentClasses;
+		editedPage.layout.content[oldlLayoutColumn][oldPosition].new = 'false';
 
-		editedPage.layout.content[oldlLayoutColumn][oldPosition].classes = componentClasses;
 
 		if((oldPosition > layoutColumnPosition) || (oldlLayoutColumn != layoutColumn ) ){
 			editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,0,editedPage.layout.content[oldlLayoutColumn][oldPosition]);

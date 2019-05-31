@@ -7,7 +7,7 @@ mixin layout-12-fluid(content)
 
 			div(class="layout-row row")
 			
-				div(class="column col-12",data-layout-column="content_upper")
+				div(class="layout-column col-12",data-layout-column="content_upper")
 
 					each component,index in content_upper
-						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index})
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})

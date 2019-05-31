@@ -16,12 +16,11 @@
 			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-site-confirm-publish') Publicar Site
 
 	.card.mb-0
-		.card-header.bg-dark.text-white.border-secondary(id="dropdownComponents" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseOne")
+		.card-header.bg-dark.text-white.border-secondary(id="dropdownComponents" data-toggle="collapse" data-target="#ToolsComponentList" aria-expanded="true" aria-controls="collapseOne")
 			span.text Componentes
 			i.fa.fa-ellipsis-v.float-right.px-3.py-1
 
-		ul(id="collapseTwo" class="collapse list-group list-group-flush" aria-labelledby="dropdownComponents")
-			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-component-add') Añadir Componente
+		ul(id="ToolsComponentList" class="collapse list-group list-group-flush" aria-labelledby="dropdownComponents",data-load="true",data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentListLI",data-target="#ToolsComponentList")
 
 	.card.mb-0
 		.card-header.bg-dark.text-white.border-secondary(id="dropdownPages" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree")
