@@ -726,10 +726,20 @@
                 "content": {
                     "content_upper": [
                         {
-                            "name": "component-sample",
-                            "id": "component-sample-5763",
+                            "name": "component-breadcrumbs",
+                            "id": "component-breadcrumbs-5733",
                             "content": "",
-                            "title": "component-sample",
+                            "title": "component-breadcrumbs",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-breadcrumbs",
+                            "id": "component-breadcrumbs-3203",
+                            "content": "",
+                            "title": "component-breadcrumbs",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",
@@ -744,9 +754,7 @@
                             "full": "false",
                             "classes": "",
                             "new": "true"
-                        }
-                    ],
-                    "content_left": [
+                        },
                         {
                             "name": "component-sample-list",
                             "id": "component-sample-list-4459",
@@ -756,6 +764,28 @@
                             "full": "true",
                             "classes": "",
                             "new": "false"
+                        },
+                        {
+                            "name": "component-sample",
+                            "id": "component-sample-5763",
+                            "content": "",
+                            "title": "component-sample",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        }
+                    ],
+                    "content_left": [
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-2739",
+                            "content": "",
+                            "title": "component-html-content",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
                         },
                         {
                             "name": "component-banner",

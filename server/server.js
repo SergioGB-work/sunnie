@@ -356,6 +356,49 @@ gulp.task('apiServer', function() {
 
 	});
 
+	app.post('/site/:idSite/page/:idPage/component/move', function (req, res) {
+		var site = req.params.idSite;
+		var idPage = req.params.idPage || '';
+		var layoutColumn = req.body.layoutColumn || '';
+		var layoutColumnPosition = req.body.layoutColumnPosition || 0;
+		var oldPosition = req.body.oldPosition;
+		var oldlLayoutColumn = req.body.oldLayoutColumn;
+
+		//Datos del componente
+		var siteURL = getURLSite(site);
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+		var editedPage = findPage(sitemap.pages,idPage);
+		var index = findIndex(sitemap.pages,idPage);
+
+		if((oldPosition > layoutColumnPosition) || (oldlLayoutColumn != layoutColumn ) ){
+			editedPage.layout.content[layoutColumn].splice(layoutColumnPosition,0,editedPage.layout.content[oldlLayoutColumn][oldPosition]);
+		}
+		else{
+			editedPage.layout.content[layoutColumn].splice(parseInt(layoutColumnPosition) + 1,0,editedPage.layout.content[oldlLayoutColumn][oldPosition]);
+		}
+
+
+		if((oldPosition > layoutColumnPosition) && (oldlLayoutColumn == layoutColumn)){
+			editedPage.layout.content[oldlLayoutColumn].splice(parseInt(oldPosition) + 1,1);
+		}
+		else{
+			editedPage.layout.content[oldlLayoutColumn].splice(oldPosition,1);
+		}	
+		//Generamos la posicion de edicion
+		var patron = "sitemap.pages";
+		index.forEach(function(element,i){
+			if(i == 0){
+				patron += '['+element+']'
+			}
+			else{
+				patron += '.childs['+element+']';
+			}
+		})
+		
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
+		deploySites('--env dev --site ' + site + ' --page ' + editedPage['src'].split('.')[0].split('/')[1] , res);
+	});
+
 	app.listen(8082,function(req, res){
   		console.log('API running on 8082!');
 	});

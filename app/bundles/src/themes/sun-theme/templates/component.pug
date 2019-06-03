@@ -25,9 +25,12 @@ mixin component(content)
 		-var idComponent = componentName + '-' + componentId
 
 	if newComponent  == "true"
-		- var classesComponent = classesComponent + ' component-new'		
+		- var classesComponent = classesComponent + ' component-new'
 
-	div(class=classesComponent + ' ' + componentName + ' ' + classes, id=idComponent || false,data-layout-position = index)
+	if locals.development == true
+		- var draggable = "true"	
+
+	div(class=classesComponent + ' ' + componentName + ' ' + classes, id=idComponent || false,data-layout-position = index, draggable=draggable || false, data-component-name=componentName)
 		if locals.development == true
 			.dropdown.action-bar
 				button(class="dropdown-toggle border-0 p-0",type="button",id="dropdownMenuButton",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")

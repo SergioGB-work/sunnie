@@ -162,6 +162,18 @@ $(document).ready(function(){
 	});
 
 
+	$('#ToolsComponentList').on('dragend','[draggable="true"]', function(evt) {
+		$('.layout .layout-drop-zone').remove();
+	});
+
+	$('.layout .layout-column').on('dragstart','.component', function(evt) {
+		evt.originalEvent.dataTransfer.setData("origin", 'move');
+		evt.originalEvent.dataTransfer.setData("oldPosition", $(this).data("layout-position"));
+		evt.originalEvent.dataTransfer.setData("oldLayoutColumn", $(this).closest('.layout-column').data("layout-column"));
+
+	});
+
+
 	$('.layout .layout-column').on('dragover','.component', function(evt) {
 		evt.preventDefault();
 		evt.stopPropagation();
@@ -179,21 +191,34 @@ $(document).ready(function(){
 		evt.stopPropagation();
 		$(this).removeClass('dragging-over');
 		
-		var id = evt.originalEvent.dataTransfer.getData("id");
+		var origin = evt.originalEvent.dataTransfer.getData("origin");
 		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
 		var layoutPosition = $(this).data("layout-position");
 
-		$('.layout .layout-drop-zone').remove();
-		$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
-
-		addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
+		if(origin=='new'){
+			var id = evt.originalEvent.dataTransfer.getData("id");
+			$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
+			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
+		}
+		else{
+			var oldPosition = evt.originalEvent.dataTransfer.getData("oldPosition");
+			var oldLayoutColumn = evt.originalEvent.dataTransfer.getData("oldLayoutColumn");
+			//falta clonar el antiguo componente a la nueva posicion
+			moveComponent({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"oldPosition":oldPosition, "oldLayoutColumn":oldLayoutColumn})
+		}
 
 	});
 
-
-	$('.layout .layout-column').on('dragover dragleave','.layout-drop-zone', function(evt) {
+	$('.layout .layout-column').on('dragover','.layout-drop-zone', function(evt) {
 		evt.preventDefault();
 		evt.stopPropagation();
+		$(this).addClass('dragging-over');
+	});
+
+	$('.layout .layout-column').on('dragleave','.layout-drop-zone', function(evt) {
+		evt.preventDefault();
+		evt.stopPropagation();
+		$(this).removeClass('dragging-over');
 	});
 
 	$('.layout .layout-column').on('drop','.layout-drop-zone', function(evt) {
@@ -203,7 +228,6 @@ $(document).ready(function(){
 		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
 
 		$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
-		$('.layout .layout-drop-zone').remove();
 		addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":0,"name":id})
 	});		
 
@@ -212,7 +236,7 @@ $(document).ready(function(){
 function addComponentToPage(el){
 
 	var layoutColumn = el.layoutColumn || '';
-	var position = el.position || 0;
+	var position = el.layoutColumnPosition || 0;
 	var name = el.name || '';
 
 	getData({
@@ -220,6 +244,24 @@ function addComponentToPage(el){
 		"method": "POST",
 		"aditionalData":{"layoutColumn":layoutColumn,"layoutColumnPosition":position,"name":name,"newComponent":"true"}
 	});	
+}
+
+function moveComponent(el){
+
+	var layoutColumn = el.layoutColumn || '';
+	var position = el.layoutColumnPosition || 0;
+	var oldPosition = el.oldPosition;
+	var oldLayoutColumn = el.oldLayoutColumn;
+	console.log("OldPos:" + oldPosition);
+	console.log("OldColumn:" + oldLayoutColumn);
+	console.log("position:" + position);
+	console.log("layoutColumn:" + layoutColumn);
+	
+	getData({
+		"service": apiDevelop + "/site/{idSite}/page/{idPage}/component/move",
+		"method": "POST",
+		"aditionalData":{"layoutColumn":layoutColumn,"layoutColumnPosition":position,"oldPosition":oldPosition,"oldLayoutColumn":oldLayoutColumn}
+	});
 }
 
 function reloadArrayIndex(el){
