@@ -726,6 +726,25 @@
                 "content": {
                     "content_upper": [
                         {
+                            "name": "component-card",
+                            "id": "component-card-6949",
+                            "content": {
+                                "src": "./images/carousel1.jpg",
+                                "alt": "gsdgsdf",
+                                "header": "Header",
+                                "description": "Lorem ipsum",
+                                "href": "www.google.es",
+                                "classes": "",
+                                "title": "Title",
+                                "price": "18965€"
+                            },
+                            "title": "component-card",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
                             "name": "component-slider",
                             "id": "component-slider-8900",
                             "content": {

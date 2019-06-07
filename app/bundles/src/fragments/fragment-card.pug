@@ -11,7 +11,8 @@ mixin fragment-card(content)
 	.card(class=classes)
 		if(button != '')	
 			a(href=href,title=title)
-				img.card-img-top(src=src,alt=alt)
+				if src != ''
+					img.card-img-top(src=src,alt=alt)
 
 				if(header != '' || description != '')
 					.card-body
@@ -24,8 +25,8 @@ mixin fragment-card(content)
 							p.price.text-primary #{price}
 
 		else
-
-			img.card-img-top(src=src,alt=alt)
+			if src != ''
+				img.card-img-top(src=src,alt=alt)
 
 			if(header != '' || description != '')
 				.card-body
