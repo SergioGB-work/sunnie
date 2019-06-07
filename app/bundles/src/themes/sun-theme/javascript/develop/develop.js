@@ -37,24 +37,6 @@ $(document).ready(function(){
 		}
 	});
 
-	$('#modal-component-add .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-component-add').modal('hide');
-			showError('','Añadiendo componente, espere por favor...');
-		}
-	});
-
-	$('#modal-component-add #componentName').change(function(){
-		var component = $(this).val();
-
-		getData({
-			"service": apiDevelop + "/component/config/" + component,
-			"method": "GET", "template": "#templateDynamicConfigComponent",
-			"target": "#dynamicConfig"
-		});
-
-	});
-
 	$('#modal-component-edit .send').click(function(){
 		if(validateForm($(this).closest('form'))){
 			$(this).closest('#modal-component-edit').modal('hide');
@@ -170,7 +152,10 @@ $(document).ready(function(){
 		evt.originalEvent.dataTransfer.setData("origin", 'move');
 		evt.originalEvent.dataTransfer.setData("oldPosition", $(this).data("layout-position"));
 		evt.originalEvent.dataTransfer.setData("oldLayoutColumn", $(this).closest('.layout-column').data("layout-column"));
+	});
 
+	$('.layout .layout-column').on('dragend','.component', function(evt) {
+		$('.layout .layout-drop-zone').remove();
 	});
 
 
@@ -203,7 +188,13 @@ $(document).ready(function(){
 		else{
 			var oldPosition = evt.originalEvent.dataTransfer.getData("oldPosition");
 			var oldLayoutColumn = evt.originalEvent.dataTransfer.getData("oldLayoutColumn");
-			//falta clonar el antiguo componente a la nueva posicion
+			var originalComponent = $('[data-layout-column='+oldLayoutColumn+'] [data-layout-position='+oldPosition+']');
+			var componentToMove = originalComponent.clone(true);
+
+			componentToMove.insertBefore($(this));
+			originalComponent.remove();
+			refreshPositions(layoutColumn);
+			refreshPositions(oldLayoutColumn);
 			moveComponent({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"oldPosition":oldPosition, "oldLayoutColumn":oldLayoutColumn})
 		}
 
@@ -224,14 +215,46 @@ $(document).ready(function(){
 	$('.layout .layout-column').on('drop','.layout-drop-zone', function(evt) {
 		evt.preventDefault();
 		evt.stopPropagation();
-		var id = evt.originalEvent.dataTransfer.getData("id");
-		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
 
-		$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
-		addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":0,"name":id})
+		var origin = evt.originalEvent.dataTransfer.getData("origin");
+		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
+		var layoutPosition = $(this).closest('.layout-column').find('.component').length;
+
+
+		if(origin=='new'){
+			var id = evt.originalEvent.dataTransfer.getData("id");
+			$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
+			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":0,"name":id})
+		}
+		else{
+			var oldPosition = evt.originalEvent.dataTransfer.getData("oldPosition");
+			var oldLayoutColumn = evt.originalEvent.dataTransfer.getData("oldLayoutColumn");
+			var originalComponent = $('[data-layout-column='+oldLayoutColumn+'] [data-layout-position='+oldPosition+']');
+			var componentToMove = originalComponent.clone(true);
+
+			componentToMove.appendTo($(this).closest('.layout-column'));
+			originalComponent.remove();
+			refreshPositions(layoutColumn);
+			refreshPositions(oldLayoutColumn);
+			moveComponent({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"oldPosition":oldPosition, "oldLayoutColumn":oldLayoutColumn})
+		}
+
+
+
+
 	});		
 
 });
+
+function refreshPositions(column){
+
+	$('[data-layout-column='+column+'] .component').each(function(index,value){
+
+		$(this).attr('data-layout-position',index)
+
+	})
+
+}
 
 function addComponentToPage(el){
 
@@ -250,7 +273,7 @@ function moveComponent(el){
 
 	var layoutColumn = el.layoutColumn || '';
 	var position = el.layoutColumnPosition || 0;
-	var oldPosition = el.oldPosition;
+	var oldPosition = parseInt(el.oldPosition);
 	var oldLayoutColumn = el.oldLayoutColumn;
 	console.log("OldPos:" + oldPosition);
 	console.log("OldColumn:" + oldLayoutColumn);
@@ -300,13 +323,6 @@ function dataEditSiteLoadedCallback(data){
 	dataList($('#modal-site-edit #themeList'));
 }
 
-function addComponentCallback(data){
-	var modal = $('#modal-component-add');
-	modal.find('form')[0].reset();
-	$('#modal-error').modal('hide');
-	location.reload();
-}
-
 function checkLayoutSelected(data,idLayout){
 	$('#modal-page-edit #layoutEditList input[value="'+idLayout+'"]').attr('checked','checked');
 }
@@ -316,6 +332,7 @@ function checkThemeSelected(data,idTheme){
 }
 
 function dataComponentLoadedCallback(data){
+	loadConfigComponent();
 	dataList($('#modal-component-edit #componentName'));
 	dataList($('#modal-component-edit #layoutColumn'));
 }
@@ -352,4 +369,8 @@ function editSiteCallback(data){
 		newLocation.shift();
 		location.href = newLocation.join('');
 	}
+}
+
+function loadConfigComponent(){
+	tinymce.init({selector:'textarea'});
 }

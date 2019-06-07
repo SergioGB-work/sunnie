@@ -726,44 +726,87 @@
                 "content": {
                     "content_upper": [
                         {
-                            "name": "component-breadcrumbs",
-                            "id": "component-breadcrumbs-5733",
-                            "content": "",
-                            "title": "component-breadcrumbs",
+                            "name": "component-slider",
+                            "id": "component-slider-8900",
+                            "content": {
+                                "items": [
+                                    {
+                                        "src": "./images/carousel1.jpg",
+                                        "alt": "gsdgsdf",
+                                        "longdesc": "dsfg",
+                                        "href": "www.google.es",
+                                        "title": "asdf",
+                                        "target": "",
+                                        "responsiveSRC": "",
+                                        "srcset": ""
+                                    },
+                                    {
+                                        "src": "./images/carousel2.jpg",
+                                        "alt": "gsdgsdf",
+                                        "longdesc": "asfddas",
+                                        "href": "www.google.es2",
+                                        "title": "",
+                                        "target": "",
+                                        "responsiveSRC": "",
+                                        "srcset": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-slider",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",
-                            "new": "true"
+                            "new": "false"
                         },
                         {
-                            "name": "component-breadcrumbs",
-                            "id": "component-breadcrumbs-3203",
-                            "content": "",
-                            "title": "component-breadcrumbs",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        },
-                        {
-                            "name": "component-image",
-                            "id": "component-image-5577",
-                            "content": "",
-                            "title": "component-image",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        },
-                        {
-                            "name": "component-sample-list",
-                            "id": "component-sample-list-4459",
-                            "content": "",
-                            "title": "component-sample-list",
+                            "name": "component-accordion",
+                            "id": "component-accordion-6789",
+                            "content": {
+                                "items": [
+                                    {
+                                        "header": "Opcion 1",
+                                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                        "collapsed": "closed"
+                                    },
+                                    {
+                                        "header": "Opcion 2",
+                                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                        "collapsed": "opened"
+                                    },
+                                    {
+                                        "header": "Opcion 3",
+                                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                        "collapsed": "closed"
+                                    }
+                                ],
+                                "collapseParent": "true"
+                            },
+                            "title": "component-accordion",
                             "showTitle": "false",
                             "full": "true",
                             "classes": "",
                             "new": "false"
+                        },
+                        {
+                            "name": "component-slider",
+                            "id": "component-slider-4200",
+                            "content": {
+                                "items": {
+                                    "src": "",
+                                    "alt": "",
+                                    "longdesc": "",
+                                    "href": "",
+                                    "title": "",
+                                    "target": "",
+                                    "responsiveSRC": "",
+                                    "srcset": ""
+                                }
+                            },
+                            "title": "component-slider",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
                         },
                         {
                             "name": "component-sample",
@@ -774,42 +817,64 @@
                             "full": "false",
                             "classes": "",
                             "new": "true"
-                        }
-                    ],
-                    "content_left": [
+                        },
                         {
-                            "name": "component-html-content",
-                            "id": "component-html-content-2739",
-                            "content": "",
-                            "title": "component-html-content",
+                            "name": "component-highlighted-side-image",
+                            "id": "component-highlighted-side-image-3894",
+                            "content": {
+                                "position": "",
+                                "image": [
+                                    {
+                                        "src": "",
+                                        "alt": ""
+                                    }
+                                ],
+                                "content": "",
+                                "button": [
+                                    {
+                                        "href": "",
+                                        "title": "",
+                                        "text": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-highlighted-side-image",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",
                             "new": "true"
                         },
                         {
-                            "name": "component-banner",
-                            "id": "component-banner-3803",
-                            "content": "",
-                            "title": "component-banner",
+                            "name": "component-image",
+                            "id": "component-image-1840",
+                            "content": {
+                                "src": "",
+                                "alt": "",
+                                "longdesc": "",
+                                "responsiveSRC": "",
+                                "srcset": ""
+                            },
+                            "title": "component-image",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-slider",
+                            "id": "component-slider-3047",
+                            "content": {
+                                "items": ""
+                            },
+                            "title": "component-slider",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",
                             "new": "true"
                         }
                     ],
-                    "content_right": [
-                        {
-                            "name": "component-image",
-                            "id": "component-image-9444",
-                            "content": "",
-                            "title": "component-image",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        }
-                    ]
+                    "content_left": [],
+                    "content_right": []
                 }
             },
             "childs": []

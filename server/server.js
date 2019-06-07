@@ -224,12 +224,46 @@ gulp.task('apiServer', function() {
 		//Datos del componente
 		var componentName = req.body.name || 'Component';
 		var componentId = normaliza(componentName) + '-' + parseInt(Math.random() * (9999 - 0) + 0);
-		var componentContent = req.body.content || '';
+		var componentContent = req.body.content || {};
 		var componentTitle = req.body.title || componentName;
 		var componentShowTitle = req.body.showTitle || 'true';
 		var componentFull = req.body.full || 'false';
 		var componentClasses = req.body.classes || '';
 		var componentNew = req.body.newComponent || 'false';
+
+
+		var configComponent = getComponentConfig(componentName);
+
+
+		configComponent.config.forEach(function(element,i){
+
+			if(element.type=="array"){
+				var itemArray = {}
+
+				element.arrayContent.forEach(function(item,index){
+					itemArray[item.name]=''
+				});
+
+				componentContent[element.name]=[itemArray];	
+			}
+
+			else if(element.type=="group"){
+				var itemGroup = {}
+
+				element.content.forEach(function(item,index){
+					itemGroup[item.name]=''
+				});
+
+				componentContent[element.name]=[itemGroup];	
+			}
+
+			else{
+				componentContent[element.name]='';
+			}
+
+		});	
+
+		console.log(componentContent);
 
 		var newComponent = {
 			"name":componentName,
