@@ -1,0 +1,29 @@
+mixin component-data-list(content)
+	- var service = content.service
+	- var method = content.method
+	- var template = content.template
+	- var templateCode = content.template_code || ''
+	- var staticCode = content.static_code || ''
+	- var initialPage = content.initial_page
+	- var itemsPerPage = content.items_per_page
+	- var target = content.target
+	- var aditionalData = content.aditionalData
+	- var callback = content.callback
+	- var pagination = content.pagination
+	- var contentCallback = content.content
+	- var enableGetParams = content.enable_get_params
+	- var getParamsList = content.get_params_list
+	- var rel = content.rel
+	- var liveReload = content.live_reload 
+	- var timeReload = content.time_reload
+	- var cache = content.cache
+
+	div(data-load="true",data-service-data=service || false, data-method=method || false, data-template="#"+template, data-items-per-page=itemsPerPage || false, data-initial-page= initialPage || false, data-target=target || false, data-enable-get-params=enableGetParams || false, data-cache=cache || false, data-rel=rel || false, data-aditionalData = aditionalData || false, data-callback=callback || false, data-content=contentCallback || false, data-get-params-list=getParamsList || false, data-live-reload=liveReload || false, data-time-reload=timeReload || false, data-has-pagination=pagination || false) !{staticCode}
+
+
+		if(pagination == true || pagination == 'true')
+			+fragment('fragment-pagination')
+
+	if template		
+		script(id=template ,type="text/x-jquery-tmpl").
+			!{templateCode}

@@ -526,6 +526,21 @@
                                                 "text": "HTML Content",
                                                 "href": "#componentHTMLContent",
                                                 "title": "${{ default.goToComponent }}$ HTML Content"
+                                            },
+                                            {
+                                                "text": "Card",
+                                                "href": "#componentCard",
+                                                "title": "${{ default.goToComponent }}$ Card"
+                                            },
+                                            {
+                                                "text": "Accordion",
+                                                "href": "#componentAccordion",
+                                                "title": "${{ default.goToComponent }}$ Accordion"
+                                            },
+                                            {
+                                                "text": "Social Share",
+                                                "href": "#componentSocialShare",
+                                                "title": "${{ default.goToComponent }}$ Social Share"
                                             }
                                         ]
                                     }
@@ -726,25 +741,6 @@
                 "content": {
                     "content_upper": [
                         {
-                            "name": "component-card",
-                            "id": "component-card-6949",
-                            "content": {
-                                "src": "./images/carousel1.jpg",
-                                "alt": "gsdgsdf",
-                                "header": "Header",
-                                "description": "Lorem ipsum",
-                                "href": "www.google.es",
-                                "classes": "",
-                                "title": "Title",
-                                "price": "18965€"
-                            },
-                            "title": "component-card",
-                            "showTitle": "false",
-                            "full": "true",
-                            "classes": "",
-                            "new": "false"
-                        },
-                        {
                             "name": "component-slider",
                             "id": "component-slider-8900",
                             "content": {
@@ -774,6 +770,66 @@
                             "title": "component-slider",
                             "showTitle": "true",
                             "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-data-list",
+                            "id": "component-data-list-5940",
+                            "content": {
+                                "service": "http://localhost:8083/default/data/sitemap.json",
+                                "method": "GET",
+                                "static_code": "<table class=\"table\"> \t<thead> \t\t<tr> \t\t\t<th> ID</th> \t\t\t<th> Nombre</th> \t\t\t<th> Email</th> \t\t\t \t\t\t<th> Rol</th> \t\t</tr> \t</thead>\t\t\t\t \t<tbody></tbody> </table>\t",
+                                "template": "sitemapTemplate",
+                                "template_code": "{%if data.pages.length > 0 %} \t{%each data.pages%} \t<tr> \t\t<td> ${$value.id}</td> \t\t<td> ${$value.name}</td> \t\t<td> ${$value.url}</td> \t\t<td> rol</td> \t{%/each%} \t{%else%} \t</tr> \t\t<td class=\"alert alert-warning\",role=\"alert\",colspan=\"6\"> No hay usuarios</td></tr> \t{%/if%}\t",
+                                "target": ".sergio .table tbody",
+                                "initial_page": "",
+                                "items_per_page": "",
+                                "aditionalData": "",
+                                "callback": "",
+                                "content": "",
+                                "enable_get_params": "false",
+                                "get_params_list": "",
+                                "rel": "",
+                                "live_reload": "false",
+                                "time_reload": "",
+                                "cache": "false",
+                                "pagination": "false"
+                            },
+                            "title": "component-data-list",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "sergio",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-socialShare",
+                            "id": "component-socialshare-485",
+                            "content": {
+                                "items": [
+                                    {
+                                        "href": "http://www.google.es",
+                                        "title": "Ir a GoogleES",
+                                        "target": "_self",
+                                        "iconType": "fontawesome",
+                                        "iconCode": "fa-facebook-f",
+                                        "iconSize": "icon-6x",
+                                        "iconColor": "#00ff00"
+                                    },
+                                    {
+                                        "href": "http://www.google.com",
+                                        "title": "Ir a GoogleCOM",
+                                        "target": "_self",
+                                        "iconType": "fontawesome",
+                                        "iconCode": "fa-twitter",
+                                        "iconSize": "icon-6x",
+                                        "iconColor": "#ff0000"
+                                    }
+                                ]
+                            },
+                            "title": "component-socialShare",
+                            "showTitle": "false",
+                            "full": "true",
                             "classes": "",
                             "new": "false"
                         },

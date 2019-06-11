@@ -1,0 +1,145 @@
+{
+	"config":[
+
+		{
+			"label":"Service Data",
+			"name":"service",
+			"type":"text"
+		},
+		{
+			"label":"Method",
+			"name":"method",
+			"type":"select",
+			"options":[
+				{
+					"label":"POST",
+					"value":"POST"
+				},
+				{
+					"label":"GET",
+					"value":"GET"
+				}
+			]
+		},
+		{
+			"label":"Static Template(HTML)",
+			"name":"static_code",
+			"type":"text"
+		},		
+		{
+			"label":"Template ID",
+			"name":"template",
+			"type":"text"
+		},		
+		{
+			"label":"Template Code(jQuery TMPL)",
+			"name":"template_code",
+			"type":"text"
+		},
+		{
+			"label":"Target",
+			"name":"target",
+			"type":"text"
+		},
+		{
+			"label":"Initial Page",
+			"name":"initial_page",
+			"type":"number"
+		},
+		{
+			"label":"Items per page",
+			"name":"items_per_page",
+			"type":"number"
+		},
+		{
+			"label":"aditionalData",
+			"name":"aditionalData",
+			"type":"text"
+		},
+		{
+			"label":"Callback",
+			"name":"callback",
+			"type":"text"
+		},
+		{
+			"label":"Content",
+			"name":"content",
+			"type":"text"
+		},
+		{
+			"label":"Enable get params",
+			"name":"enable_get_params",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		},
+		{
+			"label":"Get params list",
+			"name":"get_params_list",
+			"type":"text"
+		},
+		{
+			"label":"Rel",
+			"name":"rel",
+			"type":"text"
+		},
+		{
+			"label":"Live Reload",
+			"name":"live_reload",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		},
+		{
+			"label":"Time reload",
+			"name":"time_reload",
+			"type":"number"
+		},
+		{
+			"label":"cache",
+			"name":"cache",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		},
+		{
+			"label":"Pagination",
+			"name":"pagination",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]			
+		}
+	]
+}

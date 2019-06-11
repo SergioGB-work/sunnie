@@ -441,7 +441,7 @@ gulp.task('connect', function() {
 		var rules = buildRules();
 		var url = rules[req.url];
 
-		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
+		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.indexOf('/data/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
 			res.sendFile(url,{ root: pathModule.join(__dirname, './app/public/sites/') });
 		}
@@ -480,7 +480,7 @@ gulp.task('connectDev', function() {
 		getSitesPlugins();
 		var rules = buildRules();
 		var url = rules[req.url];
-		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
+		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/data/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
 			
 			res.sendFile(url,{ root: pathModule.join(__dirname, './app/development/sites/') });

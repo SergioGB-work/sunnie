@@ -1,0 +1,15 @@
+mixin component-socialShare(content)
+
+	- var items = content.items
+
+	ul.list-inline.d-flex
+	
+		each item,i in items
+			li.list-inline-item
+				- var iconType = item.iconType
+				a(href=item.href, title=item.title, target=item.target)
+					if iconType=='material'
+						i(class=item.iconSize + ' material-icons' , style="color: " + item.iconColor) !{item.iconCode}
+				
+					else if iconType=='fontawesome'	
+						i(aria-hidden="true",class=item.iconSize + ' fa ' +  item.iconCode, style="color: " + item.iconColor)

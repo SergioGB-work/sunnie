@@ -198,7 +198,29 @@ mixin component-components(content)
 						li <strong>HTMLcontent:</strong> ${{ components.htmlContentParamHTMLContent }}$
 					h4.icon-2x ${{ components.example }}$
 					pre
-						| +component({'name':'component-banner','id':'id1','content':{'HTMLcontent':'&lt;h2&gt;Hellow World&lt;/h2&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;'},'showTitle':'false','full':'false'})
+						| +component({'name':'component-html-content','id':'id1','content':{'HTMLcontent':'&lt;h2&gt;Hellow World&lt;/h2&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;'},'showTitle':'false','full':'false'})
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Social Share
+					p Component que muestra un listado de iconos enlazables
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-socialShare"							
+						li <strong>items:</strong>
+							ul
+								li <strong>href:</strong> Enlace del icono
+								li <strong>title:</strong> Texto alternativo del icono
+								li <strong>target:</strong> Modo de apertura de la nueva URL(redirección o pestaña nueva)
+								li <strong>iconType:</strong> Tipo de icono(Font Awesome o Material)
+								li <strong>iconCode:</strong> Código del icono. Se debe obtener de la libreria de iconos correspodiente
+								li <strong>iconSize:</strong> Tamaño del icono
+								li <strong>iconColor:</strong> Color en HEX del icono
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
+
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -275,6 +297,25 @@ mixin component-components(content)
 					pre 
 						| +component({"name":"component-slider","content":{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}]},"showTitle":"false","full":"true"})
 
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Card
+					p Elemento Card de Bootstrap
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-card"							
+						li <strong>header:</strong> ${{ components.cardHeader }}$
+						li <strong>description:</strong> ${{ components.descriptionText }}$
+						li <strong>src:</strong> ${{ components.imageURL }}$
+						li <strong>alt:</strong> ${{ components.altText }}$
+						li <strong>href:</strong> ${{ components.cardLink }}$
+						li <strong>title:</strong> ${{ components.buttonTitle }}$
+						li <strong>classes:</strong> ${{ components.cardClasses }}$
+						li <strong>price:</strong> ${{ components.cardPrice }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-card","content":{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},"showTitle":"false","full":"true"})
 		.col-12.col-sm-6.col-lg-4
 			.card
 				.card-body
@@ -353,6 +394,27 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentCardsListCarousel",title="${{ components.goToComponent }}$ Cards List Carousel") Accordion
+					p Componente de acordeón en el que se listan diferentes bloques que pueden ser desplegados al ser pulsados.
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-accordion"							
+						li <strong>collapseParent:</strong> Si se pone a "true" al abrir cualquier de los acordeones del componente se cerrarán automáticamente el resto si estuviesen abiertos.
+						li <strong>items:</strong>
+							ul
+								li <strong>header:</strong> Encabezado del acordeón
+								li <strong>content:</strong> Contenido desplegable
+								li <strong>collapsed:</strong> Si se selecciona a "opened" el bloque saldrá por defecto desplegado. Si se selecciona a "closed" se mostrará cerrado.
+
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-accordion","content":{"items": [{"header": "Opcion 1","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"},{"header": "Opcion 2","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "opened"},{"header": "Opcion 3","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"}],"collapseParent": "true"},"showTitle":"false","full":"true"})
+
 						
 	.row
 		.col-12
@@ -473,3 +535,29 @@ mixin component-components(content)
 			.row
 				.col-12
 					+component({"name":"component-html-content","content":{"HTMLcontent":"<h2>Hello World</h2><p>Lorem ipsum dolor sit</p>"},"showTitle":"false","full":"false"})
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentCard").m-0 Card
+			.row
+				.offset-sm-3.col-12.col-sm-6
+					+component({"name": "component-card","id": "component-card-6949","content": {"src": "./images/monument.jpg","alt": "gsdgsdf","header": "Header","description": "Lorem ipsum","href": "www.google.es","classes": "","title": "Title","price": "18965€"},"title": "component-card","showTitle": "false","full": "true","classes": "","new": "false"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentAccordion").m-0 Accordion
+			.row
+				.col-12
+					+component({"name": "component-accordion","id": "component-accordion-6789","content": {"items": [{"header": "Opcion 1","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"},{"header": "Opcion 2","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "opened"},{"header": "Opcion 3","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"}],"collapseParent": "true"},"title": "component-accordion","showTitle": "false","full": "true","classes": "","new": "false"})
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSocialShare").m-0 Social Share
+			.row
+				.col-12
+					+component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
