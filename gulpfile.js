@@ -439,7 +439,9 @@ gulp.task('connect', function() {
 	app.get('*', function (req, res) {
 		getSitesPlugins();
 		var rules = buildRules();
-		var url = rules[req.url];
+		var url = rules[req.url.split('?')[0]];
+
+		console.log("REQUEST URL: " + url);
 
 		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.indexOf('/data/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
@@ -479,7 +481,10 @@ gulp.task('connectDev', function() {
 	app.get('*', function (req, res) {
 		getSitesPlugins();
 		var rules = buildRules();
-		var url = rules[req.url];
+		var url = rules[req.url.split('?')[0]];
+
+		console.log("REQUEST URL: " + url);
+		
 		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/data/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
 			

@@ -1,0 +1,10 @@
+script(id="filterPillsTemplate" ,type="text/x-jquery-tmpl")
+	
+	| {%each data%}
+
+	div(class="alert bg-primary text-white float-left px-1 py-1 mr-2 d-flex align-items-center mb-0", data-filter="${$index}")
+		span ${$value}
+		a(class="ml-1 text-white d-flex lh1", href="" , aria-label="Delete filter", data-filter-value="")
+			span(aria-hidden="true" class="icon-2x") &times;
+
+	| {%/each%}

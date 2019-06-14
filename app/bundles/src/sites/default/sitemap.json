@@ -774,6 +774,19 @@
                             "new": "false"
                         },
                         {
+                            "name": "component-filter-pills",
+                            "id": "component-filter-pills-7543",
+                            "content": {
+                                "rel": "",
+                                "ignored": "filtro6_group1"
+                            },
+                            "title": "component-filter-pills",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
                             "name": "component-data-list",
                             "id": "component-data-list-5940",
                             "content": {

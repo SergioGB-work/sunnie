@@ -1,0 +1,15 @@
+{
+	"config":[
+		{
+			"label":"Rel",
+			"name":"rel",
+			"type":"text"
+		},
+		{
+			"label":"Ignored Params(separated with ,)",
+			"name":"ignored",
+			"type":"text"
+		}
+
+	]
+}

@@ -732,12 +732,12 @@ function filters(el) {
 				}
 				finalHref = finalHref.substring(0, finalHref.length - 1);
 			}
-
 			for (var i = 0; i < filtersSearch.length; i++) {
 
 				filter = filtersSearch[i].split('=');
 
 				if (filter[0] != "filter[skip]") {
+
 					if (($(this).data('filter-value').toString() != '' && (!filterParent.hasClass('checkbox'))) || ($(this).data('filter-value').toString() != '' && (filterParent.hasClass('checkbox')) && (!filterParent.hasClass('active')))) {
 						if (finalHref.indexOf(filter[0] + '=') < 0) {
 
@@ -747,7 +747,6 @@ function filters(el) {
 
 							finalHref += filtersSearch[i];
 						}
-
 					}
 
 					else if ((dataFilter.indexOf(filter[0]) < 0 && !filterParent.hasClass('checkbox')) || (dataFilter.indexOf(filter[0]) < 0 && filterParent.hasClass('checkbox') && filterParent.hasClass('active'))) {
@@ -760,8 +759,8 @@ function filters(el) {
 					}
 
 				}
-
 			}
+
 			if ($(this).is('a')) {
 				$(this).attr('href', '?' + finalHref);
 				if (filterParent.hasClass('active')) {
