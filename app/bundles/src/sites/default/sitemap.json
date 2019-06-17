@@ -541,6 +541,16 @@
                                                 "text": "Social Share",
                                                 "href": "#componentSocialShare",
                                                 "title": "${{ default.goToComponent }}$ Social Share"
+                                            },
+                                            {
+                                                "text": "Data List",
+                                                "href": "#componentDataList",
+                                                "title": "${{ default.goToComponent }}$ Data List"
+                                            },
+                                            {
+                                                "text": "Filter Pills",
+                                                "href": "#componentFilterPills",
+                                                "title": "${{ default.goToComponent }}$ Filter Pills"
                                             }
                                         ]
                                     }

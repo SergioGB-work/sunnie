@@ -316,6 +316,36 @@ mixin component-components(content)
 					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component({"name":"component-card","content":{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},"showTitle":"false","full":"true"})
+		
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Data List
+					p Este componente permite realizar la carga de datos dinámicos provenientes de un servicio y mostrar a través de una plantilla.
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-data-list"
+						li <strong>service:</strong> URL del servicio REST que se desea consumir
+						li <strong>method:</strong> Método de la petición. GET o POST
+						li <strong>static_code:</strong> Código estático de la plantilla. HTML
+						li <strong>template:</strong> ID de la plantilla
+						li <strong>template_code:</strong> Código dinámico de la plantilla. jQuery TMPL
+						li <strong>target:</strong> Selector CSS donde se va a colocar el código generado por la plantilla
+						li <strong>initial_page:</strong> Página inicial a cargar si los datos son paginados
+						li <strong>items_per_page:</strong> Número de items a mostrar por cada página
+						li <strong>aditionalData:</strong> Datos adicionales a enviar el en body de la petición
+						li <strong>callback:</strong> Función javascript a ejecutar una vez se han cargado los datos del servicio
+						li <strong>content:</strong> Parámetros adicionales que se le pueden enviar al callback desde el origen de la petición
+						li <strong>enable_get_params:</strong> Habilita que los datos del servicio se vean afectados por los parámetros GET de la URL. Estos parámetros se transforman en variables que se envían al servicio en la propia petición.
+						li <strong>get_params_list:</strong> Si es definido, solo se filtrarán los datos por los parámetros aquí definidos
+						li <strong>rel:</strong> Permite crear grupos de datos de tal forma que solo le afecten aquellos filtros que estén dentro del grupo de datos indicado
+						li <strong>live_reload:</strong> Permite activar la recarga automática de datos
+						li <strong>time_reload:</strong> Intervalo de tiempo que establece cada cuanto se deben recargar los datos
+						li <strong>cache:</strong> Si se activa, los datos devueltos por el servicio se almacenarán en sessionstorage.
+						li <strong>pagination:</strong> Activa la paginación de los datos si el servicio original es capaz de hacerlo
+
+
 		.col-12.col-sm-6.col-lg-4
 			.card
 				.card-body
@@ -415,7 +445,19 @@ mixin component-components(content)
 					pre
 						| +component({"name":"component-accordion","content":{"items": [{"header": "Opcion 1","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"},{"header": "Opcion 2","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "opened"},{"header": "Opcion 3","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"}],"collapseParent": "true"},"showTitle":"false","full":"true"})
 
-						
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Filter Pills
+					p Este componete muestra una pildoras a partir de los parámetros GET de la URL. A través de su configuración se puede gestionar que pildoras se desea que muestre en función del grupo de datos o ignorar las que se desee. Cada pildora dispone de una X que al ser pulsada elimina ese filtro de la URL permitiendo a este componete funcionar conjuntamente con el componente data-list.
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-filter-pills"							
+						li <strong>rel:</strong> Mostrará solo aquelloos filtros asociados a los grupos de datos definidos. Se puede definir mas de un grupo separandolos por ,
+						li <strong>ignored:</strong> Permite ignorar los filtros que se deseen separándolos por ,
+
+
+					
 	.row
 		.col-12
 			h2#ejemplos ${{ components.examples }}$
