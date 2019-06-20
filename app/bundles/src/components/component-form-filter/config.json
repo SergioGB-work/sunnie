@@ -1,0 +1,198 @@
+{
+	"config":[
+		{
+			"label":"Form Filter",
+			"name":"formFilter",
+			"type":"select",
+			"options": [
+				{
+					"label":"Si",
+					"value":"true"
+				},
+				{
+					"label":"No",
+					"value":"false"
+				}				
+			]			
+		},
+		{
+			"label":"Action",
+			"name":"action",
+			"type":"text",
+			"visibility":"hidden"
+		},
+		{
+			"label":"Method",
+			"name":"method",
+			"type":"select",
+			"options": [
+				{
+					"label":"POST",
+					"value":"true"
+				},
+				{
+					"label":"GET",
+					"value":"no"
+				}				
+			],
+			"visibility":"hidden"			
+		},
+		{
+			"label":"Callback",
+			"name":"callback",
+			"type":"text",
+			"visibility":"hidden"
+		},				
+		{
+			"label":"Rel",
+			"name":"rel",
+			"type":"text"
+		},		
+		{
+			"label":"Form Inputs",
+			"name":"items",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"Label",
+					"name":"label",
+					"type":"text"
+				},
+				{
+					"id":"typeInputSelector",
+					"label":"Input Type",
+					"name":"type",
+					"type":"select",
+					"options": [
+
+						{
+							"label":"Text",
+							"value":"text"
+						},
+						{
+							"label":"Number",
+							"value":"number"
+						},
+						{
+							"label":"Email",
+							"value":"email"
+						},
+						{
+							"label":"Select",
+							"value":"select"
+						},
+						{
+							"label":"Checkbox",
+							"value":"checkbox"
+						},
+						{
+							"label":"Radio",
+							"value":"radio"
+						},
+						{
+							"label":"Textarea",
+							"value":"textarea"
+						}					
+					]
+				},
+				{
+					"label":"Select Values",
+					"name":"selectValues",
+					"type":"array",
+					"arrayContent":[
+						{
+							"label":"Text",
+							"name":"text",
+							"type":"text"
+						},
+						{
+							"label":"Value",
+							"name":"value",
+							"type":"text"
+						}						
+					],
+					"visibility":"hidden"
+				},
+				{
+					"label":"Name",
+					"name":"name",
+					"type":"text"
+				},
+				{
+					"label":"Placeholder",
+					"name":"placeholder",
+					"type":"text"
+				},
+				{
+					"label":"Help text",
+					"name":"helpText",
+					"type":"text"
+				},				
+				{
+					"label":"Default Value",
+					"name":"value",
+					"type":"text"
+				},				
+				{
+					"label":"Required",
+					"name":"required",
+					"type":"select",
+					"options":[
+						{
+							"label":"No",
+							"value":"false"
+						},
+						{
+							"label":"Si",
+							"value":"true"
+						}
+					]
+				},
+				{
+					"label":"Input Size",
+					"name":"size",
+					"type":"select",
+					"options":[
+						{
+							"label":"Col 12",
+							"value":"col-12"
+						},
+						{
+							"label":"Col 9",
+							"value":"col-9"
+						},
+						{
+							"label":"Col 8",
+							"value":"col-8"
+						},
+						{
+							"label":"Col 7",
+							"value":"col-7"
+						},
+						{
+							"label":"Col 6",
+							"value":"col-6"
+						},
+						{
+							"label":"Col 5",
+							"value":"col-5"
+						},
+						{
+							"label":"Col 4",
+							"value":"col-4"
+						},
+						{
+							"label":"Col 3",
+							"value":"col-3"
+						}						
+					]
+				},
+				{
+					"label":"Regular Expression",
+					"name":"regExp",
+					"type":"text"
+				}			
+			]
+		}
+	]
+}

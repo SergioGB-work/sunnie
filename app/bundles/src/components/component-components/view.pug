@@ -222,6 +222,36 @@ mixin component-components(content)
 						| +component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
 
 
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Form Filter
+					p Este componente permite generar formularios dinámicos. Dicho formularios puede funcionar como un formuario tradicional al que indicarle un action y enviará toda la información a dicho servicio o podrá funcionar como un filtro, en cuyo caso al enviar el formularios recargará la página publicando los datos en la URL como parametros GET para que puedan ser consumidos por otro componente.
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-form-filter"
+						li <strong>formFilter:</strong> Si se selecciona a "true" el formulario funcionará como un filtro
+						li <strong>action:</strong> Si el formulario funciona de la forma tradional, este campo es el servicio al que enviar los datos
+						li <strong>method:</strong> Método POST o GET del servicio al que se envian los datos
+						li <strong>callback:</strong> Función javascript a ejecutar una vez se envían los datos y el servicio responde correctamente.
+						li <strong>rel:</strong> Permite crear grupos de datos de tal forma que el formulario publicará los filtros en el grupo de datos indicado. Se debe separar por , si se desea indicar más de un grupo 
+						li <strong>items:</strong> Array de los datos de los inputs que formarán el formulario
+							ul
+								li <strong>label:</strong> Label del campo
+								li <strong>type:</strong> Tipo de campo: text, select, number, etc...
+								li <strong>selectValues:</strong> En caso de haber seleccionado tipo select serán los options del select
+									ul
+										li <strong>text:</strong> Texto del option
+										li <strong>value:</strong> Valor del option
+
+								li <strong>name:</strong> Name del campo 		
+								li <strong>placeholder:</strong> Placeholder del campo 		
+								li <strong>helpText:</strong> Texto en formato tooltip que sirve de ayuda para el campo
+								li <strong>value:</strong> Valor por defecto del campo
+								li <strong>required:</strong> Indica si el campo es requerido o no. "true" o "false"
+								li <strong>size:</strong> Tamaño del campo. Utiliza las clases de bootstrap 4
+								li <strong>regExp:</strong> Expresion regular para validar el campo
+
 		.col-12.col-sm-6.col-lg-4
 			.card
 				.card-body

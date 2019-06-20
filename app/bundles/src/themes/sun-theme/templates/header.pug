@@ -10,3 +10,12 @@ div(id="top-bar")
 	+component({'name':'component-languageSelector','id':'id1','showTitle':'false', 'classes':'ml-3'})
 
 	+component({'name':'component-siteSelector','id':'id1','showTitle':'false'})
+
+
+	.component.version-selector
+		div(class="dropdown")
+			a(class="btn btn-link dropdown-toggle h-100 text-white d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") 3.X
+
+			div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+				a(class="dropdown-item" href="https://www.sunniejs.com") 1.X
+				a(class="dropdown-item" href="#") 3.X

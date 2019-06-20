@@ -417,10 +417,6 @@ mixin component-data-definitions(content)
 									th ${{ data-definitions.dataFormTableTH3 }}$
 							tbody
 								tr
-									td <strong>toggle</strong>
-									td ${{ data-definitions.dataFormTableContainerToggleDescription }}$
-									td data-toggle="validator"
-								tr
 									td <strong>action</strong>
 									td ${{ data-definitions.dataFormTableContainerActionDescription }}$
 									td data-action=api +"/usuario/add"
@@ -444,7 +440,7 @@ mixin component-data-definitions(content)
 					h3 ${{ data-definitions.dataExampleTitle }}$
 
 					pre
-						| form(data-toggle="validator",role="form",data-callback="callbackAddUser",data-method="POST",data-action=api + "/usuarios")
+						| form(role="form",data-callback="callbackAddUser",data-method="POST",data-action=api + "/usuarios")
 
 						|    .row
 						|        .col-md-6.col-12

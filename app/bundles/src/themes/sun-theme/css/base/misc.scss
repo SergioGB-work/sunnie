@@ -305,6 +305,10 @@ legend{
 	}
 }
 
+.tooltip-inner{
+	border:1px solid $tooltip-arrow-color;
+}
+
 @include media-breakpoint-up(sm) {
 	.container-fluid{
 		padding-left: $grid-gutter-width/2;

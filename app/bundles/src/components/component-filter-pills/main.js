@@ -55,7 +55,9 @@ $(document).ready(function(){
 
 		});
 
-		filters($('[data="filters"]'));
+		$('.component-filter-pills [data="filters"]').each(function () {
+			filters($(this));
+		});
 	};
 
 });

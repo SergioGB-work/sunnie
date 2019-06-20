@@ -551,6 +551,11 @@
                                                 "text": "Filter Pills",
                                                 "href": "#componentFilterPills",
                                                 "title": "${{ default.goToComponent }}$ Filter Pills"
+                                            },
+                                            {
+                                                "text": "Form Filter",
+                                                "href": "#componentFormFilter",
+                                                "title": "${{ default.goToComponent }}$ Form Filter"
                                             }
                                         ]
                                     }
@@ -784,15 +789,243 @@
                             "new": "false"
                         },
                         {
+                            "name": "component-form-filter",
+                            "id": "component-form-filter-824",
+                            "content": {
+                                "formFilter": "true",
+                                "action": "",
+                                "method": "true",
+                                "callback": "",
+                                "rel": "",
+                                "items": [
+                                    {
+                                        "label": "Cliente",
+                                        "type": "number",
+                                        "selectValues": [
+                                            {
+                                                "text": "Cliente1",
+                                                "value": "client"
+                                            },
+                                            {
+                                                "text": "Cliente 2",
+                                                "value": "clien2"
+                                            }
+                                        ],
+                                        "name": "cliente",
+                                        "placeholder": "El nombre del cliente",
+                                        "helpText": "hola cliente",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Selector",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Opcion abc",
+                                                "value": "abc"
+                                            },
+                                            {
+                                                "text": "Opción def",
+                                                "value": "def"
+                                            },
+                                            {
+                                                "text": "Otra",
+                                                "value": "otra"
+                                            }
+                                        ],
+                                        "name": "selector",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-form-filter",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
                             "name": "component-filter-pills",
                             "id": "component-filter-pills-7543",
                             "content": {
-                                "rel": "",
-                                "ignored": "filtro6_group1"
+                                "rel": "group",
+                                "ignored": ""
                             },
                             "title": "component-filter-pills",
                             "showTitle": "false",
                             "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-banner",
+                            "id": "component-banner-3417",
+                            "content": {
+                                "src": "",
+                                "alt": "",
+                                "longdesc": "",
+                                "href": "",
+                                "title": "",
+                                "target": "",
+                                "responsiveSRC": "",
+                                "srcset": ""
+                            },
+                            "title": "component-banner",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-form-filter",
+                            "id": "component-form-filter-252",
+                            "content": {
+                                "formFilter": "true",
+                                "action": "",
+                                "method": "true",
+                                "callback": "",
+                                "rel": "group",
+                                "items": [
+                                    {
+                                        "label": "Nombre",
+                                        "type": "text",
+                                        "name": "nombre",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Email",
+                                        "type": "text",
+                                        "name": "email",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Telefono",
+                                        "type": "text",
+                                        "selectValues": [
+                                            {
+                                                "text": "Todos",
+                                                "value": ""
+                                            },
+                                            {
+                                                "text": "Opcion 3",
+                                                "value": "option3"
+                                            },
+                                            {
+                                                "text": "Opcion 4",
+                                                "value": "option4"
+                                            }
+                                        ],
+                                        "name": "telefono",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Comentario",
+                                        "type": "textarea",
+                                        "name": "comentario",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-12",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Estado",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Todos",
+                                                "value": ""
+                                            },
+                                            {
+                                                "text": "Opcion 1",
+                                                "value": "option1"
+                                            },
+                                            {
+                                                "text": "Opcion 2",
+                                                "value": "option2"
+                                            }
+                                        ],
+                                        "name": "status",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Precio 1-99",
+                                        "type": "radio",
+                                        "name": "precio",
+                                        "placeholder": "",
+                                        "helpText": "Texto de ayuda1",
+                                        "value": "precio1",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Precio 100-999",
+                                        "type": "radio",
+                                        "name": "precio",
+                                        "placeholder": "",
+                                        "helpText": "Texto de ayuda2",
+                                        "value": "precio2",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Todos",
+                                        "type": "radio",
+                                        "name": "precio",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    },
+                                    {
+                                        "label": "Oferta",
+                                        "type": "checkbox",
+                                        "name": "oferta",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "activo",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-form-filter",
+                            "showTitle": "true",
+                            "full": "false",
                             "classes": "",
                             "new": "false"
                         },
@@ -817,7 +1050,8 @@
                                 "live_reload": "false",
                                 "time_reload": "",
                                 "cache": "false",
-                                "pagination": "false"
+                                "pagination": "false",
+                                "itemsPerPageSelector": "true"
                             },
                             "title": "component-data-list",
                             "showTitle": "false",
@@ -886,21 +1120,23 @@
                             "new": "false"
                         },
                         {
-                            "name": "component-slider",
-                            "id": "component-slider-4200",
+                            "name": "component-cards-list-carousel",
+                            "id": "component-cards-list-carousel-1846",
                             "content": {
-                                "items": {
-                                    "src": "",
-                                    "alt": "",
-                                    "longdesc": "",
-                                    "href": "",
-                                    "title": "",
-                                    "target": "",
-                                    "responsiveSRC": "",
-                                    "srcset": ""
-                                }
+                                "items": [
+                                    {
+                                        "src": "",
+                                        "alt": "",
+                                        "header": "",
+                                        "description": "",
+                                        "href": "",
+                                        "classes": "",
+                                        "title": "",
+                                        "price": ""
+                                    }
+                                ]
                             },
-                            "title": "component-slider",
+                            "title": "component-cards-list-carousel",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",
@@ -911,60 +1147,6 @@
                             "id": "component-sample-5763",
                             "content": "",
                             "title": "component-sample",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        },
-                        {
-                            "name": "component-highlighted-side-image",
-                            "id": "component-highlighted-side-image-3894",
-                            "content": {
-                                "position": "",
-                                "image": [
-                                    {
-                                        "src": "",
-                                        "alt": ""
-                                    }
-                                ],
-                                "content": "",
-                                "button": [
-                                    {
-                                        "href": "",
-                                        "title": "",
-                                        "text": ""
-                                    }
-                                ]
-                            },
-                            "title": "component-highlighted-side-image",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        },
-                        {
-                            "name": "component-image",
-                            "id": "component-image-1840",
-                            "content": {
-                                "src": "",
-                                "alt": "",
-                                "longdesc": "",
-                                "responsiveSRC": "",
-                                "srcset": ""
-                            },
-                            "title": "component-image",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        },
-                        {
-                            "name": "component-slider",
-                            "id": "component-slider-3047",
-                            "content": {
-                                "items": ""
-                            },
-                            "title": "component-slider",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",

@@ -78,27 +78,30 @@ block modal-body
 					.row
 						| {%each data.config%}
 						| ${( $data.requiredField = $value.required == true ? "required" : "" ) ,''}
-						| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+						| ${( $data.id = $value.id !== undefined && $value.id !== '' ? $value.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
+						| ${( $data.show = $value.visibility == "hidden" ? 'd-none' : '' ),''}
+
 
 						| {%if $value.type == "checkbox" || $value.type =="radio" %}
 
 						| ${( $data.checked = data.content[name] == 'true' ? "checked" : "" ) ,''}
-						div(class="form-group col-md-4 col-12 pt-8")
+						div(class="form-group col-md-4 col-12 pt-8 ${show}")
 							div(class="custom-control custom-${$value.type}")
-								input(class="custom-control-input",type="${$value.type}",id="input${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
-								label(class="custom-control-label" for="input${id}") ${$value.label}
+								input(class="custom-control-input",type="${$value.type}",id="${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
+								label(class="custom-control-label" for="${id}") ${$value.label}
 
 						| {%elseif $value.type == "textarea" %}
-						div(class="form-group col-12")
-							label(for="input${id}",class="uppercase") ${$value.label}
-							textarea(name="${$value.name}", id="input${id}",class="form-control",${requiredField}) ${data.content[name]}
+						div(class="form-group col-12 ${show}")
+							label(for="${id}",class="uppercase") ${$value.label}
+							textarea(name="${$value.name}", id="${id}",class="form-control",${requiredField}) ${data.content[name]}
 
 						| {%elseif $value.type == "select" %}
 
-						div(class="form-group col-md-4 col-12")
+						div(class="form-group col-md-4 col-12 ${show}")
 							
-							label(for="input${id}",class="uppercase") ${$value.label}
-							select(name="${$value.name}", id="input${id}", class="form-control",${requiredField})
+							label(for="${id}",class="uppercase") ${$value.label}
+							select(name="${$value.name}", id="${id}", class="form-control",${requiredField})
 
 								| {%each(key,val) $value.options%}
 								| ${( $data.selected = val.value == data.content[name] ? "selected" : "" ) ,''}
@@ -106,7 +109,8 @@ block modal-body
 								| {%/each%}
 
 						| {%elseif $value.type == "array" %}
-						.col-12.form-group
+
+						.col-12.form-group(class="${show}")
 
 							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
 
@@ -124,30 +128,81 @@ block modal-body
 
 												| {%each(key,val) $data.dataContent%}
 												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
-												| ${( $data.id2 = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+												| ${( $data.id2 = val.id !== undefined && val.id !== '' ? val.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' +parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
 
 												| {%if val.type == "checkbox" || val.type =="radio" %}
-												div(class="form-group col-md-4 col-12 pt-8")
+												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}")
 													div(class="custom-control custom-${val.type}")
-														input(class="custom-control-input",type="${val.type}",id="input${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked})
-														label(class="custom-control-label" for="input${id2}") ${val.label}
+														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked})
+														label(class="custom-control-label" for="${id2}") ${val.label}
 												| {%elseif val.type == "select" %}
 
-												div(class="form-group col-md-4 col-12")
+												div(class="form-group col-md-4 col-12 ${visibility2}")
 													
-													label(for="input${id2}",class="uppercase") ${val.label}
-													select(name="${val.name}", id="input${id2}", class="form-control",${requiredField})
+													label(for="${id2}",class="uppercase") ${val.label}
+													select(name="${val.name}", id="${id2}", class="form-control",${requiredField})
 
 														| {%each(key2,val2) val.options%}
 														| ${( $data.selected = val2.value == itemVal[val.name] ? "selected" : "" ) ,''}
 														option(value="${val2.value}",${selected} ) ${val2.label}
 														| {%/each%}
 
+												| {%elseif val.type == "array" %}	
+													
+												.col-12.form-group(class="${visibility2}")
+													| ${( $data.isSubArray = val.type=="array" ? 'data-block-type=array' : '' ),''}
+													
+													fieldset( ${isSubArray} data-form-group="${val.name}")
+														legend ${val.label}
+														.row.position-relative
+															.col-12
+
+																| {%each(itemKey2, itemVal2) itemVal[val.name] %}
+																
+																.fieldset(data-array-id="${itemKey2}",class="mt-3")
+																	.row
+
+																		| ${( $data.dataContent2 = val.arrayContent ||  val.content || [] ) ,''}
+
+																		| {%each(key2,val2) $data.dataContent2%}
+																		| ${( $data.requiredField3 = val2.required == true ? "required" : "" ) ,''}
+																		| ${( $data.id3 = val2.id !== undefined && val2.id !== '' ? val2.id+ parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
+																		| {%if val2.type == "checkbox" || val2.type =="radio" %}
+																		div(class="form-group col-md-4 col-12 pt-8")
+																			div(class="custom-control custom-${val2.type}")
+																				input(class="custom-control-input",type="${val2.type}",id="${id3}",name="${val2.name}",value="${val2.value}",${requiredField2},${checked})
+																				label(class="custom-control-label" for="${id3}") ${val2.label}
+																		| {%elseif val2.type == "select" %}
+
+																		div(class="form-group col-md-4 col-12")
+																			
+																			label(for="${id3}",class="uppercase") ${val2.label}
+																			select(name="${val2.name}", id="${id3}", class="form-control",${requiredField2})
+
+																				| {%each(key3,val3) val2.options%}
+																				| ${( $data.selected2 = val3.value == itemVal2[val2.name] ? "selected" : "" ) ,''}
+																				option(value="${val3.value}",${selected2} ) ${val3.label}
+																				| {%/each%}
+
+																		| {%else%}
+																		div(class="form-group col-md-4 col-12 mb-md-0")
+																			label(for="${id3}",class="uppercase") ${val2.label}
+																			input(type="${val2.type}",name="${val2.name}",id="${id3}",class="form-control", value="${itemVal2[val2.name]}",${requiredField3})
+																		| {%/if%}		
+																		| {%/each%}
+
+																		| {%if $value.type == "array"%}
+																		div(class="addItem fa fa-plus mr-1")
+																		div(class="deleteItem fa fa-minus")
+																		| {%/if%}
+																| {%/each%}
 
 												| {%else%}
-												div(class="form-group col-md-4 col-12 mb-md-0")
-													label(for="input${id2}",class="uppercase") ${val.label}
-													input(type="${val.type}",name="${val.name}",id="input${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
+												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}")
+													label(for="${id2}",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
 												| {%/if%}		
 												| {%/each%}
 
@@ -158,7 +213,7 @@ block modal-body
 										| {%/each%}
 
 						| {%elseif $value.type == "group"  %}
-						.col-12.form-group
+						.col-12.form-group(class="${show}")
 
 							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
 
@@ -175,16 +230,17 @@ block modal-body
 
 												| {%each(key,val) $data.dataContent%}
 												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
-												| ${( $data.id2 = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+												| ${( $data.id2 = val.id !== undefined && val.id !== '' ? val.id+ parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
 
 												| {%if val.type == "checkbox" || val.type =="radio" %}
 
 												| {%elseif val.type == "select" %}
 
-												div(class="form-group col-md-4 col-12")
+												div(class="form-group col-md-4 col-12 ${visibility2}")
 													
-													label(for="input${id2}",class="uppercase") ${val.label}
-													select(name="${val.name}", id="input${id2}", class="form-control",${requiredField2})
+													label(for="${id2}",class="uppercase") ${val.label}
+													select(name="${val.name}", id="${id2}", class="form-control",${requiredField2})
 
 														| {%each(key2,val2) val.options%}
 														| ${( $data.selected = val2.value == itemVal[val.name] ? "selected" : "" ) ,''}
@@ -192,9 +248,9 @@ block modal-body
 														| {%/each%}
 
 												| {%else%}
-												div(class="form-group col-md-4 col-12 mb-md-0")
-													label(for="input${id2}",class="uppercase") ${val.label}
-													input(type="${val.type}",name="${val.name}",id="input${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
+												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}")
+													label(for="${id2}",class="uppercase") ${val.label}
+													input(type="${val.type}",name="${val.name}",id="${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
 												| {%/if%}		
 												| {%/each%}
 
@@ -203,9 +259,9 @@ block modal-body
 												div(class="deleteItem fa fa-minus")
 												| {%/if%}													
 						| {%else%}
-						div(class="form-group col-md-4 col-12")
-							label(for="input${id}",class="uppercase") ${$value.label}
-							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="input${id}",class="form-control",${requiredField})
+						div(class="form-group col-md-4 col-12 ${show}")
+							label(for="${id}",class="uppercase") ${$value.label}
+							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="${id}",class="form-control",${requiredField})
 
 						| {%/if%}
 

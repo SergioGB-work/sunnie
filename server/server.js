@@ -235,35 +235,9 @@ gulp.task('apiServer', function() {
 		var configComponent = getComponentConfig(componentName);
 
 
-		configComponent.config.forEach(function(element,i){
+		
 
-			if(element.type=="array"){
-				var itemArray = {}
-
-				element.arrayContent.forEach(function(item,index){
-					itemArray[item.name]=''
-				});
-
-				componentContent[element.name]=[itemArray];	
-			}
-
-			else if(element.type=="group"){
-				var itemGroup = {}
-
-				element.content.forEach(function(item,index){
-					itemGroup[item.name]=''
-				});
-
-				componentContent[element.name]=[itemGroup];	
-			}
-
-			else{
-				componentContent[element.name]='';
-			}
-
-		});	
-
-		console.log(componentContent);
+		componentContent = buildDefaultComponentData(configComponent.config, componentContent)
 
 		var newComponent = {
 			"name":componentName,
@@ -794,5 +768,30 @@ function getURLSite(site){
 	else{
 		return pathPlugins + '/sites/' + site;
 	}
+
+}
+
+function buildDefaultComponentData(config, componentContent){
+
+	var componentContent = componentContent || {};
+
+	config.forEach(function(element,i){
+
+		if(element.type=="array"){
+			componentContent[element.name] = [];
+			componentContent[element.name].push(buildDefaultComponentData(element.arrayContent));
+		}
+
+		else if(element.type=="group"){
+			componentContent[element.name] = buildDefaultComponentData(element.content);
+		}
+
+		else{
+			componentContent[element.name]='';
+		}
+
+	});	
+
+	return componentContent;
 
 }

@@ -37,7 +37,7 @@ $(document).ready(function(){
 		var data = {};
 		var form = $(this);
 
-		var rel = $(this).find('[data="filters"][data-rel]').data('rel') || '';
+		var rel = $(this).data('rel') || '';
 
 		if (rel != '' && rel !== undefined) {
 			rel = rel.split(',');
@@ -49,89 +49,47 @@ $(document).ready(function(){
 
 		var emptyVars = '';
 		var arraysArrays = [];
+		var newGroup = [];
 
 		form.find('input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked,input[type="checkbox"]:checked').each(function () {
 
 			var value = $(this).val();
 			var name = $(this).attr('name');
-			var groups = $(this).closest('[data-form-group]').length > 0 ? $(this).parents('[data-form-group]') : '';	
-			var array = $(this).closest('[data-block-type]').length > 0 ? true : false ; 
-			var arrayID = $(this).closest('[data-array-id]').length > 0 ? $(this).closest('[data-array-id]').data('array-id') : '' ; 
+			var group = $(this).parents('[data-form-group]:last');
 		    
-			var group = '';
-			if(groups != ''){
-				$($(this).parents('[data-form-group]').get().reverse()).each(function(){
+			//Solo se procesa si es un input hijo directo del form o si es un group hijo directo del form.
+			if(group.length >= 1){
 
-					var current = ('["'+$(this).data("form-group")+'"]');	
-					group = group.concat(current);
-
-					eval("data" + group +" = " + "data" + group +" != '' && "+ "data" + group + " !== undefined ? "+ "data" + group + " : {} ");
-
-
-				});
-				 
-
-				if(array){
-					eval("data" + group +" = " + "!$.isEmptyObject( data" + group +" ) ? "+ "data" + group + " : [] ");
-				}
-				else if(group != ''){
-					eval("data" + group +" = " + "data" + group +" != '' && "+ "data" + group + " !== undefined ? "+ "data" + group + " : {} ");
+				if(!newGroup.includes(group.data('form-group'))){
+					data = Object.assign(data, buildSitemapForm(group) );
+					newGroup.push(group.data('form-group'));
 				}
 
-				group = "data" + group;
-
-			}	
-
-			if (form.data('form-filter') != true || value != '') {
+			}
+			else if(group.length <= 0 && value != ''){
 				if (rel != '') {
 					$.each(rel, function (index, elem) {
-						if(group != ''){
-							var key = name + element;
-							var newValue = {};
-							newValue[name] = value;
-							data[group] = Object.assign(data[group], newValue);
-						}
-						else{
+						{
 							data[name + elem] = value;
 						}
 					})
-				}
-				else {
-
-					if(array){	
-						eval(group +"[arrayID] = "+group+"[arrayID] != '' && "+group+"[arrayID] !== undefined ? "+group+"[arrayID] : {} ");
-						var newValue = {};
-						newValue[name] = value;
-
-						eval(group+"[arrayID] = Object.assign("+group+"[arrayID],newValue)");
-					}
-
-					else if(group != ''){
-						var newValue = {};
-						newValue[name] = value;
-						eval(group+" = Object.assign("+group+", newValue)");
-					}
-					else{
-						data[name] = value;
-					}
+				}	
+				else{
+					data[name] = value;
 				}
 			}
 
-			else if (form.data('form-filter') == true && value == '') {
+			if (form.data('form-filter') == true && value == '') {
 				if (rel != '') {
 					$.each(rel, function (index, elem) {
 
-						if (value == '') {
-							emptyVars += name + elem + '&';
-						}
+						emptyVars += name + elem + '&';
 
 					})
 				}
 				else {
 
-					if (value == '') {
-						emptyVars += name + '&';
-					}
+					emptyVars += name + '&';
 				}
 			}
 
@@ -160,16 +118,19 @@ $(document).ready(function(){
 			getData(params);
 		}
 		else {
+
 			var filters = JSON.stringify(data);
+
 			filters = filters.replace(/:/g, '=').replace(/"/g, '').replace(/,/g, '&').replace('{', '').replace('}', '').replace(/%5Blike%3D%5D=/g, '=[like]%3D');
 			var search = window.location.search.replace('?', '');
 			filtersSearch = search.split('&');
 			for (var i = 0; i < filtersSearch.length; i++) {
 				filter = filtersSearch[i].split('=');
-				if (filters.indexOf(filter[0] + '=') < 0 && emptyVars.indexOf(filter[0]) < 0 && filter[0] != 'filter[skip]') {
+				if (filters.indexOf(filter[0] + '=') < 0 && emptyVars.indexOf(filter[0]) < 0 && filter[0] != 'filter[skip]' && (form.find('input[name = "'+filter[0]+'"]:checkbox').not(':checked').length <= 0)) {
 					filters += '&' + filter[0] + '=' + filter[1]
 				}
 			}
+			
 			filters = (filters[0] == '&') ? filters.substr(1) : filters;
 			url = form.attr('data-action') + '?' + filters;
 			window.location.href = url;
@@ -188,6 +149,12 @@ $(document).ready(function(){
 
 	$('[data-search="true"]').each(function(e){
 		dataSearch();
+	});
+
+	// SETEAR EL VALOR POR DEFECTO A PARTIR DE LOS PARAMETROS DE LA URL
+
+	$('[data-get-default-value]').each(function(e){
+		setDefaultValue($(this));
 	});	
 
 	// ACTIVACION DE POPOVERS
@@ -235,8 +202,7 @@ $(document).ready(function(){
 
 	//FILTROS DE LISTADOS
 
-	if ($('[data="filters"]').length > 0) {
-
+	if ($('[data="filters"]').length > 0) {	
 		$('[data="filters"]').each(function () {
 			filters($(this));
 		});
@@ -305,8 +271,7 @@ function getData(el) {
 		enableGetParams = el.enableGetParams,
 		getParamsList = el.getParamsList,
 		cache = el.cache,
-		rel_group = [''],
-		dynamicField = el.dynamicField;
+		rel_group = [''];
 
 	if (el.rel != '' && el.rel !== undefined) {
 		rel_group = el.rel.split(',');
@@ -451,7 +416,7 @@ function getData(el) {
 				if (cache == true) {
 					sessionStorage.setItem(url + '_${{ default.lang }}$', JSON.stringify(dataResponse));
 				}
-				processData(dataResponse, target, template, callback, content, xhr.getResponseHeader('Pagination-Count'), dynamicField);
+				processData(dataResponse, target, template, callback, content, xhr.getResponseHeader('Pagination-Count'));
 	
 				if(el.pagination != undefined && el.pagination!=null){
 					generatePagination(dataResponse,el.pagination,xhr.getResponseHeader('Pagination-Count'));
@@ -479,7 +444,7 @@ function getData(el) {
 		});
 	}
 	else {
-		processData(JSON.parse(sessionStorage.getItem(url + '_${{ default.lang }}$')), target, template, callback, content, '', dynamicField)
+		processData(JSON.parse(sessionStorage.getItem(url + '_${{ default.lang }}$')), target, template, callback, content, '')
 	}
 }
 
@@ -521,7 +486,7 @@ function dataList(el){
 	}
 }
 
-function processData(dataResponse, target, template, callback, content, totalItems, dynamicFieldName) {
+function processData(dataResponse, target, template, callback, content, totalItems) {
 	var data = { "data": dataResponse };
 	var total = 1;
 	if (totalItems !== null && totalItems !== undefined && totalItems > 1) {
@@ -532,10 +497,6 @@ function processData(dataResponse, target, template, callback, content, totalIte
 	if ((target != '') && (template != '') && (template !== undefined) && (target !== undefined)) {
 		$(target).html('');
 		$(template).tmpl(data).appendTo(target);
-	}
-
-	if ((dynamicFieldName != '') && (dynamicFieldName !== undefined)) {
-		setDefaultGetParams(dynamicFieldName);
 	}
 
 	if ((callback != '') && (callback !== undefined)) {
@@ -586,10 +547,9 @@ function dataList(el) {
 		liveReload = el.data('live-reload') || 'false',
 		timeReload = el.data('time-reload') || 60000,
 		cache = el.data('cache') || 'false',
-		rel = el.data('rel') || ''
-		dynamicField = el.data('get-default-value') || '';
+		rel = el.data('rel') || '';
 	
-	var params = { "service": service, "method": method, "template": template, "target": target, "page": initial_page, "items_per_page": items_per_page, "aditionalData": aditionalData, "callback": callback, "content": content, "enableGetParams": enableGetParams, "getParamsList": getParamsList, "rel": rel, "cache": cache, "dynamicField": dynamicField};
+	var params = { "service": service, "method": method, "template": template, "target": target, "page": initial_page, "items_per_page": items_per_page, "aditionalData": aditionalData, "callback": callback, "content": content, "enableGetParams": enableGetParams, "getParamsList": getParamsList, "rel": rel, "cache": cache};
 
 	if(el.data('has-pagination')==true){	
 		var	service_data_all_pagination = el.data('pagination-service-data-all') || el.data('service-data') || '',
@@ -608,8 +568,7 @@ function dataList(el) {
 			liveReload_pagination = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
 			timeReload_pagination = el.data('pagination-time-reload') || el.data('time-reload') || 60000,
 			cache_pagination = el.data('pagination-cache') || el.data('cache') || 'false',
-			rel_pagination = el.data('pagination-rel') || el.data('rel') || '',
-			dynamicField_pagination = el.data('get-default-value') || '';
+			rel_pagination = el.data('pagination-rel') || el.data('rel') || '';
 		var paramsPagination = { service: service_data_pagination, method_pagination: method, template: template_pagination, target: target_pagination, page: initial_page_pagination, pagination_target: pagination_target_pagination, items_per_page: items_per_page_pagination, callback: callback_pagination, content: content_pagination, enableGetParams: enableGetParams_pagination, getParamsList: getParamsList_pagination, rel: rel_pagination, cache: cache_pagination };
 		params['pagination'] = paramsPagination;
 	}		
@@ -683,9 +642,7 @@ function generatePagination(data, el, totalItems) {
 
 function filters(el) {
 	var rels = el.data('rel') ? el.data('rel').split(',') : [];
-
 	el.find('[data-filter]').each(function () {
-
 		var filterParent = $(this);
 		var dataFilter = [$(this).data('filter')];
 
@@ -955,23 +912,6 @@ function dataSearch(){
 	});
 }
 
-function setDefaultGetParams(fieldName) {
-	var params = JSON.parse(JSON.stringify(getParams));
-	for (i = 0; i < Object.keys(params).length; i++) {
-		if (Object.keys(params)[i] != "filter[skip]" && Object.keys(params)[i] != "filter[limit]") {
-			var value = Object.values(params)[i];
-			var key = Object.keys(params)[i];
-			if (value.includes("[like]=")) {
-				value = value.split("[like]=")[1];
-				key += '%5Blike%3D%5D';
-			}
-			if (key == fieldName) {
-				$('[name="' + key + '"]').val(value);
-			}
-		}
-	}
-}
-
 function validateForm(el){
 
 	if(el.find('textarea:required:invalid,input:required:invalid,select:required:invalid').length > 0){
@@ -981,4 +921,111 @@ function validateForm(el){
 		return true;
 	}
 
+}
+
+function setDefaultValue(el){
+
+	var defaultValue = el.data('get-default-value');
+
+	if(el.parents('[data-rel]').length > 0){
+		defaultValue = defaultValue + '_' + el.parents('[data-rel]').data('rel');
+	}
+
+	var paramValue = getParams[defaultValue];
+
+	if(paramValue !== undefined && paramValue !== null){
+
+		if(el.is("select")){
+			el.find('option[value="'+paramValue+'"]').attr('selected','selected')
+		}
+
+		else if(el.is("textarea")){
+			el.val(paramValue);
+		}
+
+		else{
+			if(el.is(':checkbox') && el.val() == paramValue){
+				el.prop('checked',true)
+			}
+			else if(el.is(':radio') && el.val() == paramValue){
+				el.prop('checked',true)
+			}
+			else if(!el.is(':radio') && !el.is(':checkbox')){
+				el.val(paramValue);
+			}	
+		}
+	}	
+}
+
+function buildSitemapForm(elemento){ 
+	var originalGroup = elemento.data('form-group');
+	var isArray = elemento.data('block-type') == 'array' ? true : false;
+	var aux = {};
+	var data = {};
+
+	if(isArray){
+		aux[originalGroup] = [];
+		elemento.find('[data-array-id]').each(function(){
+			
+			if($(this).closest('[data-form-group]').data('form-group') == originalGroup ){
+                var arrayInputs = {};
+                var arrayGroup = [];
+
+                $(this).find('input,select,textarea').each(function(){
+                    //Caso basico
+                    if( $(this).closest('[data-form-group]').data('form-group') == originalGroup ){
+                        var name = $(this).attr('name');
+                        var value = $(this).val();
+                        arrayInputs[name]=value;
+
+                    }
+
+                    else if(!arrayGroup.includes($(this).closest('[data-form-group]').data('form-group'))){
+                        arrayInputs = Object.assign(arrayInputs,buildSitemapForm($(this).closest('[data-form-group]')));
+                        arrayGroup.push($(this).closest('[data-form-group]').data('form-group'));
+
+                    }
+
+                });	
+
+                if(JSON.stringify(arrayInputs) != '{}'){
+                    aux[originalGroup].push(arrayInputs);
+                }
+        	}
+
+		})
+	}	
+	else{
+		aux[originalGroup] = {};	
+		var arrayGroup = [];
+		var arrayInputs = {};
+		
+		elemento.find('input,select,textarea').each(function(){
+            //Caso basico
+			
+			var currentGroup = $(this).parents('[data-form-group]');
+
+            if( currentGroup.data('form-group') == originalGroup ){
+                var name = $(this).attr('name');
+                var value = $(this).val();
+                arrayInputs[name]=value;
+
+            }
+
+			else if(currentGroup.parents('[data-form-group]').data('form-group') == originalGroup ){
+                if(!arrayGroup.includes($(this).closest('[data-form-group]').data('form-group'))){
+                    arrayInputs = Object.assign(arrayInputs,buildSitemapForm($(this).closest('[data-form-group]')));
+                    arrayGroup.push($(this).closest('[data-form-group]').data('form-group'));
+
+                }
+        	}
+
+        });	
+
+		if(JSON.stringify(arrayInputs) != '{}'){
+            aux[originalGroup] = (arrayInputs);
+        }	
+	}
+
+	return aux;
 }

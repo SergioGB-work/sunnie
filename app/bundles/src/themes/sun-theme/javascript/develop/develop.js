@@ -183,6 +183,8 @@ $(document).ready(function(){
 		if(origin=='new'){
 			var id = evt.originalEvent.dataTransfer.getData("id");
 			$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
+			refreshPositions(layoutColumn);
+			refreshPositions(oldLayoutColumn);
 			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
 		}
 		else{
@@ -242,7 +244,7 @@ $(document).ready(function(){
 
 
 
-	});		
+	});	
 
 });
 
@@ -332,13 +334,13 @@ function checkThemeSelected(data,idTheme){
 }
 
 function dataComponentLoadedCallback(data){
-	loadConfigComponent();
 	dataList($('#modal-component-edit #componentName'));
 	dataList($('#modal-component-edit #layoutColumn'));
 }
 
 function checkComponentEdited(data, nameComponent){
 	$('#modal-component-edit #componentName option[value="'+nameComponent+'"]').attr('selected','selected');
+	loadConfigComponent();
 }
 
 function checkLayoutColumn(data, column){
@@ -372,5 +374,52 @@ function editSiteCallback(data){
 }
 
 function loadConfigComponent(){
-	tinymce.init({selector:'textarea'});
+
+	if($('#componentName').val() == 'component-form-filter'){
+
+		//APLICABLE SOLO AL FORM FILTER
+		$('#form-edit-component [name="type"]').change(function(){
+
+			if($(this).val() == 'select'){
+				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().removeClass('d-none');
+			}
+			else{
+				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().addClass('d-none');
+			}
+
+		})
+
+		$('#form-edit-component [name="type"]').each(function(){
+			if($(this).val() == 'select'){
+				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().removeClass('d-none');
+			}
+			else{
+				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().addClass('d-none');
+			}
+		});
+
+
+		//APLICABLE SOLO AL FORM FILTER
+		$('#form-edit-component [name="formFilter"]').change(function(){
+
+			if($(this).val() == 'false'){
+				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().removeClass('d-none');
+			}
+			else{
+				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
+			}
+
+		})
+
+
+		if($('#form-edit-component [name="formFilter"]').val() == 'false'){
+			$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().removeClass('d-none');
+		}
+		else{
+			$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
+		}
+
+
+
+	}
 }

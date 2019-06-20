@@ -1,0 +1,55 @@
+mixin component-form-filter(content)
+
+	- var items = content.items
+	- var formFilter = content.formFilter || false
+	- var action = content.action || false
+	- var method = content.method || false
+	- var callback = content.callback || false
+	- var rel = content.rel || false
+
+	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel)
+		.row
+			each item in items
+
+				- var randomID = Math.floor(Math.random() * (15 - 1300) + 1300)
+				- var customControls = item.type=='checkbox' || item.type=='radio' ? 'custom-control custom-' + item.type : ''
+				- var required = item.required == 'true' ? true : false
+				- var placeholder = item.placeholder != '' ? item.placeholder : false
+				- var regExp = item.regExp != '' ? item.regExp  : false
+
+				.form-group(class=customControls + ' ' +item.size)
+
+					if item.type=='textarea'
+						label(for="input"+randomID)
+							| #{item.label} 
+							if item.helpText != ''
+								i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
+						textarea(class="form-control", id="input" + randomID, name=item.name, required=required, placeholder=placeholder, data-get-default-value=item.name) #{item.value}
+
+					else if item.type=='checkbox' || item.type=='radio'
+						input(class="custom-control-input", type=item.type, id="input" + randomID, name=item.name, required=required, value=item.value,data-get-default-value=item.name)
+						label(for="input"+randomID, class="custom-control-label")
+							| #{item.label} 
+							if item.helpText != ''
+								i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
+
+					else if item.type=='select'
+						label(for="input"+randomID)
+							| #{item.label} 
+							if item.helpText != ''
+								i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
+						select(class="form-control", id="input" + randomID, name=item.name, required=required, data-get-default-value=item.name)
+							if item.selectValues !== undefined
+								each option in item.selectValues
+									option(value=option.value) #{option.text}
+
+					else	
+						label(for="input"+randomID)
+							| #{item.label} 
+							if item.helpText != ''
+								i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
+						input(class="form-control", type=item.type, id="input" + randomID, name=item.name, required=required, value=item.value, placeholder=placeholder, pattern=regExp, data-get-default-value=item.name)
+
+		.row
+			.form-group
+				button(class="btn btn-primary", type="submit") Filtrar

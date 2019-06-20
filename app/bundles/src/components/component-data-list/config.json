@@ -140,6 +140,21 @@
 					"value":"true"
 				}
 			]			
-		}
+		},
+		{
+			"label":"Items Per Page Selector",
+			"name":"itemsPerPageSelector",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]			
+		}		
 	]
 }
