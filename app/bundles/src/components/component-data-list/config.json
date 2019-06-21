@@ -24,7 +24,7 @@
 		{
 			"label":"Static Template(HTML)",
 			"name":"static_code",
-			"type":"text"
+			"type":"textarea"
 		},		
 		{
 			"label":"Template ID",
@@ -34,7 +34,7 @@
 		{
 			"label":"Template Code(jQuery TMPL)",
 			"name":"template_code",
-			"type":"text"
+			"type":"textarea"
 		},
 		{
 			"label":"Target",
@@ -155,6 +155,21 @@
 					"value":"true"
 				}
 			]			
-		}		
+		},
+		{
+			"label":"No Reload",
+			"name":"noReload",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		}				
 	]
 }

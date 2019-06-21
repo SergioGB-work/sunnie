@@ -419,7 +419,5 @@ function loadConfigComponent(){
 			$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
 		}
 
-
-
 	}
 }

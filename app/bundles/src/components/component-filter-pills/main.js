@@ -1,46 +1,39 @@
 $(document).ready(function(){
 
 	if($('.component-filter-pills').length > 0){
+		loadFilterPills();
+	};
 
-		$('.component-filter-pills').each(function(){
+});
 
-			var component = $(this);
-			var ignored = component.find('[data="filters"]').data('ignored') ? component.find('[data="filters"]').data('ignored').split(',') : []
+function loadFilterPills(){
 
+	$('.component-filter-pills').find('.filters-container [data-filter]').remove();
 
-			if(component.find('[data="filters"][data-rel]').length > 0){
-			
-				component.find('[data="filters"][data-rel]').each(function(){
+	$('.component-filter-pills').each(function(){
 
-					var valueRel = $(this).data('rel');
-					var filters = JSON.stringify(getParams);
-					filters = JSON.parse(filters);
-
-					Object.keys(filters).forEach(function(key) {
-						if(key.indexOf('_' + valueRel) < 0){
-							delete filters[key];
-						}
-
-					});
+		var component = $(this);
+		var ignored = component.find('[data="filters"]').data('ignored') ? component.find('[data="filters"]').data('ignored').split(',') : []
 
 
-					filters = JSON.parse(JSON.stringify(filters).split('_'+valueRel).join(''));
+		if(component.find('[data="filters"][data-rel]').length > 0){
+		
+			component.find('[data="filters"][data-rel]').each(function(){
 
-					ignored.forEach(function(key) {
-						
-						if(filters[key] !== undefined && filters[key] !== null && filters[key] != ''){
-							delete filters[key];
-						}
+				var valueRel = $(this).data('rel');
+				var filters = JSON.stringify(getParams);
+				filters = JSON.parse(filters);
 
-					});
-
-					$('#filterPillsTemplate').tmpl({"data":filters}).appendTo(component.find('.filters-container[data-rel="'+valueRel+'"]'));
+				Object.keys(filters).forEach(function(key) {
+					if(key.indexOf('_' + valueRel) < 0){
+						delete filters[key];
+					}
 
 				});
-			}
-			else{
 
-				var filters = getParams;
+
+				filters = JSON.parse(JSON.stringify(filters).split('_'+valueRel).join(''));
+
 				ignored.forEach(function(key) {
 					
 					if(filters[key] !== undefined && filters[key] !== null && filters[key] != ''){
@@ -49,15 +42,28 @@ $(document).ready(function(){
 
 				});
 
-				$('#filterPillsTemplate').tmpl({"data":filters}).appendTo(component.find('.filters-container'));				
+				$('#filterPillsTemplate').tmpl({"data":filters}).appendTo(component.find('.filters-container[data-rel="'+valueRel+'"]'));
 
-			}
+			});
+		}
+		else{
 
-		});
+			var filters = getParams;
+			ignored.forEach(function(key) {
+				
+				if(filters[key] !== undefined && filters[key] !== null && filters[key] != ''){
+					delete filters[key];
+				}
 
-		$('.component-filter-pills [data="filters"]').each(function () {
-			filters($(this));
-		});
-	};
+			});
 
-});
+			$('#filterPillsTemplate').tmpl({"data":filters}).appendTo(component.find('.filters-container'));				
+
+		}
+
+	});
+
+	$('.component-filter-pills [data="filters"]').each(function () {
+		filters($(this));
+	});
+}

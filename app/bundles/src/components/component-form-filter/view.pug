@@ -6,8 +6,9 @@ mixin component-form-filter(content)
 	- var method = content.method || false
 	- var callback = content.callback || false
 	- var rel = content.rel || false
+	- var noReload = content.noReload || false
 
-	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel)
+	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel, data-noreload=noReload)
 		.row
 			each item in items
 

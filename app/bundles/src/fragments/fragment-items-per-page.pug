@@ -1,11 +1,12 @@
 mixin fragment-items-per-page(content)
 
     - var rel = content.rel || false;
+    - var noReload = content.noReload || false;
 
     .row
         .col-lg-6.offset-lg-6.my-18
             .itemsPerPage
-                div.float-sm-right.mb-2(id="filter-items-per-page",data="filters", data-rel=rel)
+                div.float-sm-right.mb-2(id="filter-items-per-page",data="filters", data-rel=rel, data-noreload=noReload)
                     ul(data-filter="filter[limit]", class="list-inline d-flex mb-0")
                         each val, index in content.items
                             li.list-inline-item.mr-0                               

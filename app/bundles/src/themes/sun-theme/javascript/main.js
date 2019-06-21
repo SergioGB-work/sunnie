@@ -36,6 +36,7 @@ $(document).ready(function(){
 		var url, method;
 		var data = {};
 		var form = $(this);
+		var noReload = form.data('noreload') || '';
 
 		var rel = $(this).data('rel') || '';
 
@@ -132,8 +133,15 @@ $(document).ready(function(){
 			}
 			
 			filters = (filters[0] == '&') ? filters.substr(1) : filters;
-			url = form.attr('data-action') + '?' + filters;
-			window.location.href = url;
+
+			if(noReload != true){
+				url = form.attr('data-action') + '?' + filters;
+				window.location.href = url;				
+			}
+			else{
+				window.history.pushState('','','?' + filters);
+				reloadComponents();
+			}
 		}
 	});
 
@@ -152,10 +160,7 @@ $(document).ready(function(){
 	});
 
 	// SETEAR EL VALOR POR DEFECTO A PARTIR DE LOS PARAMETROS DE LA URL
-
-	$('[data-get-default-value]').each(function(e){
-		setDefaultValue($(this));
-	});	
+	loadFormFiltersDefaultValues();
 
 	// ACTIVACION DE POPOVERS
 	popover();
@@ -202,11 +207,14 @@ $(document).ready(function(){
 
 	//FILTROS DE LISTADOS
 
-	if ($('[data="filters"]').length > 0) {	
+	if ($('[data="filters"]').length > 0) {
+
 		$('[data="filters"]').each(function () {
 			filters($(this));
 		});
 	};	
+
+
 
 });
 
@@ -326,7 +334,6 @@ function getData(el) {
 							}
 
 							else if (key.indexOf('searchField') < 0 && key != '' && key.indexOf('action') < 0 && key.indexOf('filter') < 0) {
-								key = completeGtLtParams(key);
 								var value = getParams[val] || '';
 								if (value != '') {
 									if (value.indexOf('=') < 0) {
@@ -450,14 +457,7 @@ function getData(el) {
 
 // GENERALIZACION DE LISTADOS DE DATOS
 
-// @param el -> elemento raiz del listado que contiene los parametros data de configuracion
-// @param data-items-per-page -> Numero de items por pagina
-// @param data-method -> Método de envío del formulario (GET/POST)
-// @param data-content -> Contenido adicional que debe enviarse a la funcion callback. Por ejemplo query de busqueda.
-// @param data-template -> selector CSS de la Template Jquery tmpl sobre la que se cargarán los datos devueltos
-// @param data-content-target -> selector CSS donde se cargara el contenido estructurado con la template
-
-function dataList(el){
+function dataList(el) {
 	var el = el;
 	var live;
 	var service = el.data('service-data') || '',
@@ -473,16 +473,41 @@ function dataList(el){
 		getParamsList = el.data('get-params-list'),
 		liveReload = el.data('live-reload') || 'false',
 		timeReload = el.data('time-reload') || 60000,
-		rel = el.data('rel') || '';
+		cache = el.data('cache') || 'false',
+		rel = el.data('rel') || '',
+		noReload = el.data('noReload');
+	
+	var params = { "service": service, "method": method, "template": template, "target": target, "page": initial_page, "items_per_page": items_per_page, "aditionalData": aditionalData, "callback": callback, "content": content, "enableGetParams": enableGetParams, "getParamsList": getParamsList, "rel": rel, "cache": cache,"noReload":noReload};
 
-	var params = {"service":service,"method":method,"template":template,"target":target,"page":initial_page,"items_per_page":items_per_page,"aditionalData":aditionalData,"callback":callback,"content":content,"enableGetParams":enableGetParams,"getParamsList":getParamsList,"rel":rel}
+	if(el.data('has-pagination')==true){	
+		var	service_data_all_pagination = el.data('pagination-service-data-all') || el.data('service-data') || '',
+			items_per_page_pagination = el.data('pagination-items-per-page') || el.data('items-per-page'),
+			initial_page_pagination = el.data('pagination-initial-page') || el.data('initial-page'),
+			pagination_target_pagination = el.data('pagination-container-target') || '.pagination',
+			service_data_pagination = el.data('pagination-service-data') || el.data('service-data') || '',
+			method_pagination = el.data('pagination-method') || el.data('method') || '',
+			content_pagination = el.data('pagination-content') || el.data('content') || '',
+			template_pagination = el.data('pagination-template') || el.data('template') || '',
+			target_pagination = el.data('pagination-target') || el.data('target') || '',
+			callback_pagination = el.data('pagination-callback') || el.data('callback') || '',
+			aditionalData_pagination = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
+			enableGetParams_pagination = el.data('pagination-enable-get-params') || el.data('enable-get-params') || '',
+			getParamsList_pagination = el.data('pagination-get-params-list') || el.data('get-params-list') || '',
+			liveReload_pagination = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
+			timeReload_pagination = el.data('pagination-time-reload') || el.data('time-reload') || 60000,
+			cache_pagination = el.data('pagination-cache') || el.data('cache') || 'false',
+			rel_pagination = el.data('pagination-rel') || el.data('rel') || '',
+			noReload_pagination = el.data('pagination-noReload') || el.data('noReload') || 'false';
+		var paramsPagination = { service: service_data_pagination, method_pagination: method, template: template_pagination, target: target_pagination, page: initial_page_pagination, pagination_target: pagination_target_pagination, items_per_page: items_per_page_pagination, callback: callback_pagination, content: content_pagination, enableGetParams: enableGetParams_pagination, getParamsList: getParamsList_pagination, rel: rel_pagination, cache: cache_pagination, noReload: noReload_pagination };
+		params['pagination'] = paramsPagination;
+	}		
 
 	getData(params);
 
 	clearInterval(live);
 
-	if(liveReload=='true'){
-		live=setInterval(getData(params),timeReload);
+	if (liveReload == 'true') {
+		live = setInterval(getData(params), timeReload);
 	}
 }
 
@@ -530,64 +555,15 @@ function processData(dataResponse, target, template, callback, content, totalIte
 // @param data-template -> selector CSS de la Template Jquery tmpl sobre la que se cargarán los datos devueltos
 // @param data-content-target -> selector CSS donde se cargara el contenido estructurado con la template
 
-function dataList(el) {
-	var el = el;
-	var live;
-	var service = el.data('service-data') || '',
-		items_per_page = el.data('items-per-page'),
-		initial_page = el.data('initial-page'),
-		callback = el.data('callback') || '',
-		method = el.data('method') || 'GET',
-		content = el.data('content') || '',
-		template = el.data('template') || '',
-		target = el.data('target') || '',
-		aditionalData = el.data('aditional-data'),
-		enableGetParams = el.data('enable-get-params'),
-		getParamsList = el.data('get-params-list'),
-		liveReload = el.data('live-reload') || 'false',
-		timeReload = el.data('time-reload') || 60000,
-		cache = el.data('cache') || 'false',
-		rel = el.data('rel') || '';
-	
-	var params = { "service": service, "method": method, "template": template, "target": target, "page": initial_page, "items_per_page": items_per_page, "aditionalData": aditionalData, "callback": callback, "content": content, "enableGetParams": enableGetParams, "getParamsList": getParamsList, "rel": rel, "cache": cache};
 
-	if(el.data('has-pagination')==true){	
-		var	service_data_all_pagination = el.data('pagination-service-data-all') || el.data('service-data') || '',
-			items_per_page_pagination = el.data('pagination-items-per-page') || el.data('items-per-page'),
-			initial_page_pagination = el.data('pagination-initial-page') || el.data('initial-page'),
-			pagination_target_pagination = el.data('pagination-container-target') || '.pagination',
-			service_data_pagination = el.data('pagination-service-data') || el.data('service-data') || '',
-			method_pagination = el.data('pagination-method') || el.data('method') || '',
-			content_pagination = el.data('pagination-content') || el.data('content') || '',
-			template_pagination = el.data('pagination-template') || el.data('template') || '',
-			target_pagination = el.data('pagination-target') || el.data('target') || '',
-			callback_pagination = el.data('pagination-callback') || el.data('callback') || '',
-			aditionalData_pagination = el.data('pagination-aditional-data') || el.data('aditional-data') || '',
-			enableGetParams_pagination = el.data('pagination-enable-get-params') || el.data('enable-get-params') || '',
-			getParamsList_pagination = el.data('pagination-get-params-list') || el.data('get-params-list') || '',
-			liveReload_pagination = el.data('pagination-live-reload') || el.data('live-reload') || 'false',
-			timeReload_pagination = el.data('pagination-time-reload') || el.data('time-reload') || 60000,
-			cache_pagination = el.data('pagination-cache') || el.data('cache') || 'false',
-			rel_pagination = el.data('pagination-rel') || el.data('rel') || '';
-		var paramsPagination = { service: service_data_pagination, method_pagination: method, template: template_pagination, target: target_pagination, page: initial_page_pagination, pagination_target: pagination_target_pagination, items_per_page: items_per_page_pagination, callback: callback_pagination, content: content_pagination, enableGetParams: enableGetParams_pagination, getParamsList: getParamsList_pagination, rel: rel_pagination, cache: cache_pagination };
-		params['pagination'] = paramsPagination;
-	}		
-
-	getData(params);
-
-	clearInterval(live);
-
-	if (liveReload == 'true') {
-		live = setInterval(getData(params), timeReload);
-	}
-}
 
 function generatePagination(data, el, totalItems) {
 
 	var data = data,
 		pagination_target = el.pagination_target,
 		target = el.target,
-		items_per_page = getParams['filter[limit]'] || el.items_per_page;
+		items_per_page = getParams['filter[limit]'] || el.items_per_page,
+		noReload = el.noReload;
 
 	var totalPages = totalItems / items_per_page;
 
@@ -632,9 +608,14 @@ function generatePagination(data, el, totalItems) {
 				page: currentPage
 			}).on('page', function (event, num) {				
 				showLoading();
-				tabsPagination(event);
-				window.location.href = '?filter[skip]=' + parseInt((num - 1) * items_per_page) + href;
 
+				if(noReload != 'true'){
+					window.location.href = '?filter[skip]=' + parseInt((num - 1) * items_per_page) + href;
+				}
+				else{
+					window.history.pushState('','','?filter[skip]=' + parseInt((num - 1) * items_per_page) + href);
+					reloadComponents();
+				}
 			});
 		}
 	}
@@ -642,6 +623,8 @@ function generatePagination(data, el, totalItems) {
 
 function filters(el) {
 	var rels = el.data('rel') ? el.data('rel').split(',') : [];
+	var noReload = el.attr('data-noreload') || '';
+
 	el.find('[data-filter]').each(function () {
 		var filterParent = $(this);
 		var dataFilter = [$(this).data('filter')];
@@ -728,6 +711,20 @@ function filters(el) {
 
 		});
 	});
+
+	//Aplicamos el noreload si esta activo para los filtros de tipo enlace
+	if(noReload == 'true'){
+		el.find('[data-filter-value]').each(function () {
+			if($(this).is('a')){
+				$(this).click(function(e){
+					e.preventDefault();
+					var href = $(this).attr('href');
+					window.history.pushState('','',href);
+					reloadComponents();
+				})	
+			}
+		});	
+	}	
 }
 
 function error(statusCode, code, message, dataMessage) {
@@ -1028,4 +1025,110 @@ function buildSitemapForm(elemento){
 	}
 
 	return aux;
+}
+
+
+function reloadComponents(){
+	reloadGetParams();
+	loadFilterPills();
+	loadFormFiltersDefaultValues();
+	reloadDataList();
+}
+
+function loadFormFiltersDefaultValues(){
+	$('[data-get-default-value]').each(function(e){
+		setDefaultValue($(this));
+	});
+}
+
+function reloadDataList(){
+	$('[data-load="true"][data-enable-get-params="true"]').each(function(e){//Iteramos por todos los elementos que tenga aplicados filtros de URL
+
+		var paramsList = $(this).attr('data-get-params-list') || [];
+		var rels = $(this).attr('data-rel') || '';
+		var paramsModified = paramsChanged();
+
+		if(paramsList === undefined || paramsList == ''){ //Si le aplican todos los parámetros de la URL
+			//FALTA CONTROLAR EL rel
+
+			if(rels != '' && compareParams(paramsList,paramsModified,rels)){//Comprueba si alguno de los parametros que ha cambiado lo usa el listado	
+				dataList($(this));
+				filterContentByRol();
+			}
+			else if(rels==''){
+				dataList($(this));
+				filterContentByRol();
+			}
+		}
+		else{
+			paramsList = paramsList.split(',');
+
+			if(compareParams(paramsList,paramsModified,rels)){//Comprueba si alguno de los parametros que ha cambiado lo usa el listado	
+				dataList($(this));
+				filterContentByRol();
+			}
+
+		}
+
+	});
+}
+
+function compareParams(array1, array2, rels){
+
+	var rels = rels != '' ? rels.split(',') : [''];
+
+	if(array1.length >0){
+
+		for(var i=0; i<rels.length;i++){
+
+			var rel = rels[i] != '' ? '_' + rels[i] : '';
+
+			for(var x=0; x<array1.length;x++){
+				if(array2.includes(array1[x] + rel)){
+					return true;
+				}		
+			}			
+		}
+	}
+	else{
+		for(var i=0; i<rels.length;i++){
+			if(JSON.stringify(array2).includes(rels[i])){
+				return true;
+			}
+		}
+	}	
+
+	return false;
+
+}
+
+function paramsChanged(){
+
+	var filters = getParams;
+	var oldFilters = JSON.parse(JSON.stringify(oldGetParams));
+
+	var paramsChanged = [];
+
+	Object.keys(filters).forEach(function(key) {
+		
+		if(oldFilters[key] !== undefined && oldFilters[key] != filters[key]){//Si el key existe pero el valor es diferente
+			paramsChanged.push(key);
+			delete oldFilters[key];
+		}
+		else if(oldFilters[key] === undefined){ //Si el key es nuevo
+			paramsChanged.push(key);
+		}
+		else{
+			delete oldFilters[key];
+		}
+
+	});
+
+	Object.keys(oldFilters).forEach(function(key) {
+		paramsChanged.push(key);
+	});
+
+
+	return paramsChanged;
+
 }

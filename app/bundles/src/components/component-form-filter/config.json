@@ -47,7 +47,22 @@
 			"label":"Rel",
 			"name":"rel",
 			"type":"text"
-		},		
+		},
+		{
+			"label":"No Reload",
+			"name":"noReload",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		},			
 		{
 			"label":"Form Inputs",
 			"name":"items",
@@ -191,7 +206,7 @@
 					"label":"Regular Expression",
 					"name":"regExp",
 					"type":"text"
-				}			
+				}		
 			]
 		}
 	]

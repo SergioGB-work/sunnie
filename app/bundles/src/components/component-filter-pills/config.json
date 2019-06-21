@@ -9,7 +9,21 @@
 			"label":"Ignored Params(separated with ,)",
 			"name":"ignored",
 			"type":"text"
-		}
-
+		},
+		{
+			"label":"No Reload",
+			"name":"noReload",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		}		
 	]
 }

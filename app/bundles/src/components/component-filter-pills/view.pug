@@ -2,9 +2,10 @@ mixin component-filter-pills(content)
 	
 	- var rel = content.rel.split(',')
 	- var ignored = content.ignored
+	- var noReload = content.noReload
 
 
 	each val in rel
-		div(class="filters-container", data="filters", data-rel=val || false, data-ignored=ignored || false)
+		div(class="filters-container", data="filters", data-rel=val || false, data-ignored=ignored || false, data-noreload=noReload || false)
 
 	include templates/filter-pill-template.pug

@@ -797,6 +797,7 @@
                                 "method": "true",
                                 "callback": "",
                                 "rel": "",
+                                "noReload": "false",
                                 "items": [
                                     {
                                         "label": "Cliente",
@@ -856,8 +857,9 @@
                             "name": "component-filter-pills",
                             "id": "component-filter-pills-7543",
                             "content": {
-                                "rel": "group",
-                                "ignored": ""
+                                "rel": "group1,group2,group3",
+                                "ignored": "filter[limit]",
+                                "noReload": "true"
                             },
                             "title": "component-filter-pills",
                             "showTitle": "false",
@@ -892,12 +894,13 @@
                                 "action": "",
                                 "method": "true",
                                 "callback": "",
-                                "rel": "group",
+                                "rel": "group1",
+                                "noReload": "false",
                                 "items": [
                                     {
                                         "label": "Nombre",
                                         "type": "text",
-                                        "name": "nombre",
+                                        "name": "cliente",
                                         "placeholder": "",
                                         "helpText": "",
                                         "value": "",
@@ -1044,14 +1047,15 @@
                                 "aditionalData": "",
                                 "callback": "",
                                 "content": "",
-                                "enable_get_params": "false",
+                                "enable_get_params": "true",
                                 "get_params_list": "",
                                 "rel": "",
                                 "live_reload": "false",
                                 "time_reload": "",
                                 "cache": "false",
                                 "pagination": "false",
-                                "itemsPerPageSelector": "true"
+                                "itemsPerPageSelector": "true",
+                                "noReload": "true"
                             },
                             "title": "component-data-list",
                             "showTitle": "false",

@@ -18,12 +18,13 @@ mixin component-data-list(content)
 	- var timeReload = content.time_reload
 	- var cache = content.cache
 	- var itemsPerPageSelector = content.itemsPerPageSelector
+	- var noReload = content.noReload
 
 
 	if itemsPerPageSelector == 'true'
-		+fragment('fragment-items-per-page',{"items":{"20":"20","60":"60","80":"80","100":"100","500":"500"},"rel":rel})
+		+fragment('fragment-items-per-page',{"items":{"20":"20","60":"60","80":"80","100":"100","500":"500"},"rel":rel, "noReload":noReload})
 
-	div(data-load="true",data-service-data=service || false, data-method=method || false, data-template="#"+template, data-items-per-page=itemsPerPage || false, data-initial-page= initialPage || false, data-target=target || false, data-enable-get-params=enableGetParams || false, data-cache=cache || false, data-rel=rel || false, data-aditionalData = aditionalData || false, data-callback=callback || false, data-content=contentCallback || false, data-get-params-list=getParamsList || false, data-live-reload=liveReload || false, data-time-reload=timeReload || false, data-has-pagination=pagination || false) !{staticCode}
+	div(data-load="true",data-service-data=service || false, data-method=method || false, data-template="#"+template, data-items-per-page=itemsPerPage || false, data-initial-page= initialPage || false, data-target=target || false, data-enable-get-params=enableGetParams || false, data-cache=cache || false, data-rel=rel || false, data-aditionalData = aditionalData || false, data-callback=callback || false, data-content=contentCallback || false, data-get-params-list=getParamsList || false, data-live-reload=liveReload || false, data-time-reload=timeReload || false, data-has-pagination=pagination || false, data-noreload=noReload || false) !{staticCode}
 
 
 		if(pagination == true || pagination == 'true')
