@@ -18,7 +18,7 @@ mixin component-form-filter(content)
 				- var placeholder = item.placeholder != '' ? item.placeholder : false
 				- var regExp = item.regExp != '' ? item.regExp  : false
 
-				.form-group(class=customControls + ' ' +item.size)
+				.form-group(class=item.size)
 
 					if item.type=='textarea'
 						label(for="input"+randomID)
@@ -28,11 +28,12 @@ mixin component-form-filter(content)
 						textarea(class="form-control", id="input" + randomID, name=item.name, required=required, placeholder=placeholder, data-get-default-value=item.name) #{item.value}
 
 					else if item.type=='checkbox' || item.type=='radio'
-						input(class="custom-control-input", type=item.type, id="input" + randomID, name=item.name, required=required, value=item.value,data-get-default-value=item.name)
-						label(for="input"+randomID, class="custom-control-label")
-							| #{item.label} 
-							if item.helpText != ''
-								i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
+						div(class=customControls)
+							input(class="custom-control-input", type=item.type, id="input" + randomID, name=item.name, required=required, value=item.value,data-get-default-value=item.name)
+							label(for="input"+randomID, class="custom-control-label")
+								| #{item.label} 
+								if item.helpText != ''
+									i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
 
 					else if item.type=='select'
 						label(for="input"+randomID)
@@ -52,5 +53,5 @@ mixin component-form-filter(content)
 						input(class="form-control", type=item.type, id="input" + randomID, name=item.name, required=required, value=item.value, placeholder=placeholder, pattern=regExp, data-get-default-value=item.name)
 
 		.row
-			.form-group
+			.form-group.col-12.mb-0
 				button(class="btn btn-primary", type="submit") Filtrar

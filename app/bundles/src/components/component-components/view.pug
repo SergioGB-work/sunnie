@@ -9,15 +9,15 @@ mixin component-components(content)
 
 					h2#uso ${{ components.howToUseTitle }}$
 
-					p A diferencia de versiones anteriores, donde disponíamos de un archivo físico por página, en la nueva versión de SunnieJS toda la definición de las páginas y el uso de cada componente viene definida en el sitemap de cada site.
+					p ${{ components.paragraph2 }}$
 
-					p Para agregar un componente a una página, la opción más sencilla e intuitiva es utilizar la herramienta de CMS a través de la cual con un simple formulario podremos agregar, editar o borrar componentes a una página y configurarlos.
+					p ${{ components.paragraph3 }}$
 
-					p Por otro lado, existe la opción de editar directamente el archivo sitemap.json del site y por cada página y hueco de la layout definir los componentes que van y su configuración.
+					p ${{ components.paragraph4 }}$
 
-					p Cada componente con contenido configurable dispone de un archivo config.json donde se especfican todos los parámetros de configuración de que dispone y que deben configurarse en el objeto content del contenido.
+					p ${{ components.paragraph5 }}$
 
-					P También existen una serie de parámetros genéricos configurables para agregar un componente y que se listan a continuación:
+					P ${{ components.paragraph6 }}$
 
 
 			table(class="table table-responsive")
@@ -65,9 +65,9 @@ mixin component-components(content)
 				.card-body
 					h2 ${{ components.example }}$
 
-					p Existen don opciones para agregar un componente, por un lado lo puedes agregar directamente a la página a través del sitemap y por otro lado puedes hacer su llamada directamente desde PUG si por ejemplo queires añadir un componente dentro de otro.
+					p ${{ components.componentExampleParagraph1 }}$
 
-					h3 Agregar componente a página
+					h3 ${{ components.componentExampleParagraph2 }}$
 
 					pre
 						|	{
@@ -104,7 +104,7 @@ mixin component-components(content)
 						|	    ]
 						|	}
 
-					h3 Agregar componente a PUG
+					h3 ${{ components.componentExampleParagraph3 }}$
 					pre 
 						| +component({"name":"component-breadcrumbs","content":{"pages":[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}]},"showTitle":"false","full":"false"})
 
@@ -203,20 +203,20 @@ mixin component-components(content)
 			.card
 				.card-body
 					h3.icon-4x
-						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Social Share
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ Social Share") Social Share
 					p Component que muestra un listado de iconos enlazables
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-socialShare"							
 						li <strong>items:</strong>
 							ul
-								li <strong>href:</strong> Enlace del icono
-								li <strong>title:</strong> Texto alternativo del icono
-								li <strong>target:</strong> Modo de apertura de la nueva URL(redirección o pestaña nueva)
-								li <strong>iconType:</strong> Tipo de icono(Font Awesome o Material)
-								li <strong>iconCode:</strong> Código del icono. Se debe obtener de la libreria de iconos correspodiente
-								li <strong>iconSize:</strong> Tamaño del icono
-								li <strong>iconColor:</strong> Color en HEX del icono
+								li <strong>href:</strong> ${{ components.iconLink }}$
+								li <strong>title:</strong> ${{ components.iconAltText }}$
+								li <strong>target:</strong> ${{ components.openMode }}$
+								li <strong>iconType:</strong> ${{ components.iconType }}$
+								li <strong>iconCode:</strong> ${{ components.iconCode }}$
+								li <strong>iconSize:</strong> ${{ components.iconSize }}$
+								li <strong>iconColor:</strong> ${{ components.iconColor }}$
 					h4.icon-2x ${{ components.example }}$
 					pre
 						| +component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
@@ -225,32 +225,32 @@ mixin component-components(content)
 			.card
 				.card-body
 					h3.icon-4x 
-						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Form Filter
-					p Este componente permite generar formularios dinámicos. Dicho formularios puede funcionar como un formuario tradicional al que indicarle un action y enviará toda la información a dicho servicio o podrá funcionar como un filtro, en cuyo caso al enviar el formularios recargará la página publicando los datos en la URL como parametros GET para que puedan ser consumidos por otro componente.
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Form Filter") Form Filter
+					p ${{ components.formFilterDescription }}$
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-form-filter"
-						li <strong>formFilter:</strong> Si se selecciona a "true" el formulario funcionará como un filtro
-						li <strong>action:</strong> Si el formulario funciona de la forma tradional, este campo es el servicio al que enviar los datos
-						li <strong>method:</strong> Método POST o GET del servicio al que se envian los datos
-						li <strong>callback:</strong> Función javascript a ejecutar una vez se envían los datos y el servicio responde correctamente.
-						li <strong>rel:</strong> Permite crear grupos de datos de tal forma que el formulario publicará los filtros en el grupo de datos indicado. Se debe separar por , si se desea indicar más de un grupo 
-						li <strong>items:</strong> Array de los datos de los inputs que formarán el formulario
+						li <strong>formFilter:</strong> ${{ components.formFilterFormFilter }}$
+						li <strong>action:</strong> ${{ components.formFilterAction }}$
+						li <strong>method:</strong> ${{ components.formFilterMethod }}$
+						li <strong>callback:</strong> ${{ components.formFilterCallback }}$
+						li <strong>rel:</strong> ${{ components.formFilterRel }}$ 
+						li <strong>items:</strong> ${{ components.formFilterItems }}$
 							ul
-								li <strong>label:</strong> Label del campo
-								li <strong>type:</strong> Tipo de campo: text, select, number, etc...
-								li <strong>selectValues:</strong>Array. En caso de haber seleccionado tipo select serán los options del select
+								li <strong>label:</strong> ${{ components.formFilterLabel }}$
+								li <strong>type:</strong> ${{ components.formFilterType }}$
+								li <strong>selectValues:</strong>${{ components.formFilterOptions }}$
 									ul
-										li <strong>text:</strong> Texto del option
-										li <strong>value:</strong> Valor del option
+										li <strong>text:</strong> ${{ components.formFilterOptionText }}$
+										li <strong>value:</strong> ${{ components.formFilterOptionValue }}$
 
-								li <strong>name:</strong> Name del campo 		
-								li <strong>placeholder:</strong> Placeholder del campo 		
-								li <strong>helpText:</strong> Texto en formato tooltip que sirve de ayuda para el campo
-								li <strong>value:</strong> Valor por defecto del campo
-								li <strong>required:</strong> Indica si el campo es requerido o no. "true" o "false"
-								li <strong>size:</strong> Tamaño del campo. Utiliza las clases de bootstrap 4
-								li <strong>regExp:</strong> Expresion regular para validar el campo
+								li <strong>name:</strong> ${{ components.formFilterName }}$ 		
+								li <strong>placeholder:</strong> ${{ components.formFilterPlaceholder }}$ 		
+								li <strong>helpText:</strong> ${{ components.formFilterTooltip }}$
+								li <strong>value:</strong> ${{ components.formFilterDefaultValue }}$
+								li <strong>required:</strong> ${{ components.formFilterRequired }}$
+								li <strong>size:</strong> ${{ components.formFilterSize }}$
+								li <strong>regExp:</strong> ${{ components.formFilterRegExp }}$
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -352,28 +352,28 @@ mixin component-components(content)
 				.card-body
 					h3.icon-4x 
 						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Data List
-					p Este componente permite realizar la carga de datos dinámicos provenientes de un servicio y mostrar a través de una plantilla.
+					p ${{ components.dataListDescription }}$
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-data-list"
-						li <strong>service:</strong> URL del servicio REST que se desea consumir
-						li <strong>method:</strong> Método de la petición. GET o POST
-						li <strong>static_code:</strong> Código estático de la plantilla. HTML
-						li <strong>template:</strong> ID de la plantilla
-						li <strong>template_code:</strong> Código dinámico de la plantilla. jQuery TMPL
-						li <strong>target:</strong> Selector CSS donde se va a colocar el código generado por la plantilla
-						li <strong>initial_page:</strong> Página inicial a cargar si los datos son paginados
-						li <strong>items_per_page:</strong> Número de items a mostrar por cada página
-						li <strong>aditionalData:</strong> Datos adicionales a enviar el en body de la petición
-						li <strong>callback:</strong> Función javascript a ejecutar una vez se han cargado los datos del servicio
-						li <strong>content:</strong> Parámetros adicionales que se le pueden enviar al callback desde el origen de la petición
-						li <strong>enable_get_params:</strong> Habilita que los datos del servicio se vean afectados por los parámetros GET de la URL. Estos parámetros se transforman en variables que se envían al servicio en la propia petición.
-						li <strong>get_params_list:</strong> Si es definido, solo se filtrarán los datos por los parámetros aquí definidos
-						li <strong>rel:</strong> Permite crear grupos de datos de tal forma que solo le afecten aquellos filtros que estén dentro del grupo de datos indicado
-						li <strong>live_reload:</strong> Permite activar la recarga automática de datos
-						li <strong>time_reload:</strong> Intervalo de tiempo que establece cada cuanto se deben recargar los datos
-						li <strong>cache:</strong> Si se activa, los datos devueltos por el servicio se almacenarán en sessionstorage.
-						li <strong>pagination:</strong> Activa la paginación de los datos si el servicio original es capaz de hacerlo
+						li <strong>service:</strong> ${{ components.dataListService }}$
+						li <strong>method:</strong> ${{ components.dataListMethod }}$
+						li <strong>static_code:</strong> ${{ components.dataListStaticCode }}$
+						li <strong>template:</strong> ${{ components.dataListTemplate }}$
+						li <strong>template_code:</strong> ${{ components.dataListTemplateCode }}$
+						li <strong>target:</strong> ${{ components.dataListTarget }}$
+						li <strong>initial_page:</strong> ${{ components.dataListInitialPage }}$
+						li <strong>items_per_page:</strong> ${{ components.dataListItemsPerPage }}$
+						li <strong>aditionalData:</strong> ${{ components.dataListAditionaldata }}$
+						li <strong>callback:</strong> ${{ components.dataListCallback }}$
+						li <strong>content:</strong> ${{ components.dataListContent }}$
+						li <strong>enable_get_params:</strong> ${{ components.dataListEnableGetParams }}$
+						li <strong>get_params_list:</strong> ${{ components.dataListGetParamsList }}$
+						li <strong>rel:</strong> ${{ components.dataListRel }}$
+						li <strong>live_reload:</strong> ${{ components.dataListLiveReload }}$
+						li <strong>time_reload:</strong> ${{ components.dataListTimeReload }}$
+						li <strong>cache:</strong> ${{ components.dataListCache }}$
+						li <strong>pagination:</strong> ${{ components.dataListPagination }}$
 
 
 		.col-12.col-sm-6.col-lg-4
@@ -459,16 +459,16 @@ mixin component-components(content)
 				.card-body
 					h3.icon-4x 
 						a(href="#componentCardsListCarousel",title="${{ components.goToComponent }}$ Cards List Carousel") Accordion
-					p Componente de acordeón en el que se listan diferentes bloques que pueden ser desplegados al ser pulsados.
+					p ${{ components.accordionDescription }}$
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-accordion"							
-						li <strong>collapseParent:</strong> Si se pone a "true" al abrir cualquier de los acordeones del componente se cerrarán automáticamente el resto si estuviesen abiertos.
+						li <strong>collapseParent:</strong> ${{ components.accordionCollapseParent }}$
 						li <strong>items:</strong>
 							ul
-								li <strong>header:</strong> Encabezado del acordeón
-								li <strong>content:</strong> Contenido desplegable
-								li <strong>collapsed:</strong> Si se selecciona a "opened" el bloque saldrá por defecto desplegado. Si se selecciona a "closed" se mostrará cerrado.
+								li <strong>header:</strong> ${{ components.accordionHeader }}$
+								li <strong>content:</strong> ${{ components.accordionContent }}$
+								li <strong>collapsed:</strong> ${{ components.accordionCollapsed }}$
 
 
 					h4.icon-2x ${{ components.example }}$
@@ -479,12 +479,12 @@ mixin component-components(content)
 				.card-body
 					h3.icon-4x
 						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Filter Pills
-					p Este componete muestra una pildoras a partir de los parámetros GET de la URL. A través de su configuración se puede gestionar que pildoras se desea que muestre en función del grupo de datos o ignorar las que se desee. Cada pildora dispone de una X que al ser pulsada elimina ese filtro de la URL permitiendo a este componete funcionar conjuntamente con el componente data-list.
+					p ${{ components.filterPillsDescription }}$
 					h4.icon-2x ${{ components.params }}$
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-filter-pills"							
-						li <strong>rel:</strong> Mostrará solo aquelloos filtros asociados a los grupos de datos definidos. Se puede definir mas de un grupo separandolos por ,
-						li <strong>ignored:</strong> Permite ignorar los filtros que se deseen separándolos por ,
+						li <strong>rel:</strong> ${{ components.filterPillsRel }}$
+						li <strong>ignored:</strong> ${{ components.filterPillsIgnored }}$
 
 
 					

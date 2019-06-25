@@ -10,4 +10,4 @@ mixin fragment-items-per-page(content)
                     ul(data-filter="filter[limit]", class="list-inline d-flex mb-0")
                         each val, index in content.items
                             li.list-inline-item.mr-0                               
-                                a.py-1.px-2.float-left.text-uppercase.btn.btn-outline-primary(href="",data-filter-value=val, selected) #{index}
+                                a.py-1.px-2.float-left.text-uppercase.btn.btn-outline-primary.bg-white(href="",data-filter-value=val, selected) #{index}
