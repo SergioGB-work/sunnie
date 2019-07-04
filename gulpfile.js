@@ -32,13 +32,13 @@ var gulp = require('gulp'),
 	requireDir('server');
 
 var argv_site = argv.site !== undefined ? argv.site : false;
-var argv_page = argv.page !== undefined ? argv.page + '.pug' : '*.*';
+var argv_page = argv.pag !== undefined ? argv.pag + '.pug' : '*.*';
 var argv_env = argv.env !== undefined ? argv.env : '';
 
 var developMode = argv_env == 'dev' ? true : false;
 
 var src_site_deploy = argv_site || '**';
-var src_page_deploy = argv.page + '.pug' || '*.pug';
+var src_page_deploy = argv.pag + '.pug' || '*.pug';
 
 
 

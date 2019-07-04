@@ -65,5 +65,20 @@
   "examples":"Examples",
   "goToExamples":"Go to Examples",
   "goToComponent":"Go to the component: ",
-  "goComponents":"Go to Components"  
+  "goComponents":"Go to Components",
+  "homeMultisite":"Now SunnieJS offers you the possibility of having more than one web portal on the same server",
+  "homeCMS":"As a novelty, now you can manage the content thanks to a new CMS and everything without a database.",
+  "homeCMSTitle":"Own CMS",  
+  "homeNewStructure":"As a novelty we have also changed the structure of SunnieJS to facilitate maintenance and extensibility. You will have a CORE that you can extend to wherever you want.",
+  "homeNewStructureTitle":"New structure",  
+  "homeEnv":"You can work in a previous development environment and publish your changes whenever you want in production with a single click!",
+  "homeEnvTitle":"Two work environments",  
+  "homeInter":"Do you want to translate your website to several languages? We make it easy for you thanks to the native internationalization system in HTML5.",
+  "homeInterTitle":"Internationalization",  
+  "homeCleanCode":"It has a clean and structured code based on different layers that, compiled, make up the final code.",
+  "homeCleanCodeTitle":"Clean and structured code",  
+  "homeShortCodes":"Use the bootstrap shortcodes and all the new ones that we offer with this tool",
+  "homeSEO":"SunnieJS in full is SEO Friendly, including metadata customization per page.",
+  "homeComponentsLibraryTitle":"Library <span class='text-primary'> Components </span> own",
+  "homeComponentsLibraryDescription":"By default, we offer a wide variety of components for you to use: <span class = 'text-primary'> carousels </span>, <span class = 'text-primary'> cards </span>, <span class = 'text-primary'> images </span>, <span class = 'text-primary'> banners </span>, <span class = 'text-primary'> highlights </span>, <span class = ' text-primary '> navigation </span>, <span class =' text-primary '> login </span> ... and many more! <strong> You choose! </strong> You can use one that you like or create your own but do not worry because if you choose to create yours you can use the <strong> component generator </strong> to make it easy for you . <br/> Every day we have more and more components that you can enjoy without limit."
 }

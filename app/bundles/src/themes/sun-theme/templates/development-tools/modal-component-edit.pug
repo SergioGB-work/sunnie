@@ -136,6 +136,12 @@ block modal-body
 													div(class="custom-control custom-${val.type}")
 														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked})
 														label(class="custom-control-label" for="${id2}") ${val.label}
+
+												| {%elseif val.type == "textarea" %}
+												div(class="form-group col-12 ${visibility2}")
+													label(for="${id2}",class="uppercase") ${val.label}
+													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField}) ${itemVal[val.name]}
+
 												| {%elseif val.type == "select" %}
 
 												div(class="form-group col-md-4 col-12 ${visibility2}")
@@ -174,6 +180,12 @@ block modal-body
 																			div(class="custom-control custom-${val2.type}")
 																				input(class="custom-control-input",type="${val2.type}",id="${id3}",name="${val2.name}",value="${val2.value}",${requiredField2},${checked})
 																				label(class="custom-control-label" for="${id3}") ${val2.label}
+
+																		| {%elseif val2.type == "textarea" %}
+																		div(class="form-group col-12")
+																			label(for="${id3}",class="uppercase") ${val.label}
+																			textarea(name="${val2.name}", id="${id3}",class="form-control",${requiredField}) ${itemVal2[val2.name]}
+
 																		| {%elseif val2.type == "select" %}
 
 																		div(class="form-group col-md-4 col-12")
@@ -234,6 +246,16 @@ block modal-body
 												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
 
 												| {%if val.type == "checkbox" || val.type =="radio" %}
+												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}")
+													div(class="custom-control custom-${val.type}")
+														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked})
+														label(class="custom-control-label" for="${id2}") ${val.label}
+
+												| {%elseif val.type == "textarea" %}
+												div(class="form-group col-12 ${visibility2}")
+													label(for="${id2}",class="uppercase") ${val.label}
+													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField}) ${itemVal[val.name]}
+
 
 												| {%elseif val.type == "select" %}
 

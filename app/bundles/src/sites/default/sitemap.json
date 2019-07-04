@@ -96,12 +96,13 @@
                             "name": "component-html-content",
                             "id": "component-html-content-4537",
                             "content": {
-                                "HTMLcontent": "                <div class=\"row d-flex flex-wrap mb-3\">\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/multisite.jpg\" alt=\"Multisite\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Multisite</h3>\n                                      <p class=\"card-text\">Ahora SunnieJS te ofrece la posibilidad de tener mas de un portal web en un mismo servidor</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/cms.jpg\" alt=\"cms\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">CMS propio</h3>\n                                      <p class=\"card-text\">Como novedad, ahora prodrás gestionar el contenido gracias a un nuevo CMS y todo sin una base de datos.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/architecture.jpg\" alt=\"architecture\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Nueva estructura</h3>\n                                      <p class=\"card-text\">Como novedad también hemos cambiado la estructura de SunnieJS para facilitar el mantenimiento y la extensibilidad. Dispondrás de un CORE que podrás extender hasta donde tu quieras.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div> \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/enviroments.jpg\" alt=\"Entornos\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Dos entornos de trabajo</h3>\n                                      <p class=\"card-text\">Podrás trabajar en un entorno previo de desarrollo y publicar tus cambios cuando quieras en producción con un sólo click!</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>\n                <div class=\"row d-flex flex-wrap\">                             \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"Internacionalización\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Internacionalización</h3>\n                                      <p class=\"card-text\">¿Quieres traducir tu página web a varios idiomas? Te lo ponemos fácil gracias al sistema de internacionalización nativo en HTML5.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/code.jpg\" alt=\"Código Limpio y Estructurado\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title \">Código Limpio y Estructurado</h3>\n                                      <p class=\"card-text\">Dispone de un código limpio y estructurado en base a diferentes que capas que, compiladas, conforman el código final.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/shortcodes.jpg\" alt=\"ShortCodes\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Short Codes</h3>\n                                      <p class=\"card-text\">Usa los shortcodes de bootstrap y todos los nuevos que te ofrecemos con esta herramienta</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/seo.jpg\" alt=\"SEO Friendly\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">SEO Friendly</h3>\n                                      <p class=\"card-text\">SunnieJS al completo es SEO Friendly, incluyendo la personalización de metadatos por página.</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>"
+                                "HTMLcontent": "                <div class=\"row d-flex flex-wrap mb-3\">\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/multisite.jpg\" alt=\"Multisite\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Multisite</h3>\n                                      <p class=\"card-text\"> ${{ default.homeMultisite }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/cms.jpg\" alt=\"${{ default.homeCMSTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeCMSTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeCMS }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/architecture.jpg\" alt=\"${{ default.homeNewStructureTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeNewStructureTitle }}$</h3>\n                                      <p class=\"card-text\"> ${{ default.homeNewStructure }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div> \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/enviroments.jpg\" alt=\"Entornos\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeEnvTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeEnv }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>\n                <div class=\"row d-flex flex-wrap\">                             \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"${{ default.homeInterTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeInterTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeInter }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/code.jpg\" alt=\"${{ default.homeCleanCodeTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title \">${{ default.homeCleanCodeTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeCleanCode }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/shortcodes.jpg\" alt=\"ShortCodes\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Short Codes</h3>\n                                      <p class=\"card-text\">${{ default.homeShortCodes }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/seo.jpg\" alt=\"SEO Friendly\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">SEO Friendly</h3>\n                                      <p class=\"card-text\">${{ default.homeSEO }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>"
                             },
                             "title": "component-html-content",
                             "showTitle": "false",
                             "full": "true",
-                            "classes": ""
+                            "classes": "",
+                            "new": "false"
                         },
                         {
                             "id": "2",
@@ -127,7 +128,7 @@
                                     "src": "./images/componentes.png",
                                     "alt": "Componentes"
                                 },
-                                "content": "<h2>Biblioteca de <span class=\"text-primary\">Componentes</span> propia</h2><p>Por defecto, te ofrecemos una amplia variedad de componentes para que los utilices: <span class=\"text-primary\">carruseles</span>, <span class=\"text-primary\">tarjetas</span>, <span class=\"text-primary\">imagenes</span>, <span class=\"text-primary\">banners</span>, <span class=\"text-primary\">destacados</span>, <span class=\"text-primary\">navegación</span>, <span class=\"text-primary\">login</span>...y muchos más! <strong>Tu eliges!</strong> Puedes usar uno que te guste o crear el tuyo propio pero no te preocupes porque si eliges crear el tuyo podrás usar el <strong>generador de componentes</strong> para que te resulte muy sencillo. </p><p>Cada día disponemos de más y más componentes que podrás disfrutar sin límite.</p>",
+                                "content": "<h2>${{ default.homeComponentsLibraryTitle }}$</h2><p>${{ default.homeComponentsLibraryDescription }}$</p>",
                                 "button": {
                                     "href": "",
                                     "title": "",
@@ -137,7 +138,8 @@
                             "title": "component-highlighted-side-image",
                             "showTitle": "false",
                             "full": "false",
-                            "classes": ""
+                            "classes": "",
+                            "new": "false"
                         }
                     ]
                 }
@@ -789,6 +791,34 @@
                             "new": "false"
                         },
                         {
+                            "name": "component-image",
+                            "id": "component-image-3895",
+                            "content": {
+                                "src": "./images/carousel1.jpg",
+                                "alt": "egf",
+                                "longdesc": "asfddas",
+                                "responsiveSRC": "",
+                                "srcset": ""
+                            },
+                            "title": "component-image",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-develop-assistant",
+                            "id": "component-develop-assistant-4950",
+                            "content": {
+                                "service": "http://localhost:8082/send-message"
+                            },
+                            "title": "component-develop-assistant",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
                             "name": "component-form-filter",
                             "id": "component-form-filter-824",
                             "content": {
@@ -1101,17 +1131,17 @@
                                 "items": [
                                     {
                                         "header": "Opcion 1",
-                                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                        "content": "<p>Lorem sip<a href=\"http://sdgsdf\" target=\"_blank\">sum do</a>lor sit amet</p>\n\n<hr />\n<blockquote>\n<p>gsdgsdgg</p>\n</blockquote>\n",
                                         "collapsed": "closed"
                                     },
                                     {
                                         "header": "Opcion 2",
-                                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                        "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit<a href=\"http://www.google.es\">, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim ve</a>niam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n",
                                         "collapsed": "opened"
                                     },
                                     {
                                         "header": "Opcion 3",
-                                        "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+                                        "content": "<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>\n",
                                         "collapsed": "closed"
                                     }
                                 ],
@@ -1122,39 +1152,6 @@
                             "full": "true",
                             "classes": "",
                             "new": "false"
-                        },
-                        {
-                            "name": "component-cards-list-carousel",
-                            "id": "component-cards-list-carousel-1846",
-                            "content": {
-                                "items": [
-                                    {
-                                        "src": "",
-                                        "alt": "",
-                                        "header": "",
-                                        "description": "",
-                                        "href": "",
-                                        "classes": "",
-                                        "title": "",
-                                        "price": ""
-                                    }
-                                ]
-                            },
-                            "title": "component-cards-list-carousel",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
-                        },
-                        {
-                            "name": "component-sample",
-                            "id": "component-sample-5763",
-                            "content": "",
-                            "title": "component-sample",
-                            "showTitle": "true",
-                            "full": "false",
-                            "classes": "",
-                            "new": "true"
                         }
                     ],
                     "content_left": [],

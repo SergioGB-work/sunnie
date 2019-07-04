@@ -24,5 +24,6 @@
   "structureProjectParagraph1":"Todo proyecto desarrollado con SunnieJS tiene una estructura similar y prefijada.",
   "componentsParagraph1":"La carpeta componentes contiene todos los componentes creados en el portal para su uso en las páginas. Cada componente se crea en base a una misma estructura y todo el detalle del mismo se puede ver en la <a href='./components.html' title='Ir a Componentes'>sección de componentes</a> de este portal.",
   "layoutsParagraph1":"La carpeta layouts contiene todas las layouts creadas en el portal para su uso a la hora de definir la distribución del contenido de una página. Cada layout se crea en base a una misma estructura y todo el detalle de la misma se puede ver en la <a href='./layouts.html' title='Ir a Layouts'>sección de layouts</a> de este portal.",
-  "fragmentsParagraph1":"Un fragment es un <span class='text-primary'>trozo de código reutilizable</span> entre diferentes componentes. Por ejemplo, un botón. En esta carpeta se deben crear lo diferentes fragmentos que se vayan a utilizar en el portal."
+  "fragmentsParagraph1":"Un fragment es un <span class='text-primary'>trozo de código reutilizable</span> entre diferentes componentes. Por ejemplo, un botón. En esta carpeta se deben crear lo diferentes fragmentos que se vayan a utilizar en el portal.",
+  "varServerTableTH1":"Nombre variable"
 }

@@ -22,8 +22,8 @@
   "initServerParagraph7":"The objective of the previous tasks is to <span class='text-primary'>streamline the work</span> of any developer by allowing them to compile only one part of the project, which entails a much shorter time of <span class='text-primary'>compilation</span> and a greater <span class='text-primary'>agility</span> of development.",
   "structureProjectTitle":"Project Structure",
   "structureProjectParagraph1":"Every project developed with SunnieJS has a similar and predefined structure.",
-  
   "componentsParagraph1":"The components folder contains all the components created in the portal for use in the pages. Each component is created based on the same structure and all the details of it can be seen in the <a href='./components.html' title='Ir a Componentes'>components section</a> of this portal.",
   "layoutsParagraph1":"The layouts folder contains all the layouts created in the portal for use when defining the distribution of the content of a page. Each layout is created based on the same structure and all the detail of it can be seen in the <a href='./layouts.html' title='Ir a Layouts'>section of layouts</a> of this portal.",
-  "fragmentsParagraph1":"A fragment is a <span class = 'text-primary'>piece of reusable code</span> between different components. For example, a button. In this folder you must create the different fragments that will be used in the portal."
+  "fragmentsParagraph1":"A fragment is a <span class = 'text-primary'>piece of reusable code</span> between different components. For example, a button. In this folder you must create the different fragments that will be used in the portal.",
+  "varServerTableTH1":"Variable Name"
 }

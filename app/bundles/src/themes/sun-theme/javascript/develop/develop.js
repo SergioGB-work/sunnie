@@ -336,6 +336,11 @@ function checkThemeSelected(data,idTheme){
 function dataComponentLoadedCallback(data){
 	dataList($('#modal-component-edit #componentName'));
 	dataList($('#modal-component-edit #layoutColumn'));
+
+	$('#modal-component-edit textarea').each(function(){
+		CKEDITOR.replace( $(this).attr('id'));
+	});
+
 }
 
 function checkComponentEdited(data, nameComponent){

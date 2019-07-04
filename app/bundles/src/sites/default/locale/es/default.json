@@ -65,5 +65,20 @@
   "examples":"Ejemplos",
   "goToExamples":"Ir a Ejemplos",
   "goToComponent":"Ir al Componente",
-  "goComponents":"Ir a Componentes"
+  "goComponents":"Ir a Componentes",
+  "homeMultisite":"Ahora SunnieJS te ofrece la posibilidad de tener mas de un portal web en un mismo servidor",
+  "homeCMS":"Como novedad, ahora prodrás gestionar el contenido gracias a un nuevo CMS y todo sin una base de datos.",
+  "homeCMSTitle":"CMS propio",
+  "homeNewStructure":"Como novedad también hemos cambiado la estructura de SunnieJS para facilitar el mantenimiento y la extensibilidad. Dispondrás de un CORE que podrás extender hasta donde tu quieras.",
+  "homeNewStructureTitle":"Nueva estructura",
+  "homeEnv":"Podrás trabajar en un entorno previo de desarrollo y publicar tus cambios cuando quieras en producción con un sólo click!",
+  "homeEnvTitle":"Dos entornos de trabajo",
+  "homeInter":"¿Quieres traducir tu página web a varios idiomas? Te lo ponemos fácil gracias al sistema de internacionalización nativo en HTML5.",
+  "homeInterTitle":"Internacionalización",
+  "homeCleanCode":"Dispone de un código limpio y estructurado en base a diferentes que capas que, compiladas, conforman el código final.",
+  "homeCleanCodeTitle":"Código limpio y estructurado",
+  "homeShortCodes":"Usa los shortcodes de bootstrap y todos los nuevos que te ofrecemos con esta herramienta",
+  "homeSEO":"SunnieJS al completo es SEO Friendly, incluyendo la personalización de metadatos por página.",
+  "homeComponentsLibraryTitle":"Biblioteca de <span class='text-primary'>Componentes</span> propia",
+  "homeComponentsLibraryDescription":"Por defecto, te ofrecemos una amplia variedad de componentes para que los utilices: <span class='text-primary'>carruseles</span>, <span class='text-primary'>tarjetas</span>, <span class='text-primary'>imagenes</span>, <span class='text-primary'>banners</span>, <span class='text-primary'>destacados</span>, <span class='text-primary'>navegación</span>, <span class='text-primary'>login</span>...y muchos más! <strong>Tu eliges!</strong> Puedes usar uno que te guste o crear el tuyo propio pero no te preocupes porque si eliges crear el tuyo podrás usar el <strong>generador de componentes</strong> para que te resulte muy sencillo. <br/> Cada día disponemos de más y más componentes que podrás disfrutar sin límite."
 }

@@ -1,0 +1,22 @@
+script(id="templateComponentListDevelopAssistantBot",type="text/x-jquery-tmpl")
+	| {%if data.length > 0 %}
+	form(class="formComponentAdd",data-action=apiDevelopment + "/site/{idSite}/page/{idPage}/component/add", data-method="POST", data-callback="componentAddedFromDevelopAssistant",data-callfront="addingComponent")
+
+		input(type="hidden",name="layoutColumn", value="content_upper")
+		input(type="hidden",name="layoutColumnPosition", value="999")
+		input(type="hidden",name="newComponent", value="true")
+
+		.row
+			.col-12
+				ul
+					| {%each data%}
+					li.list-group-item
+						.custom-control.custom-radio
+							input(type="radio",name="name",value="${$value}",class="custom-control-input",id="add-${$value}")
+							label(class="custom-control-label",for="add-${$value}") ${$value}
+					| {%/each%}
+
+		.row
+			.form-group.col-12.mb-0
+				button(class="btn btn-primary", type="submit") Añadir			
+		| {%/if%}	

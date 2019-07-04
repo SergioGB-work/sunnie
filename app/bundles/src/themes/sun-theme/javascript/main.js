@@ -48,6 +48,7 @@ $(document).ready(function(){
 			});
 		}
 
+
 		var emptyVars = '';
 		var arraysArrays = [];
 		var newGroup = [];
@@ -115,7 +116,7 @@ $(document).ready(function(){
 		if (form.data('form-filter') != true) {
 			url = form.attr('data-action');
 			method = form.data('method');				
-			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback'), "content":form.data('content')};
+			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback'), "content":form.data('content'),"callfront":form.data('callfront')};
 			getData(params);
 		}
 		else {
@@ -279,7 +280,13 @@ function getData(el) {
 		enableGetParams = el.enableGetParams,
 		getParamsList = el.getParamsList,
 		cache = el.cache,
-		rel_group = [''];
+		rel_group = [''],
+		callfront = el.callfront;
+
+		
+	if(callfront != '' && callfront !== undefined){
+		eval(callfront + '()');
+	}
 
 	if (el.rel != '' && el.rel !== undefined) {
 		rel_group = el.rel.split(',');
@@ -437,11 +444,13 @@ function getData(el) {
 				console.log("response:");
 				console.log(data);
 				console.log("--------------------------------------");
-				var statusCode = data.error.statusCode || data.status,
-					code = data.error.code,
-					message = data.error.message || data.statusText,
-					dataMessage = '';
-				if (data.responseJSON != undefined && data.responseJSON !== null) {
+				if(data.error !== undefined && data.error !== null){	
+					var statusCode = data.error.statusCode || data.status ,
+						code = data.error.code,
+						message = data.error.message || data.statusText,
+						dataMessage = '';
+				}	
+				if (data.responseJSON !== undefined && data.responseJSON !== null) {
 					statusCode = data.responseJSON.statusCode;
 					message = code = data.responseJSON.code;
 					dataMessage = data.responseJSON.data || '';
@@ -453,6 +462,8 @@ function getData(el) {
 	else {
 		processData(JSON.parse(sessionStorage.getItem(url + '_${{ default.lang }}$')), target, template, callback, content, '')
 	}
+
+
 }
 
 // GENERALIZACION DE LISTADOS DE DATOS
