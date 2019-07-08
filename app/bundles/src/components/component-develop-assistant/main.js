@@ -7,8 +7,7 @@ $(document).ready(function(){
 		var message = $(this).closest('form').find('#inputChat').val();
 		writeOnChat(message,'user');
 		$(this).closest('form').submit();
-
-		$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
+		$(this).closest('.component-develop-assistant').find('.card-body').scrollTop($(this).closest('.component-develop-assistant').find('.card-body')[0].scrollHeight);
 
 	});
 
@@ -17,7 +16,7 @@ $(document).ready(function(){
 		if (code==13) {
 			var message = $(this).closest('form').find('#inputChat').val();
 			writeOnChat(message,'user');
-			$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
+			$(this).closest('.component-develop-assistant').find('.card-body').scrollTop($(this).closest('.component-develop-assistant').find('.card-body')[0].scrollHeight);
 		}
 
 
@@ -67,6 +66,10 @@ function addBotResponse(data){
 					case 'END_ADD_COMPONENT_PROCESS':
 						var layoutColumn = data.outputContexts[0].parameters.fields.Columna.stringValue;
 						var name = "component-" + data.outputContexts[0].parameters.fields.Componente.stringValue;
+
+						$('#templateNewComponent').tmpl({data:name}).insertBefore($('.layout .layout-column[data-layout-column="'+layoutColumn+'"]'));
+						refreshPositions(layoutColumn);
+
 						getData({
 							"service": apiDevelop + "/site/{idSite}/page/{idPage}/component/add",
 							"method": "POST","callback":"componentAddedFromDevelopAssistant",
@@ -83,7 +86,9 @@ function addBotResponse(data){
 			}
 
 			else{
-				chatResponse += '<div class="wspre">' + data.fulfillmentMessages[index].text.text[0] + '</div>';
+				if(data.fulfillmentMessages[index].text.text[0] != ''){
+					chatResponse += '<div class="wspre">' + data.fulfillmentMessages[index].text.text[0] + '</div>';
+				}
 			}
 
 			if(chatResponse != ''){
@@ -127,11 +132,11 @@ function writeOnChat(msg,profile){
 	}
 	
 	var align = profile == 'user' ? 'float-right' : 'float-left';
-	var template = "<div class='float-left w-100'><div class='alert "+color+" w-75 "+align+"'>" + msg + "</div></div>"
+	var template = "<div class='float-left w-100'><div class='alert "+color+" w-90 "+align+"'>" + msg + "</div></div>"
 
 	$('.component-develop-assistant form')[0].reset();
 	$('#conversation').append(template);
-	$('#conversation').scrollTop($('#conversation')[0].scrollHeight);
+	$('.component-develop-assistant').find('.card-body').scrollTop($('.component-develop-assistant').find('.card-body')[0].scrollHeight);
 }
 
 function loadComponentsOnChat(data){
@@ -142,7 +147,10 @@ function loadComponentsOnChat(data){
 function loadLayoutColumnsOnChat(data){
 	writeOnChat('Estas son las columnas disponibles en esta página','bot');
 	var chatResponse = $("<div />").append($.tmpl($('#templateLayoutColumnsListDevelopAssistantBot'), {"data":data})).html()
-	writeOnChat(chatResponse,'bot');
+	if(data != ''){
+		writeOnChat(chatResponse,'bot');
+	}
+	
 }
 
 function componentAddedFromDevelopAssistant(data){
@@ -171,7 +179,9 @@ function checkComponent(data,result){
 			"method": "GET", "callback":"loadLayoutColumnsOnChat"
 		});		
 
-		writeOnChat(result.fulfillmentText,'bot');
+		if(result.fulfillmentText != ''){
+			writeOnChat(result.fulfillmentText,'bot');
+		}
 	}
 
 }

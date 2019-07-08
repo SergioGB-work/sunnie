@@ -1,5 +1,8 @@
 if locals.development == true
 	script(src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js")
+		div #{locals.enableChatBot}
+	if locals.site.enableChatBot == 'true'
+		+component({'name':"component-develop-assistant",'showTitle':"false","full":"true", "classes":"h-100"})
 
 	include addButton.pug
 

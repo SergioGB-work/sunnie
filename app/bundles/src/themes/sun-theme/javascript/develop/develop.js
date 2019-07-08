@@ -133,9 +133,15 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.sunniejs-addButton').click(function(){
+	$('.sunniejs-tools .addButton').click(function(){
 		$('body').toggleClass('show-sidebar-menu-tools');
-	})
+		$('body').removeClass('show-develop-assistant');
+	});
+
+	$('.sunniejs-tools .develop-assistant').click(function(){
+		$('body').toggleClass('show-develop-assistant');
+		$('body').removeClass('show-sidebar-menu-tools');
+	})	
 
 	$('#ToolsComponentList').on('dragstart','[draggable="true"]', function(evt) {
 		evt.originalEvent.dataTransfer.setData("id", $(this).data('id-component'));

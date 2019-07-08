@@ -1,7 +1,8 @@
 {
     "site": {
         "name": "default",
-        "url": "/default"
+        "url": "/default",
+        "enableChatBot": "true"
     },
     "pages": [
         {
@@ -807,18 +808,6 @@
                             "new": "false"
                         },
                         {
-                            "name": "component-develop-assistant",
-                            "id": "component-develop-assistant-4950",
-                            "content": {
-                                "service": "http://localhost:8082/send-message"
-                            },
-                            "title": "component-develop-assistant",
-                            "showTitle": "false",
-                            "full": "true",
-                            "classes": "",
-                            "new": "false"
-                        },
-                        {
                             "name": "component-form-filter",
                             "id": "component-form-filter-824",
                             "content": {
@@ -1094,6 +1083,25 @@
                             "new": "false"
                         },
                         {
+                            "name": "component-accordion",
+                            "id": "component-accordion-496",
+                            "content": {
+                                "items": [
+                                    {
+                                        "header": "",
+                                        "content": "",
+                                        "collapsed": ""
+                                    }
+                                ],
+                                "collapseParent": ""
+                            },
+                            "title": "component-accordion",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
                             "name": "component-socialShare",
                             "id": "component-socialshare-485",
                             "content": {
@@ -1152,10 +1160,53 @@
                             "full": "true",
                             "classes": "",
                             "new": "false"
+                        },
+                        {
+                            "name": "component-slider",
+                            "id": "component-slider-1906",
+                            "content": {
+                                "items": [
+                                    {
+                                        "src": "",
+                                        "alt": "",
+                                        "longdesc": "",
+                                        "href": "",
+                                        "title": "",
+                                        "target": "",
+                                        "responsiveSRC": "",
+                                        "srcset": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-slider",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
                         }
                     ],
                     "content_left": [],
-                    "content_right": []
+                    "content_right": [
+                        {
+                            "name": "component-accordion",
+                            "id": "component-accordion-258",
+                            "content": {
+                                "items": [
+                                    {
+                                        "header": "",
+                                        "content": "",
+                                        "collapsed": ""
+                                    }
+                                ],
+                                "collapseParent": ""
+                            },
+                            "title": "component-accordion",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        }
+                    ]
                 }
             },
             "childs": []

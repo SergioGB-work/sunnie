@@ -10,8 +10,8 @@ $gray-base: 							$black;
 $box-shadow:							0 1px 1px 0 rgba(0, 0, 0, 0.12);
 $grid-gutter-width:						1rem;
 
-$spacer: 1rem !default;
-$spacers: () !default;
+$spacer: 1rem;
+$spacers: ();
 $spacers: map-merge((
   0: 0,
   1: ($spacer * .25),
@@ -24,6 +24,15 @@ $spacers: map-merge((
   8: ($spacer * 2.5)
 ), $spacers);
 
+$sizes: ();
+$sizes: map-merge((
+  25: 25%,
+  50: 50%,
+  75: 75%,
+  90: 90%,
+  100: 100%,
+  auto: auto
+), $sizes);
 
 
 $header-height: 						60px;
@@ -152,7 +161,10 @@ $pagination-margin:						0;
 
 $thumbnail-bg:							#ffffff;
 
-$sidebar-menu-tools-width:				250px;
+$sidebar-menu-tools-width:        250px;
+$develop-assistant-width:         300px;
+$develop-assistant-header-height: 60px;
+$develop-assistant-footer-height: 72px;
 
 $tooltip-font-size:                 $font-size-base * 0.75;
 $tooltip-color:                     $primary;

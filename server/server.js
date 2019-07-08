@@ -665,6 +665,7 @@ gulp.task('apiServer', function() {
 		try{
 			var siteName = req.body.name;
 			var siteURL = req.body.url;
+			var enableChatBot = req.body.enableChatBot;
 			var siteTheme = {"theme": req.body.theme};
 			var defaultSiteURL = getURLSite(defaultSite);
 
@@ -675,7 +676,8 @@ gulp.task('apiServer', function() {
 			var sitemap = {
 				"site":{
 					"name": siteName,
-					"url": siteURL
+					"url": siteURL,
+					"enableChatBot":enableChatBot
 				},
 				"pages": [
 					{
@@ -749,6 +751,7 @@ gulp.task('apiServer', function() {
 		try{
 			var site = req.params.id;
 			var name = req.body.name;
+			var enableChatBot = req.body.enableChatBot;
 			var url = req.body.url;
 			var theme = req.body.theme;
 
@@ -759,6 +762,7 @@ gulp.task('apiServer', function() {
 
 			sitemap.site.name = name;
 			sitemap.site.url = url;
+			sitemap.site.enableChatBot = enableChatBot;
 			build.theme = theme;
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
@@ -780,7 +784,7 @@ gulp.task('apiServer', function() {
 			});
 						
 			//Renombro la carpeta el site en development
-			fs.rename( siteURL + '/../../../development/sites/' + site, siteURL + '/../../../development/sites/' + name, function(err) {
+			fs.rename( siteURL + '/../../../../development/sites/' + site, siteURL + '/../../../../development/sites/' + name, function(err) {
 			    if ( err ) console.log('ERROR: ' + err);
 			});
 

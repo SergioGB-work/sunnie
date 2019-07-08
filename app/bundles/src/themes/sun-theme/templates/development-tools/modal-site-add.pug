@@ -15,7 +15,19 @@ block modal-body
 			div(class="form-group col-4")
 				label(for="siteURL",class="uppercase") URL
 				input(type="text",name="url",id="siteURL",class="form-control",required)
-		
+
+			div(class="form-group col-md-4 col-12")
+
+				fielset
+					legend Activar Asistente de Desarrollo(solo desarrollo)
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotNo",class="form-control custom-control-input",required, value="false", checked)
+						label(for="enableChatBotNo",class="uppercase custom-control-label") No
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotSi",class="form-control custom-control-input",required,value="true")
+						label(for="enableChatBotSi",class="uppercase custom-control-label") Si
 		.row
 			.col-12
 				h3 Seleciona un tema de apariencia

@@ -25,6 +25,21 @@ block modal-body
 			div(class="form-group col-4")
 				label(for="siteURL",class="uppercase") URL
 				input(type="text",name="url",id="siteURL",class="form-control",value="${data.url}",required)
+
+			div(class="form-group col-md-4 col-12")
+				| ${( $data.enableChatBot = data.enableChatBot == 'true' ? "checked" : "" ) ,''}
+				| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
+				fielset
+					legend Activar Asistente de Desarrollo(solo desarrollo)
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotNo${id}",class="form-control custom-control-input",required, value="false", checked)
+						label(for="enableChatBotNo${id}",class="uppercase custom-control-label") No
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotSi${id}",class="form-control custom-control-input",required,value="true",${enableChatBot})
+						label(for="enableChatBotSi${id}",class="uppercase custom-control-label") Si					
 		
 		.row
 			.col-12

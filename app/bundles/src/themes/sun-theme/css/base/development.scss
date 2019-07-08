@@ -1,7 +1,7 @@
 @import 'variables';
 @import '../lib/bootstrap/variables';
 
-.sunniejs-addButton{
+.sunniejs-tools{
 	right:1em;
 	bottom:1em;
 	transition: 0.3s 0s all;
@@ -34,11 +34,25 @@
 		padding-right:#{$sidebar-menu-tools-width};
 	}
 
-	.sunniejs-addButton{
+	.sunniejs-tools{
 		right:calc(1rem + #{$sidebar-menu-tools-width});
 	}
 
 	#sidebar-menu-tools{
+		right:0;
+	}
+}
+
+.show-develop-assistant{
+	#wrapper{
+		padding-right:$develop-assistant-width;
+	}
+
+	.sunniejs-tools{
+		right:calc(1rem + #{$develop-assistant-width});
+	}
+
+	.component-develop-assistant{
 		right:0;
 	}
 }
