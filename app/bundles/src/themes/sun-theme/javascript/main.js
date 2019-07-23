@@ -160,6 +160,17 @@ $(document).ready(function(){
 		dataSearch();
 	});
 
+	// GENERALIZACIÓN DE EVENTOS
+	$(document).on('change','[data-onchange]',function(){
+		var evt = $(this).data('onchange');
+		eval(evt + '()');
+	});
+
+	$(document).on('click','[data-onclick]',function(){
+		var evt = $(this).data('onclick');
+		eval(evt + '()');
+	});
+
 	// SETEAR EL VALOR POR DEFECTO A PARTIR DE LOS PARAMETROS DE LA URL
 	loadFormFiltersDefaultValues();
 
@@ -213,8 +224,42 @@ $(document).ready(function(){
 		$('[data="filters"]').each(function () {
 			filters($(this));
 		});
-	};	
+	};
 
+
+	$('[data-parent][data-parent-event="change"]').each(function(){
+
+		var targetEvent = $(this).data('parent');
+		var action = $(this).data('parent-event-action');
+		var valueDispatchAction =  $(this).data('parent-event-value') != '' && $(this).data('parent-event-action')!== undefined ? $(this).data('parent-event-action') : false;
+
+		var currentEvent = $(this);
+
+		$(targetEvent).on('change', function(){
+			var value = $(this).val();
+			currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
+			currentEvent.data('aditional-data',{"value":value});
+			dataList(currentEvent);
+		});
+
+	});
+
+	$('[data-parent][data-parent-event="click"]').each(function(){
+
+		var targetEvent = $(this).data('parent');
+		var action = $(this).data('parent-event-action');
+		var valueDispatchAction =  $(this).data('parent-event-value') != '' && $(this).data('parent-event-action')!== undefined ? $(this).data('parent-event-action') : false;
+
+		var currentEvent = $(this);
+
+		$(targetEvent).on('click', function(){
+			var value = $(this).val();
+			currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
+			currentEvent.data('aditional-data',{"value":value});
+			dataList(currentEvent);
+		});
+
+	});
 
 
 });
@@ -401,7 +446,7 @@ function getData(el) {
 		var jsonData = aditionalData instanceof FormData ? aditionalData : JSON.stringify(aditionalData);
 		var contentType = aditionalData instanceof FormData ? false : "application/json";
 		var timeout = 600000; // tiempo de espera por defecto de la peticion
-
+		console.log(jsonData);
 		var getURL = $.ajax({
 			url: url,
 			type: method,
@@ -471,6 +516,7 @@ function getData(el) {
 function dataList(el) {
 	var el = el;
 	var live;
+
 	var service = el.data('service-data') || '',
 		items_per_page = el.data('items-per-page'),
 		initial_page = el.data('initial-page'),
@@ -979,7 +1025,7 @@ function buildSitemapForm(elemento){
                 var arrayInputs = {};
                 var arrayGroup = [];
 
-                $(this).find('input,select,textarea').each(function(){
+                $(this).find('input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked,input[type="checkbox"]:checked').each(function(){
                     //Caso basico
                     if( $(this).closest('[data-form-group]').data('form-group') == originalGroup ){
                         var name = $(this).attr('name');

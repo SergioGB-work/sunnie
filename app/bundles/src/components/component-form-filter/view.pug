@@ -7,6 +7,7 @@ mixin component-form-filter(content)
 	- var callback = content.callback || false
 	- var rel = content.rel || false
 	- var noReload = content.noReload || false
+	- var submitButton = content.submitButton || 'Aceptar'
 
 	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel, data-noreload=noReload)
 		.row
@@ -17,6 +18,18 @@ mixin component-form-filter(content)
 				- var required = item.required == 'true' ? true : false
 				- var placeholder = item.placeholder != '' ? item.placeholder : false
 				- var regExp = item.regExp != '' ? item.regExp  : false
+				- var event = item.event != '' ? item.event  : false
+				- var eventTarget = item.eventTarget != '' ? item.eventTarget  : false
+				- var eventValue = item.eventValue != '' ? item.eventValue  : false
+				- var eventAction = item.eventAction != '' ? item.eventAction  : false
+				- var service = item.dataService != '' ? item.dataService : false
+				- var template = item.dataTemplate != '' ? item.dataTemplate : false
+				- var method = item.dataMethod != '' ? item.dataMethod : false
+				- var parent = item.dataParent != '' ? item.dataParent  : false			
+				- var parentEvent = item.dataParentEvent != '' ? item.dataParentEvent  : false			
+				- var parentEventValue = item.dataParentEventValue != '' ? item.dataParentEventValue  : false			
+				- var parentEventAction = item.dataParentEventAction != '' ? item.dataParentEventAction  : false	
+				- var load = item.dataService != '' && item.dataParent == '' ? 'true' : false		
 
 				.form-group(class=item.size)
 
@@ -40,10 +53,13 @@ mixin component-form-filter(content)
 							| #{item.label} 
 							if item.helpText != ''
 								i(class="fa fa-question-circle text-primary",data-toggle="tooltip" data-placement="right" title=item.helpText)
-						select(class="form-control", id="input" + randomID, name=item.name, required=required, data-get-default-value=item.name)
-							if item.selectValues !== undefined
+						select(class="form-control", id="input" + randomID, name=item.name, required=required, data-get-default-value=item.name, data-event=event, data-event-target=eventTarget, data-event-value=eventValue, data-event-action=eventAction, data-service-data=service, data-method=method, data-template=template, data-target="#input" + randomID, data-load=load, data-parent=parent, data-parent-event=parentEvent, data-parent-event-value=parentEventValue, data-parent-event-action=parentEventAction)
+							if item.selectValues !== undefined && !service
 								each option in item.selectValues
 									option(value=option.value) #{option.text}
+
+					else if item.type=='separator'
+						h3.mb-0 #{item.label}
 
 					else	
 						label(for="input"+randomID)
@@ -54,4 +70,4 @@ mixin component-form-filter(content)
 
 		.row
 			.form-group.col-12.mb-0
-				button(class="btn btn-primary", type="submit") Filtrar
+				button(class="btn btn-primary", type="submit") #{submitButton}

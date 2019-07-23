@@ -16,6 +16,11 @@
 			]			
 		},
 		{
+			"label":"Submit Button Text",
+			"name":"submitButton",
+			"type":"text"
+		},		
+		{
 			"label":"Action",
 			"name":"action",
 			"type":"text",
@@ -28,11 +33,11 @@
 			"options": [
 				{
 					"label":"POST",
-					"value":"true"
+					"value":"POST"
 				},
 				{
 					"label":"GET",
-					"value":"no"
+					"value":"GET"
 				}				
 			],
 			"visibility":"hidden"			
@@ -107,7 +112,11 @@
 						{
 							"label":"Textarea",
 							"value":"textarea"
-						}					
+						},
+						{
+							"label":"Separator",
+							"value":"separator"
+						}
 					]
 				},
 				{
@@ -206,7 +215,140 @@
 					"label":"Regular Expression",
 					"name":"regExp",
 					"type":"text"
-				}		
+				},
+				{
+					"label":"Data Service",
+					"name":"dataService",
+					"type":"text"
+				},
+				{
+					"label":"Data Method",
+					"name":"dataMethod",
+					"type":"select",
+					"options": [
+						{
+							"label":"Selecciona un método",
+							"value":""
+						},						
+						{
+							"label":"POST",
+							"value":"POST"
+						},
+						{
+							"label":"GET",
+							"value":"GET"
+						}				
+					]					
+				},				
+				{
+					"label":"Data Template",
+					"name":"dataTemplate",
+					"type":"text"
+				},							
+				{
+					"label":"Event",
+					"name":"event",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an event",
+							"value":""
+						},
+						{
+							"label":"Change",
+							"value":"change"
+						},
+						{
+							"label":"Click",
+							"value":"click"
+						}
+					]	
+				},
+				{
+					"label":"Event Target",
+					"name":"eventTarget",
+					"type":"text"
+				},
+				{
+					"label":"Event value",
+					"name":"eventValue",
+					"type":"text"
+				},
+				{
+					"label":"Event Action",
+					"name":"eventAction",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an action",
+							"value":""
+						},
+						{
+							"label":"Load Data Target",
+							"value":"load-data"
+						},
+						{
+							"label":"Show Target",
+							"value":"show"
+						},
+						{
+							"label":"Hide Target",
+							"value":"hide"
+						}
+					]	
+				},
+				{
+					"label":"Data Parent",
+					"name":"dataParent",
+					"type":"text"
+				},
+				{
+					"label":"Data Parent Event",
+					"name":"dataParentEvent",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an event",
+							"value":""
+						},
+						{
+							"label":"Change",
+							"value":"change"
+						},
+						{
+							"label":"Click",
+							"value":"click"
+						}
+					]						
+				},
+				{
+					"label":"Data Parent Event Value",
+					"name":"dataParentEventValue",
+					"type":"text"
+				},
+				{
+					"label":"Data Parent Event Action",
+					"name":"dataParentEventAction",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an action",
+							"value":""
+						},
+						{
+							"label":"Load Data Target",
+							"value":"load-data"
+						},
+						{
+							"label":"Show Target",
+							"value":"show"
+						},
+						{
+							"label":"Hide Target",
+							"value":"hide"
+						}
+					]	
+				}						
 			]
 		}
 	]

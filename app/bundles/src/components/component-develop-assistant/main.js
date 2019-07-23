@@ -74,7 +74,7 @@ function addBotResponse(data){
 							"service": apiDevelop + "/site/{idSite}/page/{idPage}/component/add",
 							"method": "POST","callback":"componentAddedFromDevelopAssistant",
 							"aditionalData":{"layoutColumn":layoutColumn,"layoutColumnPosition": "999","name":name,"newComponent":"true"}
-						});	
+						});
 
 						break;
 
@@ -92,15 +92,15 @@ function addBotResponse(data){
 			}
 
 			if(chatResponse != ''){
-				writeOnChat(chatResponse,'bot');	
+				writeOnChat(chatResponse,'bot');
 			}
-		});	
+		});
 	}
 	else{
 		var chatResponse = text;
 		if(chatResponse != ''){
-			writeOnChat(chatResponse,'bot');	
-		}		
+			writeOnChat(chatResponse,'bot');
+		}
 	}
 }
 
@@ -160,7 +160,10 @@ function componentAddedFromDevelopAssistant(data){
 	}
 	else{
 		writeOnChat('Tu componente se ha añadido correctamente.','bot');
-		writeOnChat('¿Puedo ayudarte en algo más mi señor?','bot');		
+		writeOnChat('¿Puedo ayudarte en algo más mi señor?','bot');	
+
+		$('#templateNewComponent').tmpl({data:name}).insertBefore($('.layout .layout-column[data-layout-column="'+layoutColumn+'"]'));
+		refreshPositions(layoutColumn);
 	}
 }
 
@@ -169,7 +172,6 @@ function addingComponent(){
 }
 
 function checkComponent(data,result){
-	
 	if(result.outputContexts[0].parameters.fields.Componente.stringValue == '' || !data.includes('component-' + result.outputContexts[0].parameters.fields.Componente.stringValue)){
 		writeOnChat("El componente que has elegido no existe o no está disponible. Por favor, introduce un nombre válido.",'error');
 	}
@@ -177,11 +179,10 @@ function checkComponent(data,result){
 		var response = getData({
 			"service": apiDevelop + "/layout/detail/{idLayout}",
 			"method": "GET", "callback":"loadLayoutColumnsOnChat"
-		});		
+		});
 
 		if(result.fulfillmentText != ''){
 			writeOnChat(result.fulfillmentText,'bot');
 		}
 	}
-
 }

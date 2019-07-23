@@ -1,0 +1,27 @@
+{
+	"config":[
+		{
+			"label":"Items",
+			"name":"items",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"Step Text",
+					"name":"text",
+					"type":"text"
+				},
+				{
+					"label":"Click Event",
+					"name":"onclick",
+					"type":"text"
+				},
+				{
+					"label":"Current Step",
+					"name":"current",
+					"type":"checkbox",
+					"value":"true"
+				}				
+			]
+		}
+	]
+}

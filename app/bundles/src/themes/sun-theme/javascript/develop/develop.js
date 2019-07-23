@@ -411,6 +411,7 @@ function loadConfigComponent(){
 
 
 		//APLICABLE SOLO AL FORM FILTER
+
 		$('#form-edit-component [name="formFilter"]').change(function(){
 
 			if($(this).val() == 'false'){
@@ -422,12 +423,11 @@ function loadConfigComponent(){
 
 		})
 
-
 		if($('#form-edit-component [name="formFilter"]').val() == 'false'){
-			$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().removeClass('d-none');
+			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().removeClass('d-none');
 		}
 		else{
-			$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
+			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
 		}
 
 	}

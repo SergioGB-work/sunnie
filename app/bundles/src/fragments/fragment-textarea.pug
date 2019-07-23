@@ -1,0 +1,15 @@
+mixin fragment-textarea(content)
+
+	- var id = content.id || false;
+	- var classes = content.class || false;
+	- var name = content.name || false;
+	- var value = content.value || '';
+	- var required = content.required || false;
+	- var dataAttributes = content.dataAttributes || false;
+	- var cols = content.cols || false;
+	- var rows = content.rows || false;
+	- var disabled = content.disabled || false;
+	- var readonly = content.readonly || false;
+
+	textarea(id=id, class=classes, name=name, required=required, disabled=disabled, readonly=readonly cols=cols, rows=rows
+	)&attributes(dataAttributes) #{value}

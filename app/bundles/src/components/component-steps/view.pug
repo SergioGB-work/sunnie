@@ -1,0 +1,14 @@
+mixin component-steps(content)
+	
+	- var items = content.items || []
+
+	ul.list-inline.row.mb-0
+		- var nItems = items.length
+
+		each item,index in items
+
+			li.list-inline-item.text-center.d-flex.flex-column(data-onclick=item.onclick || false, class='m-0 col-' + (12/nItems)) 
+				div.w-100.text-center
+					span.number(class=(item.current == 'true' ? 'bg-primary text-white border border-primary' : 'border border-primary text-primary ') + "number rounded-circle px-3 py-2 d-inline-block ") #{index + 1}
+				span.text(class= item.current == 'true' ? 'font-weight-bold' : '') #{item.text}
+

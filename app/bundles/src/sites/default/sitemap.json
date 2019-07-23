@@ -422,7 +422,8 @@
                     ]
                 }
             },
-            "childs": []
+            "childs": [],
+            "hidden": "true"
         },
         {
             "id": "components",
@@ -887,6 +888,32 @@
                             "new": "false"
                         },
                         {
+                            "name": "component-steps",
+                            "id": "component-steps-6870",
+                            "content": {
+                                "items": [
+                                    {
+                                        "text": "Datos Personales",
+                                        "onclick": "alerta"
+                                    },
+                                    {
+                                        "text": "Firma Contrato",
+                                        "onclick": ""
+                                    },
+                                    {
+                                        "text": "Felicitaciones",
+                                        "onclick": "",
+                                        "current": "true"
+                                    }
+                                ]
+                            },
+                            "title": "component-steps",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
                             "name": "component-banner",
                             "id": "component-banner-3417",
                             "content": {
@@ -1205,6 +1232,748 @@
                             "full": "false",
                             "classes": "",
                             "new": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "tarificador-5628",
+            "name": "Tarificador",
+            "url": "/tarificador",
+            "src": "/tarificador.html",
+            "attributes": {
+                "title": "Tarificador",
+                "description": "",
+                "keywords": ""
+            },
+            "layout": {
+                "name": "layout-12-9-3",
+                "content": {
+                    "content_upper": [
+                        {
+                            "name": "component-steps",
+                            "id": "component-steps-1480",
+                            "content": {
+                                "items": [
+                                    {
+                                        "text": "Datos Personales",
+                                        "onclick": "",
+                                        "current": "true"
+                                    },
+                                    {
+                                        "text": "Precio",
+                                        "onclick": ""
+                                    },
+                                    {
+                                        "text": "Contrato",
+                                        "onclick": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-steps",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "mt-3",
+                            "new": "false"
+                        }
+                    ],
+                    "content_left": [
+                        {
+                            "name": "component-form-filter",
+                            "id": "component-form-filter-3286",
+                            "content": {
+                                "formFilter": "false",
+                                "submitButton": "Continuar",
+                                "action": "http://localhost:8082/ok",
+                                "method": "POST",
+                                "callback": "redirect",
+                                "rel": "",
+                                "noReload": "false",
+                                "items": [
+                                    {
+                                        "label": "¿Cuál es la marca de tu coche?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "marca",
+                                        "placeholder": "",
+                                        "helpText": "Selecciona la marca de tu coche",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "http://localhost:8082/coches/lista",
+                                        "dataMethod": "GET",
+                                        "dataTemplate": "#templateOptions",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "¿Cuál es el modelo de tu coche?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Modelo1",
+                                                "value": "Modelo2"
+                                            }
+                                        ],
+                                        "name": "modelo",
+                                        "placeholder": "",
+                                        "helpText": "Selecciona el modelo de tu coche",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "http://localhost:8082/coches/modelos",
+                                        "dataMethod": "POST",
+                                        "dataTemplate": "#templateOptions",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "select[name='marca']",
+                                        "dataParentEvent": "change",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": "load-data"
+                                    },
+                                    {
+                                        "label": "¿Acabas de comprar tu coche?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Sí, lo he comprado nuevo",
+                                                "value": "1"
+                                            },
+                                            {
+                                                "text": "No, ya lo tenía y quiero cambiar de seguro",
+                                                "value": "2"
+                                            },
+                                            {
+                                                "text": "Sí, lo he comprado de 2ª mano a un Particular",
+                                                "value": "3"
+                                            },
+                                            {
+                                                "text": "Sí, lo he comprado de 2ª mano a un Concesionario",
+                                                "value": "3"
+                                            }
+                                        ],
+                                        "name": "estado_compra",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "Dinos la fecha de primera matriculación",
+                                        "type": "separator",
+                                        "name": "",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-12",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "Año",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "2019",
+                                                "value": "2019"
+                                            },
+                                            {
+                                                "text": "2018",
+                                                "value": "2018"
+                                            },
+                                            {
+                                                "text": "2017",
+                                                "value": "2017"
+                                            },
+                                            {
+                                                "text": "2016",
+                                                "value": "2016"
+                                            },
+                                            {
+                                                "text": "2015",
+                                                "value": "2015"
+                                            },
+                                            {
+                                                "text": "2014",
+                                                "value": "2014"
+                                            },
+                                            {
+                                                "text": "2013",
+                                                "value": "2013"
+                                            },
+                                            {
+                                                "text": "2012",
+                                                "value": "2012"
+                                            },
+                                            {
+                                                "text": "2011",
+                                                "value": "2011"
+                                            }
+                                        ],
+                                        "name": "ano",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "Mes",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Enero",
+                                                "value": "ene"
+                                            },
+                                            {
+                                                "text": "Febrero",
+                                                "value": "feb"
+                                            },
+                                            {
+                                                "text": "Marzo",
+                                                "value": "mar"
+                                            },
+                                            {
+                                                "text": "Abril",
+                                                "value": "abr"
+                                            },
+                                            {
+                                                "text": "Mayo",
+                                                "value": "may"
+                                            },
+                                            {
+                                                "text": "Junio",
+                                                "value": "jun"
+                                            },
+                                            {
+                                                "text": "Julio",
+                                                "value": "jul"
+                                            },
+                                            {
+                                                "text": "Agosto",
+                                                "value": "ago"
+                                            },
+                                            {
+                                                "text": "Septiembre",
+                                                "value": "sep"
+                                            },
+                                            {
+                                                "text": "Octubre",
+                                                "value": "oct"
+                                            },
+                                            {
+                                                "text": "Noviembre",
+                                                "value": "nov"
+                                            },
+                                            {
+                                                "text": "Diciembre",
+                                                "value": "dic"
+                                            }
+                                        ],
+                                        "name": "",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "¿Qué tipo de combustible utiliza?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Gasolina",
+                                                "value": "gaso"
+                                            },
+                                            {
+                                                "text": "Diesel",
+                                                "value": "die"
+                                            },
+                                            {
+                                                "text": "No estoy seguro",
+                                                "value": "no"
+                                            }
+                                        ],
+                                        "name": "combustible",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "¿Cuántas puertas tiene?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "5 puertas",
+                                                "value": "5"
+                                            },
+                                            {
+                                                "text": "3 puertas",
+                                                "value": "3"
+                                            },
+                                            {
+                                                "text": "No estoy seguro",
+                                                "value": "no"
+                                            }
+                                        ],
+                                        "name": "puertas",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "¿Qué potencia tiene el motor?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "90CV",
+                                                "value": "90"
+                                            },
+                                            {
+                                                "text": "105CV",
+                                                "value": "105"
+                                            },
+                                            {
+                                                "text": "130CV",
+                                                "value": "130"
+                                            },
+                                            {
+                                                "text": "No estoy seguro",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "potencia",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    }
+                                ]
+                            },
+                            "title": "Tarificador de Coches",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-form-filter",
+                            "id": "component-form-filter-8111",
+                            "content": {
+                                "formFilter": "false",
+                                "submitButton": "Continuar",
+                                "action": "www.google.es",
+                                "method": "POST",
+                                "callback": "",
+                                "rel": "",
+                                "noReload": "false",
+                                "items": [
+                                    {
+                                        "label": "Tipo de vía",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Calle",
+                                                "value": "calle"
+                                            },
+                                            {
+                                                "text": "Avenida",
+                                                "value": ""
+                                            },
+                                            {
+                                                "text": "Travesia",
+                                                "value": ""
+                                            },
+                                            {
+                                                "text": "Cañada",
+                                                "value": ""
+                                            },
+                                            {
+                                                "text": "Carretera",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "tipo_via",
+                                        "placeholder": "",
+                                        "helpText": "Debes seleccionar el tipo de vía en la que vives",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "Nombre de la vía",
+                                        "type": "text",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "nombre_calle",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-8",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "Número",
+                                        "type": "number",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "numero",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "Piso",
+                                        "type": "text",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "piso",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "Código Postal",
+                                        "type": "number",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "cp",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "Datos del domicilio",
+                                        "type": "separator",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-12",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "¿Qué tipo de vivienda es?",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "Piso",
+                                                "value": "piso"
+                                            },
+                                            {
+                                                "text": "Chalet",
+                                                "value": "chalet"
+                                            },
+                                            {
+                                                "text": "Casa",
+                                                "value": "casa"
+                                            },
+                                            {
+                                                "text": "Duplex",
+                                                "value": "duplex"
+                                            }
+                                        ],
+                                        "name": "tipo_vivienda",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    },
+                                    {
+                                        "label": "Ubicación",
+                                        "type": "select",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "name": "ubicacion",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "true",
+                                        "size": "col-6",
+                                        "regExp": "",
+                                        "dataService": "http://localhost:8082/coches/lista",
+                                        "dataMethod": "GET",
+                                        "dataTemplate": "#templateOptions",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-form-filter",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        }
+                    ],
+                    "content_right": [
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-233",
+                            "content": {
+                                "HTMLcontent": ""
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-224",
+                            "content": {
+                                "HTMLcontent": "<h2 class=\"h5\">Informaci&oacute;n requerida</h2>\n\n<p>Para poder darte el precio exacto te recomendamos tengas cerca:</p>\n\n<ul>\n\t<li>DNI</li>\n\t<li>Direcci&oacute;n del domicilio a asegurar</li>\n</ul>\n",
+                                "undefined": "<h2 class=\"h5\">Informaci&oacute;n requerida</h2>\n\n<p>Para poder darte el precio exacto te recomendamos tengas cerca:</p>\n\n<ul>\n\t<li>DNI</li>\n\t<li>Direcci&oacute;n del domicilio a asegurar</li>\n</ul>\n"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-3098",
+                            "content": {
+                                "HTMLcontent": "<h2 class=\"h5\">Preguntas frecuentes</h2>\n\n<ul>\n\t<li>&iquest;Qu&eacute; consideramos contenido a efectos del seguro?</li>\n\t<li>&iquest;Qu&eacute; me incluye la restauraci&oacute;n est&eacute;tica?</li>\n\t<li>&iquest;Qu&eacute; me cubre los da&ntilde;os por agua?</li>\n\t<li>&iquest;Qu&eacute; me cubren los da&ntilde;os el&eacute;ctricos?</li>\n</ul>\n",
+                                "undefined": "<h2 class=\"h5\">Preguntas frecuentes</h2>\n\n<ul>\n\t<li>&iquest;Qu&eacute; consideramos contenido a efectos del seguro?</li>\n\t<li>&iquest;Qu&eacute; me incluye la restauraci&oacute;n est&eacute;tica?</li>\n\t<li>&iquest;Qu&eacute; me cubre los da&ntilde;os por agua?</li>\n\t<li>&iquest;Qu&eacute; me cubren los da&ntilde;os el&eacute;ctricos?</li>\n</ul>\n"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "resultados-del-tarificador-1111",
+            "name": "Resultados del Tarificador",
+            "url": "/tarificador/resultados",
+            "src": "/resultados-del-tarificador.html",
+            "hidden": "true",
+            "attributes": {
+                "title": "Resultados del Tarificador",
+                "description": "",
+                "keywords": ""
+            },
+            "layout": {
+                "name": "layout-12",
+                "content": {
+                    "content_upper": [
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-8442",
+                            "content": {
+                                "HTMLcontent": "<p class=\"text-center\"><img alt=\"\" src=\"../images/ResultadoSeguro.png\" /></p>\n",
+                                "undefined": "<p class=\"text-center\"><img alt=\"\" src=\"../images/ResultadoSeguro.png\" /></p>\n"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
                         }
                     ]
                 }

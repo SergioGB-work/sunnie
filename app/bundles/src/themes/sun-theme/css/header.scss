@@ -24,37 +24,6 @@
 		display:flex;
 		align-items:center;
 	}
-
-	#user{
-		float:right;
-		border-left: 1px solid $body-bg;
-		height: $navbar-height;
-
-		.user-name{
-			font-weight:500;
-			margin-right: ceil(($grid-gutter-width * 0.5));
-		}
-
-		.dropdown{
-			display:inline-block;
-
-			button{
-				background:0;
-				border:0;
-				height: $navbar-height;
-				outline:0;
-				display:flex;
-				align-items:center;
-				padding-left:$grid-gutter-width;
-				float:right;
-			}
-
-			.dropdown-menu{
-				right:0;
-				left:auto;
-			}
-		}
-	}	
 }
 
 @include media-breakpoint-up(md) {
@@ -63,27 +32,6 @@
 		
 		.header-content{
 			border-left:0;
-		}
-
-		#user{
-			height: $header-height;
-			border-width:2px;
-
-			.dropdown{
-				button{
-					height: $header-height;
-
-					i{
-						color:#333;
-						margin-right: ceil(($grid-gutter-width * 0.75));
-					}
-				}
-
-				.dropdown-menu{
-					right:auto;
-					left:0;
-				}				
-			}
 		}
 	}
 }

@@ -1,0 +1,8 @@
+script(id="templateOptions",type="text/x-jquery-tmpl")
+	| {%if data.length > 0 %}
+	| {%each data%}
+	option(value="${$value.id}") ${$value.name}
+	| {%/each%}
+	| {%else%}
+	option(value="") No hay datos
+	| {%/if%}

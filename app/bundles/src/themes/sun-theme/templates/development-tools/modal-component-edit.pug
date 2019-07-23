@@ -132,9 +132,10 @@ block modal-body
 												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
 
 												| {%if val.type == "checkbox" || val.type =="radio" %}
+												| ${( $data.checked2 = itemVal[val.name] == 'true' ? "checked" : "" ) ,''}
 												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}")
 													div(class="custom-control custom-${val.type}")
-														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked})
+														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked2})
 														label(class="custom-control-label" for="${id2}") ${val.label}
 
 												| {%elseif val.type == "textarea" %}

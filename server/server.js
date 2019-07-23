@@ -64,7 +64,8 @@ gulp.task('apiServer', function() {
 				title = req.body.title || name,
 				description = req.body.description || '',
 				keywords = req.body.keywords || '',
-				layout = req.body.layout || '';
+				layout = req.body.layout || '',
+				hidden = req.body.hidden || '';
 
 			var columns = getLayoutColumns(layout);
 			var pageColumns = {};
@@ -78,6 +79,7 @@ gulp.task('apiServer', function() {
 				"name": name,
 				"url": url.indexOf('/') < 0 || url.indexOf('/') > 0 ? "/" + url : url,
 				"src": src,
+				"hidden":hidden,
 				"attributes":{
 					"title":title,
 					"description":description,
@@ -127,6 +129,7 @@ gulp.task('apiServer', function() {
 				name = req.body.name,
 				url = req.body.url || '/' + name,
 				title = req.body.title || name,
+				hidden = req.body.hidden || '',
 				description = req.body.description || '',
 				keywords = req.body.keywords || '',
 				layout = req.body.layout || '',
@@ -134,6 +137,7 @@ gulp.task('apiServer', function() {
 
 			editedPage['name'] = name;
 			editedPage['url'] = url;
+			editedPage['hidden'] = hidden;
 			editedPage.attributes['title'] = title;
 			editedPage.attributes['description'] = description;
 			editedPage.attributes['keywords'] = keywords;
@@ -293,11 +297,7 @@ gulp.task('apiServer', function() {
 
 
 
-			var configComponent = getComponentConfig(componentName);
-
-			console.log(componentName);
-			console.log(configComponent.config);
-			
+			var configComponent = getComponentConfig(componentName);	
 
 			componentContent = buildDefaultComponentData(configComponent.config, componentContent)
 
@@ -852,7 +852,156 @@ gulp.task('apiServer', function() {
 		    const result = responses[0].queryResult;
 		    return res.json(result);
 		  });
-		});	
+		});
+
+	//SERVICIOS PARA LA DEMO DE TARIFICADORES SOLO
+
+	app.post('/ok', function (req, res) {
+
+		res.status(200).send();
+
+	});
+
+
+	app.get('/coches/lista', function (req, res) {
+		res.status(200).send(
+			[
+				{
+					"id":"0",
+					"name":"Selecciona la marca de tu coche"
+				},			
+				{
+					"id":"1",
+					"name":"Renault"
+				},
+				{
+					"id":"2",
+					"name":"Peugeot"
+				},
+				{
+					"id":"3",
+					"name":"Ford"
+				},
+				{
+					"id":"4",
+					"name":"Mercedes"
+				}
+			]
+		);	
+	});
+
+	app.post('/coches/modelos', function (req, res) {
+
+		var idMarca = req.body.value;
+
+		console.log(req.body);
+		console.log(idMarca);
+
+		switch(idMarca){
+			case '0':
+				res.status(200).send(
+					[
+					]
+				);			
+				break;			
+			case '1':
+				res.status(200).send(
+					[
+						{
+							"id":"1",
+							"name":"Clio"
+						},
+						{
+							"id":"2",
+							"name":"Scenic"
+						},
+						{
+							"id":"3",
+							"name":"Talisman"
+						},
+						{
+							"id":"4",
+							"name":"Megane"
+						}
+
+					]
+				);
+
+				break;
+			case '2':
+				res.status(200).send(
+					[
+						{
+							"id":"1",
+							"name":"208"
+						},
+						{
+							"id":"2",
+							"name":"308"
+						},
+						{
+							"id":"3",
+							"name":"3008"
+						},
+						{
+							"id":"3",
+							"name":"5008"
+						}
+
+					]
+				);			
+				break;
+			case '3':
+				res.status(200).send(
+					[
+						{
+							"id":"1",
+							"name":"Fiesta"
+						},
+						{
+							"id":"2",
+							"name":"Focus"
+						},
+						{
+							"id":"3",
+							"name":"Mondeo"
+						},
+						{
+							"id":"3",
+							"name":"Kuga"
+						}
+
+					]
+				);			
+				break;
+			case '4':
+				res.status(200).send(
+					[
+						{
+							"id":"1",
+							"name":"A 180d"
+						},
+						{
+							"id":"2",
+							"name":"C 220"
+						},
+						{
+							"id":"3",
+							"name":"E 350d"
+						},
+						{
+							"id":"3",
+							"name":"55S AMG"
+						}
+					]
+				);			
+				break;
+
+			default:
+				res.status(412).send({"ERROR":"No se ha encontrado la marca"});	
+		}	
+	});
+
 });
 
 function getLayoutColumns(id){
@@ -943,7 +1092,7 @@ function deployPage(argv,res){
 	  }
 
 	  // the *entire* stdout and stderr (buffered)
-	  console.log('DEPLOY FINISHED');
+	  console.log('DEPLOY FINISHED: ' + stdout + stderr);
 	  res.status(200).send('SUCCESSFULL');
 	});
 }
@@ -959,7 +1108,7 @@ function deploySites(argv,res,argv_res){
 	  }
 
 	  // the *entire* stdout and stderr (buffered)
-	  console.log('DEPLOY FINISHED');
+	  console.log('DEPLOY FINISHED: ' + stdout + stderr);
 	  res.status(200).send(argv_res);
 	});
 }
