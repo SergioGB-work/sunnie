@@ -813,8 +813,9 @@
                             "id": "component-form-filter-824",
                             "content": {
                                 "formFilter": "true",
+                                "submitButton": "",
                                 "action": "",
-                                "method": "true",
+                                "method": "POST",
                                 "callback": "",
                                 "rel": "",
                                 "noReload": "false",
@@ -838,7 +839,18 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Selector",
@@ -863,11 +875,22 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     }
                                 ]
                             },
-                            "title": "component-form-filter",
+                            "title": "Buscador 1",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",
@@ -937,8 +960,9 @@
                             "id": "component-form-filter-252",
                             "content": {
                                 "formFilter": "true",
+                                "submitButton": "",
                                 "action": "",
-                                "method": "true",
+                                "method": "POST",
                                 "callback": "",
                                 "rel": "group1",
                                 "noReload": "false",
@@ -952,7 +976,18 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Email",
@@ -963,7 +998,18 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Telefono",
@@ -983,12 +1029,23 @@
                                             }
                                         ],
                                         "name": "telefono",
-                                        "placeholder": "",
+                                        "placeholder": "Escribe tu telefono",
                                         "helpText": "",
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Comentario",
@@ -999,7 +1056,18 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-12",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Estado",
@@ -1024,7 +1092,18 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Precio 1-99",
@@ -1035,7 +1114,18 @@
                                         "value": "precio1",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Precio 100-999",
@@ -1046,7 +1136,18 @@
                                         "value": "precio2",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Todos",
@@ -1057,7 +1158,18 @@
                                         "value": "",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     },
                                     {
                                         "label": "Oferta",
@@ -1068,7 +1180,18 @@
                                         "value": "activo",
                                         "required": "false",
                                         "size": "col-4",
-                                        "regExp": ""
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
                                     }
                                 ]
                             },
@@ -1325,8 +1448,8 @@
                                         "type": "select",
                                         "selectValues": [
                                             {
-                                                "text": "Modelo1",
-                                                "value": "Modelo2"
+                                                "text": "Selecciona tu modelo",
+                                                "value": ""
                                             }
                                         ],
                                         "name": "modelo",

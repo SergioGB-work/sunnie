@@ -18,16 +18,18 @@ block modal-body
 
 		.row
 			div(class="form-group col-md-4 col-12")
-				label(for="componentID",class="uppercase") ID
-				input(type="text",name="id",id="componentID",class="form-control", value="${data.id}", disabled)
+				+fragment('fragment-label',{"for":"componentID", "text":"ID"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentID","name":"id", "value":"${data.id}", "disabled":"disabled"})
+				
 
 			div(class="form-group col-md-4 col-12")
-				label(for="componentName",class="uppercase") Nombre
-				select(type="text",name="name",id="componentName",class="form-control", required, data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentList",data-target="#modal-component-edit #componentName", data-callback="checkComponentEdited", data-content='"${data.name}"')
+				+fragment('fragment-label',{"for":"componentName", "text":"Nombre"})
+				+fragment('fragment-select',{"class":"form-control","id":"componentName","name":"name", "required":"required","dataAttributes":{"data-service-data":apiDevelopment + "/component/list","data-method":"GET","data-template":"#templateComponentList","data-target":"#modal-component-edit #componentName", "data-callback":"checkComponentEdited", "data-content":"'${data.name}'"}})
+
 
 			div(class="form-group col-md-4 col-12")
-				label(for="componentTitle",class="uppercase") Título
-				input(type="text",name="title",id="componentTitle",class="form-control", value="${data.title}")
+				+fragment('fragment-label',{"for":"componentTitle", "text":"Título"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentTitle","name":"title", "value":"${data.title}"})
 
 			div(class="form-group col-md-4 col-12")
 				| ${( $data.showTitle = data.showTitle == 'true' ? "checked" : "" ) ,''}
@@ -39,11 +41,11 @@ block modal-body
 
 					div(class="custom-control custom-radio")
 						input(type="radio",name="showTitle",id="componentShowTitleNo${id}",class="form-control custom-control-input",required, value="false", checked)
-						label(for="componentShowTitleNo${id}",class="uppercase custom-control-label") No
+						+fragment('fragment-label',{"for":"componentShowTitleNo${id}", "text":"No", "class":"uppercase custom-control-label"},'true')
 
 					div(class="custom-control custom-radio")
 						input(type="radio",name="showTitle",id="componentShowTitleSi${id}",class="form-control custom-control-input",required,value="true",${showTitle})
-						label(for="componentShowTitleSi${id}",class="uppercase custom-control-label") Si
+						+fragment('fragment-label',{"for":"componentShowTitleSi${id}", "text":"Si", "class":"uppercase custom-control-label"},'true')
 
 			div(class="form-group col-md-4 col-12")
 				fielset
@@ -51,25 +53,28 @@ block modal-body
 
 					div(class="custom-control custom-radio")
 						input(type="radio",name="full",id="componentFullNo${id}",class="custom-control-input",required, value="false", checked)
-						label(for="componentFullNo${id}",class="uppercase custom-control-label") No
+						+fragment('fragment-label',{"for":"componentFullNo${id}", "text":"No", "class":"custom-control-label"},'true')
 
 					div(class="custom-control custom-radio")
 						input(type="radio",name="full",id="componentFullSi${id}",class="custom-control-input",required, value="true", ${full})
-						label(for="componentFullSi${id}",class="uppercase custom-control-label") Si
+						+fragment('fragment-label',{"for":"componentFullSi${id}", "text":"Si", "class":"custom-control-label"},'true')
+
 
 			div(class="form-group col-md-4 col-12")
-				label(for="componentClasses",class="uppercase") Clases
-				input(type="text",name="classes",id="componentClasses",class="form-control", value="${data.classes}")
+				+fragment('fragment-label',{"for":"componentClasses", "text":"Clases"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentClasses","name":"classes", "value":"${data.classes}"})
+
 
 		.row
 			div(class="form-group col-md-4 col-12")
-				label(for="layoutColumnPosition",class="uppercase") Layout Position
-				input(type="text",name="layoutColumnPosition",id="layoutColumnPosition",class="form-control", required, value="${data.position}")
-				input(type="hidden",name="oldPosition",value="${data.position}")
+				+fragment('fragment-label',{"for":"layoutColumnPosition", "text":"Layout Position"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"layoutColumnPosition","name":"layoutColumnPosition", "value":"${data.position}","required":"required"})
+				+fragment('fragment-input',{"type":"hidden", "name":"oldPosition", "value":"${data.position}"})
+			
 			div(class="form-group col-md-4 col-12")
-				label(for="layoutColumn",class="uppercase") Layout Column
+				+fragment('fragment-label',{"for":"layoutColumn", "text":"Layout Column"})
 				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-callback="checkLayoutColumn", data-content='"${data.layoutColumn}"')
-				input(type="hidden",name="oldLayoutColumn",value="${data.layoutColumn}")
+				+fragment('fragment-input',{"type":"hidden", "name":"oldLayoutColumn", "value":"${data.layoutColumn}"})
 
 		.row
 			.col-12
@@ -90,6 +95,7 @@ block modal-body
 							div(class="custom-control custom-${$value.type}")
 								input(class="custom-control-input",type="${$value.type}",id="${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
 								label(class="custom-control-label" for="${id}") ${$value.label}
+
 
 						| {%elseif $value.type == "textarea" %}
 						div(class="form-group col-12 ${show}")

@@ -1,10 +1,15 @@
 include ../../fragments/include_fragments.pug
 
-mixin fragment(fragmentType,content)
+mixin fragment(fragmentType,content,cleanCode)
 
 	- var classesFragment = 'fragment'
 
-	div(class=classesFragment + ' ' + fragmentType)
+	- var clean = cleanCode == 'true' ? true : false;
 
-		div(class="fragment-content")
-			+#{fragmentType}(content)
+	if !clean
+		div(class=classesFragment + ' ' + fragmentType)
+
+			div(class="fragment-content")
+				+#{fragmentType}(content)
+	else
+		+#{fragmentType}(content)
