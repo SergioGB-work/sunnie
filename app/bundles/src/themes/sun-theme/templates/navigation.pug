@@ -9,29 +9,29 @@ nav(class="navbar navbar-expand-xl navbar-dark p-0 p-3-xl",role="navigation")
 		ul(class="navbar-nav bd-navbar-nav",data-load="true",data-service-data=apiLocal +siteURL + "/data/sitemap.json",data-method="GET",data-template="#templateNavigation",data-target="#navigation-list ul")
 
 
-	script(id="templateNavigation",type="text/x-jquery-tmpl")
-		| {%if data.pages.length > 0 %}
-		| {%each data.pages%}
+	script(id="templateNavigation",type="text/x-jsrender")
+		| {{if data.pages.length > 0 }}
+		| {{for data.pages}}
 
-		| {%if $value.childs.length > 0 &&  $value.hidden != 'true' %}
+		| {{if childs.length > 0 &&  hidden != 'true' }}
 		li.nav-item.dropdown
-			a(href=fullSiteUrl + "${$value.url}", title="${{ default.goTo }}$ ${$value.name}", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="${$value.id}", class="nav-link dropdown-toggle d-flex d-flex align-items-center")
-				span ${$value.name}
+			a(href=fullSiteUrl + "{{:url}}", title="${{ default.goTo }}$ {{:name}}", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="{{:id}}", class="nav-link dropdown-toggle d-flex d-flex align-items-center")
+				span {{:name}}
 
-			ul(class="dropdown-menu",aria-labelledby="${$value.id}")
-				| {%each(i, child) $value.childs %}
-				| {%if child.hidden != 'true' %}
+			ul(class="dropdown-menu",aria-labelledby="{{:id}}")
+				| {{for childs itemVar="~child"}}
+				| {{if ~child.hidden != 'true' }}
 				li.dropdown-item
-					a(href=fullSiteUrl + "${child.url}", title="${{ default.goTo }}$ ${child.name}") ${child.name}
-				| {%/if%}	
-				| {%/each%}
+					a(href=fullSiteUrl + "{{:~child.url}}", title="${{ default.goTo }}$ {{:~child.name}}") {{:~child.name}}
+				| {{/if}}	
+				| {{/for}}
 
-		| {%elseif $value.hidden != 'true' %}
+		| {{else hidden != 'true' }}
 
 		li.nav-item
-			a(href=fullSiteUrl + "${$value.url}", class="nav-link d-flex d-flex align-items-center", title="${{ default.goTo }}$ ${$value.name}")
-				span ${$value.name}
-		| {%/if%}
+			a(href=fullSiteUrl + "{{:url}}", class="nav-link d-flex d-flex align-items-center", title="${{ default.goTo }}$ {{:name}}")
+				span {{:name}}
+		| {{/if}}
 
-		| {%/each%}
-		| {%/if%}
+		| {{/for}}
+		| {{/if}}

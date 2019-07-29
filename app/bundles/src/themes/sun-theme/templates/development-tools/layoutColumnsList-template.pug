@@ -1,7 +1,7 @@
-script(id="templateLayoutColumnsList",type="text/x-jquery-tmpl")
-	| {%if data.columns.length > 0 %}
+script(id="templateLayoutColumnsList",type="text/x-jsrender")
+	| {{if data.columns.length > 0 }}
 	option(value="") Selecciona una columna	
-	| {%each data.columns%}
-	option(value="${$value}") ${$value}
-	| {%/each%}
-	| {%/if%}
+	| {{for data.columns}}
+	option(value="{{:}}") {{:}}
+	| {{/for}}
+	| {{/if}}

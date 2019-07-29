@@ -5,10 +5,10 @@ mixin component-siteSelector(content)
 		ul(id="siteList",class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="siteSelector",data-load="true",data-service-data=apiDevelopment + "/site/list",data-method="GET",data-template="#templateSitesList",data-target="#siteList")
 
 
-	script(id="templateSitesList",type="text/x-jquery-tmpl")
-		| {%if data.length > 0 %}	
-		| {%each data%}
+	script(id="templateSitesList",type="text/x-jsrender")
+		| {{if data.length > 0 }}	
+		| {{for data}}
 		li.dropdown-item
-			a(href="${$value.url}/${{ default.lang }}$/") ${$value.name}
-		| {%/each%}
-		| {%/if%}		
+			a(href="{{:url}}/${{ default.lang }}$/") {{:name}}
+		| {{/for}}
+		| {{/if}}		

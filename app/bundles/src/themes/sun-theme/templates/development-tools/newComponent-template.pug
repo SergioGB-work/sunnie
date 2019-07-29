@@ -1,4 +1,4 @@
-script(id="templateNewComponent",type="text/x-jquery-tmpl")
+script(id="templateNewComponent",type="text/x-jsrender")
 
 	div(class="component component-new", draggable="true")
 		.dropdown.action-bar
@@ -10,7 +10,7 @@ script(id="templateNewComponent",type="text/x-jquery-tmpl")
 				a.dropdown-item.edit(data-toggle="modal", data-target="#modal-component-edit") Editar
 				a.dropdown-item.delete(data-toggle="modal", data-target="#modal-component-delete") Eliminar		
 		div(class="component-title")
-			h2.text-capitalize ${data}
+			h2.text-capitalize {{:data}}
 
 		div(class="component-content")
 			div(class="alert alert-info text-center mb-0") Debes configurar el componente

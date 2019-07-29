@@ -1,6 +1,6 @@
-script(id="templateComponentListLI",type="text/x-jquery-tmpl")
-	| {%if data.length > 0 %}
-	| {%each data%}
-	li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(draggable="true", data-id-component="${$value}") ${$value}
-	| {%/each%}
-	| {%/if%}
+script(id="templateComponentListLI",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	| {{for data}}
+	li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(draggable="true", data-id-component="{{:}}") {{:}}
+	| {{/for}}
+	| {{/if}}

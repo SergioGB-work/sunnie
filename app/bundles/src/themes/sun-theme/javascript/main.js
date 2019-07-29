@@ -578,7 +578,10 @@ function processData(dataResponse, target, template, callback, content, totalIte
 
 	if ((target != '') && (template != '') && (template !== undefined) && (target !== undefined)) {
 		$(target).html('');
-		$(template).tmpl(data).appendTo(target);
+
+		var tmpl = $.templates(template);
+		var html = tmpl.render(data); 
+		$(target).html(html);
 	}
 
 	if ((callback != '') && (callback !== undefined)) {

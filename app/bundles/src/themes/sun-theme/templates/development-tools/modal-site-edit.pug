@@ -15,33 +15,33 @@ block modal-body
 				button(type="submit",class="btn btn-primary send") Editar
 
 
-	script(id="templateEditSite",type="text/x-jquery-tmpl")
+	script(id="templateEditSite",type="text/x-jsrender")
 
 		.row
 			div(class="form-group col-4")
 				label(for="siteName",class="uppercase") Nombre
-				input(type="text",name="name",id="siteName",class="form-control",value="${data.name}",required)
+				input(type="text",name="name",id="siteName",class="form-control",value="{{:data.name}}",required)
 
 			div(class="form-group col-4")
 				label(for="siteURL",class="uppercase") URL
-				input(type="text",name="url",id="siteURL",class="form-control",value="${data.url}",required)
+				input(type="text",name="url",id="siteURL",class="form-control",value="{{:data.url}}",required)
 
 			div(class="form-group col-md-4 col-12")
-				| ${( $data.enableChatBot = data.enableChatBot == 'true' ? "checked" : "" ) ,''}
-				| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+				| {{* ~enableChatBot = data.enableChatBot == 'true' ? "checked" : "" }}
+				| {{* ~id = parseInt(Math.random() * (99999 - 0) + 0) }}
 
 				fielset
 					legend Activar Asistente de Desarrollo(solo desarrollo)
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotNo${id}",class="form-control custom-control-input",required, value="false", checked)
-						label(for="enableChatBotNo${id}",class="uppercase custom-control-label") No
+						input(type="radio",name="enableChatBot",id="enableChatBotNo{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
+						label(for="enableChatBotNo{{*:id}}",class="uppercase custom-control-label") No
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotSi${id}",class="form-control custom-control-input",required,value="true",${enableChatBot})
-						label(for="enableChatBotSi${id}",class="uppercase custom-control-label") Si					
+						input(type="radio",name="enableChatBot",id="enableChatBotSi{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
+						label(for="enableChatBotSi{{*:id}}",class="uppercase custom-control-label") Si					
 		
 		.row
 			.col-12
 				h3 Seleciona un tema de apariencia
-		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-content='"${data.theme}' + '"',data-callback="checkThemeSelected")
+		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-content='"{{:data.theme}}' + '"',data-callback="checkThemeSelected")
