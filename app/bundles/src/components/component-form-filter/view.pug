@@ -5,11 +5,12 @@ mixin component-form-filter(content)
 	- var action = content.action || false
 	- var method = content.method || false
 	- var callback = content.callback || false
+	- var contentCallback = content.content || false
 	- var rel = content.rel || false
 	- var noReload = content.noReload || false
 	- var submitButton = content.submitButton || 'Aceptar'
 
-	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel, data-noreload=noReload)
+	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel, data-noreload=noReload, data-content=contentCallback)
 		.row
 			each item in items
 
@@ -52,6 +53,9 @@ mixin component-form-filter(content)
 
 					else if item.type=='separator'
 						h3.mb-0 #{item.label}
+
+					else if item.type=='html'
+						div !{item.htmlContent}	
 
 					else
 

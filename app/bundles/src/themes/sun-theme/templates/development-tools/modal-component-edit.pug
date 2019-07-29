@@ -86,27 +86,27 @@ block modal-body
 						| ${( $data.id = $value.id !== undefined && $value.id !== '' ? $value.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
 
 						| ${( $data.show = $value.visibility == "hidden" ? 'd-none' : '' ),''}
+						| ${( $data.showState = $value.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
 
 
 						| {%if $value.type == "checkbox" || $value.type =="radio" %}
 
 						| ${( $data.checked = data.content[name] == 'true' ? "checked" : "" ) ,''}
-						div(class="form-group col-md-4 col-12 pt-8 ${show}")
+						div(class="form-group col-md-4 col-12 pt-8 ${show}" ${showState})
 							div(class="custom-control custom-${$value.type}")
 								input(class="custom-control-input",type="${$value.type}",id="${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
-								label(class="custom-control-label" for="${id}") ${$value.label}
+								+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}", "class":"custom-control-label"}, 'true')
 
 
 						| {%elseif $value.type == "textarea" %}
 						div(class="form-group col-12 ${show}")
-							label(for="${id}",class="uppercase") ${$value.label}
+							+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
 							textarea(name="${$value.name}", id="${id}",class="form-control",${requiredField}) ${data.content[name]}
 
 						| {%elseif $value.type == "select" %}
 
 						div(class="form-group col-md-4 col-12 ${show}")
-							
-							label(for="${id}",class="uppercase") ${$value.label}
+							+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
 							select(name="${$value.name}", id="${id}", class="form-control",${requiredField})
 
 								| {%each(key,val) $value.options%}
@@ -135,26 +135,28 @@ block modal-body
 												| {%each(key,val) $data.dataContent%}
 												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
 												| ${( $data.id2 = val.id !== undefined && val.id !== '' ? val.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' +parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+												
 												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
+												| ${( $data.visibility2State = val.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
 
 												| {%if val.type == "checkbox" || val.type =="radio" %}
 												| ${( $data.checked2 = itemVal[val.name] == 'true' ? "checked" : "" ) ,''}
-												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}")
+												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}", ${visibility2State})
 													div(class="custom-control custom-${val.type}")
-														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked2})
-														label(class="custom-control-label" for="${id2}") ${val.label}
+														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField2},${checked2})
+														+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}", "class":"custom-control-label"}, 'true')
 
 												| {%elseif val.type == "textarea" %}
-												div(class="form-group col-12 ${visibility2}")
-													label(for="${id2}",class="uppercase") ${val.label}
-													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField}) ${itemVal[val.name]}
+												div(class="form-group col-12 ${visibility2}",${visibility2State})
+													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
+													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField2}) ${itemVal[val.name]}
 
 												| {%elseif val.type == "select" %}
 
-												div(class="form-group col-md-4 col-12 ${visibility2}")
+												div(class="form-group col-md-4 col-12 ${visibility2}",${visibility2State})
 													
-													label(for="${id2}",class="uppercase") ${val.label}
-													select(name="${val.name}", id="${id2}", class="form-control",${requiredField})
+													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
+													select(name="${val.name}", id="${id2}", class="form-control",${requiredField2})
 
 														| {%each(key2,val2) val.options%}
 														| ${( $data.selected = val2.value == itemVal[val.name] ? "selected" : "" ) ,''}
@@ -163,7 +165,7 @@ block modal-body
 
 												| {%elseif val.type == "array" %}	
 													
-												.col-12.form-group(class="${visibility2}")
+												.col-12.form-group(class="${visibility2}",${visibility2State})
 													| ${( $data.isSubArray = val.type=="array" ? 'data-block-type=array' : '' ),''}
 													
 													fieldset( ${isSubArray} data-form-group="${val.name}")
@@ -185,20 +187,19 @@ block modal-body
 																		| {%if val2.type == "checkbox" || val2.type =="radio" %}
 																		div(class="form-group col-md-4 col-12 pt-8")
 																			div(class="custom-control custom-${val2.type}")
-																				input(class="custom-control-input",type="${val2.type}",id="${id3}",name="${val2.name}",value="${val2.value}",${requiredField2},${checked})
-																				label(class="custom-control-label" for="${id3}") ${val2.label}
+																				input(class="custom-control-input",type="${val2.type}",id="${id3}",name="${val2.name}",value="${val2.value}",${requiredField3},${checked})
+																				+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}", "class":"custom-control-label"}, 'true')
 
 																		| {%elseif val2.type == "textarea" %}
 																		div(class="form-group col-12")
-																			label(for="${id3}",class="uppercase") ${val.label}
-																			textarea(name="${val2.name}", id="${id3}",class="form-control",${requiredField}) ${itemVal2[val2.name]}
+																			+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}"})
+																			textarea(name="${val2.name}", id="${id3}",class="form-control",${requiredField3}) ${itemVal2[val2.name]}
 
 																		| {%elseif val2.type == "select" %}
 
 																		div(class="form-group col-md-4 col-12")
-																			
-																			label(for="${id3}",class="uppercase") ${val2.label}
-																			select(name="${val2.name}", id="${id3}", class="form-control",${requiredField2})
+																			+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}"})
+																			select(name="${val2.name}", id="${id3}", class="form-control",${requiredField3})
 
 																				| {%each(key3,val3) val2.options%}
 																				| ${( $data.selected2 = val3.value == itemVal2[val2.name] ? "selected" : "" ) ,''}
@@ -207,7 +208,7 @@ block modal-body
 
 																		| {%else%}
 																		div(class="form-group col-md-4 col-12 mb-md-0")
-																			label(for="${id3}",class="uppercase") ${val2.label}
+																			+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}"})
 																			input(type="${val2.type}",name="${val2.name}",id="${id3}",class="form-control", value="${itemVal2[val2.name]}",${requiredField3})
 																		| {%/if%}		
 																		| {%/each%}
@@ -220,7 +221,7 @@ block modal-body
 
 												| {%else%}
 												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}")
-													label(for="${id2}",class="uppercase") ${val.label}
+													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
 													input(type="${val.type}",name="${val.name}",id="${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
 												| {%/if%}		
 												| {%/each%}
@@ -251,24 +252,24 @@ block modal-body
 												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
 												| ${( $data.id2 = val.id !== undefined && val.id !== '' ? val.id+ parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
 												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
-
+												| ${( $data.visibility2State = val.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
 												| {%if val.type == "checkbox" || val.type =="radio" %}
-												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}")
+												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}", ${visibility2State})
 													div(class="custom-control custom-${val.type}")
-														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField},${checked})
-														label(class="custom-control-label" for="${id2}") ${val.label}
+														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField2},${checked})
+														+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}", "class":"custom-control-label"}, 'true')
 
 												| {%elseif val.type == "textarea" %}
-												div(class="form-group col-12 ${visibility2}")
-													label(for="${id2}",class="uppercase") ${val.label}
-													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField}) ${itemVal[val.name]}
+												div(class="form-group col-12 ${visibility2}",${visibility2State})
+													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
+													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField2}) ${itemVal[val.name]}
 
 
 												| {%elseif val.type == "select" %}
 
-												div(class="form-group col-md-4 col-12 ${visibility2}")
+												div(class="form-group col-md-4 col-12 ${visibility2}",${visibility2State})
 													
-													label(for="${id2}",class="uppercase") ${val.label}
+													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
 													select(name="${val.name}", id="${id2}", class="form-control",${requiredField2})
 
 														| {%each(key2,val2) val.options%}
@@ -277,8 +278,8 @@ block modal-body
 														| {%/each%}
 
 												| {%else%}
-												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}")
-													label(for="${id2}",class="uppercase") ${val.label}
+												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}",${visibility2State})
+													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
 													input(type="${val.type}",name="${val.name}",id="${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
 												| {%/if%}		
 												| {%/each%}
@@ -288,8 +289,8 @@ block modal-body
 												div(class="deleteItem fa fa-minus")
 												| {%/if%}													
 						| {%else%}
-						div(class="form-group col-md-4 col-12 ${show}")
-							label(for="${id}",class="uppercase") ${$value.label}
+						div(class="form-group col-md-4 col-12 ${show}", ${showState})
+							+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
 							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="${id}",class="form-control",${requiredField})
 
 						| {%/if%}

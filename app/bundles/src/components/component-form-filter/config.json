@@ -47,7 +47,13 @@
 			"name":"callback",
 			"type":"text",
 			"visibility":"hidden"
-		},				
+		},
+		{
+			"label":"Content Callback",
+			"name":"content",
+			"type":"text",
+			"visibility":"hidden"
+		},						
 		{
 			"label":"Rel",
 			"name":"rel",
@@ -83,6 +89,7 @@
 					"label":"Input Type",
 					"name":"type",
 					"type":"select",
+					"required":true,
 					"options": [
 
 						{
@@ -116,6 +123,10 @@
 						{
 							"label":"Separator",
 							"value":"separator"
+						},
+						{
+							"label":"HTML",
+							"value":"html"
 						}
 					]
 				},
@@ -135,6 +146,12 @@
 							"type":"text"
 						}						
 					],
+					"visibility":"hidden"
+				},
+				{
+					"label":"HTML Content",
+					"name":"htmlContent",
+					"type":"textarea",
 					"visibility":"hidden"
 				},
 				{

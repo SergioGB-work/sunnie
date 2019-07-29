@@ -1,0 +1,97 @@
+script(id="templateFormGenerator",type="text/x-jquery-tmpl")
+	
+	| {%each data%}
+	| ${( $data.requiredField = $value.required == true ? "required" : "" ) ,''}
+	| ${( $data.id = $value.id !== undefined && $value.id !== '' ? $value.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+
+	| ${( $data.show = $value.visibility == "hidden" ? 'd-none' : '' ),''}
+	| ${( $data.showState = $value.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
+
+
+	| {%if $value.type == "checkbox" || $value.type =="radio" %}
+
+	| ${( $data.checked = data.content[name] == 'true' ? "checked" : "" ) ,''}
+	div(class="form-group col-md-4 col-12 pt-8 ${show}" ${showState})
+		div(class="custom-control custom-${$value.type}")
+			input(class="custom-control-input",type="${$value.type}",id="${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
+			+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}", "class":"custom-control-label"}, 'true')
+
+
+	| {%elseif $value.type == "textarea" %}
+	div(class="form-group col-12 ${show}")
+		+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
+		textarea(name="${$value.name}", id="${id}",class="form-control",${requiredField}) ${data.content[name]}
+
+	| {%elseif $value.type == "select" %}
+
+	div(class="form-group col-md-4 col-12 ${show}")
+		+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
+		select(name="${$value.name}", id="${id}", class="form-control",${requiredField})
+
+			| {%each(key,val) $value.options%}
+			| ${( $data.selected = val.value == data.content[name] ? "selected" : "" ) ,''}
+			option(value="${val.value}",${selected}) ${val.label}
+			| {%/each%}
+
+	| {%elseif $value.type == "array" %}
+
+	.col-12.form-group(class="${show}")
+
+		| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
+
+		fieldset( ${isArray} data-form-group="${$value.name}")
+			legend ${$value.label}
+			.row.position-relative
+				.col-12
+
+					| {%each(itemKey, itemVal) data.content[name] %}
+					
+					.fieldset(data-array-id="${itemKey}",class="mt-3")
+						.row
+
+							| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
+
+							| {%each(key,val) $data.dataContent%}
+
+							| {%tmpl(val) '#templateFormGenerator'%}
+
+							| {%/each%}
+
+							| {%if $value.type == "array"%}
+							div(class="addItem fa fa-plus mr-1")
+							div(class="deleteItem fa fa-minus")
+							| {%/if%}
+					| {%/each%}
+
+	| {%elseif $value.type == "group"  %}
+	.col-12.form-group(class="${show}")
+
+		| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
+
+		fieldset( ${isArray} data-form-group="${$value.name}")
+			legend ${$value.label}
+			.row.position-relative
+				.col-12
+					
+					.fieldset(data-array-id="0",class="mt-3")
+						.row
+
+							| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
+							| ${( $data.itemVal = data.content[name] ) ,''}
+
+							| {%each(key,val) $data.dataContent%}
+							| {%tmpl(val) '#templateFormGenerator'%}
+							| {%/each%}
+
+							| {%if $value.type == "array"%}
+							div(class="addItem fa fa-plus mr-1")
+							div(class="deleteItem fa fa-minus")
+							| {%/if%}													
+	| {%else%}
+	div(class="form-group col-md-4 col-12 ${show}", ${showState})
+		+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
+		input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="${id}",class="form-control",${requiredField})
+
+	| {%/if%}
+
+	| {%/each%}

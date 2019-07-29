@@ -890,6 +890,34 @@ gulp.task('apiServer', function() {
 		);	
 	});
 
+	app.get('/coches/modelos', function (req, res) {
+		res.status(200).send(
+			[
+				{
+					"id":"",
+					"name":"Selecciona el modelo de tu coche"
+				},			
+				{
+					"id":"1",
+					"name":"Clio"
+				},
+				{
+					"id":"2",
+					"name":"Megane"
+				},
+				{
+					"id":"3",
+					"name":"Talisman"
+				},
+				{
+					"id":"4",
+					"name":"Captur"
+				}
+			]
+		);	
+	});
+
+
 	app.post('/coches/modelos', function (req, res) {
 
 		var idMarca = req.body.value;

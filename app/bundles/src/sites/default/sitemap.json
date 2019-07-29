@@ -1405,120 +1405,32 @@
                     "content_left": [
                         {
                             "name": "component-form-filter",
-                            "id": "component-form-filter-3286",
+                            "id": "component-form-filter-9117",
                             "content": {
-                                "formFilter": "false",
-                                "submitButton": "Continuar",
-                                "action": "http://localhost:8082/ok",
+                                "formFilter": "true",
+                                "submitButton": "",
+                                "action": "",
                                 "method": "POST",
-                                "callback": "redirect",
+                                "callback": "",
+                                "content": "",
                                 "rel": "",
                                 "noReload": "false",
                                 "items": [
                                     {
-                                        "label": "¿Cuál es la marca de tu coche?",
-                                        "type": "select",
+                                        "label": "",
+                                        "type": "text",
                                         "selectValues": [
                                             {
                                                 "text": "",
                                                 "value": ""
                                             }
                                         ],
-                                        "name": "marca",
-                                        "placeholder": "",
-                                        "helpText": "Selecciona la marca de tu coche",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-6",
-                                        "regExp": "",
-                                        "dataService": "http://localhost:8082/coches/lista",
-                                        "dataMethod": "GET",
-                                        "dataTemplate": "#templateOptions",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "¿Cuál es el modelo de tu coche?",
-                                        "type": "select",
-                                        "selectValues": [
-                                            {
-                                                "text": "Selecciona tu modelo",
-                                                "value": ""
-                                            }
-                                        ],
-                                        "name": "modelo",
-                                        "placeholder": "",
-                                        "helpText": "Selecciona el modelo de tu coche",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-6",
-                                        "regExp": "",
-                                        "dataService": "http://localhost:8082/coches/modelos",
-                                        "dataMethod": "POST",
-                                        "dataTemplate": "#templateOptions",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "select[name='marca']",
-                                        "dataParentEvent": "change",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": "load-data"
-                                    },
-                                    {
-                                        "label": "¿Acabas de comprar tu coche?",
-                                        "type": "select",
-                                        "selectValues": [
-                                            {
-                                                "text": "Sí, lo he comprado nuevo",
-                                                "value": "1"
-                                            },
-                                            {
-                                                "text": "No, ya lo tenía y quiero cambiar de seguro",
-                                                "value": "2"
-                                            },
-                                            {
-                                                "text": "Sí, lo he comprado de 2ª mano a un Particular",
-                                                "value": "3"
-                                            },
-                                            {
-                                                "text": "Sí, lo he comprado de 2ª mano a un Concesionario",
-                                                "value": "3"
-                                            }
-                                        ],
-                                        "name": "estado_compra",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-6",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "Dinos la fecha de primera matriculación",
-                                        "type": "separator",
+                                        "htmlContent": "",
                                         "name": "",
                                         "placeholder": "",
                                         "helpText": "",
                                         "value": "",
-                                        "required": "true",
+                                        "required": "false",
                                         "size": "col-12",
                                         "regExp": "",
                                         "dataService": "",
@@ -1534,236 +1446,21 @@
                                         "dataParentEventAction": ""
                                     },
                                     {
-                                        "label": "Año",
-                                        "type": "select",
+                                        "label": "",
+                                        "type": "html",
                                         "selectValues": [
                                             {
-                                                "text": "2019",
-                                                "value": "2019"
-                                            },
-                                            {
-                                                "text": "2018",
-                                                "value": "2018"
-                                            },
-                                            {
-                                                "text": "2017",
-                                                "value": "2017"
-                                            },
-                                            {
-                                                "text": "2016",
-                                                "value": "2016"
-                                            },
-                                            {
-                                                "text": "2015",
-                                                "value": "2015"
-                                            },
-                                            {
-                                                "text": "2014",
-                                                "value": "2014"
-                                            },
-                                            {
-                                                "text": "2013",
-                                                "value": "2013"
-                                            },
-                                            {
-                                                "text": "2012",
-                                                "value": "2012"
-                                            },
-                                            {
-                                                "text": "2011",
-                                                "value": "2011"
+                                                "text": "",
+                                                "value": ""
                                             }
                                         ],
-                                        "name": "ano",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-6",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "Mes",
-                                        "type": "select",
-                                        "selectValues": [
-                                            {
-                                                "text": "Enero",
-                                                "value": "ene"
-                                            },
-                                            {
-                                                "text": "Febrero",
-                                                "value": "feb"
-                                            },
-                                            {
-                                                "text": "Marzo",
-                                                "value": "mar"
-                                            },
-                                            {
-                                                "text": "Abril",
-                                                "value": "abr"
-                                            },
-                                            {
-                                                "text": "Mayo",
-                                                "value": "may"
-                                            },
-                                            {
-                                                "text": "Junio",
-                                                "value": "jun"
-                                            },
-                                            {
-                                                "text": "Julio",
-                                                "value": "jul"
-                                            },
-                                            {
-                                                "text": "Agosto",
-                                                "value": "ago"
-                                            },
-                                            {
-                                                "text": "Septiembre",
-                                                "value": "sep"
-                                            },
-                                            {
-                                                "text": "Octubre",
-                                                "value": "oct"
-                                            },
-                                            {
-                                                "text": "Noviembre",
-                                                "value": "nov"
-                                            },
-                                            {
-                                                "text": "Diciembre",
-                                                "value": "dic"
-                                            }
-                                        ],
+                                        "htmlContent": "<h1>Hola</h1>\n",
                                         "name": "",
                                         "placeholder": "",
                                         "helpText": "",
                                         "value": "",
-                                        "required": "true",
-                                        "size": "col-6",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "¿Qué tipo de combustible utiliza?",
-                                        "type": "select",
-                                        "selectValues": [
-                                            {
-                                                "text": "Gasolina",
-                                                "value": "gaso"
-                                            },
-                                            {
-                                                "text": "Diesel",
-                                                "value": "die"
-                                            },
-                                            {
-                                                "text": "No estoy seguro",
-                                                "value": "no"
-                                            }
-                                        ],
-                                        "name": "combustible",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-4",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "¿Cuántas puertas tiene?",
-                                        "type": "select",
-                                        "selectValues": [
-                                            {
-                                                "text": "5 puertas",
-                                                "value": "5"
-                                            },
-                                            {
-                                                "text": "3 puertas",
-                                                "value": "3"
-                                            },
-                                            {
-                                                "text": "No estoy seguro",
-                                                "value": "no"
-                                            }
-                                        ],
-                                        "name": "puertas",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-4",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "¿Qué potencia tiene el motor?",
-                                        "type": "select",
-                                        "selectValues": [
-                                            {
-                                                "text": "90CV",
-                                                "value": "90"
-                                            },
-                                            {
-                                                "text": "105CV",
-                                                "value": "105"
-                                            },
-                                            {
-                                                "text": "130CV",
-                                                "value": "130"
-                                            },
-                                            {
-                                                "text": "No estoy seguro",
-                                                "value": ""
-                                            }
-                                        ],
-                                        "name": "potencia",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "true",
-                                        "size": "col-4",
+                                        "required": "false",
+                                        "size": "col-12",
                                         "regExp": "",
                                         "dataService": "",
                                         "dataMethod": "",
@@ -1779,7 +1476,7 @@
                                     }
                                 ]
                             },
-                            "title": "Tarificador de Coches",
+                            "title": "component-form-filter",
                             "showTitle": "true",
                             "full": "false",
                             "classes": "",

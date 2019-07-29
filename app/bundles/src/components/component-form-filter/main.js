@@ -5,6 +5,6 @@ $(document).ready(function(){
 
 })
 
-function redirect(data){
-	window.location.href='/tarificador/${{ default.lang }}$/tarificador-autos/resultados';
+function redirect(data,page){
+	window.location.href='/tarificador/${{ default.lang }}$' + page;
 }

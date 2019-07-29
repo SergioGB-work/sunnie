@@ -74,10 +74,24 @@ $(document).ready(function(){
 	});
 	
 	$(document).on('click','[data-block-type="array"] [data-array-id] .addItem',function(){
-		var array_item = $(this).closest('[data-array-id]').clone();
+		var array_item = $(this).closest('[data-array-id]').clone(true);
+		
+		$(array_item).find('textarea').each(function(){
+			var newID = 'input' + (Math.random() * (99999 - 0) + 0);//Se genera un nuevo ID para los CK Editor
+			$(this).attr("id", newID );//Se asocia el id al textarea que será el ckeditor 
+			$(this).prev().attr("for", newID );
+		})
+		
+		$(array_item).find('.cke').remove();
+		
+		array_item.insertAfter($(this).closest('[data-array-id]'));
+		
+		$(this).closest('[data-array-id]').next().find('textarea').each(function(){	
+			CKEDITOR.replace($(this).attr('id'));
+		});
 
-		array_item.insertBefore($(this).closest('[data-array-id]'));
-		$(this).closest('[data-array-id]').find('input').val('');
+		$(this).closest('[data-array-id]').next().find('[data-default-visibility="hidden"]').addClass('d-none');
+		$(this).closest('[data-array-id]').next().find('input,textarea,select').val('');
 
 		reloadArrayIndex($(this).closest('[data-block-type="array"]'));
 	});
@@ -228,11 +242,13 @@ $(document).ready(function(){
 		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
 		var layoutPosition = $(this).closest('.layout-column').find('.component').length;
 
-
 		if(origin=='new'){
 			var id = evt.originalEvent.dataTransfer.getData("id");
 			$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
-			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":0,"name":id})
+			refreshPositions(layoutColumn);
+			refreshPositions(oldLayoutColumn);
+			layoutPosition = $(this).closest('.layout-column').find('.component').length;
+			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
 		}
 		else{
 			var oldPosition = evt.originalEvent.dataTransfer.getData("oldPosition");
@@ -255,7 +271,6 @@ $(document).ready(function(){
 });
 
 function refreshPositions(column){
-
 	$('[data-layout-column='+column+'] .component').each(function(index,value){
 
 		$(this).attr('data-layout-position',index)
@@ -398,6 +413,13 @@ function loadConfigComponent(){
 				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().addClass('d-none');
 			}
 
+			if($(this).val() == 'html'){
+				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().removeClass('d-none');
+			}
+			else{
+				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().addClass('d-none');
+			}			
+
 		})
 
 		$('#form-edit-component [name="type"]').each(function(){
@@ -407,6 +429,12 @@ function loadConfigComponent(){
 			else{
 				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().addClass('d-none');
 			}
+			if($(this).val() == 'html'){
+				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().removeClass('d-none');
+			}
+			else{
+				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().addClass('d-none');
+			}				
 		});
 
 
@@ -415,19 +443,19 @@ function loadConfigComponent(){
 		$('#form-edit-component [name="formFilter"]').change(function(){
 
 			if($(this).val() == 'false'){
-				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().removeClass('d-none');
+				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().removeClass('d-none');
 			}
 			else{
-				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
+				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().addClass('d-none');
 			}
 
 		})
 
 		if($('#form-edit-component [name="formFilter"]').val() == 'false'){
-			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().removeClass('d-none');
+			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().removeClass('d-none');
 		}
 		else{
-			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"]').parent().addClass('d-none');
+			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().addClass('d-none');
 		}
 
 	}
