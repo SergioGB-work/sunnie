@@ -18,33 +18,33 @@ block modal-body
 		.row
 			div(class="form-group col-4")
 				label(for="pageId",class="uppercase") ID
-				input(type="text",name="id",id="pageId",class="form-control",required ,disabled, value="{{:data.id}")
+				input(type="text",name="id",id="pageId",class="form-control",required ,disabled, value="{{:data.id}}")
 
 			div(class="form-group col-4")
 				label(for="pageName",class="uppercase") Nombre
-				input(type="text",name="name",id="pageName",class="form-control",required, value="{{:data.name}")
+				input(type="text",name="name",id="pageName",class="form-control",required, value="{{:data.name}}")
 		.row
 			div(class="form-group col-4")
 				label(for="pageSRC",class="uppercase") SRC
-				input(type="text",name="src",id="pageSRC",class="form-control",required, disabled,value="{{:data.src}")
+				input(type="text",name="src",id="pageSRC",class="form-control",required, disabled,value="{{:data.src}}")
 			div(class="form-group col-4")
 				label(for="pageURL",class="uppercase") Url
-				input(type="text",name="url",id="pageURL",class="form-control",required,value="{{:data.url}")
+				input(type="text",name="url",id="pageURL",class="form-control",required,value="{{:data.url}}")
 			div(class="form-group col-4")
 				label(for="pagePosition",class="uppercase") Posición
-				input(type="number",name="position",min=0,id="pagePosition",class="form-control",required,value="{{:data.position}")
+				input(type="number",name="position",min=0,id="pagePosition",class="form-control",required,value="{{:data.position}}")
 		.row
 			div(class="form-group col-4")
 				label(for="pageTitle",class="uppercase") Page Title
-				input(type="text",name="title",id="pageTitle",class="form-control",required,value="{{:data.attributes.title}")
+				input(type="text",name="title",id="pageTitle",class="form-control",required,value="{{:data.attributes.title}}")
 
 			div(class="form-group col-4")
 				label(for="pageDescription",class="uppercase") Description
-				textarea(type="text",name="description",id="pageDescription",class="form-control") {{:data.attributes.description}
+				textarea(type="text",name="description",id="pageDescription",class="form-control") {{:data.attributes.description}}
 
 			div(class="form-group col-4")
 				label(for="pageKeywords",class="uppercase") Keywords
-				textarea(type="text",name="keywords",id="pageKeywords",class="form-control") {{:data.attributes.keywords}
+				textarea(type="text",name="keywords",id="pageKeywords",class="form-control") {{:data.attributes.keywords}}
 
 		.row
 			| {{* ~hidden = data.hidden == 'true' ? "selected" : "" }}
@@ -53,8 +53,8 @@ block modal-body
 				label(for="pageHidden",class="uppercase") Page Hidden
 				select(name="hidden",id="pageHidden",class="form-control",required)
 					option(value="false") No
-					option(value="true", {{*:~hidden}) Si				
+					option(value="true", {{*:~hidden}}) Si				
 		.row
 			.col-12
 				h3 Seleciona una plantilla de página
-		.row(id="layoutEditList",data-load="true",data-service-data=apiDevelopment + "/layout/list",data-method="GET",data-template="#templateLayoutList",data-items-per-page="0",data-initial-page="0",data-target="#modal-page-edit #layoutEditList",data-content='"{{:data.layout.name}' + '.pug"',data-callback="checkLayoutSelected")
+		.row(id="layoutEditList",data-load="true",data-service-data=apiDevelopment + "/layout/list",data-method="GET",data-template="#templateLayoutList",data-items-per-page="0",data-initial-page="0",data-target="#modal-page-edit #layoutEditList",data-content='"{{:data.layout.name}}' + '.pug"',data-callback="checkLayoutSelected")
