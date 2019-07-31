@@ -27,8 +27,8 @@ block modal-body
 				input(type="text",name="url",id="siteURL",class="form-control",value="{{:data.url}}",required)
 
 			div(class="form-group col-md-4 col-12")
-				| {{* ~enableChatBot = data.enableChatBot == 'true' ? "checked" : "" }}
-				| {{* ~id = parseInt(Math.random() * (99999 - 0) + 0) }}
+				| {{* window.enableChatBot = data.enableChatBot == 'true' ? "checked" : "" }}
+				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0) }}
 
 				fielset
 					legend Activar Asistente de Desarrollo(solo desarrollo)

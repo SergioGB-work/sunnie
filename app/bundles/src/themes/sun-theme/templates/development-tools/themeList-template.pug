@@ -1,7 +1,7 @@
 script(id="templateThemeList",type="text/x-jsrender")
 	| {{if data.length > 0 }}
 	| {{for data}}
-	| {{* ~id = parseInt(Math.random() * (99999 - 0) + 0) }}
+	| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0) }}
 	.col-4.form-group
 		div(class="custom-control custom-radio")
 			input(type="radio" class="custom-control-input" id="theme{{*:id}}" name="theme" value="{{:}}")

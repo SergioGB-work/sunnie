@@ -41,8 +41,10 @@ function loadFilterPills(){
 					}
 
 				});
-
-				$('#filterPillsTemplate').tmpl({"data":filters}).appendTo(component.find('.filters-container[data-rel="'+valueRel+'"]'));
+				var tmpl = $.templates('#filterPillsTemplate');
+				var html = tmpl.render({"data":filters}); 
+				component.find('.filters-container[data-rel="'+valueRel+'"]').html(html);
+					
 
 			});
 		}
@@ -57,8 +59,10 @@ function loadFilterPills(){
 
 			});
 
-			$('#filterPillsTemplate').tmpl({"data":filters}).appendTo(component.find('.filters-container'));				
-
+			var tmpl = $.templates('#filterPillsTemplate');
+			var html = tmpl.render({"data":filters});
+			component.find('.filters-container').html(html);
+	
 		}
 
 	});

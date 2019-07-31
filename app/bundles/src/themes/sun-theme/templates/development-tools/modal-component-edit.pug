@@ -14,285 +14,73 @@ block modal-body
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
 				button(type="submit",class="btn btn-primary send") Editar componente
 
-	script(id="templateEditComponent",type="text/x-jquery-tmpl")
+	script(id="templateEditComponent",type="text/x-jsrender")
 
 		.row
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"componentID", "text":"ID"})
-				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentID","name":"id", "value":"${data.id}", "disabled":"disabled"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentID","name":"id", "value":"{{:data.id}}", "disabled":"disabled"})
 				
 
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"componentName", "text":"Nombre"})
-				+fragment('fragment-select',{"class":"form-control","id":"componentName","name":"name", "required":"required","dataAttributes":{"data-service-data":apiDevelopment + "/component/list","data-method":"GET","data-template":"#templateComponentList","data-target":"#modal-component-edit #componentName", "data-callback":"checkComponentEdited", "data-content":"'${data.name}'"}})
+				+fragment('fragment-select',{"class":"form-control","id":"componentName","name":"name", "required":"required","dataAttributes":{"data-service-data":apiDevelopment + "/component/list","data-method":"GET","data-template":"#templateComponentList","data-target":"#modal-component-edit #componentName", "data-callback":"checkComponentEdited", "data-content":"'{{:data.name}}'"}})
 
 
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"componentTitle", "text":"Título"})
-				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentTitle","name":"title", "value":"${data.title}"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentTitle","name":"title", "value":"{{:data.title}}"})
 
 			div(class="form-group col-md-4 col-12")
-				| ${( $data.showTitle = data.showTitle == 'true' ? "checked" : "" ) ,''}
-				| ${( $data.full = data.full == 'true' ? "checked" : "" ) ,''}
-				| ${( $data.id = parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
+				| {{* window.showTitle = data.showTitle == 'true' ? "checked" : "" }}
+				| {{* window.full = data.full == 'true' ? "checked" : "" }}
+				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0);}}
 
 				fielset
 					legend Mostrar Título
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="showTitle",id="componentShowTitleNo${id}",class="form-control custom-control-input",required, value="false", checked)
-						+fragment('fragment-label',{"for":"componentShowTitleNo${id}", "text":"No", "class":"uppercase custom-control-label"},'true')
+						input(type="radio",name="showTitle",id="componentShowTitleNo{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
+						+fragment('fragment-label',{"for":"componentShowTitleNo{{*:id}}", "text":"No", "class":"uppercase custom-control-label"},'true')
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="showTitle",id="componentShowTitleSi${id}",class="form-control custom-control-input",required,value="true",${showTitle})
-						+fragment('fragment-label',{"for":"componentShowTitleSi${id}", "text":"Si", "class":"uppercase custom-control-label"},'true')
+						input(type="radio",name="showTitle",id="componentShowTitleSi{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:showTitle}})
+						+fragment('fragment-label',{"for":"componentShowTitleSi{{*:id}}", "text":"Si", "class":"uppercase custom-control-label"},'true')
+				
 
 			div(class="form-group col-md-4 col-12")
 				fielset
 					legend Fullsize
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="full",id="componentFullNo${id}",class="custom-control-input",required, value="false", checked)
-						+fragment('fragment-label',{"for":"componentFullNo${id}", "text":"No", "class":"custom-control-label"},'true')
+						input(type="radio",name="full",id="componentFullNo{{*:id}}",class="custom-control-input",required, value="false", checked)
+						+fragment('fragment-label',{"for":"componentFullNo{{*:id}}", "text":"No", "class":"custom-control-label"},'true')
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="full",id="componentFullSi${id}",class="custom-control-input",required, value="true", ${full})
-						+fragment('fragment-label',{"for":"componentFullSi${id}", "text":"Si", "class":"custom-control-label"},'true')
+						input(type="radio",name="full",id="componentFullSi{{*:id}}",class="custom-control-input",required, value="true", {{*:full}})
+						+fragment('fragment-label',{"for":"componentFullSi{{*:id}}", "text":"Si", "class":"custom-control-label"},'true')
 
 
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"componentClasses", "text":"Clases"})
-				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentClasses","name":"classes", "value":"${data.classes}"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentClasses","name":"classes", "value":"{{:data.classes}}"})
 
 
 		.row
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"layoutColumnPosition", "text":"Layout Position"})
-				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"layoutColumnPosition","name":"layoutColumnPosition", "value":"${data.position}","required":"required"})
-				+fragment('fragment-input',{"type":"hidden", "name":"oldPosition", "value":"${data.position}"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"layoutColumnPosition","name":"layoutColumnPosition", "value":"{{:data.position}}","required":"required"})
+				+fragment('fragment-input',{"type":"hidden", "name":"oldPosition", "value":"{{:data.position}}"})
 			
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"layoutColumn", "text":"Layout Column"})
-				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-callback="checkLayoutColumn", data-content='"${data.layoutColumn}"')
-				+fragment('fragment-input',{"type":"hidden", "name":"oldLayoutColumn", "value":"${data.layoutColumn}"})
+				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-callback="checkLayoutColumn", data-content='"{{:data.layoutColumn}}"')
+				+fragment('fragment-input',{"type":"hidden", "name":"oldLayoutColumn", "value":"{{:data.layoutColumn}}"})
 
 		.row
 			.col-12
 				fieldset(id="dynamicConfigComponent",data-form-group="content", class="md-3")
 					legend Contenido
 					.row
-						| {%each data.config%}
-						| ${( $data.requiredField = $value.required == true ? "required" : "" ) ,''}
-						| ${( $data.id = $value.id !== undefined && $value.id !== '' ? $value.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
 
-						| ${( $data.show = $value.visibility == "hidden" ? 'd-none' : '' ),''}
-						| ${( $data.showState = $value.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
-
-
-						| {%if $value.type == "checkbox" || $value.type =="radio" %}
-
-						| ${( $data.checked = data.content[name] == 'true' ? "checked" : "" ) ,''}
-						div(class="form-group col-md-4 col-12 pt-8 ${show}" ${showState})
-							div(class="custom-control custom-${$value.type}")
-								input(class="custom-control-input",type="${$value.type}",id="${id}",name="${$value.name}",value="${$value.value}",${requiredField},${checked})
-								+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}", "class":"custom-control-label"}, 'true')
-
-
-						| {%elseif $value.type == "textarea" %}
-						div(class="form-group col-12 ${show}")
-							+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
-							textarea(name="${$value.name}", id="${id}",class="form-control",${requiredField}) ${data.content[name]}
-
-						| {%elseif $value.type == "select" %}
-
-						div(class="form-group col-md-4 col-12 ${show}")
-							+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
-							select(name="${$value.name}", id="${id}", class="form-control",${requiredField})
-
-								| {%each(key,val) $value.options%}
-								| ${( $data.selected = val.value == data.content[name] ? "selected" : "" ) ,''}
-								option(value="${val.value}",${selected}) ${val.label}
-								| {%/each%}
-
-						| {%elseif $value.type == "array" %}
-
-						.col-12.form-group(class="${show}")
-
-							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
-
-							fieldset( ${isArray} data-form-group="${$value.name}")
-								legend ${$value.label}
-								.row.position-relative
-									.col-12
-
-										| {%each(itemKey, itemVal) data.content[name] %}
-										
-										.fieldset(data-array-id="${itemKey}",class="mt-3")
-											.row
-
-												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
-
-												| {%each(key,val) $data.dataContent%}
-												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
-												| ${( $data.id2 = val.id !== undefined && val.id !== '' ? val.id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' +parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
-												
-												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
-												| ${( $data.visibility2State = val.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
-
-												| {%if val.type == "checkbox" || val.type =="radio" %}
-												| ${( $data.checked2 = itemVal[val.name] == 'true' ? "checked" : "" ) ,''}
-												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}", ${visibility2State})
-													div(class="custom-control custom-${val.type}")
-														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField2},${checked2})
-														+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}", "class":"custom-control-label"}, 'true')
-
-												| {%elseif val.type == "textarea" %}
-												div(class="form-group col-12 ${visibility2}",${visibility2State})
-													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
-													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField2}) ${itemVal[val.name]}
-
-												| {%elseif val.type == "select" %}
-
-												div(class="form-group col-md-4 col-12 ${visibility2}",${visibility2State})
-													
-													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
-													select(name="${val.name}", id="${id2}", class="form-control",${requiredField2})
-
-														| {%each(key2,val2) val.options%}
-														| ${( $data.selected = val2.value == itemVal[val.name] ? "selected" : "" ) ,''}
-														option(value="${val2.value}",${selected} ) ${val2.label}
-														| {%/each%}
-
-												| {%elseif val.type == "array" %}	
-													
-												.col-12.form-group(class="${visibility2}",${visibility2State})
-													| ${( $data.isSubArray = val.type=="array" ? 'data-block-type=array' : '' ),''}
-													
-													fieldset( ${isSubArray} data-form-group="${val.name}")
-														legend ${val.label}
-														.row.position-relative
-															.col-12
-
-																| {%each(itemKey2, itemVal2) itemVal[val.name] %}
-																
-																.fieldset(data-array-id="${itemKey2}",class="mt-3")
-																	.row
-
-																		| ${( $data.dataContent2 = val.arrayContent ||  val.content || [] ) ,''}
-
-																		| {%each(key2,val2) $data.dataContent2%}
-																		| ${( $data.requiredField3 = val2.required == true ? "required" : "" ) ,''}
-																		| ${( $data.id3 = val2.id !== undefined && val2.id !== '' ? val2.id+ parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
-
-																		| {%if val2.type == "checkbox" || val2.type =="radio" %}
-																		div(class="form-group col-md-4 col-12 pt-8")
-																			div(class="custom-control custom-${val2.type}")
-																				input(class="custom-control-input",type="${val2.type}",id="${id3}",name="${val2.name}",value="${val2.value}",${requiredField3},${checked})
-																				+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}", "class":"custom-control-label"}, 'true')
-
-																		| {%elseif val2.type == "textarea" %}
-																		div(class="form-group col-12")
-																			+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}"})
-																			textarea(name="${val2.name}", id="${id3}",class="form-control",${requiredField3}) ${itemVal2[val2.name]}
-
-																		| {%elseif val2.type == "select" %}
-
-																		div(class="form-group col-md-4 col-12")
-																			+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}"})
-																			select(name="${val2.name}", id="${id3}", class="form-control",${requiredField3})
-
-																				| {%each(key3,val3) val2.options%}
-																				| ${( $data.selected2 = val3.value == itemVal2[val2.name] ? "selected" : "" ) ,''}
-																				option(value="${val3.value}",${selected2} ) ${val3.label}
-																				| {%/each%}
-
-																		| {%else%}
-																		div(class="form-group col-md-4 col-12 mb-md-0")
-																			+fragment('fragment-label',{"for":"${id3}", "text":"${val2.label}"})
-																			input(type="${val2.type}",name="${val2.name}",id="${id3}",class="form-control", value="${itemVal2[val2.name]}",${requiredField3})
-																		| {%/if%}		
-																		| {%/each%}
-
-																		| {%if $value.type == "array"%}
-																		div(class="addItem fa fa-plus mr-1")
-																		div(class="deleteItem fa fa-minus")
-																		| {%/if%}
-																| {%/each%}
-
-												| {%else%}
-												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}")
-													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
-													input(type="${val.type}",name="${val.name}",id="${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
-												| {%/if%}		
-												| {%/each%}
-
-												| {%if $value.type == "array"%}
-												div(class="addItem fa fa-plus mr-1")
-												div(class="deleteItem fa fa-minus")
-												| {%/if%}
-										| {%/each%}
-
-						| {%elseif $value.type == "group"  %}
-						.col-12.form-group(class="${show}")
-
-							| ${( $data.isArray = $value.type=="array" ? 'data-block-type=array' : '' ),''}
-
-							fieldset( ${isArray} data-form-group="${$value.name}")
-								legend ${$value.label}
-								.row.position-relative
-									.col-12
-										
-										.fieldset(data-array-id="0",class="mt-3")
-											.row
-
-												| ${( $data.dataContent = $value.arrayContent ||  $value.content || [] ) ,''}
-												| ${( $data.itemVal = data.content[name] ) ,''}
-
-												| {%each(key,val) $data.dataContent%}
-												| ${( $data.requiredField2 = val.required == true ? "required" : "" ) ,''}
-												| ${( $data.id2 = val.id !== undefined && val.id !== '' ? val.id+ parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) ) ,''}
-												| ${( $data.visibility2 = val.visibility == "hidden" ? 'd-none' : '' ),''}
-												| ${( $data.visibility2State = val.visibility == "hidden" ? 'data-default-visibility=hidden' : '' ),''}
-												| {%if val.type == "checkbox" || val.type =="radio" %}
-												div(class="form-group col-md-4 col-12 pt-8 ${visibility2}", ${visibility2State})
-													div(class="custom-control custom-${val.type}")
-														input(class="custom-control-input",type="${val.type}",id="${id2}",name="${val.name}",value="${val.value}",${requiredField2},${checked})
-														+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}", "class":"custom-control-label"}, 'true')
-
-												| {%elseif val.type == "textarea" %}
-												div(class="form-group col-12 ${visibility2}",${visibility2State})
-													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
-													textarea(name="${val.name}", id="${id2}",class="form-control",${requiredField2}) ${itemVal[val.name]}
-
-
-												| {%elseif val.type == "select" %}
-
-												div(class="form-group col-md-4 col-12 ${visibility2}",${visibility2State})
-													
-													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
-													select(name="${val.name}", id="${id2}", class="form-control",${requiredField2})
-
-														| {%each(key2,val2) val.options%}
-														| ${( $data.selected = val2.value == itemVal[val.name] ? "selected" : "" ) ,''}
-														option(value="${val2.value}",${selected} ) ${val2.label}
-														| {%/each%}
-
-												| {%else%}
-												div(class="form-group col-md-4 col-12 mb-md-0 ${visibility2}",${visibility2State})
-													+fragment('fragment-label',{"for":"${id2}", "text":"${val.label}"})
-													input(type="${val.type}",name="${val.name}",id="${id2}",class="form-control", value="${itemVal[val.name]}",${requiredField2})
-												| {%/if%}		
-												| {%/each%}
-
-												| {%if $value.type == "array"%}
-												div(class="addItem fa fa-plus mr-1")
-												div(class="deleteItem fa fa-minus")
-												| {%/if%}													
-						| {%else%}
-						div(class="form-group col-md-4 col-12 ${show}", ${showState})
-							+fragment('fragment-label',{"for":"${id}", "text":"${$value.label}"})
-							input(type="${$value.type}",name="${$value.name}",value="${data.content[name]}",id="${id}",class="form-control",${requiredField})
-
-						| {%/if%}
-
-						| {%/each%}
+						| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}

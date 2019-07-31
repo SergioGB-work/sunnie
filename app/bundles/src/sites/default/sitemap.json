@@ -924,9 +924,14 @@
                                         "onclick": ""
                                     },
                                     {
-                                        "text": "Felicitaciones",
+                                        "text": "Documentación",
                                         "onclick": "",
                                         "current": "true"
+                                    },
+                                    {
+                                        "text": "Felicitaciones",
+                                        "onclick": "",
+                                        "current": ""
                                     }
                                 ]
                             },
@@ -1209,7 +1214,7 @@
                                 "method": "GET",
                                 "static_code": "<table class=\"table\"> \t<thead> \t\t<tr> \t\t\t<th> ID</th> \t\t\t<th> Nombre</th> \t\t\t<th> Email</th> \t\t\t \t\t\t<th> Rol</th> \t\t</tr> \t</thead>\t\t\t\t \t<tbody></tbody> </table>\t",
                                 "template": "sitemapTemplate",
-                                "template_code": "{%if data.pages.length > 0 %} \t{%each data.pages%} \t<tr> \t\t<td> ${$value.id}</td> \t\t<td> ${$value.name}</td> \t\t<td> ${$value.url}</td> \t\t<td> rol</td> \t{%/each%} \t{%else%} \t</tr> \t\t<td class=\"alert alert-warning\",role=\"alert\",colspan=\"6\"> No hay usuarios</td></tr> \t{%/if%}\t",
+                                "template_code": "{{if data.pages.length > 0 }} \t{{for data.pages}} \t<tr> \t\t<td> {{:id}}</td> \t\t<td> {{:name}}</td> \t\t<td> {{:url}}</td> \t\t<td> rol</td> \t{{/for}} \t{{else}} \t</tr> \t\t<td class=\"alert alert-warning\",role=\"alert\",colspan=\"6\"> No hay usuarios</td></tr> \t{{/if}}\t",
                                 "target": ".sergio .table tbody",
                                 "initial_page": "",
                                 "items_per_page": "",
@@ -1414,10 +1419,10 @@
                                 "callback": "",
                                 "content": "",
                                 "rel": "",
-                                "noReload": "false",
+                                "noReload": "true",
                                 "items": [
                                     {
-                                        "label": "",
+                                        "label": "Campo 1",
                                         "type": "text",
                                         "selectValues": [
                                             {
@@ -1426,12 +1431,12 @@
                                             }
                                         ],
                                         "htmlContent": "",
-                                        "name": "",
+                                        "name": "campo 1",
                                         "placeholder": "",
                                         "helpText": "",
                                         "value": "",
                                         "required": "false",
-                                        "size": "col-12",
+                                        "size": "col-4",
                                         "regExp": "",
                                         "dataService": "",
                                         "dataMethod": "",
@@ -1477,7 +1482,7 @@
                                 ]
                             },
                             "title": "component-form-filter",
-                            "showTitle": "true",
+                            "showTitle": "false",
                             "full": "false",
                             "classes": "",
                             "new": "false"

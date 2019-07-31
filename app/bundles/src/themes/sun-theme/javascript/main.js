@@ -578,7 +578,7 @@ function processData(dataResponse, target, template, callback, content, totalIte
 
 	if ((target != '') && (template != '') && (template !== undefined) && (target !== undefined)) {
 		$(target).html('');
-
+		$.views.settings.allowCode(true);
 		var tmpl = $.templates(template);
 		var html = tmpl.render(data); 
 		$(target).html(html);

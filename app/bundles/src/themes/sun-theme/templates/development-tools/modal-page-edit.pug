@@ -47,13 +47,13 @@ block modal-body
 				textarea(type="text",name="keywords",id="pageKeywords",class="form-control") {{:data.attributes.keywords}}
 
 		.row
-			| {{* ~hidden = data.hidden == 'true' ? "selected" : "" }}
+			| {{* window.hidden = data.hidden == 'true' ? "selected" : "" }}
 
 			div(class="form-group col-4")
 				label(for="pageHidden",class="uppercase") Page Hidden
 				select(name="hidden",id="pageHidden",class="form-control",required)
 					option(value="false") No
-					option(value="true", {{*:~hidden}}) Si				
+					option(value="true", {{*:hidden}}) Si				
 		.row
 			.col-12
 				h3 Seleciona una plantilla de página

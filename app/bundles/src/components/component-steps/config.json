@@ -8,7 +8,8 @@
 				{
 					"label":"Step Text",
 					"name":"text",
-					"type":"text"
+					"type":"text",
+					"required":true
 				},
 				{
 					"label":"Click Event",
