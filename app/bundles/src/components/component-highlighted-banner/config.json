@@ -3,7 +3,8 @@
 		{
 			"label":"Content",
 			"name":"content",
-			"type":"textarea"
+			"type":"textarea",
+			"required":true
 		},
 		{
 			"label":"Button",

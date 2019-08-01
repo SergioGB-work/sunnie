@@ -139,26 +139,26 @@ mixin component-data-definitions(content)
 					p ${{ data-definitions.dataLoadingTemplateContentParagraph3 }}$
 
 					pre 
-						|script(id="templateUsersList",type="text/x-jquery-tmpl")
+						|script(id="templateUsersList",type="text/x-jsrender")
 
-						|	| {%if data.length > 0 %}
+						|	| {{if data.length > 0 }
 
-						|	| {%each data%}
+						|	| {{for data}}
 
 						|	tr
-						|		td ${$value.idUsuario}
-						|		td ${$value.username}
-						|		td ${$value.email}
-						|		td.text-center ${$value.rol.nombreRol}
+						|		td {{:idUsuario}}
+						|		td {{:username}}
+						|		td {{:email}}
+						|		td.text-center {{:rol.nombreRol}}
 
-						|	| {%/each%}
+						|	| {{/for}}
 
-						|	| {%else%}
+						|	| {{else}}
 
 						|	tr
 						|		td(class="alert alert-warning",role="alert",colspan="6") No hay usuarios
 
-						|	| {%/if%}	
+						|	| {{/if}}	
 
 	.row
 		.col-12

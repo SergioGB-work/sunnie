@@ -37,6 +37,13 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#modal-page-confirm-publish .send').click(function(){
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Publicando página, espere por favor...');
+		}	
+	});	
+
 	$('#modal-component-edit .send').click(function(){
 		if(validateForm($(this).closest('form'))){
 			$(this).closest('#modal-component-edit').modal('hide');
@@ -160,7 +167,9 @@ $(document).ready(function(){
 	$('#ToolsComponentList').on('dragstart','[draggable="true"]', function(evt) {
 		evt.originalEvent.dataTransfer.setData("id", $(this).data('id-component'));
 		evt.originalEvent.dataTransfer.setData("origin", 'new');
-		$('#templateLayoutDropZone').tmpl().appendTo($('.layout .layout-column'));
+		var tmpl = $.templates('#templateLayoutDropZone');
+		var html = tmpl.render();
+		$('.layout .layout-column').append(html);
 	});
 
 
@@ -172,6 +181,9 @@ $(document).ready(function(){
 		evt.originalEvent.dataTransfer.setData("origin", 'move');
 		evt.originalEvent.dataTransfer.setData("oldPosition", $(this).data("layout-position"));
 		evt.originalEvent.dataTransfer.setData("oldLayoutColumn", $(this).closest('.layout-column').data("layout-column"));
+		var tmpl = $.templates('#templateLayoutDropZone');
+		var html = tmpl.render();
+		$('.layout .layout-column').append(html);
 	});
 
 	$('.layout .layout-column').on('dragend','.component', function(evt) {
@@ -182,6 +194,7 @@ $(document).ready(function(){
 	$('.layout .layout-column').on('dragover','.component', function(evt) {
 		evt.preventDefault();
 		evt.stopPropagation();
+
 		$(this).addClass('dragging-over');
 	});
 
@@ -195,29 +208,36 @@ $(document).ready(function(){
 		evt.preventDefault();
 		evt.stopPropagation();
 		$(this).removeClass('dragging-over');
+		$('.layout .layout-drop-zone').remove();
 		
 		var origin = evt.originalEvent.dataTransfer.getData("origin");
 		var layoutColumn = $(this).closest('.layout-column').data("layout-column");
 		var layoutPosition = $(this).data("layout-position");
+		var oldPosition = evt.originalEvent.dataTransfer.getData("oldPosition");
+		var oldLayoutColumn = evt.originalEvent.dataTransfer.getData("oldLayoutColumn");
 
-		if(origin=='new'){
-			var id = evt.originalEvent.dataTransfer.getData("id");
-			$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
-			refreshPositions(layoutColumn);
-			refreshPositions(oldLayoutColumn);
-			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
-		}
-		else{
-			var oldPosition = evt.originalEvent.dataTransfer.getData("oldPosition");
-			var oldLayoutColumn = evt.originalEvent.dataTransfer.getData("oldLayoutColumn");
-			var originalComponent = $('[data-layout-column='+oldLayoutColumn+'] [data-layout-position='+oldPosition+']');
-			var componentToMove = originalComponent.clone(true);
 
-			componentToMove.insertBefore($(this));
-			originalComponent.remove();
-			refreshPositions(layoutColumn);
-			refreshPositions(oldLayoutColumn);
-			moveComponent({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"oldPosition":oldPosition, "oldLayoutColumn":oldLayoutColumn})
+		if(oldPosition != layoutPosition || oldLayoutColumn != layoutColumn){
+			if(origin=='new'){
+				var id = evt.originalEvent.dataTransfer.getData("id");
+				var tmpl = $.templates('#templateNewComponent');
+				var html = tmpl.render({data:id});
+				$(html).insertBefore($(this));
+
+				refreshPositions(layoutColumn);
+				addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
+			}
+			else{
+				
+				var originalComponent = $('[data-layout-column='+oldLayoutColumn+'] [data-layout-position='+oldPosition+']');
+				var componentToMove = originalComponent.clone(true);
+
+				componentToMove.insertBefore($(this));
+				originalComponent.remove();
+				refreshPositions(layoutColumn);
+				refreshPositions(oldLayoutColumn);
+				moveComponent({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"oldPosition":oldPosition, "oldLayoutColumn":oldLayoutColumn})
+			}
 		}
 
 	});
@@ -244,9 +264,11 @@ $(document).ready(function(){
 
 		if(origin=='new'){
 			var id = evt.originalEvent.dataTransfer.getData("id");
-			$('#templateNewComponent').tmpl({data:id}).insertBefore($(this));
+			var tmpl = $.templates('#templateNewComponent');
+			var html = tmpl.render({data:id});
+			$(html).insertBefore($(this));
+
 			refreshPositions(layoutColumn);
-			refreshPositions(oldLayoutColumn);
 			layoutPosition = $(this).closest('.layout-column').find('.component').length;
 			addComponentToPage({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"name":id})
 		}
@@ -262,9 +284,23 @@ $(document).ready(function(){
 			refreshPositions(oldLayoutColumn);
 			moveComponent({"layoutColumn":layoutColumn,"layoutColumnPosition":layoutPosition,"oldPosition":oldPosition, "oldLayoutColumn":oldLayoutColumn})
 		}
+		$('.layout .layout-drop-zone').remove();
 
+	});	
 
+	$('body *').on('dragover', function(evt) {
+		var dragY = evt.originalEvent.pageY;
+		if((dragY - $(window).scrollTop())   < 100){
+			$(window).scrollTop($(window).scrollTop() - 1 );
+		}
 
+		else if(dragY <= screen.height  && (screen.height - (dragY - $(window).scrollTop())  < 200  )){
+			$(window).scrollTop($(window).scrollTop() + 1 );
+		}
+
+		else if(dragY > screen.height  && (($(window).scrollTop() + screen.height) - dragY)  < 200){
+			$(window).scrollTop($(window).scrollTop() + 1 );
+		}
 
 	});	
 
@@ -273,7 +309,8 @@ $(document).ready(function(){
 function refreshPositions(column){
 	$('[data-layout-column='+column+'] .component').each(function(index,value){
 
-		$(this).attr('data-layout-position',index)
+		$(this).attr('data-layout-position',index);
+		$(this).data('layout-position',index);
 
 	})
 
@@ -298,10 +335,6 @@ function moveComponent(el){
 	var position = el.layoutColumnPosition || 0;
 	var oldPosition = parseInt(el.oldPosition);
 	var oldLayoutColumn = el.oldLayoutColumn;
-	console.log("OldPos:" + oldPosition);
-	console.log("OldColumn:" + oldLayoutColumn);
-	console.log("position:" + position);
-	console.log("layoutColumn:" + layoutColumn);
 	
 	getData({
 		"service": apiDevelop + "/site/{idSite}/page/{idPage}/component/move",
@@ -338,8 +371,13 @@ function deletePageCallback(data){
 	$('[data-layout-column="'+data.column+'"] [data-layout-position="'+data.position+'"]').remove();
 }
 
+function publishPageCallback(){
+	$('#modal-error').modal('hide');
+}
+
 function dataEditPageLoadedCallback(data){
 	dataList($('#modal-page-edit #layoutEditList'));
+	dataList($('#modal-page-edit #pageParentPositionEdit'));
 }
 
 function dataEditSiteLoadedCallback(data){
@@ -352,6 +390,11 @@ function checkLayoutSelected(data,idLayout){
 
 function checkThemeSelected(data,idTheme){
 	$('#modal-site-edit #themeList input[value="'+idTheme+'"]').attr('checked','checked');
+}
+
+function checkParentPage(data,parentPosition,pagePosition){
+	$('#modal-page-edit #pageParentPositionEdit option[value^="'+parentPosition + ',' + pagePosition +'"]').remove();
+	$('#modal-page-edit #pageParentPositionEdit option[value="'+parentPosition+'"]').attr('selected','selected');
 }
 
 function dataComponentLoadedCallback(data){

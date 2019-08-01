@@ -580,7 +580,7 @@ function processData(dataResponse, target, template, callback, content, totalIte
 		$(target).html('');
 		$.views.settings.allowCode(true);
 		var tmpl = $.templates(template);
-		var html = tmpl.render(data); 
+		var html = tmpl.render(data);
 		$(target).html(html);
 	}
 

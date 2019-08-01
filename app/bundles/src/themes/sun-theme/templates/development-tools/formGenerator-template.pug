@@ -25,7 +25,7 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 	| {{/if}}
 
 
-	div(class="form-group col-md-4 col-12 pt-8 {{*:show}}", {{*:showState}})
+	div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}})
 		div(class="custom-control custom-{{:type}}")
 			input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}})
 			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label"}, 'true')
@@ -38,7 +38,7 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 
 	| {{else type == "select" }}
 
-	div(class="form-group col-md-4 col-12 {{*:show}}")
+	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}")
 		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
 		select(name="{{:name}}", id="{{*:id}}", class="form-control",{{*:requiredField}})
 			
@@ -85,7 +85,7 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 							| {{for content ~originalContent = ~originalContent[name] tmpl="#templateFormGenerator"/}}
 
 	| {{else}}
-	div(class="form-group col-md-4 col-12 {{*:show}}", {{*:showState}})
+	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}})
 		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
 		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control",{{*:requiredField}})
 

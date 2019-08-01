@@ -35,7 +35,8 @@
 		{
 			"label":"Content",
 			"name":"content",
-			"type":"text"
+			"type":"text",
+			"required":true
 		},
 		{
 			"label":"Button",

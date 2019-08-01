@@ -8,7 +8,8 @@
 				{
 					"label":"Header",
 					"name":"header",
-					"type":"text"
+					"type":"text",
+					"required":true
 				},
 				{
 					"label":"Content",

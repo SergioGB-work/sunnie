@@ -3,7 +3,8 @@
 		{
 			"label":"HTML Content",
 			"name":"HTMLcontent",
-			"type":"textarea"
+			"type":"textarea",
+			"required":true
 		}
 	]
 }

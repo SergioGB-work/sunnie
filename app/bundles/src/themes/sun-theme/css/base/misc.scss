@@ -252,6 +252,9 @@ legend{
 	background: $modal-header-bg;
 	color: $modal-header-color;
 }
+.modal-full{
+	max-width:95%;
+}
 
 /** PAGINATION **/
 .pagination{

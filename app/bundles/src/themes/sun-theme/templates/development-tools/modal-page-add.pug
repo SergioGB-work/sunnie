@@ -3,7 +3,7 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Crear Página"
 	- var modal_id = "modal-page-add"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-full"
 
 block modal-body
 	form(id="form-add-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/add", data-callback="addPageCallback")
@@ -16,9 +16,13 @@ block modal-body
 				label(for="pageURL",class="uppercase") Url
 				input(type="text",name="url",id="pageURL",class="form-control",required)
 
+		.row
+			div(class="form-group col-4")
+				label(for="pageParentPosition",class="uppercase") Padre
+				select(name="parentPosition",id="pageParentPosition",class="form-control",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePagesList",data-target="#modal-page-add #pageParentPosition")
 			div(class="form-group col-4")
 				label(for="pagePosition",class="uppercase") Posición
-				input(type="number",name="position",min=0,id="pagePosition",class="form-control",required)
+				input(type="text",name="position",min=0,id="pagePosition",class="form-control",required)
 
 		.row
 			div(class="form-group col-4")

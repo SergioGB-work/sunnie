@@ -13,7 +13,8 @@
 				{
 					"label":"Page Name",
 					"name":"pageName",
-					"type":"text"
+					"type":"text",
+					"required":true
 				}
 			]
 		}

@@ -4,7 +4,8 @@
 		{
 			"label":"Service Data",
 			"name":"service",
-			"type":"text"
+			"type":"text",
+			"required":true
 		},
 		{
 			"label":"Method",

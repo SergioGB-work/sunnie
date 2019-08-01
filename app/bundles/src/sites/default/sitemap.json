@@ -916,7 +916,7 @@
                             "content": {
                                 "items": [
                                     {
-                                        "text": "Datos Personales",
+                                        "text": "Datos Personales12",
                                         "onclick": "alerta"
                                     },
                                     {
@@ -930,8 +930,7 @@
                                     },
                                     {
                                         "text": "Felicitaciones",
-                                        "onclick": "",
-                                        "current": ""
+                                        "onclick": ""
                                     }
                                 ]
                             },
@@ -1410,85 +1409,6 @@
                     "content_left": [
                         {
                             "name": "component-form-filter",
-                            "id": "component-form-filter-9117",
-                            "content": {
-                                "formFilter": "true",
-                                "submitButton": "",
-                                "action": "",
-                                "method": "POST",
-                                "callback": "",
-                                "content": "",
-                                "rel": "",
-                                "noReload": "true",
-                                "items": [
-                                    {
-                                        "label": "Campo 1",
-                                        "type": "text",
-                                        "selectValues": [
-                                            {
-                                                "text": "",
-                                                "value": ""
-                                            }
-                                        ],
-                                        "htmlContent": "",
-                                        "name": "campo 1",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "false",
-                                        "size": "col-4",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    },
-                                    {
-                                        "label": "",
-                                        "type": "html",
-                                        "selectValues": [
-                                            {
-                                                "text": "",
-                                                "value": ""
-                                            }
-                                        ],
-                                        "htmlContent": "<h1>Hola</h1>\n",
-                                        "name": "",
-                                        "placeholder": "",
-                                        "helpText": "",
-                                        "value": "",
-                                        "required": "false",
-                                        "size": "col-12",
-                                        "regExp": "",
-                                        "dataService": "",
-                                        "dataMethod": "",
-                                        "dataTemplate": "",
-                                        "event": "",
-                                        "eventTarget": "",
-                                        "eventValue": "",
-                                        "eventAction": "",
-                                        "dataParent": "",
-                                        "dataParentEvent": "",
-                                        "dataParentEventValue": "",
-                                        "dataParentEventAction": ""
-                                    }
-                                ]
-                            },
-                            "title": "component-form-filter",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": "",
-                            "new": "false"
-                        },
-                        {
-                            "name": "component-form-filter",
                             "id": "component-form-filter-8111",
                             "content": {
                                 "formFilter": "false",
@@ -1726,9 +1646,151 @@
                             "full": "false",
                             "classes": "",
                             "new": "false"
+                        },
+                        {
+                            "name": "component-form-filter",
+                            "id": "component-form-filter-5753",
+                            "content": {
+                                "formFilter": "",
+                                "submitButton": "",
+                                "action": "",
+                                "method": "",
+                                "callback": "",
+                                "content": "",
+                                "rel": "",
+                                "noReload": "",
+                                "items": [
+                                    {
+                                        "label": "",
+                                        "type": "",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "htmlContent": "",
+                                        "name": "",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "",
+                                        "size": "",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-form-filter",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-form-filter",
+                            "id": "component-form-filter-9117",
+                            "content": {
+                                "formFilter": "true",
+                                "submitButton": "",
+                                "action": "",
+                                "method": "POST",
+                                "callback": "",
+                                "content": "",
+                                "rel": "",
+                                "noReload": "true",
+                                "items": [
+                                    {
+                                        "label": "Campo 2",
+                                        "type": "text",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "htmlContent": "",
+                                        "name": "campo 1",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-4",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    },
+                                    {
+                                        "label": "",
+                                        "type": "html",
+                                        "selectValues": [
+                                            {
+                                                "text": "",
+                                                "value": ""
+                                            }
+                                        ],
+                                        "htmlContent": "<h1>Hola</h1>\n",
+                                        "name": "",
+                                        "placeholder": "",
+                                        "helpText": "",
+                                        "value": "",
+                                        "required": "false",
+                                        "size": "col-12",
+                                        "regExp": "",
+                                        "dataService": "",
+                                        "dataMethod": "",
+                                        "dataTemplate": "",
+                                        "event": "",
+                                        "eventTarget": "",
+                                        "eventValue": "",
+                                        "eventAction": "",
+                                        "dataParent": "",
+                                        "dataParentEvent": "",
+                                        "dataParentEventValue": "",
+                                        "dataParentEventAction": ""
+                                    }
+                                ]
+                            },
+                            "title": "component-form-filter",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
                         }
                     ],
                     "content_right": [
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-3098",
+                            "content": {
+                                "HTMLcontent": "<h2 class=\"h5\">Preguntas frecuentes</h2>\n\n<ul>\n\t<li>&iquest;Qu&eacute; consideramos contenido a efectos del seguro?</li>\n\t<li>&iquest;Qu&eacute; me incluye la restauraci&oacute;n est&eacute;tica?</li>\n\t<li>&iquest;Qu&eacute; me cubre los da&ntilde;os por agua?</li>\n\t<li>&iquest;Qu&eacute; me cubren los da&ntilde;os el&eacute;ctricos?</li>\n</ul>\n",
+                                "undefined": "<h2 class=\"h5\">Preguntas frecuentes</h2>\n\n<ul>\n\t<li>&iquest;Qu&eacute; consideramos contenido a efectos del seguro?</li>\n\t<li>&iquest;Qu&eacute; me incluye la restauraci&oacute;n est&eacute;tica?</li>\n\t<li>&iquest;Qu&eacute; me cubre los da&ntilde;os por agua?</li>\n\t<li>&iquest;Qu&eacute; me cubren los da&ntilde;os el&eacute;ctricos?</li>\n</ul>\n"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        },
                         {
                             "name": "component-html-content",
                             "id": "component-html-content-233",
@@ -1747,19 +1809,6 @@
                             "content": {
                                 "HTMLcontent": "<h2 class=\"h5\">Informaci&oacute;n requerida</h2>\n\n<p>Para poder darte el precio exacto te recomendamos tengas cerca:</p>\n\n<ul>\n\t<li>DNI</li>\n\t<li>Direcci&oacute;n del domicilio a asegurar</li>\n</ul>\n",
                                 "undefined": "<h2 class=\"h5\">Informaci&oacute;n requerida</h2>\n\n<p>Para poder darte el precio exacto te recomendamos tengas cerca:</p>\n\n<ul>\n\t<li>DNI</li>\n\t<li>Direcci&oacute;n del domicilio a asegurar</li>\n</ul>\n"
-                            },
-                            "title": "component-html-content",
-                            "showTitle": "false",
-                            "full": "false",
-                            "classes": "",
-                            "new": "false"
-                        },
-                        {
-                            "name": "component-html-content",
-                            "id": "component-html-content-3098",
-                            "content": {
-                                "HTMLcontent": "<h2 class=\"h5\">Preguntas frecuentes</h2>\n\n<ul>\n\t<li>&iquest;Qu&eacute; consideramos contenido a efectos del seguro?</li>\n\t<li>&iquest;Qu&eacute; me incluye la restauraci&oacute;n est&eacute;tica?</li>\n\t<li>&iquest;Qu&eacute; me cubre los da&ntilde;os por agua?</li>\n\t<li>&iquest;Qu&eacute; me cubren los da&ntilde;os el&eacute;ctricos?</li>\n</ul>\n",
-                                "undefined": "<h2 class=\"h5\">Preguntas frecuentes</h2>\n\n<ul>\n\t<li>&iquest;Qu&eacute; consideramos contenido a efectos del seguro?</li>\n\t<li>&iquest;Qu&eacute; me incluye la restauraci&oacute;n est&eacute;tica?</li>\n\t<li>&iquest;Qu&eacute; me cubre los da&ntilde;os por agua?</li>\n\t<li>&iquest;Qu&eacute; me cubren los da&ntilde;os el&eacute;ctricos?</li>\n</ul>\n"
                             },
                             "title": "component-html-content",
                             "showTitle": "false",

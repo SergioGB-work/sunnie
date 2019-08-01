@@ -32,13 +32,12 @@ var gulp = require('gulp'),
 	requireDir('server');
 
 var argv_site = argv.site !== undefined ? argv.site : false;
-var argv_page = argv.pag !== undefined ? argv.pag + '.pug' : '*.*';
+var argv_page = argv.pag !== undefined ? argv.pag: '*.*';
 var argv_env = argv.env !== undefined ? argv.env : '';
 
 var developMode = argv_env == 'dev' ? true : false;
 
 var src_site_deploy = argv_site || '**';
-var src_page_deploy = argv.pag + '.pug' || '*.pug';
 
 
 
@@ -54,7 +53,6 @@ var path = {
 
     localeBundles: [pathBundles + '/sites/'+src_site_deploy+'/locale/**/*.*'],
 	
-	sitesDeploy: [pathBuild+'/sites/'+src_site_deploy+'/'+src_page_deploy],
     sitesBuild: argv_site ? pathBuild + '/sites/' + argv_site : pathBuild + '/sites/',
 	sitesPublic: argv_site ? pathPublic + '/' + argv_site : pathPublic + '/',
 	sitesDevelopment: argv_site ? pathDevelopment + '/' + argv_site : pathDevelopment + '/',
@@ -760,7 +758,6 @@ function getURLs(json,urls){
 }
 
 function buildPage(sitemap,development,site){
-
 	for(var page in sitemap){
 
 		var filename = sitemap[page].src.replace('/','').split('.');
@@ -790,22 +787,21 @@ function buildPage(sitemap,development,site){
 	}	
 }
 
-function findPage(pages , pageName){
+function findPage(pages , pageID){
 	//var page = pages.filter(page => page.id == id)[0];
-
 	var page = '';
 	
 	for( var i=0; i<pages.length; i++) {
 
 		if(pages[i].childs.length > 0){
-			page = findPage(pages[i].childs , pageName);
+			page = findPage(pages[i].childs , pageID);
 		}
 
 		if(page != '' && page !== undefined){
 			return page;
 		}
 
-		else if(pages[i].src == '/' + pageName.split('.')[0] + '.html'){
+		else if(pages[i].id == pageID){
 			return pages[i];
 		}
 	};

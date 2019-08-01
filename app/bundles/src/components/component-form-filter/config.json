@@ -225,7 +225,11 @@
 						{
 							"label":"Col 3",
 							"value":"col-3"
-						}						
+						},
+						{
+							"label":"Col 2",
+							"value":"col-2"
+						}			
 					]
 				},
 				{

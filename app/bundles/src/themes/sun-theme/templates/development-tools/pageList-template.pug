@@ -1,0 +1,11 @@
+script(id="templatePagesList",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	option(value="") root
+	| {{for data}}
+	| {{* window.spaces = '' }}
+	| {{for position.split(',')}}
+	| {{* window.spaces += '-' }}
+	| {{/for}}
+	option(value="{{:position}}") {{*:spaces}}  {{:name}}
+	| {{/for}}
+	| {{/if}}

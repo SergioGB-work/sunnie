@@ -3,7 +3,7 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Editar Página"
 	- var modal_id = "modal-page-edit"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-full"
 
 block modal-body
 	form(id="form-edit-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/edit/{idPage}", data-callback="editPageCallback")
@@ -17,41 +17,45 @@ block modal-body
 	script(id="templateEditPage",type="text/x-jsrender")
 		.row
 			div(class="form-group col-4")
-				label(for="pageId",class="uppercase") ID
-				input(type="text",name="id",id="pageId",class="form-control",required ,disabled, value="{{:data.id}}")
+				label(for="pageIdEdit",class="uppercase") ID
+				input(type="text",name="id",id="pageIdEdit",class="form-control",required ,disabled, value="{{:data.id}}")
 
 			div(class="form-group col-4")
-				label(for="pageName",class="uppercase") Nombre
-				input(type="text",name="name",id="pageName",class="form-control",required, value="{{:data.name}}")
+				label(for="pageNameEdit",class="uppercase") Nombre
+				input(type="text",name="name",id="pageNameEdit",class="form-control",required, value="{{:data.name}}")
 		.row
 			div(class="form-group col-4")
-				label(for="pageSRC",class="uppercase") SRC
-				input(type="text",name="src",id="pageSRC",class="form-control",required, disabled,value="{{:data.src}}")
+				label(for="pageSRCEdit",class="uppercase") SRC
+				input(type="text",name="src",id="pageSRCEdit",class="form-control",required, disabled,value="{{:data.src}}")
 			div(class="form-group col-4")
-				label(for="pageURL",class="uppercase") Url
-				input(type="text",name="url",id="pageURL",class="form-control",required,value="{{:data.url}}")
-			div(class="form-group col-4")
-				label(for="pagePosition",class="uppercase") Posición
-				input(type="number",name="position",min=0,id="pagePosition",class="form-control",required,value="{{:data.position}}")
+				label(for="pageURLEdit",class="uppercase") Url
+				input(type="text",name="url",id="pageURLEdit",class="form-control",required,value="{{:data.url}}")
 		.row
 			div(class="form-group col-4")
-				label(for="pageTitle",class="uppercase") Page Title
-				input(type="text",name="title",id="pageTitle",class="form-control",required,value="{{:data.attributes.title}}")
+				label(for="pageParentPositionEdit",class="uppercase") Padre
+				select(name="parentPosition",id="pageParentPositionEdit",class="form-control",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePagesList",data-target="#modal-page-edit #pageParentPositionEdit",data-callback="checkParentPage", data-content='"{{:data.parentPosition}}","{{:data.position}}"')
+			div(class="form-group col-4")
+				label(for="pagePositionEdit",class="uppercase") Posición
+				input(type="text",name="position",min=0,id="pagePositionEdit",class="form-control",required,value="{{:data.position}}")
+		.row
+			div(class="form-group col-4")
+				label(for="pageTitleEdit",class="uppercase") Page Title
+				input(type="text",name="title",id="pageTitleEdit",class="form-control",required,value="{{:data.attributes.title}}")
 
 			div(class="form-group col-4")
-				label(for="pageDescription",class="uppercase") Description
-				textarea(type="text",name="description",id="pageDescription",class="form-control") {{:data.attributes.description}}
+				label(for="pageDescriptionEdit",class="uppercase") Description
+				textarea(type="text",name="description",id="pageDescriptionEdit",class="form-control") {{:data.attributes.description}}
 
 			div(class="form-group col-4")
-				label(for="pageKeywords",class="uppercase") Keywords
-				textarea(type="text",name="keywords",id="pageKeywords",class="form-control") {{:data.attributes.keywords}}
+				label(for="pageKeywordsEdit",class="uppercase") Keywords
+				textarea(type="text",name="keywords",id="pageKeywordsEdit",class="form-control") {{:data.attributes.keywords}}
 
 		.row
 			| {{* window.hidden = data.hidden == 'true' ? "selected" : "" }}
 
 			div(class="form-group col-4")
-				label(for="pageHidden",class="uppercase") Page Hidden
-				select(name="hidden",id="pageHidden",class="form-control",required)
+				label(for="pageHiddenEdit",class="uppercase") Page Hidden
+				select(name="hidden",id="pageHiddenEdit",class="form-control",required)
 					option(value="false") No
 					option(value="true", {{*:hidden}}) Si				
 		.row

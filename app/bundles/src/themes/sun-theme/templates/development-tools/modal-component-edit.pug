@@ -3,7 +3,7 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Editar Componente"
 	- var modal_id = "modal-component-edit"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-full"
 
 block modal-body
 	form(id="form-edit-component",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/{idPage}/component/edit", data-callback="editComponentCallback")
@@ -32,8 +32,19 @@ block modal-body
 				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentTitle","name":"title", "value":"{{:data.title}}"})
 
 			div(class="form-group col-md-4 col-12")
-				| {{* window.showTitle = data.showTitle == 'true' ? "checked" : "" }}
-				| {{* window.full = data.full == 'true' ? "checked" : "" }}
+
+				| {{if data.showTitle && data.showTitle == 'true'}}
+				| {{* window.showTitle = "checked"}}
+				| {{else}}
+				| {{* window.showTitle = "" }}
+				| {{/if}}
+
+				| {{if data.full && data.full == 'true'}}
+				| {{* window.full = "checked"}}
+				| {{else}}
+				| {{* window.full = "" }}
+				| {{/if}}
+
 				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0);}}
 
 				fielset

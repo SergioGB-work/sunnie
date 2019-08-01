@@ -3,7 +3,7 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Editar Site"
 	- var modal_id = "modal-site-edit"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-full"
 
 block modal-body
 	form(id="form-edit-site",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/edit/{idSite}", data-callback="editSiteCallback")
@@ -27,7 +27,13 @@ block modal-body
 				input(type="text",name="url",id="siteURL",class="form-control",value="{{:data.url}}",required)
 
 			div(class="form-group col-md-4 col-12")
-				| {{* window.enableChatBot = data.enableChatBot == 'true' ? "checked" : "" }}
+
+				| {{if data.enableChatBot && data.enableChatBot == 'true'}}
+				| {{* window.enableChatBot = "checked"}}
+				| {{else}}
+				| {{* window.enableChatBot = "" }}
+				| {{/if}}
+
 				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0) }}
 
 				fielset

@@ -1,0 +1,15 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+	- var modal_id = "modal-page-confirm-publish"
+	- var modal_size = "modal-sm"
+
+block modal-body
+	form(data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/{idPage}/publish", data-callback="publishPageCallback")
+		.row
+			.col-12
+				p ¿Estás seguro que deseas publicar la página actual?
+		.row
+			div(class="form-group col-12 mb-0")
+				button(type="submit",class="btn btn-default float-left", data-dismiss="modal") Cancelar
+				button(type="submit",class="btn btn-primary float-right send") Publicar

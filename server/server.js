@@ -54,7 +54,8 @@ gulp.task('apiServer', function() {
 			var site = req.params.idSite;
 			var siteURL = getURLSite(site);
 			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
-			var position = [req.body.position] || [sitemap.pages.length] ;
+			var position = [req.body.position] || [sitemap.pages.length];
+			var parentPosition =  req.body.parentPosition !== undefined && req.body.parentPosition != '' ? req.body.parentPosition.split(',') : [];
 			var patron = "sitemap.pages";
 
 			var name = req.body.name,
@@ -92,20 +93,22 @@ gulp.task('apiServer', function() {
 				"childs": []
 			};
 
+			position = parentPosition.concat(position);
+
 			position.forEach(function(element,i){
 				if(i == (position.length - 1)){
-					patron += ".splice("+element+",0,newPage)"
+					patron += ".splice("+parseInt(element)+",0,newPage)"
 				}
 				else{
-					patron += '['+element+'].childs';
+					patron += '['+parseInt(element)+'].childs';
 				}
 			});
-
+			console.log(patron);
 			eval(patron);
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-			deploySites('--site '+ site +' --env dev --pag ' + src.split('.')[0].split('/')[1] , res)
+			deploySites('--site '+ site +' --env dev --pag ' + id , res)
 		}
 		catch(e){
 			res.status(412).send(
@@ -133,8 +136,10 @@ gulp.task('apiServer', function() {
 				description = req.body.description || '',
 				keywords = req.body.keywords || '',
 				layout = req.body.layout || '',
-				position = [req.body.position] || [sitemap.pages.length];
+				parentPosition =  req.body.parentPosition !== undefined && req.body.parentPosition != '' ? req.body.parentPosition.split(',') : [];
+				position = [req.body.position] || [sitemap.pages.length] ;
 
+			
 			editedPage['name'] = name;
 			editedPage['url'] = url;
 			editedPage['hidden'] = hidden;
@@ -193,24 +198,33 @@ gulp.task('apiServer', function() {
 				currentPage = eval(patronDelete);
 
 				//Copiamos el elemento en su nueva posicion
-				position.forEach(function(element,i){
+				position = parentPosition.concat(position);
 
-					if(i == (position.length - 1)){
-						patronEdit += ".splice("+element+",0,currentPage[0])"
-					}
-					else{
-						patronEdit += '['+element+'].childs';
+				index.forEach(function(element,i){
+					if(position[i] > element){
+						position[i] = position[i] - 1;
 					}
 				});
 
+				position.forEach(function(element,i){
+
+					if(i == (position.length - 1)){
+						patronEdit += ".splice("+parseInt(element)+",0,currentPage[0])"
+					}
+					else{
+						patronEdit += '['+parseInt(element)+'].childs';
+					}
+				});
+				console.log(patronEdit);
 				eval(patronEdit);
 			}
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-			deployPage('--site '+ site +' --env dev --pag ' + editedPage['src'].split('.')[0].split('/')[1] , res)
+			deployPage('--site '+ site +' --env dev --pag ' + editedPage['id'], res)
 		}
 		catch(e){
+			console.log(e);
 			res.status(412).send(
 				{
 					"code":"412",
@@ -245,6 +259,7 @@ gulp.task('apiServer', function() {
 			deploySites('--env dev --site ' + site , res);
 		}
 		catch(e){
+			console.log(e);
 			res.status(412).send(
 				{
 					"code":"412",
@@ -262,9 +277,8 @@ gulp.task('apiServer', function() {
 			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
 			var detailPage = findPage(sitemap.pages,idPage);
 			var positionPage = findIndex(sitemap.pages,idPage);
-
-			detailPage['position'] = positionPage[positionPage.length - 1]
-
+			detailPage['position'] = positionPage.pop();
+			detailPage['parentPosition'] = positionPage.join();
 			res.send(detailPage);
 		}
 		catch(e){
@@ -275,7 +289,32 @@ gulp.task('apiServer', function() {
 				}
 			)
 		};	
-	});		
+	});	
+
+	app.post('/site/:idSite/page/:idPage/publish', function (req, res) {
+		try{
+			var site = req.params.idSite;
+			var page = req.params.idPage;
+			deployPage('--site ' + site + ' --pag '+ page , res);
+		}
+		catch(e){
+			res.status(412).send(
+				{
+					"code":"412",
+					"statusCode":"PUBLISH_PAGE_ERROR"
+				}
+			)
+		};			
+	});
+
+	app.get('/site/:idSite/page/list', function (req, res) {
+			var site = req.params.idSite;
+			var siteURL = getURLSite(site);
+			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+
+			res.status(200).send(pagesList(sitemap.pages,sitemap.pages));
+			
+	});			
 
 	app.post('/site/:idSite/page/:idPage/component/add', function (req, res) {
 		//Configuracion de colocacion
@@ -333,7 +372,7 @@ gulp.task('apiServer', function() {
 			eval(patron +'= editedPage');
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['src'].split('.')[0].split('/')[1], res);
+			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'], res);
 		}
 		catch(e){
 			res.status(200).send(
@@ -404,7 +443,7 @@ gulp.task('apiServer', function() {
 			})
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['src'].split('.')[0].split('/')[1] , res);
+			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res);
 		}
 		catch(e){
 			res.status(412).send(
@@ -444,7 +483,7 @@ gulp.task('apiServer', function() {
 
 			eval(patron +'= editedPage');
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['src'].split('.')[0].split('/')[1] , res,{"column":layoutColumn,"position":componentPosition});
+			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res,{"column":layoutColumn,"position":componentPosition});
 		}
 		catch(e){
 			res.status(412).send(
@@ -497,7 +536,7 @@ gulp.task('apiServer', function() {
 			})
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['src'].split('.')[0].split('/')[1] , res);
+			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'], res);
 		}
 		catch(e){
 			res.status(412).send(
@@ -629,7 +668,7 @@ gulp.task('apiServer', function() {
 			res.status(412).send(
 				{
 					"code":"412",
-					"statusCode":"PUBLISH_PAGE_ERROR"
+					"statusCode":"PUBLISH_SITE_ERROR"
 				}
 			)
 		};			
@@ -1213,4 +1252,22 @@ function buildDefaultComponentData(config, componentContent){
 
 	return componentContent;
 
+}
+
+function pagesList(sitemap, originalSiteMap){
+
+	var pages = [];
+
+	sitemap.forEach(function(element,i){
+		var position = findIndex(originalSiteMap,element.id);
+		if(element.childs.length > 0){
+			pages.push({"id":element.id,"name":element.name,"position":position.join()});
+			pages = pages.concat(pagesList(element.childs,originalSiteMap));
+		}
+		else{
+			pages.push({"id":element.id,"name":element.name,"position":position.join()});
+		}
+
+	});
+	return pages;
 }

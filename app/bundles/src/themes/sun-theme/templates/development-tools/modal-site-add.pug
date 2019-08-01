@@ -3,7 +3,7 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Crear Site"
 	- var modal_id = "modal-site-add"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-ful"
 
 block modal-body
 	form(id="form-site-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/add", data-callback="addSiteCallback")
