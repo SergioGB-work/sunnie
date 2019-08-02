@@ -268,6 +268,49 @@ gulp.task('jsTheme',['jsBuild'], function() {
 		}
 			
 		for (var lang in langs){
+
+			var auxFiles = files.pipe(concat('main.js'))
+			.pipe(i18n({
+				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				createLangDirs: true,
+				defaultLang: 'es'
+			}))
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+			
+
+			var auxPriorityFiles = priorityFiles.pipe(concat('priority.js'))
+			.pipe(i18n({
+				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+				createLangDirs: true,
+				defaultLang: 'es'
+			}))				
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
+			
+			
+			if(!developMode){
+
+				auxFiles.pipe(rename('main.min.js'))
+				.pipe(uglify())
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+
+				auxPriorityFiles.pipe(rename('priority.min.js'))
+				.pipe(uglify())
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+			}
+
+			if(developMode){
+				developFiles.pipe(concat('develop.js'))
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
+				.pipe(i18n({
+					langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+					createLangDirs: true,
+					defaultLang: 'es'
+				}))
+				.pipe(rename('develop.min.js'))
+				.pipe(uglify())
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));			
+			}
+			/*
 			files.pipe(concat('main.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			.pipe(rename('main.min.js'))
@@ -278,7 +321,7 @@ gulp.task('jsTheme',['jsBuild'], function() {
 			}))
 			.pipe(uglify())
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
-
+			
 			priorityFiles.pipe(concat('priority.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			.pipe(rename('priority.min.js'))
@@ -301,7 +344,7 @@ gulp.task('jsTheme',['jsBuild'], function() {
 				}))
 				.pipe(uglify())
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));			
-			}
+			}*/
 		}	
 	}
 
@@ -315,16 +358,27 @@ gulp.task('jsComponents',['componentsBuild'], function() {
 		);
 
 		for (var lang in langs){
-			files.pipe(concat('components.js'))
-				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
-			.pipe(rename('components.min.js'))
+			
+			var auxFiles = files.pipe(concat('components.js'))
 			.pipe(i18n({
 				langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
 				createLangDirs: true,
 				defaultLang: 'es'
-			}))			
-			.pipe(uglify())
-				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
+			}))
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+
+
+
+			if(!developMode){
+				auxFiles.pipe(rename('components.min.js'))
+				.pipe(i18n({
+					langDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
+					createLangDirs: true,
+					defaultLang: 'es'
+				}))			
+				.pipe(uglify())
+				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
+			}
 		}		
 	}
 

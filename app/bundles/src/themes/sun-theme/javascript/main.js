@@ -227,40 +227,111 @@ $(document).ready(function(){
 	};
 
 
-	$('[data-parent][data-parent-event="change"]').each(function(){
+	$('[data-parent]').each(function(){
 
 		var targetEvent = $(this).data('parent');
 		var action = $(this).data('parent-event-action');
-		var valueDispatchAction =  $(this).data('parent-event-value') != '' && $(this).data('parent-event-action')!== undefined ? $(this).data('parent-event-action') : false;
-
+		var valueDispatchAction =  $(this).data('parent-event-value') != '' && $(this).data('parent-event-value')!== undefined ? $(this).data('parent-event-value') : false;
+		var parentEvent =  $(this).data('parent-event');
 		var currentEvent = $(this);
 
-		$(targetEvent).on('change', function(){
-			var value = $(this).val();
-			currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
-			currentEvent.data('aditional-data',{"value":value});
-			dataList(currentEvent);
-		});
+		if(parentEvent != ''){
+			$(targetEvent).on(parentEvent, function(){
+				switch(action){
 
+					case 'load-data':
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							var value = $(this).val();
+							currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
+							currentEvent.data('aditional-data',{"value":value});
+							dataList(currentEvent);
+						}
+						break;
+					
+
+					case 'submit':
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							currentEvent.closest('form').submit();
+						}
+						break;
+
+					case 'show':
+
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							currentEvent.show();
+						}
+						else{
+							currentEvent.hide()
+						}
+						
+						break;
+
+					case 'hide':
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							currentEvent.hide();
+						}
+						else{
+							currentEvent.show()
+						}
+						break;
+				}
+
+			});
+		}
 	});
 
-	$('[data-parent][data-parent-event="click"]').each(function(){
+	$('[data-event]').each(function(){
 
-		var targetEvent = $(this).data('parent');
-		var action = $(this).data('parent-event-action');
-		var valueDispatchAction =  $(this).data('parent-event-value') != '' && $(this).data('parent-event-action')!== undefined ? $(this).data('parent-event-action') : false;
-
+		var targetEvent = $(this).data('event-target');
+		var action = $(this).data('event-action');
+		var valueDispatchAction =  $(this).data('event-value') != '' && $(this).data('event-value')!== undefined ? $(this).data('event-value') : false;
+		var event =  $(this).data('event');
 		var currentEvent = $(this);
 
-		$(targetEvent).on('click', function(){
-			var value = $(this).val();
-			currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
-			currentEvent.data('aditional-data',{"value":value});
-			dataList(currentEvent);
-		});
+		if(event != ''){
+			$(this).on(event, function(){
+				switch(action){
 
-	});
+					case 'load-data':
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							var value = $(this).val();
+							$(targetEvent).attr('data-aditional-data',JSON.stringify({"value":value}));
+							$(targetEvent).data('aditional-data',{"value":value});
+							dataList($(targetEvent));
+						}
+						break;
+					
 
+					case 'submit':
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							$(targetEvent).closest('form').submit();
+						}
+						break;
+
+					case 'show':
+
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							$(targetEvent).show();
+						}
+						else{
+							$(targetEvent).hide()
+						}
+						
+						break;
+
+					case 'hide':
+						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+							$(targetEvent).hide();
+						}
+						else{
+							currentEvent.show()
+						}
+						break;
+				}
+
+			});
+		}
+	});	
 
 });
 

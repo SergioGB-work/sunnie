@@ -1648,6 +1648,37 @@
                             "new": "false"
                         },
                         {
+                            "name": "component-accordion",
+                            "id": "component-accordion-2710",
+                            "content": {
+                                "items": [
+                                    {
+                                        "header": "",
+                                        "content": "",
+                                        "collapsed": ""
+                                    }
+                                ],
+                                "collapseParent": ""
+                            },
+                            "title": "component-accordion",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-6504",
+                            "content": {
+                                "HTMLcontent": ""
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "true",
+                            "full": "false",
+                            "classes": "",
+                            "new": "true"
+                        },
+                        {
                             "name": "component-form-filter",
                             "id": "component-form-filter-5753",
                             "content": {

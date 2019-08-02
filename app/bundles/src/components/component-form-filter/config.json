@@ -315,6 +315,10 @@
 						{
 							"label":"Hide Target",
 							"value":"hide"
+						},
+						{
+							"label":"Submit Form",
+							"value":"submit"
 						}
 					]	
 				},
@@ -367,6 +371,10 @@
 						{
 							"label":"Hide Target",
 							"value":"hide"
+						},
+						{
+							"label":"Submit Form",
+							"value":"submit"
 						}
 					]	
 				}						

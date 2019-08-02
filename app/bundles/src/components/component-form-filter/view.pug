@@ -65,4 +65,5 @@ mixin component-form-filter(content)
 
 		.row
 			.form-group.col-12.mb-0
-				button(class="btn btn-primary", type="submit") #{submitButton}
+				if submitButton
+					button(class="btn btn-primary", type="submit") #{submitButton}

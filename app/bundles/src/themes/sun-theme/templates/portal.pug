@@ -11,8 +11,12 @@ html(lang="${{ default.lang }}$")
 		link(rel="preconnect" href=apiDevelopment)
 		link(rel="shortcut icon",href="favicon.ico")
 		link(href=fullSiteUrl + "/css/main.min.css",rel="stylesheet",media="all")
-		script(src=fullSiteUrl + "/javascript/priority.min.js",type="text/javascript")
 
+		if locals.development == true
+			script(src=fullSiteUrl + "/javascript/priority.js",type="text/javascript")
+		else
+			script(src=fullSiteUrl + "/javascript/priority.min.js",type="text/javascript")
+				
 		block head
 
 	body(data-page-id=id, data-site-id = siteName)
@@ -35,10 +39,15 @@ html(lang="${{ default.lang }}$")
 		include error.pug
 		include development-tools/development-tools.pug
 		include options-template.pug
-		link(href=fullSiteUrl + "/css/components.min.css",rel="stylesheet",media="all",async)
 		link(href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700",rel="stylesheet",media="all",async)
 		link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet",media="all", async)
-		script(src=fullSiteUrl + "/javascript/main.min.js",type="text/javascript")
-		script(src=fullSiteUrl + "/javascript/components.min.js",type="text/javascript",async)
+		link(href=fullSiteUrl + "/css/components.min.css",rel="stylesheet",media="all",async)
+
 		if locals.development == true
+			script(src=fullSiteUrl + "/javascript/main.js",type="text/javascript")
+			script(src=fullSiteUrl + "/javascript/components.js",type="text/javascript",async)
+			script(src=fullSiteUrl + "/javascript/develop.js",type="text/javascript")
+		else
+			script(src=fullSiteUrl + "/javascript/main.min.js",type="text/javascript")
+			script(src=fullSiteUrl + "/javascript/components.min.js",type="text/javascript",async)
 			script(src=fullSiteUrl + "/javascript/develop.min.js",type="text/javascript")

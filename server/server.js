@@ -1065,7 +1065,7 @@ gulp.task('apiServer', function() {
 				break;
 
 			default:
-				res.status(412).send({"ERROR":"No se ha encontrado la marca"});	
+				res.status(200).send();
 		}	
 	});
 

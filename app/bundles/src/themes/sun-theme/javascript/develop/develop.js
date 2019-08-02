@@ -393,7 +393,9 @@ function checkThemeSelected(data,idTheme){
 }
 
 function checkParentPage(data,parentPosition,pagePosition){
-	$('#modal-page-edit #pageParentPositionEdit option[value^="'+parentPosition + ',' + pagePosition +'"]').remove();
+
+	parentPosition = parentPosition !='' ? parentPosition + ',' : parentPosition
+	$('#modal-page-edit #pageParentPositionEdit option[value^="'+parentPosition + pagePosition +'"]').attr("disabled","disabled");
 	$('#modal-page-edit #pageParentPositionEdit option[value="'+parentPosition+'"]').attr('selected','selected');
 }
 
