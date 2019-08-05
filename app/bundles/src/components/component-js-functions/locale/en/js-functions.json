@@ -11,7 +11,7 @@
   "howTo":"How to",
   "serviceDescription":"REST service URL",
   "methodDescription":"Type of method with which the service is called. POST or GET",
-  "templateDescription":"ID of the template jquery tmpl on which the obtained data will be loaded. It should be left empty if you do not want to load the data on any template.",
+  "templateDescription":"ID of the template JSRender on which the obtained data will be loaded. It should be left empty if you do not want to load the data on any template.",
   "targetDescription":"ID of the container on which the template with the data will be loaded. It should be left empty if you do not want to show the data.",
   "pageDescription":"Data page that you want to load through the REST service. Leave it to 0 if you wish to load the complete list of data without paging.",
   "itemsPerPageDescription":"Number of rows per page that you want to load. Leave it to 0 if you wish to load the complete list of data without paging.",

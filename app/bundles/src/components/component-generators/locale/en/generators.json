@@ -23,5 +23,12 @@
   "componentsParagraph1":"To generate a new component you must locate with your administration console(CMD) on the folder of your SunnieJS project <span class='text-primary'>/src/pug/components</span>.",
   "componentsParagraph2":"From there you must execute the following:",
   "componentsParagraph3":"This will launch the component generator and ask you two things: <span class='text-primary'>name of your component</span> and if you want to overwrite the include_components file what you should answer <span class='text-primary'>'Y'</span>.",
-  "componentsParagraph4":"This will create all the <span class='text-primary'>HTML structure</span> of the necessary basic component in its corresponding folder within the component folder and add your component to the file <span class='text-primary' >include_components</span> so you have it available for use from minute 0."
+  "componentsParagraph4":"This will create all the <span class='text-primary'>HTML structure</span> of the necessary basic component in its corresponding folder within the component folder and add your component to the file <span class='text-primary' >include_components</span> so you have it available for use from minute 0.",
+  "sitesParagraph1":"To generate a new site you must place yourself with your administration console (CMD) on the folder of your SunnieJS project <span class = 'text-primary'>app/plugins/sites/</span>",
+  "sitesParagraph2":"From there you must execute the following:",
+  "sitesParagraph3":"This will launch the site generator and will ask you a series of questions for you to define your site: name, url, theme that you want to use from those you have defined in your portal, etc ...",
+  "themesParagraph1":"To generate a new theme you must place yourself with your administration console (CMD) on the folder of your SunnieJS project <span class = 'text-primary'>app/plugins/themes/</span>",
+  "themesParagraph2":"From there you must execute the following:",
+  "themesParagraph3":"This will launch the theme generator and ask you what name you want to assign it and what is the parent theme from which you want it to inherit the styles. Remember that all themes must be created based on another parent theme but then you can modify everything you want."
+
 }

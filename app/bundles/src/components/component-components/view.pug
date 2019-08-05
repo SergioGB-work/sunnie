@@ -108,7 +108,109 @@ mixin component-components(content)
 					pre 
 						| +component({"name":"component-breadcrumbs","content":{"pages":[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}]},"showTitle":"false","full":"false"})
 
-	.row
+					h3 Config
+					p ${{ components.componentConfigParagraph1 }}$
+
+					h4 ${{ components.componentConfigExampleTitle }}$
+					pre
+						| {
+						| 	"config":[
+						| 		{
+						| 			"label":"Items",
+						| 			"name":"items",
+						| 			"type":"array",
+						| 			"arrayContent":[
+						| 				{
+						| 					"label":"Header",
+						| 					"name":"header",
+						| 					"type":"text",
+						| 					"required":true
+						| 				},
+						| 				{
+						| 					"label":"Content",
+						| 					"name":"content",
+						| 					"type":"textarea"
+						| 				},
+						| 				{
+						| 					"label":"Default Display",
+						| 					"name":"collapsed",
+						| 					"type":"select",
+						| 					"options":[
+						| 						{
+						| 							"label":"Opened",
+						| 							"value":"opened"
+						| 						},
+						| 						{
+						| 							"label":"Closed",
+						| 							"value":"closed"	
+						| 						}						
+						| 					]
+						| 				}				
+						| 			]
+						| 		},
+						| 		{
+						| 			"label":"Close All to Open",
+						| 			"name":"collapseParent",
+						| 			"type":"checkbox",
+						| 			"value":"true"
+						| 		}
+						| 	]
+						| }
+					
+					p ${{ components.componentConfigParagraph2 }}$
+
+					p ${{ components.componentConfigParagraph3 }}$
+
+					p ${{ components.componentConfigParagraph4 }}$
+
+					.table-responsive-sm
+						table(class="table")
+							thead
+								tr
+									th ${{ components.componentConfigTableTH1 }}$
+									th ${{ components.componentConfigTableTH2 }}$
+									th ${{ components.componentConfigTableTH3 }}$
+							tbody
+								tr
+									td <strong>label</strong>
+									td ${{ components.componentConfigTableContainerLabelDescription }}$
+									td String
+								tr
+									td <strong>type</strong>
+									td ${{ components.componentConfigTableContainerTypeDescription }}$
+									td text, checkbox, radio, textarea, select, array, group
+								tr
+									td <strong>name</strong>
+									td ${{ components.componentConfigTableContainerNameDescription }}$
+									td String
+								tr
+									td <strong>required</strong>
+									td ${{ components.componentConfigTableContainerRequiredDescription }}$
+									td Bool: true , false
+								tr
+									td <strong>options</strong>
+									td ${{ components.componentConfigTableContainerOptionsDescription }}$
+									td Array con JSON {"label":"Etiqueta de la opcion","value":"valor de la opción"}
+								tr
+									td <strong>value</strong>
+									td ${{ components.componentConfigTableContainerValueDescription }}$
+									td String
+								tr
+									td <strong>arrayContent</strong>
+									td ${{ components.componentConfigTableContainerArrayContentDescription }}$
+									td Array con JSONs de inputs
+								tr
+									td <strong>content</strong>
+									td ${{ components.componentConfigTableContainerContentDescription }}$
+									td Array con JSONs de inputs
+								tr
+									td <strong>visibility</strong>
+									td ${{ components.componentConfigTableContainerVisibilityDescription }}$
+									td hidden
+								tr
+									td <strong>id</strong>
+									td ${{ components.componentConfigTableContainerIDDescription }}$
+									td String
 		.col-12
 			.card
 				.card-body
@@ -487,6 +589,18 @@ mixin component-components(content)
 						li <strong>ignored:</strong> ${{ components.filterPillsIgnored }}$
 
 
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentSteps",title="${{ components.goToComponent }}$ Steps") Steps
+					p ${{ components.stepsDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-steps"							
+						li <strong>text:</strong> ${{ components.stepsText }}$
+						li <strong>onclick:</strong> ${{ components.stepsOnClick }}$
+						li <strong>current:</strong> ${{ components.stepsCurrent }}$
+
 					
 	.row
 		.col-12
@@ -633,3 +747,12 @@ mixin component-components(content)
 			.row
 				.col-12
 					+component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSteps").m-0 Steps
+			.row
+				.col-12
+					+component({'name':'component-steps','id':'id1','content':{"items": [{"text": "Step1", "current":"true"},{"text": "Step2"},{"text": "Step3"}]},'showTitle':'false','full':'false'})

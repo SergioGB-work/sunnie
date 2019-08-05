@@ -5,42 +5,42 @@ mixin component-themes(content)
 				.card-body
 					h1 ${{ themes.pageTitle }}$
 
-					p Un tema de apariencia es la pieza que le da estructura a la página a nivel general(cabecera, menu, footer, etc...), contiene los estilos y las funcionalidades javascript transversales del site.
+					p ${{ themes.pageDescription }}$
 	.row
 		.col-12
 			.card
 				.card-body
 					h2 Templates
-					p Las templates son plantillas funcionales de contenido reutilizable. Pueden ser tanto estáticas como dinámicas con jQuery TMPL. Asi, por defecto, disponemos por ejemplo de una template para el header, otro para las modales, otro para los mensajes de error, etc...
+					p ${{ themes.templatesParagraph1 }}$
 
-					p La mas importante a destacar es <span class="text-primary">portal.pug </span>que se encarga de definir la estructura global de las páginas(head, body, cabecera, menu, footer). Todas las páginas se crean en base a esta plantilla y se rellenar en base a lo configurado para cada una de ellas a nivel de componentes y layout.
+					p ${{ themes.templatesParagraph2 }}$
 
-					p Están desarrolladas en PUG y posteriormente en la fase de compilación se convierten a HTML.
+					p ${{ themes.templatesParagraph3 }}$
 
-					h3 Variables disponibles
+					h3 ${{ themes.templatesParagraph4 }}$
 
-					p Existen una serie de variables que pueden resultar de utilidad para el desarrollador. Se pueden usar tanto en los archivos pug del tema de apariencia como en los componentes.
+					p ${{ themes.templatesParagraph5 }}$
 
-					p A continuación se listan las variables disponibles que también puede encontrar en el archivo templates/variables.pug:
+					p ${{ themes.templatesParagraph6 }}$
 
 					ul
-						li <strong>pages:</strong> array de págians del site
-						li <strong>siteURL:</strong> URL del site. Por ejemplo "/default"
-						li <strong>siteName:</strong> Nombre del site. Por ejemplo "default"
-						li <strong>fullSiteURL:</strong> URL completa del site. Por ejemplo "/default/es"
-						li <strong>api:</strong> Si es necesario integrarse con una API diferente a la del CMS, se puede utilizar esta variable. Por ejemplo http://api.google.com/v1/
-						li <strong>apiLocal:</strong> Si es necesario integrarse con una API Local se puede usar esta variable. Por ejemplo http://localhost:8080
-						li <strong>apiDevelopment:</strong> URL de la API del CMS. Por defecto http://localhost:8082
+						li <strong>pages:</strong> ${{ themes.templatesParagraph7 }}$
+						li <strong>siteURL:</strong> ${{ themes.templatesParagraph8 }}$
+						li <strong>siteName:</strong> ${{ themes.templatesParagraph9 }}$
+						li <strong>fullSiteURL:</strong> ${{ themes.templatesParagraph10 }}$
+						li <strong>api:</strong> ${{ themes.templatesParagraph11 }}$
+						li <strong>apiLocal:</strong> ${{ themes.templatesParagraph12 }}$
+						li <strong>apiDevelopment:</strong> ${{ themes.templatesParagraph13 }}$
 
-					p Se pueden crear todas las variables que se consideren necesarias pero no se recomienda eliminar ninguna de las existentes.
+					p ${{ themes.templatesParagraph14 }}$
 
-					h3 Herencia
+					h3 ${{ themes.templatesParagraph15 }}$
 
-					p Una de las novedades de SunnieJS 3 es que los temas de apariencia que crees nuevos pueden tomar como base otro creado, un padre, que sirva como base, de tal forma que puedas solo modificar aquello que necesites y lo demás dejar que lo herede del padre.
+					p ${{ themes.templatesParagraph16 }}$
 
-					p Por defecto, existe un tema de apariencia básico llamada <span class="text-primary">"sun-theme"</span> del cual heredan todos los temas personalizados que crees, pero esta herencia se puede modificar en el archivo <span class="text-primary">templates/build.pug</span> para que tu tema herede de otro.
+					p ${{ themes.templatesParagraph17 }}$
 
-					p Si deseas modificar algo en tu tema de apariencia solo tienes que replicar la ruta del archivo que quieres modificar dentro de tu tema de apariencia y cuando se compile, el resultado será todo el código del padre excepto aquello que hayas redefinido.
+					p ${{ themes.templatesParagraph18 }}$
 	.row
 		.col-12
 			.card
@@ -61,6 +61,7 @@ mixin component-themes(content)
 					p ${{ themes.javascriptParagraph1 }}$
 
 					ul
+						li <strong>develop</strong> -> ${{ themes.javascriptList10 }}$
 						li <strong>primaryLibs</strong> -> ${{ themes.javascriptList11 }}$
 						li <strong>libs</strong> -> ${{ themes.javascriptList12 }}$
 						li <strong>priority</strong> -> ${{ themes.javascriptList13 }}$

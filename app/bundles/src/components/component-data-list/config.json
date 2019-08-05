@@ -33,7 +33,7 @@
 			"type":"text"
 		},		
 		{
-			"label":"Template Code(jQuery TMPL)",
+			"label":"Template Code(JSRender)",
 			"name":"template_code",
 			"type":"textarea"
 		},

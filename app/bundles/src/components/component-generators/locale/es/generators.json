@@ -23,5 +23,11 @@
   "componentsParagraph1":"Para generar una nuevo componente debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class='text-primary'>/src/pug/components</span>.",
   "componentsParagraph2":"Desde ahí debes ejecutar lo siguiente:",
   "componentsParagraph3":"Esto lanzará el generador de componentes y te preguntará dos cosas: <span class='text-primary'>nombre de tu componente</span> y si quieres sobreescribir el archivo include_components a lo que debes contestar <span class='text-primary'>'Y'</span>.",
-  "componentsParagraph4":"Esto te creará toda la <span class='text-primary'>estructura HTML</span> del componente básica necesaria en su carpeta correspondiente dentro de la carpeta  de componentes y añadir tu componente al archivo <span class='text-primary'>include_components</span> para que lo tengas disponible para su uso desde el minuto 0."
+  "componentsParagraph4":"Esto te creará toda la <span class='text-primary'>estructura HTML</span> del componente básica necesaria en su carpeta correspondiente dentro de la carpeta  de componentes y añadir tu componente al archivo <span class='text-primary'>include_components</span> para que lo tengas disponible para su uso desde el minuto 0.",
+  "sitesParagraph1":"Para generar un nuevo site debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class='text-primary'>app/plugins/sites/</span>",
+  "sitesParagraph2":"Desde ahí debes ejecutar lo siguiente:",
+  "sitesParagraph3":"Esto lanzará el generador de sites y te irá preguntando una serie de cuestiones para que definas tu site: nombre, url, theme que quieres utilizar de los que tienes definidos en tu portal, etc...",
+  "themesParagraph1":"Para generar un nuevo theme debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class='text-primary'>app/plugins/themes/</span>",
+  "themesParagraph2":"Desde ahí debes ejecutar lo siguiente:",
+  "themesParagraph3":"Esto lanzará el generador de themes y te preguntará que nombre quieres asignarle y cual es el tema padre del que quieres que herede los estilos. Recuerda que todos los themes se deben crear en base a otro tema padre pero luego podrás modificar todo lo que desees."
 }

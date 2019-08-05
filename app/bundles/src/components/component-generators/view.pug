@@ -86,9 +86,9 @@ mixin component-generators(content)
 
 					h3 Sites
 
-					p Para generar un nuevo site debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-primary">app/plugins/sites/</span>.
+					p ${{ generators.sitesParagraph1 }}$
 
-					p Desde ahí debes ejecutar lo siguiente:
+					p ${{ generators.sitesParagraph2 }}$
 
 					pre
 						| yo sunnie:site
@@ -96,13 +96,13 @@ mixin component-generators(content)
 					p.text-center
 						img(src="./images/demo/generator-site-img.png",alt="")
 
-					p Esto lanzará el generador de sites y te irá preguntando una serie de cuestiones para que definas tu site: nombre, url, theme que quieres utilizar de los que tienes definidos en tu portal, etc...	
+					p ${{ generators.sitesParagraph3 }}$	
 
 					h3 Themes
 
-					p Para generar un nuevo theme debes situarte con tu consola de administración(CMD) sobre la carpeta de tu proyecto SunnieJS <span class="text-primary">app/plugins/themes/</span>.
+					p ${{ generators.themesParagraph1 }}$
 
-					p Desde ahí debes ejecutar lo siguiente:			
+					p ${{ generators.themesParagraph2 }}$			
 
 					pre
 						| yo sunnie:theme
@@ -110,4 +110,4 @@ mixin component-generators(content)
 					p.text-center
 						img(src="./images/demo/generator-theme-img.png",alt="")
 
-					p Esto lanzará el generador de themes y te preguntará que nombre quieres asignarle y cual es el tema padre del que quieres que herede los estilos. Recuerda que todos los themes se deben crear en base a otro tema padre pero luego podrás modificar todo lo que desees.
+					p ${{ generators.themesParagraph3 }}$

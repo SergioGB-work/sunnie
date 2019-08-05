@@ -422,8 +422,7 @@
                     ]
                 }
             },
-            "childs": [],
-            "hidden": "true"
+            "childs": []
         },
         {
             "id": "components",
@@ -560,6 +559,11 @@
                                                 "text": "Form Filter",
                                                 "href": "#componentFormFilter",
                                                 "title": "${{ default.goToComponent }}$ Form Filter"
+                                            },
+                                            {
+                                                "text": "Steps",
+                                                "href": "#componentSteps",
+                                                "title": "${{ default.goToComponent }}$ Steps"
                                             }
                                         ]
                                     }

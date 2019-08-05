@@ -11,7 +11,7 @@
   "howTo":"Uso",
   "serviceDescription":"URL del servicio REST",
   "methodDescription":"Tipo de método con el que se llama al servicio. POST o GET ",
-  "templateDescription":"ID de la plantilla jquery tmpl sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.",
+  "templateDescription":"ID de la plantilla JSRender sobre la que se cargarán los datos obtenidos. Se debe dejar vacío si no se desea cargar los datos sobre alguna plantilla.",
   "targetDescription":"ID del contenedor sobre el que se cargará la template con los datos. Se debe dejar vacío si no se desea mostrar los datos.",
   "pageDescription":"Página de datos que se desea cargar a través del servicio REST. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.",
   "itemsPerPageDescription":"Número de filas por página que se desea cargar. Dejar a 0 si se desea cargar el listado completo de datos sin paginar.",

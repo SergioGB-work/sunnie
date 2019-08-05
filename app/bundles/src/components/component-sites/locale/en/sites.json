@@ -1,1 +1,10 @@
-{}
+{
+  "sitesParagraph1":"SunnieJS 3 is a <span class = 'text-primary'>multisite</span> environment, this means that in a single environment we are able to manage several web portals simultaneously, each with its own <span class = 'text-primary'> <span class ='text-primary'>features</span> and <span class ='text-primary'>settings</span>.",
+  "sitesParagraph2":"Each of the sites is composed of different <span class = 'text-primary'>pages</span> and these, in turn, are filled with <span class = 'text-primary'>components</span> placed from the distribution defined by a <span class = 'text-primary'>layout</span>. Additionally, each site has an associated <span class = 'text-primary'>appearance theme</span> which gives it its overall style and structure.",
+  "sitesParagraph3":"For this, each site has a <span class = 'text-primary'>sitemap.json</span> file where all the site settings are defined. Of course, it is not necessary to manage it manually but through the <span class = 'text-primary'>CMS tools</span> it can be managed automatically for <span class = 'text-primary'>add pages</span>, move them from the site in the navigation tree, manage the components that form them, their appearance theme or the layout that each page uses.",
+  "sitesParagraph4":"If you prefer, you can also edit the sitemap manually but do not forget after compiling the site so that your changes are reflected in the browser. We recommend you not to edit the sitemap by hand as it can be complex and it is easy to make a mistake in the syntax or format.",
+  "sitesParagraph5":"From the sitemap, you can indicate for each page the <span class = 'text-primary'>components</span> that it includes, its <span class = 'text-primary'>configuration</span>, in what position Go, what are the <span class = 'text-primary'>metadata</span> of the page and much more!",
+  "sitesParagraph6":"Sitemap Example",
+  "sitesParagraph7":"The <span class = 'text-primary'>site</span> object defines both the <span class = 'text-primary'>name</span> of the site and the <span class = 'text-primary'>URL</span> with which we will access.",
+  "sitesParagraph8":"The <span class = 'text-primary'>pages</span> object defines all the pages available to the site as well as its <span class = 'text-primary'>configuration</span>."
+}

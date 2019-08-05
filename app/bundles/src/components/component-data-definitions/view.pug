@@ -116,6 +116,11 @@ mixin component-data-definitions(content)
 									td ${{ data-definitions.dataLoadingTableCacheDescription }}$
 									td "false"
 									td data-cache = "true"
+								tr
+									td <strong>noReload</strong>
+									td ${{ data-definitions.dataLoadingTableNoReloadDescription }}$
+									td "false"
+									td data-noreload = "true"
 
 					h3 ${{ data-definitions.dataExampleTitle }}$
 					
@@ -270,6 +275,11 @@ mixin component-data-definitions(content)
 									td ${{ data-definitions.dataPaginationTableTimeReloadDescription }}$
 									td data-time-reload || "60000"
 									td data-pagination-time-reload = 30000
+								tr
+									td <strong>noReload</strong>
+									td ${{ data-definitions.dataPaginationTableNoReloadDescription }}$
+									td "false"
+									td data-noreload = "true"	
 
 					h3 ${{ data-definitions.dataExampleTitle }}$
 
@@ -333,7 +343,7 @@ mixin component-data-definitions(content)
 					h3 ${{ data-definitions.dataExampleTitle }}$
 
 					pre
-						| ul.filterBar.list-inline(data="filters",data-rel="group1")
+						| ul.filterBar.list-inline(data="filters",data-rel="group1",data-noreload="true")
 						|    li.dropdown.list-inline-item(data-filter="order")
 						|        a(href="javascript:void(0)", aria-expanded="false", class="dropdown-toggle", data-toggle="dropdown")
 						|            span Ordenar por: 
@@ -431,7 +441,12 @@ mixin component-data-definitions(content)
 								tr
 									td <strong>form-filter</strong>
 									td ${{ data-definitions.dataFormTableContainerFormFilterDescription }}$
-									td data-form-filter="true"									
+									td data-form-filter="true"
+								tr
+									td <strong>noReload</strong>
+									td ${{ data-definitions.dataFormTableContainerNoReloadDescription }}$
+									td "false"
+									td data-noreload = "true"
 
 					p ${{ data-definitions.dataFormParagraph2 }}$
 
@@ -469,4 +484,92 @@ mixin component-data-definitions(content)
 						|        .col-12
 						|            div(class="form-group text-right")
 						|                button(type="button",class="btn btn-secondary") Cancel
-						|                button(type="submit",class="btn btn-primary",class="send") Save						
+						|                button(type="submit",class="btn btn-primary",class="send") Save
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2(id="data-definitions-data-event-block") Event
+					p ${{ data-definitions.dataEventParagraph1}}$
+
+					.table-responsive-sm
+						table(class="table")
+							thead
+								tr
+									th ${{ data-definitions.dataEventTableTH1}}$
+									th ${{ data-definitions.dataEventTableTH2}}$
+									th ${{ data-definitions.dataEventTableTH3}}$
+									th ${{ data-definitions.dataEventTableTH4}}$
+							tbody
+								tr
+									td <strong>event</strong>
+									td ${{ data-definitions.dataEventTableContainerEventDescription}}$
+									td data-event="change"
+									td change , click
+								tr
+									td <strong>event-action</strong>
+									td ${{ data-definitions.dataEventTableContainerEventActionDescription}}$
+									td data-event-action="load-data"
+									td 
+										ul
+											li <strong>load-data:</strong> ${{ data-definitions.dataEventTableContainerEventActionDescriptionOption1}}$
+											li <strong>show:</strong> ${{ data-definitions.dataEventTableContainerEventActionDescriptionOption2}}$
+											li <strong>hide:</strong> ${{ data-definitions.dataEventTableContainerEventActionDescriptionOption3}}$
+											li <strong>submit:</strong> ${{ data-definitions.dataEventTableContainerEventActionDescriptionOption4}}$
+
+								tr
+									td <strong>event-target</strong>
+									td ${{ data-definitions.dataEventTableContainerEventTargetDescription}}$
+									td data-event-target="#listadoUsuario"
+									td CSS Selector
+
+								tr
+									td <strong>event-value</strong>
+									td ${{ data-definitions.dataEventTableContainerEventValueDescription}}$
+									td data-event-value="active"
+									td String
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2(id="data-definitions-data-event-block") Parent Event
+					p ${{ data-definitions.dataParentEventParagraph1}}$
+
+					.table-responsive-sm
+						table(class="table")
+							thead
+								tr
+									th ${{ data-definitions.dataParentEventTableTH1}}$
+									th ${{ data-definitions.dataParentEventTableTH2}}$
+									th ${{ data-definitions.dataParentEventTableTH3}}$
+									th ${{ data-definitions.dataParentEventTableTH4}}$
+							tbody
+								tr
+									td <strong>event</strong>
+									td ${{ data-definitions.dataParentEventTableContainerEventDescription}}$
+									td data-event="change"
+									td change , click
+								tr
+									td <strong>event-action</strong>
+									td ${{ data-definitions.dataParentEventTableContainerEventActionDescription}}$
+									td data-event-action="load-data"
+									td 
+										ul
+											li <strong>load-data:</strong> ${{ data-definitions.dataParentEventTableContainerEventActionDescriptionOption1}}$
+											li <strong>show:</strong> ${{ data-definitions.dataParentEventTableContainerEventActionDescriptionOption2}}$
+											li <strong>hide:</strong> ${{ data-definitions.dataParentEventTableContainerEventActionDescriptionOption3}}$
+											li <strong>submit:</strong> ${{ data-definitions.dataParentEventTableContainerEventActionDescriptionOption4}}$
+
+								tr
+									td <strong>event-target</strong>
+									td ${{ data-definitions.dataParentEventTableContainerEventTargetDescription}}$
+									td data-event-target="#listadoUsuario"
+									td CSS Selector
+
+								tr
+									td <strong>event-value</strong>
+									td ${{ data-definitions.dataParentEventTableContainerEventValueDescription}}$
+									td data-event-value="active"
+									td String

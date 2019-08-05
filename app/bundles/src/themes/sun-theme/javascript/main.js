@@ -373,7 +373,7 @@ function popover(){
 // LISTADOS DE DATOS
 	// Devuelve el listado comppleto de datos obtenidos de un servicio
 	// @param service -> servicio rest del que se obtendrán los datos a mostrar
-	// @param template -> selector CSS de la Template Jquery tmpl sobre la que se cargarán los datos devueltos
+	// @param template -> selector CSS de la Template JSRender sobre la que se cargarán los datos devueltos
 	// @param target -> selector CSS donde se cargara el contenido estructurado con la template
 	// @param page -> pagina a cargar del servicio invicado. 0 si se quiere cargar todos los resultados sin paginar
 	// @param items_per_page -> numero de elementos por pagina. 0 si se quiere cargar todos los resultados sin paginar
@@ -683,7 +683,7 @@ function processData(dataResponse, target, template, callback, content, totalIte
 // @param data-callback -> Función que se ejecuta cuando un usuario pulsa sobre una pagina. Como mino, esta funcion recibira la pagina a cargar y los items_per_page
 // @param data-method -> Método de envío del formulario (GET/POST)
 // @param data-content -> Contenido adicional que debe enviarse a la funcion callback. Por ejemplo query de busqueda.
-// @param data-template -> selector CSS de la Template Jquery tmpl sobre la que se cargarán los datos devueltos
+// @param data-template -> selector CSS de la Template JSRender sobre la que se cargarán los datos devueltos
 // @param data-content-target -> selector CSS donde se cargara el contenido estructurado con la template
 
 
