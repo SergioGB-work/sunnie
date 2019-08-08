@@ -8,7 +8,13 @@ mixin component-siteSelector(content)
 	script(id="templateSitesList",type="text/x-jsrender")
 		| {{if data.length > 1 }}	
 		| {{for data}}
+
+		| {{if url && url != '/'}}
 		li.dropdown-item
 			a(href="{{:url}}/${{ default.lang }}$/") {{:name}}
+		| {{else}}
+		li.dropdown-item
+			a(href="/${{ default.lang }}$/") {{:name}}
+		| {{/if}}
 		| {{/for}}
-		| {{/if}}		
+		| {{/if}}	

@@ -9,7 +9,8 @@ div(id="top-bar")
 
 	+component({'name':'component-languageSelector','id':'id1','showTitle':'false', 'classes':'ml-3'})
 
-	+component({'name':'component-siteSelector','id':'id1','showTitle':'false'})
+	if locals.development == true
+		+component({'name':'component-siteSelector','id':'id1','showTitle':'false'})
 
 
 	.component.version-selector

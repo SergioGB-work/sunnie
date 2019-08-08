@@ -1,5 +1,5 @@
 - var pages = locals.pages
-- var siteURL = locals.site.url
+- var siteURL = locals.site.url != '/' ? locals.site.url : ''
 - var siteName = locals.site.name
 - var enableChatBot = locals.site.enableChatBot
 - var fullSiteUrl =  siteURL + "${{ "+siteName+".urlLang }}$"

@@ -6,12 +6,6 @@ $(document).ready(function(){
 
 	/** CONTROL ACTIVE MENU **/
 	var currentURL = window.location.pathname;
-	currentURL = currentURL.split('/');
-	currentURL = currentURL.splice(2);
-	currentURL = './' + currentURL.join('/');
-	currentURL = currentURL.split('?');
-	currentURL = currentURL[0];
-
 	$('#navigation li a').each(function(){
 
 		var href = $(this).attr('href').split('?');
