@@ -472,7 +472,7 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 
 /** DEPLOY **/
 gulp.task('deploy',function(callback){
-	runSequence(['deploySites','deployCSS','deployJS','deployImages'],'removeTMP',callback)
+	runSequence(['deploySites','deployCSS','deployJS','deployImages','htaccess'],'removeTMP',callback)
 });
 
 /** DEFAULT **/
