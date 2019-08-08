@@ -570,6 +570,11 @@ gulp.task('test', function () {
     }));
 });
 
+gulp.task('htaccess', function () {
+	buildRules();
+	return true;
+});
+
 
 gulp.task('removeTMP', function () {
 	deleteTMPFiles()
@@ -863,6 +868,7 @@ function findPage(pages , pageID){
 
 function buildRules(){
 	var rewriteRules = {};
+	var rewriteRulesApache = [];
 
 	for (var key in sitesDefined){	
 		
@@ -888,9 +894,62 @@ function buildRules(){
 			for (var lang in langs){
 			//rewriteRules.push('^' + site + '/' + langs[lang] + urls[i].url + ' /' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src + ' [L]');
 			rewriteRules[site + '/' + langs[lang] + urls[i].url]='/' + sitesDefined[key].site + '/' + langs[lang] + urls[i].src;
+			
+			rewriteRulesApache.push('^' + langs[lang] + urls[i].url + '(.*)$ ' + langs[lang] + urls[i].src + '$1 [L]');
 			}	
 		}
+	
+		if (!fs.existsSync('extras')) {
+			fs.mkdirSync('extras');
+		}
+
+		const writeStream = fs.createWriteStream(pathPublic + '/sites/' +sitesDefined[key].site+'/data/.htaccess');
+
+		const pathName = writeStream.path;
+
+		// write each value of the array on the file breaking line
+		writeStream.write(`RewriteEngine On\n`);
+
+
+		writeStream.write(`RewriteCond %{REQUEST_FILENAME} -f\n`);
+		writeStream.write(`RewriteRule ^ - [L]\n`);
+
+
+		writeStream.write(`RewriteRule ^es/css/(.*)$ en/css/$1 [L]\n`);
+		writeStream.write(`RewriteRule ^en/css/(.*)$ en/css/$1 [L]\n`);
+
+		writeStream.write(`RewriteRule ^es/javascript/(.*)$ en/javascript/$1 [L]\n`);
+		writeStream.write(`RewriteRule ^en/javascript/(.*)$ en/javascript/$1 [L]\n`);
+
+		writeStream.write(`RewriteRule ^es/images/(.*)$ en/images/$1 [L]\n`);
+		writeStream.write(`RewriteRule ^en/images/(.*)$ en/images/$1 [L]\n`);
+
+		rewriteRulesApache.sort(function (a, b) {
+		    if (a > b) {
+		        return -1;
+		    }
+		    if (b > a) {
+		        return 1;
+		    }
+		    return 0;
+		});
+
+		rewriteRulesApache.forEach(value => writeStream.write(`RewriteRule ${value}\n`));
+
+		// the finish event is emitted when all data has been flushed from the stream
+		writeStream.on('finish', () => {
+
+		});
+
+		// handle the errors on the write process
+		writeStream.on('error', (err) => {
+			console.error(`Ha habido un error al generar el fichero .htaccess ${pathName} => ${err}`)
+		});
+
+		// close the stream
+		writeStream.end();	
 	}
+
 
 	return rewriteRules;
 }

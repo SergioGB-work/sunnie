@@ -6,32 +6,22 @@ nav(class="navbar navbar-expand-xl navbar-dark p-0 p-3-xl",role="navigation")
 
 	div(class="collapse navbar-collapse",id="navigation-list", aria-expanded="false")
 
-		ul(class="navbar-nav bd-navbar-nav",data-load="true",data-service-data=apiLocal +siteURL + "/data/sitemap.json",data-method="GET",data-template="#templateNavigation",data-target="#navigation-list ul")
+		ul(class="navbar-nav bd-navbar-nav")
 
+			each page in pages
 
-	script(id="templateNavigation",type="text/x-jsrender")
-		| {{if data.pages.length > 0 }}
-		| {{for data.pages}}
+				if page.childs.length > 0 && page.hidden != 'true'
+					li.nav-item.dropdown
+						a(href=fullSiteUrl + page.url, title="${{ default.goTo }}$ " + page.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id=page.id, class="nav-link dropdown-toggle d-flex d-flex align-items-center")
+							span #{page.name}
 
-		| {{if childs.length > 0 &&  hidden != 'true' }}
-		li.nav-item.dropdown
-			a(href=fullSiteUrl + "{{:url}}", title="${{ default.goTo }}$ {{:name}}", data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id="{{:id}}", class="nav-link dropdown-toggle d-flex d-flex align-items-center")
-				span {{:name}}
+						ul(class="dropdown-menu",aria-labelledby=page.id)
+							each child in page.childs
+								if child.hidden === undefined || child.hidden != 'true'
+									li.dropdown-item
+										a(href=fullSiteUrl + child.url, title="${{ default.goTo }}$ "+child.name) #{child.name}
 
-			ul(class="dropdown-menu",aria-labelledby="{{:id}}")
-				| {{for childs itemVar="~child"}}
-				| {{if ~child.hidden != 'true' }}
-				li.dropdown-item
-					a(href=fullSiteUrl + "{{:~child.url}}", title="${{ default.goTo }}$ {{:~child.name}}") {{:~child.name}}
-				| {{/if}}	
-				| {{/for}}
-
-		| {{else hidden != 'true' }}
-
-		li.nav-item
-			a(href=fullSiteUrl + "{{:url}}", class="nav-link d-flex d-flex align-items-center", title="${{ default.goTo }}$ {{:name}}")
-				span {{:name}}
-		| {{/if}}
-
-		| {{/for}}
-		| {{/if}}
+				else if page.hidden != 'true'
+					li.nav-item
+						a(href=fullSiteUrl + page.url, class="nav-link d-flex d-flex align-items-center", title="${{ default.goTo }}$ " + page.name)
+							span #{page.name}
