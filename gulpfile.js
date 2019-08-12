@@ -947,11 +947,10 @@ function buildRules(){
 
 		// write each value of the array on the file breaking line
 		writeStream.write(`RewriteEngine On\n`);
-
+		writeStream.write(`RewriteBase /\n`);
 
 		writeStream.write(`RewriteCond %{REQUEST_FILENAME} -f\n`);
 		writeStream.write(`RewriteRule ^ - [L]\n`);
-
 
 		writeStream.write(`RewriteRule ^es/css/(.*)$ en/css/$1 [L]\n`);
 		writeStream.write(`RewriteRule ^en/css/(.*)$ en/css/$1 [L]\n`);
