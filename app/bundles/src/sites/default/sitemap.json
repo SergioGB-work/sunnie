@@ -68,16 +68,18 @@
                             "id": "1",
                             "name": "component-highlighted-banner",
                             "content": {
-                                "content": "<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>",
+                                "content": "<h2>${{ default.homeBannerThemeTitle }}$</h2>\n\n<p>${{ default.homeBannerThemeContent }}$</p>\n",
                                 "button": {
-                                    "text": "${{ default.homeBannerThemeButtonText }}$",
                                     "href": "./data-definitions.html",
-                                    "title": "${{ default.goDataDefinitions }}$"
+                                    "title": "${{ default.goDataDefinitions }}$",
+                                    "text": "${{ default.homeBannerThemeButtonText }}$"
                                 }
                             },
                             "showTitle": "false",
                             "full": "true",
-                            "classes": "row"
+                            "classes": "",
+                            "title": "component-highlighted-banner",
+                            "new": "false"
                         },
                         {
                             "id": "1",
@@ -109,16 +111,18 @@
                             "id": "2",
                             "name": "component-highlighted-banner",
                             "content": {
-                                "content": "<h2>${{ default.homeBannerComponentsContent }}$</h2>",
+                                "content": "<h2>${{ default.homeBannerComponentsContent }}$</h2>\n",
                                 "button": {
-                                    "text": "${{ default.homeBannerComponentsButtonText }}$",
                                     "href": "./components.html",
-                                    "title": "${{ default.homeBannerComponentsButtonTitle }}$"
+                                    "title": "${{ default.homeBannerComponentsButtonTitle }}$",
+                                    "text": "${{ default.homeBannerComponentsButtonText }}$"
                                 }
                             },
                             "showTitle": "false",
                             "full": "true",
-                            "classes": "bg-info row"
+                            "classes": "bg-info",
+                            "title": "component-highlighted-banner",
+                            "new": "false"
                         },
                         {
                             "name": "component-highlighted-side-image",

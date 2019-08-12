@@ -4,6 +4,6 @@ mixin component-languageSelector(content)
 			span.store-name ${{ languageSelector.currentLanguage }}$
 		ul(class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="languageSelector")
 			li.dropdown-item
-				a(href="/es/", data-lang="es", title="${{ languageSelector.spanishTitle }}$") ${{ languageSelector.spanish }}$
+				a(href=siteURL+"/es/", data-lang="es", title="${{ languageSelector.spanishTitle }}$") ${{ languageSelector.spanish }}$
 			li.dropdown-item
-				a(href="/en/", data-lang="en", title="${{ languageSelector.englishTitle }}$") ${{ languageSelector.english }}$		
+				a(href=siteURL+"/en/", data-lang="en", title="${{ languageSelector.englishTitle }}$") ${{ languageSelector.english }}$		
