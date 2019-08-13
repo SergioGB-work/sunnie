@@ -154,6 +154,21 @@ $(document).ready(function(){
 		}
 	});
 
+	$('#modal-locales .send').click(function(){
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('#modal-locales').modal('hide');
+			showError('','Actualizando traducciones, espere por favor...');
+		}
+	});
+
+	$('#modal-locales form').on('change','[name="key"]',function(e){
+		var val = $(this).val();
+		val = val.replace(/[^a-zA-Z0-9]/gi,'');
+
+		$(this).val(val);
+		$(this).closest('.locale-key').find('.locale-code').text('custom.' + val);
+	});		
+
 	$('.sunniejs-tools .addButton').click(function(){
 		$('body').toggleClass('show-sidebar-menu-tools');
 		$('body').removeClass('show-develop-assistant');
@@ -302,7 +317,11 @@ $(document).ready(function(){
 			$(window).scrollTop($(window).scrollTop() + 1 );
 		}
 
-	});	
+	});
+
+	$('#modal-locales').on('show.bs.modal',function(event){
+		dataList($('#locales-block'));
+	});
 
 });
 
@@ -442,6 +461,10 @@ function editSiteCallback(data){
 		newLocation.shift();
 		location.href = newLocation.join('');
 	}
+}
+
+function updateLocalesCallback(data){
+	$('#modal-error').modal('hide');
 }
 
 function loadConfigComponent(){

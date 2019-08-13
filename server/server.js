@@ -755,6 +755,9 @@ gulp.task('apiServer', function() {
 			fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/en');	
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/'+siteName+'.json', JSON.stringify(JSON.parse(fs.readFileSync(defaultSiteURL + '/locale/es/'+defaultSite+'.json')),null,4),function(err){});
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/'+siteName+'.json', JSON.stringify(JSON.parse(fs.readFileSync(defaultSiteURL + '/locale/es/'+defaultSite+'.json')),null,4),function(err){});
+			
+			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/custom.json', {},function(err){});
+			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/custom.json', {},function(err){});
 
 			deployPage('--env dev --site ' + siteName , res);
 		}
@@ -863,6 +866,76 @@ gulp.task('apiServer', function() {
 				}
 			)
 		};			
+	});
+
+	app.get('/site/:id/get-locales', function (req, res) {
+		try{
+			var site = req.params.id;
+			var siteURL = getURLSite(site);
+			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+
+			var langs = ['es','en'];
+
+			var customLocaleJSON, siteLocale = {};
+
+
+			langs.forEach(function(element,i){
+
+
+				if(fs.existsSync(siteURL + '/locale/'+ element + '/custom.json')){
+					customLocaleJSON = JSON.parse(fs.readFileSync(siteURL + '/locale/'+ element + '/custom.json'));
+				}
+				else{
+					customLocaleJSON = {};
+				}
+
+				Object.keys(customLocaleJSON).forEach(function(key){
+					if(siteLocale[key] == undefined){
+						siteLocale[key] = [];
+					}
+
+					siteLocale[key].push({ [element] : customLocaleJSON[key] });
+				});
+
+			});
+
+			res.status(200).send(siteLocale);
+		}
+		catch(e){
+			console.log(e);
+			res.status(412).send(
+				{
+					"code":"412",
+					"statusCode":"SITE_LOAD_LOCALE_LIST_ERROR"
+				}
+			)
+		};					
+	});
+
+
+	app.post('/site/:id/update-locales', function (req, res) {
+
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+
+		var locales = req.body.locales;
+		
+		var langs = ['es','en'];
+		
+		langs.forEach(function(element,i){
+
+			var customLocaleJSON={};
+
+			locales.forEach(function(el,index){
+				customLocaleJSON[el.key] = locales[index][element];
+			});
+
+			fs.writeFileSync(siteURL + '/locale/'+ element + '/custom.json', JSON.stringify(customLocaleJSON,null,4),function(err){});	
+
+		});
+
+		deploySites('--env dev --site ' + site, res);
 	});
 
 
