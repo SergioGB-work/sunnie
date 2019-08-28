@@ -34,11 +34,11 @@ mixin component-form-filter(content)
 
 				.form-group(class=item.size)
 
-					if item.type=='textarea'
+					if item.type=='textarea' || item.type=='richHTML' || item.type=='codePUG' || item.type=='codeHTML'
 
 						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
 
-						+fragment('fragment-textarea',{"class":"form-control", "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "dataAttributes":{"data-get-default-value":item.name}})
+						+fragment('fragment-textarea',{"class":"form-control " + item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "dataAttributes":{"data-get-default-value":item.name}})
 					else if item.type=='checkbox' || item.type=='radio'
 
 						div(class=customControls)

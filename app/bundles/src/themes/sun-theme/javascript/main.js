@@ -57,7 +57,7 @@ $(document).ready(function(){
 			if(group.length >= 1){
 
 				if(!newGroup.includes(group.data('form-group'))){
-					data = Object.assign(data, buildSitemapForm(group) );
+					data = Object.assign(data, buildSitemapForm(group));
 					newGroup.push(group.data('form-group'));
 				}
 
@@ -109,7 +109,7 @@ $(document).ready(function(){
 
 		if (form.data('form-filter') != true) {
 			url = form.attr('data-action');
-			method = form.data('method');				
+			method = form.data('method');			
 			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback'), "content":form.data('content'),"callfront":form.data('callfront')};
 			getData(params);
 		}
@@ -222,109 +222,12 @@ $(document).ready(function(){
 
 
 	$('[data-parent]').each(function(){
-
-		var targetEvent = $(this).data('parent');
-		var action = $(this).data('parent-event-action');
-		var valueDispatchAction =  $(this).data('parent-event-value') != '' && $(this).data('parent-event-value')!== undefined ? $(this).data('parent-event-value') : false;
-		var parentEvent =  $(this).data('parent-event');
-		var currentEvent = $(this);
-
-		if(parentEvent != ''){
-			$(targetEvent).on(parentEvent, function(){
-				switch(action){
-
-					case 'load-data':
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							var value = $(this).val();
-							currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
-							currentEvent.data('aditional-data',{"value":value});
-							dataList(currentEvent);
-						}
-						break;
-					
-
-					case 'submit':
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							currentEvent.closest('form').submit();
-						}
-						break;
-
-					case 'show':
-
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							currentEvent.show();
-						}
-						else{
-							currentEvent.hide()
-						}
-						
-						break;
-
-					case 'hide':
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							currentEvent.hide();
-						}
-						else{
-							currentEvent.show()
-						}
-						break;
-				}
-
-			});
-		}
+		dataParent($(this));
 	});
 
+
 	$('[data-event]').each(function(){
-
-		var targetEvent = $(this).data('event-target');
-		var action = $(this).data('event-action');
-		var valueDispatchAction =  $(this).data('event-value') != '' && $(this).data('event-value')!== undefined ? $(this).data('event-value') : false;
-		var event =  $(this).data('event');
-		var currentEvent = $(this);
-
-		if(event != ''){
-			$(this).on(event, function(){
-				switch(action){
-
-					case 'load-data':
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							var value = $(this).val();
-							$(targetEvent).attr('data-aditional-data',JSON.stringify({"value":value}));
-							$(targetEvent).data('aditional-data',{"value":value});
-							dataList($(targetEvent));
-						}
-						break;
-					
-
-					case 'submit':
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							$(targetEvent).closest('form').submit();
-						}
-						break;
-
-					case 'show':
-
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							$(targetEvent).show();
-						}
-						else{
-							$(targetEvent).hide()
-						}
-						
-						break;
-
-					case 'hide':
-						if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-							$(targetEvent).hide();
-						}
-						else{
-							currentEvent.show()
-						}
-						break;
-				}
-
-			});
-		}
+		dataEvent($(this));
 	});	
 
 });
@@ -511,7 +414,6 @@ function getData(el) {
 		var jsonData = aditionalData instanceof FormData ? aditionalData : JSON.stringify(aditionalData);
 		var contentType = aditionalData instanceof FormData ? false : "application/json";
 		var timeout = 600000; // tiempo de espera por defecto de la peticion
-		console.log(jsonData);
 		var getURL = $.ajax({
 			url: url,
 			type: method,
@@ -1122,7 +1024,7 @@ function buildSitemapForm(elemento){
 		var arrayGroup = [];
 		var arrayInputs = {};
 		
-		elemento.find('input,select,textarea').each(function(){
+		elemento.find('input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked,input[type="checkbox"]:checked').each(function(){
             //Caso basico
 			
 			var currentGroup = $(this).parents('[data-form-group]');
@@ -1256,4 +1158,112 @@ function paramsChanged(){
 
 	return paramsChanged;
 
+}
+
+function dataEvent(el){
+	var targetEvent = $(el.data('event-target'));
+	var action = el.data('event-action');
+	var valueDispatchAction =  el.data('event-value') != '' && el.data('event-value') !== undefined ? el.data('event-value') : false;
+	var event =  el.data('event');
+	var currentEvent = el;
+
+	if(event != ''){
+		el.on(event, function(){
+
+			if($(this).closest('[data-array-id]').length > 0 && targetEvent.closest('[data-array-id]').length > 0){
+				targetEvent = $(this).closest('[data-array-id]').find($(this).data('event-target'));
+			}
+
+			switch(action){
+
+				case 'load-data':
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+						var value = $(this).val();
+						targetEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
+						targetEvent.data('aditional-data',{"value":value});
+						dataList(targetEvent);
+					}
+					break;
+				
+
+				case 'submit':
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+						targetEvent.closest('form').submit();
+					}
+					break;
+
+				case 'show':
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+						targetEvent.removeClass('d-none');
+					}
+					else{
+						targetEvent.addClass('d-none');
+					}
+					
+					break;
+
+				case 'hide':
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+						targetEvent.addClass('d-none');
+					}
+					else{
+						targetEvent.removeClass('d-none');
+					}
+					break;
+			}
+
+		});
+	}
+}
+
+function dataParent(el){
+	var targetEvent = el.data('parent');
+	var action = el.data('parent-event-action');
+	var valueDispatchAction =  el.data('parent-event-value') != '' && el.data('parent-event-value')!== undefined ? el.data('parent-event-value') : false;
+	var parentEvent =  el.data('parent-event');
+	var currentEvent = el;
+
+	if(parentEvent != ''){
+		$(targetEvent).on(parentEvent, function(){
+			switch(action){
+
+				case 'load-data':
+					if(!valueDispatchAction || valueDispatchAction == el.val()){
+						var value = el.val();
+						currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
+						currentEvent.data('aditional-data',{"value":value});
+						dataList(currentEvent);
+					}
+					break;
+				
+
+				case 'submit':
+					if(!valueDispatchAction || valueDispatchAction == el.val()){
+						currentEvent.closest('form').submit();
+					}
+					break;
+
+				case 'show':
+
+					if(!valueDispatchAction || valueDispatchAction == el.val()){
+						currentEvent.show();
+					}
+					else{
+						currentEvent.hide()
+					}
+					
+					break;
+
+				case 'hide':
+					if(!valueDispatchAction || valueDispatchAction == el.val()){
+						currentEvent.hide();
+					}
+					else{
+						currentEvent.show()
+					}
+					break;
+			}
+
+		});
+	}	
 }

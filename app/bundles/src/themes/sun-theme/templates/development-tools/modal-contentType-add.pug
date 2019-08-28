@@ -1,0 +1,105 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Nuevo Tipo de Contenido"
+	- var modal_id = "modal-contentType-add"
+	- var modal_size = "modal-lg"
+
+block modal-body
+
+	form(id="form-add-contentType",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/contentType/add", data-callback="addContentTypeCallback")
+		.row
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"contentName", "text":"Nombre"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"contentName","name":"name", "required":"required"})
+		.row
+			div(id="contentTypeConfig",data-service-data=apiDevelopment + "/site/{idSite}/content/contentType/config",data-method="GET",data-template="#templateAddContentType",data-target="#modal-contentType-add #contentTypeConfig", data-callback="dataAddContentTypeCallback")
+
+		.row
+			div(class="form-group col-12")
+				+fragment('fragment-label',{"for":"contentTypeTemplate", "text":"Plantilla del Contenido(PUG)","helpText":"La plantilla debe estar desarrollada en PUG. Para utilizar uno de los campos anteriormente seleccionados se debe utilizar #{nameDelCampo}"})
+				textarea(name="template", id="contentTypeTemplate",class="form-control codePUG")
+
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(class="btn btn-default mr-3", data-toggle="modal", data-target="#modal-contents", data-dismiss="modal") Cancelar
+				button(class="btn btn-primary send", type="submit") Crear
+
+	script(id="templateAddContentType",type="text/x-jsrender")
+		| {{for data.config tmpl="#templateFormAddContentType"/}}
+
+	script(id="templateFormAddContentType",type="text/x-jsrender")
+		
+		| {{if required && required == true}}
+		| {{* window.requiredField = "required"}}
+		| {{else}}
+		| {{* window.requiredField = "" }}
+		| {{/if}}
+
+		| {{* window.id = id !== undefined && id !== '' ? id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) }}
+
+		| {{if visibility && visibility == "hidden"}}
+		| {{* window.show = 'd-none'}}
+		| {{* window.showState = 'data-default-visibility=hidden'}}
+		| {{else}}
+		| {{* window.show = ''}}
+		| {{* window.showState = ''}}
+		| {{/if}}
+
+		| {{if type == "checkbox" || type =="radio" }}
+
+		div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}}, id="{{:parentID}}")
+			div(class="custom-control custom-{{:type}}")
+				input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}}, {{:dataAttributes}})
+				+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label"}, 'true')
+
+
+		| {{else type == "textarea" || type == "richHTML" || type == "codePUG" }}
+		div(class="form-group col-12 {{*:show}}", id="{{:parentID}}")
+			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
+			textarea(name="{{:name}}", id="{{*:id}}",class="form-control {{:type}}",{{*:requiredField}}, {{:dataAttributes}})
+
+		| {{else type == "select" }}
+
+		div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", id="{{:parentID}}")
+			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
+			select(name="{{:name}}", id="{{*:id}}", class="form-control",{{*:requiredField}}, {{:dataAttributes}})
+				
+				| {{for options ~na=name}}
+				
+				option(value="{{:value}}") {{:label}}
+				| {{/for}}
+
+
+		| {{else type == "array" }}
+		.col-12.form-group(class="{{*:show}}", id="{{:parentID}}")
+			fieldset(data-form-group="{{:name}}",data-block-type='array')
+				legend {{:label}}
+				.row.position-relative
+					.col-12
+						.fieldset(data-array-id="0",class="mt-3")
+							.row
+								| {{for arrayContent tmpl="#templateFormAddContentType"/}}
+								
+								div(class="addItem fa fa-plus mr-1")
+								div(class="deleteItem fa fa-minus")
+
+
+		| {{else type == "group" }}
+		.col-12.form-group(class="{{*:show}}", id="{{:parentID}}")
+			fieldset(data-form-group="{{:name}}")
+				legend {{:label}}
+				.row.position-relative
+					.col-12
+
+						.fieldset(data-array-id="0",class="mt-3")
+							.row
+								| {{for content tmpl="#templateFormAddContentType"/}}
+
+		| {{else}}
+		div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}}, id="{{:parentID}}")
+			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
+			input(type="{{:type}}",name="{{:name}}",id="{{*:id}}",class="form-control",{{*:requiredField}}, {{:dataAttributes}})
+
+		| {{/if}}

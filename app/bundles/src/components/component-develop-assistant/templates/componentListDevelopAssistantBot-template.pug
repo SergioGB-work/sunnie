@@ -13,7 +13,7 @@ script(id="templateComponentListDevelopAssistantBot",type="text/x-jsrender")
 					li.list-group-item
 						.custom-control.custom-radio
 							input(type="radio",name="name",value="${$value}",class="custom-control-input",id="add-{{:}}")
-							label(class="custom-control-label",for="add-{{:}}") {{:}}
+							+fragment('fragment-label',{"for":"add-{{:}}", "text":"{{:}}", "class":"custom-control-label"},'true')
 					| {{/for}}
 
 		.row

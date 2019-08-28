@@ -9,7 +9,7 @@ mixin fragment-card(content)
 	- var price = content.price || ''
 
 	.card(class=classes)
-		if(button != '')	
+		if href != ''
 			a(href=href,title=title)
 				if src != ''
 					img.card-img-top(src=src,alt=alt)

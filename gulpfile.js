@@ -34,10 +34,12 @@ var gulp = require('gulp'),
 var argv_site = argv.site !== undefined ? argv.site : false;
 var argv_page = argv.pag !== undefined ? argv.pag: '*.*';
 var argv_env = argv.env !== undefined ? argv.env : '';
+var argv_contentType = argv.contentType !== undefined ? argv.contentType : '';
+var argv_contentID = argv.contentID !== undefined ? argv.contentID : '';
 
 var developMode = argv_env == 'dev' ? true : false;
 
-var src_site_deploy = argv_site || '**';
+var src_site_deploy = argv_site + '/**' || '**';
 
 
 
@@ -264,7 +266,7 @@ gulp.task('jsTheme',['jsBuild'], function() {
 		var developFiles;
 		if(developMode){
 			var developFiles = streamqueue({ objectMode: true },
-				gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/[^_]*.js'));
+				gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/**/[^_]*.js'));
 		}
 			
 		for (var lang in langs){
@@ -609,6 +611,41 @@ gulp.task('htaccess', function () {
 gulp.task('removeTMP', function () {
 	deleteTMPFiles()
     return true;	
+});
+
+
+gulp.task('buildContentTemplate',function(){
+
+	var contentID = argv_contentID;
+	var contentType = argv_contentType;
+	var site = argv_site;
+
+	if(site == 'default'){
+		pathSite = pathBundles;
+	}
+	else{
+		pathSite = pathPlugins;
+	}
+
+	var dirContents = contentID != '' ? [contentID] : fs.readdirSync(pathSite + '/sites/' + site + '/content_manager/' + contentType);
+
+	dirContents.forEach(function(contentID,index){
+		if(contentID.split('.').length <= 1){
+			var configValues = JSON.parse(fs.readFileSync(pathSite + '/sites/' + site + '/content_manager/'+contentType + '/' + contentID + '/config.json')).configValues;
+
+			gulp.src(pathSite + '/sites/' + site + '/content_manager/'+contentType+'/template.pug')
+				.pipe(pug({
+					pretty: true,
+					locals: configValues
+				}))
+				.pipe(rename({
+					basename: 'view',
+					extname: '.html'
+				}))
+				.pipe(gulp.dest(pathSite + '/sites/' + site + '/content_manager/'+contentType + '/' + contentID));	
+		}	
+	});
+
 });
 
 function deleteTMPFiles(){

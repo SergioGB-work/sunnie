@@ -14,7 +14,7 @@
 				{
 					"label":"Content",
 					"name":"content",
-					"type":"textarea"
+					"type":"richHTML"
 				},
 				{
 					"label":"Visualización por defecto",

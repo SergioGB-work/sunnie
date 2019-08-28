@@ -1,0 +1,32 @@
+script(id="editHTMLContentComponentView",type="text/x-jsrender")
+	
+	.col-12
+		p Elige el contenido que deseas mostrar.
+	.col-12
+		div(id="editContentListContent",data-service-data=apiDevelopment + "/site/{idSite}/contents/{{:~idComponent}}",data-method="GET",data-template="#editHTMLContentRadio",data-target="#editContentListContent")
+
+script(id="editHTMLContentRadio",type="text/x-jsrender")
+	| {{if data.content.length > 0}}
+	.row
+		| {{for data.content}}
+		| {{* window.id = id !== undefined && id !== '' ? id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) }}
+
+		| {{if checked == true}}
+		| {{* window.checkedField = "checked"}}
+		| {{else}}
+		| {{* window.checkedField = "" }}
+		| {{/if}}
+
+		.col-12.col-sm-4.col-md-3.col-lg-2
+			div(class="custom-control custom-radio")
+				input(class="custom-control-input",type="radio",id="content{{*:id}}",name="idContent",value="{{:id}}",required, {{*:checkedField}})
+				+fragment('fragment-label',{"for":"content{{*:id}}", "text":"{{:name}}", "class":"custom-control-label"}, 'true')
+				input(type="hidden",name="contentType",value="{{:contentType}}",required)
+
+		| {{/for}}
+
+	| {{else}}
+	.row
+		.alert.alert-info.text-center.col-12.col-sm-8.offset-sm-2 Todavía no has creado contenidos.
+
+	| {{/if}}

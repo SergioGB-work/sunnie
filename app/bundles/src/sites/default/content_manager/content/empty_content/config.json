@@ -1,0 +1,8 @@
+{
+    "id": "empty_content",
+    "name": "Contenido por defecto",
+    "createdDate": "Mon, 19 Aug 2019 10:42:42 GMT",
+    "configValues":	{
+    	"htmlContent":"<div class='alert alert-info'> El contenido seleccionado ya no existe. Elige uno nuevo.</div>"
+    }
+}

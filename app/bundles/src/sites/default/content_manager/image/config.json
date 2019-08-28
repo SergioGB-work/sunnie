@@ -1,0 +1,14 @@
+{
+	"config":[
+		{
+			"label":"SRC",
+			"type":"text",
+			"name":"src"
+		},
+		{
+			"label":"Alt",
+			"type":"text",
+			"name":"alt"
+		}			
+	]
+}

@@ -9,36 +9,37 @@ block modal-body
 	form(id="form-add-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/add", data-callback="addPageCallback")
 		.row
 			div(class="form-group col-4")
-				label(for="pageName",class="uppercase") Nombre
-				input(type="text",name="name",id="pageName",class="form-control",required)
+				+fragment('fragment-label',{"for":"pageName", "text":"Nombre"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageName","name":"name", "required":"required"})
 
 			div(class="form-group col-4")
-				label(for="pageURL",class="uppercase") Url
-				input(type="text",name="url",id="pageURL",class="form-control",required)
+				+fragment('fragment-label',{"for":"pageURL", "text":"Url"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageURL","name":"url", "required":"required"})
 
 		.row
 			div(class="form-group col-4")
-				label(for="pageParentPosition",class="uppercase") Padre
+				+fragment('fragment-label',{"for":"pageParentPosition", "text":"Padre"})
 				select(name="parentPosition",id="pageParentPosition",class="form-control",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePagesList",data-target="#modal-page-add #pageParentPosition")
+
 			div(class="form-group col-4")
-				label(for="pagePosition",class="uppercase") Posición
-				input(type="text",name="position",min=0,id="pagePosition",class="form-control",required)
+				+fragment('fragment-label',{"for":"pagePosition", "text":"Posición"})
+				+fragment('fragment-input',{"class":"form-control", "type":"number", "id":"pagePosition","name":"position", "required":"required","min":"0"})
 
 		.row
 			div(class="form-group col-4")
-				label(for="pageTitle",class="uppercase") Page Title
-				input(type="text",name="title",id="pageTitle",class="form-control",required)
+				+fragment('fragment-label',{"for":"pageTitle", "text":"Page Title"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageTitle","name":"title", "required":"required"})
 
 			div(class="form-group col-4")
-				label(for="pageDescription",class="uppercase") Description
+				+fragment('fragment-label',{"for":"pageDescription", "text":"Description"})
 				textarea(type="text",name="description",id="pageDescription",class="form-control")
 
 			div(class="form-group col-4")
-				label(for="pageKeywords",class="uppercase") Keywords
+				+fragment('fragment-label',{"for":"pageKeywords", "text":"Keywords"})
 				textarea(type="text",name="keywords",id="pageKeywords",class="form-control")
 		.row
 			div(class="form-group col-4")
-				label(for="pageHidden",class="uppercase") Page Hidden
+				+fragment('fragment-label',{"for":"pageHidden", "text":"Page Hidden"})
 				select(name="hidden",id="pageHidden",class="form-control",required)
 					option(value="false") No
 					option(value="true") Si

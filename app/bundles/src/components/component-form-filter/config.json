@@ -121,6 +121,10 @@
 							"value":"textarea"
 						},
 						{
+							"label":"HTML Enriquecido",
+							"value":"richHTML"
+						},
+						{
 							"label":"Separator",
 							"value":"separator"
 						},
@@ -151,7 +155,7 @@
 				{
 					"label":"HTML Content",
 					"name":"htmlContent",
-					"type":"textarea",
+					"type":"richHTML",
 					"visibility":"hidden"
 				},
 				{

@@ -5,6 +5,6 @@ script(id="templateThemeList",type="text/x-jsrender")
 	.col-4.form-group
 		div(class="custom-control custom-radio")
 			input(type="radio" class="custom-control-input" id="theme{{*:id}}" name="theme" value="{{:}}")
-			label(class="custom-control-label" for="theme{{*:id}}") {{:}}
+			+fragment('fragment-label',{"for":"theme{{*:id}}", "text":"{{:}}", "class":"custom-control-label"},'true')
 	| {{/for}}
 	| {{/if}}

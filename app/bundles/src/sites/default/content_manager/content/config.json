@@ -1,0 +1,9 @@
+{
+	"config":[
+		{
+			"label":"HTML Content",
+			"type":"textarea",
+			"name":"htmlContent"
+		}			
+	]
+}

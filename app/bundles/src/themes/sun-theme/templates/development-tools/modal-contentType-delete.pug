@@ -1,0 +1,16 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+	- var modal_id = "modal-contentType-delete"
+	- var modal_size = "modal-md"
+
+block modal-body
+	form(data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/contentType/delete", data-callback="deleteContentTypeCallback")
+		.row
+			.col-12
+				p ¿Estás seguro que deseas eliminar este contenido? 
+				p Recuerda que todos aquellos contenidos que pertenezcan a este tipo de contenido serán también eliminados y los componentes que usen dichos contenidos serán modificados para mostrar un contenido por defecto.
+				+fragment('fragment-input',{"type":"hidden", "name":"contentTypeName", "required":"required"})
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Eliminar

@@ -25,7 +25,7 @@
 		{
 			"label":"Static Template(HTML)",
 			"name":"static_code",
-			"type":"textarea"
+			"type":"codeHTML"
 		},		
 		{
 			"label":"Template ID",
@@ -33,9 +33,9 @@
 			"type":"text"
 		},		
 		{
-			"label":"Template Code(JSRender)",
+			"label":"Template Code(HTML + JSRender)",
 			"name":"template_code",
-			"type":"textarea"
+			"type":"codeHTML"
 		},
 		{
 			"label":"Target",
@@ -74,7 +74,7 @@
 			"options":[
 				{
 					"label":"No",
-					"value":"false"
+					"value":""
 				},
 				{
 					"label":"Si",
@@ -99,7 +99,7 @@
 			"options":[
 				{
 					"label":"No",
-					"value":"false"
+					"value":""
 				},
 				{
 					"label":"Si",
@@ -119,7 +119,7 @@
 			"options":[
 				{
 					"label":"No",
-					"value":"false"
+					"value":""
 				},
 				{
 					"label":"Si",
@@ -134,7 +134,7 @@
 			"options":[
 				{
 					"label":"No",
-					"value":"false"
+					"value":""
 				},
 				{
 					"label":"Si",
@@ -149,7 +149,7 @@
 			"options":[
 				{
 					"label":"No",
-					"value":"false"
+					"value":""
 				},
 				{
 					"label":"Si",
@@ -164,7 +164,7 @@
 			"options":[
 				{
 					"label":"No",
-					"value":"false"
+					"value":""
 				},
 				{
 					"label":"Si",

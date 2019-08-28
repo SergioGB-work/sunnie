@@ -1,5 +1,6 @@
 @import 'variables';
 @import '../lib/bootstrap/variables';
+@import '../lib/codemirror/codemirror';
 
 .sunniejs-tools{
 	right:1em;
@@ -20,9 +21,16 @@
 
 	ul{
 		li{
-			font-size:0.75rem;
+			font-size:0.75rem;		
 		}
 	}
+	a,span{
+		cursor:pointer;
+
+		@include hover-focus-active{
+			text-decoration:none
+		}
+	}	
 }
 
 #wrapper{
@@ -69,5 +77,24 @@
 		&.dragging-over{
 			border:1px solid $primary;
 		}		
+	}
+}
+
+.modal{
+	.actions{
+		display:none;
+	}
+	@include hover-focus-active{
+		.actions{
+			display:block;
+			
+			.action{
+				cursor:pointer;
+				@include hover-focus-active{
+					text-decoration:none;
+					color:$primary !important;
+				}
+			}
+		}
 	}
 }

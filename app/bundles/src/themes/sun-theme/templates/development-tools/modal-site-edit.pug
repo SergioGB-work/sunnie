@@ -19,12 +19,12 @@ block modal-body
 
 		.row
 			div(class="form-group col-4")
-				label(for="siteName",class="uppercase") Nombre
-				input(type="text",name="name",id="siteName",class="form-control",value="{{:data.name}}",required)
+				+fragment('fragment-label',{"for":"siteNameEdit", "text":"Nombre"})
+				input(type="text",name="name",id="siteNameEdit",class="form-control",value="{{:data.name}}",required)
 
 			div(class="form-group col-4")
-				label(for="siteURL",class="uppercase") URL
-				input(type="text",name="url",id="siteURL",class="form-control",value="{{:data.url}}",required)
+				+fragment('fragment-label',{"for":"siteURLEdit", "text":"URL"})
+				input(type="text",name="url",id="siteURLEdit",class="form-control",value="{{:data.url}}",required)
 
 			div(class="form-group col-md-4 col-12")
 
@@ -40,12 +40,12 @@ block modal-body
 					legend Activar Asistente de Desarrollo(solo desarrollo)
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotNo{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
-						label(for="enableChatBotNo{{*:id}}",class="uppercase custom-control-label") No
+						input(type="radio",name="enableChatBot",id="enableChatBotNoEdit{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
+						+fragment('fragment-label',{"for":"enableChatBotNoEdit{{*:id}}", "text":"No", "class":"uppercase custom-control-label"},'true')
 
 					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotSi{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
-						label(for="enableChatBotSi{{*:id}}",class="uppercase custom-control-label") Si					
+						input(type="radio",name="enableChatBot",id="enableChatBotSiEdit{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
+						+fragment('fragment-label',{"for":"enableChatBotSiEdit{{*:id}}", "text":"Si", "class":"uppercase custom-control-label"},'true')
 		
 		.row
 			.col-12

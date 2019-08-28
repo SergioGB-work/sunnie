@@ -1,4 +1,5 @@
 script(id="templateFormGenerator",type="text/x-jsrender")
+
 	| {{if required && required == true}}
 	| {{* window.requiredField = "required"}}
 	| {{else}}
@@ -25,22 +26,24 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 	| {{/if}}
 
 
-	div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}})
+
+	div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}}, id="{{:parentID}}")
 		div(class="custom-control custom-{{:type}}")
-			input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}})
+			input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}},{{:dataAttributes}})
 			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label"}, 'true')
 
 
-	| {{else type == "textarea" }}
-	div(class="form-group col-12 {{*:show}}")
+	| {{else type == "textarea" || type == "richHTML" || type == "codePUG" || type == "codeHTML"}}
+
+	div(class="form-group col-12 {{*:show}}", id="{{:parentID}}")
 		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		textarea(name="{{:name}}", id="{{*:id}}",class="form-control",{{*:requiredField}}) {{:~originalContent[name]}}
+		textarea(name="{{:name}}", id="{{*:id}}",class="form-control {{:type}}",{{*:requiredField}}, {{:dataAttributes}}) {{:~originalContent[name]}}
 
 	| {{else type == "select" }}
 
-	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}")
+	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", id="{{:parentID}}")
 		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		select(name="{{:name}}", id="{{*:id}}", class="form-control",{{*:requiredField}})
+		select(name="{{:name}}", id="{{*:id}}", class="form-control",{{*:requiredField}}, {{:dataAttributes}})
 			
 			| {{for options ~na=name}}
 
@@ -55,7 +58,7 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 
 
 	| {{else type == "array" }}
-	.col-12.form-group(class="{{*:show}}")
+	.col-12.form-group(class="{{*:show}}", id="{{:parentID}}")
 		fieldset(data-form-group="{{:name}}",data-block-type='array')
 			legend {{:label}}
 			.row.position-relative
@@ -74,7 +77,7 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 
 
 	| {{else type == "group" }}
-	.col-12.form-group(class="{{*:show}}")
+	.col-12.form-group(class="{{*:show}}", id="{{:parentID}}")
 		fieldset(data-form-group="{{:name}}")
 			legend {{:label}}
 			.row.position-relative
@@ -84,9 +87,14 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 						.row
 							| {{for content ~originalContent = ~originalContent[name] tmpl="#templateFormGenerator"/}}
 
+	| {{else type == "custom" }}
+
+	| {{include  ~originalContent = ~originalContent ~idComponent = ~idComponent tmpl=customView/}}
+
+
 	| {{else}}
-	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}})
+	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}}, id="{{:parentID}}")
 		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control",{{*:requiredField}})
+		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control",{{*:requiredField}}, {{:dataAttributes}})
 
 	| {{/if}}

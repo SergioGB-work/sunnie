@@ -1,0 +1,36 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Edit Tipo de Contenido"
+	- var modal_id = "modal-contentType-edit"
+	- var modal_size = "modal-lg"
+
+block modal-body
+
+	form(id="form-edit-contentType",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/contentType/edit", data-callback="editContentTypeCallback")
+		
+		p Recuerda que si modificas un tipo de contenido y lo guardas, los cambios serán extendidos a todos los contenidos que usen este tipo de contenido. Si modificas la plantilla, los contenidos que sean de este tipo se volverán a compilar para aplicar la nueva plantilla.
+
+		div(id="edit-contentType-block")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(class="btn btn-default mr-3", data-toggle="modal", data-target="#modal-contentType-list", data-dismiss="modal") Cancelar
+				button(class="btn btn-primary send", type="submit") Guardar	
+
+	script(id="templateEditContentType",type="text/x-jsrender")
+		.row
+			div(class="form-group col-4")
+				| {{* window.id = id !== undefined && id !== '' ? id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) }}
+				+fragment('fragment-label',{"for":"input_{{*:id}}", "text":"Nombre"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"input_{{*:id}}","name":"name", "required":"required","value":"{{:data.name}}"})
+
+		.row
+			.col-12
+			| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}
+		
+		.row
+			div(class="form-group col-12")
+				| {{* window.id = id !== undefined && id !== '' ? id + parseInt(Math.random() * (99999 - 0) + 0) : 'input' + parseInt(Math.random() * (99999 - 0) + 0) }}
+				+fragment('fragment-label',{"for":"input_{{*:id}}", "text":"Plantilla del Contenido"})
+				textarea(name="template", id="input_{{*:id}}",class="form-control codePUG") {{:data.template}}

@@ -17,44 +17,46 @@ block modal-body
 	script(id="templateEditPage",type="text/x-jsrender")
 		.row
 			div(class="form-group col-4")
-				label(for="pageIdEdit",class="uppercase") ID
-				input(type="text",name="id",id="pageIdEdit",class="form-control",required ,disabled, value="{{:data.id}}")
+				+fragment('fragment-label',{"for":"pageIdEdit", "text":"ID"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageIdEdit","name":"id", "required":"required","disabled":"disabled","value":"{{:data.id}}"})
 
 			div(class="form-group col-4")
-				label(for="pageNameEdit",class="uppercase") Nombre
-				input(type="text",name="name",id="pageNameEdit",class="form-control",required, value="{{:data.name}}")
+				+fragment('fragment-label',{"for":"pageNameEdit", "text":"Nombre"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageNameEdit","name":"name", "required":"required","value":"{{:data.name}}"})
 		.row
 			div(class="form-group col-4")
-				label(for="pageSRCEdit",class="uppercase") SRC
-				input(type="text",name="src",id="pageSRCEdit",class="form-control",required, disabled,value="{{:data.src}}")
+				+fragment('fragment-label',{"for":"pageSRCEdit", "text":"SRC"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageSRCEdit","name":"src", "required":"required","disabled":"disabled","value":"{{:data.src}}"})
+	
 			div(class="form-group col-4")
-				label(for="pageURLEdit",class="uppercase") Url
-				input(type="text",name="url",id="pageURLEdit",class="form-control",required,value="{{:data.url}}")
+				+fragment('fragment-label',{"for":"pageURLEdit", "text":"Url"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageURLEdit","name":"url", "required":"required","value":"{{:data.url}}"})
 		.row
 			div(class="form-group col-4")
-				label(for="pageParentPositionEdit",class="uppercase") Padre
+				+fragment('fragment-label',{"for":"pageParentPositionEdit", "text":"Padre"})
 				select(name="parentPosition",id="pageParentPositionEdit",class="form-control",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePagesList",data-target="#modal-page-edit #pageParentPositionEdit",data-callback="checkParentPage", data-content='"{{:data.parentPosition}}","{{:data.position}}"')
-			div(class="form-group col-4")
-				label(for="pagePositionEdit",class="uppercase") Posición
-				input(type="text",name="position",min=0,id="pagePositionEdit",class="form-control",required,value="{{:data.position}}")
-		.row
-			div(class="form-group col-4")
-				label(for="pageTitleEdit",class="uppercase") Page Title
-				input(type="text",name="title",id="pageTitleEdit",class="form-control",required,value="{{:data.attributes.title}}")
 
 			div(class="form-group col-4")
-				label(for="pageDescriptionEdit",class="uppercase") Description
+				+fragment('fragment-label',{"for":"pagePositionEdit", "text":"Posición"})
+				+fragment('fragment-input',{"class":"form-control", "type":"number", "id":"pagePositionEdit","name":"position", "required":"required","value":"{{:data.position}}","min":"0"})
+		.row
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"pageTitleEdit", "text":"Page Title"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"pageTitleEdit","name":"title", "required":"required","value":"{{:data.attributes.title}}"})
+
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"pageDescriptionEdit", "text":"Description"})
 				textarea(type="text",name="description",id="pageDescriptionEdit",class="form-control") {{:data.attributes.description}}
 
 			div(class="form-group col-4")
-				label(for="pageKeywordsEdit",class="uppercase") Keywords
+				+fragment('fragment-label',{"for":"pageKeywordsEdit", "text":"Keywords"})
 				textarea(type="text",name="keywords",id="pageKeywordsEdit",class="form-control") {{:data.attributes.keywords}}
 
 		.row
 			| {{* window.hidden = data.hidden == 'true' ? "selected" : "" }}
 
 			div(class="form-group col-4")
-				label(for="pageHiddenEdit",class="uppercase") Page Hidden
+				+fragment('fragment-label',{"for":"pageHiddenEdit", "text":"Page Hidden"})
 				select(name="hidden",id="pageHiddenEdit",class="form-control",required)
 					option(value="false") No
 					option(value="true", {{*:hidden}}) Si				

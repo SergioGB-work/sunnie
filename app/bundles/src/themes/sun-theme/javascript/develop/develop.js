@@ -1,6 +1,25 @@
 var apiDevelop = "http://localhost:8082";
 
 $(document).ready(function(){
+
+	// Cuando se abre una modal se  carga cualquier contenido dinamico que tenga por defecto. 
+	// Los contenidos adicionales se deben cargar en el callback de la peticion
+	$('.modal').on('show.bs.modal',function(event){
+		$(this).find("[data-service-data]").each(function(){
+			dataList($(this));
+		})
+
+  		$('[data-toggle="tooltip"]').tooltip()
+		
+	});
+
+	//BUG - Cuando Cierras un modal y abres otro a la vez el scroll de la pantalla desaparece
+	$('.modal').on('shown.bs.modal',function(event){
+		$('body').addClass('modal-open');
+
+		initSpecialTextareas($(this));		
+	});
+
 	$('#confirmDeleteComponent').on('show.bs.modal',function(event){
 		var component = $(event.relatedTarget).closest('.component'),
 			position = component.data('layout-position'),
@@ -24,10 +43,6 @@ $(document).ready(function(){
 			$(this).closest('#modal-page-edit').modal('hide');
 			showError('','Editando y desplegando página, espere por favor...');
 		}
-	});
-
-	$('#modal-page-edit').on('show.bs.modal',function(event){
-		dataList($('#edit-page-block'));
 	});
 
 	$('#modal-page-delete .send').click(function(event){
@@ -93,7 +108,7 @@ $(document).ready(function(){
 		
 		array_item.insertAfter($(this).closest('[data-array-id]'));
 		
-		$(this).closest('[data-array-id]').next().find('textarea').each(function(){	
+		$(this).closest('[data-array-id]').next().find('textarea.richHTML').each(function(){	
 			CKEDITOR.replace($(this).attr('id'));
 		});
 
@@ -143,10 +158,6 @@ $(document).ready(function(){
 		}	
 	});	
 
-	$('#modal-site-edit').on('show.bs.modal',function(event){
-		dataList($('#edit-site-block'));
-	});
-
 	$('#modal-site-delete .send').click(function(event){
 		if(validateForm($(this).closest('form'))){
 			$(this).closest('.modal').modal('hide');
@@ -167,7 +178,78 @@ $(document).ready(function(){
 
 		$(this).val(val);
 		$(this).closest('.locale-key').find('.locale-code').text('custom.' + val);
-	});		
+	});
+
+	$('#modal-content-add #contentTypeSelector').on('change',function(event){
+
+		var contentType = $(this).val();
+
+		getData({
+			"service": apiDevelop + "/site/{idSite}/content/detail/"+contentType,
+			"method": "GET", "template": "#templateAddContent",
+			"target": "#add-content-block", "callback":"dataContentLoadedCallback"
+		});
+
+	});
+
+
+	$('#modal-content-edit').on('show.bs.modal',function(event){
+		
+		var idContent = $(event.relatedTarget).data('content-id');
+		var contentType = $(event.relatedTarget).data('content-type');
+
+		getData({
+			"service": apiDevelop + "/site/{idSite}/content/detail/"+contentType+"/" + idContent,
+			"method": "GET", "template": "#templateEditContent",
+			"target": "#edit-content-block", "callback": "dataContentLoadedCallback"
+		});		
+
+	});
+
+	$('#modal-content-edit .send').click(function(){
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Desplegando contenido editado, espere por favor...');
+		}
+	});
+
+	$('#modal-content-delete').on('show.bs.modal',function(event){
+		var idContent = $(event.relatedTarget).data('content-id');
+		var contentType = $(event.relatedTarget).data('content-type');
+		$(this).find('[name=id]').val(idContent);
+		$(this).find('[name=contentType]').val(contentType);
+	});
+
+	$('#modal-content-delete .send').click(function(event){
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Eliminando contenido, espere por favor...');
+		}
+	});	
+
+	$('#modal-contentType-edit').on('show.bs.modal',function(event){
+		
+		var contentType = $(event.relatedTarget).data('content-type');
+
+		getData({
+			"service": apiDevelop + "/site/{idSite}/content/contentType/detail/" + contentType,
+			"method": "GET", "template": "#templateEditContentType",
+			"target": "#edit-contentType-block", "callback": "dataContentTypeLoadedCallback"
+		});		
+
+	});
+
+	$('#modal-contentType-delete').on('show.bs.modal',function(event){
+		var contentType = $(event.relatedTarget).data('content-type');
+		$(this).find('[name=contentTypeName]').val(contentType);
+	});
+
+	$('#modal-contentType-delete .send').click(function(event){
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Eliminando tipo de contenido, espere por favor...');
+		}
+	});	
 
 	$('.sunniejs-tools .addButton').click(function(){
 		$('body').toggleClass('show-sidebar-menu-tools');
@@ -319,10 +401,6 @@ $(document).ready(function(){
 
 	});
 
-	$('#modal-locales').on('show.bs.modal',function(event){
-		dataList($('#locales-block'));
-	});
-
 });
 
 function refreshPositions(column){
@@ -419,10 +497,11 @@ function checkParentPage(data,parentPosition,pagePosition){
 }
 
 function dataComponentLoadedCallback(data){
-	dataList($('#modal-component-edit #componentName'));
-	dataList($('#modal-component-edit #layoutColumn'));
+	$('[data-service-data]').each(function(){
+		dataList($(this));
+	});
 
-	$('#modal-component-edit textarea').each(function(){
+	$('#modal-component-edit textarea.richHTML').each(function(){
 		CKEDITOR.replace( $(this).attr('id'));
 	});
 
@@ -448,6 +527,7 @@ function publishSiteCallback(){
 
 function addSiteCallback(data){
 	$('#modal-error').modal('hide');
+	$('#modal-site-add form')[0].reset();
 }
 
 function editSiteCallback(data){
@@ -527,4 +607,90 @@ function loadConfigComponent(){
 		}
 
 	}
+}
+
+
+function addContentCallback(data){
+	$('#modal-error').modal('hide');	
+	$('#modal-content-add').modal('hide');
+	$('#modal-content-add form')[0].reset();
+	$('#modal-contents').modal('show');
+	dataList($('#modal-contents #contentList'));
+}
+function editContentCallback(data){
+	$('#modal-error').modal('hide');
+	$('#modal-content-edit').modal('hide');
+	$('#modal-contents').modal('show');
+	dataList($('#modal-contents #contentList'));
+}
+
+function dataContentLoadedCallback(data){
+	initSpecialTextareas($('#modal-content-edit,#modal-content-add'))
+}
+
+function dataContentTypeLoadedCallback(data){
+	initSpecialTextareas($('#modal-contentType-edit'))
+	dataEvent($('#form-edit-contentType #edit-contentType-block [data-event]'));
+}
+
+function deleteContentCallback(data){
+	$('#modal-error').modal('hide');
+	$('#modal-contents').modal('show');
+}
+
+function dataAddContentTypeCallback(data){
+	dataEvent($('#form-add-contentType #contentTypeConfig [data-event]'));
+}
+
+function addContentTypeCallback(){
+	$('#modal-error').modal('hide');	
+	$('#modal-contentType-add').modal('hide');
+	$('#modal-contentType-add form')[0].reset();
+	$('#modal-contentType-list').modal('show');
+}
+
+function deleteContentTypeCallback(data){
+	$('#modal-error').modal('hide');
+	$('#modal-contentType-list').modal('show');
+}
+
+function initSpecialTextareas(el){
+	el.find('textarea.richHTML').each(function(){
+		if(!$(this).next().hasClass('cke')){
+			CKEDITOR.replace( $(this).attr('id'));
+		}
+	});
+
+	el.find('textarea.codePUG').each(function(){
+		var id = $(this).attr('id');
+		if(!$(this).next().hasClass('CodeMirror')){
+			var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+	        	mode: {name: "pug", alignCDATA: true},
+	        	lineNumbers: true,
+	        	theme:"base16-dark"
+	     	 });
+		}
+		else{
+			$('.CodeMirror').each(function(i, el){
+			    el.CodeMirror.refresh();
+			});
+		}
+	});
+
+	el.find('textarea.codeHTML').each(function(){
+		var id = $(this).attr('id');
+		if(!$(this).next().hasClass('CodeMirror')){
+			var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+	        	mode: "text/html",
+          		extraKeys: {"Ctrl-Space": "autocomplete"},
+	        	lineNumbers: true,
+	        	theme:"base16-dark"
+	     	 })
+		}
+		else{
+			$('.CodeMirror').each(function(i, el){
+			    el.CodeMirror.refresh();
+			});
+		}
+	});		
 }

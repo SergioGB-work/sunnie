@@ -3,7 +3,7 @@
 		{
 			"label":"Content",
 			"name":"content",
-			"type":"textarea",
+			"type":"richHTML",
 			"required":true
 		},
 		{

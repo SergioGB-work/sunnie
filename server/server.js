@@ -966,6 +966,310 @@ gulp.task('apiServer', function() {
 		  });
 		});
 
+	//CONTENIDOS
+
+	app.get('/site/:id/content/contentTypes', function (req, res) {
+		
+		var site = req.params.id,
+			siteURL = getURLSite(site),
+			contentTypes = [];
+
+		if(fs.existsSync(siteURL + '/content_manager')){
+			dirContentSite = fs.readdirSync(siteURL + '/content_manager');
+		}
+
+		dirContentSite.forEach(function(element,index){
+			if(element.split('.').length <= 1){
+				contentTypes.push({"value":element,"label":element});
+			}	
+		});
+
+		return res.status(200).send(contentTypes);
+
+	});
+
+	app.get('/site/:id/content/detail/:contentType/:idContent', function (req, res) {
+		
+		var site = req.params.id,
+			siteURL = getURLSite(site),
+			idContent = req.params.idContent,
+			contentType = req.params.contentType,
+			contentConfig = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/config.json'));
+			contentConfigValues = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/' + idContent + '/config.json'));
+			configValues = contentConfigValues.configValues;
+			contentTypes = [];
+
+		if(fs.existsSync(siteURL + '/content_manager')){
+			dirContentSite = fs.readdirSync(siteURL + '/content_manager');
+		}
+
+		dirContentSite.forEach(function(element,index){
+			if(element.split('.').length <= 1){
+				contentTypes.push({"value":element,"label":element});
+			}	
+		});
+
+		delete contentConfigValues['configValues'];
+
+		return res.status(200).send(Object.assign(contentConfig,contentConfigValues,{"contentTypes":contentTypes},{"content":configValues}));
+
+	});
+
+	app.get('/site/:id/content/detail/:contentType', function (req, res) {
+		
+		var site = req.params.id,
+			siteURL = getURLSite(site),
+			contentType = req.params.contentType,
+			contentTypeConfig = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/config.json'));
+			
+		return res.status(200).send(contentTypeConfig);
+
+	});	
+
+	app.get('/site/:id/contents/:idComponent', function (req, res) {
+		
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var dirContentSite = [];
+		var contents = [];
+		var idComponent = req.params.idComponent;
+		var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json').toString());
+		var componentDetail = getDetailComponentByID(idComponent, sitemap.pages);
+
+		if(fs.existsSync(siteURL + '/content_manager')){
+			dirContentSite = fs.readdirSync(siteURL + '/content_manager');
+		}
+		
+		dirContentSite.forEach(function(contentType,index){
+
+			if(contentType.split('.').length <= 1){
+				fs.readdirSync(siteURL + '/content_manager/' + contentType).forEach(function(element,i){
+
+					if(element.split('.').length <= 1 && element != 'empty_content'){
+						var file = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/' + element + '/config.json'));
+						file['contentType']= contentType;
+						file['checked'] = componentDetail.content.idContent == element ? true : false;
+						contents.push(file);
+					}
+				})
+			}
+		})
+
+		contents = { "content": contents };
+
+		return res.status(200).send(contents);
+	});
+
+	app.get('/site/:id/contents', function (req, res) {
+		
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var dirContentSite = [];
+		var contents = [];
+
+		if(fs.existsSync(siteURL + '/content_manager')){
+			dirContentSite = fs.readdirSync(siteURL + '/content_manager');
+		}
+		
+		dirContentSite.forEach(function(contentType,index){
+
+			if(contentType.split('.').length <= 1){
+				fs.readdirSync(siteURL + '/content_manager/' + contentType).forEach(function(element,i){
+
+					if(element.split('.').length <= 1 && element != 'empty_content'){
+						var file = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/' + element + '/config.json'));
+						file['contentType']= contentType;
+						contents.push(file);
+					}
+				})
+			}
+		})
+
+		contents = { "content": contents };
+
+		return res.status(200).send(contents);
+	});
+
+	app.post('/site/:id/content/add', function (req, res) {
+
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var contentType = req.body.contentType;
+		var name = req.body.name;
+		var createdDate = new Date().toGMTString();
+		var id = 'content_' + parseInt(Math.random() * (99999 - 0) + 0);
+		var configContentType = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/config.json'));
+		var configValues = {"contentType":contentType};	
+
+		configContentType.config.forEach(function(el,index){
+			configValues[el.name] = req.body[el.name];
+		});
+
+
+		fs.mkdirSync(siteURL + '/content_manager/'+contentType+'/' + id);
+
+		var config = {
+			"id":id,
+			"name":name,
+			"createdDate":createdDate,
+			"configValues": configValues
+		}
+
+		var mixinContent = "mixin "+id+"(content)\n";
+			mixinContent +="	include view.html";
+		
+		var includeContents = fs.readFileSync(siteURL + '/content_manager/'+contentType+'/include.pug').toString() + '\n';
+		includeContents +=  'include ./'+ id +'/mixin.pug';
+
+		fs.writeFileSync(siteURL + '/content_manager/'+contentType+'/include.pug', includeContents,function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentType+'/'+ id +'/config.json', JSON.stringify(config,null,4),function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentType+'/'+ id +'/mixin.pug', mixinContent ,function(err){});
+
+		buildContentTemplate('--site ' + site + ' --contentType ' + contentType + ' --contentID ' + id , res)
+	});
+
+
+	app.post('/site/:id/content/edit', function (req, res) {
+		if(req.body.id != 'empty_content'){
+			var site = req.params.id;
+			var siteURL = getURLSite(site);
+			var contentType = req.body.contentType;
+			var id = req.body.id;
+			var name = req.body.name;
+			var htmlContent = req.body.htmlContent;
+			var modifiedDate = new Date().toGMTString();
+			var configContentType = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/config.json'));
+			var configValues = {"contentType":contentType};	
+
+			var config = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/' + id + '/config.json'));
+
+			configContentType.config.forEach(function(el,index){
+				configValues[el.name] = req.body[el.name];
+			});
+
+			config['name'] = name;
+			config['modifiedDate'] = modifiedDate;
+			config['configValues'] = configValues;
+
+			fs.writeFileSync(siteURL + '/content_manager/'+contentType+'/'+ id +'/config.json', JSON.stringify(config,null,4),function(err){});
+
+
+
+			execGulpTask('gulp buildContentTemplate --site '+site+' --contentType '+contentType+' --contentID ' + id + ' & gulp deploySites --env dev --site ' + site + ' & gulp removeTMP', res);
+		};
+	});
+
+	//Eliminar contenido
+	app.post('/site/:id/content/delete', function (req, res) {
+		if(req.body.idContent != 'empty_content'){
+			var site = req.params.id;
+			var contentId = req.body.id;
+			var contentType = req.body.contentType;
+			deleteContent(site,contentId,contentType);
+			deploySites('--env dev --site ' + site, res);
+		}
+	});
+
+	app.post('/site/:id/content/contentType/add', function (req, res) {
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var contentTypeName = req.body.name;
+		var contentTypeTemplate = req.body.template;
+		var config = {"config":req.body.config};
+
+		fs.mkdirSync(siteURL + '/content_manager/'+contentTypeName);
+
+		var mixinContent = "include ./include.pug\n\n";
+			mixinContent += "mixin content_"+contentTypeName+"(contentName)\n";
+			mixinContent +="	+#{contentName}";
+
+		var includeContents = fs.readFileSync(siteURL + '/content_manager/include_contents.pug').toString()  + '\n';	
+		includeContents +=  'include ./'+ contentTypeName +'/mixin.pug';
+
+		fs.writeFileSync(siteURL + '/content_manager/include_contents.pug', includeContents,function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/include.pug','',function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/config.json', JSON.stringify(config,null,4),function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/mixin.pug', mixinContent ,function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/template.pug', contentTypeTemplate ,function(err){});
+
+		return res.status(200).send();
+
+	});
+
+	app.post('/site/:id/content/contentType/edit', function (req, res) {
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var contentTypeName = req.body.name;
+		var contentTypeTemplate = req.body.template;
+		var config = {"config":req.body.config};
+
+		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/config.json', JSON.stringify(config,null,4),function(err){});
+		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/template.pug', contentTypeTemplate ,function(err){});
+		
+		execGulpTask('gulp buildContentTemplate --site '+site+' --contentType '+contentTypeName+ ' & gulp deploySites --env dev --site ' + site + ' & gulp removeTMP', res);
+		
+	});
+
+	app.post('/site/:id/content/contentType/delete/', function (req, res) {
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var contentTypeName = req.body.contentTypeName;
+
+		//Borramos primero las referencias al tipo de contenido
+		var sitemap = fs.readFileSync(siteURL + '/sitemap.json').toString();
+		sitemap = JSON.parse(sitemap.replace('"contentType": "'+contentTypeName+'"','"contentType": "content"'));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
+
+		//Borramos las referencias a los contenidos asociados al tipo de contenido
+
+		if(fs.existsSync(siteURL + '/content_manager/' + contentTypeName)){
+			dirContentTypeSite = fs.readdirSync(siteURL + '/content_manager/' + contentTypeName);
+		}
+		
+		dirContentTypeSite.forEach(function(content,index){
+
+			if(content.split('.').length <= 1){	
+				deleteContent(site,content,contentTypeName);
+			}
+		});	
+
+
+		var includeContents = fs.readFileSync(siteURL + '/content_manager/include_contents.pug').toString();
+		includeContents = includeContents.replace('include ./'+contentTypeName+'/mixin.pug','')
+		fs.writeFileSync(siteURL + '/content_manager/include_contents.pug', includeContents,function(err){});
+
+		rimraf(siteURL + '/content_manager/'+contentTypeName,function () {
+			console.log("ELIMINADO TIPO CONTENIDO -> " + contentTypeName);
+		});
+		
+		deploySites('--env dev --site ' + site, res);
+		
+	});	
+
+	app.get('/site/:id/content/contentType/detail/:contentTypeName', function (req, res) {
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var contentTypeName = req.params.contentTypeName;
+
+		var config = JSON.parse(fs.readFileSync(siteURL + '/content_manager/config.json'));
+		var content = JSON.parse(fs.readFileSync(siteURL + '/content_manager/' + contentTypeName + '/config.json'));
+		var template = fs.readFileSync(siteURL + '/content_manager/' + contentTypeName + '/template.pug').toString();
+		
+
+
+		return res.status(200).send(Object.assign(config,{"content":content},{"template":template},{"name":contentTypeName}));
+		
+	});
+
+	app.get('/site/:id/content/contentType/config', function (req, res) {
+		var site = req.params.id;
+		var siteURL = getURLSite(site);
+		var config = JSON.parse(fs.readFileSync(siteURL + '/content_manager/config.json'));
+		
+		return res.status(200).send(config);
+		
+	});	
+
 });
 
 function getLayoutColumns(id){
@@ -1077,6 +1381,38 @@ function deploySites(argv,res,argv_res){
 	});
 }
 
+function buildContentTemplate(argv,res,argv_res){
+	const { exec } = require('child_process');
+	console.log('START BUILD TEMPLATE gulp buildContentTemplate ' + argv);
+	exec('gulp buildContentTemplate ' + argv, (err, stdout, stderr) => {
+	  if (err) {
+	    // node couldn't execute the command
+	    console.log('BUILD ERROR:' + err);
+	    res.send('ERROR');
+	  }
+
+	  // the *entire* stdout and stderr (buffered)
+	  console.log('BUILD FINISHED: ' + stdout + stderr);
+	  res.status(200).send(argv_res);
+	});
+}
+
+function execGulpTask(argv,res,argv_res){
+	const { exec } = require('child_process');
+	console.log('START ' + argv);
+	exec(argv, (err, stdout, stderr) => {
+	  if (err) {
+	    // node couldn't execute the command
+	    console.log('BUILD ERROR:' + err);
+	    res.send('ERROR');
+	  }
+
+	  // the *entire* stdout and stderr (buffered)
+	  console.log('EXEC FINISHED: ' + stdout + stderr);
+	  res.status(200).send(argv_res);
+	});
+}
+
 function normaliza(str) {
  	str = str.replace(/^\s+|\s+$/g, ''); // trim
   	str = str.toLowerCase();
@@ -1167,4 +1503,45 @@ function pagesList(sitemap, originalSiteMap){
 
 	});
 	return pages;
+}
+
+function getDetailComponentByID(idComponent,sitemap){
+
+	var component;
+
+	sitemap.forEach(function(page,index){
+		if(Object.keys(page.layout.content).length > 0){
+
+			Object.keys(page.layout.content).forEach(function(key,i){
+				if(page.layout.content[key].length > 0){
+					page.layout.content[key].forEach(function(currentComponent){
+						if(currentComponent.id == idComponent){
+							component = currentComponent;	
+						}
+					});
+				}	
+			})			
+		}
+
+	})
+	return component;
+}
+
+function deleteContent(site,contentId,contentType){
+	if(contentId != 'empty_content'){
+		var siteURL = getURLSite(site);
+		var sitemap = fs.readFileSync(siteURL + '/sitemap.json').toString();
+		sitemap = sitemap.replace(contentId,'empty_content');
+		sitemap = JSON.parse(sitemap.replace('"contentType": "'+contentType+'"','"contentType": "content"'));
+		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
+
+		var includeContents = fs.readFileSync(siteURL + '/content_manager/'+contentType+'/include.pug').toString();
+
+		includeContents = includeContents.replace('include ./'+contentId+'/mixin.pug','')
+		fs.writeFileSync(siteURL + '/content_manager/'+contentType+'/include.pug', includeContents,function(err){});
+
+		rimraf(siteURL + '/content_manager/'+contentType+'/' + contentId,function () {
+			console.log("ELIMINADO CONTENIDO -> " + contentId);
+		});
+	}
 }

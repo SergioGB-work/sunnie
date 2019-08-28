@@ -5,6 +5,6 @@ script(id="templateLayoutList",type="text/x-jsrender")
 	.col-4.form-group
 		div(class="custom-control custom-radio")
 			input(type="radio" class="custom-control-input" id="layoutPage{{*:id}}" name="layout" value="{{:}}")
-			label(class="custom-control-label" for="layoutPage{{*:id}}") {{:}}
+			+fragment('fragment-label',{"for":"layoutPage{{*:id}}", "text":"{{:}}", "class":"custom-control-label"},'true')
 	| {{/for}}
 	| {{/if}}

@@ -10,7 +10,7 @@ block modal-body
 			.col-12
 				form()
 					.form-group.m-0
-						label.sr-only(for="#search-box") ${{ search.search }}$
+						+fragment('fragment-label',{"for":"search-box", "text":"${{ search.search }}$", "class":"sr-only"})
 						.input-group
 							input(class="form-control",type="search",name="search",placeholder="${{ search.search }}$...",id="search-box")
 							div(class="input-group-append")

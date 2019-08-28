@@ -94,4 +94,4 @@ block modal-body
 					legend Contenido
 					.row
 
-						| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}
+						| {{for data.config ~originalContent = ~root.data.content ~idComponent = ~root.data.id tmpl="#templateFormGenerator"/}}
