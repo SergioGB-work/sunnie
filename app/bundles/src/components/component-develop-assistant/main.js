@@ -66,8 +66,11 @@ function addBotResponse(data){
 					case 'END_ADD_COMPONENT_PROCESS':
 						var layoutColumn = data.outputContexts[0].parameters.fields.Columna.stringValue;
 						var name = "component-" + data.outputContexts[0].parameters.fields.Componente.stringValue;
+						$.views.settings.allowCode(true);
+						var tmpl = $.templates('#templateNewComponent');
+						var html = tmpl.render({"data":name});
+						$(html).insertBefore($('.layout .layout-column[data-layout-column="'+layoutColumn+'"]'));
 
-						$('#templateNewComponent').tmpl({data:name}).insertBefore($('.layout .layout-column[data-layout-column="'+layoutColumn+'"]'));
 						refreshPositions(layoutColumn);
 
 						getData({
@@ -140,15 +143,20 @@ function writeOnChat(msg,profile){
 }
 
 function loadComponentsOnChat(data){
-	var chatResponse = $("<div />").append($.tmpl($('#templateComponentListDevelopAssistantBot'), {"data":data})).html()
-	writeOnChat(chatResponse,'bot');
+	$.views.settings.allowCode(true);
+	var tmpl = $.templates('#templateComponentListDevelopAssistantBot');
+	var html = tmpl.render({"data":data});
+	writeOnChat(html,'bot');
 }
 
 function loadLayoutColumnsOnChat(data){
 	writeOnChat('Estas son las columnas disponibles en esta página','bot');
-	var chatResponse = $("<div />").append($.tmpl($('#templateLayoutColumnsListDevelopAssistantBot'), {"data":data})).html()
+	$.views.settings.allowCode(true);
+	var tmpl = $.templates('#templateLayoutColumnsListDevelopAssistantBot');
+	var html = tmpl.render({"data":data});
+
 	if(data != ''){
-		writeOnChat(chatResponse,'bot');
+		writeOnChat(html,'bot');
 	}
 	
 }
@@ -161,8 +169,11 @@ function componentAddedFromDevelopAssistant(data){
 	else{
 		writeOnChat('Tu componente se ha añadido correctamente.','bot');
 		writeOnChat('¿Puedo ayudarte en algo más mi señor?','bot');	
+		$.views.settings.allowCode(true);
+		var tmpl = $.templates('#templateNewComponent');
+		var html = tmpl.render({"data":name});
+		$(html).insertBefore($('.layout .layout-column[data-layout-column="'+layoutColumn+'"]'));
 
-		$('#templateNewComponent').tmpl({data:name}).insertBefore($('.layout .layout-column[data-layout-column="'+layoutColumn+'"]'));
 		refreshPositions(layoutColumn);
 	}
 }

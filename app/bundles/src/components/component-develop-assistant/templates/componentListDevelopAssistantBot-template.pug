@@ -12,11 +12,11 @@ script(id="templateComponentListDevelopAssistantBot",type="text/x-jsrender")
 					| {{for data}}
 					li.list-group-item
 						.custom-control.custom-radio
-							input(type="radio",name="name",value="${$value}",class="custom-control-input",id="add-{{:}}")
+							input(type="radio",name="name",value="{{:}}",class="custom-control-input",id="add-{{:}}")
 							+fragment('fragment-label',{"for":"add-{{:}}", "text":"{{:}}", "class":"custom-control-label"},'true')
 					| {{/for}}
 
 		.row
 			.form-group.col-12.mb-0
 				button(class="btn btn-primary", type="submit") Añadir			
-		| {%/if%}	
+	| {{/if}}	
