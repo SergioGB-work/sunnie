@@ -2,7 +2,10 @@ var gulp = require('gulp'),
 	express = require('express'),
 	fs = require('fs'),
 	path = require('path'),
-	rimraf = require("rimraf");
+	rimraf = require("rimraf"),
+	pug = require("pug"),
+	fsextra = require("fs-extra"),
+	html2pug = require('html2pug');
 
 var defaultSite = 'default';
 
@@ -372,7 +375,7 @@ gulp.task('apiServer', function() {
 			eval(patron +'= editedPage');
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'], res);
+			deployPage('--env dev --site ' + site + ' --pag ' + editedPage['id'], res);
 		}
 		catch(e){
 			res.status(200).send(
@@ -443,7 +446,7 @@ gulp.task('apiServer', function() {
 			})
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res);
+			deployPage('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res);
 		}
 		catch(e){
 			res.status(412).send(
@@ -548,6 +551,205 @@ gulp.task('apiServer', function() {
 		};			
 	});
 
+
+	app.post('/site/:id/component/create', function (req, res) {
+		try{
+			var componentName = req.body.name;
+			var componentConfig = req.body.config[0].name != '' ? {"config":req.body.config} : JSON.parse('{"config":[]}');
+			var componentView = req.body.componentView || 'div';
+			var componentJS = req.body.componentJS || '';
+			var componentCSS = req.body.componentCSS || '';
+
+			if(fs.existsSync(pathPlugins + '/components/component-' + componentName)){
+				res.status(412).send({
+					"code":"412",
+					"statusCode":"COMPONENT_CREATE_ERROR_NAME_IN_USE"
+				})
+			}
+
+			//Se hace una donble conversion para compobar algunos errores de formato, si da error lo capturara el try catch
+			var componentViewCheck = pug.render(componentView, {});
+			componentViewCheck = html2pug(componentViewCheck, { tabs: true, fragment:true})
+			
+			fs.mkdirSync(pathPlugins + '/components/component-' + componentName);
+
+			var view = "mixin component-"+componentName+"(content)\n";
+			
+			componentView.split('\n').forEach(function(line){
+				line = line.replace(/\s+$/,"");
+				view += "\t" + line + "\n";
+			});
+
+			var include="";
+			//añadir al include o crearlo
+			if(fs.existsSync(pathPlugins + '/components/include_components.pug')){
+				include = fs.readFileSync(pathPlugins + '/components/include_components.pug').toString() + '\n';
+			}
+			else{
+				include = fs.readFileSync(pathBundles + '/components/include_components.pug').toString() + '\n';
+			}
+
+			var config={};
+			//añadir al include o crearlo
+			if(!fs.existsSync(pathPlugins + '/components/config.json')){
+				config = JSON.parse(fs.readFileSync(pathBundles + '/components/config.json'));
+			}
+			else{
+				config = JSON.parse(fs.readFileSync(pathPlugins + '/components/config.json'));
+			}
+
+			include += "include ../components/component-"+componentName+"/view.pug";
+			
+			fs.writeFileSync(pathPlugins + '/components/config.json',JSON.stringify(config,null,4),function(err){});
+			fs.writeFileSync(pathPlugins + '/components/include_components.pug',include,function(err){});
+			fs.writeFileSync(pathPlugins + '/components/component-'+componentName+'/view.pug',view,function(err){});
+			fs.writeFileSync(pathPlugins + '/components/component-'+componentName+'/config.json', JSON.stringify(componentConfig,null,4),function(err){});
+			fs.writeFileSync(pathPlugins + '/components/component-'+componentName+'/main.scss', componentCSS ,function(err){});
+			fs.writeFileSync(pathPlugins + '/components/component-'+componentName+'/main.js', componentJS ,function(err){});
+			
+			res.status(200).send();
+		
+		}
+		catch(e){
+			console.log(e);
+			//Si ocurre algun error borramos la carpeta del componente si existe	
+			if(fs.existsSync(pathPlugins + '/components/component-' + componentName)){
+				rimraf(pathPlugins + '/components/component-' + componentName,function () {
+					res.status(200).send();
+				});				
+			}
+			//Si ocurre algun error borramos la referencia al componente
+			if(fs.existsSync(pathPlugins + '/components/include_components.pug')){
+				var include = fs.readFileSync(pathPlugins + '/components/include_components.pug').toString() + '\n';
+				include = include.replace("include ../components/component-"+componentName+"/view.pug","");
+				fs.writeFileSync(pathPlugins + '/components/include_components.pug',include,function(err){});
+			};
+
+			res.status(200).send(
+				{
+					"error":{
+						"code":"412",
+						"statusCode":"COMPONENT_CREATE_ERROR"
+					}
+				}
+			)
+		};
+
+	});
+
+	app.post('/site/:id/component/edit-created', function (req, res) {
+		try{
+			var componentName = req.body.name;
+			var componentConfig = {"config":req.body.config} || JSON.parse('{"config":[]}');
+			var componentView = req.body.componentView || 'div';
+			var componentJS = req.body.componentJS || '';
+			var componentCSS = req.body.componentCSS || '';
+
+			if(!fs.existsSync(pathPlugins + '/components/' + componentName)){
+				res.status(412).send({
+					"code":"412",
+					"statusCode":"COMPONENT_EDIT_ERROR_NOT_EXISTS"
+				})
+			}
+
+			//Se hace una donble conversion para compobar algunos errores de formato, si da error lo capturara el try catch
+			var componentViewCheck = pug.render(componentView, {});
+			componentViewCheck = html2pug(componentViewCheck, { tabs: true, fragment:true})	
+
+			var view ="";
+
+			console.log(componentView);
+
+			componentView.split('\n').forEach(function(line){
+				line = line.replace(/\s+$/,"");
+				view += line + "\n";
+			});
+
+			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/view.pug',view,function(err){});
+			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/config.json', JSON.stringify(componentConfig,null,4),function(err){});
+			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/main.scss', componentCSS ,function(err){});
+			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/main.js', componentJS ,function(err){});
+			
+			execGulpTask('gulp deploy --env dev & gulp removeTMP', res);
+		
+		}
+		catch(e){
+			//Si ocurre algun error borramos la carpeta del componente si existe	
+			if(fs.existsSync(pathPlugins + '/components/component-' + componentName)){
+				rimraf(pathPlugins + '/components/component-' + componentName,function () {
+					res.status(200).send();
+				});				
+			}
+			//Si ocurre algun error borramos la referencia al componente
+			if(fs.existsSync(pathPlugins + '/components/include_components.pug')){
+				var include = fs.readFileSync(pathPlugins + '/components/include_components.pug').toString() + '\n';
+				include = include.replace("include ../components/component-"+componentName+"/view.pug","");
+				fs.writeFileSync(pathPlugins + '/components/include_components.pug',include,function(err){});
+			};
+
+			res.status(200).send(
+				{
+					"error":{
+						"code":"412",
+						"statusCode":"COMPONENT_EDIT_ERROR"
+					}
+				}
+			)
+		};
+	});
+
+	app.get('/site/:id/component/detail-created/:componentName', function (req, res) {
+		var componentName = req.params.componentName;
+		var content = getComponentConfig(componentName);
+		var config = getComponentsGeneralConfig();
+		var componentView = fs.readFileSync(pathPlugins + '/components/'+componentName+'/view.pug').toString();
+		var componentCSS = fs.readFileSync(pathPlugins + '/components/'+componentName+'/main.scss').toString();
+		var componentJS = fs.readFileSync(pathPlugins + '/components/'+componentName+'/main.js').toString();
+
+		res.status(200).send(Object.assign({"name":componentName,"componentView":componentView,"componentCSS":componentCSS,"componentJS":componentJS},config,{"content":content}));
+
+	});
+
+	app.post('/site/:id/component/delete-created', function (req, res) {
+
+		var componentName = req.body.name;
+
+		if(fs.existsSync(pathPlugins + '/components/' + componentName)){
+
+			if(!componentInUse(componentName)){
+
+				var includeComponents = fs.readFileSync(pathPlugins + '/components/include_components.pug').toString();
+				includeComponents = includeComponents.replace('include ../components/'+componentName+'/view.pug','');
+				fs.writeFileSync(pathPlugins + '/components/include_components.pug', includeComponents,function(err){});
+
+				rimraf(pathPlugins + '/components/' + componentName,function () {
+					console.log("ELIMINADO COMPONENTE -> " + componentName);
+					res.status(200).send();
+				});
+
+			}else{
+				res.status(412).send({
+					"code":"412",
+					"statusCode":"COMPONENT_DELETE_ERROR_IN_USE"
+				})				
+			}
+		}
+		else{
+			res.status(412).send({
+				"code":"412",
+				"statusCode":"COMPONENT_DELETE_ERROR_NOT_EXIST"
+			})			
+		}
+
+	});
+
+
+	app.get('/site/:id/component/generalConfig', function (req, res) {
+		var config = getComponentsGeneralConfig();
+		return res.status(200).send(config);
+		
+	});		
+
 	app.listen(8082,function(req, res){
   		console.log('API running on 8082!');
 	});
@@ -601,6 +803,33 @@ gulp.task('apiServer', function() {
 			)
 		};			
 	});
+
+	app.get('/component/list/detail', function (req, res) {
+		try{
+			var dirComponentsBundles = getDirectories(pathBundles + '/components/');
+			var dirComponentsPlugins = getDirectories(pathPlugins + '/components/');
+			
+			var components = []
+
+			dirComponentsBundles.forEach(function(component){
+				components.push({"name":component,"editable":"false"});
+			});
+
+			dirComponentsPlugins.forEach(function(component){
+				components.push({"name":component,"editable":"true"});
+			});
+
+			res.send(components);
+		}
+		catch(e){
+			res.status(412).send(
+				{
+					"code":"412",
+					"statusCode":"COMPONENT_LIST_ERROR"
+				}
+			)
+		};			
+	});	
 
 	app.post('/site/:idSite/page/:idPage/component/detail', function (req, res) {
 		try{
@@ -750,18 +979,13 @@ gulp.task('apiServer', function() {
 			fs.mkdirSync(pathPlugins + '/sites/' + siteName);
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/build.json', JSON.stringify(siteTheme,null,4),function(err){});
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/sitemap.json', JSON.stringify(sitemap,null,4),function(err){});
-			fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale');	
-			fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/es');	
-			fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/en');	
-			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/'+siteName+'.json', JSON.stringify(JSON.parse(fs.readFileSync(defaultSiteURL + '/locale/es/'+defaultSite+'.json')),null,4),function(err){});
-			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/'+siteName+'.json', JSON.stringify(JSON.parse(fs.readFileSync(defaultSiteURL + '/locale/es/'+defaultSite+'.json')),null,4),function(err){});
-			
-			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/es/custom.json', {},function(err){});
-			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/locale/en/custom.json', {},function(err){});
+			fsextra.copy(defaultSiteURL + '/locale/', pathPlugins + '/sites/' + siteName+'/locale/',function(err){});
+			fsextra.copy(defaultSiteURL + '/content_manager/', pathPlugins + '/sites/' + siteName+'/content_manager/',function(err){});
 
 			deployPage('--env dev --site ' + siteName , res);
 		}
 		catch(e){
+			console.log(e);
 			res.status(412).send(
 				{
 					"code":"412",
@@ -1451,6 +1675,20 @@ function getComponentConfig(idComponent){
 	return config;
 }
 
+function getComponentsGeneralConfig(){
+	var config = {};
+
+	if(fs.existsSync(pathPlugins + '/components/config.json')){
+		config = JSON.parse(fs.readFileSync(pathPlugins + '/components/config.json'));
+	}	
+
+	else if(fs.existsSync(pathBundles + '/components/config.json')){
+		config = JSON.parse(fs.readFileSync(pathBundles + '/components/config.json'));
+	}
+	
+	return config;	
+}
+
 function getURLSite(site){
 	
 	if(site == defaultSite){
@@ -1544,4 +1782,22 @@ function deleteContent(site,contentId,contentType){
 			console.log("ELIMINADO CONTENIDO -> " + contentId);
 		});
 	}
+}
+
+//Busca si un componente esta en uso en algun site y devuelve true o false si lo encuentra o no
+function componentInUse(componentName){
+
+	var componentName = componentName;
+	var sitesList = getDirectories(pathBundles + '/sites/').concat(getDirectories(pathPlugins + '/sites/'));
+
+	for(var i=0; i < sitesList.length; i++){
+		var siteURL = getURLSite(sitesList[i]);
+		var currentSitemap = fs.readFileSync(siteURL + '/sitemap.json').toString();
+		
+		if(currentSitemap.indexOf(componentName) >= 0){
+			return true;
+		}
+
+	}
+	return false;
 }

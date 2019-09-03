@@ -16,9 +16,12 @@ $(document).ready(function(){
 	//BUG - Cuando Cierras un modal y abres otro a la vez el scroll de la pantalla desaparece
 	$('.modal').on('shown.bs.modal',function(event){
 		$('body').addClass('modal-open');
-
 		initSpecialTextareas($(this));		
 	});
+
+	$('body').on('shown.bs.tab','[data-toggle="tab"]',function(event){
+		initSpecialTextareas($($(this).attr('href')));	
+	});	
 
 	$('#confirmDeleteComponent').on('show.bs.modal',function(event){
 		var component = $(event.relatedTarget).closest('.component'),
@@ -94,6 +97,33 @@ $(document).ready(function(){
 		$(this).find('[name="componentPosition"]').val(position);
 
 	});
+
+	$('#modal-created-edit .send').click(function(){
+		if(validateForm($(this).closest('form'))){
+			$(this).closest('.modal').modal('hide');
+			showError('','Modificando y desplegando componente, espere por favor...');
+		}	
+	});		
+
+	$('#modal-component-created-edit').on('show.bs.modal',function(event){
+		
+		var componentName = $(event.relatedTarget).data('component-name');
+
+		getData({
+			"service": apiDevelop + "/site/{idSite}/component/detail-created/" + componentName,
+			"method": "GET", "template": "#templateEditComponentCreated",
+			"target": "#edit-component-created-block", "callback": "dataComponentEditLoadedCallback"
+		});		
+
+	});	
+
+
+	$('#modal-component-created-delete').on('show.bs.modal',function(event){
+		var componentName = $(event.relatedTarget).data('component-name');
+		$(this).find('[name="name"]').val(componentName);
+	});
+
+
 	
 	$(document).on('click','[data-block-type="array"] [data-array-id] .addItem',function(){
 		var array_item = $(this).closest('[data-array-id]').clone(true);
@@ -440,6 +470,16 @@ function moveComponent(el){
 	});
 }
 
+function createComponent(data){
+	$('.modal').modal('hide');
+	dataList($('#ToolsComponentList'));
+}
+
+function deleteComponentCreated(data){
+	$('.modal').modal('hide');
+	dataList($('#ToolsComponentList'));
+}
+
 function reloadArrayIndex(el){
 	el.find('[data-array-id]').each(function(index,el){
 		$(this).attr('data-array-id',index);
@@ -630,7 +670,22 @@ function dataContentLoadedCallback(data){
 
 function dataContentTypeLoadedCallback(data){
 	initSpecialTextareas($('#modal-contentType-edit'))
-	dataEvent($('#form-edit-contentType #edit-contentType-block [data-event]'));
+	$('#form-edit-contentType #edit-contentType-block [data-event]').each(function(){
+		dataEvent($(this));
+	});
+};
+
+function dataComponentEditLoadedCallback(data){
+	initSpecialTextareas($('#modal-component-created-edit'));
+	$('#form-component-created-edit #edit-component-created-block [data-event]').each(function(){
+		dataEvent($(this));
+	});	
+}
+
+function componentCreateConfigCallback(data){
+	$('#form-component-create #componentViewConfig [data-event]').each(function(){
+		dataEvent($(this));
+	});		
 }
 
 function deleteContentCallback(data){
@@ -639,7 +694,9 @@ function deleteContentCallback(data){
 }
 
 function dataAddContentTypeCallback(data){
-	dataEvent($('#form-add-contentType #contentTypeConfig [data-event]'));
+	$('#form-add-contentType #contentTypeConfig [data-event]').each(function(){
+		dataEvent($(this));
+	})	
 }
 
 function addContentTypeCallback(){
@@ -692,5 +749,38 @@ function initSpecialTextareas(el){
 			    el.CodeMirror.refresh();
 			});
 		}
-	});		
+	});
+	el.find('textarea.codeCSS').each(function(){
+		var id = $(this).attr('id');
+		if(!$(this).next().hasClass('CodeMirror')){
+			var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+	        	mode: "text/css",
+          		extraKeys: {"Ctrl-Space": "autocomplete"},
+	        	lineNumbers: true,
+	        	theme:"base16-dark"
+	     	 })
+		}
+		else{
+			$('.CodeMirror').each(function(i, el){
+			    el.CodeMirror.refresh();
+			});
+		}
+	});
+	el.find('textarea.codeJS').each(function(){
+		var id = $(this).attr('id');
+		if(!$(this).next().hasClass('CodeMirror')){
+			var editor = CodeMirror.fromTextArea(document.getElementById(id), {
+	        	mode: "text/javascript",
+          		extraKeys: {"Ctrl-Space": "autocomplete"},
+	        	lineNumbers: true,
+	        	theme:"base16-dark"
+	     	 })
+		}
+		else{
+			$('.CodeMirror').each(function(i, el){
+			    el.CodeMirror.refresh();
+			});
+		}
+	});
 }
+

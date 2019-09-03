@@ -39,9 +39,7 @@ var argv_contentID = argv.contentID !== undefined ? argv.contentID : '';
 
 var developMode = argv_env == 'dev' ? true : false;
 
-var src_site_deploy = argv_site + '/**' || '**';
-
-
+var src_site_deploy = argv_site ? argv_site + '/**' : '**';
 
 var	pathPublic = argv_env == 'dev' ? 'app/development' : 'app/public',
 	pathDevelopment = 'app/development',
@@ -69,7 +67,7 @@ var path = {
 	localePluginsComponents: [pathPlugins + '/components/**/locale/**/*.*'],
 
 	pugBundlesFragments: [pathBundles + '/fragments/**/**/**/*.*'],
-	pugPluginsFragments: [pathPlugins + '/fragments/**/**/**/*.*'],	
+	pugPluginsFragments: [pathPlugins + '/fragments/**/**/**/*.*'],
 	
 };
 

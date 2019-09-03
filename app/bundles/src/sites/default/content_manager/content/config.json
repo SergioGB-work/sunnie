@@ -2,8 +2,14 @@
 	"config":[
 		{
 			"label":"HTML Content",
-			"type":"textarea",
-			"name":"htmlContent"
+			"type":"richHTML",
+			"name":"htmlContent",
+			"selectValues": [
+                {
+                    "label": "",
+                    "value": ""
+                }
+            ]
 		}			
 	]
 }

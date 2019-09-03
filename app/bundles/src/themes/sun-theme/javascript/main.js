@@ -467,6 +467,9 @@ function getData(el) {
 					message = code = data.responseJSON.code;
 					dataMessage = data.responseJSON.data || '';
 				}
+
+				$('.modal').modal('hide');
+
 				error(statusCode, code, message,dataMessage);
 			}
 		});
@@ -814,6 +817,86 @@ function error(statusCode, code, message, dataMessage) {
 		case 500:
 			content = '500:' + message;
 			break;
+
+		case 'COMPONENT_CREATE_ERROR':
+			content = 'Se ha producido un error al crear el componente. Comprueba que el formato PUG de la vista es correcto e inténtalo de nuevo';
+			break;
+
+		case 'COMPONENT_CREATE_ERROR_NAME_IN_USE':
+			content = 'Ya existe un componente con ese nombre. Inténtalo de nuevo';
+			break;		
+
+		case 'COMPONENT_EDIT_ERROR':
+			content = 'Se ha producido un error al editar el componente. Comprueba que el formato PUG de la vista es correcto e inténtalo de nuevo';
+			break;
+
+		case 'COMPONENT_EDIT_ERROR_NOT_EXISTS':
+			content = 'El componente que estás intentando editar no existe. Inténtalo de nuevo';
+			break;	
+
+		case 'DELETE_COMPONENT_ERROR':
+			content = 'Se ha producido un error al intentar eliminar el componente de la página. Inténtalo de nuevo';
+			break;
+
+		case 'COMPONENT_DELETE_ERROR_IN_USE':
+			content = 'No ha sido posible eliminar el componente ya que se encuentra en uso por algún site.';
+			break;		
+
+		case 'COMPONENT_DELETE_ERROR_NOT_EXIST':
+			content = 'El componente que estás intentando eliminar no existe. Inténtalo de nuevo';
+			break;
+
+		case 'LAYOUT_LIST_ERROR':
+			content = 'Se ha producido un error al intentar obtener el listado de layouts. Inténtalo de nuevo.';
+			break;
+
+		case 'LAYOUT_DETAIL_ERROR':
+			content = 'Se ha producido un error al intentar obtener el detalle de la layout. Inténtalo de nuevo.';
+			break;
+
+		case 'COMPONENT_LIST_ERROR':
+			content = 'Se ha producido un error al intentar obtener el listado de componentes. Inténtalo de nuevo.';
+			break;
+
+		case 'COMPONENT_DETAIL_ERROR':
+			content = 'Se ha producido un error al intentar obtener el detalle del componente. Inténtalo de nuevo.';
+			break;
+
+		case 'COMPONENT_CONFIG_ERROR':
+			content = 'Se ha producido un error al intentar obtener la configuración del componente. Inténtalo de nuevo.';
+			break;
+
+		case 'THEME_LIST_ERROR':
+			content = 'Se ha producido un error al intentar obtener el listado de temas de apariencia. Inténtalo de nuevo.';
+			break;		
+
+		case 'SITE_LIST_ERROR':
+			content = 'Se ha producido un error al intentar obtener el listado de sites. Inténtalo de nuevo.';
+			break;
+
+		case 'PUBLISH_SITE_ERROR':
+			content = 'Se ha producido un error al intentar publicar el site. Inténtalo de nuevo.';
+			break;
+
+		case 'ADD_SITE_ERROR':
+			content = 'Se ha producido un error al intentar crear el site. Inténtalo de nuevo.';
+			break;
+
+		case 'EDIT_SITE_ERROR':
+			content = 'Se ha producido un error al intentar editar el site. Inténtalo de nuevo.';
+			break;
+
+		case 'DELETE_SITE_ERROR':
+			content = 'Se ha producido un error al intentar eliminar el site. Inténtalo de nuevo.';
+			break;				
+
+		case 'SITE_DETAIL_ERROR':
+			content = 'Se ha producido un error al intentar obtener los datos del site. Inténtalo de nuevo.';
+			break;
+
+		case 'SITE_LOAD_LOCALE_LIST_ERROR':
+			content = 'Se ha producido un error al intentar obtener el listado de variables de traducción del site. Inténtalo de nuevo.';
+			break;			
 
 		default:
 			content = statusCode + ':${{ default.unknownError }}$ .'+ message;
@@ -1213,6 +1296,9 @@ function dataEvent(el){
 			}
 
 		});
+	}
+	if(el.val() == valueDispatchAction){
+		el.change();
 	}
 }
 
