@@ -7,7 +7,23 @@ const html2pug = require('html2pug');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
-module.exports = (app) => {		
+module.exports = (app) => {
+
+
+	/**
+	* Service to add a component to a page
+	* @param {string} - idSite - Name of the site
+	* @param {string} - idPage - ID of the page
+	* @param {string} - layoutColumn - Name of the column where the component will add
+	* @param {number} - layoutColumnPosition - Position number where the component will add inside the layout column
+	* @param {string} - name - Name of th component to add
+	* @param {json} - content - Content of the component. The fields are configured in config.json
+	* @param {string} - title - Title of the component
+	* @param {string} - showTitle - If 'true' the component will show the title text
+	* @param {string} - full - If 'true' the component will show filling the full width of the column
+	* @param {string} - classes - String of additionals classes to add to the component
+	* @param {string} - newComponent - If 'true' the component will show a default message until it will be configured
+	*/
 	app.post('/site/:idSite/page/:idPage/component/add', function (req, res) {
 		//Configuracion de colocacion
 		try{
@@ -25,9 +41,6 @@ module.exports = (app) => {
 			var componentFull = req.body.full || 'false';
 			var componentClasses = req.body.classes || '';
 			var componentNew = req.body.newComponent || 'false';
-
-
-
 			var configComponent = functions.getComponentConfig(componentName);	
 
 			componentContent = functions.buildDefaultComponentData(configComponent.config, componentContent)
@@ -80,6 +93,20 @@ module.exports = (app) => {
 
 	});
 
+	/**
+	* Service to edit a component added to a page
+	* @param {string} - idSite - Name of the site
+	* @param {string} - idPage - ID of the page
+	* @param {string} - layoutColumn - Name of the column where the component will add
+	* @param {number} - layoutColumnPosition - Position number where the component will add inside the layout column
+	* @param {string} - name - Name of th component to add
+	* @param {json} - content - Content of the component. The fields are configured in config.json
+	* @param {string} - title - Title of the component
+	* @param {string} - showTitle - If 'true' the component will show the title text
+	* @param {string} - full - If 'true' the component will show filling the full width of the column
+	* @param {string} - classes - String of additionals classes to add to the component
+	* @param {string} - newComponent - If 'true' the component will show a default message until it will be configured
+	*/
 	app.post('/site/:idSite/page/:idPage/component/edit', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -149,6 +176,13 @@ module.exports = (app) => {
 		};	
 	});
 
+	/**
+	* Service to delete a component added to a page
+	* @param {string} - idSite - Name of the site
+	* @param {string} - idPage - ID of the page
+	* @param {string} - layoutColumn - Name of the column where the component will add
+	* @param {number} - layoutColumnPosition - Position number where the component will add inside the layout column
+	*/
 	app.post('/site/:idSite/page/:idPage/component/delete', function (req, res) {
 		try{
 			//Configuracion de colocacion
@@ -190,6 +224,15 @@ module.exports = (app) => {
 		};	
 	});
 
+	/**
+	* Service to move the position of a component added to a page
+	* @param {string} - idSite - Name of the site
+	* @param {string} - idPage - ID of the page
+	* @param {string} - layoutColumn - Name of the new column where the component will add
+	* @param {string} - oldLayoutColumn - Name of the last column where the component was
+	* @param {number} - layoutColumnPosition - New position number where the component will add inside the layout column
+	* @param {number} - oldLayoutColumnPosition - Last position number where the component was added inside the layout column
+	*/
 	app.post('/site/:idSite/page/:idPage/component/move', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -244,7 +287,15 @@ module.exports = (app) => {
 		};			
 	});
 
-
+	/**
+	* Service to create a new component. Later, the user will can add it to the page
+	* @param {string} - idSite - Name of the site
+	* @param {string} - name - Name of the new component
+	* @param {string} - config - Config of the new component
+	* @param {number} - componentView - View typed in PUG of the component
+	* @param {number} - componentJS - Javascript code of the component
+	* @param {number} - componentCSS - CSS code of the component
+	*/
 	app.post('/site/:id/component/create', function (req, res) {
 		try{
 			var componentName = req.body.name;
@@ -330,6 +381,15 @@ module.exports = (app) => {
 
 	});
 
+	/**
+	* Service to edit a created component. Only the components allocated in plugins will can be edited
+	* @param {string} - idSite - Name of the site
+	* @param {string} - name - Name of the component
+	* @param {string} - config - Config of the component
+	* @param {number} - componentView - View typed in PUG of the component
+	* @param {number} - componentJS - Javascript code of the component
+	* @param {number} - componentCSS - CSS code of the component
+	*/
 	app.post('/site/:id/component/edit-created', function (req, res) {
 		try{
 			var componentName = req.body.name;
@@ -390,6 +450,12 @@ module.exports = (app) => {
 		};
 	});
 
+	/**
+	* GET Service to obtain detail of a created component. Only the components allocated in plugins will can be obtained
+	* @param {string} - idSite - Name of the site
+	* @param {string} - componentName - Name of the component
+	* @return {json} JSON with the detail of the component
+	*/
 	app.get('/site/:id/component/detail-created/:componentName', function (req, res) {
 		var componentName = req.params.componentName;
 		var content = functions.getComponentConfig(componentName);
@@ -402,6 +468,11 @@ module.exports = (app) => {
 
 	});
 
+	/**
+	* Service to delete a created component. You can only delete components that it is not in used by any site
+	* @param {string} - idSite - Name of the site
+	* @param {string} - name - Name of the component
+	*/
 	app.post('/site/:id/component/delete-created', function (req, res) {
 
 		var componentName = req.body.name;
@@ -436,12 +507,21 @@ module.exports = (app) => {
 
 	});
 
-
+	/**
+	* GET Service to obtain the general config of the components
+	* @param {string} - idSite - Name of the site
+	* @return {json} JSON with the general config of the components
+	*/
 	app.get('/site/:id/component/generalConfig', function (req, res) {
 		var config = functions.getComponentsGeneralConfig();
 		return res.status(200).send(config);
 		
 	});
+
+	/**
+	* GET service to obtain a list of components
+	* @return {array} ARRAY with a list of components ['component1','component2',...]
+	*/
 	app.get('/component/list', function (req, res) {
 		try{
 			var dirComponentsBundles = functions.getDirectories(pathBundles + '/components/');
@@ -459,6 +539,10 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* GET service to obtain a list of components with their details
+	* @return {array} ARRAY of jsons with the components and their details
+	*/
 	app.get('/component/list/detail', function (req, res) {
 		try{
 			var dirComponentsBundles = functions.getDirectories(pathBundles + '/components/');
@@ -487,6 +571,14 @@ module.exports = (app) => {
 		};			
 	});	
 
+	/**
+	* GET service to obtain the detail of a component added to a page in a specific position
+	* @param {string} - idSite - Name of the site
+	* @param {string} - idPage - Name of the page
+	* @param {string} - layoutColumn - Name of the column where the component is
+	* @param {string} - componentPosition - Position number where the component is
+	* @return {array} ARRAY of jsons with the components and their details
+	*/
 	app.post('/site/:idSite/page/:idPage/component/detail', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -513,6 +605,11 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* GET service to obtain the config of a specific component
+	* @param {string} - idComponent - Name of the component
+	* @return {json} JSON with the component config
+	*/
 	app.get('/component/config/:idComponent', function (req, res) {
 		try{
 			var idComponent = req.params.idComponent;

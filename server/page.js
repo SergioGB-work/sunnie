@@ -4,9 +4,22 @@ const functions = require('./functions.js');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
-module.exports = (app) => {	
-	app.post('/site/:idSite/page/add', function (req, res) {
+module.exports = (app) => {
 
+	/**
+	* Service to create a new page of a specific site
+	* @param {string} - idSite - Name of the site where the page will be created
+	* @param {number} - position - Position number where the page will be created inside the nav tree
+	* @param {string} - parentPosition - String of index of the page parent. "1,0,3"
+	* @param {string} - name - Name of the page
+	* @param {string} - url - URL of the page
+	* @param {string} - title - Meta title of the page
+	* @param {string} - description - Meta description of the page
+	* @param {string} - keywords - Meta keywords of the page
+	* @param {string} - layout - Name of the layout used in the page
+	* @param {string} - hidden - If 'true' the page will not be show in site navigation
+	*/
+	app.post('/site/:idSite/page/add', function (req, res) {
 		try{
 			var site = req.params.idSite;
 			var siteURL = functions.getURLSite(site);
@@ -77,7 +90,20 @@ module.exports = (app) => {
 		};
 	});
 
-	//FALTA DEFINIR LOS PARAMETROS DE EDICION
+	/**
+	* Service to modifify an existing page of a specific site
+	* @param {string} - id - Name of the page to be modified
+	* @param {string} - idSite - Name of the site of the page
+	* @param {number} - position - Position number where the page will be created inside the nav tree
+	* @param {string} - parentPosition - String of index of the page parent. "1,0,3"
+	* @param {string} - name - Name of the page
+	* @param {string} - url - URL of the page
+	* @param {string} - title - Meta title of the page
+	* @param {string} - description - Meta description of the page
+	* @param {string} - keywords - Meta keywords of the page
+	* @param {string} - layout - Name of the layout used in the page
+	* @param {string} - hidden - If 'true' the page will not be show in site navigation
+	*/
 	app.post('/site/:idSite/page/edit/:id', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -191,7 +217,11 @@ module.exports = (app) => {
 		};	
 	});
 
-	//TERMINADO A FALTA DE GUARDAR EN EL FICHERO FINAL
+	/**
+	* Service to delete an existing page of a specific site
+	* @param {string} - id - Name of the page to be deleted
+	* @param {string} - idSite - Name of the site of the page
+	*/
 	app.post('/site/:idSite/page/delete/:id', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -226,6 +256,12 @@ module.exports = (app) => {
 		};	
 	});
 
+	/**
+	* Service to get the detail of an existing page of a specific site
+	* @param {string} - id - Name of the page
+	* @param {string} - idSite - Name of the site of the page
+	* @return {json} JSON with the page detail
+	*/
 	app.get('/site/:idSite/page/detail/:id', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -248,6 +284,11 @@ module.exports = (app) => {
 		};	
 	});	
 
+	/**
+	* Service to publish an existing page of a specific site. The page will be publish from dev enviroment to public enviroment
+	* @param {string} - idPage - Name of the page to be modified
+	* @param {string} - idSite - Name of the site of the page
+	*/
 	app.post('/site/:idSite/page/:idPage/publish', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -264,6 +305,11 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* GET service to obtain the pages list
+	* @param {string} - idSite - Name of the site
+	* @return {array} Array of pages availables in the site ['page11','page2',...]
+	*/
 	app.get('/site/:idSite/page/list', function (req, res) {
 			var site = req.params.idSite;
 			var siteURL = functions.getURLSite(site);

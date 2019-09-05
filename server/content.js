@@ -6,6 +6,12 @@ const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
 module.exports = (app) => {
+
+	/**
+	* GET service to obtain the list of content types of a site
+	* @param {string} - idSite - Name of the site
+	* @return {array} ARRAY with the content types names
+	*/	
 	app.get('/site/:id/content/contentTypes', function (req, res) {
 		
 		var site = req.params.id,
@@ -26,6 +32,13 @@ module.exports = (app) => {
 
 	});
 
+	/**
+	* GET service to obtain the detail of a content
+	* @param {string} - idSite - Name of the site
+	* @param {string} - contentType - Name of the contentType of the content
+	* @param {string} - idContent - ID of the content
+	* @return {json} JSON with the detail of the content
+	*/	
 	app.get('/site/:id/content/detail/:contentType/:idContent', function (req, res) {
 		
 		var site = req.params.id,
@@ -53,6 +66,12 @@ module.exports = (app) => {
 
 	});
 
+	/**
+	* GET service to obtain the detail of a content type
+	* @param {string} - idSite - Name of the site
+	* @param {string} - contentType - Name of the contentType
+	* @return {json} JSON with the detail of the content type
+	*/
 	app.get('/site/:id/content/detail/:contentType', function (req, res) {
 		
 		var site = req.params.id,
@@ -64,6 +83,12 @@ module.exports = (app) => {
 
 	});	
 
+	/**
+	* GET service to obtain a list of contents for a component, checking the content which the component is using at this moment
+	* @param {string} - id - Name of the site
+	* @param {string} - idComponent - ID of the component
+	* @return {json} JSON with a list of contents
+	*/
 	app.get('/site/:id/contents/:idComponent', function (req, res) {
 		
 		var site = req.params.id;
@@ -98,6 +123,11 @@ module.exports = (app) => {
 		return res.status(200).send(contents);
 	});
 
+	/**
+	* GET service to obtain a list of contents
+	* @param {string} - id - Name of the site
+	* @return {json} JSON with a list of contents
+	*/
 	app.get('/site/:id/contents', function (req, res) {
 		
 		var site = req.params.id;
@@ -128,6 +158,12 @@ module.exports = (app) => {
 		return res.status(200).send(contents);
 	});
 
+	/**
+	* Service to create a new content
+	* @param {string} - id - Name of the site
+	* @param {string} - contentType - ContentType of the content
+	* @param {number} - name - Name of the content
+	*/
 	app.post('/site/:id/content/add', function (req, res) {
 
 		var site = req.params.id;
@@ -166,7 +202,12 @@ module.exports = (app) => {
 		functions.buildContentTemplate('--site ' + site + ' --contentType ' + contentType + ' --contentID ' + id , res)
 	});
 
-
+	/**
+	* Service to edit a content
+	* @param {string} - id - Name of the site
+	* @param {string} - contentType - ContentType of the content
+	* @param {number} - name - Name of the content
+	*/
 	app.post('/site/:id/content/edit', function (req, res) {
 		if(req.body.id != 'empty_content'){
 			var site = req.params.id;
@@ -197,9 +238,14 @@ module.exports = (app) => {
 		};
 	});
 
-	//Eliminar contenido
+	/**
+	* Service to delete a content
+	* @param {string} - id - Name of the site
+	* @param {string} - id - ID of the content
+	* @param {number} - contentType - Name of the content type
+	*/
 	app.post('/site/:id/content/delete', function (req, res) {
-		if(req.body.idContent != 'empty_content'){
+		if(req.body.id != 'empty_content'){
 			var site = req.params.id;
 			var contentId = req.body.id;
 			var contentType = req.body.contentType;
@@ -208,6 +254,14 @@ module.exports = (app) => {
 		}
 	});
 
+
+	/**
+	* Service to add a content type
+	* @param {string} - id - Name of the site
+	* @param {string} - name - Name of the content type
+	* @param {string} - template - Template code of the content type
+	* @param {json} - config - JSON with the config of the content type
+	*/
 	app.post('/site/:id/content/contentType/add', function (req, res) {
 		var site = req.params.id;
 		var siteURL = functions.getURLSite(site);
@@ -234,6 +288,13 @@ module.exports = (app) => {
 
 	});
 
+	/**
+	* Service to modify a content type
+	* @param {string} - id - Name of the site
+	* @param {string} - name - Name of the content type
+	* @param {string} - template - Template code of the content type
+	* @param {json} - config - JSON with the config of the content type
+	*/
 	app.post('/site/:id/content/contentType/edit', function (req, res) {
 		var site = req.params.id;
 		var siteURL = functions.getURLSite(site);
@@ -248,6 +309,11 @@ module.exports = (app) => {
 		
 	});
 
+	/**
+	* Service to delete a content type, including his contents. If a component use a content that belongs to content type, his content is modified to default content and content type
+	* @param {string} - id - Name of the site
+	* @param {string} - contentTypeName - Name of the content type
+	*/
 	app.post('/site/:id/content/contentType/delete/', function (req, res) {
 		var site = req.params.id;
 		var siteURL = functions.getURLSite(site);
@@ -259,7 +325,6 @@ module.exports = (app) => {
 		fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
 		//Borramos las referencias a los contenidos asociados al tipo de contenido
-
 		if(fs.existsSync(siteURL + '/content_manager/' + contentTypeName)){
 			dirContentTypeSite = fs.readdirSync(siteURL + '/content_manager/' + contentTypeName);
 		}
@@ -284,6 +349,12 @@ module.exports = (app) => {
 		
 	});	
 
+	/**
+	* GET service to obtain the detail of a content type
+	* @param {string} - id - Name of the site
+	* @param {string} - contentTypeName - Name of the content type
+	* @return {json} JSON with the detail of the content type
+	*/
 	app.get('/site/:id/content/contentType/detail/:contentTypeName', function (req, res) {
 		var site = req.params.id;
 		var siteURL = functions.getURLSite(site);
@@ -299,6 +370,11 @@ module.exports = (app) => {
 		
 	});
 
+	/**
+	* GET service to obtain the general config for all the content types
+	* @param {string} - id - Name of the site
+	* @return {json} JSON with the config of all content types
+	*/
 	app.get('/site/:id/content/contentType/config', function (req, res) {
 		var site = req.params.id;
 		var siteURL = functions.getURLSite(site);

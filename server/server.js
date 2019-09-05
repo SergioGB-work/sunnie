@@ -9,7 +9,7 @@ var gulp = require('gulp'),
 var defaultSite = 'default';
 
 
-/** API SERVER **/
+/** Task to launch Api Server running on localhost:8082 */
 gulp.task('apiServer', function() {
 	
 	app = express();

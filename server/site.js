@@ -8,6 +8,10 @@ const defaultSite = variables.defaultSite;
 
 module.exports = (app) => {
 
+	/**
+	* Service to publish an existing site. The full site will be publish from dev enviroment to public enviroment
+	* @param {string} - idSite - Name of the site of the page
+	*/
 	app.post('/site/:idSite/publish', function (req, res) {
 		try{
 			var site = req.params.idSite;
@@ -24,6 +28,10 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* GET service to obtain the sites list
+	* @return {aray} Array of sites availables [{"name":"site1","url":"/site1"},{"name":"site2","url":"/site2"},...]
+	*/
 	app.get('/site/list', function (req, res) {
 		try{
 			var dirSitesBundles = fs.readdirSync('./app/bundles/src/sites/');
@@ -51,6 +59,13 @@ module.exports = (app) => {
 		};			
 	});	
 
+	/**
+	* Service to create a new site
+	* @param {string} - name - Name of the site
+	* @param {string} - url - URL of the site
+	* @param {string} - enableChatBot - If true, the develop chatbot assitant will be show in dev enviroment
+	* @param {string} - theme - Name of theme that the new site will use
+	*/
 	app.post('/site/add', function (req, res) {
 		try{
 			var siteName = req.body.name;
@@ -126,6 +141,11 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* Service to get the detail of an existing site
+	* @param {string} - id - Name of the site
+	* @return {json} JSON with the site detail
+	*/
 	app.get('/site/detail/:id', function (req, res) {
 		try{
 			var site = req.params.id;
@@ -144,6 +164,15 @@ module.exports = (app) => {
 			)
 		};		
 	});
+
+	/**
+	* Service to modify a site
+	* @param {string} - id - ID of the site
+	* @param {string} - name - Name of the site
+	* @param {string} - url - URL of the site
+	* @param {string} - enableChatBot - If true, the develop chatbot assitant will be show in dev enviroment
+	* @param {string} - theme - Name of theme that the site will use
+	*/	
 
 	app.post('/site/edit/:id', function (req, res) {
 		try{
@@ -199,6 +228,10 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* Service to delete an existing site
+	* @param {string} - id - ID of the site to be deleted
+	*/
 	app.post('/site/delete/:id', function (req, res) {
 		try{	
 			var site = req.params.id;
@@ -226,6 +259,11 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* GET service to obtain the var locales of the site
+	* @param {string} - id - ID of the site
+	* @return {json} JSON with the site detail
+	*/
 	app.get('/site/:id/get-locales', function (req, res) {
 		try{
 			var site = req.params.id;
@@ -270,6 +308,11 @@ module.exports = (app) => {
 		};					
 	});
 
+	/**
+	* Service to update the var locales of the site
+	* @param {string} - id - ID of the site
+	* @param {json} - locales - JSON with the var locales and their tranlations
+	*/
 	app.post('/site/:id/update-locales', function (req, res) {
 
 		var site = req.params.id;

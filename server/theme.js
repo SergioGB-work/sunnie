@@ -2,6 +2,10 @@ const functions = require('./functions.js');
 
 module.exports = (app) => {	
 
+	/**
+	* GET service to obtain the themes list
+	* @return {array} Array of themes names availables ['theme1','theme2',...]
+	*/
 	app.get('/theme/list', function (req, res) {
 		try{
 			var dirThemesBundles = functions.getDirectories(pathBundles + '/themes/');

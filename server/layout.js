@@ -3,6 +3,10 @@ const functions = require('./functions.js');
 
 module.exports = (app) => {		
 
+	/**
+	* GET service to obtain the layouts list
+	* @return {array} Array of layouts names availables ['layout1','layout2',...]
+	*/
 	app.get('/layout/list', function (req, res) {
 		try{
 			var dirLayoutsBundles = fs.readdirSync('./app/bundles/src/layouts/');
@@ -19,6 +23,11 @@ module.exports = (app) => {
 		};			
 	});
 
+	/**
+	* GET service to obtain the layout detail.
+	* @param {string} id - Name of the layout to get the detail
+	* @return {json} JSON with the layout columns {"columns":['column1','column2',...]}
+	*/
 	app.get('/layout/detail/:id', function (req, res) {
 		try{
 			var idLayout = req.params.id;
