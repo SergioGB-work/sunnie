@@ -13,6 +13,9 @@ const sessionClient = new dialogflow.SessionsClient({
 });
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
+/**
+ * @module chatbot
+ */
 module.exports = (app) => {		
 	app.post('/send-message', function (req, res) {
 		var message = req.body.message;	

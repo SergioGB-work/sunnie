@@ -4,9 +4,13 @@ const functions = require('./functions.js');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
+/**
+ * @module page
+ */
 module.exports = (app) => {
 
 	/**
+	* @function
 	* Service to create a new page of a specific site
 	* @param {string} - idSite - Name of the site where the page will be created
 	* @param {number} - position - Position number where the page will be created inside the nav tree
@@ -91,6 +95,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to modifify an existing page of a specific site
 	* @param {string} - id - Name of the page to be modified
 	* @param {string} - idSite - Name of the site of the page
@@ -218,6 +223,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to delete an existing page of a specific site
 	* @param {string} - id - Name of the page to be deleted
 	* @param {string} - idSite - Name of the site of the page
@@ -257,6 +263,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to get the detail of an existing page of a specific site
 	* @param {string} - id - Name of the page
 	* @param {string} - idSite - Name of the site of the page
@@ -285,6 +292,7 @@ module.exports = (app) => {
 	});	
 
 	/**
+	* @function
 	* Service to publish an existing page of a specific site. The page will be publish from dev enviroment to public enviroment
 	* @param {string} - idPage - Name of the page to be modified
 	* @param {string} - idSite - Name of the site of the page
@@ -306,6 +314,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the pages list
 	* @param {string} - idSite - Name of the site
 	* @return {array} Array of pages availables in the site ['page11','page2',...]

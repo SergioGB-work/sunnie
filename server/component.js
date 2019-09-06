@@ -7,10 +7,14 @@ const html2pug = require('html2pug');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
+/**
+ * @module component
+ */
 module.exports = (app) => {
 
 
 	/**
+	* @function
 	* Service to add a component to a page
 	* @param {string} - idSite - Name of the site
 	* @param {string} - idPage - ID of the page
@@ -94,6 +98,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to edit a component added to a page
 	* @param {string} - idSite - Name of the site
 	* @param {string} - idPage - ID of the page
@@ -177,6 +182,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to delete a component added to a page
 	* @param {string} - idSite - Name of the site
 	* @param {string} - idPage - ID of the page
@@ -225,6 +231,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to move the position of a component added to a page
 	* @param {string} - idSite - Name of the site
 	* @param {string} - idPage - ID of the page
@@ -288,6 +295,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to create a new component. Later, the user will can add it to the page
 	* @param {string} - idSite - Name of the site
 	* @param {string} - name - Name of the new component
@@ -382,6 +390,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to edit a created component. Only the components allocated in plugins will can be edited
 	* @param {string} - idSite - Name of the site
 	* @param {string} - name - Name of the component
@@ -451,6 +460,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET Service to obtain detail of a created component. Only the components allocated in plugins will can be obtained
 	* @param {string} - idSite - Name of the site
 	* @param {string} - componentName - Name of the component
@@ -469,6 +479,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to delete a created component. You can only delete components that it is not in used by any site
 	* @param {string} - idSite - Name of the site
 	* @param {string} - name - Name of the component
@@ -508,6 +519,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET Service to obtain the general config of the components
 	* @param {string} - idSite - Name of the site
 	* @return {json} JSON with the general config of the components
@@ -519,6 +531,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain a list of components
 	* @return {array} ARRAY with a list of components ['component1','component2',...]
 	*/
@@ -540,6 +553,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain a list of components with their details
 	* @return {array} ARRAY of jsons with the components and their details
 	*/
@@ -572,6 +586,7 @@ module.exports = (app) => {
 	});	
 
 	/**
+	* @function
 	* GET service to obtain the detail of a component added to a page in a specific position
 	* @param {string} - idSite - Name of the site
 	* @param {string} - idPage - Name of the page
@@ -606,6 +621,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the config of a specific component
 	* @param {string} - idComponent - Name of the component
 	* @return {json} JSON with the component config

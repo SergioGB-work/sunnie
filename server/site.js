@@ -6,9 +6,14 @@ const rimraf = require("rimraf");
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
+/**
+ * @module site
+ */
+
 module.exports = (app) => {
 
 	/**
+	* @function
 	* Service to publish an existing site. The full site will be publish from dev enviroment to public enviroment
 	* @param {string} - idSite - Name of the site of the page
 	*/
@@ -29,6 +34,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the sites list
 	* @return {aray} Array of sites availables [{"name":"site1","url":"/site1"},{"name":"site2","url":"/site2"},...]
 	*/
@@ -60,6 +66,7 @@ module.exports = (app) => {
 	});	
 
 	/**
+	* @function
 	* Service to create a new site
 	* @param {string} - name - Name of the site
 	* @param {string} - url - URL of the site
@@ -142,6 +149,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to get the detail of an existing site
 	* @param {string} - id - Name of the site
 	* @return {json} JSON with the site detail
@@ -166,6 +174,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to modify a site
 	* @param {string} - id - ID of the site
 	* @param {string} - name - Name of the site
@@ -229,6 +238,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to delete an existing site
 	* @param {string} - id - ID of the site to be deleted
 	*/
@@ -260,6 +270,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the var locales of the site
 	* @param {string} - id - ID of the site
 	* @return {json} JSON with the site detail
@@ -309,6 +320,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to update the var locales of the site
 	* @param {string} - id - ID of the site
 	* @param {json} - locales - JSON with the var locales and their tranlations

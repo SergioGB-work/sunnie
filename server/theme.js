@@ -1,8 +1,13 @@
+/**
+ * @module theme
+ */
+
 const functions = require('./functions.js');
 
 module.exports = (app) => {	
 
 	/**
+	* @function
 	* GET service to obtain the themes list
 	* @return {array} Array of themes names availables ['theme1','theme2',...]
 	*/

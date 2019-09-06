@@ -5,9 +5,13 @@ const rimraf = require("rimraf");
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
+/**
+ * @module content
+ */
 module.exports = (app) => {
 
 	/**
+	* @function
 	* GET service to obtain the list of content types of a site
 	* @param {string} - idSite - Name of the site
 	* @return {array} ARRAY with the content types names
@@ -33,6 +37,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the detail of a content
 	* @param {string} - idSite - Name of the site
 	* @param {string} - contentType - Name of the contentType of the content
@@ -67,6 +72,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the detail of a content type
 	* @param {string} - idSite - Name of the site
 	* @param {string} - contentType - Name of the contentType
@@ -84,6 +90,7 @@ module.exports = (app) => {
 	});	
 
 	/**
+	* @function
 	* GET service to obtain a list of contents for a component, checking the content which the component is using at this moment
 	* @param {string} - id - Name of the site
 	* @param {string} - idComponent - ID of the component
@@ -124,6 +131,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain a list of contents
 	* @param {string} - id - Name of the site
 	* @return {json} JSON with a list of contents
@@ -159,6 +167,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to create a new content
 	* @param {string} - id - Name of the site
 	* @param {string} - contentType - ContentType of the content
@@ -203,6 +212,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to edit a content
 	* @param {string} - id - Name of the site
 	* @param {string} - contentType - ContentType of the content
@@ -239,6 +249,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to delete a content
 	* @param {string} - id - Name of the site
 	* @param {string} - id - ID of the content
@@ -256,6 +267,7 @@ module.exports = (app) => {
 
 
 	/**
+	* @function
 	* Service to add a content type
 	* @param {string} - id - Name of the site
 	* @param {string} - name - Name of the content type
@@ -289,6 +301,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to modify a content type
 	* @param {string} - id - Name of the site
 	* @param {string} - name - Name of the content type
@@ -310,6 +323,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* Service to delete a content type, including his contents. If a component use a content that belongs to content type, his content is modified to default content and content type
 	* @param {string} - id - Name of the site
 	* @param {string} - contentTypeName - Name of the content type
@@ -350,6 +364,7 @@ module.exports = (app) => {
 	});	
 
 	/**
+	* @function
 	* GET service to obtain the detail of a content type
 	* @param {string} - id - Name of the site
 	* @param {string} - contentTypeName - Name of the content type
@@ -371,6 +386,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the general config for all the content types
 	* @param {string} - id - Name of the site
 	* @return {json} JSON with the config of all content types

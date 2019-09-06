@@ -1,9 +1,13 @@
 const fs = require('fs');
 const functions = require('./functions.js');
 
+/**
+ * @module layout
+ */
 module.exports = (app) => {		
 
 	/**
+	* @function /layout/list
 	* GET service to obtain the layouts list
 	* @return {array} Array of layouts names availables ['layout1','layout2',...]
 	*/
@@ -24,6 +28,7 @@ module.exports = (app) => {
 	});
 
 	/**
+	* @function
 	* GET service to obtain the layout detail.
 	* @param {string} id - Name of the layout to get the detail
 	* @return {json} JSON with the layout columns {"columns":['column1','column2',...]}
