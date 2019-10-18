@@ -560,7 +560,8 @@ gulp.task('connectDev', function() {
 			else if((req.url.split('.').length) >=0 ){
 				
 			}							
-
+			console.log(req.url);
+			console.log(url);
 			var siteURL = rules[url[0] + folder] + '/' + url[1].split('?')[0];
 			res.sendFile(siteURL,{ root: pathModule.join(__dirname, './app/development/sites/') });
 		

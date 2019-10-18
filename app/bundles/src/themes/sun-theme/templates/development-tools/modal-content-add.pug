@@ -15,9 +15,9 @@ block modal-body
 			
 			div(class="form-group col-4")
 				+fragment('fragment-label',{"for":"contentTypeSelector", "text":"Tipo de Contenido"})
-				+fragment('fragment-select',{"class":"form-control", "id":"contentTypeSelector","name":"contentType", "required":"required", "dataAttributes":{"data-service-data":apiDevelopment + "/site/{idSite}/content/contentTypes", "data-method":"GET", "data-template":"#templateOptionsContentType", "data-target":"#form-add-content #contentTypeSelector"}})
+				+fragment('fragment-select',{"class":"form-control", "id":"contentTypeSelector","name":"contentType", "required":"required", "dataAttributes":{"data-service-data":apiDevelopment + "/site/{idSite}/content/contentTypes", "data-method":"GET", "data-template":"#templateOptionsContentType", "data-target":"#form-add-content #contentTypeSelector","data-event":"change","data-event-target":"#add-content-block", "data-event-action":"load-data"}})
 		
-		div(id="add-content-block")
+		div(id="add-content-block", data-service-data = apiDevelopment + "/site/{idSite}/content/detail/{contentType}/", data-method="GET", data-template="#templateAddContent",data-target="#add-content-block", data-callback="dataContentLoadedCallback", data-load="false")
 
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")

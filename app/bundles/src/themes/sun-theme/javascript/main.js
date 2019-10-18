@@ -1249,6 +1249,7 @@ function dataEvent(el){
 	var valueDispatchAction =  el.data('event-value') != '' && el.data('event-value') !== undefined ? el.data('event-value') : false;
 	var event =  el.data('event');
 	var currentEvent = el;
+	var name = el.attr('name');
 
 	if(event != ''){
 		el.on(event, function(){
@@ -1256,25 +1257,27 @@ function dataEvent(el){
 			if($(this).closest('[data-array-id]').length > 0 && targetEvent.closest('[data-array-id]').length > 0){
 				targetEvent = $(this).closest('[data-array-id]').find($(this).data('event-target'));
 			}
-
+			
 			switch(action){
-
+				
 				case 'load-data':
 					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
 						var value = $(this).val();
-						targetEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
-						targetEvent.data('aditional-data',{"value":value});
+						var nameKeyJSON = {}; 
+						nameKeyJSON[name] = value; 
+						targetEvent.data('service-data',targetEvent.attr('data-service-data').replace('{'+name+'}',value));
+						targetEvent.attr('data-aditional-data',JSON.stringify(nameKeyJSON));
+						targetEvent.data('aditional-data',nameKeyJSON);
 						dataList(targetEvent);
 					}
 					break;
 				
-
 				case 'submit':
 					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
 						targetEvent.closest('form').submit();
 					}
 					break;
-
+	
 				case 'show':
 					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
 						targetEvent.removeClass('d-none');
@@ -1303,53 +1306,65 @@ function dataEvent(el){
 }
 
 function dataParent(el){
-	var targetEvent = el.data('parent');
+	var targetEvent = $(el.data('parent'));
 	var action = el.data('parent-event-action');
 	var valueDispatchAction =  el.data('parent-event-value') != '' && el.data('parent-event-value')!== undefined ? el.data('parent-event-value') : false;
 	var parentEvent =  el.data('parent-event');
 	var currentEvent = el;
+	var name = $(targetEvent).attr('name');
+	var id = el.data('id');
 
 	if(parentEvent != ''){
-		$(targetEvent).on(parentEvent, function(){
+		targetEvent.on(parentEvent, function(){
+
+			if($(this).closest('[data-array-id]').length > 0){
+				currentEvent = $(this).closest('[data-array-id]').find('[data-id="'+el.data('id')+'"]');
+			}
+
 			switch(action){
 
 				case 'load-data':
-					if(!valueDispatchAction || valueDispatchAction == el.val()){
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
 						var value = el.val();
-						currentEvent.attr('data-aditional-data',JSON.stringify({"value":value}));
+						var nameKeyJSON= {};
+						nameKeyJSON[name] = value;
+						currentEvent.data('service-data',currentEvent.attr('data-service-data').replace('{'+name+'}',value));
+						currentEvent.attr('data-aditional-data',JSON.stringify(nameKeyJSON));
 						currentEvent.data('aditional-data',{"value":value});
 						dataList(currentEvent);
 					}
 					break;
 				
-
 				case 'submit':
-					if(!valueDispatchAction || valueDispatchAction == el.val()){
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
 						currentEvent.closest('form').submit();
 					}
 					break;
 
 				case 'show':
-
-					if(!valueDispatchAction || valueDispatchAction == el.val()){
-						currentEvent.show();
+					
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+						currentEvent.removeClass('d-none');;
 					}
 					else{
-						currentEvent.hide()
+						currentEvent.addClass('d-none');
 					}
 					
 					break;
 
 				case 'hide':
-					if(!valueDispatchAction || valueDispatchAction == el.val()){
-						currentEvent.hide();
+					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
+						currentEvent.addClass('d-none');
 					}
 					else{
-						currentEvent.show()
+						currentEvent.removeClass('d-none');
 					}
 					break;
 			}
 
 		});
-	}	
+	}
+	if(targetEvent.val() == valueDispatchAction){
+		targetEvent.change();
+	}
 }

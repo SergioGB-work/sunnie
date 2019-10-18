@@ -89,6 +89,25 @@ module.exports = (app) => {
 
 	});	
 
+
+	/**
+	* @function
+	* POST service to obtain the detail of a content type
+	* @param {string} - idSite - Name of the site
+	* @param {string} - contentType - Name of the contentType
+	* @return {json} JSON with the detail of the content type
+	*/
+	app.post('/site/:id/content/detail', function (req, res) {
+		
+		var site = req.params.id,
+			siteURL = functions.getURLSite(site),
+			contentType = req.body.contentType,
+			contentTypeConfig = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/config.json'));
+			
+		return res.status(200).send(contentTypeConfig);
+
+	});	
+
 	/**
 	* @function
 	* GET service to obtain a list of contents for a component, checking the content which the component is using at this moment

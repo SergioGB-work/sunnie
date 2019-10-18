@@ -82,7 +82,8 @@
 				{
 					"label":"Label",
 					"name":"label",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#label' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"id":"typeInputSelector",
@@ -150,33 +151,39 @@
 							"type":"text"
 						}						
 					],
-					"visibility":"hidden"
+					"visibility":"hidden",
+					"dataAttributesParent": "data-id='#selectValues' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='select'"
 				},
 				{
 					"label":"HTML Content",
 					"name":"htmlContent",
 					"type":"richHTML",
-					"visibility":"hidden"
+					"visibility":"hidden",
+					"dataAttributesParent": "data-id='#htmlContent' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='html'"
 				},
 				{
 					"label":"Name",
 					"name":"name",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#name' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Placeholder",
 					"name":"placeholder",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#placeholder' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Help text",
 					"name":"helpText",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#helptext' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},				
 				{
 					"label":"Default Value",
 					"name":"value",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#value' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},				
 				{
 					"label":"Required",
@@ -191,7 +198,8 @@
 							"label":"Si",
 							"value":"true"
 						}
-					]
+					],
+					"dataAttributesParent": "data-id='#required' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Input Size",
@@ -239,12 +247,14 @@
 				{
 					"label":"Regular Expression",
 					"name":"regExp",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#rexexp' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Data Service",
 					"name":"dataService",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#dataservice' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Data Method",
@@ -263,12 +273,14 @@
 							"label":"GET",
 							"value":"GET"
 						}				
-					]					
+					],
+					"dataAttributesParent": "data-id='#datamethod' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"			
 				},				
 				{
 					"label":"Data Template",
 					"name":"dataTemplate",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#datatemplate' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},							
 				{
 					"label":"Event",
@@ -287,17 +299,20 @@
 							"label":"Click",
 							"value":"click"
 						}
-					]	
+					],
+					"dataAttributesParent": "data-id='#event' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Event Target",
 					"name":"eventTarget",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#eventtarget' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Event value",
 					"name":"eventValue",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#eventvalue' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Event Action",
@@ -324,12 +339,14 @@
 							"label":"Submit Form",
 							"value":"submit"
 						}
-					]	
+					],
+					"dataAttributesParent": "data-id='#eventaction' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Data Parent",
 					"name":"dataParent",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#dataparent' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Data Parent Event",
@@ -348,12 +365,14 @@
 							"label":"Click",
 							"value":"click"
 						}
-					]						
+					],
+					"dataAttributesParent": "data-id='#dataparentevent' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"			
 				},
 				{
 					"label":"Data Parent Event Value",
 					"name":"dataParentEventValue",
-					"type":"text"
+					"type":"text",
+					"dataAttributesParent": "data-id='#dataparenteventvalue' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},
 				{
 					"label":"Data Parent Event Action",
@@ -380,7 +399,8 @@
 							"label":"Submit Form",
 							"value":"submit"
 						}
-					]	
+					],
+					"dataAttributesParent": "data-id='#dataparenteventaction' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				}						
 			]
 		}

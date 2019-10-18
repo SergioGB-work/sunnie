@@ -56,10 +56,11 @@ block modal-body
 						| {{/props}}
 
 						| {{/for}}
-					div(class="addItem fa fa-plus mr-1")
-					div(class="deleteItem fa fa-minus")
+					div(class="arrayActions")
+						div(class="addItem bg-primary fa fa-plus mr-1")
+						div(class="deleteItem bg-danger fa fa-minus")
 
-			| {{/props}}	
+			| {{/props}}
 		| {{else}}
 
 		div No hay traducciones

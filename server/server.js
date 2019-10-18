@@ -40,6 +40,7 @@ gulp.task('apiServer', function() {
 	const content = require('./content.js');
 	const component = require('./component.js');
 	const chatbot = require('./chatbot.js');
+	const mocks = require('./mocks.js');
 
 	layout(app);
 	theme(app);
@@ -48,6 +49,7 @@ gulp.task('apiServer', function() {
 	content(app);
 	component(app);
 	chatbot(app);
+	mocks(app);
 
 	app.listen(8082,function(req, res){
   		console.log('API running on 8082!');
