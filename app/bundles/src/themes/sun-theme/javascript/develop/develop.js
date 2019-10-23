@@ -601,6 +601,7 @@ function editSiteCallback(data){
 		newLocation.shift();
 		location.href = newLocation.join('');
 	}
+	dataList($('#siteList'));
 }
 
 function updateLocalesCallback(data){
