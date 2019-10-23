@@ -220,8 +220,13 @@ module.exports = (app) => {
 			});
 						
 			//Renombro la carpeta el site en development
-			fs.rename( siteURL + '/../../../../development/sites/' + site, siteURL + '/../../../../development/sites/' + name, function(err) {
+			fs.rename( siteURL + '/../../../development/sites/' + site, siteURL + '/../../../development/sites/' + name, function(err) {
 			    if ( err ) console.log('ERROR: ' + err);
+			});
+
+			//Elimino la carpeta en build del site
+			rimraf(siteURL + '/../../../build/sites/' + site,function () {
+
 			});
 
 			functions.deployPage('--env dev --site ' + name , res,{"name":name, "url":url, "oldUrl": oldUrl});

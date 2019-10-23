@@ -93,9 +93,35 @@
 				cursor:pointer;
 				@include hover-focus-active{
 					text-decoration:none;
-					color:$primary !important;
+					color:$gray-300 !important;
 				}
 			}
 		}
 	}
+}
+
+.color-tips{
+	padding-top:25%;
+	padding-bottom:25%;
+	font-weight:100;
+	text-transform:capitalize;
+
+	&.bg-1{
+		background:$info;
+	}
+	&.bg-2{
+		background:$warning;
+	}
+	&.bg-3{
+		background:$danger;
+	}
+	&.bg-4{
+		background:$success;
+	}
+	&.bg-5{
+		background:$primary;
+	}
+	&.bg-6{
+		background:$secondary;
+	}		
 }

@@ -587,6 +587,7 @@ function publishSiteCallback(){
 function addSiteCallback(data){
 	$('#modal-error').modal('hide');
 	$('#modal-site-add form')[0].reset();
+	dataList($('#siteList'));
 }
 
 function editSiteCallback(data){

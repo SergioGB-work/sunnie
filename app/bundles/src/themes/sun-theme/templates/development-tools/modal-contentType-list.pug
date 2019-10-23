@@ -15,17 +15,18 @@ block modal-body
 		| {{if data.length > 0}}
 		.row
 			| {{for data}}
+			| {{* window.id =parseInt((Math.random() * 6) + 1) }}
 			.col-12.col-sm-4.col-md-3.col-lg-2
 				.card
 					.card-img-top
 						div.actions.position-absolute.px-2.py-1.w-100.text-right.icon-3x
-							a.action.text-secondary(data-content-type='{{:value}}', data-toggle='modal', data-target='#modal-contentType-edit', data-dismiss='modal')
+							a.action.text-white(data-content-type='{{:value}}', data-toggle='modal', data-target='#modal-contentType-edit', data-dismiss='modal')
 								i(class="fa fa-edit")
 									span.sr-only Editar tipo de contenido
-							a.action.text-secondary.ml-2(href="", data-content-type='{{:value}}', data-toggle='modal', data-target='#modal-contentType-delete', data-dismiss='modal')
+							a.action.text-white.ml-2(href="", data-content-type='{{:value}}', data-toggle='modal', data-target='#modal-contentType-delete', data-dismiss='modal')
 								i(class="fa fa-times")
 									span.sr-only Eliminar tipo de contenido		
-						img(src=fullSiteUrl +"/images/default-img.png",alt='Image-Content-{{:name}}')
+						div(class="bg-{{*:id}} icon-12x text-white text-center d-flex justify-content-center align-items-center color-tips") {{:label.substring(0,2)}}
 					.card-body
 						if(header != '')
 							h3.card-title.icon-2x {{:label}}

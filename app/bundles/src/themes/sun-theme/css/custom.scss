@@ -103,9 +103,11 @@
 	.arrayActions{
 		display:flex;
 	    position: absolute;
-	    top: $grid-gutter-width / 2;
 	    right: $grid-gutter-width;
 	    background: $white;
+    	top:  $grid-gutter-width * -0.75;
+    	right: $grid-gutter-width / 2;
+    	padding: 0 $grid-gutter-width / 2;	    
 
 		.addItem,.deleteItem{
 		    color: $white;

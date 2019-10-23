@@ -14,18 +14,20 @@ block modal-body
 
 		| {{if data.content.length > 0}}
 		.row
-			| {{for data.content}}
+			| {{for data.content }}
+			| {{* window.id =parseInt((Math.random() * 6) + 1) }}
+
 			.col-12.col-sm-4.col-md-3.col-lg-2
 				.card
 					.card-img-top
 						div.actions.position-absolute.px-2.py-1.w-100.text-right.icon-3x
-							a.action.text-secondary(data-content-id='{{:id}}', data-content-type="{{:contentType}}", data-toggle='modal', data-target='#modal-content-edit', data-dismiss='modal')
+							a.action.text-white(data-content-id='{{:id}}', data-content-type="{{:contentType}}", data-toggle='modal', data-target='#modal-content-edit', data-dismiss='modal')
 								i(class="fa fa-edit")
 									span.sr-only Editar contenido
-							a.action.text-secondary.ml-2(href="", data-content-id='{{:id}}', data-content-type="{{:contentType}}", data-toggle='modal', data-target='#modal-content-delete', data-dismiss='modal')
+							a.action.text-white.ml-2(href="", data-content-id='{{:id}}', data-content-type="{{:contentType}}", data-toggle='modal', data-target='#modal-content-delete', data-dismiss='modal')
 								i(class="fa fa-times")
 									span.sr-only Eliminar contenido		
-						img(src=fullSiteUrl +"/images/default-img.png",alt='Image-Content-{{:name}}')
+						div(class="bg-{{*:id}} icon-12x text-white text-center d-flex justify-content-center align-items-center color-tips") {{:name.substring(0,2)}}
 					.card-body
 						if(header != '')
 							h3.card-title.icon-2x {{:name}}

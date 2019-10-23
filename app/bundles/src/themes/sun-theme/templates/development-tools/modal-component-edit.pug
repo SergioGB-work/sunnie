@@ -88,6 +88,7 @@ block modal-body
 				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-callback="checkLayoutColumn", data-content='"{{:data.layoutColumn}}"')
 				+fragment('fragment-input',{"type":"hidden", "name":"oldLayoutColumn", "value":"{{:data.layoutColumn}}"})
 
+		| {{if data.config.length > 0 }}
 		.row
 			.col-12
 				fieldset(id="dynamicConfigComponent",data-form-group="content", class="md-3")
@@ -95,3 +96,4 @@ block modal-body
 					.row
 
 						| {{for data.config ~originalContent = ~root.data.content ~idComponent = ~root.data.id tmpl="#templateFormGenerator"/}}
+		| {{/if}}				

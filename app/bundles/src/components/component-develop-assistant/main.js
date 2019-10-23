@@ -130,7 +130,7 @@ function writeOnChat(msg,profile){
 			break;
 
 		default:
-			color = 'alert-info';
+			color = 'alert-info';3
 			break;
 	}
 	
@@ -191,9 +191,9 @@ function checkComponent(data,result){
 			"service": apiDevelop + "/layout/detail/{idLayout}",
 			"method": "GET", "callback":"loadLayoutColumnsOnChat"
 		});
-
+		/*
 		if(result.fulfillmentText != ''){
 			writeOnChat(result.fulfillmentText,'bot');
-		}
+		}*/
 	}
 }
