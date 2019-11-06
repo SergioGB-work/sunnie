@@ -4,6 +4,7 @@ const rimraf = require("rimraf");
 
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
+const fileUpload = require('express-fileupload');
 
 /**
  * @module content
@@ -162,6 +163,8 @@ module.exports = (app) => {
 		var dirContentSite = [];
 		var contents = [];
 
+		var filter_contentType = req.query.filter && req.query.filter.where && req.query.filter.where.and[0] && req.query.filter.where.and[0].contentType ? req.query.filter.where.and[0].contentType : false;
+
 		if(fs.existsSync(siteURL + '/content_manager')){
 			dirContentSite = fs.readdirSync(siteURL + '/content_manager');
 		}
@@ -172,17 +175,27 @@ module.exports = (app) => {
 				fs.readdirSync(siteURL + '/content_manager/' + contentType).forEach(function(element,i){
 
 					if(element.split('.').length <= 1 && element != 'empty_content'){
+						
 						var file = JSON.parse(fs.readFileSync(siteURL + '/content_manager/'+contentType+'/' + element + '/config.json'));
 						file['contentType']= contentType;
-						contents.push(file);
+
+						if(filter_contentType && file['contentType'] == filter_contentType){
+							contents.push(file);
+						}
+						else if(!filter_contentType){
+							contents.push(file);
+						}
 					}
 				})
 			}
 		})
 
-		contents = { "content": contents };
+		var filter_skip = req.query.filter && req.query.filter.skip ? req.query.filter.skip : 0;
+		var filter_limit = req.query.filter && req.query.filter.limit > 0 ? req.query.filter.limit : contents.length;
+		var sliced_contents = contents.slice(filter_skip,filter_skip+filter_limit);
 
-		return res.status(200).send(contents);
+		sliced_contents = { "content": sliced_contents };
+		return res.set({'Pagination-Count': contents.length}).status(200).send(sliced_contents);
 	});
 
 	/**
@@ -418,4 +431,83 @@ module.exports = (app) => {
 		return res.status(200).send(config);
 		
 	});
+
+
+	/**
+	* @function
+	* GET service to obtain a list of media contents
+	* @param {string} - id - Name of the site
+	* @return {json} JSON with a list of contents
+	*/
+	app.get('/site/:id/content/media', function (req, res) {
+		
+		var site = req.params.id;
+		var siteURL = functions.getURLSite(site);
+		var dirContentSite = [];
+		var contents = [];
+
+		if(fs.existsSync(siteURL + '/media')){
+			dirContentSite = fs.readdirSync(siteURL + '/media');
+		}
+
+		else{
+			fs.mkdirSync(siteURL + '/media');
+			dirContentSite = fs.readdirSync(siteURL + '/media');
+		}
+
+		dirContentSite.forEach(function(content,index){
+			console.log(dirContentSite[index]);
+
+			var file = dirContentSite[index].split('.');
+
+			if(file.length > 1 && dirContentSite[index].match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
+				contents.push(dirContentSite[index]);
+			}
+		})
+
+		contents = { "media": contents };
+
+		return res.status(200).send(contents);
+	});
+
+	/**
+	* @function
+	* GET service to obtain a list of media contents
+	* @param {string} - id - Name of the site
+	* @return {json} JSON with a list of contents
+	*/
+
+	app.post('/site/:id/content/media/upload', fileUpload() ,async function(req, res) {
+		var site = req.params.id;
+		var siteURL = functions.getURLSite(site);
+
+		console.log(req.files);
+
+		var file = JSON.parse(JSON.stringify(req.files))
+
+		var file_name = file.files.name
+
+		//if you want just the buffer format you can use it
+		var buffer = new Buffer.from(file.files.data.data)
+
+		//uncomment await if you want to do stuff after the file is created
+
+		/*await*/
+		fs.writeFile(siteURL + '/media/' + file_name, buffer, async(err) => {
+
+			console.log("Successfully Written to File.");
+
+
+			// do what you want with the file it is in (__dirname + "/" + file_name)
+
+			console.log("end  :  " + new Date())
+
+			//console.log(result_stt + "")
+
+			//fs.unlink(__dirname + "/" + file_name, () => {})
+			res.send()
+		});
+
+	});
+
 }

@@ -43,7 +43,7 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 
 	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", id="{{:parentID}}",{{:dataAttributesParent}})
 		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		select(name="{{:name}}", id="{{*:id}}", class="form-control",{{*:requiredField}}, {{:dataAttributes}})
+		select(name="{{:name}}", id="{{*:id}}", class="form-control {{:classes}}",{{*:requiredField}}, {{:dataAttributes}}, data-content="'{{:~originalContent[name]}}'" || false)
 			
 			| {{for options ~na=name}}
 

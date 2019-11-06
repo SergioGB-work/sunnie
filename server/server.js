@@ -29,7 +29,8 @@ gulp.task('apiServer', function() {
 
     	res.setHeader("Access-Control-Allow-Credentials", "true");
     	res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
-    	res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization,Accept-Language");
+    	res.setHeader("Access-Control-Expose-Headers","Pagination-Count");
+    	res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, Accept-Language, Pagination-Count");
 		next();
 	});
 

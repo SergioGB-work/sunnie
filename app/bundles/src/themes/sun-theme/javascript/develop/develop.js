@@ -821,3 +821,11 @@ function clearCKeditor(){
     }
     CKEDITOR.instances[instance].setData('');
 }
+
+function checkSelected(data,selectedValue){
+	$('select').each(function(){
+		if($(this).data('content') == "'"+selectedValue+"'"){
+			$(this).find('option[value='+selectedValue+']').attr("selected","selected");
+		}
+	})
+}

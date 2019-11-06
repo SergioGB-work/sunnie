@@ -1,0 +1,16 @@
+mixin component-publisher(content)
+	- var contentType = content.contentType || '' 
+	- var id = parseInt(Math.random() * (99999 - 0) + 0)
+	- var templateCode = content.template_code || false
+	- var pagination = content.pagination || 'false'
+	- var itemsPerPage = content.items_per_page
+	- var initialPage = content.initial_page
+	- var rel = content.rel
+	
+	div(id="component-publisher-content-" + id,data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/contents?filter[where][and][0][contentType]=" + contentType,data-method="GET",data-template="#component-publisher-template-" + id, data-target="#component-publisher-content-" + id,  data-has-pagination=pagination || false, data-items-per-page=itemsPerPage || false, data-initial-page= initialPage || false, data-enable-get-params="true", data-rel=rel || false)
+
+	div.row.d-flex.justify-content-center
+		nav.pagination
+	if templateCode
+		script(id="component-publisher-template-" + id ,type="text/x-jsrender").
+			!{templateCode}

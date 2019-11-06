@@ -1,0 +1,48 @@
+{
+	"config":[
+		{
+			"classes":"contentTypePublisher",
+			"label":"Content Type",
+			"name":"contentType",
+			"type":"select",
+			"options": [				
+			],
+			"dataAttributes": "data-service-data='http://localhost:8082/site/{idSite}/content/contentTypes' data-method='GET' data-template='#templateOptionsContentType' data-target='.contentTypePublisher' data-load='true' data-callback='checkSelected'"				
+		},
+		{
+			"label":"Activar Pagination",
+			"name":"pagination",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":""
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]			
+		},
+		{
+			"label":"Initial Page",
+			"name":"initial_page",
+			"type":"number"
+		},
+		{
+			"label":"Items per page",
+			"name":"items_per_page",
+			"type":"number"
+		},
+		{
+			"label":"Rel",
+			"name":"rel",
+			"type":"text"
+		},	
+		{
+			"label":"Template Code(HTML + JSRender)",
+			"name":"template_code",
+			"type":"codeHTML"
+		}
+	]
+}

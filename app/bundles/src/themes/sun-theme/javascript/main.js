@@ -445,6 +445,7 @@ function getData(el) {
 				processData(dataResponse, target, template, callback, content, xhr.getResponseHeader('Pagination-Count'));
 	
 				if(el.pagination != undefined && el.pagination!=null){
+					console.log(xhr.getResponseHeader('Pagination-Count'));
 					generatePagination(dataResponse,el.pagination,xhr.getResponseHeader('Pagination-Count'));
 				}
 			},
@@ -593,7 +594,8 @@ function generatePagination(data, el, totalItems) {
 		pagination_target = el.pagination_target,
 		target = el.target,
 		items_per_page = getParams['filter[limit]'] || el.items_per_page,
-		noReload = el.noReload;
+		noReload = el.noReload,
+		rel = el.rel ? '_' + el.rel : '';
 
 	var totalPages = totalItems / items_per_page;
 
@@ -640,10 +642,10 @@ function generatePagination(data, el, totalItems) {
 				showLoading();
 
 				if(noReload != 'true'){
-					window.location.href = '?filter[skip]=' + parseInt((num - 1) * items_per_page) + href;
+					window.location.href = '?filter[skip]'+rel+'=' + parseInt((num - 1) * items_per_page) + href;
 				}
 				else{
-					window.history.pushState('','','?filter[skip]=' + parseInt((num - 1) * items_per_page) + href);
+					window.history.pushState('','','?filter[skip]'+rel+'=' + parseInt((num - 1) * items_per_page) + href);
 					reloadComponents();
 				}
 			});

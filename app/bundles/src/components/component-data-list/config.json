@@ -43,16 +43,6 @@
 			"type":"text"
 		},
 		{
-			"label":"Initial Page",
-			"name":"initial_page",
-			"type":"number"
-		},
-		{
-			"label":"Items per page",
-			"name":"items_per_page",
-			"type":"number"
-		},
-		{
 			"label":"aditionalData",
 			"name":"aditionalData",
 			"type":"text"
