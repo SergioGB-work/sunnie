@@ -1,6 +1,7 @@
 const fs = require('fs');
 const functions = require('./functions.js');
 const rimraf = require("rimraf");
+const path = require('path');
 
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
@@ -189,6 +190,20 @@ module.exports = (app) => {
 				})
 			}
 		})
+
+		var filter_order = req.query.filter && req.query.filter.order ? req.query.filter.order : 0;
+
+		contents = contents.sort(function (a, b) {
+			if (a[filter_order] > b[filter_order]) {
+				return 1;
+			}
+			if (a[filter_order] < b[filter_order]) {
+				return -1;
+			}
+			// a must be equal to b
+			return 0;
+		});
+
 
 		var filter_skip = req.query.filter && req.query.filter.skip ? req.query.filter.skip : 0;
 		var filter_limit = req.query.filter && req.query.filter.limit > 0 ? req.query.filter.limit : contents.length;
@@ -455,17 +470,21 @@ module.exports = (app) => {
 			dirContentSite = fs.readdirSync(siteURL + '/media');
 		}
 
-		dirContentSite.forEach(function(content,index){
-			console.log(dirContentSite[index]);
+
+		for(var index=0; index < dirContentSite.length; index++){
 
 			var file = dirContentSite[index].split('.');
+			var filename = dirContentSite[index];
+			var file_details = {};
+			var stats = fs.statSync(siteURL + '/media/' + filename);
 
-			if(file.length > 1 && dirContentSite[index].match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
-				contents.push(dirContentSite[index]);
+			if(file.length == 2 && filename.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
+				file_details["name"] = filename,
+				file_details["size"] = stats.size,
+				file_details["extension"] = path.extname(siteURL + '/media/' + filename);
+				contents.push(file_details);
 			}
-		})
-
-		contents = { "media": contents };
+		}
 
 		return res.status(200).send(contents);
 	});

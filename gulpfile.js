@@ -465,6 +465,11 @@ gulp.task('deploySites',['localesBuild','localesComponentsBuild','layoutsBuild',
 
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'));
+
+		for (var lang in langs){
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/media/*.*')
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/media'));
+		}
 	}
 	return true;
 });
@@ -493,7 +498,7 @@ gulp.task('connect', function() {
 		var rules = buildRules();
 		var url = rules[req.url.split('?')[0]];
 
-		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.indexOf('/data/') >=0 || req.url.split('.').length > 1 ){
+		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/images/') >=0 || req.url.indexOf('/data/') >=0 || req.url.indexOf('/media/') >=0 || req.url.split('.').length > 1 ){
 			url = req.url.split('?')[0];
 			res.sendFile(url,{ root: pathModule.join(__dirname, './app/public/sites/') });
 		}
@@ -533,7 +538,7 @@ gulp.task('connectDev', function() {
 		var rules = buildRules();
 		
 		
-		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/data/') >=0 || req.url.indexOf('/images/') >=0 || req.url.split('.').length > 1 ){
+		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/data/') >=0 || req.url.indexOf('/images/') >=0 || req.url.indexOf('/media/') >=0 || req.url.split('.').length > 1 ){
 				
 			var folder = '';
 			var ulr = '';
@@ -556,6 +561,11 @@ gulp.task('connectDev', function() {
 				url = req.url.split('/images/');
 				folder = '/images';
 			}
+
+			else if(req.url.indexOf('/media/') >=0){
+				url = req.url.split('/media/');
+				folder = '/media';
+			}			
 
 			else if((req.url.split('.').length) >=0 ){
 				
@@ -956,6 +966,7 @@ function buildRules(){
 			rewriteRules[site + '/' + langs[lang] + '/css']='/' + sitesDefined[key].site + '/' + langs[lang] + '/css';
 			rewriteRules[site + '/' + langs[lang] + '/javascript']='/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript';
 			rewriteRules[site + '/' + langs[lang] + '/images']='/' + sitesDefined[key].site + '/' + langs[lang] + '/images';
+			rewriteRules[site + '/' + langs[lang] + '/media']='/' + sitesDefined[key].site + '/' + langs[lang] + '/media';
 			rewriteRules[site + '/data']='/' + sitesDefined[key].site + '/data';
 		}
 		
@@ -997,6 +1008,9 @@ function buildRules(){
 
 		writeStream.write(`RewriteRule ^es/images/(.*)$ en/images/$1 [L]\n`);
 		writeStream.write(`RewriteRule ^en/images/(.*)$ en/images/$1 [L]\n`);
+
+		writeStream.write(`RewriteRule ^es/media/(.*)$ en/media/$1 [L]\n`);
+		writeStream.write(`RewriteRule ^en/media/(.*)$ en/media/$1 [L]\n`);
 
 		writeStream.write(`RewriteRule ^data/(.*)$ data/$1 [L]\n`);
 		writeStream.write(`RewriteRule ^data/(.*)$ data/$1 [L]\n`);

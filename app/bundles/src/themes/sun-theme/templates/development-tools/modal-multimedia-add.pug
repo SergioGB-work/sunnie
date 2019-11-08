@@ -1,0 +1,19 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Subir fichero"
+	- var modal_id = "modal-content-add"
+	- var modal_size = "modal-lg"
+
+block modal-body
+
+	form(id="form-add-content",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/media/upload", data-callback="addContentCallback")
+		.row
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"contentName", "text":"Elige el fichero a  subir"})
+				+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"filename","name":"file", "required":"required"})
+		
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(class="btn btn-default mr-3", data-toggle="modal", data-target="#modal-contents", data-dismiss="modal") Cancelar
+				button(class="btn btn-primary send", type="submit") Subir

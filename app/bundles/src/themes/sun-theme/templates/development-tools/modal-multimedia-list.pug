@@ -1,0 +1,44 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Multimedia"
+	- var modal_id = "modal-multimedia-list"
+	- var modal_size = "modal-full"
+
+block modal-body
+
+	div(id="multimediaList",data-service-data=apiDevelopment + "/site/{idSite}/content/media",data-method="GET",data-template="#templateMultimediaList",data-target="#modal-multimedia-list #multimediaList")
+
+	
+	script(id="templateMultimediaList",type="text/x-jsrender")
+
+		| {{if data.length > 0}}
+		.row
+			| {{for data }}
+			| {{* window.id = parseInt((Math.random() * 6) + 1) }}
+
+			.col-12.col-sm-4.col-md-3.col-lg-2
+				.card
+					.card-img-top
+						div.actions.position-absolute.px-2.py-1.w-100.text-right.icon-3x
+							a.action.text-white.ml-2(href="", data-multimedia-name='{{:name}}', data-toggle='modal', data-target='#modal-multimedia-delete', data-dismiss='modal')
+								i(class="fa fa-times")
+									span.sr-only Eliminar contenido		
+						.embed-responsive.embed-responsive-1by1
+							img(class="embed-responsive-item",src=fullSiteUrl + "/media/{{:name}}")
+					.card-body
+						if(header != '')
+							h3.card-title.icon-2x {{:name}}
+
+			| {{/for}}
+
+		| {{else}}
+		.row
+			.alert.alert-info.text-center.col-12.col-sm-8.offset-sm-2 Todavía no has creado tu primer contenido	
+
+		| {{/if}}
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+
+				button(class="btn btn-primary mr-3", data-toggle="modal", data-target="#modal-multimedia-add", data-dismiss="modal") Subir

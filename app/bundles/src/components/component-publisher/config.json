@@ -25,6 +25,21 @@
 			]			
 		},
 		{
+			"label":"Ordenar por",
+			"name":"order",
+			"type":"select",
+			"options":[
+				{
+					"label":"Fecha creación",
+					"value":"createdDate"
+				},
+				{
+					"label":"Nombre",
+					"value":"name"
+				}
+			]			
+		},		
+		{
 			"label":"Initial Page",
 			"name":"initial_page",
 			"type":"number"
@@ -38,9 +53,14 @@
 			"label":"Rel",
 			"name":"rel",
 			"type":"text"
-		},	
+		},
 		{
-			"label":"Template Code(HTML + JSRender)",
+			"label":"URL Content Detail",
+			"name":"url_detail",
+			"type":"text"
+		},
+		{
+			"label":"Custom Template Code(HTML + JSRender)(Opcional)",
 			"name":"template_code",
 			"type":"codeHTML"
 		}

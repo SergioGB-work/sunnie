@@ -84,20 +84,21 @@
 .modal{
 	.actions{
 		display:none;
-	}
-	@include hover-focus-active{
-		.actions{
-			display:block;
-			
-			.action{
-				cursor:pointer;
-				@include hover-focus-active{
-					text-decoration:none;
-					color:$gray-300 !important;
+		z-index:9;
+		@include hover-focus-active{
+			.actions{
+				display:block;
+				
+				.action{
+					cursor:pointer;
+					@include hover-focus-active{
+						text-decoration:none;
+						color:$gray-300 !important;
+					}
 				}
 			}
 		}
-	}
+	}	
 }
 
 .color-tips{
