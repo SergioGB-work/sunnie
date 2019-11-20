@@ -1,0 +1,46 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Detalle"
+	- var modal_id = "modal-multimedia-detail"
+	- var modal_size = "modal-md"
+
+block modal-body
+
+
+	div(id="multimedia-detail")
+
+	.row
+		div(class="form-group col-12 d-flex justify-content-end mb-0")
+			button(class="btn btn-default", data-toggle="modal", data-target="#modal-multimedia-list", data-dismiss="modal") Volver
+
+	script(id="templateMultimediaDetail",type="text/x-jsrender")
+		.row
+			.col-md-4
+				img(src=fullSiteUrl + "/media/{{:data.name}}", alt="{{:data.name}}")
+
+			.col-md-8
+				dl
+					dt Nombre
+					dd {{:data.name}}
+
+					dt Formato
+					dd {{:data.format}}
+
+					dt URL
+					dd /media/{{:data.name}}
+
+					dt Tamaño
+					dd {{:(data.size / 1024).toFixed(2)}} KB
+
+					dt Dimensiones
+					dd {{:data.width}}x{{:data.height}}
+
+					dt Fecha de creación
+					| {{* window.fecha = ''}}
+					| {{for data.dateCreate }}
+					| {{* fecha = new Date(data).toLocaleString()}}
+					dd {{*: fecha}}
+
+					| {{/for}}
+

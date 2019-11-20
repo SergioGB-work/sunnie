@@ -4,7 +4,8 @@ var gulp = require('gulp'),
 	path = require('path'),
 	rimraf = require("rimraf"),
 	pug = require("pug"),
-	html2pug = require('html2pug');
+	html2pug = require('html2pug'),
+	mung = require('express-mung');
 
 var defaultSite = 'default';
 
@@ -33,6 +34,64 @@ gulp.task('apiServer', function() {
     	res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, Accept-Language, Pagination-Count");
 		next();
 	});
+
+	//Interceptamos la respuesta para agregarle globalmente paginacion
+	app.use(mung.json(
+	    function transform(body, req, res) {
+
+			if(Array.isArray(body)){
+		    	
+		    	//Cabecera con el numero total de elementos antes de paginarlos
+		    	res.set({'Pagination-Count': body.length})
+		    	
+		    	//Ordenacion global
+		    	var filter_order = req.query.filter && req.query.filter.order ? req.query.filter.order : false;
+		    	
+		    	//Se puede agregar ASC o DESC al valor del filtro para que la ordenacion cambie de orden: filter[order]=nombre ASC
+				if(filter_order){
+		    		filter_order = filter_order.split(' ');
+		    	}
+		    	
+		    	
+		    	var orientation = filter_order.length > 1 && filter_order[1]=='DESC' ? filter_order[1] : 'ASC'
+
+				if(filter_order[0] !== false){
+					body = body.sort(function (a, b) {
+
+						if(orientation == 'DESC'){
+							if (a[filter_order[0]] < b[filter_order[0]]) {
+								return 1;
+							}
+							if (a[filter_order[0]] > b[filter_order[0]]) {
+								return -1;
+							}
+							// a must be equal to b
+							return 0;
+						}
+						else{
+							if (a[filter_order[0]] > b[filter_order[0]]) {
+								return 1;
+							}
+							if (a[filter_order[0]] < b[filter_order[0]]) {
+								return -1;
+							}
+							// a must be equal to b
+							return 0;
+						}	
+					});
+				}
+
+				//Paginacion Global
+				var filter_skip = req.query.filter && req.query.filter.skip ? req.query.filter.skip : 0;
+				var filter_limit = req.query.filter && req.query.filter.limit > 0 ? req.query.filter.limit : body.length;
+				var sliced_body = body.slice(filter_skip,parseInt(filter_skip)+parseInt(filter_limit));
+		        return sliced_body;
+		    }
+		    else{
+		    	return body;
+		    }    
+	    }
+	));
 
 	const layout = require('./layout.js');
 	const theme = require('./theme.js');

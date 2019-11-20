@@ -7,14 +7,14 @@ block vars
 
 block modal-body
 
-	div(id="contentList",data-service-data=apiDevelopment + "/site/{idSite}/contents",data-method="GET",data-template="#templateContentsList",data-target="#modal-contents #contentList")
+	div(id="contentList",data-service-data=apiDevelopment + "/site/{idSite}/contents",data-method="GET",data-template="#templateContentsList",data-target="#modal-contents #contentList",data-has-pagination="true", data-initial-page="1", data-items-per-page="6", data-enable-get-params="true", data-noreload="true", data-rel="contentsList", data-pagination-container-target="#modal-contents .pagination")
 
 	
 	script(id="templateContentsList",type="text/x-jsrender")
 
-		| {{if data.content.length > 0}}
+		| {{if data.length > 0}}
 		.row
-			| {{for data.content }}
+			| {{for data }}
 			| {{* window.id =parseInt((Math.random() * 6) + 1) }}
 
 			.col-12.col-sm-4.col-md-3.col-lg-2
@@ -33,7 +33,9 @@ block modal-body
 							h3.card-title.icon-2x {{:name}}
 
 			| {{/for}}
-
+		.row
+			.col-12
+				+fragment('fragment-pagination')
 		| {{else}}
 		.row
 			.alert.alert-info.text-center.col-12.col-sm-8.offset-sm-2 Todavía no has creado tu primer contenido	

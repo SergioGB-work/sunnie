@@ -82,13 +82,15 @@
 }
 
 .modal{
-	.actions{
-		display:none;
-		z-index:9;
+	.card{
+		.actions{
+			display:none;
+		}
+
 		@include hover-focus-active{
 			.actions{
-				display:block;
-				
+				z-index:9;
+				display:block;			
 				.action{
 					cursor:pointer;
 					@include hover-focus-active{

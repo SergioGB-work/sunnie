@@ -6,6 +6,7 @@ const path = require('path');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 const fileUpload = require('express-fileupload');
+const imagemagick = require('imagemagick');
 
 /**
  * @module content
@@ -33,7 +34,7 @@ module.exports = (app) => {
 				contentTypes.push({"value":element,"label":element});
 			}	
 		});
-
+	
 		return res.status(200).send(contentTypes);
 
 	});
@@ -204,13 +205,7 @@ module.exports = (app) => {
 			return 0;
 		});
 
-
-		var filter_skip = req.query.filter && req.query.filter.skip ? req.query.filter.skip : 0;
-		var filter_limit = req.query.filter && req.query.filter.limit > 0 ? req.query.filter.limit : contents.length;
-		var sliced_contents = contents.slice(filter_skip,filter_skip+filter_limit);
-
-		sliced_contents = { "content": sliced_contents };
-		return res.set({'Pagination-Count': contents.length}).status(200).send(sliced_contents);
+		return res.status(200).send(contents);
 	});
 
 	/**
@@ -450,9 +445,9 @@ module.exports = (app) => {
 
 	/**
 	* @function
-	* GET service to obtain a list of media contents
+	* GET service to obtain a list of media files
 	* @param {string} - id - Name of the site
-	* @return {json} JSON with a list of contents
+	* @return {json} JSON with a list of media files
 	*/
 	app.get('/site/:id/content/media', function (req, res) {
 		
@@ -478,7 +473,7 @@ module.exports = (app) => {
 			var file_details = {};
 			var stats = fs.statSync(siteURL + '/media/' + filename);
 
-			if(file.length == 2 && filename.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
+			if(filename.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
 				file_details["name"] = filename,
 				file_details["size"] = stats.size,
 				file_details["extension"] = path.extname(siteURL + '/media/' + filename);
@@ -491,42 +486,156 @@ module.exports = (app) => {
 
 	/**
 	* @function
-	* GET service to obtain a list of media contents
+	* POST service to upload a media file
 	* @param {string} - id - Name of the site
-	* @return {json} JSON with a list of contents
+	* @param {file} - Array of files
+	* @return {json} JSON with the filename uploaded
 	*/
 
 	app.post('/site/:id/content/media/upload', fileUpload() ,async function(req, res) {
-		var site = req.params.id;
-		var siteURL = functions.getURLSite(site);
+		var file_name = '';
 
-		console.log(req.files);
-
-		var file = JSON.parse(JSON.stringify(req.files))
-
-		var file_name = file.files.name
-
-		//if you want just the buffer format you can use it
-		var buffer = new Buffer.from(file.files.data.data)
-
-		//uncomment await if you want to do stuff after the file is created
-
-		/*await*/
-		fs.writeFile(siteURL + '/media/' + file_name, buffer, async(err) => {
-
-			console.log("Successfully Written to File.");
+		try{
+			var site = req.params.id;
+			var siteURL = functions.getURLSite(site);
+			var file = JSON.parse(JSON.stringify(req.files))
 
 
-			// do what you want with the file it is in (__dirname + "/" + file_name)
+			Object.keys(file).forEach(function(el){
 
-			console.log("end  :  " + new Date())
+				file_name = file[el].name
+				if(fs.existsSync(siteURL + '/media/' + file_name)){
+					return res.status(200).send(
+						{
+							"filename":file_name,
+							"error":{
+								"code":"FILE_EXIST_ERROR"
+							}
+						}
+					)
+				}
 
-			//console.log(result_stt + "")
+				if(!file_name.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
+					return res.status(200).send(
 
-			//fs.unlink(__dirname + "/" + file_name, () => {})
-			res.send()
-		});
+						{
+							"filename":file_name,
+							"error":{
+								"code":"FILE_FORMAT_ERROR"								
+							}
+						}
+					)
+				}
+
+				var buffer = new Buffer.from(file[el].data.data)
+
+				//uncomment await if you want to do stuff after the file is created
+
+				/*await*/
+				fs.writeFile(siteURL + '/media/' + file_name, buffer, async(err) => {
+
+					console.log("Successfully Written to File.");
+					console.log("end  :  " + new Date())
+
+				});
+
+				fs.writeFile('app/development/sites/'+site+'/es/media/' + file_name, buffer, async(err) => {
+					console.log("Successfully Written to File.");
+					console.log("end  :  " + new Date())
+				});
+				fs.writeFile('app/development/sites/'+site+'/en/media/' + file_name, buffer, async(err) => {
+					console.log("Successfully Written to File.");
+					console.log("end  :  " + new Date())
+				});				
+
+				return res.status(200).send({"filename":file_name});
+			});
+
+			
+		}
+		catch(e){
+			console.log(e);
+			res.status(200).send(
+				{
+					"filename":file_name,
+					"error":{
+						"code":"FILE_UPLOAD_ERROR"								
+					}
+				}
+			)
+		};
 
 	});
+
+	/**
+	* @function
+	* POST service to delete a media file
+	* @param {string} - id - Name of the site
+	* @param {string} - filename - Name of the file to be deleted
+	*/		
+
+	app.post('/site/:id/content/media/delete', function (req, res) {
+
+		var site = req.params.id;
+		var siteURL = functions.getURLSite(site);
+		var filename = req.body.filename;
+
+		if(!fs.existsSync(siteURL + '/media/' + filename)){
+			res.status(412).send(
+				{
+					"code":"412",
+					"statusCode":"FILE_DELETE_NOT_EXIST_ERROR"
+				}
+			)	
+		}
+
+		fs.unlinkSync(siteURL + '/media/' + filename);
+		fs.unlinkSync('app/development/sites/'+site+'/es/media/' + filename);
+		fs.unlinkSync('app/development/sites/'+site+'/en/media/' + filename);
+
+		res.status(200).send();
+	});
+
+	/**
+	* @function
+	* GET service to obtain the detail of a media file
+	* @param {string} - id - Name of the site
+	* @param {string} - filename - Name of the media file
+	* @return {json} JSON with the detail of the file
+	*/	
+
+	app.get('/site/:id/content/media/detail/:filename', function (req, res) {
+		
+		var site = req.params.id;
+		var siteURL = functions.getURLSite(site);
+		var filename = req.params.filename;
+		var file_details = {}
+
+		if(!fs.existsSync(siteURL + '/media/' + filename)){
+			res.status(412).send(
+				{
+					"code":"412",
+					"statusCode":"FILE_DETAIL_NOT_EXIST_ERROR"
+				}
+			)	
+		}
+
+		imagemagick.identify(siteURL + '/media/' + filename, function(err, features){
+		
+			file_details["width"] = features.width;
+			file_details["height"] = features.height;
+			file_details["format"] = features.format;
+			file_details["dateCreate"] = features.properties["date:create"];
+			var stats = fs.statSync(siteURL + '/media/' + filename);
+			file_details["name"] = filename,
+			file_details["size"] = stats.size,
+			file_details["extension"] = path.extname(siteURL + '/media/' + filename),
+			file_details["url_dev"] = 'pro',
+			file_details["url_pro"] = 'dev';
+
+			return res.status(200).send(file_details);			
+		})
+
+	});	
 
 }

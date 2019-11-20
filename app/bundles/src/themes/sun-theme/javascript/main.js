@@ -228,7 +228,11 @@ $(document).ready(function(){
 
 	$('[data-event]').each(function(){
 		dataEvent($(this));
-	});	
+	});
+
+	$('[data-uploadFile="true"]').each(function(){
+		dataUploadFile($(this));
+	});
 
 });
 
@@ -375,6 +379,7 @@ function getData(el) {
 		}
 
 	}
+
 	if (page !== undefined && page != '' && page > 0 && filter.indexOf('filter[skip]') <= -1 && getParams['filter[limit]'] != 0) {
 		page = ((page - 1) * items_per_page);
 		filter += '&filter[skip]=' + page;
@@ -443,9 +448,8 @@ function getData(el) {
 					sessionStorage.setItem(url + '_${{ default.lang }}$', JSON.stringify(dataResponse));
 				}
 				processData(dataResponse, target, template, callback, content, xhr.getResponseHeader('Pagination-Count'));
-	
+			
 				if(el.pagination != undefined && el.pagination!=null){
-					console.log(xhr.getResponseHeader('Pagination-Count'));
 					generatePagination(dataResponse,el.pagination,xhr.getResponseHeader('Pagination-Count'));
 				}
 			},
@@ -503,7 +507,7 @@ function dataList(el) {
 		timeReload = el.data('time-reload') || 60000,
 		cache = el.data('cache') || 'false',
 		rel = el.data('rel') || '',
-		noReload = el.data('noReload');
+		noReload = el.data('noreload');
 	
 	var params = { "service": service, "method": method, "template": template, "target": target, "page": initial_page, "items_per_page": items_per_page, "aditionalData": aditionalData, "callback": callback, "content": content, "enableGetParams": enableGetParams, "getParamsList": getParamsList, "rel": rel, "cache": cache,"noReload":noReload};
 
@@ -525,7 +529,7 @@ function dataList(el) {
 			timeReload_pagination = el.data('pagination-time-reload') || el.data('time-reload') || 60000,
 			cache_pagination = el.data('pagination-cache') || el.data('cache') || 'false',
 			rel_pagination = el.data('pagination-rel') || el.data('rel') || '',
-			noReload_pagination = el.data('pagination-noReload') || el.data('noReload') || 'false';
+			noReload_pagination = el.data('pagination-noreload') || el.data('noreload') || 'false';
 		var paramsPagination = { service: service_data_pagination, method_pagination: method, template: template_pagination, target: target_pagination, page: initial_page_pagination, pagination_target: pagination_target_pagination, items_per_page: items_per_page_pagination, callback: callback_pagination, content: content_pagination, enableGetParams: enableGetParams_pagination, getParamsList: getParamsList_pagination, rel: rel_pagination, cache: cache_pagination, noReload: noReload_pagination };
 		params['pagination'] = paramsPagination;
 	}		
@@ -596,7 +600,7 @@ function generatePagination(data, el, totalItems) {
 		items_per_page = getParams['filter[limit]'] || el.items_per_page,
 		noReload = el.noReload,
 		rel = el.rel ? '_' + el.rel : '';
-
+	
 	var totalPages = totalItems / items_per_page;
 
 	if(items_per_page == 0){
@@ -619,15 +623,15 @@ function generatePagination(data, el, totalItems) {
 
 		filter = filtersSearch[i].split('=');
 
-		if (filter[0].indexOf("filter[skip]") < 0 && filter[0] != '') {
-			href += '&' + filtersSearch[i];
+		if (filter[0].indexOf("filter[skip]"+rel) < 0 && filter[0] != '') {
+			
 		}
 		else if (filter[0] != '') {
 			currentPage = (filter[1] / items_per_page) + 1;
 		}
 	}
 
-	if ($(pagination_target + ' .bootpag').length <= 0) {
+	if ($(pagination_target + ' .bootpag').length <= 0 || noReload==true) {
 
 		$(pagination_target).parents(target).find('.totalResults').text(totalItems);
 		$(pagination_target).parents(target).find('.initInterval').text(parseInt((currentPage - 1) * items_per_page + 1));
@@ -640,8 +644,20 @@ function generatePagination(data, el, totalItems) {
 				page: currentPage
 			}).on('page', function (event, num) {				
 				showLoading();
+				
+				var search = window.location.search.replace('?', '');
+				var filtersSearch = search.split('&');
 
-				if(noReload != 'true'){
+				for (var i = 0; i < filtersSearch.length; i++) {
+
+					filter = filtersSearch[i].split('=');
+					
+					if (filter[0].indexOf("filter[skip]"+rel) < 0 && filter[0] != '') {
+						href += '&' + filtersSearch[i];
+					}
+				}
+
+				if(noReload != true){
 					window.location.href = '?filter[skip]'+rel+'=' + parseInt((num - 1) * items_per_page) + href;
 				}
 				else{
@@ -898,7 +914,19 @@ function error(statusCode, code, message, dataMessage) {
 
 		case 'SITE_LOAD_LOCALE_LIST_ERROR':
 			content = 'Se ha producido un error al intentar obtener el listado de variables de traducción del site. Inténtalo de nuevo.';
-			break;			
+			break;
+
+		case 'FILE_FORMAT_ERROR':
+			content = 'El formato del fichero no es válido. Inténtelo de nuevo con otro formato.';
+			break;				
+
+		case 'FILE_UPLOAD_ERROR':
+			content = 'Se ha producido un error al intentar subir el fichero. Inténtalo de nuevo.';
+			break;
+
+		case 'FILE_DELETE_NOT_EXIST_ERROR':
+			content = 'Se ha producido un error al intentar eliminar el fichero. El fichero no existe.';
+			break;
 
 		default:
 			content = statusCode + ':${{ default.unknownError }}$ .'+ message;
@@ -1154,8 +1182,7 @@ function loadFormFiltersDefaultValues(){
 }
 
 function reloadDataList(){
-	$('[data-load="true"][data-enable-get-params="true"]').each(function(e){//Iteramos por todos los elementos que tenga aplicados filtros de URL
-
+	$('[data-noreload="true"][data-enable-get-params="true"]').each(function(e){//Iteramos por todos los elementos que tenga aplicados filtros de URL
 		var paramsList = $(this).attr('data-get-params-list') || [];
 		var rels = $(this).attr('data-rel') || '';
 		var paramsModified = paramsChanged();
@@ -1369,4 +1396,57 @@ function dataParent(el){
 	if(targetEvent.val() == valueDispatchAction){
 		targetEvent.change();
 	}
+}
+
+function dataUploadFile(el){
+
+	var idInput = el.attr('id') || '',
+		uploadPreviewContainer = el.data('upload-preview-container') || '',
+		modalUploadProgress = el.data('modal-upload-progress') || '';
+
+    $(id).change(function () {
+        var input = $(this).get(0);
+        uploadFilePreview(input.files);
+    });
+}
+
+function uploadFilePreview(files){
+	$.each(files, function (index) {
+        var filename = files[index].name.split('.')[0],
+            extension = files[index].name.split('.')[1],
+            type = '';
+
+    	var preview = window.URL.createObjectURL(files[index]);             
+
+        $("#modal-multimedia-add .filesContainer .file").each(function () {
+            var filename = $(this).data('filename');
+
+            if (files[index].name == filename) {
+                var i = $(this).data('index');
+                uploadFilesArray.splice(i, 1);
+                $(this).remove();
+            }
+        });
+
+        uploadFilesArray.push(files[index]);
+
+        switch (files[index].type.split('/')[0]) {
+
+            case 'audio':
+                type = 'music';
+                break;
+
+            case 'video':
+                type = 'video';
+                break;
+
+            case 'image':
+                type = 'image';
+                break;
+        }
+        var data = { "data": { "filename": filename, "extension": extension, "type": type, "index": index, "preview":preview } };
+        var tmpl = $.templates("#uploadItemTemplate");
+		var html = tmpl.render(data);
+		$("#modal-multimedia-add .filesContainer").append(html);
+    });	
 }

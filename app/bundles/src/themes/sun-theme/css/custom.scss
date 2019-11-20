@@ -142,3 +142,7 @@
 .fieldset, fieldset{
 	position:relative;
 }
+
+.dragging-over{
+	background: lighten($info,60%);
+}

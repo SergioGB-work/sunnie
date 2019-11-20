@@ -7,7 +7,7 @@ block vars
 
 block modal-body
 
-	div(id="contentTypeList",data-service-data=apiDevelopment + "/site/{idSite}/content/contentTypes",data-method="GET",data-template="#templateContentTypeList",data-target="#modal-contentType-list #contentTypeList")
+	div(id="contentTypeList",data-service-data=apiDevelopment + "/site/{idSite}/content/contentTypes",data-method="GET",data-template="#templateContentTypeList",data-target="#modal-contentType-list #contentTypeList",data-has-pagination="true", data-initial-page="1", data-items-per-page="6", data-enable-get-params="true", data-noreload="true", data-rel="contentTypeList", data-pagination-container-target="#modal-contentType-list .pagination")
 
 	
 	script(id="templateContentTypeList",type="text/x-jsrender")
@@ -32,7 +32,9 @@ block modal-body
 							h3.card-title.icon-2x {{:label}}
 
 			| {{/for}}
-
+		.row
+			.col-12
+				+fragment('fragment-pagination')
 		| {{else}}
 		.row
 			.alert.alert-info.text-center.col-12.col-sm-8.offset-sm-2 Todavía no existen tipos de contenido

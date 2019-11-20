@@ -19,17 +19,21 @@ mixin component-publisher(content)
 	else
 		script(id="component-publisher-template-" + id ,type="text/x-jsrender")
 			
-			| {{if data.content.length > 0}}
+			| {{if data.length > 0}}
 			
 			.row
-				| {{for data.content}}
+				| {{for data}}
 				.col-6.col-xl-2.col-lg-3.col-md-4
 					.card
 						.card-body
 							h3.card-title.icon-2x 
 								a(href= fullSiteUrl + url_detail + "&idContent={{:id}}") {{:name}}
-							p.card-text {{:createdDate}}
 
+							| {{* window.fecha = ''}}
+							| {{for createdDate }}
+							| {{* fecha = new Date(data).toLocaleString()}}
+							p.card-text {{*: fecha}}
+							| {{/for}}
 				| {{/for}}
 			| {{else}}
 			.row

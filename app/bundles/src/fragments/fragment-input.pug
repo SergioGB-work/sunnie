@@ -18,5 +18,7 @@ mixin fragment-input(content)
 	- var size = content.size || false;
 	- var step = content.step || false;
 	- var autocomplete = content.autocomplete || false;
+	- var multiple = content.multiple || false;
+	- var accept = content.accept || false;
 
-	input(id=id, class=classes, type=type, name=name, value=value, required=required, placeholder=placeholder, pattern=pattern, disabled=disabled, readonly=readonly, max=max, min=min, maxlength=maxlength, size=size, step=step,  autocomplete=autocomplete)&attributes(dataAttributes)
+	input(id=id, class=classes, type=type, name=name, value=value, required=required, placeholder=placeholder, pattern=pattern, disabled=disabled, readonly=readonly, max=max, min=min, maxlength=maxlength, size=size, step=step,  autocomplete=autocomplete,multiple=multiple, accept=accept)&attributes(dataAttributes)

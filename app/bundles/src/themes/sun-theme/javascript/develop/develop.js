@@ -1,4 +1,7 @@
 var apiDevelop = "http://localhost:8082";
+var uploadFilesArray=[];
+var totalLoadedContents = 0;
+var itemsUploaded = 0;
 
 $(document).ready(function(){
 
@@ -16,7 +19,7 @@ $(document).ready(function(){
 			dataList($(this));
 		})
 
-  		$('[data-toggle="tooltip"]').tooltip()
+  		$('[data-toggle="tooltip"]').tooltip();
 		
 	});
 
@@ -442,6 +445,85 @@ $(document).ready(function(){
 		}
 
 	});
+	
+	//SUBIDA MULTIPLE DE FICHEROS
+    $('#modal-multimedia-add').on('dragover','.dropfile',function (e) {
+    	$(this).addClass('alert-info').removeClass('alert-dark');
+    });
+
+    $('#modal-multimedia-add').on('dragleave','.dropfile',function (e) {
+    	$(this).removeClass('alert-info').addClass('alert-dark');
+    });    
+
+
+    $('#modal-multimedia-add').on('drop','.dropfile',function (e) {
+    	$(this).removeClass('alert-info').addClass('alert-dark');
+    	var dt = e.dataTransfer
+  		var files = dt.files
+        uploadFilePreview(files);
+    });
+
+	$('#modal-multimedia-add').on('click', '.deleteFile', function () {
+		var index = $(this).closest('.file').data('index');
+		$(this).closest('.file').remove();
+		uploadFilesArray.splice(index, 1);
+
+		//Renovamos los
+		$('#modal-multimedia-add .file').each(function(index){
+			$(this).data("index",index);
+			$(this).attr("data-index",index);
+		});
+
+	});
+
+	$('#modal-multimedia-add').on('show.bs.modal', function (e) {
+	  	if (totalLoadedContents < itemsUploaded) {
+	  		e.preventDefault();
+     		e.stopImmediatePropagation();
+        	$('#modal-multimedia-uploadingFiles').modal('show');
+	  	}
+	  	else{
+	  		uploadFilesArray = [];
+  			$('.filesContainer').html('');
+	  	}
+
+  	});
+
+	$('#modal-multimedia-add .send').click(function () {
+        $('#modal-multimedia-add').modal('hide');
+        $('#modal-multimedia-uploadingFiles').modal('show');
+        itemsUploaded = 0;
+        itemsUploaded = uploadFilesArray.length;
+        $('.progressBar-block .current').text('0');
+        $('.progressBar-block .total').text(itemsUploaded);
+        $('.progressBar-block .percentage').text('0%');
+        $('.progressBar-block .progress-bar').css('width', '0%');
+
+        for (var key in uploadFilesArray) {
+            var dataFormData = new FormData();
+            dataFormData.append('file', uploadFilesArray[key]);
+            var params = { "service": apiDevelop + "/site/{idSite}/content/media/upload", "method": "POST", "aditionalData": dataFormData, "callback": "addMultimediaCallback" };
+            getData(params);
+        }
+        uploadFilesArray = [];
+	});
+
+	$('#modal-multimedia-delete').on('show.bs.modal',function(event){
+		var filename = $(event.relatedTarget).data('filename');
+		$(this).find('[name=filename]').val(filename);
+	});
+
+	$('#modal-multimedia-detail').on('show.bs.modal',function(event){
+		$(this).find('#multimedia-detail').html('');	
+		var filename = $(event.relatedTarget).data('filename');
+
+		getData({
+			"service": apiDevelop + "/site/{idSite}/content/media/detail/"+filename,
+			"method": "GET", "template": "#templateMultimediaDetail",
+			"target": "#multimedia-detail"
+		});		
+
+	});	
 
 });
 
@@ -828,4 +910,59 @@ function checkSelected(data,selectedValue){
 			$(this).find('option[value='+selectedValue+']').attr("selected","selected");
 		}
 	})
+}
+
+function addMultimediaCallback(data){
+
+	var nItems = parseInt($('.progressBar-block .current:eq(0)').text());
+
+    if (nItems < parseInt($('.progressBar-block .total:eq(0)').text())) {
+        $('.progressBar-block .current').text(nItems + 1);
+        $('.progressBar-block .percentage').text(parseFloat(parseInt($('.progressBar-block .current:eq(0)').text()) * 100 / parseInt($('.progressBar-block .total:eq(0)').text())).toFixed() + '%');
+        $('.progressBar-block .progress-bar').css('width', (parseInt($('.progressBar-block .current:eq(0)').text()) * 100 / parseInt($('.progressBar-block .total:eq(0)').text())) + '%');
+        
+        var filename = data.filename || "Unknown filename";
+        var classes = "alert-success";
+        var message = data.filename + " se ha subido correctamente";
+        var messsage_detail = '';
+
+        if (data.error) {
+            switch (data.error.code) {
+                case 'FILE_FORMAT_ERROR"':
+                    messsage_detail = 'El formato del fichero no es válido.'
+                    break;
+
+                case 'FILE_EXIST_ERROR':
+                    messsage_detail = 'El fichero ya existe. SI deseas volver a subirlo, elimina el anterior y vuelve a subirlo.'
+                    break;    
+
+                default:
+                    messsage_detail = "Ha ocurrido un error al intentar subir el fichero";
+                    break;
+            }
+
+            classes = "alert-danger";
+            message = "Error al subir el fichero " + filename + "." + messsage_detail;
+        }
+		var tmpl = $.templates('#alertTemplate');
+		var html = tmpl.render({ data: { 'message': message, 'class': classes } });
+		$('#modal-multimedia-uploadingFiles .alerts-block').append(html);
+    }
+
+    totalLoadedContents++;
+
+    if (totalLoadedContents == itemsUploaded) {
+        itemsUploaded = 0;
+        totalLoadedContents = 0;
+        uploadError = false;
+
+		$('#modal-multimedia-add form')[0].reset();
+		$('#modal-multimedia-uploadingFiles .progressBarButton').toggleClass('d-none');
+
+    }
+}
+
+function deleteMultimediaCallback(data){
+	$('#modal-multimedia-list').modal('show');
+	$('#modal-multimedia-delete').modal('hide');
 }
