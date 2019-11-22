@@ -1,6 +1,9 @@
 var api = "http://localhost:3000";
 var items_per_page_default = 10;
 var defaultImg = './images/default-img.png';
+var uploadFilesArray={};
+var totalLoadedContents = 0;
+var itemsUploaded = 0;
 
 $(document).ready(function(){
 
@@ -31,6 +34,7 @@ $(document).ready(function(){
 		var data = {};
 		var form = $(this);
 		var noReload = form.data('noreload') || '';
+		var enableModalUploadProgress = form.data('enable-modal-upload-progress');
 
 		var rel = $(this).data('rel') || '';
 
@@ -97,23 +101,72 @@ $(document).ready(function(){
 			var dataFormData = new FormData();	
 
 			form.find('input[type="file"]').each(function(){
-				dataFormData.append($(this).attr('name'), $(this).get(0).files[0]);
+
+				if($(this).get(0).files.length > 1){
+					
+					var filesArray = [];
+
+					for(var i=0;i < $(this).get(0).files.length; i++){
+
+						filesArray.push($(this).get(0).files[i]);
+					}
+
+					dataFormData.append($(this).attr('name'),filesArray) ;
+				}
+				else{
+					dataFormData.append($(this).attr('name'), $(this).get(0).files[0]);
+				}
+				
 			});
+
+
 
 			for ( var key in data ) {
     			dataFormData.append(key, data[key]);
 			}
 
 			data = dataFormData;
+
+	        if(enableModalUploadProgress == true){
+	        	//Cerramos la modal si el formulario esta en una modal
+	        	form.closest('.modal').modal('hide');
+	        	//Mostramos la modal de progreso de subida de ficheros
+				$('#modal-multimedia-uploadingFiles').modal('show').find('.alerts-block').html('');
+
+		        itemsUploaded = 0;
+
+		        form.find('input[type="file"]').each(function(){
+		        	itemsUploaded += uploadFilesArray[$(this).attr('name')].length
+		        });
+
+
+		        $('.progressBar-block .current').text('0');
+		        $('.progressBar-block .total').text(itemsUploaded);
+		        $('.progressBar-block .percentage').text('0%');
+		        $('.progressBar-block .progress-bar').css('width', '0%');
+
+		        form.find('input[type="file"]').each(function(){
+			        
+			        for (var key in uploadFilesArray[$(this).attr('name')]) {
+
+			            dataFormData = new FormData();
+			            dataFormData.append($(this).attr('name'), uploadFilesArray[$(this).attr('name')][key]);
+			            var params = { "service": form.attr('data-action'), "method": form.data('method'), "aditionalData": dataFormData, "callback": form.data('callback')};
+			            getData(params);
+			        }
+			        uploadFilesArray[$(this).attr('name')] = [];
+			    });
+	        }
+
 		}
 
-		if (form.data('form-filter') != true) {
+		if (form.data('form-filter') != true && enableModalUploadProgress !== true) {
 			url = form.attr('data-action');
 			method = form.data('method');			
 			var params = { "service": url, "method": method, "aditionalData": data, "callback": form.data('callback'), "content":form.data('content'),"callfront":form.data('callfront')};
 			getData(params);
 		}
-		else {
+		else if(form.data('form-filter') == true) {
 
 			var filters = JSON.stringify(data);
 
@@ -230,8 +283,8 @@ $(document).ready(function(){
 		dataEvent($(this));
 	});
 
-	$('[data-uploadFile="true"]').each(function(){
-		dataUploadFile($(this));
+	$('[data-upload-file-preview="true"]').each(function(){
+		dataUploadFilePreview($(this));
 	});
 
 });
@@ -1398,19 +1451,36 @@ function dataParent(el){
 	}
 }
 
-function dataUploadFile(el){
+function dataUploadFilePreview(el){
 
 	var idInput = el.attr('id') || '',
-		uploadPreviewContainer = el.data('upload-preview-container') || '',
-		modalUploadProgress = el.data('modal-upload-progress') || '';
+		nameInput = el.attr('name') || '',
+		uploadFilePreviewContainer = el.data('upload-file-preview-container') || '',
+		uploadFilePreviewTemplate = el.data('upload-file-preview-template') || '#uploadItemTemplate';
 
-    $(id).change(function () {
+    $('#' + idInput).change(function () {
         var input = $(this).get(0);
-        uploadFilePreview(input.files);
+        uploadFilePreview(input.files,uploadFilePreviewContainer, nameInput);
     });
+
+
+    if(uploadFilePreviewContainer != '' && uploadFilePreviewContainer !== undefined){
+		$(uploadFilePreviewContainer).on('click', '.deleteFile', function () {
+			var index = $(this).closest('.file').data('index');
+			$(this).closest('.file').remove();
+			uploadFilesArray[nameInput].splice(index, 1);
+
+			//Renovamos los indices de los ficheros que están en preview
+			$(uploadFilePreviewContainer).find('.file').each(function(index){
+				$(this).data("index",index);
+				$(this).attr("data-index",index);
+			});
+		});
+    }   
+
 }
 
-function uploadFilePreview(files){
+function uploadFilePreview(files,previewContainer,nameInput){
 	$.each(files, function (index) {
         var filename = files[index].name.split('.')[0],
             extension = files[index].name.split('.')[1],
@@ -1418,17 +1488,21 @@ function uploadFilePreview(files){
 
     	var preview = window.URL.createObjectURL(files[index]);             
 
-        $("#modal-multimedia-add .filesContainer .file").each(function () {
+        $(previewContainer).find(".file").each(function () {
             var filename = $(this).data('filename');
 
             if (files[index].name == filename) {
                 var i = $(this).data('index');
-                uploadFilesArray.splice(i, 1);
+                uploadFilesArray[nameInput].splice(i, 1);
                 $(this).remove();
             }
         });
+        
+        if(uploadFilesArray[nameInput] === undefined){
+        	uploadFilesArray[nameInput] = []
+        }
 
-        uploadFilesArray.push(files[index]);
+        uploadFilesArray[nameInput].push(files[index]);
 
         switch (files[index].type.split('/')[0]) {
 
@@ -1445,8 +1519,60 @@ function uploadFilePreview(files){
                 break;
         }
         var data = { "data": { "filename": filename, "extension": extension, "type": type, "index": index, "preview":preview } };
-        var tmpl = $.templates("#uploadItemTemplate");
+        var tmpl = $.templates(uploadItemTemplate);
 		var html = tmpl.render(data);
-		$("#modal-multimedia-add .filesContainer").append(html);
+		$(previewContainer).append(html);
     });	
+}
+
+function uploadFileCallback(data){
+	$('#modal-multimedia-uploadingFiles .progressBarButton:not(.loadingButton)').addClass('d-none');
+	$('#modal-multimedia-uploadingFiles .progressBarButton.loadingButton').removeClass('d-none');
+
+	var nItems = parseInt($('.progressBar-block .current:eq(0)').text());
+    if (nItems < parseInt($('.progressBar-block .total:eq(0)').text())) {
+        $('.progressBar-block .current').text(nItems + 1);
+        $('.progressBar-block .percentage').text(parseFloat(parseInt($('.progressBar-block .current:eq(0)').text()) * 100 / parseInt($('.progressBar-block .total:eq(0)').text())).toFixed() + '%');
+        $('.progressBar-block .progress-bar').css('width', (parseInt($('.progressBar-block .current:eq(0)').text()) * 100 / parseInt($('.progressBar-block .total:eq(0)').text())) + '%');
+        
+        var filename = data.filename || "Unknown filename";
+        var classes = "alert-success";
+        var message = data.filename + " se ha subido correctamente";
+        var messsage_detail = '';
+
+        if (data.error) {
+            switch (data.error.code) {
+                case 'FILE_FORMAT_ERROR"':
+                    messsage_detail = 'El formato del fichero no es válido.'
+                    break;
+
+                case 'FILE_EXIST_ERROR':
+                    messsage_detail = 'El fichero ya existe. SI deseas volver a subirlo, elimina el anterior y vuelve a subirlo.'
+                    break;    
+
+                default:
+                    messsage_detail = "Ha ocurrido un error al intentar subir el fichero";
+                    break;
+            }
+
+            classes = "alert-danger";
+            message = "Error al subir el fichero " + filename + "." + messsage_detail;
+        }
+		var tmpl = $.templates('#alertTemplate');
+		var html = tmpl.render({ data: { 'message': message, 'class': classes } });
+		$('#modal-multimedia-uploadingFiles .alerts-block').append(html);
+    }
+
+    totalLoadedContents++;
+
+    if (totalLoadedContents == itemsUploaded) {
+        itemsUploaded = 0;
+        totalLoadedContents = 0;
+        uploadError = false;
+
+		$('#modal-multimedia-add form')[0].reset();
+		$('#modal-multimedia-uploadingFiles .progressBarButton:not(.loadingButton)').removeClass('d-none');
+		$('#modal-multimedia-uploadingFiles .progressBarButton.loadingButton').addClass('d-none');
+
+    }
 }

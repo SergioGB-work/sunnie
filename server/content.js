@@ -500,6 +500,7 @@ module.exports = (app) => {
 			var siteURL = functions.getURLSite(site);
 			var file = JSON.parse(JSON.stringify(req.files))
 
+			console.log(req.files);
 
 			Object.keys(file).forEach(function(el){
 

@@ -7,15 +7,15 @@ block vars
 
 block modal-body
 
-	form
+	form(data-action=apiDevelopment + "/site/{idSite}/content/media/upload",data-method="POST", data-callback="uploadFileCallback", data-enable-modal-upload-progress="true")
 		.alert.alert-dark.text-center.text-secondary.position-relative.dropfile.py-5
 			i.fa.fa-upload.icon-12x
 			p.mb-0.text-uppercase.icon-2x Arrastra o selecciona el fichero	
-			+fragment('fragment-input',{"class":"position-absolute h-100 w-100 opacity-0 left-0 top-0 cursor-pointer", "type":"file", "id":"uploadFile","name":"uploadfile", "required":"required","multiple":"multiple","accept":".jpeg,.jpg,.png,.gif,.bmp"}, "true")
-		
+			+fragment('fragment-input',{"class":"position-absolute h-100 w-100 opacity-0 left-0 top-0 cursor-pointer", "type":"file", "id":"uploadFile","name":"file", "required":"required","multiple":"multiple","accept":".jpeg,.jpg,.png,.gif,.bmp", "dataAttributes":{"data-upload-file-preview-container":"#modal-multimedia-add .filesContainer","data-upload-file-preview":"true"}}, "true")
+
 		.row.filesContainer
 
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
 				button(class="btn btn-default mr-3", data-toggle="modal", data-target="#modal-multimedia-list", data-dismiss="modal") Cancelar
-				a(class="btn btn-primary send") Subir
+				button(type="submit",class="btn btn-primary send") Subir
