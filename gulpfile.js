@@ -87,8 +87,10 @@ let taskCSSBuild = [],
 	taskLAYOUTSBuild = [],
 	taskCOMPONENTSBuild = [],
 	taskFRAGMENTSBuild = [],
-	taskLOCALESBuild = [];
+	taskLOCALESBuild = [],
 	taskLOCALES_COMPONENTSBuild = [];
+
+
 
 for (let key in sitesDefined){
 
@@ -478,7 +480,7 @@ function sitesPlugins(done){
 }
 
 function deploySites(done){
-	return gulp.series(localesBuild,localesComponentsBuild,layoutsBuild,templatesBuild,componentsBuild,fragmentsBuild,sitesBuild,sitesFunction,mediaFunction)(done);
+	return gulp.series(localesBuild,localesComponentsBuild,layoutsBuild,templatesBuild,componentsBuild,fragmentsBuild,sitesBuild,sitesFunction,pagesBuild,mediaFunction)(done);
 }
 
 function sitesFunction(done){
@@ -504,9 +506,8 @@ function sitesFunction(done){
 			sitemap = [findPage(sitemap,argv_page)];
 			sitemap[0].childs = [];
 		}
-		
+			
 		buildPage(sitemap,developMode,sitesDefined[key]);
-
 		
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
@@ -896,7 +897,7 @@ function findPage(pages , pageID){
 		}
 	};
 }
-
+/*
 function buildPage(sitemap,development,site){
 	for(let page in sitemap){
 
@@ -905,7 +906,7 @@ function buildPage(sitemap,development,site){
 		if(sitemap[page].layout != undefined){
 
 			let sitemapFile = fs.readFileSync(pathBuild + '/sites/' + site.site +'/sitemap.json');
-
+			
 			gulp.src(pathBuild + '/sites/' + site.site + '/theme/templates/portal.pug')
 			.pipe(pug({
 				data: sitemap[page],
@@ -915,7 +916,7 @@ function buildPage(sitemap,development,site){
 			}))
 			.pipe(i18n({
 				localeDir: pathBuild + '/sites/' + site.site + '/locale',
-				locales: ['es','en'],
+				locales: langs,
 				delimeters: ['${{','}}$']
 			}))
 			.pipe(rename({
@@ -930,6 +931,64 @@ function buildPage(sitemap,development,site){
 		}
 	}
 }
+*/
+var taskPages = [];
+
+function buildPage(sitemap,development,site){
+	
+	taskPages = [];
+	
+	for(let page in sitemap){
+
+		let filename = sitemap[page].src.replace('/','').split('.');
+		
+		if(sitemap[page].layout != undefined){
+			createTaskPages(sitemap[page].id,sitemap[page],site.site,filename,development);
+			taskPages.push('pageBuild' + sitemap[page].id);
+			
+		}	
+		
+		if(sitemap[page].childs != undefined && sitemap[page].childs.length > 0){
+			taskPages.concat(buildPage(sitemap[page].childs,development,site));
+		}
+	}
+	return taskPages;
+}
+
+function pagesBuild(done){
+	return gulp.parallel(taskPages)(done);
+}
+
+function createTaskPages(pageID,page,siteName,filename,development){
+	
+	gulp.task('pageBuild' + pageID, () => {
+			
+		let sitemapFile = fs.readFileSync(pathBuild + '/sites/' + siteName +'/sitemap.json');
+		
+		return gulp.src(pathBuild + '/sites/' + siteName + '/theme/templates/portal.pug')
+		.pipe(pug({
+			data: page,
+			pretty: true,
+			locals: Object.assign(JSON.parse(sitemapFile), {"development":development})
+		}))
+		.pipe(i18n({
+			localeDir: pathBuild + '/sites/' + siteName + '/locale',
+			locales: langs,
+			delimeters: ['${{','}}$']
+		}))
+		.pipe(rename({
+			basename: filename[0],
+			extname: '.'+filename[1]
+		}))
+		.pipe(gulp.dest(pathPublic + '/sites/' + siteName));
+	});
+}
+
+
+
+
+
+
 
 function buildRules(){
 	let rewriteRules = {};
@@ -1078,3 +1137,4 @@ exports.build = build;
 exports.cssComponents = cssComponents;
 exports.sitesBuild = sitesBuild;
 exports.sitesFunction = sitesFunction;
+exports.removeTMP = removeTMP;

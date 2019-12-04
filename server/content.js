@@ -319,7 +319,7 @@ module.exports = (app) => {
 	app.post('/site/:id/content/contentType/add', function (req, res) {
 		var site = req.params.id;
 		var siteURL = functions.getURLSite(site);
-		var contentTypeName = req.body.name;
+		var contentTypeName = req.body.name.replace(/ /g, "");
 		var contentTypeTemplate = req.body.template;
 		var config = {"config":req.body.config};
 
