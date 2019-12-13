@@ -297,27 +297,27 @@ function jsThemeFunction(done){
 		let developFiles;
 		if(developMode){
 				developFiles = streamqueue({ objectMode: true },
-				gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/[^_]*.js'));
+				gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/develop/**/[^_]*.js'));
 		}
 
 		for (let lang in langs){
 
 			let auxFiles = files.pipe(concat('main.js'))
-			/*.pipe(i18n({
+			.pipe(i18n({
 				localeDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
 				locales: [langs[lang]],
 				delimeters: ['${{','}}$']
-			}))*/
+			}))
 			.pipe(rename('main.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
 			
 
 			let auxPriorityFiles = priorityFiles.pipe(concat('priority.js'))
-			/*.pipe(i18n({
+			.pipe(i18n({
 				localeDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
 				locales: [langs[lang]],
 				delimeters: ['${{','}}$']
-			}))*/
+			}))
 			.pipe(rename('priority.js'))			
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 			
@@ -335,11 +335,11 @@ function jsThemeFunction(done){
 
 			if(developMode){
 				developFiles.pipe(concat('develop.js'))
-				/*.pipe(i18n({
+				.pipe(i18n({
 					localeDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
 					locales: [langs[lang]],
 					delimeters: ['${{','}}$']
-				}))*/
+				}))
 				.pipe(rename('develop.js'))
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 				.pipe(rename('develop.min.js'))
@@ -367,11 +367,11 @@ function jsComponentsFunction(done){
 		for (let lang in langs){
 			
 			let auxFiles = files.pipe(concat('components.js'))
-			/*.pipe(i18n({
+			.pipe(i18n({
 				localeDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
 				locales: [langs[lang]],
 				delimeters: ['${{','}}$']
-			}))*/
+			}))
 			.pipe(rename('components.js'))
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));
 
@@ -379,11 +379,11 @@ function jsComponentsFunction(done){
 
 			if(!developMode){
 				auxFiles.pipe(rename('components.min.js'))
-				/*.pipe(i18n({
+				.pipe(i18n({
 					localeDir: pathBuild + '/sites/' + sitesDefined[key].site + '/locale',
 					locales: [langs[lang]],
 					delimeters: ['${{','}}$']
-				}))*/
+				}))
 				.pipe(rename('components.min.js'))	
 				.pipe(uglify())
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));

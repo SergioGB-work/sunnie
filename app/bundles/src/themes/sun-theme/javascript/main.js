@@ -518,15 +518,20 @@ function getData(el) {
 					var statusCode = data.error.statusCode || data.status ,
 						code = data.error.code,
 						message = data.error.message || data.statusText,
-						dataMessage = '';
+						dataMessage = '',
+						close = true;
 				}	
 				if (data.responseJSON !== undefined && data.responseJSON !== null) {
-					statusCode = data.responseJSON.statusCode;
-					message = code = data.responseJSON.code;
-					dataMessage = data.responseJSON.data || '';
+					statusCode = data.responseJSON.error.statusCode;
+					message = code = data.responseJSON.error.code;
+					dataMessage = data.responseJSON.error.data || '',
+					close = data.responseJSON.error.close !== undefined ? data.responseJSON.error.close : true;
 				}
-
-				$('.modal').modal('hide');
+				
+				if(close){
+					$('.modal').modal('hide');
+				}
+				
 
 				error(statusCode, code, message,dataMessage);
 			}
@@ -979,6 +984,26 @@ function error(statusCode, code, message, dataMessage) {
 
 		case 'FILE_DELETE_NOT_EXIST_ERROR':
 			content = 'Se ha producido un error al intentar eliminar el fichero. El fichero no existe.';
+			break;
+
+		case 'PUG_INVALID_INDENTATION':
+			content = 'Se ha producido un error en tu plantilla PUG. La indentación de PUG no es correcta.\n';
+			content +='Mensaje original: ' + dataMessage 
+			break;
+
+		case 'PUG_INVALID_KEY_CARACTER':
+			content = 'Se ha producido un error en tu plantilla PUG. Caracter inesperado en PUG.\n';
+			content +='Mensaje original: ' + dataMessage 
+			break;
+
+		case 'PUG_NO_END_BRACKET':
+			content = 'Se ha producido un error en tu plantilla PUG. Se ha encontrado un string sin un ) de cierre.\n';
+			content +='Mensaje original: ' + dataMessage 
+			break;
+
+		case 'PUG_MIXIN_WITHOUT_BODY':
+			content = 'Se ha producido un error en tu plantilla PUG. Declarado mixin sin body.\n';
+			content +='Mensaje original: ' + dataMessage 
 			break;
 
 		default:

@@ -146,3 +146,7 @@
 .dragging-over{
 	background: lighten($info,60%);
 }
+
+#modal-error{
+	z-index: $zindex-modal + 1;
+}

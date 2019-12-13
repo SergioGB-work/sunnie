@@ -305,6 +305,7 @@ module.exports = (app) => {
 	* @param {number} - componentCSS - CSS code of the component
 	*/
 	app.post('/site/:id/component/create', function (req, res) {
+
 		try{
 			var componentName = req.body.name;
 			var componentConfig = req.body.config[0].name != '' ? {"config":req.body.config} : JSON.parse('{"config":[]}');
@@ -319,7 +320,7 @@ module.exports = (app) => {
 				})
 			}
 
-			//Se hace una donble conversion para compobar algunos errores de formato, si da error lo capturara el try catch
+			//Se hace una doble conversion para compobar algunos errores de formato, si da error lo capturara el try catch
 			var componentViewCheck = pug.render(componentView, {});
 			componentViewCheck = html2pug(componentViewCheck, { tabs: true, fragment:true})
 			
@@ -363,6 +364,7 @@ module.exports = (app) => {
 		
 		}
 		catch(e){
+
 			console.log(e);
 			//Si ocurre algun error borramos la carpeta del componente si existe	
 			if(fs.existsSync(pathPlugins + '/components/component-' + componentName)){
@@ -377,7 +379,19 @@ module.exports = (app) => {
 				fs.writeFileSync(pathPlugins + '/components/include_components.pug',include,function(err){});
 			};
 
-			res.status(200).send(
+			if(e.code == 'PUG:INVALID_INDENTATION'){
+				res.status(412).send(
+					{
+						"error":{
+							"code":"412",
+							"statusCode":"PUG_INVALID_INDENTATION",
+							"data":e.msg
+						}
+					}
+				)			
+			}			
+
+			res.status(412).send(
 				{
 					"error":{
 						"code":"412",
@@ -416,6 +430,7 @@ module.exports = (app) => {
 
 			//Se hace una donble conversion para compobar algunos errores de formato, si da error lo capturara el try catch
 			var componentViewCheck = pug.render(componentView, {});
+
 			componentViewCheck = html2pug(componentViewCheck, { tabs: true, fragment:true})	
 
 			var view ="";
@@ -435,6 +450,7 @@ module.exports = (app) => {
 		}
 		catch(e){
 			console.log(e);
+
 			//Si ocurre algun error borramos la carpeta del componente si existe	
 			if(fs.existsSync(pathPlugins + '/components/component-' + componentName)){
 				rimraf(pathPlugins + '/components/component-' + componentName,function () {
@@ -448,7 +464,21 @@ module.exports = (app) => {
 				fs.writeFileSync(pathPlugins + '/components/include_components.pug',include,function(err){});
 			};
 
-			res.status(200).send(
+			if(e.code != '' && e.code !== undefined && e.code !== null){
+
+				res.status(412).send(
+					{
+						"error":{
+							"code":"412",
+							"statusCode":e.code.replace(':','_'),
+							"data":e.msg,
+							"close": false
+						}
+					}
+				)			
+			}
+
+			res.status(412).send(
 				{
 					"error":{
 						"code":"412",

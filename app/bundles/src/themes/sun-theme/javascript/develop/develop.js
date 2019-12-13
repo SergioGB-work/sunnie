@@ -108,7 +108,6 @@ $(document).ready(function(){
 
 	$('#modal-component-created-edit .send').click(function(){
 		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
 			showError('','Modificando y desplegando componente, espere por favor...');
 		}	
 	});		
