@@ -582,6 +582,8 @@ function dataEditPageLoadedCallback(data){
 
 function dataEditSiteLoadedCallback(data){
 	dataList($('#modal-site-edit #themeList'));
+	$('#form-edit-site #manifest_displayEdit option[value="'+data.manifest.display+'"]').attr('selected','selected')
+	$('#form-edit-site #manifest_orientationEdit option[value="'+data.manifest.orientation+'"]').attr('selected','selected')
 }
 
 function checkLayoutSelected(data,idLayout){

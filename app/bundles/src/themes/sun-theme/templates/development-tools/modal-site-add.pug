@@ -7,32 +7,80 @@ block vars
 
 block modal-body
 	form(id="form-site-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/add", data-callback="addSiteCallback")
-		.row
-			div(class="form-group col-4")
-				+fragment('fragment-label',{"for":"siteName", "text":"Nombre"})
-				input(type="text",name="name",id="siteName",class="form-control",required)
+		
+		ul.nav.nav-tabs.mb-3(id="add-site-tabs",role="tablist")
+			li.nav-item
+				a.nav-link.active(id="config-tab",data-toggle="pill" href="#block-site-data" role="tab" aria-controls="block-site-data" aria-selected="true") Configuración
+			li.nav-item
+				a.nav-link(id="manifest-tab",data-toggle="pill" href="#block-site-manifest" role="tab" aria-controls="block-site-manifest" aria-selected="false") Manifest
 
-			div(class="form-group col-4")
-				+fragment('fragment-label',{"for":"siteURL", "text":"URL"})
-				input(type="text",name="url",id="siteURL",class="form-control",required)
+		#add-site-content-tabs.tab-content
+			#block-site-data.tab-pane.show.active(role="tabpanel",aria-labelledby="config-tab")
+				.row
+					div(class="form-group col-4")
+						+fragment('fragment-label',{"for":"siteName", "text":"Nombre"})
+						input(type="text",name="name",id="siteName",class="form-control",required)
 
-			div(class="form-group col-md-4 col-12")
+					div(class="form-group col-4")
+						+fragment('fragment-label',{"for":"siteURL", "text":"URL"})
+						input(type="text",name="url",id="siteURL",class="form-control",required)
 
-				fielset
-					legend Activar Asistente de Desarrollo(solo desarrollo)
+					div(class="form-group col-md-4 col-12")
 
-					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotNo",class="form-control custom-control-input",required, value="false", checked)
-						+fragment('fragment-label',{"for":"enableChatBotNo", "text":"No", "class":"uppercase custom-control-label"},'true')
+						fielset
+							legend Activar Asistente de Desarrollo(solo desarrollo)
 
-					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotSi",class="form-control custom-control-input",required,value="true")
-						+fragment('fragment-label',{"for":"enableChatBotSi", "text":"Si", "class":"uppercase custom-control-label"},'true')
-		.row
-			.col-12
-				h3 Seleciona un tema de apariencia
-		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-add #themeList")
+							div(class="custom-control custom-radio")
+								input(type="radio",name="enableChatBot",id="enableChatBotNo",class="form-control custom-control-input",required, value="false", checked)
+								+fragment('fragment-label',{"for":"enableChatBotNo", "text":"No", "class":"uppercase custom-control-label"},'true')
 
+							div(class="custom-control custom-radio")
+								input(type="radio",name="enableChatBot",id="enableChatBotSi",class="form-control custom-control-input",required,value="true")
+								+fragment('fragment-label',{"for":"enableChatBotSi", "text":"Si", "class":"uppercase custom-control-label"},'true')
+				.row
+					.col-12
+						h3 Seleciona un tema de apariencia
+				.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-add #themeList")
+
+
+			#block-site-manifest.tab-pane(role="tabpanel",aria-labelledby="manifest-tab")
+				.row
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_name", "text":"Name"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_name","name":"manifest_name"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_short_name", "text":"Short Name"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_short_name","name":"manifest_short_name"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_theme_color", "text":"Theme Color"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_theme_color","name":"manifest_theme_color"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_background_color", "text":"Background Color"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_background_color","name":"manifest_background_color"})
+
+				.row
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_display", "text":"Display"})
+						+fragment('fragment-select',{"class":"form-control", "id":"manifest_display","name":"manifest_display","options":[{"value":"fullscreen","text":"Fullscreen"},{"value":"standalone","text":"Standalone"},{"value":"minimal-ui","text":"Minimal UI"},{"value":"browser","text":"Browser"}]})
+
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_orientation", "text":"Orientation"})
+						+fragment('fragment-select',{"class":"form-control", "id":"manifest_orientation","name":"manifest_orientation","options":[{"value":"any","text":"Any"},{"value":"natural","text":"Natural"},{"value":"landscape","text":"Landscape"},{"value":"portrait","text":"Portrait"},{"value":"portrait-primary","text":"Portrait Primary"},{"value":"portrait-secondary","text":"Portrait Secondary"},{"value":"landscape-primary","text":"Landscape Primary"},{"value":"landscape-secondary","text":"Landscape Secondary"}]})
+
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_scope", "text":"Scope"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_scope","name":"manifest_scope"})
+
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_description", "text":"Description"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_description","name":"manifest_description"})
+				.row
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_start_url", "text":"Start URL"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_start_url","name":"manifest_start_url"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_lang", "text":"Lang"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_lang","name":"manifest_lang"})
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
 				button(type="submit",class="btn btn-primary send") Crear		

@@ -379,13 +379,14 @@ module.exports = (app) => {
 				fs.writeFileSync(pathPlugins + '/components/include_components.pug',include,function(err){});
 			};
 
-			if(e.code == 'PUG:INVALID_INDENTATION'){
+			if(e.code != '' && e.code !== undefined && e.code !== null){
 				res.status(412).send(
 					{
 						"error":{
 							"code":"412",
-							"statusCode":"PUG_INVALID_INDENTATION",
-							"data":e.msg
+							"statusCode":e.code.replace(':','_'),
+							"data":e.msg,
+							"close": false
 						}
 					}
 				)			

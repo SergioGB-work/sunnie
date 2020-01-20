@@ -2,7 +2,8 @@ const fs = require('fs');
 const functions = require('./functions.js');
 const fsextra = require("fs-extra");
 const rimraf = require("rimraf");
-
+const imagemagick = require('imagemagick');
+const fileUpload = require('express-fileupload');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 
@@ -81,6 +82,20 @@ module.exports = (app) => {
 			var siteTheme = {"theme": req.body.theme};
 			var defaultSiteURL = functions.getURLSite(defaultSite);
 
+			var manifest = {
+				"name": req.body.manifest_name || '',
+				"short_name": req.body.manifest_short_name || '',
+				"theme_color": req.body.manifest_theme_color || '',
+				"background_color": req.body.manifest_background_color || '',
+				"display": req.body.manifest_display || '',
+				"orientation": req.body.manifest_orientation || '',
+				"scope": req.body.manifest_scope || '',
+				"description" : req.body.manifest_description || '',
+				"start_url" : req.body.manifest_start_url || '',
+				"lang" : req.body.manifest_lang || ''
+			}
+
+
 			if(siteURL[0]!= '/'){
 				siteURL= '/' + siteURL;
 			}
@@ -123,6 +138,7 @@ module.exports = (app) => {
 			fs.mkdirSync(pathPlugins + '/sites/' + siteName);
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/build.json', JSON.stringify(siteTheme,null,4),function(err){});
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/sitemap.json', JSON.stringify(sitemap,null,4),function(err){});
+			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/manifest.json', JSON.stringify(manifest,null,4),function(err){});
 
 			fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/');
 			fs.mkdirSync(pathPlugins + '/sites/' + siteName + '/locale/es/');
@@ -159,8 +175,9 @@ module.exports = (app) => {
 			var site = req.params.id;
 			var siteURL = functions.getURLSite(site);
 			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));		
-			var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));	
-			res.status(200).send(Object.assign(sitemap.site, build));
+			var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));
+			var manifest = JSON.parse(fs.readFileSync(siteURL + '/manifest.json'));
+			res.status(200).send(Object.assign(sitemap.site, build, {"manifest":manifest}));
 		}
 		catch(e){
 			console.log(e);
@@ -183,7 +200,7 @@ module.exports = (app) => {
 	* @param {string} - theme - Name of theme that the site will use
 	*/	
 
-	app.post('/site/edit/:id', function (req, res) {
+	app.post('/site/edit/:id',fileUpload(), async function (req, res) {
 		try{
 			var site = req.params.id;
 			var name = req.body.name;
@@ -196,6 +213,65 @@ module.exports = (app) => {
 			var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));
 			var oldUrl = sitemap.site.url;
 
+			var file = JSON.parse(JSON.stringify(req.files));
+			var file_details = {};
+
+			Object.keys(file).forEach(function(el){
+
+				let file_name = file[el].name;
+				let realName = file_name.split('.');
+				let extension = realName.pop();
+					realName = realName.join('.');
+
+				if(!file_name.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
+					return res.status(200).send(
+
+						{
+							"filename":file_name,
+							"error":{
+								"code":"FILE_FORMAT_ERROR"								
+							}
+						}
+					)
+				}
+
+				var buffer = new Buffer.from(file[el].data.data)
+
+				//uncomment await if you want to do stuff after the file is created
+				if(!fs.existsSync(siteURL + '/media')){
+					fs.mkdirSync(siteURL + '/media');
+				}
+
+				if(!fs.existsSync(siteURL + '/media/pwa')){
+					fs.mkdirSync(siteURL + '/media/pwa');
+				}
+
+				fs.writeFile(siteURL + '/media/pwa/' + file_name, buffer, async(err) => {
+					imagemagick.resize({
+					  srcPath: siteURL + '/media/pwa/' + file_name,
+					  dstPath: siteURL + '/media/pwa/' + realName + '.' + extension,
+					  width:   256
+					}, function(err, stdout, stderr){
+					  if (err) throw err;
+					  console.log('resized kittens.jpg to fit within 256x256px');
+					});
+
+				});		
+			});
+
+			var manifest = {
+				"name": req.body.manifest_name || '',
+				"short_name": req.body.manifest_short_name || '',
+				"theme_color": req.body.manifest_theme_color || '',
+				"background_color": req.body.manifest_background_color || '',
+				"display": req.body.manifest_display || '',
+				"orientation": req.body.manifest_orientation || '',
+				"scope": req.body.manifest_scope || '',
+				"description" : req.body.manifest_description || '',
+				"start_url" : req.body.manifest_start_url || '',
+				"lang" : req.body.manifest_lang || ''
+			}			
+
 			sitemap.site.name = name;
 			sitemap.site.url = url;
 			sitemap.site.enableChatBot = enableChatBot;
@@ -203,6 +279,7 @@ module.exports = (app) => {
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 			fs.writeFileSync(siteURL + '/build.json', JSON.stringify(build,null,4));
+			fs.writeFileSync(siteURL + '/manifest.json', JSON.stringify(manifest,null,4));
 
 			//Renombro los archivos del site en src. Se encadenan para que no se bloqueen entre ellas
 			fs.rename(siteURL + '/locale/es/' + site + '.json', siteURL + '/locale/es/' + name + '.json', function(err) {

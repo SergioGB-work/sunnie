@@ -513,11 +513,21 @@ function sitesFunction(done){
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
 		.on('end', function() {
 			siteDone++;
-			if(siteDone == sitesDefined.length){
+			if(siteDone == sitesDefined.length * langs.length){
 				done();
 			}
-			
 		});
+
+		for (let lang in langs){
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/manifest.json')
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site  +'/'  + langs[lang]))
+			.on('end', function() {
+				siteDone++;
+				if(siteDone == sitesDefined.length * langs.length){
+					done();
+				}
+			})
+		}
 	}
 }
 function mediaFunction(done){
@@ -607,7 +617,6 @@ function connectDevServer(done){
 		if(req.url.indexOf('/css/') >=0 || req.url.indexOf('/javascript/') >=0 || req.url.indexOf('/data/') >=0 || req.url.indexOf('/images/') >=0 || req.url.indexOf('/media/') >=0 || req.url.split('.').length > 1 ){
 				
 			let folder = '';
-			let ulr = '';
 			if(req.url.indexOf('/css/') >=0){
 				url = req.url.split('/css/');
 				folder = '/css';
@@ -631,11 +640,11 @@ function connectDevServer(done){
 			else if(req.url.indexOf('/media/') >=0){
 				url = req.url.split('/media/');
 				folder = '/media';
-			}			
+			}
 
 			else if((req.url.split('.').length) >=0 ){
-				
-			}							
+				return res.sendFile(req.url,{ root: pathModule.join(__dirname, './app/development/sites/') });
+			}
 			console.log(req.url);
 			console.log(url);
 			let siteURL = rules[url[0] + folder] + '/' + url[1].split('?')[0];
@@ -935,11 +944,8 @@ function buildPage(sitemap,development,site){
 var taskPages = [];
 
 function buildPage(sitemap,development,site){
-	
-	taskPages = [];
-	
-	for(let page in sitemap){
 
+	for(let page in sitemap){
 		let filename = sitemap[page].src.replace('/','').split('.');
 		
 		if(sitemap[page].layout != undefined){
@@ -956,11 +962,12 @@ function buildPage(sitemap,development,site){
 }
 
 function pagesBuild(done){
+	console.log(taskPages);
 	return gulp.parallel(taskPages)(done);
 }
 
 function createTaskPages(pageID,page,siteName,filename,development){
-	
+
 	gulp.task('pageBuild' + pageID, () => {
 			
 		let sitemapFile = fs.readFileSync(pathBuild + '/sites/' + siteName +'/sitemap.json');
@@ -983,9 +990,6 @@ function createTaskPages(pageID,page,siteName,filename,development){
 		.pipe(gulp.dest(pathPublic + '/sites/' + siteName));
 	});
 }
-
-
-
 
 
 
