@@ -25,6 +25,9 @@
     "uuid": "^3.3.2"
   },
   "scripts": {
+    "serve": "gulp",
+    "api": "gulp apiServer",
+    "build": "gulp deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sergio Gonzalez Barrios",

@@ -401,22 +401,10 @@ function deployJS(done){
 
 /** IMAGES **/
 function imagesFunction(done){
-	for (let key in sitesDefined){	
-		let files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
-		  /*.pipe(image({
-			  pngquant: true,
-			  optipng: false,
-			  zopflipng: true,
-			  jpegRecompress: false,
-			  jpegoptim: true,
-			  mozjpeg: true,
-			  gifsicle: true,
-			  svgo: true,
-			  concurrent: 10
-			}))*/;
-
-		for (let lang in langs){  
-			files.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/images/'))
+	for (let key in sitesDefined){
+		for (let lang in langs){
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/images/'));
 		}	
 	}
 
@@ -425,21 +413,21 @@ function imagesFunction(done){
 
 function imagesCompressFunction(done){
 	for (let key in sitesDefined){	
-		let files = gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
-		  .pipe(image({
-			  pngquant: true,
-			  optipng: false,
-			  zopflipng: true,
-			  jpegRecompress: false,
-			  jpegoptim: true,
-			  mozjpeg: true,
-			  gifsicle: true,
-			  svgo: true,
-			  concurrent: 10
-			}));
 
 		for (let lang in langs){  
-			files.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/images/'))
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/images/**/*.*')
+			  	.pipe(image({
+				  pngquant: true,
+				  optipng: false,
+				  zopflipng: true,
+				  jpegRecompress: false,
+				  jpegoptim: true,
+				  mozjpeg: true,
+				  gifsicle: true,
+				  svgo: true,
+				  concurrent: 10
+				}))
+			  	.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/images/'))
 		}	
 	}
 
@@ -513,7 +501,7 @@ function sitesFunction(done){
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))
 		.on('end', function() {
 			siteDone++;
-			if(siteDone == sitesDefined.length * langs.length){
+			if(siteDone == (sitesDefined.length * langs.length) * 2){
 				done();
 			}
 		});
@@ -523,10 +511,19 @@ function sitesFunction(done){
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site  +'/'  + langs[lang]))
 			.on('end', function() {
 				siteDone++;
-				if(siteDone == sitesDefined.length * langs.length){
+				if(siteDone == (sitesDefined.length * langs.length) * 2){
 					done();
 				}
 			})
+
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/service-worker.js')
+			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site  +'/'  + langs[lang]))
+			.on('end', function() {
+				siteDone++;
+				if(siteDone == (sitesDefined.length * langs.length) * 2){
+					done();
+				}
+			})			
 		}
 	}
 }
@@ -534,7 +531,7 @@ function mediaFunction(done){
 	let siteDone = 0;
 	for (let key in sitesDefined){
 		for (let lang in langs){
-			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/media/*.*')
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/media/**/*.*')
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/media'))
 			.on('end', function() {
 				siteDone++;

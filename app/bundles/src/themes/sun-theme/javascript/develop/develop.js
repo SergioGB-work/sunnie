@@ -13,11 +13,12 @@ $(document).ready(function(){
 			$(this).find('form')[0].reset();
 		}		
 		
+		//REVISAR para generalizar
 		$(this).find("[data-service-data]:not([data-load='false'])").each(function(){
 			dataList($(this));
 		})
 
-  		$('[data-toggle="tooltip"]').tooltip();
+		loadEvents("#" + $(this).attr('id'));
 		
 	});
 
@@ -575,23 +576,13 @@ function publishPageCallback(){
 	$('#modal-error').modal('hide');
 }
 
-function dataEditPageLoadedCallback(data){
-	dataList($('#modal-page-edit #layoutEditList'));
-	dataList($('#modal-page-edit #pageParentPositionEdit'));
-}
-
 function dataEditSiteLoadedCallback(data){
-	dataList($('#modal-site-edit #themeList'));
-	$('#form-edit-site #manifest_displayEdit option[value="'+data.manifest.display+'"]').attr('selected','selected')
-	$('#form-edit-site #manifest_orientationEdit option[value="'+data.manifest.orientation+'"]').attr('selected','selected')
-}
 
-function checkLayoutSelected(data,idLayout){
-	$('#modal-page-edit #layoutEditList input[value="'+idLayout+'"]').attr('checked','checked');
-}
+	$('#form-edit-site input[name="serviceWorkerType"][value="custom"]').change(function(){
+		initSpecialTextareas($('#form-edit-site'));
+	})
 
-function checkThemeSelected(data,idTheme){
-	$('#modal-site-edit #themeList input[value="'+idTheme+'"]').attr('checked','checked');
+	$('#form-edit-site input[name="serviceWorkerType"]:checked').change()
 }
 
 function checkParentPage(data,parentPosition,pagePosition){
@@ -601,12 +592,13 @@ function checkParentPage(data,parentPosition,pagePosition){
 }
 
 function dataComponentLoadedCallback(data){
+	
 	$('.modal [data-service-data]:not([data-load="false"])').each(function(){
-		dataList($(this));
+		//dataList($(this));
 	});
 
 	$('#modal-component-edit [data-parent]').each(function(){
-		dataParent($(this));
+		//dataParent($(this));
 	});	
 
 	$('#modal-component-edit textarea.richHTML').each(function(){
@@ -614,13 +606,9 @@ function dataComponentLoadedCallback(data){
 	});
 }
 
-function checkComponentEdited(data, nameComponent){
-	$('#modal-component-edit #componentName option[value="'+nameComponent+'"]').attr('selected','selected');
+//REVISAR SI SIRVE DE ALGO
+function checkComponentEdited(data){
 	loadConfigComponent();
-}
-
-function checkLayoutColumn(data, column){
-	$('#modal-component-edit #layoutColumn option[value="'+column+'"]').attr('selected','selected');
 }
 
 function editComponentCallback(data){
@@ -743,22 +731,22 @@ function dataContentLoadedCallback(data){
 
 function dataContentTypeLoadedCallback(data){
 	initSpecialTextareas($('#modal-contentType-edit'))
-	$('#form-edit-contentType #edit-contentType-block [data-event]').each(function(){
+	/*$('#form-edit-contentType #edit-contentType-block [data-event]').each(function(){
 		dataEvent($(this));
-	});
+	});*/
 };
 
 function dataComponentEditLoadedCallback(data){
 	initSpecialTextareas($('#modal-component-created-edit'));
-	$('#form-component-created-edit #edit-component-created-block [data-event]').each(function(){
+	/*$('#form-component-created-edit #edit-component-created-block [data-event]').each(function(){
 		dataEvent($(this));
-	});	
+	});	*/
 }
 
 function componentCreateConfigCallback(data){
-	$('#form-component-create #componentViewConfig [data-event]').each(function(){
+	/*$('#form-component-create #componentViewConfig [data-event]').each(function(){
 		dataEvent($(this));
-	});		
+	});		*/
 }
 
 function deleteContentCallback(data){
@@ -767,9 +755,9 @@ function deleteContentCallback(data){
 }
 
 function dataAddContentTypeCallback(data){
-	$('#form-add-contentType #contentTypeConfig [data-event]').each(function(){
+	/*$('#form-add-contentType #contentTypeConfig [data-event]').each(function(){
 		dataEvent($(this));
-	})	
+	})	*/
 }
 
 function addContentTypeCallback(){

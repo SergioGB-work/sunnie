@@ -3,7 +3,7 @@ script(id="editHTMLContentComponentView",type="text/x-jsrender")
 	.col-12
 		p Elige el contenido que deseas mostrar.
 	.col-12
-		div(id="editContentListContent",data-service-data=apiDevelopment + "/site/{idSite}/contents/{{:~idComponent}}",data-method="GET",data-template="#editHTMLContentRadio",data-target="#editContentListContent")
+		div(id="editContentListContent",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/contents/{{:~idComponent}}",data-method="GET",data-template="#editHTMLContentRadio",data-target="#editContentListContent")
 
 script(id="editHTMLContentRadio",type="text/x-jsrender")
 	| {{if data.content.length > 0}}

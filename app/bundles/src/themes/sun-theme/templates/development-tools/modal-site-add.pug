@@ -13,6 +13,8 @@ block modal-body
 				a.nav-link.active(id="config-tab",data-toggle="pill" href="#block-site-data" role="tab" aria-controls="block-site-data" aria-selected="true") Configuración
 			li.nav-item
 				a.nav-link(id="manifest-tab",data-toggle="pill" href="#block-site-manifest" role="tab" aria-controls="block-site-manifest" aria-selected="false") Manifest
+			li.nav-item
+				a.nav-link(id="service-worker-tab",data-toggle="pill" href="#block-site-service-worker" role="tab" aria-controls="block-site-service-worker" aria-selected="false") Manifest
 
 		#add-site-content-tabs.tab-content
 			#block-site-data.tab-pane.show.active(role="tabpanel",aria-labelledby="config-tab")
@@ -81,6 +83,11 @@ block modal-body
 					div(class="form-group col-3")
 						+fragment('fragment-label',{"for":"manifest_lang", "text":"Lang"})
 						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_lang","name":"manifest_lang"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_icon", "text":"Icon"})
+						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"manifest_icon","name":"manifest_icon"})
+
+			#block-site-service-worker.tab-pane(role="tabpanel",aria-labelledby="service-worker-tab")
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
-				button(type="submit",class="btn btn-primary send") Crear		
+				button(type="submit",class="btn btn-primary send") Crear

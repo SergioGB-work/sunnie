@@ -3,6 +3,7 @@ const rimraf = require("rimraf");
 
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
+const imagemagick = require('imagemagick');
 
 module.exports = class functions{
 
@@ -239,12 +240,14 @@ module.exports = class functions{
 
 		sitemap.forEach(function(element,i){
 			var position = functions.findIndex(originalSiteMap,element.id);
+			var src = element.src.split('/');
+			src = src[src.length - 1];
 			if(element.childs.length > 0){
-				pages.push({"id":element.id,"name":element.name,"position":position.join()});
+				pages.push({"id":element.id,"name":element.name,"position":position.join(),"src":src});
 				pages = pages.concat(functions.pagesList(element.childs,originalSiteMap));
 			}
 			else{
-				pages.push({"id":element.id,"name":element.name,"position":position.join()});
+				pages.push({"id":element.id,"name":element.name,"position":position.join(), "src":src});
 			}
 
 		});
@@ -308,5 +311,125 @@ module.exports = class functions{
 
 		}
 		return false;
+	}
+
+	static generateManifest(siteURL,file,pwaImageSizes,data){
+
+		var currentManifest = JSON.parse(fs.readFileSync(siteURL + '/manifest.json'));
+		var icons = currentManifest.icons;
+
+		var manifest = {
+			"name": data.manifest_name || '',
+			"short_name": data.manifest_short_name || '',
+			"theme_color": data.manifest_theme_color || '',
+			"background_color": data.manifest_background_color || '',
+			"display": data.manifest_display || '',
+			"orientation": data.manifest_orientation || '',
+			"scope": data.manifest_scope || '',
+			"description" : data.manifest_description || '',
+			"start_url" : data.manifest_start_url || '',
+			"lang" : data.manifest_lang || '',
+			"icons": icons
+		}		
+
+
+		for(var key in file){
+
+			let file_name = file[key].name;
+			let realName = file_name.split('.');
+			let extension = realName.pop();
+				realName = realName.join('.');
+
+			if(!file_name.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
+				return res.status(200).send(
+
+					{
+						"filename":file_name,
+						"error":{
+							"code":"FILE_FORMAT_ERROR"								
+						}
+					}
+				)
+			}
+
+			pwaImageSizes.forEach(function(format){
+				manifest.icons.push({
+					'src': 'media/pwa/'+realName + '-' + format.width + 'x' + format.height + '.' + extension,
+					'sizes': format.width + 'x' + format.height,
+					'type': 'image/' + extension
+				});	
+			})		
+
+			var buffer = new Buffer.from(file[key].data.data)
+
+			//uncomment await if you want to do stuff after the file is created
+
+			rimraf(siteURL + '/media/pwa/' ,function () {
+				if(!fs.existsSync(siteURL + '/media')){
+					fs.mkdirSync(siteURL + '/media');
+				}
+
+				if(!fs.existsSync(siteURL + '/media/pwa')){
+					fs.mkdirSync(siteURL + '/media/pwa');
+				}
+
+				fs.writeFile(siteURL + '/media/pwa/' + file_name, buffer,async (err) => {
+					pwaImageSizes.forEach(function(format){
+						imagemagick.resize({
+						  srcPath: siteURL + '/media/pwa/' + file_name,
+						  dstPath: siteURL + '/media/pwa/' + realName + '-' + format.width + 'x' + format.height + '.' + extension,
+						  width:   format.width,
+						  height:   format.height
+						}, function(err, stdout, stderr){
+						  	if (err) throw err;
+						  	console.log('Resized '+realName+' to fit within ' + format.width + 'x' + format.height);
+						});
+					});
+				});
+			});
+		};
+
+		return manifest;	
+	}
+
+	static generateServiceWorker(siteURL,serviceWorkerType,offlinePage, cachedPages, customContent){
+		if(serviceWorkerType!= '' && serviceWorkerType !== undefined){
+			console.log("Generating Service Worker...");
+			console.log("OfflinePage ->" + offlinePage);
+			console.log("Cached Pages ->" + cachedPages);
+
+			var serviceWorkerFile = '';
+
+
+			switch(serviceWorkerType){
+
+				case 'offline':
+					serviceWorkerFile = fs.readFileSync('./server/service-worker-models/offline.js',"utf8");
+					serviceWorkerFile = serviceWorkerFile.replace("{ToDo-replace-this-name.html}",offlinePage);
+					break;
+				case 'offline-copy-pages':
+					serviceWorkerFile = fs.readFileSync('./server/service-worker-models/Offline copy of pages.js',"utf8")
+					serviceWorkerFile = serviceWorkerFile.replace("{ToDo-replace-this-name.html}",offlinePage);
+					break;
+				case 'offline-copy-backup':
+					serviceWorkerFile = fs.readFileSync('./server/service-worker-models/Offline copy with Backup offline page.js',"utf8")
+					serviceWorkerFile = serviceWorkerFile.replace("{ToDo-replace-this-name.html}",offlinePage);
+					break;
+				case 'cache-first-network':
+					serviceWorkerFile = fs.readFileSync('./server/service-worker-models/Cache-first network.js',"utf8")
+					serviceWorkerFile = serviceWorkerFile.replace("{precacheFiles}",JSON.stringify(cachedPages));
+					break;
+				case 'advance-caching':
+					serviceWorkerFile = fs.readFileSync('./server/service-worker-models/offline.js',"utf8")
+					serviceWorkerFile = serviceWorkerFile.replace("{ToDo-replace-this-name.html}",offlinePage);
+					serviceWorkerFile = serviceWorkerFile.replace("{precacheFiles}",JSON.stringify(cachedPages));
+					break;
+				case 'custom':
+					serviceWorkerFile = customContent;
+					break;
+			}
+
+			fs.writeFileSync(siteURL + '/service-worker.js', serviceWorkerFile);
+		}
 	}
 }	

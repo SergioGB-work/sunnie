@@ -9,3 +9,29 @@ script(id="templatePagesList",type="text/x-jsrender")
 	option(value="{{:position}}") {{*:spaces}}  {{:name}}
 	| {{/for}}
 	| {{/if}}
+
+
+script(id="templatePagesListSRC",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	| {{for data}}
+	| {{* window.spaces = '' }}
+	| {{for position.split(',')}}
+	| {{* window.spaces += ' ' }}
+	| {{/for}}
+	option(value="{{:src}}") {{*:spaces}}  {{:name}}
+	| {{/for}}
+	| {{/if}}
+
+script(id="templatePagesChecksList",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	| {{for data}}
+	| {{* window.spaces = '' }}
+	| {{for position.split(',')}}
+	| {{* window.spaces += ' ' }}
+	| {{/for}}
+
+	div(class="custom-control custom-checkbox")
+		input(id="cache-page-{{:id}}-Edit",type="checkbox", name="cachedPage-{{:id}}", value="{{:src}}",class="form-control custom-control-input")
+		+fragment('fragment-label',{"for":"cache-page-{{:id}}-Edit", "text":"{{:name}}", "class":"custom-control-label"},'true')
+	| {{/for}}
+	| {{/if}}		

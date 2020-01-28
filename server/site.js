@@ -2,10 +2,44 @@ const fs = require('fs');
 const functions = require('./functions.js');
 const fsextra = require("fs-extra");
 const rimraf = require("rimraf");
-const imagemagick = require('imagemagick');
 const fileUpload = require('express-fileupload');
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
+
+const pwaImageSizes = [
+	{
+		"width":72,
+		"height":72
+	},	
+	{
+		"width":96,
+		"height":96
+	},	
+	{
+		"width":128,
+		"height":128
+	},
+	{
+		"width":144,
+		"height":144
+	},
+	{
+		"width":152,
+		"height":152
+	},
+	{
+		"width":192,
+		"height":192
+	},
+	{
+		"width":384,
+		"height":384
+	},
+	{
+		"width":512,
+		"height":512
+	}
+]
 
 /**
  * @module site
@@ -81,19 +115,19 @@ module.exports = (app) => {
 			var enableChatBot = req.body.enableChatBot;
 			var siteTheme = {"theme": req.body.theme};
 			var defaultSiteURL = functions.getURLSite(defaultSite);
+			var file = JSON.parse(JSON.stringify(req.files));
+			var manifest = functions.generateManifest(siteURL,file,pwaImageSizes,req.body);
 
-			var manifest = {
-				"name": req.body.manifest_name || '',
-				"short_name": req.body.manifest_short_name || '',
-				"theme_color": req.body.manifest_theme_color || '',
-				"background_color": req.body.manifest_background_color || '',
-				"display": req.body.manifest_display || '',
-				"orientation": req.body.manifest_orientation || '',
-				"scope": req.body.manifest_scope || '',
-				"description" : req.body.manifest_description || '',
-				"start_url" : req.body.manifest_start_url || '',
-				"lang" : req.body.manifest_lang || ''
-			}
+			var cachedPages = [];
+			var serviceWorkerType = req.body.serviceWorkerType || '';
+			var offlinePage = req.body.offlinePage || '';
+			var contentCustomServiceWorker = req.body.customServiceWorkerContent || '';
+
+			Object.keys(req.body).forEach(function(key){
+				if(key.indexOf('cachedPage-') > -1){
+					cachedPages.push(req.body[key]);
+				}
+			})
 
 
 			if(siteURL[0]!= '/'){
@@ -104,7 +138,13 @@ module.exports = (app) => {
 				"site":{
 					"name": siteName,
 					"url": siteURL,
-					"enableChatBot":enableChatBot
+					"enableChatBot":enableChatBot,
+					"serviceWorker":{
+						"type":serviceWorkerType,
+						"offlinePage":offlinePage,
+						"cachedPages":cachedPages,
+						"customTemplate":contentCustomServiceWorker
+					}
 				},
 				"pages": [
 					{
@@ -177,6 +217,7 @@ module.exports = (app) => {
 			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));		
 			var build = JSON.parse(fs.readFileSync(siteURL + '/build.json'));
 			var manifest = JSON.parse(fs.readFileSync(siteURL + '/manifest.json'));
+
 			res.status(200).send(Object.assign(sitemap.site, build, {"manifest":manifest}));
 		}
 		catch(e){
@@ -214,67 +255,28 @@ module.exports = (app) => {
 			var oldUrl = sitemap.site.url;
 
 			var file = JSON.parse(JSON.stringify(req.files));
-			var file_details = {};
 
-			Object.keys(file).forEach(function(el){
+			var manifest = functions.generateManifest(siteURL,file,pwaImageSizes,req.body);
+			var cachedPages = [];
+			var serviceWorkerType = req.body.serviceWorkerType || '';
+			var offlinePage = req.body.offlinePage || '';
+			var contentCustomServiceWorker = req.body.customServiceWorkerContent || '';
 
-				let file_name = file[el].name;
-				let realName = file_name.split('.');
-				let extension = realName.pop();
-					realName = realName.join('.');
-
-				if(!file_name.match(/\.(jpg|jpeg|png|gif|bmp|webp)$/i)){
-					return res.status(200).send(
-
-						{
-							"filename":file_name,
-							"error":{
-								"code":"FILE_FORMAT_ERROR"								
-							}
-						}
-					)
+			Object.keys(req.body).forEach(function(key){
+				if(key.indexOf('cachedPage-') > -1){
+					cachedPages.push(req.body[key]);	
 				}
+			})
 
-				var buffer = new Buffer.from(file[el].data.data)
-
-				//uncomment await if you want to do stuff after the file is created
-				if(!fs.existsSync(siteURL + '/media')){
-					fs.mkdirSync(siteURL + '/media');
-				}
-
-				if(!fs.existsSync(siteURL + '/media/pwa')){
-					fs.mkdirSync(siteURL + '/media/pwa');
-				}
-
-				fs.writeFile(siteURL + '/media/pwa/' + file_name, buffer, async(err) => {
-					imagemagick.resize({
-					  srcPath: siteURL + '/media/pwa/' + file_name,
-					  dstPath: siteURL + '/media/pwa/' + realName + '.' + extension,
-					  width:   256
-					}, function(err, stdout, stderr){
-					  if (err) throw err;
-					  console.log('resized kittens.jpg to fit within 256x256px');
-					});
-
-				});		
-			});
-
-			var manifest = {
-				"name": req.body.manifest_name || '',
-				"short_name": req.body.manifest_short_name || '',
-				"theme_color": req.body.manifest_theme_color || '',
-				"background_color": req.body.manifest_background_color || '',
-				"display": req.body.manifest_display || '',
-				"orientation": req.body.manifest_orientation || '',
-				"scope": req.body.manifest_scope || '',
-				"description" : req.body.manifest_description || '',
-				"start_url" : req.body.manifest_start_url || '',
-				"lang" : req.body.manifest_lang || ''
-			}			
+			functions.generateServiceWorker(siteURL,serviceWorkerType,offlinePage, cachedPages, contentCustomServiceWorker, );
 
 			sitemap.site.name = name;
 			sitemap.site.url = url;
 			sitemap.site.enableChatBot = enableChatBot;
+			sitemap.site.serviceWorker.offlinePage = offlinePage;
+			sitemap.site.serviceWorker.type = serviceWorkerType;
+			sitemap.site.serviceWorker.cachedPages = cachedPages;
+			sitemap.site.serviceWorker.customTemplate = contentCustomServiceWorker;
 			build.theme = theme;
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));

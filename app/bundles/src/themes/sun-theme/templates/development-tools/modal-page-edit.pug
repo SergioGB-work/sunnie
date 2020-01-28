@@ -8,7 +8,7 @@ block vars
 block modal-body
 	form(id="form-edit-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/edit/{idPage}", data-callback="editPageCallback")
 
-		div(id="edit-page-block",data-service-data=apiDevelopment + "/site/{idSite}/page/detail/{idPage}",data-method="GET",data-template="#templateEditPage",data-target="#edit-page-block",data-callback="dataEditPageLoadedCallback")
+		div(id="edit-page-block",data-service-data=apiDevelopment + "/site/{idSite}/page/detail/{idPage}",data-method="GET",data-template="#templateEditPage",data-target="#edit-page-block")
 
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
@@ -63,4 +63,4 @@ block modal-body
 		.row
 			.col-12
 				h3 Seleciona una plantilla de página
-		.row(id="layoutEditList",data-load="true",data-service-data=apiDevelopment + "/layout/list",data-method="GET",data-template="#templateLayoutList",data-items-per-page="0",data-initial-page="0",data-target="#modal-page-edit #layoutEditList",data-content='"{{:data.layout.name}}' + '.pug"',data-callback="checkLayoutSelected")
+		.row(id="layoutEditList",data-load="true",data-service-data=apiDevelopment + "/layout/list",data-method="GET",data-template="#templateLayoutList",data-items-per-page="0",data-initial-page="0",data-target="#modal-page-edit #layoutEditList",data-checked="{{:data.layout.name}}.pug",data-checked-target="#modal-page-edit #layoutEditList")
