@@ -55,6 +55,10 @@ block modal-body
 							div(class="custom-control custom-radio")
 								input(type="radio",name="enableChatBot",id="enableChatBotSiEdit{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
 								+fragment('fragment-label',{"for":"enableChatBotSiEdit{{*:id}}", "text":"Si", "class":"uppercase custom-control-label"},'true')
+
+					div(class="form-group col-8")
+						+fragment('fragment-label',{"for":"publishURLEdit", "text":"Publish URL"})
+						input(type="text",name="publishUrl",id="publishURLEdit",class="form-control",value="{{:data.publishUrl}}",required)
 				
 				.row
 					.col-12
@@ -176,8 +180,8 @@ block modal-body
 										| {{else}}
 										| {{* window.checkRadio = "" }}
 										| {{/if}}
-										input(id="sw-custom",type="radio", name="serviceWorkerType", value="custom",class="form-control custom-control-input",{{*:checkRadio}})
-										+fragment('fragment-label',{"for":"sw-custom", "text":"Custom", "class":"custom-control-label"},'true')
+										input(id="sw-customEdit",type="radio", name="serviceWorkerType", value="custom",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-customEdit", "text":"Custom", "class":"custom-control-label"},'true')
 										p Si lo prefieres, puedes escribir tu propio srevice worker.
 					div(class="form-group col-4")
 						fieldset
@@ -185,7 +189,7 @@ block modal-body
 							div(class="row d-none mb-5", data-parent="#modal-site-edit [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="offline,offline-copy-pages,offline-copy-backup,advance-caching")
 								div(class="col-12")
 									p Elige la página que deseas que se muestre si la PWA pierde la conexión con internet.
-									+fragment('fragment-label',{"for":"offlinePage-editEdit", "text":"Página offline"})
+									+fragment('fragment-label',{"for":"siteOfflineEdit", "text":"Página offline"})
 									+fragment('fragment-select',{"class":"form-control","id":"siteOfflineEdit","name":"offlinePage", "required":"required","dataAttributes":{"data-load":"true","data-service-data":apiDevelopment + "/site/{idSite}/page/list","data-method":"GET","data-template":"#templatePagesListSRC","data-target":"#modal-site-edit #siteOfflineEdit","data-selected":"{{:data.serviceWorker.offlinePage}}","data-selected-target":"#modal-site-edit #siteOfflineEdit"}})
 
 							div(class="row d-none", data-parent="#modal-site-edit [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="cache-first-network,advance-caching",)

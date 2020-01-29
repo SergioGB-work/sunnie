@@ -4,7 +4,7 @@
 			"label":"HTML Content",
 			"type":"richHTML",
 			"name":"htmlContent",
-			"selectValues": [
+			"options": [
                 {
                     "label": "",
                     "value": ""

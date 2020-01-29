@@ -44,7 +44,7 @@ block modal-body
 					div(class="tab-pane" id="configView" role="tabpanel" aria-labelledby="configView-tab")
 						p Esta opción te permite configurar la vista de edición del componente. Todos los campos aquí definidos podras utilizarlos a la hora de pintar la vista del componente a través de las variables de PUG.
 						.row
-							div(id="componentViewConfig",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/component/generalConfig",data-method="GET",data-template="#templateCreateComponentConfig",data-target="#modal-component-create #componentViewConfig", data-callback="componentCreateConfigCallback")
+							div(id="componentViewConfig",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/component/generalConfig",data-method="GET",data-template="#templateCreateComponentConfig",data-target="#modal-component-create #componentViewConfig")
 
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")

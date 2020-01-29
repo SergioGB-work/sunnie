@@ -39,6 +39,10 @@ block modal-body
 							div(class="custom-control custom-radio")
 								input(type="radio",name="enableChatBot",id="enableChatBotSi",class="form-control custom-control-input",required,value="true")
 								+fragment('fragment-label',{"for":"enableChatBotSi", "text":"Si", "class":"uppercase custom-control-label"},'true')
+					div(class="form-group col-8")
+						+fragment('fragment-label',{"for":"publishURL", "text":"Publish URL"})
+						input(type="text",name="publishUrl",id="publishURL",class="form-control",value="app/public",required)
+
 				.row
 					.col-12
 						h3 Seleciona un tema de apariencia
@@ -88,6 +92,65 @@ block modal-body
 						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"manifest_icon","name":"manifest_icon"})
 
 			#block-site-service-worker.tab-pane(role="tabpanel",aria-labelledby="service-worker-tab")
+				.row
+					div(class="form-group col-8")
+						fieldset
+							legend Elige el tipo de Service Worker
+							div(class="row")
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										input(id="sw-offline",type="radio", name="serviceWorkerType", value="offline",class="form-control custom-control-input")
+										+fragment('fragment-label',{"for":"sw-offline", "text":"Offline","class":"custom-control-label"},'true')
+										p This simple but elegant solution pulls a file from your web server called "offline.html" (make sure that file is actually there) and serves the file whenever a network connection can not be made.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										input(id="sw-offline-copy-pages",type="radio", name="serviceWorkerType", value="offline-copy-pages",class="form-control custom-control-input")
+										+fragment('fragment-label',{"for":"sw-offline-copy-pages", "text":"Offline copy of pages", "class":"custom-control-label"},'true')
+										p A solution that expands the offline capabilities of your app. A copy of each pages is stored in the cache as your visitors view them. This allows a visitor to load any previously viewed page while they are offline.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										input(id="sw-offline-copy-backup",type="radio", name="serviceWorkerType", value="offline-copy-backup",class="form-control custom-control-input")
+										+fragment('fragment-label',{"for":"sw-offline-copy-backup", "text":"Offline copy with Backup offline page", "class":"custom-control-label"},'true')
+										p A copy of each pages is stored in the cache as your visitors view them. This allows a visitor to load any previously viewed page while they are offline. This then adds the "offline page" that allows you to customize the message and experience if the app is offline, and the page is not in the cache.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										input(id="sw-cache",type="radio", name="serviceWorkerType", value="cache-first-network",class="form-control custom-control-input")
+										+fragment('fragment-label',{"for":"sw-cache", "text":"Cache-first network", "class":"custom-control-label"},'true')
+										p Use this service worker to pre-cache content. The content you add to the "cache-array" will be added immediately to the cache and service from the cache whenever a page requests it. At the same time it will update the cache with the version you have on the server. Configure your file array to include all your site files, or a subset that you want to be served quickly.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										input(id="sw-advanced-caching",type="radio", name="serviceWorkerType", value="advance-caching",class="form-control custom-control-input")
+										+fragment('fragment-label',{"for":"sw-advanced-caching", "text":"Advanced caching", "class":"custom-control-label"},'true')
+										p Use this service worker to improve the performance of your app, and make it work offline. The advanced caching service worker allows you to configure files and routes that are cached in different manners (pre-cache, server first, cache first, etc.). The tool can be used to build a lightening fast app (even for dynamic content) that works offline.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										input(id="sw-custom",type="radio", name="serviceWorker", value="custom",class="form-control custom-control-input")
+										+fragment('fragment-label',{"for":"sw-custom", "text":"Custom", "class":"custom-control-label"},'true')
+										p Si lo prefieres, puedes escribir tu propio srevice worker.
+					div(class="form-group col-4")
+						fieldset
+							legend Datos adicionales
+							div(class="row d-none mb-5", data-parent="#modal-site-add [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="offline,offline-copy-pages,offline-copy-backup,advance-caching")
+								div(class="col-12")
+									p Elige la página que deseas que se muestre si la PWA pierde la conexión con internet.
+									+fragment('fragment-label',{"for":"offlinePage", "text":"Página offline"})
+									+fragment('fragment-select',{"class":"form-control","id":"offlinePage","name":"offlinePage", "required":"required","dataAttributes":{"data-load":"true","data-service-data":apiDevelopment + "/site/{idSite}/page/list","data-method":"GET","data-template":"#templatePagesListSRC","data-target":"#modal-site-add #offlinePage"}})
+
+							div(class="row d-none", data-parent="#modal-site-add [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="cache-first-network,advance-caching",)
+								
+								div(class="col-12")
+									p Elige las páginas que deseas cachear a través del service worker
+								
+									div(id="pages-to-cache", data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list", data-method="GET",data-template="#templatePagesChecksList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-add #pages-to-cache")
+
+							div(class="row d-none", data-parent="#modal-site-add [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="custom")
+								div(class="col-12")
+									P Recuerda que el service worker debe estar escrito en javascript.
+									+fragment('fragment-label',{"for":"customServiceWorker-input", "text":"Custom Service Worker"})
+									+fragment('fragment-textarea',{"class":"form-control codeJS","id":"customServiceWorker-input","name":"customServiceWorkerContent"})
+
+
+
 		.row
 			div(class="form-group col-12 d-flex justify-content-end mb-0")
 				button(type="submit",class="btn btn-primary send") Crear

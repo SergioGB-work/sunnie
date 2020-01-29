@@ -13,7 +13,7 @@ block modal-body
 				+fragment('fragment-label',{"for":"contentName", "text":"Nombre"})
 				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"contentName","name":"name", "required":"required"})
 		.row
-			div(id="contentTypeConfig",data-service-data=apiDevelopment + "/site/{idSite}/content/contentType/config",data-method="GET",data-template="#templateAddContentType",data-target="#modal-contentType-add #contentTypeConfig", data-callback="dataAddContentTypeCallback")
+			div(id="contentTypeConfig",data-service-data=apiDevelopment + "/site/{idSite}/content/contentType/config",data-method="GET",data-template="#templateAddContentType",data-target="#modal-contentType-add #contentTypeConfig")
 
 		.row
 			div(class="form-group col-12")

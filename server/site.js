@@ -55,7 +55,9 @@ module.exports = (app) => {
 	app.post('/site/:idSite/publish', function (req, res) {
 		try{
 			var site = req.params.idSite;
-			functions.deployPage('--site ' + site  , res);
+			var siteURL = functions.getURLSite(site);
+			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+			functions.deployPage('--site ' + site + ' --publishUrl ' + sitemap.site.publishUrl  , res);
 		}
 		catch(e){
 			console.log(e);
@@ -117,6 +119,7 @@ module.exports = (app) => {
 			var defaultSiteURL = functions.getURLSite(defaultSite);
 			var file = JSON.parse(JSON.stringify(req.files));
 			var manifest = functions.generateManifest(siteURL,file,pwaImageSizes,req.body);
+			var publishUrl = req.body.publishUrl;
 
 			var cachedPages = [];
 			var serviceWorkerType = req.body.serviceWorkerType || '';
@@ -139,6 +142,7 @@ module.exports = (app) => {
 					"name": siteName,
 					"url": siteURL,
 					"enableChatBot":enableChatBot,
+					"publishUrl":publishUrl,
 					"serviceWorker":{
 						"type":serviceWorkerType,
 						"offlinePage":offlinePage,
@@ -248,6 +252,7 @@ module.exports = (app) => {
 			var enableChatBot = req.body.enableChatBot;
 			var url = req.body.url;
 			var theme = req.body.theme;
+			var publishUrl = req.body.publishUrl;
 
 			var siteURL = functions.getURLSite(site);
 			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
@@ -272,6 +277,7 @@ module.exports = (app) => {
 
 			sitemap.site.name = name;
 			sitemap.site.url = url;
+			sitemap.site.publishUrl = publishUrl;
 			sitemap.site.enableChatBot = enableChatBot;
 			sitemap.site.serviceWorker.offlinePage = offlinePage;
 			sitemap.site.serviceWorker.type = serviceWorkerType;

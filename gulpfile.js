@@ -34,6 +34,7 @@ let gulp = require('gulp'),
 let argv_site = argv.site !== undefined ? argv.site : false;
 let argv_page = argv.pag !== undefined ? argv.pag: '*.*';
 let argv_env = argv.env !== undefined ? argv.env : '';
+let argv_publishUrl = argv.publishUrl !== undefined ? argv.publishUrl : '';
 let argv_contentType = argv.contentType !== undefined ? argv.contentType : '';
 let argv_contentID = argv.contentID !== undefined ? argv.contentID : '';
 
@@ -46,7 +47,8 @@ let src_page_deploy = argv.pag + '.pug' || '*.pug';
 var	pathPublic = argv_env == 'dev' ? 'app/development' : 'app/public',
 	pathDevelopment = 'app/development',
 	pathBuild = 'app/build',
-	sitesDefined=[];
+	sitesDefined=[],
+	pathPublic = argv_publishUrl != '' ? argv_publishUrl : pathPublic;
 
 let path = {
 	

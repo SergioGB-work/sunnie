@@ -24,7 +24,7 @@ block modal-body
 
 			div(class="form-group col-md-4 col-12")
 				+fragment('fragment-label',{"for":"componentName", "text":"Nombre"})
-				+fragment('fragment-select',{"class":"form-control","id":"componentName","name":"name", "required":"required","dataAttributes":{"data-load":"true","data-service-data":apiDevelopment + "/component/list","data-method":"GET","data-template":"#templateComponentList","data-target":"#modal-component-edit #componentName","data-selected":"{{:data.name}}", "data-selected-target":"#modal-component-edit #componentName", "data-callback":"checkComponentEdited"}})
+				+fragment('fragment-select',{"class":"form-control","id":"componentName","name":"name", "required":"required","dataAttributes":{"data-load":"true","data-service-data":apiDevelopment + "/component/list","data-method":"GET","data-template":"#templateComponentList","data-target":"#modal-component-edit #componentName","data-selected":"{{:data.name}}", "data-selected-target":"#modal-component-edit #componentName"}})
 
 
 			div(class="form-group col-md-4 col-12")

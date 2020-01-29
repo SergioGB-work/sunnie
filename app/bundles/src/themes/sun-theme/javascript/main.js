@@ -659,7 +659,7 @@ function processData(dataResponse, target, template, callback, content, totalIte
 		checkedValue.split(',').forEach(function(value){
 			$(checkedTarget).find('input[value="'+value+'"]').attr('checked','checked');
 		})
-	})	
+	})
 
 }
 
@@ -1409,13 +1409,13 @@ function dataEvent(el){
 					break;
 				
 				case 'submit':
-					if(!valueDispatchAction || valueDispatchAction.includes($(this).val())){
+					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
 						targetEvent.closest('form').submit();
 					}
 					break;
 	
 				case 'show':
-					if(!valueDispatchAction || valueDispatchAction.includes($(this).val())){
+					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
 						targetEvent.removeClass('d-none');
 					}
 					else{
@@ -1425,7 +1425,7 @@ function dataEvent(el){
 					break;
 
 				case 'hide':
-					if(!valueDispatchAction || valueDispatchAction.includes($(this).val())){
+					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
 						targetEvent.addClass('d-none');
 					}
 					else{
@@ -1436,7 +1436,7 @@ function dataEvent(el){
 
 		});
 	}
-	if(el.val() == valueDispatchAction){
+	if(valueDispatchAction.toString().includes(el.val())){
 		el.change();
 	}
 }
@@ -1472,14 +1472,14 @@ function dataParent(el){
 					break;
 				
 				case 'submit':
-					if(!valueDispatchAction || valueDispatchAction.includes($(this).val())){
+					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
 						currentEvent.closest('form').submit();
 					}
 					break;
 
 				case 'show':
 					
-					if(!valueDispatchAction || valueDispatchAction.includes($(this).val())){
+					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
 						currentEvent.removeClass('d-none');;
 					}
 					else{
@@ -1489,7 +1489,7 @@ function dataParent(el){
 					break;
 
 				case 'hide':
-					if(!valueDispatchAction || valueDispatchAction.includes($(this).val())){
+					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
 						currentEvent.addClass('d-none');
 					}
 					else{
@@ -1500,7 +1500,7 @@ function dataParent(el){
 
 		});
 	}
-	if(targetEvent.val() == valueDispatchAction){
+	if(valueDispatchAction.toString().includes(targetEvent.val())){
 		targetEvent.change();
 	}
 }

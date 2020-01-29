@@ -44,38 +44,23 @@ $(document).ready(function(){
 	})
 
 	$('#modal-page-add .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-page-add').modal('hide');
-			showError('','Creando página, espere por favor...');
-		}
+		callbackFormModal($(this),'Creando página, espere por favor...');
 	});
 
 	$('#modal-page-edit .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-page-edit').modal('hide');
-			showError('','Editando y desplegando página, espere por favor...');
-		}
+		callbackFormModal($(this),'Editando y desplegando página, espere por favor...');
 	});
 
 	$('#modal-page-delete .send').click(function(event){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-page-delete').modal('hide');
-			showError('','Eliminando página, espere por favor...');
-		}
+		callbackFormModal($(this),'Eliminando página, espere por favor...');
 	});
 
 	$('#modal-page-confirm-publish .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Publicando página, espere por favor...');
-		}	
+		callbackFormModal($(this),'Publicando página, espere por favor...');	
 	});	
 
 	$('#modal-component-edit .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-component-edit').modal('hide');
-			showError('','Aplicando cambios del componente, espere por favor...');
-		}	
+		callbackFormModal($(this),'Aplicando cambios del componente, espere por favor...');	
 	});	
 
 	$('#modal-component-edit').on('show.bs.modal',function(event){
@@ -92,10 +77,7 @@ $(document).ready(function(){
 	});	
 
 	$('#modal-component-delete .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-component-delete').modal('hide');
-			showError('','Eliminando componente, espere por favor...');
-		}	
+		callbackFormModal($(this),'Eliminando componente, espere por favor...');
 	});	
 
 	$('#modal-component-delete').on('show.bs.modal',function(event){
@@ -180,38 +162,23 @@ $(document).ready(function(){
 	});
 
 	$('#modal-site-confirm-publish .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Publicando site, espere por favor...');
-		}	
+		callbackFormModal($(this),'Publicando site, espere por favor...');
 	});
 
 	$('#modal-site-add .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Creando site, espere por favor...');
-		}	
+		callbackFormModal($(this),'Creando site, espere por favor...');
 	});
 
 	$('#modal-site-edit .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Editando site, espere por favor...');
-		}	
+		callbackFormModal($(this),'Editando site, espere por favor...');	
 	});	
 
 	$('#modal-site-delete .send').click(function(event){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Site Eliminado');
-		}
+		callbackFormModal($(this),'Site Eliminado');
 	});
 
 	$('#modal-locales .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('#modal-locales').modal('hide');
-			showError('','Actualizando traducciones, espere por favor...');
-		}
+		callbackFormModal($(this),'Actualizando traducciones, espere por favor...');
 	});
 
 	$('#modal-locales form').on('change','[name="key"]',function(e){
@@ -223,10 +190,7 @@ $(document).ready(function(){
 	});
 
 	$('#modal-content-add .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Añadiendo contenido, espere por favor...');
-		}	
+		callbackFormModal($(this),'Añadiendo contenido, espere por favor...');
 	});
 
 	$('#modal-content-edit').on('show.bs.modal',function(event){
@@ -243,10 +207,7 @@ $(document).ready(function(){
 	});
 
 	$('#modal-content-edit .send').click(function(){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Desplegando contenido editado, espere por favor...');
-		}
+		callbackFormModal($(this),'Desplegando contenido editado, espere por favor...');
 	});
 
 	$('#modal-content-delete').on('show.bs.modal',function(event){
@@ -256,11 +217,8 @@ $(document).ready(function(){
 		$(this).find('[name=contentType]').val(contentType);
 	});
 
-	$('#modal-content-delete .send').click(function(event){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Eliminando contenido, espere por favor...');
-		}
+	$('#modal-content-delete .send').click(function(){
+		callbackFormModal($(this),'Eliminando contenido, espere por favor...');
 	});	
 
 	$('#modal-contentType-edit').on('show.bs.modal',function(event){
@@ -276,10 +234,7 @@ $(document).ready(function(){
 	});
 
 	$('#modal-contentType-edit .send').click(function(event){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Editando tipo de contenido, espere por favor...');
-		}
+		callbackFormModal($(this),'Editando tipo de contenido, espere por favor...');
 	});	
 
 	$('#modal-contentType-delete').on('show.bs.modal',function(event){
@@ -288,10 +243,7 @@ $(document).ready(function(){
 	});
 
 	$('#modal-contentType-delete .send').click(function(event){
-		if(validateForm($(this).closest('form'))){
-			$(this).closest('.modal').modal('hide');
-			showError('','Eliminando tipo de contenido, espere por favor...');
-		}
+		callbackFormModal($(this),'Eliminando tipo de contenido, espere por favor...');
 	});	
 
 	$('.sunniejs-tools .addButton').click(function(){
@@ -592,23 +544,9 @@ function checkParentPage(data,parentPosition,pagePosition){
 }
 
 function dataComponentLoadedCallback(data){
-	
-	$('.modal [data-service-data]:not([data-load="false"])').each(function(){
-		//dataList($(this));
-	});
-
-	$('#modal-component-edit [data-parent]').each(function(){
-		//dataParent($(this));
-	});	
-
 	$('#modal-component-edit textarea.richHTML').each(function(){
 		CKEDITOR.replace( $(this).attr('id'));
 	});
-}
-
-//REVISAR SI SIRVE DE ALGO
-function checkComponentEdited(data){
-	loadConfigComponent();
 }
 
 function editComponentCallback(data){
@@ -644,69 +582,6 @@ function updateLocalesCallback(data){
 	$('#modal-error').modal('hide');
 }
 
-function loadConfigComponent(){
-
-	if($('#componentName').val() == 'component-form-filter'){
-/*
-		//APLICABLE SOLO AL FORM FILTER
-		$('#form-edit-component [name="type"]').change(function(){
-
-			if($(this).val() == 'select'){
-				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().removeClass('d-none');
-			}
-			else{
-				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().addClass('d-none');
-			}
-
-			if($(this).val() == 'html'){
-				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().removeClass('d-none');
-			}
-			else{
-				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().addClass('d-none');
-			}			
-
-		})
-
-		$('#form-edit-component [name="type"]').each(function(){
-			if($(this).val() == 'select'){
-				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().removeClass('d-none');
-			}
-			else{
-				$(this).closest('[data-array-id]').find('[data-form-group="selectValues"]').parent().addClass('d-none');
-			}
-			if($(this).val() == 'html'){
-				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().removeClass('d-none');
-			}
-			else{
-				$(this).closest('[data-array-id]').find('[name="htmlContent"]').parent().addClass('d-none');
-			}				
-		});
-
-	*/
-		//APLICABLE SOLO AL FORM FILTER
-
-		$('#form-edit-component [name="formFilter"]').change(function(){
-
-			if($(this).val() == 'false'){
-				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().removeClass('d-none');
-			}
-			else{
-				$(this).closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().addClass('d-none');
-			}
-
-		})
-
-		if($('#form-edit-component [name="formFilter"]').val() == 'false'){
-			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().removeClass('d-none');
-		}
-		else{
-			$('#form-edit-component [name="formFilter"]').closest('.row').find('[name="action"],[name="method"],[name="callback"],[name="content"]').parent().addClass('d-none');
-		}
-
-	}
-}
-
-
 function addContentCallback(data){
 	$('#modal-error').modal('hide');	
 	$('#modal-content-add').modal('hide');
@@ -726,38 +601,22 @@ function dataContentLoadedCallback(data){
 	if($('#contentTypeSelector option:eq(0)').val() == ''){
 		$('#contentTypeSelector option:eq(0)').remove();
 	}
-	
 }
 
 function dataContentTypeLoadedCallback(data){
 	initSpecialTextareas($('#modal-contentType-edit'))
-	/*$('#form-edit-contentType #edit-contentType-block [data-event]').each(function(){
+	$('#form-edit-contentType #edit-contentType-block [data-event]').each(function(){
 		dataEvent($(this));
-	});*/
+	});
 };
 
 function dataComponentEditLoadedCallback(data){
 	initSpecialTextareas($('#modal-component-created-edit'));
-	/*$('#form-component-created-edit #edit-component-created-block [data-event]').each(function(){
-		dataEvent($(this));
-	});	*/
-}
-
-function componentCreateConfigCallback(data){
-	/*$('#form-component-create #componentViewConfig [data-event]').each(function(){
-		dataEvent($(this));
-	});		*/
 }
 
 function deleteContentCallback(data){
 	$('#modal-error').modal('hide');
 	$('#modal-contents').modal('show');
-}
-
-function dataAddContentTypeCallback(data){
-	/*$('#form-add-contentType #contentTypeConfig [data-event]').each(function(){
-		dataEvent($(this));
-	})	*/
 }
 
 function addContentTypeCallback(){
@@ -869,4 +728,11 @@ function checkSelected(data,selectedValue){
 function deleteMultimediaCallback(data){
 	$('#modal-multimedia-list').modal('show');
 	$('#modal-multimedia-delete').modal('hide');
+}
+
+function callbackFormModal(el,msg){
+	if(validateForm(el.closest('form'))){
+		el.closest('.modal').modal('hide');
+		showError('',msg);
+	}	
 }
