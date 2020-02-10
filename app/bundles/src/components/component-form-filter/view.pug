@@ -31,12 +31,15 @@ mixin component-form-filter(content)
 				- var parentEventValue = item.dataParentEventValue != '' ? item.dataParentEventValue  : false			
 				- var parentEventAction = item.dataParentEventAction != '' ? item.dataParentEventAction  : false	
 				- var load = item.dataService != '' && item.dataParent == '' ? 'true' : false		
+				- var showLabel = item.showLabel
+				- var icon = item.icon != '' ? item.icon : false
+				- var iconType = item.iconType != '' ? item.iconType : false
 
 				.form-group(class=item.size)
 
 					if item.type=='textarea' || item.type=='richHTML' || item.type=='codePUG' || item.type=='codeHTML'
 
-						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
+						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText,"showLabel":showLabel })
 
 						+fragment('fragment-textarea',{"class":"form-control " + item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "dataAttributes":{"data-get-default-value":item.name}})
 					else if item.type=='checkbox' || item.type=='radio'
@@ -45,11 +48,11 @@ mixin component-form-filter(content)
 
 							+fragment('fragment-input',{"class":"custom-control-input", "type":item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "dataAttributes":{"data-get-default-value":item.name}},'true')
 							
-							+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText, "class":"custom-control-label"},'true')
+							+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText, "class":"custom-control-label","showLabel":showLabel},'true')
 
 					else if item.type=='select'
-						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
-						+fragment('fragment-select',{"class":"form-control","id":"input" + randomID,"name":item.name, "required":required,"options":item.selectValues,"dataAttributes":{"data-get-default-value":item.name, "data-event":event, "data-event-target":eventTarget, "data-event-value":eventValue, "data-event-action":eventAction, "data-service-data":service, "data-method":method, "data-template":template, "data-target":"#input" + randomID, "data-load":load, "data-parent":parent, "data-parent-event":parentEvent, "data-parent-event-value":parentEventValue, "data-parent-event-action":parentEventAction}})
+						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText,"showLabel":showLabel})
+						+fragment('fragment-select',{"class":"form-control","id":"input" + randomID,"name":item.name, "required":required,"options":item.selectValues,"icon":icon,"iconType":iconType,"dataAttributes":{"data-get-default-value":item.name, "data-event":event, "data-event-target":eventTarget, "data-event-value":eventValue, "data-event-action":eventAction, "data-service-data":service, "data-method":method, "data-template":template, "data-target":"#input" + randomID, "data-load":load, "data-parent":parent, "data-parent-event":parentEvent, "data-parent-event-value":parentEventValue, "data-parent-event-action":parentEventAction}})
 
 					else if item.type=='separator'
 						h3.mb-0 #{item.label}
@@ -59,9 +62,9 @@ mixin component-form-filter(content)
 
 					else
 
-						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
+						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText,"showLabel":showLabel})
 						
-						+fragment('fragment-input',{"class":"form-control", "type":item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "pattern":regExp, "dataAttributes":{"data-get-default-value":item.name}})
+						+fragment('fragment-input',{"class":"form-control", "type":item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "pattern":regExp,"icon":icon,"iconType":iconType, "dataAttributes":{"data-get-default-value":item.name}})
 
 		.row
 			.form-group.col-12.mb-0

@@ -3,7 +3,7 @@ script(id="editHTMLContentComponentView",type="text/x-jsrender")
 	.col-12
 		p Elige el contenido que deseas mostrar.
 	.col-12
-		div(id="editContentListContent",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/contents/{{:~idComponent}}",data-method="GET",data-template="#editHTMLContentRadio",data-target="#editContentListContent")
+		div(id="editContentListContent",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/contents/{{:~idComponent}}",data-method="GET",data-template="#editHTMLContentRadio",data-target="#editContentListContent", data-callback="htmlComponentEditViewCallback")
 
 script(id="editHTMLContentRadio",type="text/x-jsrender")
 	| {{if data.content.length > 0}}
@@ -21,7 +21,7 @@ script(id="editHTMLContentRadio",type="text/x-jsrender")
 			div(class="custom-control custom-radio")
 				input(class="custom-control-input",type="radio",id="content{{*:id}}",name="idContent",value="{{:id}}",required, {{*:checkedField}})
 				+fragment('fragment-label',{"for":"content{{*:id}}", "text":"{{:name}}", "class":"custom-control-label"}, 'true')
-				input(type="hidden",name="contentType",value="{{:contentType}}",required)
+				input(type="radio",name="contentType",value="{{:contentType}}",required, class="invisible",{{*:checkedField}})
 
 		| {{/for}}
 

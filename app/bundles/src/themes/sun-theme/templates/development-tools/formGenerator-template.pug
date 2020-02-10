@@ -26,23 +26,31 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 	| {{/if}}
 
 
-
 	div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}}, id="{{:parentID}}",{{:dataAttributesParent}})
 		div(class="custom-control custom-{{:type}}")
 			input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}},{{:dataAttributes}})
-			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label"}, 'true')
+			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label", "showLabel":"{{:showLabel}}"}, 'true')
+			| {{if helpText && helpText != ''}}
+			i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+			| {{/if}}
 
 
 	| {{else type == "textarea" || type == "richHTML" || type == "codePUG" || type == "codeHTML"}}
 
 	div(class="form-group col-12 {{*:show}}", id="{{:parentID}}",{{:dataAttributesParent}})
-		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
+		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "showLabel":"{{:showLabel}}"},'true')
+		| {{if helpText && helpText != ''}}
+		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+		| {{/if}}
 		textarea(name="{{:name}}", id="{{*:id}}",class="form-control {{:type}}",{{*:requiredField}}, {{:dataAttributes}}) {{:~originalContent[name]}}
 
 	| {{else type == "select" }}
 
 	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", id="{{:parentID}}",{{:dataAttributesParent}})
-		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
+		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "showLabel":"{{:showLabel}}"},'true')
+		| {{if helpText && helpText != ''}}
+		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+		| {{/if}}
 		select(name="{{:name}}", id="{{*:id}}", class="form-control {{:classes}}",{{*:requiredField}}, {{:dataAttributes}}, data-content="'{{:~originalContent[name]}}'" || false)
 			
 			| {{for options ~na=name}}
@@ -106,7 +114,12 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 
 	| {{else}}
 	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}}, id="{{:parentID}}",{{:dataAttributesParent}})
-		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
+		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "showLabel":"{{:showLabel}}"}, 'true')
+
+		| {{if helpText && helpText != ''}}
+		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+		| {{/if}}
+
 		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control",{{*:requiredField}}, {{:dataAttributes}})
 
 	| {{/if}}

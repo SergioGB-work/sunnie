@@ -291,6 +291,7 @@ function jsThemeFunction(done){
 		let files = streamqueue({ objectMode: true },
 			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/primaryLibs/**/[^_]*.js'),
 			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/libs/**/[^_]*.js'),
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/imports/**/[^_]*.js'),
 			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site + '/theme/javascript/[^_]*.js')
 		);
 
@@ -518,7 +519,7 @@ function sitesFunction(done){
 				}
 			})
 
-			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/service-worker.js')
+			gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/service-worker.js',{"allowEmpty":true})
 			.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site  +'/'  + langs[lang]))
 			.on('end', function() {
 				siteDone++;
@@ -554,6 +555,45 @@ function htaccess(done){
 
 function removeTMP(done){
 	return gulp.series(deleteTMPFiles)(done);
+
+};
+
+function buildContentTemplate(done){
+	return gulp.series(buildContentTemplateFunction)(done);
+}
+
+function buildContentTemplateFunction(done){
+
+	var contentID = argv_contentID;
+	var contentType = argv_contentType;
+	var site = argv_site;
+
+	if(site == 'default'){
+		pathSite = pathBundles;
+	}
+	else{
+		pathSite = pathPlugins;
+	}
+
+	var dirContents = contentID != '' ? [contentID] : fs.readdirSync(pathSite + '/sites/' + site + '/content_manager/' + contentType);
+
+	dirContents.forEach(function(contentID,index){
+		if(contentID.split('.').length <= 1){
+			var configValues = JSON.parse(fs.readFileSync(pathSite + '/sites/' + site + '/content_manager/'+contentType + '/' + contentID + '/config.json')).configValues;
+
+			gulp.src(pathSite + '/sites/' + site + '/content_manager/'+contentType+'/template.pug')
+				.pipe(pug({
+					pretty: true,
+					locals: configValues
+				}))
+				.pipe(rename({
+					basename: 'view',
+					extname: '.html'
+				}))
+				.pipe(gulp.dest(pathSite + '/sites/' + site + '/content_manager/'+contentType + '/' + contentID))
+				.on('end', function() { done(); });	
+		}	
+	});
 
 };
 
@@ -1141,3 +1181,4 @@ exports.cssComponents = cssComponents;
 exports.sitesBuild = sitesBuild;
 exports.sitesFunction = sitesFunction;
 exports.removeTMP = removeTMP;
+exports.buildContentTemplate = buildContentTemplate;

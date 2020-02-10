@@ -280,8 +280,17 @@ module.exports = class functions{
 		if(contentId != 'empty_content'){
 			var siteURL = functions.getURLSite(site);
 			var sitemap = fs.readFileSync(siteURL + '/sitemap.json').toString();
-			sitemap = sitemap.replace(contentId,'empty_content');
-			sitemap = JSON.parse(sitemap.replace('"contentType": "'+contentType+'"','"contentType": "content"'));
+
+			console.log(contentId);
+
+			var regexContentId = new RegExp(contentId, "g");
+			sitemap = sitemap.replace(regexContentId,'empty_content');
+
+			console.log(sitemap);
+
+			var regexContentType = new RegExp('"contentType": "'+contentType+'"',"g");
+
+			sitemap = JSON.parse(sitemap.replace(regexContentType,'"contentType": "content"'));
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
 			var includeContents = fs.readFileSync(siteURL + '/content_manager/'+contentType+'/include.pug').toString();
@@ -315,8 +324,14 @@ module.exports = class functions{
 
 	static generateManifest(siteURL,file,pwaImageSizes,data){
 
-		var currentManifest = JSON.parse(fs.readFileSync(siteURL + '/manifest.json'));
-		var icons = currentManifest.icons;
+		
+		var currentManifest={};
+		var icons = [];
+
+		if(fs.existsSync(siteURL + '/manifest.json')){
+			currentManifest = fs.readFileSync(siteURL + '/manifest.json');
+			icons = currentManifest.icons;
+		}
 
 		var manifest = {
 			"name": data.manifest_name || '',
@@ -365,6 +380,11 @@ module.exports = class functions{
 			//uncomment await if you want to do stuff after the file is created
 
 			rimraf(siteURL + '/media/pwa/' ,function () {
+
+				if(!fs.existsSync(siteURL)){
+					fs.mkdirSync(siteURL);
+				}
+
 				if(!fs.existsSync(siteURL + '/media')){
 					fs.mkdirSync(siteURL + '/media');
 				}

@@ -6,11 +6,11 @@
 			"type":"select",
 			"options": [
 				{
-					"label":"Si",
+					"label":"No",
 					"value":"true"
 				},
 				{
-					"label":"No",
+					"label":"Si",
 					"value":"false"
 				}				
 			]
@@ -78,7 +78,7 @@
 					"value":"true"
 				}
 			]
-		},			
+		},
 		{
 			"label":"Form Inputs",
 			"name":"items",
@@ -90,6 +90,22 @@
 					"type":"text",
 					"dataAttributesParent": "data-id='#label' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
+				{
+					"label":"Show Label",
+					"name":"showLabel",
+					"type":"select",
+					"options":[
+						{
+							"label":"Si",
+							"value":"true"
+						},
+						{
+							"label":"No",
+							"value":"false"
+						}
+					],
+					"dataAttributesParent": "data-id='#required' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
+				},			
 				{
 					"id":"typeInputSelector",
 					"label":"Input Type",
@@ -109,6 +125,10 @@
 						{
 							"label":"Email",
 							"value":"email"
+						},
+						{
+							"label":"Date",
+							"value":"date"
 						},
 						{
 							"label":"Select",
@@ -141,25 +161,6 @@
 					]
 				},
 				{
-					"label":"Select Values",
-					"name":"selectValues",
-					"type":"array",
-					"arrayContent":[
-						{
-							"label":"Text",
-							"name":"text",
-							"type":"text"
-						},
-						{
-							"label":"Value",
-							"name":"value",
-							"type":"text"
-						}						
-					],
-					"visibility":"hidden",
-					"dataAttributesParent": "data-id='#selectValues' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='select'"
-				},
-				{
 					"label":"HTML Content",
 					"name":"htmlContent",
 					"type":"richHTML",
@@ -183,13 +184,37 @@
 					"name":"helpText",
 					"type":"text",
 					"dataAttributesParent": "data-id='#helptext' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
-				},				
+				},							
 				{
 					"label":"Default Value",
 					"name":"value",
 					"type":"text",
 					"dataAttributesParent": "data-id='#value' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
-				},				
+				},
+				{
+					"label":"Icon Type",
+					"name":"iconType",
+					"type":"select",
+					"options":[
+						{
+							"label":"Ninguno",
+							"value":""
+						},
+						{
+							"label":"Fontawesome",
+							"value":"fontawesome"
+						},
+						{
+							"label":"Material",
+							"value":"material"
+						}
+					]
+				},
+				{
+					"label":"Icon",
+					"name":"icon",
+					"type":"text"
+				},							
 				{
 					"label":"Required",
 					"name":"required",

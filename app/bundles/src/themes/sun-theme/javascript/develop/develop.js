@@ -638,6 +638,7 @@ function deleteContentTypeCallback(data){
 }
 
 function initSpecialTextareas(el){
+
 	el.find('textarea.richHTML').each(function(){
 		if(!$(this).next().hasClass('cke')){
 			CKEDITOR.replace( $(this).attr('id'));

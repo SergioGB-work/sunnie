@@ -110,16 +110,17 @@ module.exports = (app) => {
 	* @param {string} - enableChatBot - If true, the develop chatbot assitant will be show in dev enviroment
 	* @param {string} - theme - Name of theme that the new site will use
 	*/
-	app.post('/site/add', function (req, res) {
+	app.post('/site/add',fileUpload(), async function (req, res) {
 		try{
 			var siteName = req.body.name;
 			var siteURL = req.body.url;
 			var enableChatBot = req.body.enableChatBot;
 			var siteTheme = {"theme": req.body.theme};
 			var defaultSiteURL = functions.getURLSite(defaultSite);
+
 			var file = JSON.parse(JSON.stringify(req.files));
 			var manifest = functions.generateManifest(siteURL,file,pwaImageSizes,req.body);
-			var publishUrl = req.body.publishUrl;
+			var publishUrl = req.body.publishUrl || 'app/public';
 
 			var cachedPages = [];
 			var serviceWorkerType = req.body.serviceWorkerType || '';

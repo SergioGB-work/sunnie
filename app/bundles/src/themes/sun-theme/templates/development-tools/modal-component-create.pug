@@ -3,14 +3,14 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Crear Nuevo Componente"
 	- var modal_id = "modal-component-create"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-full"
 
 block modal-body
 	form(id="form-component-create",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/component/create", data-callback="createComponent")
 		.row
 			div(class="form-group col-4")
-				+fragment('fragment-label',{"for":"contentName", "text":"Nombre", "helpText":"Solo admite letras y números"})
-				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"contentName","name":"name", "required":"required","pattern":"[a-zA-Z][a-zA-Z0-9\s]*"})
+				+fragment('fragment-label',{"for":"componentCreateName", "text":"Nombre", "helpText":"Solo admite letras y números"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentCreateName","name":"name", "required":"required","pattern":"[a-zA-Z][a-zA-Z0-9\s]*"})
 		.row
 			.col-12
 				ul(class="nav nav-tabs" id="myTab" role="tablist")
@@ -40,6 +40,10 @@ block modal-body
 						p Puedes escribir tanto javascript como jQuery.
 						label(for="codeJS",class="sr-only") Código Javascript
 						textarea(type="text",name="componentJS",id="codeJS",class="form-control codeJS")
+							| {
+							| 	"config": [
+							|	]
+							| }
 
 					div(class="tab-pane" id="configView" role="tabpanel" aria-labelledby="configView-tab")
 						p Esta opción te permite configurar la vista de edición del componente. Todos los campos aquí definidos podras utilizarlos a la hora de pintar la vista del componente a través de las variables de PUG.
