@@ -21,7 +21,7 @@ function buildSitemapForm(elemento){
                         else{
                             var name = $(this).attr('name');
                         }
-                        var value = $(this).val();
+                        var value =  $(this).attr("type") == "checkbox" ? true : $(this).val();
                         arrayInputs[name]=value;
                     }
 
@@ -52,7 +52,7 @@ function buildSitemapForm(elemento){
 
             if( currentGroup.data('form-group') == originalGroup ){
                 var name = $(this).attr('name');
-                var value = $(this).val();
+                var value = $(this).attr("type") == "checkbox" ? true : $(this).val();
                 arrayInputs[name]=value;
 
             }

@@ -37,9 +37,13 @@ block modal-body
 							div(class="custom-control custom-radio")
 								input(type="radio",name="enableChatBot",id="enableChatBotSi",class="form-control custom-control-input",required,value="true")
 								+fragment('fragment-label',{"for":"enableChatBotSi", "text":"Si", "class":"uppercase custom-control-label"},'true')
-					div(class="form-group col-8")
+					div(class="form-group col-md-8 col-12")
 						+fragment('fragment-label',{"for":"publishURL", "text":"Publish URL"})
 						input(type="text",name="publishUrl",id="publishURL",class="form-control",value="app/public",required)
+
+					div(class="form-group col-12 col-md-4")
+						+fragment('fragment-label',{"for":"siteLogo", "text":"Icon"})
+						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"siteLogo","name":"siteLogo"})
 
 				.row
 					.col-12
@@ -87,7 +91,7 @@ block modal-body
 						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_lang","name":"manifest_lang"})
 					div(class="form-group col-3")
 						+fragment('fragment-label',{"for":"manifest_icon", "text":"Icon"})
-						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"manifest_icon","name":"manifest_icon", "required":"required"})
+						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"manifest_icon","name":"manifest_icon"})
 
 
 		.row

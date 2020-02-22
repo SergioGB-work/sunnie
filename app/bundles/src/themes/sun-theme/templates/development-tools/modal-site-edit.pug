@@ -27,11 +27,11 @@ block modal-body
 		#edit-site-content-tabs.tab-content
 			#edit-block-site-data.tab-pane.show.active(role="tabpanel",aria-labelledby="config-tab")
 				.row
-					div(class="form-group col-4")
+					div(class="form-group col-md-4 col-12")
 						+fragment('fragment-label',{"for":"siteNameEdit", "text":"Nombre"})
 						input(type="text",name="name",id="siteNameEdit",class="form-control",value="{{:data.name}}",required)
 
-					div(class="form-group col-4")
+					div(class="form-group col-md-4 col-12")
 						+fragment('fragment-label',{"for":"siteURLEdit", "text":"URL"})
 						input(type="text",name="url",id="siteURLEdit",class="form-control",value="{{:data.url}}",required)
 
@@ -56,10 +56,14 @@ block modal-body
 								input(type="radio",name="enableChatBot",id="enableChatBotSiEdit{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
 								+fragment('fragment-label',{"for":"enableChatBotSiEdit{{*:id}}", "text":"Si", "class":"uppercase custom-control-label"},'true')
 
-					div(class="form-group col-8")
+					div(class="form-group col-md-8 col-12")
 						+fragment('fragment-label',{"for":"publishURLEdit", "text":"Publish URL"})
 						input(type="text",name="publishUrl",id="publishURLEdit",class="form-control",value="{{:data.publishUrl}}",required)
-				
+
+					div(class="form-group col-12 col-md-4")
+						+fragment('fragment-label',{"for":"siteLogoEdit", "text":"Icon"})
+						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"siteLogoEdit","name":"siteLogo"})
+						img(src=fullSiteUrl+"{{:data.logo}}",alt="Site Logo", width=150)
 				.row
 					.col-12
 						h3 Seleciona un tema de apariencia
@@ -106,6 +110,8 @@ block modal-body
 					div(class="form-group col-3")
 						+fragment('fragment-label',{"for":"manifest_iconEdit", "text":"Icon"})
 						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"manifest_iconEdit","name":"manifest_icon"})
+
+					| {{if data.manifest.icons.length > 0}}	
 					div(class="form-group col-12")
 						h3 Icons
 						p Estos son los iconos asociados al manifest actuales. Si deseas modificarlos tan solo tienes que adjuntar un nuevo archivo en el campo Icons y Guardar. Te recomendamos que utilices una imagen de <strong>512x512</strong> para que los iconos resultantes de la generación automática tengan la calidad adecuada.
@@ -115,6 +121,7 @@ block modal-body
 								h4.h5 {{:sizes}}
 								img(src="{{:src}}" alt="")
 							| {{/for}}
+					| {{/if}}
 
 			#edit-block-site-service-worker.tab-pane(role="tabpanel",aria-labelledby="service-worker-tab")
 				.row

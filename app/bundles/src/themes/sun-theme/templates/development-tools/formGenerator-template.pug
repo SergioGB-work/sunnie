@@ -85,7 +85,6 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 					| {{/for}}
 
 					| {{else}}
-
 					.fieldset(data-array-id="0",class="mt-3")
 						.row
 							| {{for arrayContent ~originalContent = '' tmpl="#templateFormGenerator"/}}
@@ -120,6 +119,10 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
 		| {{/if}}
 
+		
+		| {{if ~originalContent != ''}}
 		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control",{{*:requiredField}}, {{:dataAttributes}})
-
+		| {{else}}	
+		input(type="{{:type}}",name="{{:name}}",value="",id="{{*:id}}",class="form-control",{{*:requiredField}}, {{:dataAttributes}})
+		| {{/if}}
 	| {{/if}}

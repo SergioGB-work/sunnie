@@ -48,12 +48,10 @@ function dataList(el) {
 		var paramsPagination = { service: service_data_pagination, method_pagination: method, template: template_pagination, target: target_pagination, page: initial_page_pagination, pagination_target: pagination_target_pagination, items_per_page: items_per_page_pagination, callback: callback_pagination, content: content_pagination, enableGetParams: enableGetParams_pagination, getParamsList: getParamsList_pagination, rel: rel_pagination, cache: cache_pagination, noReload: noReload_pagination, private: private_pagination };
 		params['pagination'] = paramsPagination;
 	}		
-
 	getData(params);
-
 	clearInterval(live);
 
-	if (liveReload == 'true') {
-		live = setInterval(getData(params), timeReload);
+	if (liveReload == true) {
+		live = setInterval(function(){getData(params);}, timeReload);
 	}
 }

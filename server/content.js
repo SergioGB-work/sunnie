@@ -286,7 +286,7 @@ module.exports = (app) => {
 
 
 
-			functions.execGulpTask('gulp buildContentTemplate --site '+site+' --contentType '+contentType+' --contentID ' + id + ' & gulp deploySites --env dev --site ' + site + ' & gulp removeTMP', res);
+			functions.execGulpTask('gulp buildContentTemplate --site '+site+' --contentType '+contentType+' --contentID ' + id + ' & gulp deploySites --env dev --site ' + site + ' & gulp removeTMP', res, '', "Modificar el contenido <strong>" + name + "</strong>");
 		};
 	});
 
@@ -303,7 +303,7 @@ module.exports = (app) => {
 			var contentId = req.body.id;
 			var contentType = req.body.contentType;
 			functions.deleteContent(site,contentId,contentType);
-			functions.deploySites('--env dev --site ' + site, res);
+			functions.deploySites('--env dev --site ' + site, res, '',"Eliminar el contenido <strong>" + contentId + "</strong>");
 		}
 	});
 
@@ -360,7 +360,7 @@ module.exports = (app) => {
 		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/config.json', JSON.stringify(config,null,4),function(err){});
 		fs.writeFileSync(siteURL + '/content_manager/'+contentTypeName+'/template.pug', contentTypeTemplate ,function(err){});
 		
-		functions.execGulpTask('gulp buildContentTemplate --site '+site+' --contentType '+contentTypeName+ ' & gulp deploySites --env dev --site ' + site + ' & gulp removeTMP', res);
+		functions.execGulpTask('gulp buildContentTemplate --site '+site+' --contentType '+contentTypeName+ ' & gulp deploySites --env dev --site ' + site + ' & gulp removeTMP', res, '','Editar el tipo de contenido <strong>' + contentTypeName + '</strong>');
 		
 	});
 
@@ -401,7 +401,7 @@ module.exports = (app) => {
 			console.log("ELIMINADO TIPO CONTENIDO -> " + contentTypeName);
 		});
 		
-		functions.deploySites('--env dev --site ' + site, res);
+		functions.deploySites('--env dev --site ' + site, res, '', "Eliminar el tipo de contenido <strong>" + contentTypeName + "</strong>");
 		
 	});	
 

@@ -81,7 +81,7 @@ module.exports = (app) => {
 			eval(patron +'= editedPage');
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			functions.deployPage('--env dev --site ' + site + ' --pag ' + editedPage['id'], res);
+			functions.deployPage('--env dev --site ' + site + ' --pag ' + editedPage['id'], res,"Añadir el componente <strong>" + componentName + "</strong>en la página <strong>" + editedPage.name + "</strong>");
 		}
 		catch(e){
 			console.log(e);
@@ -168,7 +168,7 @@ module.exports = (app) => {
 			})
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			functions.deployPage('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res);
+			functions.deployPage('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res, "Desplegar los cambios del componente <strong>" + componentName + "</strong>en la página <strong>" + editedPage.name + "</strong>");
 		}
 		catch(e){
 			console.log(e);
@@ -217,7 +217,7 @@ module.exports = (app) => {
 
 			eval(patron +'= editedPage');
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			functions.deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res,{"column":layoutColumn,"position":componentPosition});
+			functions.deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'] , res,{"column":layoutColumn,"position":componentPosition},"Eliminar el componente de la página <strong>" + editedPage.name + "</strong>");
 		}
 		catch(e){
 			console.log(e);
@@ -281,7 +281,7 @@ module.exports = (app) => {
 			})
 			
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			functions.deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'], res);
+			functions.deploySites('--env dev --site ' + site + ' --pag ' + editedPage['id'], res, '',"Mover de posición el componente <strong>" + componentName + "</strong> de la página <strong>" + editedPage.name + "</strong>" );
 		}
 		catch(e){
 			console.log(e);
@@ -446,7 +446,7 @@ module.exports = (app) => {
 			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/main.scss', componentCSS ,function(err){});
 			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/main.js', componentJS ,function(err){});
 			
-			functions.execGulpTask('gulp deploy --env dev & gulp removeTMP', res);
+			functions.execGulpTask('gulp deploy --env dev & gulp removeTMP', res, '', "Editar el componente <strong>" + componentName + "</strong>");
 		
 		}
 		catch(e){

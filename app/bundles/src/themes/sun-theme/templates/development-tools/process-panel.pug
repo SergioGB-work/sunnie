@@ -1,0 +1,54 @@
+
+#processPanel.bg-dark.position-fixed.h-100.sidebar-menu-tools
+
+	div(id="panelProcessList")
+		.card.mb-0.bg-transparent
+			.card-header.bg-dark.text-white.border-secondary(id="dropdownSites" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne")
+				span.text Tareas
+			#panelProcessListBlock(class="p-2",data-load="true",data-service-data="http://localhost:8084/process/list",data-method="GET",data-template="#templateProcessPanel", data-target="#panelProcessListBlock",data-live-reload="true", data-time-reload="10000")
+
+
+	script(id="templateProcessPanel",type="text/x-jsrender")
+		| {{if data.length > 0}}
+
+		| {{for data}}
+
+		| {{* window.status = '' }}
+		| {{* window.header = '' }}
+		| {{* window.loading = '' }}
+		| {{if status == 'pending' }}
+		| {{* window.status = 'warning' }}
+		| {{* window.header = 'Pending' }}
+
+		| {{else status == 'success' }}
+		| {{* window.status = 'success' }}
+		| {{* window.header = 'Finished' }}
+
+		| {{else status == 'error' }}
+		| {{* window.status = 'danger' }}
+		| {{* window.header = 'Error' }}
+
+		| {{else status == 'running' }}
+		| {{* window.status = 'info' }}
+		| {{* window.header = 'Running process' }}
+		| {{* window.loading = 'loading-mask active' }}
+
+		| {{/if}}
+
+		| {{* window.id = 'collapse' + parseInt(Math.random() * (99999 - 0) + 0) }}
+
+		div(class="alert alert-{{*:status}} {{*:loading}}")
+			h4.alert-heading.mb-0.icon-1x.text-capitalize 
+				span {{*:header}}
+				i.fa.fa-plus.float-right(data-toggle="collapse",data-target="#{{*:id}}",aria-expanded="false" aria-controls="{{*:id}}")
+			p.mb-0 {{:msg}}
+			p.mb-0.font-italic.collapse.border.bg-white.p-3.mt-3(id="{{*:id}}", class="border-{{*:status}}") {{:code}}
+
+
+		| {{/for}}
+
+		| {{else}}
+
+		div.alert.alert-warning No hay tareas pendientes
+
+		| {{/if}}

@@ -27,8 +27,8 @@ function processData(dataResponse, target, template, callback, content, totalIte
 			}
 
 			exec = callback + '(' + JSON.stringify(dataResponse) + ',' + content + ',' + total + ','+ requestData + ')';
-
 		}
+		
 		var f = eval(exec);
 	}
 

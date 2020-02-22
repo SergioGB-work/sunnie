@@ -115,4 +115,36 @@ gulp.task('apiServer', function() {
   		console.log('API running on 8082!');
 	});
 
+
+
+	appProcess = express();
+	var router = express.Router();
+
+	appProcess.use(bodyParser.urlencoded({ extended: false }));
+	appProcess.use(bodyParser.json());
+
+	appProcess.use(function(req, res, next) {
+
+		var whiteList = ["https://localhost:8082","http://localhost:8083"]
+  		var origin = req.headers.origin;
+
+		if (whiteList.indexOf(origin) > -1) {
+			res.setHeader('Access-Control-Allow-Origin', origin);
+		}
+
+    	res.setHeader("Access-Control-Allow-Credentials", "true");
+    	res.setHeader("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT,DELETE");
+    	res.setHeader("Access-Control-Expose-Headers","Pagination-Count");
+    	res.setHeader("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers, Authorization, Accept-Language, Pagination-Count");
+		next();
+	});
+
+	const processManager = require('./process.js');
+
+	processManager(appProcess);
+
+	appProcess.listen(8084,function(req, res){
+  		console.log('API PROCESS running on 8084!');
+	});
+
 });

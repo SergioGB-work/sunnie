@@ -33,7 +33,7 @@ function formSubmit(){
 
 		form.find('input:not([type="radio"]):not([type="checkbox"]):not([type="file"]):not([name$="-fileHidden"]):not([type="submit"]),select,textarea,input[type="radio"]:checked,input[type="checkbox"]:checked').each(function () {
 
-			var value = $(this).val();
+			var value = $(this).attr("type") == "checkbox" ? true : $(this).val();
 			var name = $(this).attr('name');
 			var group = $(this).parents('[data-form-group]:last');
 		    
@@ -78,6 +78,7 @@ function formSubmit(){
 		var filesInput = form.find('input[type="file"]');
 
 		if(filesInput.length > 0){
+
 			var dataFormData = new FormData();	
 
 			form.find('input[type="file"]').each(function(){
@@ -124,9 +125,7 @@ function formSubmit(){
 		        $('.progressBar-block .total').text(itemsUploaded);
 		        $('.progressBar-block .percentage').text('0%');
 		        $('.progressBar-block .progress-bar').css('width', '0%');
-
 		        form.find('input[type="file"]').each(function(){
-			        
 			        for (var key in uploadFilesArray[$(this).attr('name')]) {
 
 			            dataFormData = new FormData();

@@ -10,7 +10,7 @@ script(id="templateComponentListLI",type="text/x-jsrender")
 	li.list-group-item.bg-dark.text-white.border-secondary.border-bottom.d-flex.justify-content-between.py-2(draggable="true", data-id-component="{{:name}}") 
 		span.align-self-center {{:name}}
 		
-		div
+		div.d-flex.align-items-center
 			a(href="#modal-component-created-delete", data-toggle="modal", data-component-name="{{:name}}").text.text-white
 				i.fa.fa-times.float-right.pr-1.py-1.icon-1x
 			a(href="#modal-component-created-edit", data-toggle="modal", data-component-name="{{:name}}").text.text-white

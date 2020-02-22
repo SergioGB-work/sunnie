@@ -118,10 +118,11 @@ $(document).ready(function(){
 	$(document).on('click','[data-block-type="array"] [data-array-id] .addItem',function(){
 		var array_item = $(this).closest('[data-array-id]').clone(true);
 		
-		$(array_item).find('textarea').each(function(){
+		$(array_item).find('textarea,input,select').each(function(){
 			var newID = 'input' + (Math.random() * (99999 - 0) + 0);//Se genera un nuevo ID para los CK Editor
 			$(this).attr("id", newID );//Se asocia el id al textarea que será el ckeditor 
-			$(this).prev().attr("for", newID );
+			$(this).prev("label").attr("for", newID );
+			$(this).next("label").attr("for", newID );
 		})
 		
 		$(array_item).find('.cke').remove();
@@ -189,6 +190,11 @@ $(document).ready(function(){
 		$(this).closest('.locale-key').find('.locale-code').text('custom.' + val);
 	});
 
+	$('#modal-content-add').on('show.bs.modal',function(){
+		$(this).find('#add-content-block').html('');
+	});
+
+
 	$('#modal-content-add .send').click(function(){
 		callbackFormModal($(this),'Añadiendo contenido, espere por favor...');
 	});
@@ -248,13 +254,21 @@ $(document).ready(function(){
 
 	$('.sunniejs-tools .addButton').click(function(){
 		$('body').toggleClass('show-sidebar-menu-tools');
+		$('body').removeClass('show-processPanel');
 		$('body').removeClass('show-develop-assistant');
 	});
 
 	$('.sunniejs-tools .develop-assistant').click(function(){
 		$('body').toggleClass('show-develop-assistant');
 		$('body').removeClass('show-sidebar-menu-tools');
+		$('body').removeClass('show-processPanel');
 	})	
+
+	$('.sunniejs-tools .processPanel').click(function(){
+		$('body').removeClass('show-develop-assistant');
+		$('body').removeClass('show-sidebar-menu-tools');
+		$('body').toggleClass('show-processPanel');
+	})
 
 	$('#ToolsComponentList').on('dragstart','[draggable="true"]', function(evt) {
 		evt.originalEvent.dataTransfer.setData("id", $(this).data('id-component'));
@@ -408,8 +422,8 @@ $(document).ready(function(){
 
     $('#modal-multimedia-add').on('drop','.dropfile',function (e) {
     	$(this).removeClass('alert-info').addClass('alert-dark');
-    	var dt = e.dataTransfer
-  		var files = dt.files
+    	var dt = e.dataTransfer;
+  		var files = dt.files;
         uploadFilePreview(files,'.filesContainer');
     });
 
@@ -551,7 +565,7 @@ function dataComponentLoadedCallback(data){
 
 function editComponentCallback(data){
 	$('#modal-error').modal('hide');
-	location.reload();
+	showError('','El componente ha sido modificado correctamente. Por favor recargar la página para ver los cambios.');
 }
 
 function publishSiteCallback(){
@@ -651,7 +665,8 @@ function initSpecialTextareas(el){
 			var editor = CodeMirror.fromTextArea(document.getElementById(id), {
 	        	mode: {name: "pug", alignCDATA: true},
 	        	lineNumbers: true,
-	        	theme:"base16-dark"
+	        	theme:"base16-dark",
+	        	indentWithTabs: true
 	     	 });
 		}
 		else{
@@ -668,7 +683,9 @@ function initSpecialTextareas(el){
 	        	mode: "text/html",
           		extraKeys: {"Ctrl-Space": "autocomplete"},
 	        	lineNumbers: true,
-	        	theme:"base16-dark"
+	        	theme:"base16-dark",
+	        	gutters: ["CodeMirror-lint-markers"],
+    			lint: true
 	     	 })
 		}
 		else{
@@ -684,7 +701,9 @@ function initSpecialTextareas(el){
 	        	mode: "text/css",
           		extraKeys: {"Ctrl-Space": "autocomplete"},
 	        	lineNumbers: true,
-	        	theme:"base16-dark"
+	        	theme:"base16-dark",
+	        	gutters: ["CodeMirror-lint-markers"],
+    			lint: true
 	     	 })
 		}
 		else{
@@ -700,7 +719,9 @@ function initSpecialTextareas(el){
 	        	mode: "text/javascript",
           		extraKeys: {"Ctrl-Space": "autocomplete"},
 	        	lineNumbers: true,
-	        	theme:"base16-dark"
+	        	theme:"base16-dark",
+	        	gutters: ["CodeMirror-lint-markers"],
+    			lint: true
 	     	 })
 		}
 		else{

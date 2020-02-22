@@ -1,0 +1,12 @@
+script(id="templatePageListLI",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	| {{for data}}
+	| {{* window.spaces = '' }}
+	| {{for position.split(',')}}
+	| {{* window.spaces += '&nbsp;&nbsp;' }}
+	| {{/for}}	
+	li.list-group-item.text-white.border-0.d-flex.justify-content-between.p-0.bg-transparent(data-id-page="{{:id}}") 
+		a.align-self-center.text-white.py-2.px-3.w-100(href=fullSiteUrl + "{{:url}}") {{*:spaces}}{{:name}}
+
+	| {{/for}}
+	| {{/if}}

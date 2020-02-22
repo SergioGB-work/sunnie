@@ -1,5 +1,6 @@
 const CustomConstants = {
-	defaultSite:"default"
+	defaultSite:"default",
+	orchestratorURL : "http://localhost:8084"
 }
 
 module.exports = CustomConstants;

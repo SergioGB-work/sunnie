@@ -57,7 +57,7 @@ module.exports = (app) => {
 			var site = req.params.idSite;
 			var siteURL = functions.getURLSite(site);
 			var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
-			functions.deployPage('--site ' + site + ' --publishUrl ' + sitemap.site.publishUrl  , res);
+			functions.deployPage('--site ' + site + ' --publishUrl ' + sitemap.site.publishUrl  , res, 'Publicar el site <strong>' + sitemap.site.name + '</strong>');
 		}
 		catch(e){
 			console.log(e);
@@ -119,6 +119,8 @@ module.exports = (app) => {
 			var defaultSiteURL = functions.getURLSite(defaultSite);
 
 			var file = JSON.parse(JSON.stringify(req.files));
+			delete file['siteLogo'];
+			var siteLogo = JSON.parse(JSON.stringify(req.files.siteLogo));
 			var manifest = functions.generateManifest(siteURL,file,pwaImageSizes,req.body);
 			var publishUrl = req.body.publishUrl || 'app/public';
 
@@ -149,7 +151,8 @@ module.exports = (app) => {
 						"offlinePage":offlinePage,
 						"cachedPages":cachedPages,
 						"customTemplate":contentCustomServiceWorker
-					}
+					},
+					"logo": siteLogo
 				},
 				"pages": [
 					{
@@ -179,7 +182,14 @@ module.exports = (app) => {
 			            "childs": []
 					}
 				]
-			};	
+			};
+
+			var buffer = new Buffer.from(siteLogo.data.data);
+
+			fs.writeFile(siteURL + '/media/' + siteLogo.name, buffer,async (err) => {
+				if (err) throw err;
+			});
+
 			fs.mkdirSync(pathPlugins + '/sites/' + siteName);
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/build.json', JSON.stringify(siteTheme,null,4),function(err){});
 			fs.writeFileSync(pathPlugins + '/sites/' + siteName+'/sitemap.json', JSON.stringify(sitemap,null,4),function(err){});
@@ -196,7 +206,7 @@ module.exports = (app) => {
 
 			fsextra.copy(defaultSiteURL + '/content_manager/', pathPlugins + '/sites/' + siteName+'/content_manager/',function(err){});
 
-			functions.deployPage('--env dev --site ' + siteName , res);
+			functions.deployPage('--env dev --site ' + siteName , res, 'Añadir site <strong>' + siteName + '</strong>');
 		}
 		catch(e){
 			console.log(e);
@@ -261,6 +271,13 @@ module.exports = (app) => {
 			var oldUrl = sitemap.site.url;
 
 			var file = JSON.parse(JSON.stringify(req.files));
+			
+			if(file && file.siteLogo !== undefined){
+				delete file['siteLogo']
+			}	
+
+			var siteLogo = req.files && req.files.siteLogo ? JSON.parse(JSON.stringify(req.files.siteLogo)) : sitemap.site.logo;
+			var siteLogoUrl =  req.files && req.files.siteLogo ? '/media/' + siteLogo.name : sitemap.site.logo
 
 			var manifest = functions.generateManifest(siteURL,file,pwaImageSizes,req.body);
 			var cachedPages = [];
@@ -274,12 +291,20 @@ module.exports = (app) => {
 				}
 			})
 
+			if(req.files && req.files.siteLogo !== undefined){
+				var buffer = new Buffer.from(siteLogo.data.data);
+				fs.writeFile(siteURL + '/media/' + siteLogo.name, buffer,async (err) => {
+					if (err) throw err;
+				});
+			}
+
 			functions.generateServiceWorker(siteURL,serviceWorkerType,offlinePage, cachedPages, contentCustomServiceWorker, );
 
 			sitemap.site.name = name;
 			sitemap.site.url = url;
 			sitemap.site.publishUrl = publishUrl;
 			sitemap.site.enableChatBot = enableChatBot;
+			sitemap.site.logo = siteLogoUrl;
 			sitemap.site.serviceWorker.offlinePage = offlinePage;
 			sitemap.site.serviceWorker.type = serviceWorkerType;
 			sitemap.site.serviceWorker.cachedPages = cachedPages;
@@ -315,7 +340,7 @@ module.exports = (app) => {
 
 			});
 
-			functions.deployPage('--env dev --site ' + name , res,{"name":name, "url":url, "oldUrl": oldUrl});
+			functions.deployPage('--env dev --site ' + name , res,{"name":name, "url":url, "oldUrl": oldUrl},'Editar el site <strong>' + name + '</strong>');
 		}
 		catch(e){
 			console.log(e);
@@ -438,6 +463,6 @@ module.exports = (app) => {
 
 		});
 
-		functions.deploySites('--env dev --site ' + site, res);
+		functions.deploySites('--env dev --site ' + site, res,'','Actualizar variables de idioma');
 	});	
 }	

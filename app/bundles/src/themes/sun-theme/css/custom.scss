@@ -6,18 +6,30 @@
 /** LOADING **/
 
 #loading-mask{
+	position:fixed;
+	width:100%;
+	top:0;
+}
+
+.loading-mask{
 	display:none;
+	position:relative;
+	min-height: 2px;
 	
-	&.active{
-		display:block;	
-	    position: fixed;
-	    background: $primary;
-	    top: 0;
+	&:after{
+		content:'';
+	    position: absolute;
+	    bottom: 0;
 	    width: 0%;
 	    height: 2px;		
 	    animation-name: loading;
 	    animation-duration: 1s;
 	    animation-iteration-count: infinite;
+	    background:$primary;
+	    left:0;
+	}
+	&.active{
+		display:block;	
 	}
 }
 

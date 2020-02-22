@@ -73,7 +73,7 @@ function generatePagination(data, el, totalItems) {
 				for (var i = 0; i < filtersSearch.length; i++) {
 
 					filter = filtersSearch[i].split('=');
-					
+
 					if (filter[0].indexOf("filter[skip]"+rel) < 0 && filter[0] != '') {
 						href += '&' + filtersSearch[i];
 					}

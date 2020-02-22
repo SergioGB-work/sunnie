@@ -53,7 +53,12 @@ block modal-body
 				textarea(type="text",name="keywords",id="pageKeywordsEdit",class="form-control") {{:data.attributes.keywords}}
 
 		.row
-			| {{* window.hidden = data.hidden == 'true' ? "selected" : "" }}
+
+			| {{if data.hidden && data.hidden == "true"}}
+			| {{* window.hidden = 'selected'}}
+			| {{else}}
+			| {{* window.hidden = ''}}
+			| {{/if}}
 
 			div(class="form-group col-4")
 				+fragment('fragment-label',{"for":"pageHiddenEdit", "text":"Page Hidden"})

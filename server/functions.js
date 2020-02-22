@@ -1,8 +1,10 @@
 const fs = require('fs');
 const rimraf = require("rimraf");
+const axios = require("axios");	
 
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
+const orchestratorURL = variables.orchestratorURL;
 const imagemagick = require('imagemagick');
 
 module.exports = class functions{
@@ -84,9 +86,22 @@ module.exports = class functions{
 		};
 	}
 
-	static deployPage(argv,res){
+	static deployPage(argv,res,msg){
 		const { exec } = require('child_process');
 		console.log('START DEPLOY gulp deploy ' + argv);
+
+		axios.post(orchestratorURL+'/process/add', {
+			msg : msg ? msg : 'gulp deploy ' + argv,
+			code: 'gulp deploy ' + argv
+		})
+		.then((response) => {
+			res.status(200).send();
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(400).send('ERROR');
+		})
+		/*
 		exec('gulp deploy ' + argv + ' && gulp removeTMP', (err, stdout, stderr) => {
 		  if (err) {
 		    // node couldn't execute the command
@@ -97,12 +112,26 @@ module.exports = class functions{
 		  // the *entire* stdout and stderr (buffered)
 		  console.log('DEPLOY FINISHED: ' + stdout + stderr);
 		  res.status(200).send('SUCCESSFULL');
-		});
+		});*/
 	}
 
-	static deploySites(argv,res,argv_res){
+	static deploySites(argv,res,argv_res,msg){
 		const { exec } = require('child_process');
 		console.log('START DEPLOY SITES gulp deploySites ' + argv);
+
+		axios.post(orchestratorURL+'/process/add', {
+			msg :  msg ? msg : 'gulp deploySites ' + argv + ' && gulp removeTMP',
+			code: 'gulp deploySites ' + argv + ' && gulp removeTMP'
+		})
+		.then((response) => {
+			res.status(200).send(argv_res);
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(400).send('ERROR');
+		})
+
+		/*
 		exec('gulp deploySites ' + argv + ' && gulp removeTMP', (err, stdout, stderr) => {
 		  if (err) {
 		    // node couldn't execute the command
@@ -113,12 +142,26 @@ module.exports = class functions{
 		  // the *entire* stdout and stderr (buffered)
 		  console.log('DEPLOY FINISHED: ' + stdout + stderr);
 		  res.status(200).send(argv_res);
-		});
+		});*/
 	}
 
-	static buildContentTemplate(argv,res,argv_res){
+	static buildContentTemplate(argv,res,argv_res,msg){
 		const { exec } = require('child_process');
 		console.log('START BUILD TEMPLATE gulp buildContentTemplate ' + argv);
+
+		axios.post(orchestratorURL+'/process/add', {
+			msg :  msg ? msg : 'gulp buildContentTemplate ' + argv,
+			code: 'gulp buildContentTemplate ' + argv
+		})
+		.then((response) => {
+			res.status(200).send(argv_res);
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(400).send('ERROR');
+		})
+
+		/*
 		exec('gulp buildContentTemplate ' + argv, (err, stdout, stderr) => {
 		  if (err) {
 		    // node couldn't execute the command
@@ -129,12 +172,26 @@ module.exports = class functions{
 		  // the *entire* stdout and stderr (buffered)
 		  console.log('BUILD FINISHED: ' + stdout + stderr);
 		  res.status(200).send(argv_res);
-		});
+		});*/
 	}
 
-	static execGulpTask(argv,res,argv_res){
+	static execGulpTask(argv,res,argv_res,msg){
 		const { exec } = require('child_process');
 		console.log('START ' + argv);
+
+
+		axios.post(orchestratorURL+'/process/add', {
+			msg : msg ? msg : argv,
+			code: argv
+		})
+		.then((response) => {
+			res.status(200).send(argv_res);
+		})
+		.catch((error) => {
+			console.error(error);
+			res.status(400).send('ERROR');
+		})
+		/*
 		exec(argv, (err, stdout, stderr) => {
 		  if (err) {
 		    // node couldn't execute the command
@@ -145,7 +202,7 @@ module.exports = class functions{
 		  // the *entire* stdout and stderr (buffered)
 		  console.log('EXEC FINISHED: ' + stdout + stderr);
 		  res.status(200).send(argv_res);
-		});
+		});*/
 	}
 
 	static normaliza(str) {
@@ -243,11 +300,11 @@ module.exports = class functions{
 			var src = element.src.split('/');
 			src = src[src.length - 1];
 			if(element.childs.length > 0){
-				pages.push({"id":element.id,"name":element.name,"position":position.join(),"src":src});
+				pages.push({"id":element.id,"name":element.name,"position":position.join(),"src":src,"url":element.url});
 				pages = pages.concat(functions.pagesList(element.childs,originalSiteMap));
 			}
 			else{
-				pages.push({"id":element.id,"name":element.name,"position":position.join(), "src":src});
+				pages.push({"id":element.id,"name":element.name,"position":position.join(), "src":src, "url":element.url});
 			}
 
 		});
@@ -328,9 +385,13 @@ module.exports = class functions{
 		var currentManifest={};
 		var icons = [];
 
+
 		if(fs.existsSync(siteURL + '/manifest.json')){
-			currentManifest = fs.readFileSync(siteURL + '/manifest.json');
-			icons = currentManifest.icons;
+			currentManifest = JSON.parse(fs.readFileSync(siteURL + '/manifest.json'));
+			if(currentManifest.icons){
+				icons = currentManifest.icons;
+			}
+
 		}
 
 		var manifest = {
@@ -349,7 +410,6 @@ module.exports = class functions{
 
 
 		for(var key in file){
-
 			let file_name = file[key].name;
 			let realName = file_name.split('.');
 			let extension = realName.pop();

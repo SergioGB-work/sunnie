@@ -3,7 +3,7 @@ extends ../modal_noFooter
 block vars
 	- var modal_title = "Editar Componente"
 	- var modal_id = "modal-component-created-edit"
-	- var modal_size = "modal-lg"
+	- var modal_size = "modal-full"
 
 block modal-body
 	form(id="form-component-created-edit",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/component/edit-created", data-callback="editCreatedComponent")
@@ -59,4 +59,11 @@ block modal-body
 
 							.row
 								.col-12
-								| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}
+
+									| {{if ~root.data.content.config.length > 0}}
+
+									| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}
+
+									| {{else}}
+									div(id="componentViewConfigEdit",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/component/generalConfig",data-method="GET",data-template="#templateCreateComponentConfig",data-target="#modal-component-created-edit #componentViewConfigEdit")
+									| {{/if}}

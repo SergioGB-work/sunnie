@@ -5,6 +5,7 @@ function dataUploadFilePreview(el){
 		uploadFilePreviewContainer = el.data('upload-file-preview-container') || '',
 		uploadFilePreviewTemplate = el.data('upload-file-preview-template') || '#uploadItemTemplate';
 
+    $('#' + idInput).unbind('change');
     $('#' + idInput).change(function () {
         var input = $(this).get(0);
         uploadFilePreview(input.files,uploadFilePreviewContainer, nameInput);
@@ -70,6 +71,7 @@ function uploadFilePreview(files,previewContainer,nameInput){
 		var html = tmpl.render(data);
 		$(previewContainer).append(html);
     });	
+
 }
 
 function uploadFileCallback(data){

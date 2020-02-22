@@ -80,10 +80,9 @@ function getData(el) {
 		}
 	}
 
-	filter += loopbackPaginationConnector(filter,page,items_per_page);
+	filter = loopbackPaginationConnector(filter,page,items_per_page);
 
 	var serviceParams = service.split('?');
-
 
 	if (serviceParams.length > 1) {
 		serviceParams = serviceParams[1].split('&');

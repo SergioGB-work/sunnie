@@ -253,10 +253,12 @@ function cssComponentsFunction(done){
 };
 
 function cssTheme(done){
+	console.log('Starting compiling CSS Theme...');
 	return gulp.series(cssBuild,cssThemeFunction)(done);
 }
 
 function cssComponents(done){
+	console.log('Starting compiling CSS Components...');
 	return gulp.series(componentsBuild,cssComponentsFunction)(done);
 }
 
@@ -283,6 +285,7 @@ function fontsFunction(done){
 /** JS **/
 
 function jsTheme(done){
+	console.log('Starting compiling Javascript Theme...');
 	return gulp.series(jsBuild,jsThemeFunction)(done);
 }
 
@@ -357,6 +360,7 @@ function jsThemeFunction(done){
 };
 
 function jsComponents(done){
+	console.log('Starting compiling Javascript Components...');
 	return gulp.series(componentsBuild,jsComponentsFunction)(done);
 }
 
@@ -558,6 +562,9 @@ function removeTMP(done){
 
 };
 
+
+
+
 function buildContentTemplate(done){
 	return gulp.series(buildContentTemplateFunction)(done);
 }
@@ -596,6 +603,21 @@ function buildContentTemplateFunction(done){
 	});
 
 };
+
+function watchers(){
+
+	console.log('Waiting for changes...');
+
+	//Watchers CSS
+	gulp.watch(['src/bundles/themes/**/*.{scss,css}','plugins/themes/**/*.{scss,css}'],{cwd:'./app'}, gulp.series('cssTheme'));
+	gulp.watch(['app/bundles/src/components/**/*.{scss,css}','app/plugins/components/**/*.{scss,css}'], gulp.series('cssComponents'));
+
+	//Watchers JS
+	gulp.watch(['bundles/src/themes/**/*.js','plugins/**/*.js'],{cwd:'./app'}, gulp.series('jsTheme'));
+	gulp.watch(['bundles/src/components/**/*.js','plugins/components/**/*.js'],{cwd:'./app'}, gulp.series('jsComponents'));
+
+}
+
 
 /** LOCALES **/
 
@@ -1173,12 +1195,16 @@ exports.deploy = deploy;
 exports.connect = connectServer;
 exports.connectDev = connectDevServer;
 
-exports.default = gulp.parallel(deploy,connectServer,connectDevServer);
+exports.default = gulp.parallel(deploy,connectServer,connectDevServer,watchers);
 
 
 exports.build = build;
-exports.cssComponents = cssComponents;
 exports.sitesBuild = sitesBuild;
 exports.sitesFunction = sitesFunction;
 exports.removeTMP = removeTMP;
 exports.buildContentTemplate = buildContentTemplate;
+exports.watchers = watchers;
+exports.cssTheme = cssTheme;
+exports.cssComponents = cssComponents;
+exports.jsComponents = jsComponents;
+exports.jsTheme = jsTheme;

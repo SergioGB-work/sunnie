@@ -1,5 +1,5 @@
 
-#sidebar-menu-tools.bg-dark.position-fixed.h-100
+#sidebar-menu-tools.bg-dark.position-fixed.h-100.sidebar-menu-tools
 	
 	.card.mb-0
 		.card-header.bg-dark.text-white.border-secondary(id="dropdownSites" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne")
@@ -28,13 +28,24 @@
 			i.fa.fa-ellipsis-v.float-right.px-3.py-1
 		
 		ul(id="collapseThree" class="collapse list-group list-group-flush" aria-labelledby="dropdownPages")
-			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-page-add') Añadir Página
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom.p-0(data-toggle="modal" data-target='#modal-page-add')
+				div.p-3 Añadir Página
 
-			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-page-edit') Editar Página
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom.p-0(data-toggle="modal" data-target='#modal-page-edit')
+				div.p-3 Editar Página
 			
-			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-delete') Borrar Página
+			li.list-group-item.bg-dark.text-white.p-0.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-delete')
+				div.p-3 Borrar Página
 
-			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-confirm-publish') Publicar Página
+			li.list-group-item.bg-dark.text-white.p-0.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-confirm-publish')
+				div.p-3 Publicar Página
+
+			li.list-group-item.bg-dark.text-white.border-secondary.p-0(data-toggle="collapse" data-target="#ToolsPagesList" aria-expanded="false") 
+				div.p-3.border-secondary.border-bottom
+					span Listado de Páginas
+					i.fa.fa-ellipsis-v.float-right.px-3.py-1
+				
+				ul(id="ToolsPagesList" class="list-group list-group-flush collapse w-100 border-secondary border-bottom py-2",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePageListLI",data-target="#ToolsPagesList")
 
 	.card.mb-0
 		.card-header.bg-dark.text-white.border-secondary(id="dropdownLanguages" data-toggle="collapse" data-target="#ToolsLanguagesList" aria-expanded="true" aria-controls="ToolsLanguagesList")

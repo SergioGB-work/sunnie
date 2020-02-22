@@ -82,7 +82,7 @@ module.exports = (app) => {
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-			functions.deploySites('--site '+ site +' --env dev --pag ' + id , res)
+			functions.deploySites('--site '+ site +' --env dev --pag ' + id , res, '', 'Añadir página <strong>' + name + '</strong>')
 		}
 		catch(e){
 			res.status(412).send(
@@ -209,7 +209,7 @@ module.exports = (app) => {
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
 
-			functions.deployPage('--site '+ site +' --env dev --pag ' + editedPage['id'], res)
+			functions.deployPage('--site '+ site +' --env dev --pag ' + editedPage['id'], res, 'Editar página <strong>' + name + '</strong>')
 		}
 		catch(e){
 			console.log(e);
@@ -249,7 +249,7 @@ module.exports = (app) => {
 			eval(patron);
 
 			fs.writeFileSync(siteURL + '/sitemap.json', JSON.stringify(sitemap,null,4));
-			functions.deploySites('--env dev --site ' + site , res);
+			functions.deploySites('--env dev --site ' + site , res,'','Eliminar página <strong>' + id + '</strong>');
 		}
 		catch(e){
 			console.log(e);
@@ -301,7 +301,7 @@ module.exports = (app) => {
 		try{
 			var site = req.params.idSite;
 			var page = req.params.idPage;
-			functions.deployPage('--site ' + site + ' --pag '+ page , res);
+			functions.deployPage('--site ' + site + ' --pag '+ page , res,'Publicar página <strong>' + page + '</strong>');
 		}
 		catch(e){
 			res.status(412).send(

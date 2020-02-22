@@ -14,46 +14,52 @@ function dataParent(el){
 				currentEvent = $(this).closest('[data-array-id]').find('[data-id="'+el.data('id')+'"]');
 			}
 
-			switch(action){
-
-				case 'load-data':
-					if(!valueDispatchAction || valueDispatchAction == $(this).val()){
-						var value = el.val();
-						var nameKeyJSON= {};
-						nameKeyJSON[name] = value;
-						currentEvent.data('service-data',currentEvent.attr('data-service-data').replace('{'+name+'}',value));
-						currentEvent.attr('data-aditional-data',JSON.stringify(nameKeyJSON));
-						currentEvent.data('aditional-data',{"value":value});
-						dataList(currentEvent);
-					}
-					break;
+			var actions = action.split(',');
+			var currentEventNode = $(this);
+			actions.forEach(function(actionValue){
 				
-				case 'submit':
-					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
-						currentEvent.closest('form').submit();
-					}
-					break;
-
-				case 'show':
+				switch(actionValue){
 					
-					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
-						currentEvent.removeClass('d-none');;
-					}
-					else{
-						currentEvent.addClass('d-none');
-					}
+					case 'load-data':
+						if(!valueDispatchAction || (valueDispatchAction.toString().includes(currentEventNode.val()) &&  currentEventNode.val() != '')){
+							var value = el.val();
+							var nameKeyJSON= {};
+							nameKeyJSON[name] = value;
+							currentEvent.data('service-data',currentEvent.attr('data-service-data').replace('{'+name+'}',value));
+							currentEvent.attr('data-aditional-data',JSON.stringify(nameKeyJSON));
+							currentEvent.data('aditional-data',{"value":value});
+							dataList(currentEvent);
+						}
+						break;
 					
-					break;
+					case 'submit':
+						if(!valueDispatchAction || (valueDispatchAction.toString().includes(currentEventNode.val()) &&  currentEventNode.val() != '')){
+							currentEvent.closest('form').submit();
+						}
+						break;
 
-				case 'hide':
-					if(!valueDispatchAction || valueDispatchAction.toString().includes($(this).val())){
-						currentEvent.addClass('d-none');
-					}
-					else{
-						currentEvent.removeClass('d-none');
-					}
-					break;
-			}
+
+
+					case 'show':
+						if(!valueDispatchAction || (valueDispatchAction.toString().includes(currentEventNode.val()) &&  currentEventNode.val() != '')){
+							currentEvent.removeClass('d-none');
+						}
+						else{
+							currentEvent.addClass('d-none');
+						}
+						
+						break;
+
+					case 'hide':
+						if(!valueDispatchAction || (valueDispatchAction.toString().includes(currentEventNode.val()) &&  currentEventNode.val() != '')){
+							currentEvent.addClass('d-none');
+						}
+						else{
+							currentEvent.removeClass('d-none');
+						}
+						break;
+				}
+			});
 
 		});
 	}

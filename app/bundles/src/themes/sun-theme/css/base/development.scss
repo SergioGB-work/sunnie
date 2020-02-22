@@ -2,6 +2,7 @@
 @import '../lib/bootstrap/variables';
 @import '../lib/codemirror/codemirror';
 @import '../lib/codemirror/base16-dark';
+@import '../lib/codemirror/lint';
 
 .sunniejs-tools{
 	right:1em;
@@ -11,7 +12,7 @@
 
 
 /** SIDEBAR MENU **/
-#sidebar-menu-tools{
+.sidebar-menu-tools{
 	width:$sidebar-menu-tools-width;
 	right:-($sidebar-menu-tools-width);
 	top:0;
@@ -22,7 +23,10 @@
 
 	ul{
 		li{
-			font-size:0.75rem;		
+			font-size:0.75rem;
+			ul{
+				background:darken($secondary,35%);
+			}	
 		}
 	}
 	a,span{
@@ -38,7 +42,7 @@
 	transition: all .2s linear 0s;
 }
 
-.show-sidebar-menu-tools{
+.show-sidebar-menu-tools,.show-processPanel{
 	#wrapper{
 		padding-right:#{$sidebar-menu-tools-width};
 	}
@@ -46,8 +50,16 @@
 	.sunniejs-tools{
 		right:calc(1rem + #{$sidebar-menu-tools-width});
 	}
+}
 
-	#sidebar-menu-tools{
+.show-sidebar-menu-tools #sidebar-menu-tools{
+	&.sidebar-menu-tools{
+		right:0;
+	}
+}
+
+.show-processPanel #processPanel{
+	&.sidebar-menu-tools{
 		right:0;
 	}
 }
