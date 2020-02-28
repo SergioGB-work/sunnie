@@ -29,7 +29,7 @@
   "varServerTableTH1":"Variable Name",
   "envVar1":"If we do not define this variable, the compilation will be carried out in production. If environment takes the dev value then the project will only be compiled in development.",
   "envVar2":"Where site is the name of the defined site (name of your folder). If it is not defined, it will compile all server sites.",
-  "envVar3":"Where page is the name of the page to compile (field id in the sitemap of the site). If it is not defined, it will compile all server pages. This parameter is necessary to use it next to --site.",
+  "envVar3":"Where page is the name of the page o pages(separated with ,) to compile (field id in the sitemap of the site). If it is not defined, it will compile all site pages. This parameter is necessary to use it next to --site.",
   "initApiTitle":"Starting the API",
   "initApiParagraph1":"SunnieJS 3 has a complete API for portal management. Through it you can manage the sites, pages and components, being able to add new elements, edit or delete them or even publish the development site and all through the new CMS that it incorporates.",
   "initApiParagraph2":"To start the API and start using the CMS, it is enough to launch the following gulp task:",

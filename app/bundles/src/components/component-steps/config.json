@@ -4,22 +4,26 @@
 			"label":"Items",
 			"name":"items",
 			"type":"array",
+			"helpText":"List of steps to display. You can define as many as you want.",
 			"arrayContent":[
 				{
 					"label":"Step Text",
 					"name":"text",
-					"type":"text"
+					"type":"text",
+					"helpText":"Text that appears below the step number."
 				},
 				{
 					"label":"Click Event",
 					"name":"onclick",
-					"type":"text"
+					"type":"text",
+					"helpText":"Javascript function to call if you click on the step."
 				},
 				{
 					"label":"Current Step",
 					"name":"current",
 					"type":"checkbox",
-					"value":"true"
+					"value":"true",
+					"helpText":"If activated, the step will appear with an active style."
 				}				
 			]
 		}

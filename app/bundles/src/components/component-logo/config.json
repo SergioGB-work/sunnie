@@ -4,22 +4,26 @@
 			"label":"URL Image",
 			"name":"src",
 			"type":"text",
-			"required": true
+			"required": true,
+			"helpText":"Image URL. It can be an internal or external route"
 		},
 		{
 			"label":"Alternative Text",
 			"name":"alt",
-			"type":"text"
+			"type":"text",
+			"helpText":"Alternative text of the logo to be displayed when the logo cannot be loaded"
 		},
 		{
 			"label":"Link",
 			"name":"url",
-			"type":"text"
+			"type":"text",
+			"helpText":"Link to redirect if we click on the logo"
 		},
 		{
 			"label":"Link Title",
 			"name":"title",
-			"type":"text"
+			"type":"text",
+			"helpText":"Title Attribute for Logo"
 		}
 	]
 }

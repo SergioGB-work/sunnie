@@ -3,6 +3,7 @@ const functions = require('./functions.js');
 const rimraf = require("rimraf");
 const pug = require("pug");
 const html2pug = require('html2pug');
+const axios = require("axios");	
 
 const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
@@ -414,7 +415,7 @@ module.exports = (app) => {
 	* @param {number} - componentJS - Javascript code of the component
 	* @param {number} - componentCSS - CSS code of the component
 	*/
-	app.post('/site/:id/component/edit-created', function (req, res) {
+	app.post('/site/:id/component/edit-created', async function (req, res) {
 		try{
 			var componentName = req.body.name;
 			var componentConfig = {"config":req.body.config} || JSON.parse('{"config":[]}');
@@ -446,8 +447,27 @@ module.exports = (app) => {
 			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/main.scss', componentCSS ,function(err){});
 			fs.writeFileSync(pathPlugins + '/components/'+componentName+'/main.js', componentJS ,function(err){});
 			
-			functions.execGulpTask('gulp deploy --env dev & gulp removeTMP', res, '', "Editar el componente <strong>" + componentName + "</strong>");
-		
+
+			axios.get('http://localhost:8082/site/list')
+			.then((response) => {
+				var sites =response.data;
+				sites.forEach(function(element,i){
+
+					var site = element.name;
+					var siteURL = functions.getURLSite(site);
+					var sitemap = JSON.parse(fs.readFileSync(siteURL + '/sitemap.json'));
+					var pages = functions.findComponentInSite(componentName,sitemap.pages);
+					
+					//Solo compila las páginas que usan el componente dentro de cada site	
+					if(pages.length > 0){
+						functions.execGulpTask('gulp deploy --env dev --site '+ site +' --pag '+ pages.join(), res, '', "Editar el componente <strong>" + componentName + "</strong>");
+					}
+				})
+
+			})
+			.catch((error) => {
+				console.error(error);
+			})
 		}
 		catch(e){
 			console.log(e);

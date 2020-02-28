@@ -3,12 +3,14 @@
 		{
 			"label":"Rel",
 			"name":"rel",
-			"type":"text"
+			"type":"text",
+			"helpText":"If filled, it will only show the filters belonging to the selected context."
 		},
 		{
 			"label":"Ignored Params(separated with ,)",
 			"name":"ignored",
-			"type":"text"
+			"type":"text",
+			"helpText":"Set the filters that you don't want to be displayed in the component. If you want to indicate more than one you can separate them with,"
 		},
 		{
 			"label":"No Reload",
@@ -23,7 +25,8 @@
 					"label":"Si",
 					"value":"true"
 				}
-			]
+			],
+			"helpText":"If activated, removing a filter by clicking on the X will not reload the page and those components that depend on it will be reloaded."
 		}		
 	]
 }

@@ -59,7 +59,11 @@ mixin component-components(content)
 					tr
 						td <strong>classes</strong>
 						td ${{ components.componentClassesDescription }}$
-						td ""						
+						td ""
+					tr
+						td <strong>new</strong>
+						td ${{ components.componentClassesDescription }}$
+						td ""					
 
 			.card
 				.card-body
@@ -210,6 +214,36 @@ mixin component-components(content)
 								tr
 									td <strong>id</strong>
 									td ${{ components.componentConfigTableContainerIDDescription }}$
+									td String
+
+								tr
+									td <strong>dataAttributes</strong>
+									td ${{ components.componentConfigTableContainerDataAttributesDescription }}$
+									td String
+
+								tr
+									td <strong>dataAttributesParent</strong>
+									td ${{ components.componentConfigTableContainerDataAttributesParentDescription }}$
+									td String
+
+								tr
+									td <strong>parentID</strong>
+									td ${{ components.componentConfigTableContainerParentIdDescription }}$
+									td String
+
+								tr
+									td <strong>showLabel</strong>
+									td ${{ components.componentConfigTableContainerShowLabelDescription }}$
+									td String
+
+								tr
+									td <strong>helpText</strong>
+									td ${{ components.componentConfigTableContainerHelpTextDescription }}$
+									td String
+
+								tr
+									td <strong>classes</strong>
+									td ${{ components.componentConfigTableContainerClassesDescription }}$
 									td String
 		.col-12
 			.card

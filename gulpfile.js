@@ -32,7 +32,7 @@ let gulp = require('gulp'),
 	requireDir('server');
 
 let argv_site = argv.site !== undefined ? argv.site : false;
-let argv_page = argv.pag !== undefined ? argv.pag: '*.*';
+let argv_page = argv.pag !== undefined ? argv.pag: '*.*'; //Se puede seleccionar varias paginas separandolas con ,
 let argv_env = argv.env !== undefined ? argv.env : '';
 let argv_publishUrl = argv.publishUrl !== undefined ? argv.publishUrl : '';
 let argv_contentType = argv.contentType !== undefined ? argv.contentType : '';
@@ -349,7 +349,6 @@ function jsThemeFunction(done){
 				.pipe(rename('develop.js'))
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'))
 				.pipe(rename('develop.min.js'))
-				.pipe(uglify())
 				.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/' + langs[lang] + '/javascript/'));			
 			}
 		}
@@ -498,11 +497,16 @@ function sitesFunction(done){
 		sitemap = sitemap.pages;
 
 		if(argv_page != '*.*'){
-			sitemap = [findPage(sitemap,argv_page)];
-			sitemap[0].childs = [];
+			argv_page.split(',').forEach(function(page){
+				var newSitemap = [findPage(sitemap,page)];
+				newSitemap[0].childs = [];
+				buildPage(newSitemap,developMode,sitesDefined[key]);
+			})
 		}
-			
-		buildPage(sitemap,developMode,sitesDefined[key]);
+
+		else{
+			buildPage(sitemap,developMode,sitesDefined[key]);
+		}
 		
 		gulp.src(pathBuild + '/sites/' + sitesDefined[key].site +'/sitemap.json')
 		.pipe(gulp.dest(pathPublic + '/sites/' + sitesDefined[key].site + '/data'))

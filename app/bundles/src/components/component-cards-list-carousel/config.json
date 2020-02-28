@@ -4,46 +4,55 @@
 			"label":"Items",
 			"name":"items",
 			"type":"array",
+			"helpText":"Elements of the carousel. You can add as many as you want.",
 			"arrayContent":[
 				{
 					"label":"SRC",
 					"name":"src",
-					"type":"text"
+					"type":"text",
+					"helpText":"URL of the image to show at the top of the card. If it is not filled it will not be displayed."
 				},
 				{
 					"label":"Alt",
 					"name":"alt",
-					"type":"text"
+					"type":"text",
+					"helpText":"Alternative text of the image to be displayed if the image is not loaded."
 				},
 				{
 					"label":"Header",
 					"name":"header",
-					"type":"text"
+					"type":"text",
+					"helpText":"Header of the card."
 				},
 				{
 					"label":"Description",
 					"name":"description",
-					"type":"text"
+					"type":"text",
+					"helpText":"Card text."
 				},
 				{
 					"label":"Link",
 					"name":"href",
-					"type":"text"
-				},
-				{
-					"label":"Classes",
-					"name":"classes",
-					"type":"text"
+					"type":"text",
+					"helpText":"If you fill it, clicking on the card will redirect to the indicated url."
 				},
 				{
 					"label":"Title",
 					"name":"title",
-					"type":"text"
+					"type":"text",
+					"helpText":"Title of the card link if you have filled in the Link field."
+				},
+				{
+					"label":"Classes",
+					"name":"classes",
+					"type":"text",
+					"helpText":"Additional style classes to modify the appearance of the card. They are added in the root of the card."
 				},
 				{
 					"label":"Price",
 					"name":"price",
-					"type":"text"
+					"type":"text",
+					"helpText":"Fill it in if you want the card to show a price for the content you entered. It will be displayed at the bottom."
 				}
 			]
 		}

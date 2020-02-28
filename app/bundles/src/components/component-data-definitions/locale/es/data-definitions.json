@@ -101,7 +101,7 @@
   "dataEventTableContainerEventActionDescriptionOption3":"Oculta el elemento si estaba mostrado. Si se usa en conjunto con data-event-value, el target solo se ocultará para el valor definido y se mostrará para cualquier otro valor.",
   "dataEventTableContainerEventActionDescriptionOption4":"Envía el formulario si el elemento sobre el que se aplica está dentro de un formulario",
   "dataEventTableContainerEventTargetDescription":"Al ocurrir el evento previamente definido, la acción definida aplicará sobre este elemento",
-  "dataEventTableContainerEventValueDescription":"Si es definido, el evento solo ejecutará la acción si el valor del campo(aplicable a elementos de formulario) se corresponde con el definido.",
+  "dataEventTableContainerEventValueDescription":"Si es definido, el evento solo ejecutará la acción si el valor del campo(aplicable a elementos de formulario) se corresponde con el definido. También es posible definir mas de un valor separados por ,",
   "dataParentEventParagraph1":"A diferencia de Event, Parent Event tiene en cuenta un evento ocurrido en un elemento ajeno para ejecutar la acción sobre si mismo.",
   "dataParentEventTableTH1":"Atributo",
   "dataParentEventTableTH2":"Descripción",
@@ -114,6 +114,6 @@
   "dataParentEventTableContainerEventActionDescriptionOption3":"Oculta el elemento si estaba mostrado. Si se usa en conjunto con data-parent-event-value, el elemento solo se ocultará para el valor definido y se mostrará para cualquier otro valor.",
   "dataParentEventTableContainerEventActionDescriptionOption4":"Envía el formulario si el elemento sobre el que se aplica está dentro de un formulario",
   "dataParentEventTableContainerEventTargetDescription":"El evento definido será vinculado a este elemento. Al ocurrir el evento sobre este elemento ejecutará la acción sobre el elemento original.",
-  "dataParentEventTableContainerEventValueDescription":"Si es definido, el evento solo ejecutará la acción si el valor del campo(aplicable a elementos de formulario) se corresponde con el definido."
+  "dataParentEventTableContainerEventValueDescription":"Si es definido, el evento solo ejecutará la acción si el valor del campo(aplicable a elementos de formulario) se corresponde con el definido. Tambien es posible definir más de un valor separado por ,"
 
 }

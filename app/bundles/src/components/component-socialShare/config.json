@@ -8,17 +8,20 @@
 				{
 					"label":"Link",
 					"name":"href",
-					"type":"text"
+					"type":"text",
+					"helpText":"URL to which you will redirect when you click the icon."
 				},
 				{
 					"label":"Title",
 					"name":"title",
-					"type":"text"
+					"type":"text",
+					"helpText":"Title attribute of the previous link."
 				},
 				{
 					"label":"Target",
 					"name":"target",
 					"type":"select",
+					"helpText":"Choose the opening mode when you click on the icon.",
 					"options":[
 						{
 							"label":"Redirect",
@@ -34,6 +37,7 @@
 					"label":"Icon Type",
 					"name":"iconType",
 					"type":"select",
+					"helpText":"Type of icon you can use. You can choose between using Font Awesome or Material.",
 					"options":[
 						{
 							"label":"Font Awesome",
@@ -48,12 +52,14 @@
 				{
 					"label":"Icon Code",
 					"name":"iconCode",
-					"type":"text"
+					"type":"text",
+					"helpText":"You must add the code of the icon you wish to display. In each of the pages of the previous icon libraries you can see the available codes."
 				},
 				{
 					"label":"Icon Size",
 					"name":"iconSize",
 					"type":"select",
+					"helpText":"Choose icon size",
 					"options":[
 						{
 							"label":"x2",
@@ -108,7 +114,8 @@
 				{
 					"label":"Icon Color(Hex Code with #)",
 					"name":"iconColor",
-					"type":"text"					
+					"type":"text",
+					"helpText":"Customize the color of the icon by entering a hexadecimal code."
 				}
 			]
 		}

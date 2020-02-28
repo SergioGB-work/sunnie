@@ -35,7 +35,7 @@ mixin component-form-filter(content)
 				- var icon = item.icon != '' ? item.icon : false
 				- var iconType = item.iconType != '' ? item.iconType : false
 
-				.form-group(class=item.size)
+				.form-group(class="col-12 " + item.size)
 
 					if item.type=='textarea' || item.type=='richHTML' || item.type=='codePUG' || item.type=='codeHTML'
 

@@ -5,6 +5,8 @@
 			"label":"Content Type",
 			"name":"contentType",
 			"type":"select",
+			"required":true,
+			"helpText":"Choose the type of content that will be displayed in the component. This will cause all contents of the selected type to be loaded, filtering and limiting them to the parameters set in this configuration.",
 			"options": [				
 			],
 			"dataAttributes": "data-service-data='http://localhost:8082/site/{idSite}/content/contentTypes' data-method='GET' data-template='#templateOptionsContentType' data-target='.contentTypePublisher' data-load='true' data-callback='checkSelected'"				
@@ -13,6 +15,8 @@
 			"label":"Activar Pagination",
 			"name":"pagination",
 			"type":"select",
+			"required":true,
+			"helpText":"If activated, pagination will be displayed at the bottom of the list.",
 			"options":[
 				{
 					"label":"No",
@@ -28,6 +32,8 @@
 			"label":"Ordenar por",
 			"name":"order",
 			"type":"select",
+			"required":true,
+			"helpText":"Choose the order in which the contents should appear.",
 			"options":[
 				{
 					"label":"Fecha creación",
@@ -42,27 +48,32 @@
 		{
 			"label":"Initial Page",
 			"name":"initial_page",
-			"type":"number"
+			"type":"number",
+			"helpText":"You can choose if by default the first page of the contents is displayed or if you want to show some other as the initial page."
 		},
 		{
 			"label":"Items per page",
 			"name":"items_per_page",
-			"type":"number"
+			"type":"number",
+			"helpText":"Number of items you want to display per page or limit of items to display."
 		},
 		{
 			"label":"Rel",
 			"name":"rel",
-			"type":"text"
+			"type":"text",
+			"helpText":"Define a custom context for the filters applied to the list."
 		},
 		{
 			"label":"URL Content Detail",
 			"name":"url_detail",
-			"type":"text"
+			"type":"text",
+			"helpText":"URL where the full detail of the content will be displayed. This URL must be previously created and configured to display that content. Receive idContent in the URL as the content ID."
 		},
 		{
 			"label":"Custom Template Code(HTML + JSRender)(Opcional)",
 			"name":"template_code",
-			"type":"codeHTML"
+			"type":"codeHTML",
+			"helpText":"If you prefer to customize the template that shows the list of content you can do it through this field. Use JSRender and HTML for it. Remember that the data is received in a variable 'data'"
 		}
 	]
 }

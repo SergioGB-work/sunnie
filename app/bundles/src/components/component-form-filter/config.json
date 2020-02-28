@@ -4,6 +4,7 @@
 			"label":"Form Filter",
 			"name":"formFilter",
 			"type":"select",
+			"helpText":"If activated, the form will work as a filter form that when sent will not call any service but will apply the filters selected in the URL as GET parameters and reload the page unless the no-reload parameter is activated.",	
 			"options": [
 				{
 					"label":"No",
@@ -18,13 +19,15 @@
 		{
 			"label":"Submit Button Text",
 			"name":"submitButton",
-			"type":"text"
+			"type":"text",
+			"helpText":"Text of the button that will be displayed to send the form data."
 		},		
 		{
 			"id":"inputFormFilterAction",
 			"label":"Action",
 			"name":"action",
 			"type":"text",
+			"helpText":"Service to which the form data will be sent in JSON format through the body.",
 			"visibility":"hidden",
 			"dataAttributesParent": "data-parent='[name=formFilter]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='true'"
 		},
@@ -32,6 +35,7 @@
 			"label":"Method",
 			"name":"method",
 			"type":"select",
+			"helpText":"Method of the form and which will be applied to the service of the action parameter.",
 			"options": [
 				{
 					"label":"POST",
@@ -50,6 +54,7 @@
 			"name":"callback",
 			"type":"text",
 			"visibility":"hidden",
+			"helpText":"Javascript function that will be invoked when the service to which you sent the form data responds correctly. The function receives at least one data parameter where the service response data is received.",
 			"dataAttributesParent": "data-parent='[name=formFilter]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='true'"
 		},
 		{
@@ -57,17 +62,20 @@
 			"name":"content",
 			"type":"text",
 			"visibility":"hidden",
+			"helpText":"It can be used to send some additional static parameter to the callback.",
 			"dataAttributesParent": "data-parent='[name=formFilter]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='true'"
 		},						
 		{
 			"label":"Rel",
 			"name":"rel",
-			"type":"text"
+			"type":"text",
+			"helpText":"In case the form works as a filter form, this field can be used to define a context where the filters will be published."
 		},
 		{
 			"label":"No Reload",
 			"name":"noReload",
 			"type":"select",
+			"helpText":"If it is activated and it is a form of filters, sending it will not reload the page but will apply the hot filters in the URL of the page and will reload only those components that use the published filters.",
 			"options":[
 				{
 					"label":"No",
@@ -83,17 +91,20 @@
 			"label":"Form Inputs",
 			"name":"items",
 			"type":"array",
+			"helpText":"List of form fields",
 			"arrayContent":[
 				{
 					"label":"Label",
 					"name":"label",
 					"type":"text",
+					"helpText":"Label associated to the input that will be displayed next to the input.",
 					"dataAttributesParent": "data-id='#label' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Show Label",
 					"name":"showLabel",
 					"type":"select",
+					"helpText":"Lets you choose whether or not to show the input label.",
 					"options":[
 						{
 							"label":"Si",
@@ -111,6 +122,7 @@
 					"label":"Input Type",
 					"name":"type",
 					"type":"select",
+					"helpText":"Input type",
 					"required":true,
 					"options": [
 
@@ -165,36 +177,42 @@
 					"name":"htmlContent",
 					"type":"richHTML",
 					"visibility":"hidden",
+					"helpText":"HTML content to show",
 					"dataAttributesParent": "data-id='#htmlContent' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Name",
 					"name":"name",
 					"type":"text",
+					"helpText":"Attribute name of the input. It is also used to send the data through the service, with the name being the key of the value. Additionally, if there is a filter with the same name in the URL, it will take its value as the default value of the field.",
 					"dataAttributesParent": "data-id='#name' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Placeholder",
 					"name":"placeholder",
 					"type":"text",
+					"helpText":"Input placeholder attribute.",
 					"dataAttributesParent": "data-id='#placeholder' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Help text",
 					"name":"helpText",
 					"type":"text",
+					"helpText":"Help text that will appear next to the field label in tooltip format.",
 					"dataAttributesParent": "data-id='#helptext' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html'"
 				},							
 				{
 					"label":"Default Value",
 					"name":"value",
 					"type":"text",
+					"helpText":"Default value that the field will display if it does not take another of the filters.",
 					"dataAttributesParent": "data-id='#value' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Icon Type",
 					"name":"iconType",
 					"type":"select",
+					"helpText":"Allows you to add an icon next to the input. You can choose between icons from the Font Awesome or Material library.",
 					"options":[
 						{
 							"label":"Ninguno",
@@ -213,12 +231,14 @@
 				{
 					"label":"Icon",
 					"name":"icon",
-					"type":"text"
+					"type":"text",
+					"helpText":"In case you want to display an icon, you must add here the code of the icon to be displayed that will depend on the library you have chosen."
 				},							
 				{
 					"label":"Required",
 					"name":"required",
 					"type":"select",
+					"helpText":"Indicates whether the field is mandatory or not.",
 					"options":[
 						{
 							"label":"No",
@@ -235,6 +255,7 @@
 					"label":"Input Size",
 					"name":"size",
 					"type":"select",
+					"helpText":"Input size that allows you to create the distribution of your form.It is based on the bootstrap sizes.",
 					"options":[
 						{
 							"label":"Col 12",
@@ -278,18 +299,21 @@
 					"label":"Regular Expression",
 					"name":"regExp",
 					"type":"text",
+					"helpText":"It allows to validate the data entered through a regular expression. Use the HTML 5 patterns. If the value entered does not match the required one, the form will show an error when trying to send it.",
 					"dataAttributesParent": "data-id='#rexexp' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Data Service",
 					"name":"dataService",
 					"type":"text",
+					"helpText":"If you wish, you can define a service from which to consume the data that will be displayed in the field.",
 					"dataAttributesParent": "data-id='#dataservice' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Data Method",
 					"name":"dataMethod",
 					"type":"select",
+					"helpText":"Previous service method.",
 					"options": [
 						{
 							"label":"Selecciona un método",
@@ -310,12 +334,14 @@
 					"label":"Data Template",
 					"name":"dataTemplate",
 					"type":"text",
+					"helpText":"CSS selector of the JSRender template to use to display the data obtained from the service. The target is the field itself.",
 					"dataAttributesParent": "data-id='#datatemplate' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},							
 				{
 					"label":"Event",
 					"name":"event",
 					"type":"select",
+					"helpText":"Event that will be linked to the field and that the action to be performed will then be defined when that event occurs.",
 					"options":[
 						{
 							"label":"Select an event",
@@ -336,18 +362,21 @@
 					"label":"Event Target",
 					"name":"eventTarget",
 					"type":"text",
+					"helpText":"CSS selector of the element on which the action will be launched when the previous event occurs.",
 					"dataAttributesParent": "data-id='#eventtarget' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Event value",
 					"name":"eventValue",
 					"type":"text",
+					"helpText":"If defined, the action will only be launched if the event input value matches this value. If left empty the action will be activated for any value. You can add more than one value separated by comma",
 					"dataAttributesParent": "data-id='#eventvalue' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Event Action",
 					"name":"eventAction",
 					"type":"select",
+					"helpText":"Action to execute when the defined event occurs.",
 					"options":[
 						{
 							"label":"Select an action",
@@ -376,12 +405,14 @@
 					"label":"Data Parent",
 					"name":"dataParent",
 					"type":"text",
+					"helpText":"CSS selector. When the parent event occurs on the defined selector, the action is performed on this input.",
 					"dataAttributesParent": "data-id='#dataparent' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Data Parent Event",
 					"name":"dataParentEvent",
 					"type":"select",
+					"helpText":"Event that must occur in an external element for the action on this input to be executed.",
 					"options":[
 						{
 							"label":"Select an event",
@@ -402,12 +433,14 @@
 					"label":"Data Parent Event Value",
 					"name":"dataParentEventValue",
 					"type":"text",
+					"helpText":"If defined, for the action to be executed, the event input value must be equal to the defined value. If left empty the action will be executed for any value. You can define more than one value by separating them by comma",
 					"dataAttributesParent": "data-id='#dataparenteventvalue' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='hide' data-parent-event-value='html,richHTML'"
 				},
 				{
 					"label":"Data Parent Event Action",
 					"name":"dataParentEventAction",
 					"type":"select",
+					"helpText":"Action to be taken when the data parent event occurs.",
 					"options":[
 						{
 							"label":"Select an action",

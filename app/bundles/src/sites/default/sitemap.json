@@ -2,7 +2,17 @@
     "site": {
         "name": "default",
         "url": "/",
-        "enableChatBot": "true"
+        "enableChatBot": "true",
+        "publishUrl": "app/public",
+        "serviceWorker": {
+            "type": "offline",
+            "offlinePage": "home.html",
+            "cachedPages": [
+                "true"
+            ],
+            "customTemplate": ""
+        },
+        "logo": "/media/logo.png"
     },
     "pages": [
         {

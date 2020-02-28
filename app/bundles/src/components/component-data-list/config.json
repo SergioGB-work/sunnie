@@ -5,12 +5,15 @@
 			"label":"Service Data",
 			"name":"service",
 			"type":"text",
-			"required":true
+			"required":true,
+			"helpText":"Service from which the data will be consumed. It must be an accessible URL of a REST service that returns data in JSON format"
 		},
 		{
 			"label":"Method",
 			"name":"method",
 			"type":"select",
+			"required":true,
+			"helpText":"Method to invoke the previous service. GET or POST",
 			"options":[
 				{
 					"label":"POST",
@@ -25,42 +28,50 @@
 		{
 			"label":"Static Template(HTML)",
 			"name":"static_code",
-			"type":"codeHTML"
+			"type":"codeHTML",
+			"helpText":"Static content template. This content will be the first thing to be loaded and must contain HTML code. It can be used to define the block on which the dynamic template will be loaded with the formatted data from the service JSON. It can be for example the fixed part of a table (table, thead, tbody)"
 		},		
 		{
 			"label":"Template ID",
 			"name":"template",
-			"type":"text"
+			"type":"text",
+			"helpText":"Identifier of the dynamic template to be invoked. You can use any combination of alphanumeric characters."
 		},		
 		{
 			"label":"Template Code(HTML + JSRender)",
 			"name":"template_code",
-			"type":"codeHTML"
+			"type":"codeHTML",
+			"helpText":"Dynamic content template that will show the data obtained from the service. It must be written in JSRender and HTML. Receive the service data in a JSON object called data."
 		},
 		{
 			"label":"Target",
 			"name":"target",
-			"type":"text"
+			"type":"text",
+			"helpText":"CSS selector where the previous dynamic template processed will be added."
 		},
 		{
 			"label":"aditionalData",
 			"name":"aditionalData",
-			"type":"text"
+			"type":"text",
+			"helpText":"Through this field you can send additional data in JSON format in the body of the original service defined in the previous Service Data field."
 		},
 		{
 			"label":"Callback",
 			"name":"callback",
-			"type":"text"
+			"type":"text",
+			"helpText":"Name of the additional function to be executed if the service answers correctly. It allows you to perform some additional operation when the service responds correctly. For example show an alert. The function receives as a minimum 'data' parameter that has the data that the service has responded."
 		},
 		{
 			"label":"Content",
 			"name":"content",
-			"type":"text"
+			"type":"text",
+			"helpText":"You can send additional data to the callback function defined through this field in string format"
 		},
 		{
 			"label":"Enable get params",
 			"name":"enable_get_params",
 			"type":"select",
+			"helpText":"If enabled, the GET parameters of the URL will be sent as filters to the defined service",
 			"options":[
 				{
 					"label":"No",
@@ -75,17 +86,20 @@
 		{
 			"label":"Get params list",
 			"name":"get_params_list",
-			"type":"text"
+			"type":"text",
+			"helpText":"If one is defined and the previous field is enabled, the service will only filter by the parameters defined in this field."
 		},
 		{
 			"label":"Rel",
 			"name":"rel",
-			"type":"text"
+			"type":"text",
+			"helpText":"Allows you to assign the service to a context in such a way that only the filters defined within the same rel context will affect you."
 		},
 		{
 			"label":"Live Reload",
 			"name":"live_reload",
 			"type":"select",
+			"helpText":"If activated, the service call will be made on a recurring basis every X seconds. 60s default",
 			"options":[
 				{
 					"label":"No",
@@ -100,12 +114,14 @@
 		{
 			"label":"Time reload",
 			"name":"time_reload",
-			"type":"number"
+			"type":"number",
+			"helpText":"The service call will be made every X milliseconds with X being the milliseconds defined in this field."
 		},
 		{
 			"label":"cache",
 			"name":"cache",
 			"type":"select",
+			"helpText":"If activated, the service and its response will be cached in the browser storage. If the next time a request is made, it is searched, the response will be obtained from the cache. The cache is limited to the size of the browser storage so it should be used carefully. It should only be used for requests that do not change in a long time.",
 			"options":[
 				{
 					"label":"No",
@@ -121,6 +137,7 @@
 			"label":"Pagination",
 			"name":"pagination",
 			"type":"select",
+			"helpText":"If activated, pagination will be displayed on the bottom.",
 			"options":[
 				{
 					"label":"No",
@@ -136,6 +153,7 @@
 			"label":"Items Per Page Selector",
 			"name":"itemsPerPageSelector",
 			"type":"select",
+			"helpText":"Items to display per page. It is sent as a filter to the service so that it only returns the corresponding elements to the requested page.",
 			"options":[
 				{
 					"label":"No",
@@ -151,6 +169,7 @@
 			"label":"No Reload",
 			"name":"noReload",
 			"type":"select",
+			"helpText":"If activated, changing the page will not reload the page to load the new data.",
 			"options":[
 				{
 					"label":"No",

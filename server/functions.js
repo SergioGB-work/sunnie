@@ -6,6 +6,7 @@ const variables = require("./variables.js");
 const defaultSite = variables.defaultSite;
 const orchestratorURL = variables.orchestratorURL;
 const imagemagick = require('imagemagick');
+const functions = require('./functions.js');
 
 module.exports = class functions{
 
@@ -511,5 +512,39 @@ module.exports = class functions{
 
 			fs.writeFileSync(siteURL + '/service-worker.js', serviceWorkerFile);
 		}
+	}
+
+	//Devuelve los ID de páginas en las que se encuentra el componente dentro del site
+	static findComponentInSite(component,sitemap){
+
+		var pages = [];
+
+		sitemap.forEach(function(page,index){
+
+			var pageID = page.id;
+
+			if(Object.keys(page.layout.content).length > 0){
+
+				Object.keys(page.layout.content).forEach(function(key,i){
+					if(page.layout.content[key].length > 0){
+						page.layout.content[key].forEach(function(currentComponent){
+							if(currentComponent.name == component){
+								pages.push(pageID);	
+							}
+						});
+					}	
+				})			
+			}
+
+			if(page.childs.length > 0){
+				pages.concat(functions.findComponentInSite(component,page.childs));
+			}
+
+		})
+		
+		pages = pages.filter((valor, indiceActual, paginas) => paginas.indexOf(valor) === indiceActual);
+
+		return pages;
+
 	}
 }	

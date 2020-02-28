@@ -4,37 +4,45 @@
 			"label":"URL Image",
 			"name":"src",
 			"type":"text",
-			"required": true
+			"required": true,
+			"helpText":"Image URL. It can be an internal or external route"
 		},
 		{
 			"label":"Alternative Text",
 			"name":"alt",
-			"type":"text"
+			"type":"text",
+			"helpText":"Alternative text of the image to be displayed when the image cannot be loaded"
 		},
 		{
 			"label":"Long Descrition",
 			"name":"longdesc",
-			"type":"text"
+			"type":"text",
+			"helpText":"Long description of the image if the alternative text cannot accommodate this text because it is very long"
 		},
 		{
 			"label":"Link",
 			"name":"href",
-			"type":"text"
+			"type":"text",
+			"helpText":"Link to redirect if we click on the image",
+			"required":true
 		},
 		{
 			"label":"Image Title",
 			"name":"title",
-			"type":"text"
+			"type":"text",
+			"helpText":"Image Title"
 		},
 		{
-			"label":"Image Target",
+			"label":"Link Target",
 			"name":"target",
-			"type":"text"
+			"type":"text",
+			"helpText":"Link opening mode. It can be _blank, _self, _parent, _top"
 		},
 		{
 			"label":"Responsive SRC",
 			"name":"responsiveSRC",
-			"type":"text"
+			"type":"text",
+			"helpText":"URL of the image to display for mobile devices. If you leave it blank, the same image will be displayed for any type of screen."
 		},
 		{
 			"label":"SRCSET",

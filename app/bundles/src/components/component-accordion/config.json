@@ -4,22 +4,27 @@
 			"label":"Items",
 			"name":"items",
 			"type":"array",
+			"helpText":"List of accordion elements. You can add all you need",
 			"arrayContent":[
 				{
 					"label":"Header",
 					"name":"header",
 					"type":"text",
-					"required":true
+					"required":true,
+					"helpText":"Header of each accordion. While closed, only this text is visible"
 				},
 				{
 					"label":"Content",
 					"name":"content",
-					"type":"richHTML"
+					"type":"richHTML",
+					"helpText":"Content to be displayed when clicking on the accordion header"
 				},
 				{
 					"label":"Visualización por defecto",
 					"name":"collapsed",
 					"type":"select",
+					"helpText":"Choose if you want the accordion to be displayed open or closed by default",
+					"required":true,
 					"options":[
 						{
 							"label":"Opened",
@@ -37,7 +42,8 @@
 			"label":"Close All to Open",
 			"name":"collapseParent",
 			"type":"checkbox",
-			"value":"true"
+			"value":"true",
+			"helpText":"If it is active, clicking on an accordion closes all others that share the same parent"
 		}
 	]
 }

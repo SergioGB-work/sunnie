@@ -18,7 +18,9 @@ mixin component-highlighted-flips(content)
 								span(aria-hidden="true",class=item.iconSize + ' fa d-flex justify-content-center align-items-center flex-wrap ' +  item.iconCode)
 
 					.info
-						h3.m-0 #{item.header}
-						p #{item.content}
+						if item.header != ''
+							h3.m-0 #{item.header}
+						if item.content != ''
+							p #{item.content}
 
 

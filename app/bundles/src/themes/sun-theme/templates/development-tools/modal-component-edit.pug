@@ -28,7 +28,7 @@ block modal-body
 
 
 			div(class="form-group col-md-4 col-12")
-				+fragment('fragment-label',{"for":"componentTitle", "text":"Título"})
+				+fragment('fragment-label',{"for":"componentTitle", "text":"Título","helpText":"Title heading the component"})
 				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentTitle","name":"title", "value":"{{:data.title}}"})
 
 			div(class="form-group col-md-4 col-12")
@@ -79,12 +79,12 @@ block modal-body
 
 		.row
 			div(class="form-group col-md-4 col-12")
-				+fragment('fragment-label',{"for":"layoutColumnPosition", "text":"Layout Position"})
+				+fragment('fragment-label',{"for":"layoutColumnPosition", "text":"Layout Position","helpText":"Position within the column where the component will be placed"})
 				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"layoutColumnPosition","name":"layoutColumnPosition", "value":"{{:data.position}}","required":"required"})
 				+fragment('fragment-input',{"type":"hidden", "name":"oldPosition", "value":"{{:data.position}}"})
 			
 			div(class="form-group col-md-4 col-12")
-				+fragment('fragment-label',{"for":"layoutColumn", "text":"Layout Column"})
+				+fragment('fragment-label',{"for":"layoutColumn", "text":"Layout Column", "helpText":"Slot in which the component will be placed"})
 				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-selected="{{:data.layoutColumn}}", data-selected-target="#modal-component-edit #layoutColumn")
 				+fragment('fragment-input',{"type":"hidden", "name":"oldLayoutColumn", "value":"{{:data.layoutColumn}}"})
 
