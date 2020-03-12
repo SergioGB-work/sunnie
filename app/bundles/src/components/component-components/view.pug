@@ -358,7 +358,7 @@ mixin component-components(content)
 						| +component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
 
 
-			.card
+			.card#componentFormFilter
 				.card-body
 					h3.icon-4x 
 						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Form Filter") Form Filter
@@ -484,7 +484,7 @@ mixin component-components(content)
 						| +component({"name":"component-card","content":{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},"showTitle":"false","full":"true"})
 		
 
-			.card
+			.card#componentDataList
 				.card-body
 					h3.icon-4x 
 						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Data List
@@ -510,6 +510,24 @@ mixin component-components(content)
 						li <strong>time_reload:</strong> ${{ components.dataListTimeReload }}$
 						li <strong>cache:</strong> ${{ components.dataListCache }}$
 						li <strong>pagination:</strong> ${{ components.dataListPagination }}$
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentLanguageSelector",title="${{ components.goToComponent }}$ Language Selector") Language Selector
+					p ${{ components.languageSelectorComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-languageSelector"
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentSiteSelector",title="${{ components.goToComponent }}$ Site Selector") Site Selector
+					p ${{ components.siteSelectorComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-siteSelector"
 
 
 		.col-12.col-sm-6.col-lg-4
@@ -611,7 +629,7 @@ mixin component-components(content)
 					pre
 						| +component({"name":"component-accordion","content":{"items": [{"header": "Opcion 1","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"},{"header": "Opcion 2","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "opened"},{"header": "Opcion 3","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"}],"collapseParent": "true"},"showTitle":"false","full":"true"})
 
-			.card
+			.card#componentFilterPills
 				.card-body
 					h3.icon-4x
 						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Filter Pills
@@ -634,8 +652,23 @@ mixin component-components(content)
 						li <strong>text:</strong> ${{ components.stepsText }}$
 						li <strong>onclick:</strong> ${{ components.stepsOnClick }}$
 						li <strong>current:</strong> ${{ components.stepsCurrent }}$
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentSiteSelector",title="${{ components.goToComponent }}$ Site Selector") Publisher
+					p ${{ components.publisherComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-publisher"
+						li <strong>contentType:</strong> ${{ components.publisherContentType }}$
+						li <strong>pagination:</strong> ${{ components.publisherPagination }}$
+						li <strong>order:</strong> ${{ components.publisherOrder }}$
+						li <strong>initial_page:</strong> ${{ components.publisherInitialPage }}$
+						li <strong>items_per_page:</strong> ${{ components.publisherItemsPerPage }}$
+						li <strong>rel:</strong> ${{ components.publisherRel }}$
+						li <strong>url_detail:</strong> ${{ components.publisherURLDetail }}$
+						li <strong>template_code:</strong> ${{ components.publisherTemplateCode }}$
 
-					
 	.row
 		.col-12
 			h2#ejemplos ${{ components.examples }}$
@@ -790,3 +823,23 @@ mixin component-components(content)
 			.row
 				.col-12
 					+component({'name':'component-steps','id':'id1','content':{"items": [{"text": "Step1", "current":"true"},{"text": "Step2"},{"text": "Step3"}]},'showTitle':'false','full':'false'})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSiteSelector").m-0 Site Selector
+			.row
+				.col-12.col-md-4.col-lg-2.offset-md-4.offset-lg-5
+					+component({'name':'component-siteSelector','id':'id1','showTitle':'false','full':'false'})
+		.col-12
+			.card
+				.card-body
+					h3(id="componentLanguageSelector").m-0 Language Selector
+			.row
+				.col-12.col-md-4.col-lg-2.offset-md-4.offset-lg-5
+					+component({'name':'component-languageSelector','id':'id1','showTitle':'false','full':'false'})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentPublisher").m-0 Publisher

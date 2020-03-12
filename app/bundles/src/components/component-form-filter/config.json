@@ -173,6 +173,25 @@
 					]
 				},
 				{
+					"label":"Select Values",
+					"name":"selectValues",
+					"type":"array",
+					"arrayContent":[
+						{
+							"label":"Text",
+							"name":"text",
+							"type":"text"
+						},
+						{
+							"label":"Value",
+							"name":"value",
+							"type":"text"
+						}						
+					],
+					"visibility":"hidden",
+					"dataAttributesParent": "data-id='#selectValues' data-parent='[name=type]' data-parent-event='change' data-parent-event-action='show' data-parent-event-value='select'"
+				},
+				{
 					"label":"HTML Content",
 					"name":"htmlContent",
 					"type":"richHTML",

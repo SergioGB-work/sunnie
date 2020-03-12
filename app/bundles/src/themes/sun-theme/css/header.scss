@@ -25,6 +25,17 @@
 		align-items:center;
 	}
 
+	.component-siteSelector,.component-languageSelector{
+		float:right;
+		width:auto;
+
+		.dropdown{
+			button{
+				color:$white;
+			}
+		}
+	}
+
 	img{
 		max-height:$navbar-height - ($grid-gutter-width*2);
 	}

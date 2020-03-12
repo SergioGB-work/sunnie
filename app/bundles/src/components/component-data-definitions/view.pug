@@ -486,6 +486,88 @@ mixin component-data-definitions(content)
 						|                button(type="button",class="btn btn-secondary") Cancel
 						|                button(type="submit",class="btn btn-primary",class="send") Save
 
+					h3 Otras opciones
+
+					p Si deseas agrupar una serie de campos para que cuando se envíen a través del servicio estos aparezcan agrupados bajo una key puedes usar el atributo <strong>data-form-group="nombreDeLaAgrupación"</strong>.
+
+					pre
+						| form(role="form",data-callback="callbackAddUser",data-method="POST",data-action=api + "/usuarios")
+						|    div(data-form-group="userContent")
+						|        .row
+						|            .col-md-6.col-12
+						|                div(class="form-group")
+						|                    label(for="user_name") Name
+						|                    input(type="text",class="form-control",id="user_name",placeholder="Username", name="username",required)
+
+						|            .col-md-6.col-12
+						|                div(class="form-group")
+						|                    label(for="user_email") Email
+						|                    input(type="email",class="form-control",id="user_email",placeholder="Email", name="email",required)
+
+					p El ejemplo anterior daría como resultado que en el body del servicio se envíe de la siguiente manera:
+					
+					pre 
+						| {
+						|     "userContent":{
+						|         "username":"XXX",
+						|         "email":"XXX"
+						|     }
+						| }
+
+
+					p También existe la opcion agrupar una serie de elementos repetibles bajo un array para que al enviarse al servicio estos salgan agrupados bajo un array dentro de una clave definida por data-form-group. Para ello, puedes utilizar el atributo <strong>data-block-type="array"</strong> junto al data-form-group anteriormente explicado. Además para indicar qué forma parte de cada array es necesario añadir el atributo <strong>data-array-id="index"</strong> que actuará como agrupador de cada elemento del array.
+
+					pre
+						| div(data-form-group="answers", data-block-type="array")
+						|     fieldset(data-array-id="0")
+						|         .row
+						|             .col-12
+						|                 legend Question 1
+						|                     input(type="hidden",name="answerNumber",value="0")
+						|         .row
+						|             .col-6
+						|                 div(class="custom-control custom-radio")
+						|                     input(class="custom-control-input",type="radio",id="response_1",name="responseNumber_1",value="01",required, data-rel="1")
+						|                     label(class="custom-control-label",for="response_1") Answer 1
+						|             .col-6
+						|                 div(class="custom-control custom-radio")
+						|                     input(class="custom-control-input",type="radio",id="response_2",name="responseNumber_1",value="02",required)
+						|                     label(class="custom-control-label",for="response_2",data-rel="1") Answer 2	
+						|     fieldset(data-array-id="1")
+						|         .row
+						|             .col-12
+						|                 legend Question 2
+						|                     input(type="hidden",name="answerNumber",value="1")
+						|         .row
+						|             .col-6
+						|                 div(class="custom-control custom-radio")
+						|                     input(class="custom-control-input",type="radio",id="response_1",name="responseNumber_2",value="01",required)
+						|                     label(class="custom-control-label",for="response_1",data-rel="2") Answer 1
+						|             .col-6
+						|                 div(class="custom-control custom-radio")
+						|                     input(class="custom-control-input",type="radio",id="response_2",name="responseNumber_2",value="02",required)
+						|                     label(class="custom-control-label",for="response_2",data-rel="2") Answer 2
+
+					p El ejemplo anterior daría como resultado el siguiente body de petición:
+					pre
+						| {
+						|     "answer":[
+						|         {"answerNumber":"0","responseNumber":"XX"}
+						|         {"answerNumber":"1","responseNumber":"XX"}
+						|     ]
+						| }
+
+					p A pesar de que los name de cada input llevan un _X, este sufijo es eliminado al llevar un <strong>data-rel</strong> igual definido cada uno de los inputs repetibles.
+					p Si no llevase ese data-rel el body enviado sería el siguiente:
+					pre
+						| {
+						|     "answer":[
+						|         {"answerNumber":"0","responseNumber_1":"XX"}
+						|         {"answerNumber":"1","responseNumber_2":"XX"}
+						|     ]
+						| }
+
+
 	.row
 		.col-12
 			.card

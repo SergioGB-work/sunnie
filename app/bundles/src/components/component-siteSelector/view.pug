@@ -1,11 +1,13 @@
 mixin component-siteSelector(content)
+
+	- var randomID = Math.floor(Math.random() * (15 - 1300) + 1300)
 	div(class="dropdown")
 		button(id="siteSelector",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="dropdown-toggle d-flex align-items-center")
 			span.site-name #{siteName}
-		ul(id="siteList",class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="siteSelector",data-load="true",data-service-data=apiDevelopment + "/site/list",data-method="GET",data-template="#templateSitesList",data-target="#siteList")
+		ul(id="siteList" + randomID,class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="siteSelector",data-load="true",data-service-data=apiDevelopment + "/site/list",data-method="GET",data-template="#templateSitesList"+randomID,data-target="#siteList" + randomID)
 
 
-	script(id="templateSitesList",type="text/x-jsrender")
+	script(id="templateSitesList"+randomID,type="text/x-jsrender")
 		| {{if data.length > 1 }}	
 		| {{for data}}
 

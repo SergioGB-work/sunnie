@@ -1,8 +1,7 @@
 @import '../../theme/css/base/variables';
 @import '../../theme/css/lib/bootstrap/variables';
+
 .component-siteSelector{
-	float:right;
-	width:auto;
 
 	.dropdown{
 		display:inline-block;
@@ -18,7 +17,6 @@
 			max-width: 100%;
 			padding-left:0;
 			padding-right:0;
-			color:$white;
 			i{
 				margin-right: ceil(($grid-gutter-width * 0.75));
 			}
