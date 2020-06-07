@@ -1,0 +1,16 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+	- var modal_id = "modal-component-delete"
+	- var modal_size = "modal-sm"
+
+block modal-body
+	form(data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/{idPage}/component/delete", data-callback="deletePageCallback")
+		.row
+			.col-12
+				p ¿Estás seguro que deseas eliminar el componente?
+				input(type="hidden", name="layoutColumn")
+				input(type="hidden", name="componentPosition")
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Eliminar

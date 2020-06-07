@@ -1,0 +1,22 @@
+mixin layout-4-4-4-noHeader(content)
+	-var column0 = content.column0 || ''	
+	-var column1 = content.column1	|| ''
+	-var column2 = content.column2	|| ''
+
+	div(id="layout-4-4-4-noHeader",class="layout",role="main", data-layout-id="layout-4-4-4-noHeader")
+		div(class="container-fluid")
+
+			div(class="layout-row row")
+
+				div(class="layout-column col-md-4 col-12",data-layout-column="column0")
+					each component,index in column0
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+				div(class="layout-column col-md-4 col-12",data-layout-column="column1")
+					each component,index in column1
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+				div(class="layout-column col-md-4 col-12",data-layout-column="column2")
+					each component,index in column2
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+

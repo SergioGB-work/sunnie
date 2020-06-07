@@ -1,0 +1,113 @@
+mixin component-generators(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 ${{ generators.pageTitle }}$
+					
+					p ${{ generators.paragraph1 }}$
+
+					h2 ${{ generators.beforeStartTitle }}$
+					
+					p ${{ generators.beforeStartParagraph1 }}$
+	.row
+		.col-sm-6.col-12
+			.card
+				.card-body
+					h3 Yeoman
+					
+					pre
+						| npm install -g yo
+
+		.col-sm-6.col-12
+			.card
+				.card-body
+					h3 Gulp
+					
+					pre
+						| npm install -g gulp
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ generators.instalationTitle }}$
+					
+					p ${{ generators.instalationParagraph1 }}$
+
+					p ${{ generators.instalationParagraph2 }}$
+					
+					pre
+						| npm install
+
+					p ${{ generators.instalationParagraph3 }}$
+					
+					pre
+						| npm link
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ generators.startToUseItTitle }}$
+					
+					p ${{ generators.startToUseItParagraph1 }}$
+
+					h3 Layouts
+					
+					p ${{ generators.layoutsParagraph1 }}$
+					
+					p ${{ generators.layoutsParagraph2 }}$
+					
+					pre
+						| yo sunnie:layout
+
+					p ${{ generators.layoutsParagraph3 }}$
+					
+					p.text-center
+						img(src="./images/demo/generator-layout-img.png",alt="")
+
+					p ${{ generators.layoutsParagraph4 }}$
+
+					h3 ${{ generators.componentsTitle }}$
+
+					p ${{ generators.componentsParagraph1 }}$
+					
+					p ${{ generators.componentsParagraph2 }}$
+					
+					pre
+						| yo sunnie:component
+					
+					p ${{ generators.componentsParagraph3 }}$
+
+					p.text-center
+						img(src="./images/demo/generator-component-img.png",alt="")
+
+					p ${{ generators.componentsParagraph4 }}$
+
+					h3 Sites
+
+					p ${{ generators.sitesParagraph1 }}$
+
+					p ${{ generators.sitesParagraph2 }}$
+
+					pre
+						| yo sunnie:site
+
+					p.text-center
+						img(src="./images/demo/generator-site-img.png",alt="")
+
+					p ${{ generators.sitesParagraph3 }}$	
+
+					h3 Themes
+
+					p ${{ generators.themesParagraph1 }}$
+
+					p ${{ generators.themesParagraph2 }}$			
+
+					pre
+						| yo sunnie:theme
+
+					p.text-center
+						img(src="./images/demo/generator-theme-img.png",alt="")
+
+					p ${{ generators.themesParagraph3 }}$

@@ -1,0 +1,7 @@
+script(id="templateLayoutColumnsListDevelopAssistantBot",type="text/x-jsrender")
+	| {{if data.columns.length > 0 }}
+	ul.mb-0.p-0
+		| {{for data.columns}}
+		li.list-group-item {{:}}
+		| {{/for}}
+	| {{/if}

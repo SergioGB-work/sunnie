@@ -1,0 +1,53 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+
+.component-slider{
+	.owl-theme .owl-controls {
+		margin:0;
+
+		.owl-pagination{
+			top:90%;
+			right:0;
+			position:absolute;
+		}
+		.owl-page.active span{
+			background: $primary;
+		}
+
+		.owl-buttons{
+			display:none;
+		}
+	}
+	
+	img{
+		width:100%;
+	}	
+}
+
+@include media-breakpoint-up(sm) {
+	.component-slider{
+		.owl-theme .owl-controls {
+			.owl-buttons{ 
+				height:0;
+				display:block;
+
+				div{
+					background:0;
+					color:$gray-base;
+					position:absolute;
+					top:50%;
+					margin-top:-63px;
+					font-size: 80px;
+
+					&.owl-next{
+						right:0;
+					}
+					&.owl-prev{
+						left:0;
+					}
+				}				
+			}
+		}
+	}
+}	

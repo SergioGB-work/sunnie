@@ -1,0 +1,14 @@
+{
+  "paragraph1":"SunnieJS tiene disponible una serie de layouts por defecto que pueden utilizarse para la creación de páginas y la organización del contenido de cada página lo hace sumamente sencillo el definir una pagina o modificar su distribución.",
+  "layoutsDefinitionTitle":"¿Qué es una Layout?",
+  "layoutsDefinitionParagraph1":"Las Layouts definen la distribución del contenido dentro de una página mediante columnas o huecos que podemos 'rellenar' con componentes.",
+  "layoutsDefinitionParagraph2":"Todas las layouts definidas por defecto son responsive y utilizan las clases de bootstrap para definir su distribución.",
+  "layoutsListTitle":"Listado de Layouts",
+  "layoutsListTitleParagraph1":"A continuación se muestra el listado de layouts por defecto disponibles para su uso:",
+  "layoutsLocalizationTitle":"Ubicación",
+  "layoutsLocalizationParagraph1":"El código fuente de cada una de las layouts se encuentra en la carpeta <span class='text-primary'>src/pug/layouts</span> organizado según el nombre de cada una de ellas. Es este mismo nombre de archivo(sin la extensión) el que debe usarse para la creación de una página en base a una layout.",
+  "layoutsGeneratorTitle":"Generador de layouts",
+  "layoutsGeneratorParagraph1":"Gracias al <span class='text-primary'>generador de layouts</span> de SunnieJS, puedes <span class='text-primary'>crear</span> tus <span class='text-primary'>propias layouts</span> sin escribir una sola linea de código.",
+  "layoutsGeneratorParagraph2":"Para ello, debes abrir una <span class='text-primary'>consola de administración(CMD)</span> y situarte sobre la carpeta <span class='text-primary'>layouts</span>. Una vez en ella debes ejecutar el siguiente <span class='text-primary'>comando</span>:",
+  "layoutsGeneratorParagraph3":"Esto lanzará un <span class='text-primary'>asistente de creación</span> que te guiará en tu labor de creación de layouts, te irá preguntando lo que deseas hacer...si quieres añadir una fila, una columna, cuántas columnas, qué tamaño tienen, etc... y cuando termines te <span class='text-primary'>generará</span> la nueva layout que has diseñado en la carpeta de layouts sin necesidad de que hayas escrito una sola línea de código y <span class='text-primary'>lista para usarse</span>."
+}

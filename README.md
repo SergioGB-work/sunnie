@@ -1,4 +1,17 @@
-# Sunnie
+# Sunnie 2.0
+
+## New on 2.0!
+
+- Work in Plugin, without modify core code
+- Make your owns themes, layouts, sites, pages and components
+- Easy to extend thanks to the new software architecture
+- Sunnie has his own Yeoman Generator. Create new themes, layouts, pages, sites and components with the new generator
+- Multisite
+- Choose what theme you want to use in each sites
+- Choose from what base theme you want to inherit in your custom themes
+- Modify the core features thanks to hooks
+- Default Support for Unit Testing with Jasmine
+- Sites, themes, layouts ant components now are independents between them. 
 
 ## Features
 
@@ -71,15 +84,19 @@ Publish all files from src/images to public/images and compress them. It's inclu
 
 ## Using the enviroment
 
-Base Project provide a front dev enviroment that include a page generation engine very intuitive based on a layer model where the page generation is generelized facilitating the creation, not only of new pages,  but layouts , components and new styles.
+sunnie provide a front dev enviroment that include a page generation engine very intuitive based on a layer model where the page generation is generelized facilitating the creation, not only of new pages,  but layouts , components and new styles.
 
 ### Pages
 
-If you want to create a new page you just have to duplicate our sample page and rename it. Then, you have to select the layout you want to use( extends layouts/layout-12-8-4 ), base project provide you many layouts you can use o you can create new ones. Last thing you have to do is fill the differents columns with de compontents that you want.
+If you want to create a new page you just have to duplicate our sample page and rename it. Then, you have to select the layout you want to use( extends layouts/layout-12-8-4 ), sunnie provide you many layouts you can use o you can create new ones. Last thing you have to do is fill the differents columns with de compontents that you want.
+
+Also you can use the new [Generator-Sunnie](https://github.com/SergioGB-work/generator-sunnie) of Yeoman with the command: 
+
+> yo sunnie:page
 
 ### Layouts
 
-Base project provide you many precreated layouts based on bootstrap markup but you can create all you want. 
+sunnie provide you many precreated layouts based on bootstrap markup but you can create all you want. 
 
 By Default you cant use:
 
@@ -103,9 +120,17 @@ By Default you cant use:
 
 if you want to make your own layouts, duplicate one, rename it and change the html markup.
 
+Also you can use the new [Generator-Sunnie](https://github.com/SergioGB-work/generator-sunnie) of Yeoman with the command: 
+
+> yo sunnie:layout
+
 ### Components
 
 You can use the components provided by the system or you can create all components you want. 
+
+Also you can use the new [Generator-Sunnie](https://github.com/SergioGB-work/generator-sunnie) of Yeoman with the command: 
+
+> yo sunnie:component
 
 #### Using components
 
@@ -140,13 +165,13 @@ Finally, in component-name.jade you have to change the mixin name to your compon
 
 ### CSS
 
-Base project provide a css base based on bootstrap that you can use or define your own.
+sunnie provide a css base based on bootstrap that you can use or define your own.
 
 Only the css files imported con main.scss will be included on the compiled project.
 
 ### Javascript
 
-Base project include jQuery 1.12.4 by default. Files allocated on src/javascript/primaryLibs will be the first compiled, the next one will be the lib folder and, the last one will be the rest. This method, allow you to control the order of the compilation. 
+sunnie include jQuery 1.12.4 by default. Files allocated on src/javascript/primaryLibs will be the first compiled, the next one will be the lib folder and, the last one will be the rest. This method, allow you to control the order of the compilation. 
 
 All this files will be compile in one called main.min.js
 

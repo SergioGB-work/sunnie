@@ -1,0 +1,15 @@
+extends ./modal_noHeaderNoFooter
+
+block vars
+	- var modal_title = ""
+	- var modal_id = "modal-error"
+block modal-body
+	.error
+		h2 ${{ default.error }}$
+		p ${{ default.errorOcurred }}$
+		div(class="customContent")
+
+		.row
+			.col-12
+				.text-right
+					button(class="btn btn-primary",data-dismiss="modal") ${{ default.acept }}$

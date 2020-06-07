@@ -1,0 +1,97 @@
+mixin component-navigation(content)
+	
+	- var view = content.view
+	- var pages = content.pages
+	- var justified = content.justified || ''
+	- var stacked = content.stacked || ''
+	- var fill = content.fill || ''
+	- var classes = ''
+	
+	case view
+		when 'tabs'
+			- var classes = 'nav-tabs'
+
+		when 'pills'
+			- var classes = 'nav-pills'		
+
+	if justified == 'true'
+		- var classes = classes + ' nav-justified'		
+			
+	if stacked == 'true'
+		- var classes = classes + ' flex-column'
+
+	if fill == 'true'
+		- var classes = classes + ' nav-fill'		
+
+	if classes == ''
+		- var classes = 'flex-column nav-vertical'
+
+	ul(class="nav " + classes)
+		each item,i in pages
+			- var href = item.href || ""
+			- var title = item.title || ""
+			- var text = item.text || ""
+			- var active = ''
+			- var dropdown = ''
+
+			if(item.active == 'true')
+				- var active = "active"
+
+			if(item.childs)
+				if(item.childs.length > 0)
+					if(item.childs && view == 'pills' && stacked != 'true')
+						- var dropdown = "dropdown"
+
+			li(class='nav-item ' + dropdown)
+
+				if(item.childs)
+					if(item.childs.length > 0)
+						if(item.childs && view == 'pills' && stacked != 'true')
+							a.nav-link(class=active + " dropdown-toggle",id="NavMenu-"+i,data-toggle="dropdown",href="#",role="button",aria-haspopup="true",aria-expanded="false")
+								| #{text}
+								span.caret
+						else
+							a.nav-link(class=active,href="#")
+								| #{text}
+
+
+					else
+						a.nav-link(class=active,href=href,title=title) #{text}			
+
+				else
+					a.nav-link(class=active,href=href,title=title) #{text}
+
+				if(item.childs && view == 'pills' && stacked != 'true')
+					if(item.childs.length > 0)
+						ul.dropdown-menu(aria-labelledby="NavMenu-"+i)
+							each child,i in item.childs
+
+								- var childHref = child.href || ""
+								- var childTitle = child.title || ""
+								- var childText = child.text || ""
+								- var childActive = ''
+
+								if(child.active == 'true')
+									- var childActive = "active"
+
+								li(class="dropdown-item " + active)
+									a(href=childHref,title=childTitle) #{childText}
+
+				else if(item.childs)
+					if(item.childs.length > 0)
+						ul.child-menu
+							each child,i in item.childs
+
+								- var childHref = child.href || ""
+								- var childTitle = child.title || ""
+								- var childText = child.text || ""
+								- var childActive = ''
+
+								if(child.active == 'true')
+									- var childActive = "active"
+
+								li(class=active)
+									a.nav-link(class=active,href=childHref,title=childTitle) #{childText}									
+
+
+

@@ -1,0 +1,25 @@
+{
+	"config":[	
+		{
+			"label":"URL Image",
+			"name":"src",
+			"type":"text",
+			"required": true
+		},
+		{
+			"label":"Alternative Text",
+			"name":"alt",
+			"type":"text"
+		},
+		{
+			"label":"Link",
+			"name":"url",
+			"type":"text"
+		},
+		{
+			"label":"Link Title",
+			"name":"title",
+			"type":"text"
+		}
+	]
+}

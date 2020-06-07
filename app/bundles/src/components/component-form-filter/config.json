@@ -1,0 +1,384 @@
+{
+	"config":[
+		{
+			"label":"Form Filter",
+			"name":"formFilter",
+			"type":"select",
+			"options": [
+				{
+					"label":"Si",
+					"value":"true"
+				},
+				{
+					"label":"No",
+					"value":"false"
+				}				
+			]			
+		},
+		{
+			"label":"Submit Button Text",
+			"name":"submitButton",
+			"type":"text"
+		},		
+		{
+			"label":"Action",
+			"name":"action",
+			"type":"text",
+			"visibility":"hidden"
+		},
+		{
+			"label":"Method",
+			"name":"method",
+			"type":"select",
+			"options": [
+				{
+					"label":"POST",
+					"value":"POST"
+				},
+				{
+					"label":"GET",
+					"value":"GET"
+				}				
+			],
+			"visibility":"hidden"			
+		},
+		{
+			"label":"Callback",
+			"name":"callback",
+			"type":"text",
+			"visibility":"hidden"
+		},
+		{
+			"label":"Content Callback",
+			"name":"content",
+			"type":"text",
+			"visibility":"hidden"
+		},						
+		{
+			"label":"Rel",
+			"name":"rel",
+			"type":"text"
+		},
+		{
+			"label":"No Reload",
+			"name":"noReload",
+			"type":"select",
+			"options":[
+				{
+					"label":"No",
+					"value":"false"
+				},
+				{
+					"label":"Si",
+					"value":"true"
+				}
+			]
+		},			
+		{
+			"label":"Form Inputs",
+			"name":"items",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"Label",
+					"name":"label",
+					"type":"text"
+				},
+				{
+					"id":"typeInputSelector",
+					"label":"Input Type",
+					"name":"type",
+					"type":"select",
+					"required":true,
+					"options": [
+
+						{
+							"label":"Text",
+							"value":"text"
+						},
+						{
+							"label":"Number",
+							"value":"number"
+						},
+						{
+							"label":"Email",
+							"value":"email"
+						},
+						{
+							"label":"Select",
+							"value":"select"
+						},
+						{
+							"label":"Checkbox",
+							"value":"checkbox"
+						},
+						{
+							"label":"Radio",
+							"value":"radio"
+						},
+						{
+							"label":"Textarea",
+							"value":"textarea"
+						},
+						{
+							"label":"Separator",
+							"value":"separator"
+						},
+						{
+							"label":"HTML",
+							"value":"html"
+						}
+					]
+				},
+				{
+					"label":"Select Values",
+					"name":"selectValues",
+					"type":"array",
+					"arrayContent":[
+						{
+							"label":"Text",
+							"name":"text",
+							"type":"text"
+						},
+						{
+							"label":"Value",
+							"name":"value",
+							"type":"text"
+						}						
+					],
+					"visibility":"hidden"
+				},
+				{
+					"label":"HTML Content",
+					"name":"htmlContent",
+					"type":"textarea",
+					"visibility":"hidden"
+				},
+				{
+					"label":"Name",
+					"name":"name",
+					"type":"text"
+				},
+				{
+					"label":"Placeholder",
+					"name":"placeholder",
+					"type":"text"
+				},
+				{
+					"label":"Help text",
+					"name":"helpText",
+					"type":"text"
+				},				
+				{
+					"label":"Default Value",
+					"name":"value",
+					"type":"text"
+				},				
+				{
+					"label":"Required",
+					"name":"required",
+					"type":"select",
+					"options":[
+						{
+							"label":"No",
+							"value":"false"
+						},
+						{
+							"label":"Si",
+							"value":"true"
+						}
+					]
+				},
+				{
+					"label":"Input Size",
+					"name":"size",
+					"type":"select",
+					"options":[
+						{
+							"label":"Col 12",
+							"value":"col-12"
+						},
+						{
+							"label":"Col 9",
+							"value":"col-9"
+						},
+						{
+							"label":"Col 8",
+							"value":"col-8"
+						},
+						{
+							"label":"Col 7",
+							"value":"col-7"
+						},
+						{
+							"label":"Col 6",
+							"value":"col-6"
+						},
+						{
+							"label":"Col 5",
+							"value":"col-5"
+						},
+						{
+							"label":"Col 4",
+							"value":"col-4"
+						},
+						{
+							"label":"Col 3",
+							"value":"col-3"
+						},
+						{
+							"label":"Col 2",
+							"value":"col-2"
+						}			
+					]
+				},
+				{
+					"label":"Regular Expression",
+					"name":"regExp",
+					"type":"text"
+				},
+				{
+					"label":"Data Service",
+					"name":"dataService",
+					"type":"text"
+				},
+				{
+					"label":"Data Method",
+					"name":"dataMethod",
+					"type":"select",
+					"options": [
+						{
+							"label":"Selecciona un método",
+							"value":""
+						},						
+						{
+							"label":"POST",
+							"value":"POST"
+						},
+						{
+							"label":"GET",
+							"value":"GET"
+						}				
+					]					
+				},				
+				{
+					"label":"Data Template",
+					"name":"dataTemplate",
+					"type":"text"
+				},							
+				{
+					"label":"Event",
+					"name":"event",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an event",
+							"value":""
+						},
+						{
+							"label":"Change",
+							"value":"change"
+						},
+						{
+							"label":"Click",
+							"value":"click"
+						}
+					]	
+				},
+				{
+					"label":"Event Target",
+					"name":"eventTarget",
+					"type":"text"
+				},
+				{
+					"label":"Event value",
+					"name":"eventValue",
+					"type":"text"
+				},
+				{
+					"label":"Event Action",
+					"name":"eventAction",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an action",
+							"value":""
+						},
+						{
+							"label":"Load Data Target",
+							"value":"load-data"
+						},
+						{
+							"label":"Show Target",
+							"value":"show"
+						},
+						{
+							"label":"Hide Target",
+							"value":"hide"
+						},
+						{
+							"label":"Submit Form",
+							"value":"submit"
+						}
+					]	
+				},
+				{
+					"label":"Data Parent",
+					"name":"dataParent",
+					"type":"text"
+				},
+				{
+					"label":"Data Parent Event",
+					"name":"dataParentEvent",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an event",
+							"value":""
+						},
+						{
+							"label":"Change",
+							"value":"change"
+						},
+						{
+							"label":"Click",
+							"value":"click"
+						}
+					]						
+				},
+				{
+					"label":"Data Parent Event Value",
+					"name":"dataParentEventValue",
+					"type":"text"
+				},
+				{
+					"label":"Data Parent Event Action",
+					"name":"dataParentEventAction",
+					"type":"select",
+					"options":[
+						{
+							"label":"Select an action",
+							"value":""
+						},
+						{
+							"label":"Load Data Target",
+							"value":"load-data"
+						},
+						{
+							"label":"Show Target",
+							"value":"show"
+						},
+						{
+							"label":"Hide Target",
+							"value":"hide"
+						},
+						{
+							"label":"Submit Form",
+							"value":"submit"
+						}
+					]	
+				}						
+			]
+		}
+	]
+}

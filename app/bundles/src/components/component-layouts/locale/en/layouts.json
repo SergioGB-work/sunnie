@@ -1,0 +1,14 @@
+{
+  "paragraph1":"SunnieJS has available a series of default layouts that can be used for the creation of pages and the organization of the content of each page makes it extremely easy to define a page or modify its distribution.",
+  "layoutsDefinitionTitle":"What is a Layout?",
+  "layoutsDefinitionParagraph1":"Layouts define the distribution of content within a page through columns or gaps that we can 'fill' with components.",
+  "layoutsDefinitionParagraph2":"All layouts defined by default are responsive and use the bootstrap classes to define their distribution.",
+  "layoutsListTitle":"Layouts List",
+  "layoutsListTitleParagraph1":"Below is the list of default layouts available for use:",
+  "layoutsLocalizationTitle":"Location",
+  "layoutsLocalizationParagraph1":"The source code of each of the layouts can be found in the <span class = 'text-primary'> src / pug / layouts </ span> folder organized according to the name of each of them. It is this same file name (without the extension) that should be used for the creation of a page based on a layout.",
+  "layoutsGeneratorTitle":"Layout Generator",
+  "layoutsGeneratorParagraph1":"Thanks to the <span class='text-primary'>layout generator</span> of SunnieJS, you can <span class='text-primary'>create</span> your <span class='text-primary'>own layouts</span> without writing a single line of code.",
+  "layoutsGeneratorParagraph2":"To do this, you must open a <span class='text-primary'>administration console(CMD)</span> and locate yourself on the <span class='text-primary'>layouts</span> folder. Once in it you must execute the following <span class='text-primary'>command</span>:",
+  "layoutsGeneratorParagraph3":"This will launch a <span class='text-primary'>creation assistant</span> that will guide you in your work of creating layouts, it will ask you what you want to do... if you want to add a row, a column, how many columns, what size they have, etc... and when you finish you <span class='text-primary'>will generate</span> the new layout that you have designed in the layouts folder without having to write a single line of code and <span class='text-primary'>ready to use</span>."
+}

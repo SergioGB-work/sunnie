@@ -1,0 +1,45 @@
+{
+	"config":[
+
+		{
+			"label":"SRC",
+			"name":"src",
+			"type":"text"
+		},
+		{
+			"label":"Alt",
+			"name":"alt",
+			"type":"text"
+		},
+		{
+			"label":"Header",
+			"name":"header",
+			"type":"text"
+		},
+		{
+			"label":"Description",
+			"name":"description",
+			"type":"text"
+		},
+		{
+			"label":"Link",
+			"name":"href",
+			"type":"text"
+		},
+		{
+			"label":"Classes",
+			"name":"classes",
+			"type":"text"
+		},
+		{
+			"label":"Title",
+			"name":"title",
+			"type":"text"
+		},
+		{
+			"label":"Price",
+			"name":"price",
+			"type":"text"
+		}
+	]
+}

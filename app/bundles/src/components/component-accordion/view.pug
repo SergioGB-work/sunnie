@@ -1,0 +1,18 @@
+mixin component-accordion(content)
+	- var items = content.items || []
+	- var idAccordion = Math.floor(Math.random() * (15 - 1300) + 1300)
+	- var accordionParent = content.collapseParent == 'true' ? '#accordion' + idAccordion + '' : ''
+
+	div(id="accordion" + idAccordion)
+		each item,i in items
+			- var collapsed = item.collapsed == 'closed' ? 'collapse' : 'collapse show'
+			- var expanded = item.collapsed == 'closed' ? 'false': 'true'
+			- var collapsedHeader = item.collapsed == 'closed' ? 'collapsed': ''
+			.card
+				div(class="card-header" id="heading" + i)
+					h5(class="mb-0")
+						button(class="btn btn-link "+ collapsedHeader, data-toggle="collapse", data-target="#collapse"+ i, aria-expanded=expanded, aria-controls="collapse"+ i) #{item.header}
+						
+				div(id="collapse" + i, class=collapsed, aria-labelledby="heading" + i, data-parent=accordionParent || false)
+					.card-body !{item.content}
+		

@@ -1,0 +1,10 @@
+{
+	"config":[
+
+		{
+			"label":"Chat bot service",
+			"name":"service",
+			"type":"text"
+		}		
+	]
+}

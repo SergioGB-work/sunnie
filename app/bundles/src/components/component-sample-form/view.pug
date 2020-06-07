@@ -1,0 +1,163 @@
+mixin component-sample-form(content)
+	div
+		h1 ${{ sample-form.pageTitle }}$
+
+		form
+			div(class="form-group")
+				label(for="exampleInputEmail1") ${{ sample-form.email }}$
+				input(type="email",class="form-control",id="exampleInputEmail1",placeholder="${{ sample-form.email }}$",disabled)
+				small(class="form-text text-muted") ${{ sample-form.helpText }}$
+
+			div(class="form-group")
+				label(for="exampleInputPassword1") ${{ sample-form.password }}$
+				input(type="password",class="form-control",id="exampleInputPassword1",placeholder="${{ sample-form.password }}$")
+
+			div(class="form-group")
+				label(for="exampleInputComment1") ${{ sample-form.comment }}$
+				textarea(class="form-control",id="exampleInputComment1") ${{ sample-form.typeComment }}$			
+
+			div(class="form-group")
+				label(for="exampleSelect1") ${{ sample-form.selectOption }}$
+				select(class="form-control",name="select",id="exampleSelect1")
+					option(value="option1") ${{ sample-form.option }}$ 1
+					option(value="option2") ${{ sample-form.option }}$ 2
+					option(value="option3") ${{ sample-form.option }}$ 3
+
+			div(class="form-group")
+				label(for="exampleInputFile") ${{ sample-form.fileInput }}$
+				input(type="file",id="exampleInputFile")
+				small(class="form-text text-muted") ${{ sample-form.helpTextBlock }}$.
+
+			div(class="custom-control custom-checkbox my-1 mr-sm-2")
+				input(type="checkbox",id="inputCheckSample",class="custom-control-input")
+				label(for="inputCheckSample",class="custom-control-label") ${{ sample-form.checkout }}$
+
+			div(class="form-group")
+				button(type="submit",class="btn btn-primary") ${{ sample-form.submit }}$
+
+	div
+		h3 Inline Form
+		form(class="form-inline")
+			div(class="form-group")
+				label(for="exampleInputName2") ${{ sample-form.name }}$
+				input(type="text",class="form-control mx-sm-3",id="exampleInputName2",placeholder="Jane Doe")
+
+			div(class="form-group")
+				label(for="exampleInputEmail2") ${{ sample-form.email }}$
+				input(type="email",class="form-control mx-sm-3",id="exampleInputEmail2",placeholder="jane.doe@example.com")
+
+			div(class="form-group")
+				button(type="submit",class="btn btn-secondary") ${{ sample-form.sendInvitation }}$
+
+		div(class="input-group mb-3")
+			div(class="input-group-prepend")
+				span(class="input-group-text" id="basic-addon1") @
+			input(type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1")
+		
+		div(class="input-group mb-3")
+			input(type="text" class="form-control" placeholder="Recipient's username" aria-label="Recipient's username" aria-describedby="basic-addon2")
+			div(class="input-group-append")
+				span(class="input-group-text" id="basic-addon2") @example.com
+		
+		
+
+		label(for="basic-url") Your vanity URL
+		div(class="input-group mb-3")
+			div(class="input-group-prepend")
+				span(class="input-group-text" id="basic-addon3") https://example.com/users/
+			input(type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3")
+		
+
+		div(class="input-group mb-3")
+			div(class="input-group-prepend")
+				span(class="input-group-text") $
+			input(type="text" class="form-control" aria-label="Amount (to the nearest dollar)")
+			div(class="input-group-append")
+				span(class="input-group-text") .00
+		
+		
+
+		div(class="input-group")
+			div(class="input-group-prepend")
+				span(class="input-group-text") With textarea
+			textarea(class="form-control" aria-label="With textarea")
+		
+
+	div
+		h3 Horizontal form
+		form
+			div(class="form-group row")
+				label(for="exampleInputEmail4", class="col-sm-2 col-form-label") ${{ sample-form.email }}$
+				div(class="col-sm-10")
+					input(type="email",class="form-control",id="exampleInputEmail4",placeholder="${{ sample-form.email }}$")
+
+			div(class="form-group row")
+				label(class="col-sm-2 col-form-label") ${{ sample-form.email }}$
+				div(class="col-sm-10")
+					p(class="form-control-plaintext") email@example.com
+						
+
+			div(class="form-group row")
+				label(for="exampleInputPassword3",class="col-sm-2 col-form-label") ${{ sample-form.password }}$
+				div(class="col-sm-10")
+					input(type="password",class="form-control",id="exampleInputPassword3",placeholder="${{ sample-form.password }}$")
+
+			div(class="form-group row")
+				label(for="exampleInputComment4", class="col-sm-2 col-form-label") ${{ sample-form.selectOption }}$
+				div(class="col-sm-10")
+					select(class="form-control",name="select",id="exampleInputComment4")
+						option(value="option1") ${{ sample-form.option }}$ 1
+						option(value="option2") ${{ sample-form.option }}$ 2
+						option(value="option3") ${{ sample-form.option }}$ 3
+
+			div(class="form-group row")
+				label(for="exampleInputFile1",class="col-sm-2 col-form-label") ${{ sample-form.fileInput }}$
+				div(class="col-sm-10")
+					input(type="file",id="exampleInputFile1")
+					p(class="form-text")
+						| ${{ sample-form.helpTextBlock }}$
+
+			div(class="form-group row")
+				div(class="offset-sm-2 col-sm-10")
+					button(type="submit",class="btn btn-primary") ${{ sample-form.submit }}$				
+	
+	div
+		h2 Checkboxes and Radios
+		h3 ${{ sample-form.standar }}$
+		form
+			div(class="checkbox")
+				label
+					input(type="checkbox",value="")
+					| ${{ sample-form.optionOne }}$
+
+			div(class="checkbox disabled")
+				label
+					input(type="checkbox",value="", disabled)
+					| ${{ sample-form.optionTwoDisabled }}$
+
+			div(class="radio")
+				label
+					input(type="radio",name="optionsRadios",id="optionsRadios1",value="option1",checked)
+					| ${{ sample-form.optionOne }}$
+
+			div(class="radio")
+				label
+					input(type="radio", name="optionsRadios", id="optionsRadios2", value="option2")
+					| ${{ sample-form.optionTwo }}$
+
+			div(class="radio disabled")
+				label
+					input(type="radio",name="optionsRadios", id="optionsRadios3", value="option3", disabled)
+					| ${{ sample-form.optionThreeDisabled }}$
+					
+		h3 Inline
+		form
+			div(class="form-check")
+				label
+					input(type="checkbox",value="")
+					| ${{ sample-form.optionOne }}$
+
+			div(class="form-check")
+				label
+					input(type="checkbox",value="")
+					| ${{ sample-form.optionTwo }}$	

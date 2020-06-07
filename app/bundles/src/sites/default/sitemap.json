@@ -1,0 +1,790 @@
+{
+    "site": {
+        "name": "default",
+        "url": "/",
+        "enableChatBot": "true"
+    },
+    "pages": [
+        {
+            "id": "home",
+            "name": "Home",
+            "url": "/",
+            "src": "/home.html",
+            "attributes": {
+                "title": "SunnieJS3",
+                "description": "Lorem ipsum4",
+                "keywords": "SunnieJS2"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-slider",
+                            "content": {
+                                "items": [
+                                    {
+                                        "src": "./images/carousel1.jpg",
+                                        "alt": "",
+                                        "href": "./",
+                                        "title": "Ir a Home",
+                                        "responsiveSRC": "./images/carousel1-responsive.jpg"
+                                    },
+                                    {
+                                        "src": "./images/carousel2.jpg",
+                                        "alt": "",
+                                        "href": "./",
+                                        "title": "Ir a Home",
+                                        "responsiveSRC": "./images/carousel2-responsive.jpg"
+                                    },
+                                    {
+                                        "src": "./images/carousel3.jpg",
+                                        "alt": "",
+                                        "href": "./",
+                                        "title": "${{ default.goHome }}$",
+                                        "responsiveSRC": "./images/carousel3-responsive.jpg"
+                                    }
+                                ]
+                            },
+                            "showTitle": "false",
+                            "full": "true"
+                        },
+                        {
+                            "id": "1",
+                            "name": "component-highlighted-side-image",
+                            "content": {
+                                "content": "<h2 class='text-primary'>${{ default.homeBootstrapTitleComponent }}$</h2><h3>${{ default.homeBootstrapSubTitleComponent }}$</h3><p>${{ default.homeBootstrapContentComponent }}$</p>",
+                                "image": {
+                                    "src": "./images/bootstrap-stack.png",
+                                    "alt": "Image Monument"
+                                },
+                                "position": "left"
+                            },
+                            "showTitle": "false",
+                            "full": "true"
+                        },
+                        {
+                            "id": "1",
+                            "name": "component-highlighted-banner",
+                            "content": {
+                                "content": "<h2>${{ default.homeBannerThemeTitle }}$</h2>\n\n<p>${{ default.homeBannerThemeContent }}$</p>\n",
+                                "button": {
+                                    "href": "./data-definitions.html",
+                                    "title": "${{ default.goDataDefinitions }}$",
+                                    "text": "${{ default.homeBannerThemeButtonText }}$"
+                                }
+                            },
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "title": "component-highlighted-banner",
+                            "new": "false"
+                        },
+                        {
+                            "id": "1",
+                            "name": "component-highlighted-content",
+                            "content": {
+                                "content": "<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>",
+                                "button": {
+                                    "text": "${{ default.homeOwnGeneratorsButtonText }}$",
+                                    "href": "./generators.html",
+                                    "title": "${{ default.goGenerators }}$"
+                                }
+                            },
+                            "showTitle": "false",
+                            "full": "false"
+                        },
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-4537",
+                            "content": {
+                                "HTMLcontent": "                <div class=\"row d-flex flex-wrap mb-3\">\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/multisite.jpg\" alt=\"Multisite\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Multisite</h3>\n                                      <p class=\"card-text\"> ${{ default.homeMultisite }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/cms.jpg\" alt=\"${{ default.homeCMSTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeCMSTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeCMS }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/architecture.jpg\" alt=\"${{ default.homeNewStructureTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeNewStructureTitle }}$</h3>\n                                      <p class=\"card-text\"> ${{ default.homeNewStructure }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div> \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/enviroments.jpg\" alt=\"Entornos\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeEnvTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeEnv }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>\n                <div class=\"row d-flex flex-wrap\">                             \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"${{ default.homeInterTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeInterTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeInter }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/code.jpg\" alt=\"${{ default.homeCleanCodeTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title \">${{ default.homeCleanCodeTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeCleanCode }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/shortcodes.jpg\" alt=\"ShortCodes\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Short Codes</h3>\n                                      <p class=\"card-text\">${{ default.homeShortCodes }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/seo.jpg\" alt=\"SEO Friendly\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">SEO Friendly</h3>\n                                      <p class=\"card-text\">${{ default.homeSEO }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        },
+                        {
+                            "id": "2",
+                            "name": "component-highlighted-banner",
+                            "content": {
+                                "content": "<h2>${{ default.homeBannerComponentsContent }}$</h2>\n",
+                                "button": {
+                                    "href": "./components.html",
+                                    "title": "${{ default.homeBannerComponentsButtonTitle }}$",
+                                    "text": "${{ default.homeBannerComponentsButtonText }}$"
+                                }
+                            },
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "bg-info",
+                            "title": "component-highlighted-banner",
+                            "new": "false"
+                        },
+                        {
+                            "name": "component-highlighted-side-image",
+                            "id": "component-highlighted-side-image-5202",
+                            "content": {
+                                "position": "right",
+                                "image": {
+                                    "src": "./images/componentes.png",
+                                    "alt": "Componentes"
+                                },
+                                "content": "<h2>${{ default.homeComponentsLibraryTitle }}$</h2><p>${{ default.homeComponentsLibraryDescription }}$</p>",
+                                "button": {
+                                    "href": "",
+                                    "title": "",
+                                    "text": ""
+                                }
+                            },
+                            "title": "component-highlighted-side-image",
+                            "showTitle": "false",
+                            "full": "false",
+                            "classes": "",
+                            "new": "false"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "getStarted",
+            "name": "Get Started",
+            "url": "/get-started",
+            "src": "/get-started.html",
+            "attributes": {
+                "title": "Get Started",
+                "description": "Lorem ipsum",
+                "keywords": "Get Started"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-getStarted",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "htmlElements",
+            "name": "HTML Elements",
+            "url": "",
+            "src": "",
+            "attributes": {
+                "title": "",
+                "description": "",
+                "keywords": "",
+                "script": "checkRol(4);"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-getStarted",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": [
+                {
+                    "id": "typography",
+                    "name": "Typography",
+                    "url": "/html-elements/typography",
+                    "src": "/typography.html",
+                    "attributes": {
+                        "title": "Typography",
+                        "description": "Lorem ipsum",
+                        "keywords": "Typography"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-basics",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "lists",
+                    "name": "Lists",
+                    "url": "/html-elements/lists",
+                    "src": "/lists.html",
+                    "attributes": {
+                        "title": "Lists",
+                        "description": "Lorem ipsum",
+                        "keywords": "Lists"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-list",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "tables",
+                    "name": "Tables",
+                    "url": "/html-elements/tables",
+                    "src": "/tables.html",
+                    "attributes": {
+                        "title": "Tables",
+                        "description": "Lorem ipsum",
+                        "keywords": "Tables"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-table",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "buttons",
+                    "name": "Buttons",
+                    "url": "/html-elements/buttons",
+                    "src": "/buttons.html",
+                    "attributes": {
+                        "title": "Buttons",
+                        "description": "Lorem ipsum",
+                        "keywords": "Buttons"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-button",
+                                    "showTitle": "false",
+                                    "full": "false"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "forms",
+                    "name": "Forms",
+                    "url": "/html-elements/forms",
+                    "src": "/forms.html",
+                    "attributes": {
+                        "title": "Forms",
+                        "description": "Lorem ipsum",
+                        "keywords": "Forms"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-form",
+                                    "showTitle": "false",
+                                    "full": "false"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                },
+                {
+                    "id": "modals",
+                    "name": "Modals",
+                    "url": "/html-elements/modals",
+                    "src": "/modals.html",
+                    "attributes": {
+                        "title": "Modals",
+                        "description": "Lorem ipsum",
+                        "keywords": "Modals"
+                    },
+                    "layout": {
+                        "id": "1",
+                        "name": "layout-12-fluid",
+                        "content": {
+                            "content_upper": [
+                                {
+                                    "name": "component-sample-modal",
+                                    "showTitle": "false",
+                                    "full": "true"
+                                }
+                            ]
+                        }
+                    },
+                    "childs": []
+                }
+            ]
+        },
+        {
+            "id": "generators",
+            "name": "Generators",
+            "url": "/generators",
+            "src": "/generators.html",
+            "attributes": {
+                "title": "Generators",
+                "description": "Lorem ipsum",
+                "keywords": "Generators"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-generators",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "dataDefinitions",
+            "name": "Data Definitions",
+            "url": "/data-definitions",
+            "src": "/data-definitions.html",
+            "attributes": {
+                "title": "Data Definitions",
+                "description": "Lorem ipsum",
+                "keywords": "Data Definitions"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-data-definitions",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "themes",
+            "name": "Themes",
+            "url": "/themes",
+            "src": "/themes.html",
+            "attributes": {
+                "title": "Themes | SunnieJS",
+                "description": "themes",
+                "keywords": "themes, sunniejs"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-themes",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "components",
+            "name": "Components",
+            "url": "/components",
+            "src": "/components.html",
+            "attributes": {
+                "title": "Components",
+                "description": "Lorem ipsum",
+                "keywords": "Components"
+            },
+            "layout": {
+                "name": "layout-2-10-fluid",
+                "content": {
+                    "column0": [
+                        {
+                            "id": "1",
+                            "name": "component-navigation",
+                            "content": {
+                                "pages": [
+                                    {
+                                        "text": "${{ default.components }}$",
+                                        "href": "#componentes",
+                                        "title": "${{ default.goComponents }}$",
+                                        "active": "true"
+                                    },
+                                    {
+                                        "text": "${{ default.howToUse }}$",
+                                        "href": "#uso",
+                                        "title": "${{ default.goHowToUse }}$"
+                                    },
+                                    {
+                                        "text": "${{ default.componentsList }}$",
+                                        "href": "#listado-de-componentes",
+                                        "title": "${{ default.goToComponentsList }}$",
+                                        "childs": []
+                                    },
+                                    {
+                                        "text": "${{ default.examples }}$",
+                                        "href": "#ejemplos",
+                                        "title": "${{ default.goToExamples }}$",
+                                        "childs": [
+                                            {
+                                                "text": "Login",
+                                                "href": "#componentLogin",
+                                                "title": "${{ default.goToComponent }}$ Login"
+                                            },
+                                            {
+                                                "text": "Image",
+                                                "href": "#Image",
+                                                "title": "${{ default.goToComponent }}$ Image"
+                                            },
+                                            {
+                                                "text": "Logo",
+                                                "href": "#componentLogo",
+                                                "title": "${{ default.goToComponent }}$ Logo"
+                                            },
+                                            {
+                                                "text": "Banner",
+                                                "href": "#componentBanner",
+                                                "title": "${{ default.goToComponent }}$ Banner"
+                                            },
+                                            {
+                                                "text": "Breadcrumbs",
+                                                "href": "#componentBreadcrumbs",
+                                                "title": "${{ default.goToComponent }}$ Breadcrumbs"
+                                            },
+                                            {
+                                                "text": "Highlighted Banner",
+                                                "href": "#componentHighlightedBanner",
+                                                "title": "${{ default.goToComponent }}$ Highlighted Banner"
+                                            },
+                                            {
+                                                "text": "Highlighted Content",
+                                                "href": "#componentHighlightedContent",
+                                                "title": "${{ default.goToComponent }}$ Highlighted Content"
+                                            },
+                                            {
+                                                "text": "Highlighted Side Image",
+                                                "href": "#componentHighlightedSideImage",
+                                                "title": "${{ default.goToComponent }}$ Highlighted Side Image"
+                                            },
+                                            {
+                                                "text": "Highlighted Flips",
+                                                "href": "#componentHighlightedFlips",
+                                                "title": "Ir a Componente Highlighted Flips"
+                                            },
+                                            {
+                                                "text": "Cards List Carousel",
+                                                "href": "#componentCardsListCarousel",
+                                                "title": "${{ default.goToComponent }}$ Cards List Carousel"
+                                            },
+                                            {
+                                                "text": "Slider",
+                                                "href": "#componentSlider",
+                                                "title": "${{ default.goToComponent }}$ Slider"
+                                            },
+                                            {
+                                                "text": "Navigation",
+                                                "href": "#componentNavigation",
+                                                "title": "${{ default.goToComponent }}$ Navigation"
+                                            },
+                                            {
+                                                "text": "HTML Content",
+                                                "href": "#componentHTMLContent",
+                                                "title": "${{ default.goToComponent }}$ HTML Content"
+                                            },
+                                            {
+                                                "text": "Card",
+                                                "href": "#componentCard",
+                                                "title": "${{ default.goToComponent }}$ Card"
+                                            },
+                                            {
+                                                "text": "Accordion",
+                                                "href": "#componentAccordion",
+                                                "title": "${{ default.goToComponent }}$ Accordion"
+                                            },
+                                            {
+                                                "text": "Social Share",
+                                                "href": "#componentSocialShare",
+                                                "title": "${{ default.goToComponent }}$ Social Share"
+                                            },
+                                            {
+                                                "text": "Data List",
+                                                "href": "#componentDataList",
+                                                "title": "${{ default.goToComponent }}$ Data List"
+                                            },
+                                            {
+                                                "text": "Filter Pills",
+                                                "href": "#componentFilterPills",
+                                                "title": "${{ default.goToComponent }}$ Filter Pills"
+                                            },
+                                            {
+                                                "text": "Form Filter",
+                                                "href": "#componentFormFilter",
+                                                "title": "${{ default.goToComponent }}$ Form Filter"
+                                            },
+                                            {
+                                                "text": "Steps",
+                                                "href": "#componentSteps",
+                                                "title": "${{ default.goToComponent }}$ Steps"
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            "showTitle": "false",
+                            "full": "false"
+                        }
+                    ],
+                    "column1": [
+                        {
+                            "name": "component-components",
+                            "id": "component-components-1699",
+                            "content": "",
+                            "title": "component-components",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "layouts",
+            "name": "Layouts",
+            "url": "/layouts",
+            "src": "/layouts.html",
+            "attributes": {
+                "title": "Layouts | SunnieJS",
+                "description": "Lorem ipsum",
+                "keywords": "layout, sunniejs"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-layouts",
+                            "content": [
+                                {
+                                    "src": "./images/layouts/layout-12-3-9-12.png",
+                                    "alt": "Layout 12 3 9 12",
+                                    "header": "layout-12-3-9-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-3-9.png",
+                                    "alt": "Layout 12 3 9",
+                                    "header": "layout-12-3-9",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-4-8-12.png",
+                                    "alt": "Layout 12 4 8 12",
+                                    "header": "layout-12-4-8-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-4-8.png",
+                                    "alt": "Layout 12 4 8",
+                                    "header": "layout-12-4-8",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-6-6-12.png",
+                                    "alt": "Layout 12 6 6 12",
+                                    "header": "layout-12-6-6-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-6-6.png",
+                                    "alt": "Layout 12 6 6",
+                                    "header": "layout-12-6-6",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-8-4-12.png",
+                                    "alt": "Layout 12 8 4 12",
+                                    "header": "layout-12-8-4-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-8-4.png",
+                                    "alt": "Layout 12 8 4",
+                                    "header": "layout-12-8-4",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-9-3-12.png",
+                                    "alt": "Layout 12 9 3 12",
+                                    "header": "layout-12-9-3-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-9-3.png",
+                                    "alt": "Layout 12 9 3",
+                                    "header": "layout-12-9-3",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12-fluid.png",
+                                    "alt": "Layout 12 Fluid",
+                                    "header": "layout-12-fluid",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-12.png",
+                                    "alt": "Layout 12",
+                                    "header": "layout-12",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-3-9.png",
+                                    "alt": "Layout 3 9",
+                                    "header": "layout-3-9",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-4-4-4-noHeader.png",
+                                    "alt": "Layout 4 4 4 No Header",
+                                    "header": "layout-4-4-4-noHeader",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-4-8.png",
+                                    "alt": "Layout 4 8",
+                                    "header": "layout-4-8",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-6-6.png",
+                                    "alt": "Layout 6 6",
+                                    "header": "layout-6-6",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-8-4.png",
+                                    "alt": "Layout 8 4",
+                                    "header": "layout-8-4",
+                                    "classes": "img-padding"
+                                },
+                                {
+                                    "src": "./images/layouts/layout-9-3.png",
+                                    "alt": "Layout 9 3",
+                                    "header": "layout-9-3",
+                                    "classes": "img-padding"
+                                }
+                            ],
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "sites",
+            "name": "Sites",
+            "url": "/sites",
+            "src": "/sites.html",
+            "attributes": {
+                "title": "Sites",
+                "description": "Sites",
+                "keywords": "sites"
+            },
+            "layout": {
+                "name": "layout-12-fluid",
+                "content": {
+                    "content_upper": [
+                        {
+                            "id": "1",
+                            "name": "component-sites",
+                            "showTitle": "false",
+                            "full": "true"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        },
+        {
+            "id": "resultados-del-tarificador-1111",
+            "name": "Resultados del Tarificador",
+            "url": "/tarificador/resultados",
+            "src": "/resultados-del-tarificador.html",
+            "hidden": "true",
+            "attributes": {
+                "title": "Resultados del Tarificador",
+                "description": "",
+                "keywords": ""
+            },
+            "layout": {
+                "name": "layout-12",
+                "content": {
+                    "content_upper": [
+                        {
+                            "name": "component-html-content",
+                            "id": "component-html-content-8442",
+                            "content": {
+                                "HTMLcontent": "<p class=\"text-center\"><img alt=\"\" src=\"../images/ResultadoSeguro.png\" /></p>\n",
+                                "undefined": "<p class=\"text-center\"><img alt=\"\" src=\"../images/ResultadoSeguro.png\" /></p>\n"
+                            },
+                            "title": "component-html-content",
+                            "showTitle": "false",
+                            "full": "true",
+                            "classes": "",
+                            "new": "false"
+                        }
+                    ]
+                }
+            },
+            "childs": []
+        }
+    ]
+}

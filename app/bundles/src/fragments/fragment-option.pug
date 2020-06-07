@@ -1,0 +1,8 @@
+mixin fragment-option(content)
+
+	- var value=content.value || '';
+	- var text = content.text || '';
+	- var selected = content.selected || false; 
+	- var dataAttributes = content.dataAttributes || false;
+
+	option(value=value, selected=selected)&attributes(dataAttributes) #{text}

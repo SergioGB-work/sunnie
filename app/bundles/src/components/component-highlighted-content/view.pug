@@ -1,0 +1,12 @@
+mixin component-highlighted-content(content)
+
+	- var contentHTML = content.content || ''
+	- var button= content.button || ''
+
+	.container
+		.row.d-flex.align-items-center
+			.col-sm-10.offset-sm-1.col-12.text-center
+				div !{contentHTML}
+
+				.mb-3
+					a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}

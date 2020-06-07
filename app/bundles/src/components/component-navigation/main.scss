@@ -1,0 +1,50 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+
+.component-navigation{
+	ul{
+		&.nav-vertical{
+			li{
+				a{
+					padding-left:0;
+					padding-right:0;
+					color:$gray-base;
+					
+					&:hover,&:focus,&:active{
+						color:$primary;
+					}
+				}
+				&:hover:before{
+					color:$primary;
+				}
+			}
+
+			ul{
+				padding-left:ceil(($grid-gutter-width / 2));
+
+				li{
+				    list-style: none;
+				    position: relative;
+				    display: flex;
+				    align-items: center;
+
+					&:before{
+						content: "\f105"; 
+					    font-family: FontAwesome;
+					    display: inline-block;
+					    width: 10px;
+					    height: 10px;
+					    line-height: 1;
+					    font-size: 10px;
+					}
+
+					a{
+						font-size: 0.75rem;
+						padding: $grid-gutter-width/4 0;
+					}
+				}
+			}
+		}
+	}	
+}

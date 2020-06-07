@@ -1,0 +1,65 @@
+.component{
+	float: left;
+    width: 100%;
+    padding: $grid-gutter-width;
+	margin-bottom:$grid-gutter-width;
+	background:$component-bg;
+	box-shadow: $box-shadow;
+	position:relative;
+	
+	.component-title{
+		float:left;
+		width:100%;
+	}
+	
+	.component-content{
+		float:left;
+		width:100%;		
+	}
+	
+	&.component-full{
+		padding:0;
+		border:0;
+		background:0;
+		box-shadow: none;
+	}
+
+	p:last{
+		margin-bottom:0;
+	}
+
+	.action-bar{
+		z-index:9;
+		position:absolute;
+		right:0;
+		top:0;
+
+		.dropdown-toggle{
+			width: ceil($spacer * 2.5);
+			height: ceil($spacer * 2.5);
+			background:rgba(0,0,0,0.3);
+			color:$white;
+			cursor:pointer;
+
+			@include hover-focus-active{
+				background:rgba(0,0,0,0.5);
+			}
+
+			&:after{
+				display:none;
+			}
+		}
+	}
+
+	&.dragging-over{
+		&::after {
+		    position: absolute;
+		    content: '';
+		    left: 0;
+		    width: 100%;
+		    height: 8px;
+		    background: $primary;
+		    top: -12px;
+		}
+	}
+}

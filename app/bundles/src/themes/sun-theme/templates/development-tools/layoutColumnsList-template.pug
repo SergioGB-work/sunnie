@@ -1,0 +1,7 @@
+script(id="templateLayoutColumnsList",type="text/x-jsrender")
+	| {{if data.columns.length > 0 }}
+	option(value="") Selecciona una columna	
+	| {{for data.columns}}
+	option(value="{{:}}") {{:}}
+	| {{/for}}
+	| {{/if}}

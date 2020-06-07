@@ -1,0 +1,33 @@
+mixin component-develop-assistant(content)
+	
+	- var service = content.service || apiDevelopment+"/send-message"
+
+	.card.h-100.mb-0
+		.card-header.bg-primary.text-white 
+			h2.mb-0.icon-2x Asistente de Desarrollo(BETA)
+
+		.card-body
+			.row
+				.col-12
+					div(id="conversation")
+						.float-left.w-100
+							.alert.alert-info.w-90.float-left Hola, soy tu asistente de desarrollo. Puedes preguntarme lo que desees y si lo sé te ayudaré.
+						.float-left.w-100
+							.alert.alert-info.w-90.float-left ¿Qué puedo hacer por ti mi señor?
+
+		.card-footer
+			.row
+				.col-12
+					form(role="form", data-action=service, data-method="POST", data-callback="addBotResponse")
+						.row
+							.form-group.col-12.mb-0
+								label(for="inputChat",class="sr-only") Mensaje
+								.input-group
+									input(class="form-control", type="text", id="inputChat", name="message", placeholder="Escribe tu mensaje")
+									.input-group-append.send
+										.input-group-text 
+											i(class="fa fa-arrow-right")
+
+
+	include templates/componentListDevelopAssistantBot-template											
+	include templates/layoutColumnsListDevelopAssistantBot-template											

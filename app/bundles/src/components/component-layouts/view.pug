@@ -1,0 +1,48 @@
+mixin component-layouts(content)
+	- var content = content;
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 Layouts
+
+					p ${{ layouts.paragraph1 }}$
+				
+					h2 ${{ layouts.layoutsDefinitionTitle }}$
+
+					p ${{ layouts.layoutsDefinitionParagraph1 }}$
+
+					p ${{ layouts.layoutsDefinitionParagraph2 }}$
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ layouts.layoutsListTitle }}$
+					p ${{ layouts.layoutsListTitleParagraph1 }}$
+	.row.layouts-list.d-flex.flex-wrap
+		each item in content
+			.col-lg-2.col-md-3.col-sm-4.col-6
+				+fragment("fragment-card",item)
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ layouts.layoutsLocalizationTitle }}$
+
+					p ${{ layouts.layoutsLocalizationParagraph1 }}$
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ layouts.layoutsGeneratorTitle }}$
+
+					p ${{ layouts.layoutsGeneratorParagraph1 }}$
+
+					p ${{ layouts.layoutsGeneratorParagraph2 }}$
+
+					pre 
+						| yo sunnie:layout						
+
+					p ${{ layouts.layoutsGeneratorParagraph3 }}$

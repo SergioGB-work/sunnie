@@ -1,0 +1,30 @@
+mixin layout-12-4-8-12(content)
+	- var content_upper = content.content_upper	|| ''
+	- var content_left = content.content_left || ''
+	- var content_right = content.content_right	|| ''
+	- var content_lower = content.content_lower	|| ''
+
+	div(id="layout-12-4-8-12",class="layout",role="main", data-layout-id="layout-12-4-8-12")
+		div(class="container")
+
+			div(class="layout-row row",data-layout-column="content_upper")
+
+				div(class="layout-column col-md-12")
+					each component,index in content_upper
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+			div(class="layout-row row")
+
+				div(class="layout-column col-md-4 col-12",data-layout-column="content_left")
+					each component,index in content_left
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+				div(class="layout-column col-md-8 col-12",data-layout-column="content_right")
+					each component,index in content_right
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+			div(class="layout-row row")
+
+				div(class="layout-column col-md-12",data-layout-column="content_lower")
+					each component,index in content_lower
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})

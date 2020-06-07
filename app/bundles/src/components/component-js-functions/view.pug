@@ -1,0 +1,209 @@
+mixin component-js-functions(content)
+	div
+		h1 ${{ js-functions.pageTitle }}$
+
+		p ${{ js-functions.paragraph1 }}$
+
+		p ${{ js-functions.paragraph2 }}$
+
+
+		h3 popover()
+
+		p ${{ js-functions.popoverParagraph }}$
+
+		h3 getData(el)
+
+		p ${{ js-functions.getDataParagraph1 }}$
+
+		p ${{ js-functions.getDataParagraph2 }}$
+
+		h4 ${{ js-functions.jsonParamsTitle }}$
+		
+		.table-responsive-sm
+			table(class="table")
+				thead
+					tr
+						th ${{ js-functions.param }}$
+						th ${{ js-functions.description }}$
+						th ${{ js-functions.howTo }}$
+				tbody
+					tr
+						td <strong>service</strong>
+						td ${{ js-functions.serviceDescription }}$
+						td "/clientes/59/usuarios"
+
+					tr
+						td <strong>method</strong>
+						td ${{ js-functions.methodDescription }}$
+						td "GET"
+
+					tr
+						td <strong>template</strong>
+						td ${{ js-functions.templateDescription }}$
+						td "#templateClientes"
+
+					tr
+						td <strong>target</strong>
+						td ${{ js-functions.targetDescription }}$
+						td ".table-clientes tbody"
+
+					tr
+						td <strong>page</strong>
+						td ${{ js-functions.pageDescription }}$
+						td "1"					
+
+					tr
+						td <strong>items_per_page</strong>
+						td ${{ js-functions.itemsPerPageDescription }}$
+						td "10"	
+
+					tr
+						td <strong>aditionalData</strong>
+						td ${{ js-functions.aditionalDataDescription }}$
+						td "{cliente : 55 , usuario : 12}"
+
+					tr
+						td <strong>callback</strong>
+						td ${{ js-functions.callbackDescription }}$
+						td "callbackCargaClientes"
+
+					tr
+						td <strong>content</strong>
+						td ${{ js-functions.contentDescription }}$
+						td ""				
+
+					tr
+						td <strong>enableGetParams</strong>
+						td ${{ js-functions.enableGetParamsDescription }}$
+						td "true"
+
+					tr
+						td <strong>getParamsList</strong>
+						td ${{ js-functions.getParamsListDescription }}$
+						td "order,activo,grupo"
+
+					tr
+						td <strong>rel</strong>
+						td ${{ js-functions.relDescription }}$
+						td "group1"					
+
+		h3 dataList(el)
+
+		p ${{ js-functions.dataListParagraph1 }}$
+
+		p ${{ js-functions.dataListParagraph2 }}$
+
+
+		h3 pagination(el)
+
+		p ${{ js-functions.paginationParagraph1 }}$
+
+		p ${{ js-functions.paginationParagraph2 }}$
+
+		h3 error( status, code , message )
+
+		p ${{ js-functions.errorParagraph1 }}$
+
+		p ${{ js-functions.errorParagraph2 }}$
+
+		p ${{ js-functions.errorParagraph3 }}$
+
+		h3 showLoading()
+
+		p ${{ js-functions.showLoadingParagraph1 }}$
+
+		h3 hideLoading()
+
+		p ${{ js-functions.hideLoadingParagraph1 }}$
+
+		h3 showError( title , content)
+
+		p ${{ js-functions.showErrorParagraph1 }}$
+
+		.table-responsive-sm
+			table(class="table")
+				thead
+					tr
+						th ${{ js-functions.param }}$
+						th ${{ js-functions.description }}$
+						th ${{ js-functions.howTo }}$
+				tbody
+					tr
+						td <strong>title</strong>
+						td ${{ js-functions.modalTitle }}$
+						td ${{ js-functions.modalTitleHowTo }}$
+
+					tr
+						td <strong>content</strong>
+						td ${{ js-functions.modalContentTitle }}$
+						td ${{ js-functions.modalContentHowTo }}$
+
+		h3 showHTMLError( title , content)
+
+		p ${{ js-functions.showErrorHTMLParagraph1 }}$
+
+		.table-responsive-sm
+			table(class="table")
+				thead
+					tr
+						th ${{ js-functions.param }}$
+						th ${{ js-functions.description }}$
+						th ${{ js-functions.howTo }}$
+				tbody
+					tr
+						td <strong>title</strong>
+						td ${{ js-functions.modalTitle }}$
+						td ${{ js-functions.modalTitleHowTo }}$
+
+					tr
+						td <strong>content</strong>
+						td ${{ js-functions.modalHTMLContentTitle }}$
+						td ${{ js-functions.modalHTMLContentHowTo }}$
+
+		h3 filterContentByRol()
+
+		p ${{ js-functions.filterContentByRolParagraph1 }}$
+
+		h3 dataSearch()
+
+		p ${{ js-functions.dataSearchParagraph1 }}$ 
+
+		h2 checkRol(rol)
+
+		p ${{ js-functions.checkRolParagraph1 }}$ 
+
+		h3 ${{ js-functions.example }}$ 
+
+		pre
+			| extends ./layouts/layout-12-fluid
+
+			| block header
+			|    title tiendas
+			|    meta(name="keywords",content="pug")
+			|    meta(name="description",content="pug")
+			|    script.
+			|        checkRol(3)
+
+			| block content-upper
+
+			|    +component('component-storesList','id1','','','false','true')		
+
+		h2 checkSession()
+
+		p ${{ js-functions.checkSessionParagraph1 }}$
+
+		pre
+			| extends ./layouts/layout-12-fluid
+
+			| block header
+			|    title tiendas
+			|    meta(name="keywords",content="pug")
+			|    meta(name="description",content="pug")
+			|    script.
+			|        checkSession()
+
+			| block content-upper
+
+			|    +component('component-storesList','id1','','','false','true')	
+
+

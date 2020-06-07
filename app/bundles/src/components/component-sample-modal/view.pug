@@ -1,0 +1,66 @@
+mixin component-sample-modal(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 Modals
+
+					p ${{ sample-modal.paragraph1 }}$
+
+					p ${{ sample-modal.paragraph2 }}$
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Uso
+
+					p ${{ sample-modal.paragraph3 }}$
+
+					pre
+						| extends ../../../templates/modal_noFooter
+						|
+						| block vars
+						|	- var modal_title = "${{ sample-modal.largeModalTitle }}$"
+						|	- var modal_id = "lexLargeModal"
+						|	- var modal_size = "modal-lg"
+						|
+						| block modal-body
+						|	
+						|		.row
+						|	
+						|			.col-12
+						|				p Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						|
+						|		.row
+						|			.col-12
+						|				div(class="form-group text-right")
+						|					button(type="button",class="btn btn-secondary",data-dismiss="modal") ${{ sample-modal.cancel }}$
+						|					button(type="submit",class="btn btn-primary",class="send") ${{ sample-modal.acept }}$		
+
+					p ${{ sample-modal.paragraph4 }}$
+					ul
+						li <strong>modal_title:</strong> ${{ sample-modal.paragraph5 }}$
+						li <strong>modal_id:</strong> ${{ sample-modal.paragraph6 }}$
+						li <strong>modal_size:</strong> ${{ sample-modal.paragraph7 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ sample-modal.example }}$
+
+					p ${{ sample-modal.paragraph8 }}$
+
+					button(class="btn btn-primary", data-target="#lexDefaultModal" ,data-toggle="modal") ${{ sample-modal.defaultModalTitle }}$
+
+					button(class="btn btn-primary", data-target="#lexLargeModal" ,data-toggle="modal") ${{ sample-modal.largeModalTitle }}$
+
+					button(class="btn btn-primary", data-target="#lexSmallModal" ,data-toggle="modal") ${{ sample-modal.smallModalTitle }}$l
+
+					button(class="btn btn-primary", data-target="#lexNoHeaderModal" ,data-toggle="modal") ${{ sample-modal.noHeaderModalTitle }}$
+
+
+	include templates/modal-default.pug
+	include templates/modal-large.pug
+	include templates/modal-small.pug
+	include templates/modal-noHeaderNoFooter.pug

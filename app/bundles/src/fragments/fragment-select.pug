@@ -1,0 +1,17 @@
+mixin fragment-select(content)
+
+	- var id = content.id || false;
+	- var classes = content.class || false;
+	- var name = content.name || false;
+	- var value = content.value || '';
+	- var required = content.required || false;
+	- var dataAttributes = content.dataAttributes || false;
+	- var selected = content.selected || false;
+	- var multiple = content.multiple || false;
+	- var options = content.options || [];
+	- var disabled = content.disabled || false;
+	- var readonly = content.readonly || false;
+
+	select(id=id, class=classes, name=name, required=required,value=value, multiple=multiple, disabled=disabled, readonly=readonly)&attributes(dataAttributes)
+		each option in options
+			+fragment('fragment-option',option)

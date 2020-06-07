@@ -1,0 +1,88 @@
+*{
+	outline:0;
+}
+
+body{
+	overflow-y:scroll;
+}
+
+
+h1{
+	margin-bottom: $font-size-base;
+	margin-top:0;
+	font-weight:300;
+	color: $primary;
+	line-height:$line-height-base;
+}
+
+h2{
+	margin-bottom: $font-size-base;
+	font-weight:300;
+	line-height:$line-height-base;
+}
+
+h3{
+	margin-bottom: $font-size-base;
+	line-height:$line-height-base;	
+	font-weight:400;
+}
+
+h4{
+	margin-bottom: $font-size-base * 0.75;
+	line-height:$line-height-base;	
+}
+
+h5{
+	margin-bottom: $font-size-base * 0.75;
+	line-height:$line-height-base;
+}
+
+h6{
+	margin-bottom: $font-size-base * 0.75;
+	line-height:$line-height-base;
+}
+
+a{
+	color:$primary;
+	&:focus{
+		outline:0;
+	}
+}
+
+p{
+	margin-bottom:$grid-gutter-width;
+}
+
+img{
+	max-width:100%;
+	border:0;
+}
+
+table{
+	box-shadow: $table-box-shadow;
+	
+	td,th{
+		vertical-align: middle;
+	}
+}
+
+label{
+	cursor:pointer;
+}
+
+button{
+	&:focus{
+		outline:0;
+	}
+}
+
+pre{
+    display: block;
+    padding: 1rem;
+    margin: 0 0 0.75rem;
+    font-size: 1rem;
+    word-break: break-all;
+    word-wrap: break-word;
+    background-color: $body-bg;
+    border: 1px solid $input-border;
+}

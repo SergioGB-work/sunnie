@@ -1,0 +1,22 @@
+{
+	"config":[
+		{
+			"label":"Pages",
+			"name":"pages",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"URL",
+					"name":"url",
+					"type":"text"
+				},
+				{
+					"label":"Page Name",
+					"name":"pageName",
+					"type":"text",
+					"required":true
+				}
+			]
+		}
+	]
+}

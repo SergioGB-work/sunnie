@@ -1,0 +1,7 @@
+script(id="templateComponentList",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	option(value="") Selecciona un componente
+	| {{for data}}
+	option(value="{{:}}") {{:}}
+	| {{/for}}
+	| {{/if}}

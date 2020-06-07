@@ -1,0 +1,18 @@
+{
+  "paragraph1":"SunnieJS provides a series of modal window templates that allow to standardize the creation of manners based on the basic structures of Bootstrap and the way it creates them.",
+  "paragraph2":"By default there are two Modal templates (modal_noFooter and modal_noHeaderNoFooter) that as their own names indicate, in the first case it is a modal without footer and in the other case, it has neither header nor footer.",
+  "paragraph3":"Below is an example of creating a modal extending the modal_noFooter template:",
+  "paragraph4":"Manners can receive a series of variables from <span class = 'text-primary'>block vars</span> that can be used to customize certain aspects of the generic structure of the modal.",
+  "paragraph5":"modal title",
+  "paragraph6":"modal ID",
+  "paragraph7":"modal size, being able to choose between modal-lg, modal-md, modal-sm. These sizes correspond to those defined by Bootstrap",
+  "howTo":"How to",
+  "example":"Examples",
+  "paragraph8":"Thanks to the different aspects mentioned above, you can create standardized and robust manners such as those that can be seen below:",
+  "defaultModalTitle":"Default Modal",
+  "largeModalTitle":"Large Modal",
+  "smallModalTitle":"Small Modal",
+  "noHeaderModalTitle":"Modal Without Header",
+  "cancel":"Cancel",
+  "acept":"Acept"
+}

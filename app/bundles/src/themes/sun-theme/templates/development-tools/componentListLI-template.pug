@@ -1,0 +1,6 @@
+script(id="templateComponentListLI",type="text/x-jsrender")
+	| {{if data.length > 0 }}
+	| {{for data}}
+	li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(draggable="true", data-id-component="{{:}}") {{:}}
+	| {{/for}}
+	| {{/if}}

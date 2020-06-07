@@ -1,0 +1,30 @@
+{
+	"config":[	
+		{
+			"label":"URL Image",
+			"name":"src",
+			"type":"text",
+			"required": true
+		},
+		{
+			"label":"Alternative Text",
+			"name":"alt",
+			"type":"text"
+		},
+		{
+			"label":"Long Descrition",
+			"name":"longdesc",
+			"type":"text"
+		},
+		{
+			"label":"Responsive SRC",
+			"name":"responsiveSRC",
+			"type":"text"
+		},
+		{
+			"label":"SRCSET",
+			"name":"srcset",
+			"type":"text"
+		}
+	]
+}

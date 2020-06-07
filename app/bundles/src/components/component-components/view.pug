@@ -1,0 +1,758 @@
+mixin component-components(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1#componentes ${{ components.pageTitle }}$
+					
+					p ${{ components.paragraph1 }}$
+
+					h2#uso ${{ components.howToUseTitle }}$
+
+					p ${{ components.paragraph2 }}$
+
+					p ${{ components.paragraph3 }}$
+
+					p ${{ components.paragraph4 }}$
+
+					p ${{ components.paragraph5 }}$
+
+					P ${{ components.paragraph6 }}$
+
+
+			table(class="table table-responsive")
+				thead
+					tr
+						th ${{ components.param }}$
+						th ${{ components.description }}$
+						th ${{ components.default }}$
+				tbody
+					tr
+						td <strong>name</strong>
+						td ${{ components.componentTypeDescription }}$
+						td "". Requerido				
+
+					tr
+						td <strong>id</strong>
+						td ${{ components.componentIdDescription }}$
+						td ""
+
+					tr
+						td <strong>content</strong>
+						td ${{ components.componentContentDescription }}$
+						td ""
+					tr
+						td <strong>title</strong>
+						td ${{ components.componentComponentTitleDescription }}$
+						td ""
+
+					tr
+						td <strong>showTitle</strong>
+						td ${{ components.componentShowTitleDescription }}$
+						td ""
+
+					tr
+						td <strong>full</strong>
+						td ${{ components.componentFullDescription }}$
+						td ""
+
+					tr
+						td <strong>classes</strong>
+						td ${{ components.componentClassesDescription }}$
+						td ""						
+
+			.card
+				.card-body
+					h2 ${{ components.example }}$
+
+					p ${{ components.componentExampleParagraph1 }}$
+
+					h3 ${{ components.componentExampleParagraph2 }}$
+
+					pre
+						|	{
+						|	    "site": {
+						|	        "name": "default",
+						|	        "url": "/default"
+						|	    },
+						|	    "pages": [
+						|	        {
+						|	            "id": "home",
+						|	            "name": "Home",
+						|	            "url": "/",
+						|	            "src": "/home.html",
+						|	            "attributes": {
+						|	                "title": "SunnieJS3",
+						|	                "description": "Lorem ipsum4",
+						|	                "keywords": "SunnieJS2"
+						|	            },
+						|	            "layout": {
+						|	                "name": "layout-12-fluid",
+						|	                "content": {
+						|	                    "content_upper": [
+						|	                        {
+						|	                            "name": "component-html-content",
+						|	                            "id": "component-html-content-8353",
+						|	                            "content": {
+						|	                                "HTMLcontent": "Hello World"
+						|	                            }
+						|	                        }
+						|	                    ]
+						|	                }
+						|	            }
+						|	        }
+						|	    ]
+						|	}
+
+					h3 ${{ components.componentExampleParagraph3 }}$
+					pre 
+						| +component({"name":"component-breadcrumbs","content":{"pages":[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}]},"showTitle":"false","full":"false"})
+
+					h3 Config
+					p ${{ components.componentConfigParagraph1 }}$
+
+					h4 ${{ components.componentConfigExampleTitle }}$
+					pre
+						| {
+						| 	"config":[
+						| 		{
+						| 			"label":"Items",
+						| 			"name":"items",
+						| 			"type":"array",
+						| 			"arrayContent":[
+						| 				{
+						| 					"label":"Header",
+						| 					"name":"header",
+						| 					"type":"text",
+						| 					"required":true
+						| 				},
+						| 				{
+						| 					"label":"Content",
+						| 					"name":"content",
+						| 					"type":"textarea"
+						| 				},
+						| 				{
+						| 					"label":"Default Display",
+						| 					"name":"collapsed",
+						| 					"type":"select",
+						| 					"options":[
+						| 						{
+						| 							"label":"Opened",
+						| 							"value":"opened"
+						| 						},
+						| 						{
+						| 							"label":"Closed",
+						| 							"value":"closed"	
+						| 						}						
+						| 					]
+						| 				}				
+						| 			]
+						| 		},
+						| 		{
+						| 			"label":"Close All to Open",
+						| 			"name":"collapseParent",
+						| 			"type":"checkbox",
+						| 			"value":"true"
+						| 		}
+						| 	]
+						| }
+					
+					p ${{ components.componentConfigParagraph2 }}$
+
+					p ${{ components.componentConfigParagraph3 }}$
+
+					p ${{ components.componentConfigParagraph4 }}$
+
+					.table-responsive-sm
+						table(class="table")
+							thead
+								tr
+									th ${{ components.componentConfigTableTH1 }}$
+									th ${{ components.componentConfigTableTH2 }}$
+									th ${{ components.componentConfigTableTH3 }}$
+							tbody
+								tr
+									td <strong>label</strong>
+									td ${{ components.componentConfigTableContainerLabelDescription }}$
+									td String
+								tr
+									td <strong>type</strong>
+									td ${{ components.componentConfigTableContainerTypeDescription }}$
+									td text, checkbox, radio, textarea, select, array, group
+								tr
+									td <strong>name</strong>
+									td ${{ components.componentConfigTableContainerNameDescription }}$
+									td String
+								tr
+									td <strong>required</strong>
+									td ${{ components.componentConfigTableContainerRequiredDescription }}$
+									td Bool: true , false
+								tr
+									td <strong>options</strong>
+									td ${{ components.componentConfigTableContainerOptionsDescription }}$
+									td Array con JSON {"label":"Etiqueta de la opcion","value":"valor de la opción"}
+								tr
+									td <strong>value</strong>
+									td ${{ components.componentConfigTableContainerValueDescription }}$
+									td String
+								tr
+									td <strong>arrayContent</strong>
+									td ${{ components.componentConfigTableContainerArrayContentDescription }}$
+									td Array con JSONs de inputs
+								tr
+									td <strong>content</strong>
+									td ${{ components.componentConfigTableContainerContentDescription }}$
+									td Array con JSONs de inputs
+								tr
+									td <strong>visibility</strong>
+									td ${{ components.componentConfigTableContainerVisibilityDescription }}$
+									td hidden
+								tr
+									td <strong>id</strong>
+									td ${{ components.componentConfigTableContainerIDDescription }}$
+									td String
+		.col-12
+			.card
+				.card-body
+					h2#listado-de-componentes ${{ components.componentsList }}$
+					p ${{ components.componentsListParagraph1 }}$
+
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentLogin",title="${{ components.goToComponent }}$ Login") Login
+					p ${{ components.loginParagraph1 }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-login"
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component('component-login','id1','','','false','false')
+
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentBanner",title="${{ components.goToComponent }}$ Banner") Banner
+					p ${{ components.showLinkedImage }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-banner"							
+						li <strong>src:</strong> ${{ components.imageURL }}$							
+						li <strong>alt:</strong> ${{ components.altText }}$						
+						li <strong>longdesc:</strong> ${{ components.longDesc }}$							
+						li <strong>href:</strong> ${{ components.imageLink }}$							
+						li <strong>title:</strong> ${{ components.titleLink }}$							
+						li <strong>target:</strong> ${{ components.linkTarget }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-banner','id':id1','content':{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$','href':'./home.html','title':'Ir a Home','target':'_blank'},'showTitle':false','full':'false'})						
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentHighlightedContent",title="${{ components.goToComponent }}$ Highlighted Content") Highlighted Content
+					p ${{ components.highlightedContentComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-content"							
+						li <strong>content:</strong> ${{ components.htmlContent }}$
+						li <strong>button:</strong> ${{ components.jsonContentButton }}$
+							ul
+								li <strong>text:</strong> ${{ components.buttonText }}$
+								li <strong>href:</strong> ${{ components.buttonURL }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":component-highlighted-content","content":{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"showTitle":"false","full":"true"})
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentCardsListCarousel",title="${{ components.goToComponent }}$ Cards List Carousel") Cards List Carousel
+					p ${{ components.cardCarouselDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-cards-list-carousel"							
+						li <strong>items:</strong>
+							ul
+								li <strong>header:</strong> ${{ components.cardHeader }}$
+								li <strong>description:</strong> ${{ components.descriptionText }}$
+								li <strong>src:</strong> ${{ components.imageURL }}$
+								li <strong>alt:</strong> ${{ components.altText }}$
+								li <strong>href:</strong> ${{ components.cardLink }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
+								li <strong>classes:</strong> ${{ components.cardClasses }}$
+								li <strong>price:</strong> ${{ components.cardPrice }}$
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-cards-list-carousel","content":{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"showTitle":"false","full":"true"})
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") HTML Content
+					p ${{ components.htmlContentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-html-content"							
+						li <strong>HTMLcontent:</strong> ${{ components.htmlContentParamHTMLContent }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-html-content','id':'id1','content':{'HTMLcontent':'&lt;h2&gt;Hellow World&lt;/h2&gt;&lt;p&gt;Lorem ipsum dolor&lt;/p&gt;'},'showTitle':'false','full':'false'})
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ Social Share") Social Share
+					p Component que muestra un listado de iconos enlazables
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-socialShare"							
+						li <strong>items:</strong>
+							ul
+								li <strong>href:</strong> ${{ components.iconLink }}$
+								li <strong>title:</strong> ${{ components.iconAltText }}$
+								li <strong>target:</strong> ${{ components.openMode }}$
+								li <strong>iconType:</strong> ${{ components.iconType }}$
+								li <strong>iconCode:</strong> ${{ components.iconCode }}$
+								li <strong>iconSize:</strong> ${{ components.iconSize }}$
+								li <strong>iconColor:</strong> ${{ components.iconColor }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x","iconColor": "#00ff00"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x","iconColor": "#ff0000"}]},'showTitle':'false','full':'false'})
+
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Form Filter") Form Filter
+					p ${{ components.formFilterDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-form-filter"
+						li <strong>formFilter:</strong> ${{ components.formFilterFormFilter }}$
+						li <strong>action:</strong> ${{ components.formFilterAction }}$
+						li <strong>method:</strong> ${{ components.formFilterMethod }}$
+						li <strong>callback:</strong> ${{ components.formFilterCallback }}$
+						li <strong>rel:</strong> ${{ components.formFilterRel }}$ 
+						li <strong>items:</strong> ${{ components.formFilterItems }}$
+							ul
+								li <strong>label:</strong> ${{ components.formFilterLabel }}$
+								li <strong>type:</strong> ${{ components.formFilterType }}$
+								li <strong>selectValues:</strong>${{ components.formFilterOptions }}$
+									ul
+										li <strong>text:</strong> ${{ components.formFilterOptionText }}$
+										li <strong>value:</strong> ${{ components.formFilterOptionValue }}$
+
+								li <strong>name:</strong> ${{ components.formFilterName }}$ 		
+								li <strong>placeholder:</strong> ${{ components.formFilterPlaceholder }}$ 		
+								li <strong>helpText:</strong> ${{ components.formFilterTooltip }}$
+								li <strong>value:</strong> ${{ components.formFilterDefaultValue }}$
+								li <strong>required:</strong> ${{ components.formFilterRequired }}$
+								li <strong>size:</strong> ${{ components.formFilterSize }}$
+								li <strong>regExp:</strong> ${{ components.formFilterRegExp }}$
+
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentImage",title="${{ components.goToComponent }}$ Image") Image
+					p ${{ components.imageComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-banner"							
+						li <strong>src:</strong> ${{ components.imageURL }}$								
+						li <strong>alt:</strong> ${{ components.altText }}$							
+						li <strong>longdesc:</strong> ${{ components.longDesc }}$	
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-image','id':'id1','content':{'src':'./images/banner1.jpg','alt':'${{ components.imageGoHome }}$'},'showTitle':'false','full':'false'})
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentBreadcrumbs",title="${{ components.goToComponent }}$ Bradcrumbs") Breadcrumbs
+					p ${{ components.breadcrumbsComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-banner"							
+						li <strong>pages:</strong>${{ components.breadcrumbsComponentArray }}$
+							ul
+								li <strong>url:</strong> ${{ components.pageURL }}$
+								li <strong>pageName:</strong> ${{ components.pageName }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-breadcrumbs','name':'id1','content':{'pages':[{'url':'./pagina1.html','pageName':'Página 1'},{'url':'./pagina2.html','pageName':'Página 2'},{'url':'./pagina3.html','pageName':'Página 3'}]},'showTitle':'false','full':'false'})
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentHighlightedSideImage",title="${{ components.goToComponent }}$ Highlighted Side Image") Highlighted Side Image
+					p ${{ components.highlightedSideImageComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-side-image"							
+						li <strong>content:</strong> ${{ components.htmlContentComponent }}$
+						li <strong>position:</strong> ${{ components.imagePosition }}$
+						li <strong>button:</strong> ${{ components.jsonContentButton }}$
+							ul
+								li <strong>text:</strong> ${{ components.buttonText }}$
+								li <strong>href:</strong> ${{ components.buttonURL }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
+						li <strong>image:</strong> ${{ components.jsonContentImage }}$
+							ul
+								li <strong>alt:</strong> ${{ components.altText }}$
+								li <strong>src:</strong> ${{ components.imageURL }}$						
+
+					h4.icon-2x ${{ components.example }}$
+					pre +component({"name":"component-highlighted-side-image","content":{"content":"&lt;h2&gt;Pre-Built Dummy Websites&lt;/h2&gt;&lt;h3&gt;easy to install and customise&lt;/h3&gt;&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.&lt;/p&gt;","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"showTitle":"false","full":"true"})
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentSlider",title="${{ components.goToComponent }}$ Slider") Slider
+					p ${{ components.sliderComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-slider"							
+
+						li <strong>items:</strong>
+							ul
+								li <strong>src:</strong> ${{ components.imageURL }}$
+								li <strong>alt:</strong> ${{ components.altText }}$
+								li <strong>href:</strong> ${{ components.imageLink }}$
+								li <strong>title:</strong> ${{ components.imageTitleLink }}$
+
+					h4.icon-2x ${{ components.example }}$
+					pre 
+						| +component({"name":"component-slider","content":{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home"}]},"showTitle":"false","full":"true"})
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Card
+					p Elemento Card de Bootstrap
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-card"							
+						li <strong>header:</strong> ${{ components.cardHeader }}$
+						li <strong>description:</strong> ${{ components.descriptionText }}$
+						li <strong>src:</strong> ${{ components.imageURL }}$
+						li <strong>alt:</strong> ${{ components.altText }}$
+						li <strong>href:</strong> ${{ components.cardLink }}$
+						li <strong>title:</strong> ${{ components.buttonTitle }}$
+						li <strong>classes:</strong> ${{ components.cardClasses }}$
+						li <strong>price:</strong> ${{ components.cardPrice }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-card","content":{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},"showTitle":"false","full":"true"})
+		
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Data List
+					p ${{ components.dataListDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-data-list"
+						li <strong>service:</strong> ${{ components.dataListService }}$
+						li <strong>method:</strong> ${{ components.dataListMethod }}$
+						li <strong>static_code:</strong> ${{ components.dataListStaticCode }}$
+						li <strong>template:</strong> ${{ components.dataListTemplate }}$
+						li <strong>template_code:</strong> ${{ components.dataListTemplateCode }}$
+						li <strong>target:</strong> ${{ components.dataListTarget }}$
+						li <strong>initial_page:</strong> ${{ components.dataListInitialPage }}$
+						li <strong>items_per_page:</strong> ${{ components.dataListItemsPerPage }}$
+						li <strong>aditionalData:</strong> ${{ components.dataListAditionaldata }}$
+						li <strong>callback:</strong> ${{ components.dataListCallback }}$
+						li <strong>content:</strong> ${{ components.dataListContent }}$
+						li <strong>enable_get_params:</strong> ${{ components.dataListEnableGetParams }}$
+						li <strong>get_params_list:</strong> ${{ components.dataListGetParamsList }}$
+						li <strong>rel:</strong> ${{ components.dataListRel }}$
+						li <strong>live_reload:</strong> ${{ components.dataListLiveReload }}$
+						li <strong>time_reload:</strong> ${{ components.dataListTimeReload }}$
+						li <strong>cache:</strong> ${{ components.dataListCache }}$
+						li <strong>pagination:</strong> ${{ components.dataListPagination }}$
+
+
+		.col-12.col-sm-6.col-lg-4
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentLogo",title="${{ components.goToComponent }}$ Logo") Logo
+					p ${{ components.logoComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-logo"							
+						li <strong>src:</strong> ${{ components.imageURL }}$
+						li <strong>alt:</strong> ${{ components.altText }}$
+						li <strong>url:</strong> ${{ components.imageLink }}$
+						li <strong>title:</strong> ${{ components.titleLink }}$
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({'name':'component-logo','content':{'url':'/','title':'SunnieJS Logo','src':'./images/logo.png','alt':'Site Logo SunnieJS'},'showTitle':'false','full':'true'})
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentHighlightedBanner",title="${{ components.goToComponent }}$ Highlighted Banner") Highlighted Banner
+					p ${{ components.highlightedBannerComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-banner"							
+						li <strong>content:</strong> ${{ components.htmlContent }}$
+						li <strong>button:</strong> ${{ components.jsonContentButton }}$
+							ul
+								li <strong>text:</strong> ${{ components.buttonText }}$
+								li <strong>href:</strong> ${{ components.buttonURL }}$
+								li <strong>title:</strong> ${{ components.buttonTitle }}$
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-highlighted-banner","content":{"content":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"showTitle":"false","full":"true"})
+
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentHighlightedFlips",title="${{ components.goToComponent }}$ Highlighted Flips") Highlighted Flips
+					p ${{ components.highlightedFlipsComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-highlighted-flips"						
+						li <strong>items:</strong>						
+							ul
+								li <strong>header:</strong> ${{ components.bannerHeader }}$
+								li <strong>content:</strong> ${{ components.bannerDescription }}$
+								li <strong>iconType:</strong> ${{ components.bannerIconType }}$
+								li <strong>iconCode:</strong> ${{ components.bannerIconCode }}$
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-highlighted-flips","content":{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"glyphicon", "iconCode":"glyphicon-star", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"showTitle":"false","full":"true"})						
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentNavigation",title="${{ components.goToComponent }}$ Navigation") Navigation
+					p ${{ components.navigationComponentDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-navigation"
+						li <strong>view:</strong> ${{ components.navigationView }}$
+						li <strong>justified:</strong> ${{ components.navigationJustified }}$
+						li <strong>stacked:</strong> ${{ components.navigationStacked }}$
+						li <strong>pages</strong>: ${{ components.navigationPages }}$
+							ul
+								li <strong>text:</strong> ${{ components.pageName }}$
+								li <strong>href:</strong> ${{ components.pageURL }}$
+								li <strong>title:</strong> ${{ components.titleLink }}$
+								li <strong>childs:</strong> ${{ components.childsPages }}$
+
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-navigation","content":{"pages":[{"text":"Pagina 1",href:"/pagina1.html",title:"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2",href:"/pagina2.html",title:"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
+
+			.card
+				.card-body
+					h3.icon-4x 
+						a(href="#componentCardsListCarousel",title="${{ components.goToComponent }}$ Cards List Carousel") Accordion
+					p ${{ components.accordionDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-accordion"							
+						li <strong>collapseParent:</strong> ${{ components.accordionCollapseParent }}$
+						li <strong>items:</strong>
+							ul
+								li <strong>header:</strong> ${{ components.accordionHeader }}$
+								li <strong>content:</strong> ${{ components.accordionContent }}$
+								li <strong>collapsed:</strong> ${{ components.accordionCollapsed }}$
+
+
+					h4.icon-2x ${{ components.example }}$
+					pre
+						| +component({"name":"component-accordion","content":{"items": [{"header": "Opcion 1","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"},{"header": "Opcion 2","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "opened"},{"header": "Opcion 3","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"}],"collapseParent": "true"},"showTitle":"false","full":"true"})
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentHTMLContent",title="${{ components.goToComponent }}$ HTML Content") Filter Pills
+					p ${{ components.filterPillsDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-filter-pills"							
+						li <strong>rel:</strong> ${{ components.filterPillsRel }}$
+						li <strong>ignored:</strong> ${{ components.filterPillsIgnored }}$
+
+
+			.card
+				.card-body
+					h3.icon-4x
+						a(href="#componentSteps",title="${{ components.goToComponent }}$ Steps") Steps
+					p ${{ components.stepsDescription }}$
+					h4.icon-2x ${{ components.params }}$
+					ul
+						li <strong>${{ components.name }}$:</strong> "component-steps"							
+						li <strong>text:</strong> ${{ components.stepsText }}$
+						li <strong>onclick:</strong> ${{ components.stepsOnClick }}$
+						li <strong>current:</strong> ${{ components.stepsCurrent }}$
+
+					
+	.row
+		.col-12
+			h2#ejemplos ${{ components.examples }}$
+			.row
+				.col-12
+					.card
+						.card-body
+							h3(id="componentLogin").m-0 Login
+					.row
+						.col-md-3.col-sm-2
+
+						.col-md-6.col-sm-8
+							+component({"name":"component-login","showTitle":"false","full":"false"})
+
+						.col-md-3.col-sm-2
+
+				.col-12
+					.card
+						.card-body
+							h3(id="componentImage").m-0 Image
+					.row
+						.col-md-12
+							+component({"name":"component-image","content":{"src":"./images/carousel1.jpg","alt":"Image 1"},"showTitle":"false","full":"true"})
+				.col-12
+					.card
+						.card-body
+							h3(id="componentBanner").m-0 Banner
+					.row
+						.col-md-12
+							+component({"name":"component-banner","content":{"src":"./images/carousel2.jpg","alt":"Image 1","href":"http://www.google.es", "title":"Ir a Google"},"showTitle":"false","full":"true"})
+
+				.col-12
+					.card
+						.card-body
+							h3(id="componentBreadcrumbs").m-0 Breadcrumbs
+					.row
+						.col-md-12
+							+component({"name":"component-breadcrumbs","content":{"pages":[{"url":"./Pagina1.html","pageName":"Pagina1"},{"url":"./Pagina2.html","pageName":"Pagina2"},{"url":"./Pagina3.html","pageName":"Pagina3"}]},"showTitle":"false","full":"false"})
+	.row
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedBanner").m-0 Highlighted Banner
+			.row.mx-6.mx-md-7
+				+component({"name":"component-highlighted-banner","content":{"content":"<h2>${{ default.homeBannerThemeTitle }}$</h2><p>${{ default.homeBannerThemeContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"showTitle":"false","full":"true"})
+						
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedContent").m-0 Highlighted Content
+			.row
+				.col-md-12
+					+component({"name":"component-highlighted-content","content":{"content":"<h2>${{ default.homeOwnGeneratorsTitle }}$</h2><h3>${{ default.homeOwnGeneratorsSubTitle }}$</h3><p>${{ default.homeOwnGeneratorsContent }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"}},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedFlips").m-0 Highlighted Flips
+			.row
+				.col-md-12
+					+component({"name":"component-highlighted-flips","content":{"items":[{"header":"Header1","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-ellipsis-v", "iconSize":"icon-6x"},{"header":"Header2","content":"Lorem ipsum dolor sit", "iconType":"fontawesome", "iconCode":"fa-align-center", "iconSize":"icon-6x"},{"header":"Header3","content":"Lorem ipsum dolor sit", "iconType":"material", "iconCode":"&#xE84F;", "iconSize":"icon-6x"}]},"showTitle":"false","full":"true"})
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHighlightedSideImage").m-0 Highlighted Side Image
+			.row
+				.col-md-12
+					+component({"name":"component-highlighted-side-image","content":{"content":"<h2>${{ default.homeComponentLibraryComponentTitle }}$</h2><p>${{ default.homeComponentLibraryComponentContent1 }}$ </p><p>${{ default.homeComponentLibraryComponentContent2 }}$</p>","button":{"text":"Click!","href":"http://www.google.es","title":"Ir a Google"},"image":{"src":"./images/monument.jpg","alt":"Imagen Monument"},"position":"left"},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentCardsListCarousel").m-0 Cards List Carousel
+			.row
+				.col-md-12
+					+component({"name":"component-cards-list-carousel","id":"cards","content":{"items":[{"header":"Header 1","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 2","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 3","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 4","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"},{"header":"Header 5","description":"Lorem ipsum","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0"}]},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentProductsCardsListCarousel").m-0 Product Cards List Carousel
+			.row
+				.col-md-12
+					+component({"name":"component-cards-list-carousel","id":"products","content":{"items":[{"header":"Product 1","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 2","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 3","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 4","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"},{"header":"Product 5","description":"Lorem ipsum dolor sit amet adipiscing","src":"./images/monument.jpg","alt":"Image 1","href":"http://google.com","title":"Ir a SunnieJS","classes":"full m-0","price":"15,95€"}]},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSlider").m-0 Slider
+			.row.mx-6.mx-md-7
+				+component({"name":"component-slider","content":{"items":[{"src":"./images/carousel1.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel1-responsive.jpg"},{"src":"./images/carousel2.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel2-responsive.jpg"},{"src":"./images/carousel3.jpg","alt":"","href":"./","title":"Ir a Home","responsiveSRC":"./images/carousel3-responsive.jpg"}]},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentNavigation").m-0 Navigation
+					.row
+						.col-12.col-md-6
+							h4 Tabs
+							+component({"name":"component-navigation","id":"tabs","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"tabs"},"showTitle":"false","full":"true"})
+						.col-12.col-md-6
+							h4 Pills
+							+component({"name":"component-navigation","id":"pills","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[{"text":"Pagina 1-1","href":"/pagina1-1.html","title":"Ir a pagina 1-1"}]},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills"},"showTitle":"false","full":"true"})
+					.row
+						.col-12.col-md-6
+							h4 Pills Justified
+							+component({"name":"component-navigation","id":"pills-justified","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","justified":"true"},"showTitle":"false","full":"true"})
+
+						.col-12.col-md-6
+							h4 Pills stacked
+							+component({"name":"component-navigation","id":"pills-stacked","content":{"pages":[{"text":"Pagina 1","href":"/pagina1.html","title":"Ir a pagina 1","childs":[],"active":"true"},{"text":"Pagina 2","href":"/pagina2.html","title":"Ir a pagina 2","childs":[]}],"view":"pills","stacked":"true"},"showTitle":"false","full":"true"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentHTMLContent").m-0 HTML Content
+			.row
+				.col-12
+					+component({"name":"component-html-content","content":{"HTMLcontent":"<h2>Hello World</h2><p>Lorem ipsum dolor sit</p>"},"showTitle":"false","full":"false"})
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentCard").m-0 Card
+			.row
+				.offset-sm-3.col-12.col-sm-6
+					+component({"name": "component-card","id": "component-card-6949","content": {"src": "./images/monument.jpg","alt": "gsdgsdf","header": "Header","description": "Lorem ipsum","href": "www.google.es","classes": "","title": "Title","price": "18965€"},"title": "component-card","showTitle": "false","full": "true","classes": "","new": "false"})
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentAccordion").m-0 Accordion
+			.row
+				.col-12
+					+component({"name": "component-accordion","id": "component-accordion-6789","content": {"items": [{"header": "Opcion 1","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"},{"header": "Opcion 2","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "opened"},{"header": "Opcion 3","content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.","collapsed": "closed"}],"collapseParent": "true"},"title": "component-accordion","showTitle": "false","full": "true","classes": "","new": "false"})
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSocialShare").m-0 Social Share
+			.row
+				.col-12
+					+component({'name':'component-socialShare','id':'id1','content':{"items": [{"href": "http://www.google.es","title": "Ir a GoogleES","target": "_self","iconType": "fontawesome","iconCode": "fa-facebook-f","iconSize": "icon-6x"},{"href": "http://www.google.com","title": "Ir a GoogleCOM","target": "_self","iconType": "fontawesome","iconCode": "fa-twitter","iconSize": "icon-6x"}]},'showTitle':'false','full':'false'})
+
+
+		.col-12
+			.card
+				.card-body
+					h3(id="componentSteps").m-0 Steps
+			.row
+				.col-12
+					+component({'name':'component-steps','id':'id1','content':{"items": [{"text": "Step1", "current":"true"},{"text": "Step2"},{"text": "Step3"}]},'showTitle':'false','full':'false'})

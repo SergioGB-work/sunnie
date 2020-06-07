@@ -1,0 +1,22 @@
+.d-none.d-xl-block
+	+component({'name':'component-logo','content':{'url':fullSiteUrl$1,'title':'SunnisJS','src':fullSiteUrl+'/images/logo.png','alt':'SunnieJS Logo'},'showTitle':'false','full':'true'})
+
+div(id="navigation")
+		include navigation.pug
+
+div(id="top-bar")
+	+component({'name':'component-search','id':'id1','showTitle':'false'})
+
+	+component({'name':'component-languageSelector','id':'id1','showTitle':'false', 'classes':'ml-3'})
+
+	if locals.development == true
+		+component({'name':'component-siteSelector','id':'id1','showTitle':'false'})
+
+
+	.component.version-selector
+		div(class="dropdown")
+			a(class="btn btn-link dropdown-toggle h-100 text-white d-flex align-items-center" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false") 3.X
+
+			div(class="dropdown-menu" aria-labelledby="dropdownMenuLink")
+				a(class="dropdown-item" href="https://www.sunniejs.com/v1/${{ default.lang }}$/") 1.X
+				a(class="dropdown-item" href="https://www.sunniejs.com/${{ default.lang }}$/") 3.X

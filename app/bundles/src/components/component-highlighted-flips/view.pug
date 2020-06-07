@@ -1,0 +1,24 @@
+mixin component-highlighted-flips(content)
+
+	- var items = content.items || []
+
+	.container
+		.row.d-flex.justify-content-center.align-items-center.flex-wrap
+			each item,i in items
+
+				- var iconType = item.iconType
+
+				.col-lg-3.col-md-3.col-sm-4.col-6.text-center
+					.image.d-flex.justify-content-center
+						.icon.d-flex.justify-content-center.embed-responsive.embed-responsive-1by1
+							if iconType=='material'
+								i(class=item.iconSize + ' material-icons d-flex justify-content-center align-items-center flex-wrap') !{item.iconCode}
+						
+							else if iconType=='fontawesome'	
+								span(aria-hidden="true",class=item.iconSize + ' fa d-flex justify-content-center align-items-center flex-wrap ' +  item.iconCode)
+
+					.info
+						h3.m-0 #{item.header}
+						p #{item.content}
+
+

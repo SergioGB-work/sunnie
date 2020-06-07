@@ -1,0 +1,9 @@
+mixin component-languageSelector(content)
+	div(class="dropdown")
+		button(id="languageSelector",type="button",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false",class="dropdown-toggle d-flex align-items-center")
+			span.store-name ${{ languageSelector.currentLanguage }}$
+		ul(class="dropdown-menu m-0 dropdown-menu-right",aria-labelledby="languageSelector")
+			li.dropdown-item
+				a(href=siteURL+"/es/", data-lang="es", title="${{ languageSelector.spanishTitle }}$") ${{ languageSelector.spanish }}$
+			li.dropdown-item
+				a(href=siteURL+"/en/", data-lang="en", title="${{ languageSelector.englishTitle }}$") ${{ languageSelector.english }}$		

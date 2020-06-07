@@ -1,0 +1,22 @@
+mixin fragment-input(content)
+
+	- var id = content.id || false;
+	- var classes = content.class || false;
+	- var type = content.type || false;
+	- var name = content.name || false;
+	- var value = content.value || false;
+	- var required = content.required || false;
+	- var checked = content.checked || false;
+	- var placeholder = content.placeholder || false;
+	- var pattern = content.pattern || false;
+	- var dataAttributes = content.dataAttributes || false;
+	- var disabled = content.disabled || false;
+	- var readonly = content.readonly || false;
+	- var max = content.max || false;
+	- var min = content.min || false;
+	- var maxlength = content.maxlength || false;
+	- var size = content.size || false;
+	- var step = content.step || false;
+	- var autocomplete = content.autocomplete || false;
+
+	input(id=id, class=classes, type=type, name=name, value=value, required=required, placeholder=placeholder, pattern=pattern, disabled=disabled, readonly=readonly, max=max, mmin=min, maxlength=maxlength, size=size, step=step,  autocomplete=autocomplete)&attributes(dataAttributes)

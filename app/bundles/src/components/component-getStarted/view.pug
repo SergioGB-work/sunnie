@@ -1,0 +1,154 @@
+mixin component-getStarted(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 ${{ getStarted.pageTitle }}$
+
+					p ${{ getStarted.paragraph1 }}$
+
+					p ${{ getStarted.paragraph2 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.installationTitle }}$
+
+					p ${{ getStarted.installationParagraph1 }}$
+
+					pre
+						| npm install
+
+					p ${{ getStarted.installationParagraph2 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.initServerTitle }}$
+					
+					p ${{ getStarted.initServerParagraph1 }}$
+
+					p ${{ getStarted.initServerParagraph2 }}$
+
+					pre
+						| gulp
+
+					p ${{ getStarted.initServerParagraph3 }}$
+
+					p ${{ getStarted.initServerParagraph4 }}$
+
+					p ${{ getStarted.initServerParagraph5 }}$
+
+					p ${{ getStarted.initServerParagraph6 }}$
+
+					.table-responsive-md
+						table(class="table")
+							thead
+								tr
+									th ${{ getStarted.initServerTableTH1 }}$
+									th ${{ getStarted.initServerTableTH2 }}$
+									th ${{ getStarted.initServerTableTH3 }}$
+							tbody
+								tr
+									td <strong>deploy</strong>
+									td ${{ getStarted.initServerTableContainerDeployDescription }}$
+									td gulp deploy
+
+								tr
+									td <strong>deployCSS</strong>
+									td ${{ getStarted.initServerTableContainerDeployCSSDescription }}$
+									td gulp deployCSS					
+
+								tr
+									td <strong>deployJS</strong>
+									td ${{ getStarted.initServerTableContainerDeployJSDescription }}$
+									td gulp deployJS
+
+								tr
+									td <strong>deploySites</strong>
+									td ${{ getStarted.initServerTableContainerDeployPUGDescription }}$
+									td gulp deployPUG
+
+					p ${{ getStarted.initServerParagraph7 }}$
+					p ${{ getStarted.initServerParagraph8 }}$
+					p ${{ getStarted.initServerParagraph9 }}$
+					.table-responsive-md
+						table(class="table")
+							thead
+								tr
+									th ${{ getStarted.varServerTableTH1 }}$
+									th ${{ getStarted.initServerTableTH2 }}$
+									th ${{ getStarted.initServerTableTH3 }}$
+							tbody
+								tr
+									td <strong>--env enviroment</strong>
+									td ${{ getStarted.envVar1}}$
+									td gulp deploySites --env dev
+
+								tr
+									td <strong>--site site</strong>
+									td ${{ getStarted.envVar2}}$
+									td gulp deploySites --env dev --site default
+								tr
+									td <strong>--pag page</strong>
+									td ${{ getStarted.envVar3}}$
+									td gulp deploySites --env dev --site default --page getStared
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.initApiTitle }}$
+					p ${{ getStarted.initApiParagraph1 }}$
+
+					p ${{ getStarted.initApiParagraph2 }}$
+
+					pre
+						| gulp apiServer
+
+					p ${{ getStarted.initApiParagraph3 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ getStarted.structureProjectTitle }}$
+
+					p ${{ getStarted.structureProjectParagraph1 }}$
+					
+					ul
+						li <strong>app:</strong> ${{ getStarted.structureProjectApp }}$
+							
+						li <strong>server:</strong> ${{ getStarted.structureProjectServer }}$
+
+						li <strong>node_modules:</strong> ${{ getStarted.structureProjectNodeModules }}$
+
+					p ${{ getStarted.structureProjectParagraph2 }}$
+					
+					ul
+						li <strong>bundles:</strong> ${{ getStarted.structureProjectBundles }}$
+						
+						li <strong>plugins:</strong> ${{ getStarted.structureProjectPlugins }}$
+						
+						li <strong>development:</strong> ${{ getStarted.structureProjectDevelopment }}$
+						
+						li <strong>public:</strong> ${{ getStarted.structureProjectPublic }}$
+						
+						li <strong>build:</strong> ${{ getStarted.structureProjectBuild }}$	
+
+					h4 Sites
+					p ${{ getStarted.structureProjectSitesParagraph }}$
+
+					h4 Components
+					p ${{ getStarted.structureProjectComponentsParagraph }}$
+
+					h4 Layouts
+					p ${{ getStarted.layoutsParagraph1 }}$
+
+					h4 Fragments
+					p ${{ getStarted.fragmentsParagraph1 }}$
+
+					h4 Themes
+					p ${{ getStarted.structureProjectThemesParagraph }}$

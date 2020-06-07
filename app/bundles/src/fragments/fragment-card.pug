@@ -1,0 +1,38 @@
+mixin fragment-card(content)
+	- var src = content.src || ''
+	- var alt = content.alt || ''
+	- var header = content.header || ''
+	- var description = content.description || ''
+	- var classes = content.classes || ''
+	- var title = content.title || ''
+	- var href = content.href || ''
+	- var price = content.price || ''
+
+	.card(class=classes)
+		if(button != '')	
+			a(href=href,title=title)
+				if src != ''
+					img.card-img-top(src=src,alt=alt)
+
+				if(header != '' || description != '')
+					.card-body
+						if(header != '')
+							h3.card-title #{header}
+						if(description != '')	
+							p.card-text !{description}
+
+						if(price != '')	
+							p.price.text-primary #{price}
+
+		else
+			if src != ''
+				img.card-img-top(src=src,alt=alt)
+
+			if(header != '' || description != '')
+				.card-body
+					if(header != '')
+						h3.card-title #{header}
+					if(description != '')	
+						p.card-text !{description}
+					if(price != '')
+						p.price.text-primary #{price}

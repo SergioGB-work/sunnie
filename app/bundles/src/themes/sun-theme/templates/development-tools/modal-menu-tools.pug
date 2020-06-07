@@ -1,0 +1,37 @@
+
+#sidebar-menu-tools.bg-dark.position-fixed.h-100
+	
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary(id="dropdownSites" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne")
+			span.text Sites
+			i.fa.fa-ellipsis-v.float-right.px-3.py-1
+
+		ul(id="collapseOne" class="collapse list-group list-group-flush" aria-labelledby="dropdownSites")
+			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-site-add') Añadir Site
+
+			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-site-edit') Editar Site
+
+			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-site-delete') Eliminar Site
+
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-site-confirm-publish') Publicar Site
+
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary(id="dropdownComponents" data-toggle="collapse" data-target="#ToolsComponentList" aria-expanded="true" aria-controls="collapseOne")
+			span.text Componentes
+			i.fa.fa-ellipsis-v.float-right.px-3.py-1
+
+		ul(id="ToolsComponentList" class="collapse list-group list-group-flush" aria-labelledby="dropdownComponents",data-load="true",data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentListLI",data-target="#ToolsComponentList")
+
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary(id="dropdownPages" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree")
+			span.text Páginas
+			i.fa.fa-ellipsis-v.float-right.px-3.py-1
+		
+		ul(id="collapseThree" class="collapse list-group list-group-flush" aria-labelledby="dropdownPages")
+			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-page-add') Añadir Página
+
+			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-page-edit') Editar Página
+			
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-delete') Borrar Página
+
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-confirm-publish') Publicar Página

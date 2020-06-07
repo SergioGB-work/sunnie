@@ -1,0 +1,38 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Crear Site"
+	- var modal_id = "modal-site-add"
+	- var modal_size = "modal-ful"
+
+block modal-body
+	form(id="form-site-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/add", data-callback="addSiteCallback")
+		.row
+			div(class="form-group col-4")
+				label(for="siteName",class="uppercase") Nombre
+				input(type="text",name="name",id="siteName",class="form-control",required)
+
+			div(class="form-group col-4")
+				label(for="siteURL",class="uppercase") URL
+				input(type="text",name="url",id="siteURL",class="form-control",required)
+
+			div(class="form-group col-md-4 col-12")
+
+				fielset
+					legend Activar Asistente de Desarrollo(solo desarrollo)
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotNo",class="form-control custom-control-input",required, value="false", checked)
+						label(for="enableChatBotNo",class="uppercase custom-control-label") No
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotSi",class="form-control custom-control-input",required,value="true")
+						label(for="enableChatBotSi",class="uppercase custom-control-label") Si
+		.row
+			.col-12
+				h3 Seleciona un tema de apariencia
+		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-add #themeList")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Crear		

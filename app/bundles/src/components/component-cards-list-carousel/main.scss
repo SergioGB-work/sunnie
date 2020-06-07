@@ -1,0 +1,82 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+
+.component-cards-list-carousel{
+
+    .owl-item{
+        padding: 0 $grid-gutter-width/2 0 $grid-gutter-width/2;
+    }
+
+    .owl-carousel {
+        .owl-wrapper{
+            margin-left: -($grid-gutter-width / 2);
+        }
+
+        .owl-wrapper-outer{
+            width: calc(100% + #{$grid-gutter-width});
+        }
+
+        .owl-controls{
+            display:none !important;
+        }
+    }
+}
+
+
+@include media-breakpoint-up(sm) {
+
+    .component-cards-list-carousel{
+
+        .component-content{
+            width: 90%;
+            display: inline-block;
+            margin-left: 5%;        
+        }
+
+        .owl-carousel{
+
+            .owl-wrapper{
+                margin:0;
+            }
+
+            .owl-wrapper-outer{
+                width:100%;
+            }
+
+        	.owl-item{
+                margin:0;
+        	}
+
+        	.owl-controls{
+        		position: absolute;
+            	top: 50%;
+            	margin-top: -35px;
+            	width: 100%;
+            	z-index: 0;
+                display:block !important;
+
+                .owl-buttons{
+
+                    div{
+                        background:0;
+                        color: $gray-base;
+                    }
+
+                	.owl-prev{
+            			float: left;
+                		z-index: 9999;
+               			position: absolute;
+                		left: -5%;    		
+                	}
+
+                	.owl-next{
+            			text-align: right;
+                		right: -5%;
+                		position: absolute;    		
+                	}
+                }    
+        	}
+        } 
+    }
+}

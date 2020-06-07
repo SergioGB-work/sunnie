@@ -1,0 +1,54 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+
+.component.component-highlighted-flips{
+
+	.row{
+		> div[class^=col]:nth-child(n+3){
+			margin-top:24px;
+		}
+	}
+
+	.icon{
+		border-radius:50%;
+		background: $gray-base;
+		color:$btn-primary-color;
+		text-align:center;
+		margin-bottom:10px;
+		max-width:150px;
+	}
+
+	.icon i,.icon span{
+
+
+	}
+	
+	.info{
+	
+		> *{
+			
+			&:last-child{
+				margin-bottom:0;
+			}
+		}	
+	
+	}
+
+}
+
+@include media-breakpoint-up(sm) {
+	.component.component-highlighted-flips{
+		padding:60px 0;
+
+		.row{
+			> div[class^=col]:nth-child(n+3){
+				margin-top:0px;
+			}
+
+			> div[class^=col]:nth-child(n+4){
+				margin-top:60px;
+			}
+		}	
+	}
+}	

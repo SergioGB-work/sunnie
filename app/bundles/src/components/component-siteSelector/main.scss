@@ -1,0 +1,39 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+.component-siteSelector{
+	float:right;
+	width:auto;
+
+	.dropdown{
+		display:inline-block;
+		max-width: 100%;
+		right:0;
+		left:auto;
+
+		button{
+			background:0;
+			border:0;
+			height: $navbar-height;
+			outline:0;
+			max-width: 100%;
+			padding-left:0;
+			padding-right:0;
+			color:$white;
+			i{
+				margin-right: ceil(($grid-gutter-width * 0.75));
+			}
+		}
+	}
+}
+
+@include media-breakpoint-up(sm) {
+	.component-siteSelector{
+
+		.dropdown{
+
+			button{
+				height: $header-height;
+			}
+		}
+	}
+}

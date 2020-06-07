@@ -1,0 +1,32 @@
+if locals.development == true
+	script(src="https://cdn.ckeditor.com/4.11.4/standard/ckeditor.js")
+		div #{locals.enableChatBot}
+	if locals.site.enableChatBot == 'true'
+		+component({'name':"component-develop-assistant",'showTitle':"false","full":"true", "classes":"h-100"})
+
+	include addButton.pug
+
+	include formGenerator-template
+	include componentList-template
+	include componentListLI-template
+	include themeList-template
+	include layoutList-template
+	include layoutColumnsList-template
+	include pageList-template
+	include newComponent-template
+	include layoutDropZone-template
+
+	include modal-component-edit.pug
+	include modal-component-delete.pug
+
+	include modal-page-add.pug
+	include modal-page-edit.pug
+	include modal-page-delete.pug
+	include modal-page-confirm-publish.pug
+
+	include modal-site-add.pug
+	include modal-site-edit.pug
+	include modal-site-delete.pug
+	include modal-site-confirm-publish.pug
+
+	include modal-menu-tools.pug

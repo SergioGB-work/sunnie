@@ -1,0 +1,81 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+.component-search{
+	float:right;
+
+	button{
+		color:$white;
+		text-decoration:none;
+		
+		&:hover,&:active,&:focus{
+			color:$white;
+			text-decoration:none;
+			box-shadow:0 0 0;
+		}
+		&:not(:disabled):not(.disabled):active:focus{
+			box-shadow:0 0 0;
+		}
+
+	}
+
+	#searchModal{
+
+		.modal-dialog{
+		    display: flex;
+		    height: 100%;
+		    align-items: center;
+		    position: fixed;
+		    justify-content: center;
+		    width: 100%;
+		    max-width: 100%;
+		    margin: 0;
+
+		    .modal-header{
+		    	background: 0;
+    			border: 0;
+
+    			.close{
+				    position: fixed;
+    				top: $grid-gutter-width;
+				    right: $grid-gutter-width;
+				    padding: $grid-gutter-width;
+
+				    span{
+				    	font-size: 5.25rem;
+				    }
+				}
+		    }
+
+		    .modal-content{
+				min-width: 300px;
+    			width: 35%;
+    			background: 0;
+    			box-shadow: 0 0 0;
+
+    			input[type="search"]{
+				    background: 0;
+				    border: 0;
+				    border-bottom: 1px solid $white;
+				    font-size: 2rem;
+				    color: $white;
+				    font-weight: 300;
+				    line-height:1;
+
+    				&::placeholder{
+						color: $white;
+    				}
+    			}
+
+    			.input-group-text{
+    				padding-bottom:0;
+    				border:0;
+    				border-bottom:1px solid $white;
+    				background:0;
+    				color:$white;
+    			}	    	
+		    }	
+		}
+
+	}
+}

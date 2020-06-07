@@ -1,0 +1,43 @@
+{
+	"config":[
+		{
+			"label":"Items",
+			"name":"items",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"Header",
+					"name":"header",
+					"type":"text",
+					"required":true
+				},
+				{
+					"label":"Content",
+					"name":"content",
+					"type":"textarea"
+				},
+				{
+					"label":"Visualización por defecto",
+					"name":"collapsed",
+					"type":"select",
+					"options":[
+						{
+							"label":"Opened",
+							"value":"opened"
+						},
+						{
+							"label":"Closed",
+							"value":"closed"	
+						}						
+					]
+				}				
+			]
+		},
+		{
+			"label":"Close All to Open",
+			"name":"collapseParent",
+			"type":"checkbox",
+			"value":"true"
+		}
+	]
+}

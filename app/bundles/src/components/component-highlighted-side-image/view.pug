@@ -1,0 +1,32 @@
+mixin component-highlighted-side-image(content)
+	
+	- var position = content.position || 'right'
+	- var image = content.image || ''
+	- var contentHTML = content.content || ''
+	- var button = content.button || ''
+	
+	.container
+		.row.d-sm-flex.align-items-sm-center
+			if position == 'left'
+				.col-md-6.col-12
+					img(alt=image.alt,src=image.src,class="w-100")
+
+				.col-md-6.col-12.text-center
+					.row 
+						.col-xl-9.offset-xl-1.col-md-10.offset-md-1.col-12
+							div !{contentHTML}
+
+							if button.text
+								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}             
+
+			else
+				.col-md-6.col-12.text-center
+					.row
+						.col-xl-9.offset-xl-1.col-md-10.offset-md-1.col-12 
+							div !{contentHTML}
+
+							if button.text != ''
+								a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text} 
+
+				.col-md-6.col-12
+					img(alt=image.alt,src=image.src,class="w-100")

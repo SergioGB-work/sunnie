@@ -1,0 +1,25 @@
+.fragment-card{	
+    .card{
+		text-align:center;
+		display: flex;
+		flex-direction: column;
+		margin-bottom: ceil(($grid-gutter-width));
+
+		h3{
+			font-size: 1.25rem;
+			margin-bottom: 0;
+		}
+
+		p{
+			margin-bottom:0;
+		}
+
+		&:hover,&:focus{
+			text-decoration:none;
+		}
+
+		.price{
+			font-size: 1.5rem;
+		}
+	}
+}    

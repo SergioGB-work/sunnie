@@ -1,0 +1,12 @@
+mixin generate-attributes(content)
+
+	each attribute,index in content
+		if(index == 'title')
+			title #{attribute}
+
+		else if(index == 'script')
+			script.
+				!{attribute}
+
+		else
+			meta(name=index, content=attribute)

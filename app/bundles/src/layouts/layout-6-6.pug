@@ -1,0 +1,16 @@
+mixin layout-6-6(content)
+	- var content_left = content.content_left	
+	- var content_right = content.content_right
+
+	div(id="layout-6-6",class="layout",role="main", data-layout-id="layout-6-6")
+		div(class="container")
+
+			div(class="layout-row row")
+
+				div(class="layout-column col-md-6 col-12",data-layout-column="content_left")
+					each component,index in content_left
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+				div(class="layout-column col-md-6 col-12",data-layout-column="content_right")
+					each component,index in content_right
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})

@@ -1,0 +1,34 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+.component-develop-assistant{
+    width: $develop-assistant-width;
+    right: -$develop-assistant-width;
+    top: 0;
+    z-index: 10;
+    overflow-y: auto;
+    position:fixed;
+    transition: all .2s linear 0s;
+    box-shadow: $box-shadow;
+
+    #conversation{
+    	font-size:0.85rem;
+    }
+
+    .component-content{
+    	height:100%;
+    }
+
+    .card-header{
+    	height:$develop-assistant-header-height;
+    }
+
+    .card-body{
+    	height: calc(100% - ceil($develop-assistant-header-height + $develop-assistant-footer-height));
+    	overflow-y:auto;
+    }
+
+    .card-footer{
+    	height:$develop-assistant-footer-height;
+    }
+}

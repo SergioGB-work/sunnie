@@ -1,0 +1,14 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+	- var modal_id = "modal-site-delete"
+	- var modal_size = "modal-sm"
+
+block modal-body
+	form(data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/delete/{idSite}", data-callback="deleteSiteCallback")
+		.row
+			.col-12
+				p ¿Estás seguro que deseas eliminar este site?
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Eliminar

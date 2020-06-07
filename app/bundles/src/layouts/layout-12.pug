@@ -1,0 +1,11 @@
+mixin layout-12(content)
+	- var content_upper = content.content_upper	
+
+	div(id="layout-12",class="layout",role="main", data-layout-id="layout-12")
+		div(class="container")
+
+			div(class="layout-row row")
+			
+				div(class="layout-column col-md-12",data-layout-column="content_upper")
+					each component,index in content_upper
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})

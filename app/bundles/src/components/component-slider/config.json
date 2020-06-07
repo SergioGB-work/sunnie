@@ -1,0 +1,52 @@
+{
+	"config":[
+		{
+			"label":"Items",
+			"name":"items",
+			"type":"array",
+			"arrayContent":[
+				{
+					"label":"URL Image",
+					"name":"src",
+					"type":"text",
+					"required": true
+				},
+				{
+					"label":"Alternative Text",
+					"name":"alt",
+					"type":"text"
+				},
+				{
+					"label":"Long Description",
+					"name":"longdesc",
+					"type":"text"
+				},
+				{
+					"label":"Link",
+					"name":"href",
+					"type":"text"
+				},
+				{
+					"label":"Image Title",
+					"name":"title",
+					"type":"text"
+				},
+				{
+					"label":"Image Target",
+					"name":"target",
+					"type":"text"
+				},
+				{
+					"label":"Responsive SRC",
+					"name":"responsiveSRC",
+					"type":"text"
+				},
+				{
+					"label":"SRCSET",
+					"name":"srcset",
+					"type":"text"
+				}
+			]
+		}
+	]
+}

@@ -1,0 +1,97 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Editar Componente"
+	- var modal_id = "modal-component-edit"
+	- var modal_size = "modal-full"
+
+block modal-body
+	form(id="form-edit-component",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/{idPage}/component/edit", data-callback="editComponentCallback")
+		
+		div(id="edit-component-block")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Editar componente
+
+	script(id="templateEditComponent",type="text/x-jsrender")
+
+		.row
+			div(class="form-group col-md-4 col-12")
+				+fragment('fragment-label',{"for":"componentID", "text":"ID"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentID","name":"id", "value":"{{:data.id}}", "disabled":"disabled"})
+				
+
+			div(class="form-group col-md-4 col-12")
+				+fragment('fragment-label',{"for":"componentName", "text":"Nombre"})
+				+fragment('fragment-select',{"class":"form-control","id":"componentName","name":"name", "required":"required","dataAttributes":{"data-service-data":apiDevelopment + "/component/list","data-method":"GET","data-template":"#templateComponentList","data-target":"#modal-component-edit #componentName", "data-callback":"checkComponentEdited", "data-content":"'{{:data.name}}'"}})
+
+
+			div(class="form-group col-md-4 col-12")
+				+fragment('fragment-label',{"for":"componentTitle", "text":"Título"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentTitle","name":"title", "value":"{{:data.title}}"})
+
+			div(class="form-group col-md-4 col-12")
+
+				| {{if data.showTitle && data.showTitle == 'true'}}
+				| {{* window.showTitle = "checked"}}
+				| {{else}}
+				| {{* window.showTitle = "" }}
+				| {{/if}}
+
+				| {{if data.full && data.full == 'true'}}
+				| {{* window.full = "checked"}}
+				| {{else}}
+				| {{* window.full = "" }}
+				| {{/if}}
+
+				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0);}}
+
+				fielset
+					legend Mostrar Título
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="showTitle",id="componentShowTitleNo{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
+						+fragment('fragment-label',{"for":"componentShowTitleNo{{*:id}}", "text":"No", "class":"uppercase custom-control-label"},'true')
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="showTitle",id="componentShowTitleSi{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:showTitle}})
+						+fragment('fragment-label',{"for":"componentShowTitleSi{{*:id}}", "text":"Si", "class":"uppercase custom-control-label"},'true')
+				
+
+			div(class="form-group col-md-4 col-12")
+				fielset
+					legend Fullsize
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="full",id="componentFullNo{{*:id}}",class="custom-control-input",required, value="false", checked)
+						+fragment('fragment-label',{"for":"componentFullNo{{*:id}}", "text":"No", "class":"custom-control-label"},'true')
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="full",id="componentFullSi{{*:id}}",class="custom-control-input",required, value="true", {{*:full}})
+						+fragment('fragment-label',{"for":"componentFullSi{{*:id}}", "text":"Si", "class":"custom-control-label"},'true')
+
+
+			div(class="form-group col-md-4 col-12")
+				+fragment('fragment-label',{"for":"componentClasses", "text":"Clases"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentClasses","name":"classes", "value":"{{:data.classes}}"})
+
+
+		.row
+			div(class="form-group col-md-4 col-12")
+				+fragment('fragment-label',{"for":"layoutColumnPosition", "text":"Layout Position"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"layoutColumnPosition","name":"layoutColumnPosition", "value":"{{:data.position}}","required":"required"})
+				+fragment('fragment-input',{"type":"hidden", "name":"oldPosition", "value":"{{:data.position}}"})
+			
+			div(class="form-group col-md-4 col-12")
+				+fragment('fragment-label',{"for":"layoutColumn", "text":"Layout Column"})
+				select(name="layoutColumn",id="layoutColumn",class="form-control",required, data-load="true",data-service-data=apiDevelopment + "/layout/detail/{idLayout}",data-method="GET",data-template="#templateLayoutColumnsList",data-target="#modal-component-edit #layoutColumn",data-callback="checkLayoutColumn", data-content='"{{:data.layoutColumn}}"')
+				+fragment('fragment-input',{"type":"hidden", "name":"oldLayoutColumn", "value":"{{:data.layoutColumn}}"})
+
+		.row
+			.col-12
+				fieldset(id="dynamicConfigComponent",data-form-group="content", class="md-3")
+					legend Contenido
+					.row
+
+						| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}

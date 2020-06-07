@@ -1,0 +1,55 @@
+mixin component-sites(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 Sites
+					p ${{ sites.sitesParagraph1 }}$
+
+					p ${{ sites.sitesParagraph2 }}$
+
+					p ${{ sites.sitesParagraph3 }}$
+
+					p ${{ sites.sitesParagraph4 }}$ 
+
+					p ${{ sites.sitesParagraph5 }}$
+
+					h3 ${{ sites.sitesParagraph6 }}$
+					pre
+						|	{
+						|	    "site": {
+						|	        "name": "default",
+						|	        "url": "/default"
+						|	    },
+						|	    "pages": [
+						|	        {
+						|	            "id": "home",
+						|	            "name": "Home",
+						|	            "url": "/",
+						|	            "src": "/home.html",
+						|	            "attributes": {
+						|	                "title": "SunnieJS3",
+						|	                "description": "Lorem ipsum4",
+						|	                "keywords": "SunnieJS2"
+						|	            },
+						|	            "layout": {
+						|	                "name": "layout-12-fluid",
+						|	                "content": {
+						|	                    "content_upper": [
+						|	                        {
+						|                            	"name": "component-html-content",
+						|                            	"id": "component-html-content-8353",
+						|                            	"content": {
+						|                                	"HTMLcontent": "Hello World"
+						|			                    }
+						|	                        }
+						|	                    ]
+						|	                }
+						|	            }
+						|	        }
+						|	    ]
+						|	}                           					
+
+					p ${{ sites.sitesParagraph7 }}$
+
+					p ${{ sites.sitesParagraph8 }}$

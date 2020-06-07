@@ -1,0 +1,64 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Editar Página"
+	- var modal_id = "modal-page-edit"
+	- var modal_size = "modal-full"
+
+block modal-body
+	form(id="form-edit-page",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/page/edit/{idPage}", data-callback="editPageCallback")
+
+		div(id="edit-page-block",data-service-data=apiDevelopment + "/site/{idSite}/page/detail/{idPage}",data-method="GET",data-template="#templateEditPage",data-target="#edit-page-block",data-callback="dataEditPageLoadedCallback")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Guardar
+
+	script(id="templateEditPage",type="text/x-jsrender")
+		.row
+			div(class="form-group col-4")
+				label(for="pageIdEdit",class="uppercase") ID
+				input(type="text",name="id",id="pageIdEdit",class="form-control",required ,disabled, value="{{:data.id}}")
+
+			div(class="form-group col-4")
+				label(for="pageNameEdit",class="uppercase") Nombre
+				input(type="text",name="name",id="pageNameEdit",class="form-control",required, value="{{:data.name}}")
+		.row
+			div(class="form-group col-4")
+				label(for="pageSRCEdit",class="uppercase") SRC
+				input(type="text",name="src",id="pageSRCEdit",class="form-control",required, disabled,value="{{:data.src}}")
+			div(class="form-group col-4")
+				label(for="pageURLEdit",class="uppercase") Url
+				input(type="text",name="url",id="pageURLEdit",class="form-control",required,value="{{:data.url}}")
+		.row
+			div(class="form-group col-4")
+				label(for="pageParentPositionEdit",class="uppercase") Padre
+				select(name="parentPosition",id="pageParentPositionEdit",class="form-control",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePagesList",data-target="#modal-page-edit #pageParentPositionEdit",data-callback="checkParentPage", data-content='"{{:data.parentPosition}}","{{:data.position}}"')
+			div(class="form-group col-4")
+				label(for="pagePositionEdit",class="uppercase") Posición
+				input(type="text",name="position",min=0,id="pagePositionEdit",class="form-control",required,value="{{:data.position}}")
+		.row
+			div(class="form-group col-4")
+				label(for="pageTitleEdit",class="uppercase") Page Title
+				input(type="text",name="title",id="pageTitleEdit",class="form-control",required,value="{{:data.attributes.title}}")
+
+			div(class="form-group col-4")
+				label(for="pageDescriptionEdit",class="uppercase") Description
+				textarea(type="text",name="description",id="pageDescriptionEdit",class="form-control") {{:data.attributes.description}}
+
+			div(class="form-group col-4")
+				label(for="pageKeywordsEdit",class="uppercase") Keywords
+				textarea(type="text",name="keywords",id="pageKeywordsEdit",class="form-control") {{:data.attributes.keywords}}
+
+		.row
+			| {{* window.hidden = data.hidden == 'true' ? "selected" : "" }}
+
+			div(class="form-group col-4")
+				label(for="pageHiddenEdit",class="uppercase") Page Hidden
+				select(name="hidden",id="pageHiddenEdit",class="form-control",required)
+					option(value="false") No
+					option(value="true", {{*:hidden}}) Si				
+		.row
+			.col-12
+				h3 Seleciona una plantilla de página
+		.row(id="layoutEditList",data-load="true",data-service-data=apiDevelopment + "/layout/list",data-method="GET",data-template="#templateLayoutList",data-items-per-page="0",data-initial-page="0",data-target="#modal-page-edit #layoutEditList",data-content='"{{:data.layout.name}}' + '.pug"',data-callback="checkLayoutSelected")

@@ -1,0 +1,27 @@
+nav(class="navbar navbar-expand-xl navbar-dark p-0 p-3-xl",role="navigation")
+
+	div(class="navbar-header")
+		button(type="button",class="navbar-toggler collapsed",data-toggle="collapse",data-target="#navigation-list",aria-expanded="false")
+			span.navbar-toggler-icon
+
+	div(class="collapse navbar-collapse",id="navigation-list", aria-expanded="false")
+
+		ul(class="navbar-nav bd-navbar-nav")
+
+			each page in pages
+
+				if page.childs.length > 0 && page.hidden != 'true'
+					li.nav-item.dropdown
+						a(href=fullSiteUrl + page.url, title="${{ default.goTo }}$ " + page.name, data-toggle="dropdown", aria-haspopup="true", aria-expanded="false", id=page.id, class="nav-link dropdown-toggle d-flex d-flex align-items-center")
+							span #{page.name}
+
+						ul(class="dropdown-menu",aria-labelledby=page.id)
+							each child in page.childs
+								if child.hidden === undefined || child.hidden != 'true'
+									li.dropdown-item
+										a(href=fullSiteUrl + child.url, title="${{ default.goTo }}$ "+child.name) #{child.name}
+
+				else if page.hidden != 'true'
+					li.nav-item
+						a(href=fullSiteUrl + page.url, class="nav-link d-flex d-flex align-items-center", title="${{ default.goTo }}$ " + page.name)
+							span #{page.name}

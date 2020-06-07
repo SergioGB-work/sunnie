@@ -1,0 +1,13 @@
+mixin fragment-banner(content)
+
+	- var src = content.src || '';
+	- var alt = content.alt || '';
+	- var longdesc = content.longdesc || '';
+	- var href = content.href || '#';
+	- var title = content.title || '';
+	- var target = content.target || '';
+	- var responsive_src = content.responsiveSRC || '';
+	- var srcset = content.srcset || '';
+
+	a(href=href,title=title,target=target || false)
+		img(src=src, alt=alt, longdesc=longdesc || false, data-src=src , data-responsive-src=responsive_src, srcset=srcset || false)

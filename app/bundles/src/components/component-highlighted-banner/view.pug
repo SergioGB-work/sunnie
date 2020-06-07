@@ -1,0 +1,15 @@
+mixin component-highlighted-banner(content)
+
+	- var contentHTML = content.content || ''
+	- var button= content.button || ''
+	
+	.container
+		.row
+			.col-12.d-sm-flex.align-items-sm-center
+				.row
+					.col-lg-8.col-md-7.col-12
+						div.contentHTML.pl-2.pr-2.p-md-0 !{contentHTML}
+
+					.col-lg-4.col-md-5.col-12.text-center.mt-4.mt-md-0.d-md-flex.align-items-md-center.justify-content-md-end
+						a.btn.btn-border.btn-primary-color(href=button.href, title=button.title) #{button.text}
+

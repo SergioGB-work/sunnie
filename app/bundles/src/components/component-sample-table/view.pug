@@ -1,0 +1,108 @@
+mixin component-sample-table(content)
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h1.m-0 Tables
+
+			div
+				.card
+					.card-body
+						h2.m-0 Standar
+
+						table(class="table")
+							thead
+								tr
+									th First Name
+									th Last Name
+									th Username
+							tbody
+								tr
+									td Mark
+									td Otto
+									td @mdo
+
+								tr
+									td Mark
+									td Otto
+									td @mdo
+
+								tr
+									td Mark
+									td Otto
+									td @mdo
+
+			div
+				.card
+					.card-body
+						h2.m-0 Striped
+
+						table(class="table table-bordered")
+							thead
+								tr
+									th #
+									th First Name
+									th Last Name
+									th Username
+							tbody
+								tr
+									th(scope="row") 1
+									td Mark
+									td Otto
+									td @mdo
+
+								tr
+									th(scope="row") 2
+									td Mark
+									td Otto
+									td @mdo
+
+								tr
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo			
+
+			div
+				.card
+					.card-body
+						h2.m-0 Contextual Clases
+
+						table(class="table table-bordered")
+							thead
+								tr
+									th #
+									th First Name
+									th Last Name
+									th Username
+							tbody
+								tr(class="table-success")
+									th(scope="row") 1
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-active")
+									th(scope="row") 2
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-warning")
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-info")
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo
+
+								tr(class="table-danger")
+									th(scope="row") 3
+									td Mark
+									td Otto
+									td @mdo

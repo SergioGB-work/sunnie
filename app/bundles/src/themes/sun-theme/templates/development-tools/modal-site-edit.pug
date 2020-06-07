@@ -1,0 +1,53 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Editar Site"
+	- var modal_id = "modal-site-edit"
+	- var modal_size = "modal-full"
+
+block modal-body
+	form(id="form-edit-site",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/edit/{idSite}", data-callback="editSiteCallback")
+		
+		div(id="edit-site-block",data-service-data=apiDevelopment + "/site/detail/{idSite}",data-method="GET",data-template="#templateEditSite",data-target="#edit-site-block",data-callback="dataEditSiteLoadedCallback")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Editar
+
+
+	script(id="templateEditSite",type="text/x-jsrender")
+
+		.row
+			div(class="form-group col-4")
+				label(for="siteName",class="uppercase") Nombre
+				input(type="text",name="name",id="siteName",class="form-control",value="{{:data.name}}",required)
+
+			div(class="form-group col-4")
+				label(for="siteURL",class="uppercase") URL
+				input(type="text",name="url",id="siteURL",class="form-control",value="{{:data.url}}",required)
+
+			div(class="form-group col-md-4 col-12")
+
+				| {{if data.enableChatBot && data.enableChatBot == 'true'}}
+				| {{* window.enableChatBot = "checked"}}
+				| {{else}}
+				| {{* window.enableChatBot = "" }}
+				| {{/if}}
+
+				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0) }}
+
+				fielset
+					legend Activar Asistente de Desarrollo(solo desarrollo)
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotNo{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
+						label(for="enableChatBotNo{{*:id}}",class="uppercase custom-control-label") No
+
+					div(class="custom-control custom-radio")
+						input(type="radio",name="enableChatBot",id="enableChatBotSi{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
+						label(for="enableChatBotSi{{*:id}}",class="uppercase custom-control-label") Si					
+		
+		.row
+			.col-12
+				h3 Seleciona un tema de apariencia
+		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-content='"{{:data.theme}}' + '"',data-callback="checkThemeSelected")

@@ -1,0 +1,23 @@
+mixin layout-12-3-9(content)
+	- var content_upper = content.content_upper	
+	- var content_left = content.content_left	
+	- var content_right = content.content_right	
+
+	div(id="layout-12-3-9",class="layout",role="main", data-layout-id="layout-12-3-9")
+		div(class="container")
+
+			div(class="layout-row row")
+
+				div(class="layout-column col-md-12",data-layout-column="content_upper")
+					each component,index in content_upper
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+			div(class="layout-row row")
+
+				div(class="layout-column col-md-3 col-12",data-layout-column="content_left")
+					each component,index in content_left
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})
+
+				div(class="layout-column col-md-9 col-12",data-layout-column="content_right")
+					each component,index in content_right
+						+component({"name":component.name || '' , "id":component.id || '',"content":component.content || '', "title":component.title || '',"showTitle":component.showTitle || 'true', "full":component.full || 'false',"classes":component.classes || '', "index":index, "new":component.new || 'false'})

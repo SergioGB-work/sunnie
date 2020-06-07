@@ -1,0 +1,13 @@
+mixin component-slider(content)
+
+	- var items = content.items || []
+
+	each item,i in items
+
+		- var classes = item.classes || ''
+		- var href = item.href || ''
+
+		if href != ''
+			+fragment("fragment-banner",item)
+		else
+			+fragment("fragment-image",item)

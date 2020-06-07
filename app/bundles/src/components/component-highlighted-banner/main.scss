@@ -1,0 +1,43 @@
+@import '../../theme/css/base/variables';
+@import '../../theme/css/lib/bootstrap/variables';
+
+
+.component.component-highlighted-banner{
+
+	background: $primary;
+    padding: 40px 0;
+
+	.component-content *{
+		color: $btn-primary-color;
+		margin-top:0;
+		margin-bottom:0;
+	}
+	
+	div[class^="col-"]{
+		
+	
+		> *{
+			margin-bottom: 10px;
+			
+			&:last-child{
+				margin-bottom:0;
+			}
+		}
+		
+		.btn{
+			min-width: 75%;
+			font-size: 1.25rem;
+			margin-top: ceil(($grid-gutter-width * 1.5));
+		}
+	}	
+}	
+
+@include media-breakpoint-up(sm) {
+	.component.component-highlighted-banner{
+		div[class^="col-"]{
+			.btn{
+				margin-top:0;
+			}
+		}
+	}
+}

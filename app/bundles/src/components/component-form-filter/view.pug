@@ -1,0 +1,69 @@
+mixin component-form-filter(content)
+
+	- var items = content.items
+	- var formFilter = content.formFilter || false
+	- var action = content.action || false
+	- var method = content.method || false
+	- var callback = content.callback || false
+	- var contentCallback = content.content || false
+	- var rel = content.rel || false
+	- var noReload = content.noReload || false
+	- var submitButton = content.submitButton || 'Aceptar'
+
+	form(role="form", data-form-filter=formFilter, data-action=action, data-method=method, data-callback=callback, data-rel=rel, data-noreload=noReload, data-content=contentCallback)
+		.row
+			each item in items
+
+				- var randomID = Math.floor(Math.random() * (15 - 1300) + 1300)
+				- var customControls = item.type=='checkbox' || item.type=='radio' ? 'custom-control custom-' + item.type : ''
+				- var required = item.required == 'true' ? true : false
+				- var placeholder = item.placeholder != '' ? item.placeholder : false
+				- var regExp = item.regExp != '' ? item.regExp  : false
+				- var event = item.event != '' ? item.event  : false
+				- var eventTarget = item.eventTarget != '' ? item.eventTarget  : false
+				- var eventValue = item.eventValue != '' ? item.eventValue  : false
+				- var eventAction = item.eventAction != '' ? item.eventAction  : false
+				- var service = item.dataService != '' ? item.dataService : false
+				- var template = item.dataTemplate != '' ? item.dataTemplate : false
+				- var method = item.dataMethod != '' ? item.dataMethod : false
+				- var parent = item.dataParent != '' ? item.dataParent  : false			
+				- var parentEvent = item.dataParentEvent != '' ? item.dataParentEvent  : false			
+				- var parentEventValue = item.dataParentEventValue != '' ? item.dataParentEventValue  : false			
+				- var parentEventAction = item.dataParentEventAction != '' ? item.dataParentEventAction  : false	
+				- var load = item.dataService != '' && item.dataParent == '' ? 'true' : false		
+
+				.form-group(class=item.size)
+
+					if item.type=='textarea'
+
+						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
+
+						+fragment('fragment-textarea',{"class":"form-control", "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "dataAttributes":{"data-get-default-value":item.name}})
+					else if item.type=='checkbox' || item.type=='radio'
+
+						div(class=customControls)
+
+							+fragment('fragment-input',{"class":"custom-control-input", "type":item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "dataAttributes":{"data-get-default-value":item.name}},'true')
+							
+							+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText, "class":"custom-control-label"},'true')
+
+					else if item.type=='select'
+						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
+						+fragment('fragment-select',{"class":"form-control","id":"input" + randomID,"name":item.name, "required":required,"options":item.selectValues,"dataAttributes":{"data-get-default-value":item.name, "data-event":event, "data-event-target":eventTarget, "data-event-value":eventValue, "data-event-action":eventAction, "data-service-data":service, "data-method":method, "data-template":template, "data-target":"#input" + randomID, "data-load":load, "data-parent":parent, "data-parent-event":parentEvent, "data-parent-event-value":parentEventValue, "data-parent-event-action":parentEventAction}})
+
+					else if item.type=='separator'
+						h3.mb-0 #{item.label}
+
+					else if item.type=='html'
+						div !{item.htmlContent}	
+
+					else
+
+						+fragment('fragment-label',{"for":"input"+randomID, "text":item.label, "helpText":item.helpText})
+						
+						+fragment('fragment-input',{"class":"form-control", "type":item.type, "id":"input" + randomID,"name":item.name, "required":required, "value":item.value, "placeholder":placeholder, "pattern":regExp, "dataAttributes":{"data-get-default-value":item.name}})
+
+		.row
+			.form-group.col-12.mb-0
+				if submitButton
+					button(class="btn btn-primary", type="submit") #{submitButton}
