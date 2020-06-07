@@ -1,0 +1,14 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+    - var modal_id = "modal-multimedia-uploadingFiles"
+    - var modal_size = "modal-md"
+
+block modal-body
+    .row
+        .col-12.progressBarModal
+            include uploadInfo.pug
+
+            .col-12.px-0
+                button.w-100.btn.btn-default.float-right.mt-3.progressBarButton.loadingButton(type="button", disabled) Subiendo
+                button.w-100.btn.btn-primary.float-right.mt-3.progressBarButton.d-none(type="button",data-dismiss="modal", aria-label="Close", href="#modal-multimedia-list", data-toggle="modal") Hecho!

@@ -1,0 +1,69 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Editar Componente"
+	- var modal_id = "modal-component-created-edit"
+	- var modal_size = "modal-full"
+
+block modal-body
+	form(id="form-component-created-edit",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/component/edit-created", data-callback="editCreatedComponent")
+
+
+		div(id="edit-component-created-block")
+
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(class="btn btn-default mr-3", data-toggle="modal", data-dismiss="modal") Cancelar
+				button(class="btn btn-primary send", type="submit") Guardar
+
+
+		script(id="templateEditComponentCreated",type="text/x-jsrender")
+
+			.row
+				div(class="form-group col-4")
+					+fragment('fragment-label',{"for":"contentName", "text":"Nombre", "helpText":"Solo admite letras y números"})
+					+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"contentName","name":"name","value":"{{:data.name}}","required":"required","pattern":"[a-zA-Z][a-zA-Z0-9\s]*","disabled":"disabled"})
+			.row
+				.col-12
+					ul(class="nav nav-tabs" id="myTab" role="tablist")
+						li.nav-item
+							a(class="nav-link active", id="view-tab-edit", data-toggle="tab", href="#view-edit", role="tab", aria-controls="view-edit", aria-selected="true") VIEW(PUG)
+
+						li.nav-item
+							a(class="nav-link", id="css-tab-edit", data-toggle="tab", href="#css-edit", role="tab", aria-controls="css-edit", aria-selected="false") CSS
+
+						li.nav-item
+							a(class="nav-link", id="js-tab-edit", data-toggle="tab", href="#js-edit", role="tab", aria-controls="js-edit", aria-selected="false") Javascript
+						li.nav-item
+							a(class="nav-link", id="js-tab-edit", data-toggle="tab", href="#configView-edit", role="tab", aria-controls="configView-edit", aria-selected="false") Config View	
+			.row.mb-3
+				.col-12
+					div(class="tab-content" id="myTabContent-edit")
+						div(class="tab-pane show active" id="view-edit" role="tabpanel" aria-labelledby="view-tab-edit")
+							p Recuerda que todas las variables de configuración del componente se escriben como <strong>content.NameDelCampoConfig</strong>.
+							label(for="codeVIEW",class="sr-only") Código PUG
+							textarea(type="text",name="componentView",id="codeVIEW-edit",class="form-control codePUG") {{:data.componentView}}
+						div(class="tab-pane" id="css-edit" role="tabpanel" aria-labelledby="css-tab-edit")
+							p El componente dispone de una clase especifica para que los estilos que desees añadir estén limitados a dicho componente. Para ello los estilos deben comentar con la clase ".component-NombreDelComponente".
+							label(for="codeCSS",class="sr-only") Código CSS
+							textarea(type="text",name="componentCSS",id="codeCSS-edit",class="form-control codeCSS") {{:data.componentCSS}}
+						div(class="tab-pane" id="js-edit" role="tabpanel" aria-labelledby="js-tab-edit")
+							p Puedes escribir tanto javascript como jQuery.
+							label(for="codeJS",class="sr-only") Código Javascript
+							textarea(type="text",name="componentJS",id="codeJS-edit",class="form-control codeJS") {{:data.componentJS}}
+
+						div(class="tab-pane" id="configView-edit" role="tabpanel" aria-labelledby="configView-tab-edit")
+							
+							p Esta opción te permite configurar la vista de edición del componente. Todos los campos aquí definidos podras utilizarlos a la hora de pintar la vista del componente a través de las variables de PUG.
+
+							.row
+								.col-12
+
+									| {{if ~root.data.content.config.length > 0}}
+
+									| {{for data.config ~originalContent = ~root.data.content tmpl="#templateFormGenerator"/}}
+
+									| {{else}}
+									div(id="componentViewConfigEdit",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/component/generalConfig",data-method="GET",data-template="#templateCreateComponentConfig",data-target="#modal-component-created-edit #componentViewConfigEdit")
+									| {{/if}}

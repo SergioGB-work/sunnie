@@ -59,8 +59,11 @@ mixin component-sample-modal(content)
 
 					button(class="btn btn-primary", data-target="#lexNoHeaderModal" ,data-toggle="modal") ${{ sample-modal.noHeaderModalTitle }}$
 
+					button(class="btn btn-primary", data-target="#lexFullModal" ,data-toggle="modal") ${{ sample-modal.fullModalTitle }}$
+
 
 	include templates/modal-default.pug
 	include templates/modal-large.pug
 	include templates/modal-small.pug
+	include templates/modal-full.pug
 	include templates/modal-noHeaderNoFooter.pug

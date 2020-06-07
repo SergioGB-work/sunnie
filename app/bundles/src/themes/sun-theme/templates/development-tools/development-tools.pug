@@ -13,11 +13,16 @@ if locals.development == true
 	include layoutList-template
 	include layoutColumnsList-template
 	include pageList-template
+	include pageListLI-template
 	include newComponent-template
 	include layoutDropZone-template
 
 	include modal-component-edit.pug
 	include modal-component-delete.pug
+
+	include modal-component-create.pug
+	include modal-component-created-edit.pug
+	include modal-component-created-delete.pug
 
 	include modal-page-add.pug
 	include modal-page-edit.pug
@@ -29,4 +34,24 @@ if locals.development == true
 	include modal-site-delete.pug
 	include modal-site-confirm-publish.pug
 
+	include modal-locales.pug
+
+	include modal-contents.pug
+	include modal-content-add.pug
+	include modal-content-edit.pug
+	include modal-content-delete.pug
+
+	include modal-contentType-add.pug
+	include modal-contentType-list.pug
+	include modal-contentType-edit.pug
+	include modal-contentType-delete.pug
+
+	include modal-multimedia-list.pug
+	include modal-multimedia-add.pug
+	include modal-multimedia-delete.pug
+	include modal-multimedia-detail.pug
+	include modal-multimedia-uploadingFiles.pug
+	include uploadItem-template.pug
+
 	include modal-menu-tools.pug
+	include process-panel.pug	

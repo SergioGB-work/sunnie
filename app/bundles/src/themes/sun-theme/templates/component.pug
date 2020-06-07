@@ -14,6 +14,7 @@ mixin component(content)
 	- var classes = content.classes || ''
 	- var index = content.index || '0'
 	- var newComponent = content.new || 'false'
+	- var enableToolsBar = content.enableToolsBar || 'true'
 
 	if showTitle  == "false"
 		- var classesComponent = classesComponent + ' component-noTitle'
@@ -31,7 +32,7 @@ mixin component(content)
 		- var draggable = "true"	
 
 	div(class=classesComponent + ' ' + componentName + ' ' + classes, id=idComponent || false,data-layout-position = index, draggable=draggable || false, data-component-name=componentName)
-		if locals.development == true
+		if locals.development == true && enableToolsBar != 'false'
 			.dropdown.action-bar
 				button(class="dropdown-toggle border-0 p-0",type="button",id="dropdownMenuButton",data-toggle="dropdown",aria-haspopup="true",aria-expanded="false")
 					.sr-only Actions for component #{idComponent}

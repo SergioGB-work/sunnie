@@ -18,5 +18,20 @@ mixin fragment-input(content)
 	- var size = content.size || false;
 	- var step = content.step || false;
 	- var autocomplete = content.autocomplete || false;
+	- var multiple = content.multiple || false;
+	- var accept = content.accept || false;
+	- var icon = content.icon || false;
+	- var iconType = content.iconType || false
 
-	input(id=id, class=classes, type=type, name=name, value=value, required=required, placeholder=placeholder, pattern=pattern, disabled=disabled, readonly=readonly, max=max, mmin=min, maxlength=maxlength, size=size, step=step,  autocomplete=autocomplete)&attributes(dataAttributes)
+
+	if icon && iconType
+		.input-group
+			.input-group-prepend
+				.input-group-text
+					if iconType == "material"
+						i(class="material-icons") #{icon}
+					else if iconType == "fontawesome"
+						i(class="fa " + icon)
+			input(id=id, class=classes, type=type, name=name, value=value, required=required, placeholder=placeholder, pattern=pattern, disabled=disabled, readonly=readonly, max=max, min=min, maxlength=maxlength, size=size, step=step,  autocomplete=autocomplete,multiple=multiple, accept=accept)&attributes(dataAttributes)
+	else
+		input(id=id, class=classes, type=type, name=name, value=value, required=required, placeholder=placeholder, pattern=pattern, disabled=disabled, readonly=readonly, max=max, min=min, maxlength=maxlength, size=size, step=step,  autocomplete=autocomplete,multiple=multiple, accept=accept)&attributes(dataAttributes)

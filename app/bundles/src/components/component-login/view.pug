@@ -4,11 +4,11 @@ mixin component-login(content)
 
 	form(role="form",data-callback="callbackLogin",data-method="POST",data-action="https://services.demoretailsolutions.com:3000/api/v1/usuarios/login")
 		div(class="form-group")
-			label(for="email",class="sr-only") ${{ login.email }}$
+			+fragment('fragment-label',{"for":"email", "text":"${{ login.email }}$", "class":"sr-only"})
 			input(type="email",name="email",id="email",placeholder="${{ login.email }}$",class="form-control",required)
 
 		div(class="form-group")
-			label(for="password",class="sr-only") ${{ login.password }}$
+			+fragment('fragment-label',{"for":"password", "text":"${{ login.password }}$", "class":"sr-only"})
 			input(type="password",name="password",id="password",placeholder="${{ login.password }}$",class="form-control",required)
 
 		div(class="form-group m-0")

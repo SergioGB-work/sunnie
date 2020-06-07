@@ -1,0 +1,15 @@
+{
+	"config":[
+		{
+			"label":"HTML Content",
+			"type":"richHTML",
+			"name":"htmlContent",
+			"options": [
+                {
+                    "label": "",
+                    "value": ""
+                }
+            ]
+		}			
+	]
+}

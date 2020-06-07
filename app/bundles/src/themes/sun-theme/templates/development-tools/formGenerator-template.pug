@@ -1,4 +1,5 @@
 script(id="templateFormGenerator",type="text/x-jsrender")
+
 	| {{if required && required == true}}
 	| {{* window.requiredField = "required"}}
 	| {{else}}
@@ -25,22 +26,33 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 	| {{/if}}
 
 
-	div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}})
+	div(class="form-group col-md-4 col-lg-3 col-12 pt-8 {{*:show}}", {{*:showState}}, id="{{:parentID}}",{{:dataAttributesParent}})
 		div(class="custom-control custom-{{:type}}")
-			input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}})
-			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label"}, 'true')
+			input(class="custom-control-input",type="{{:type}}",id="{{*:id}}",name="{{:name}}",value="{{:value}}",{{*:requiredField}},{{*:checkedField}},{{:dataAttributes}})
+			+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "class":"custom-control-label {{:classes}}", "showLabel":"{{:showLabel}}"}, 'true')
+			| {{if helpText && helpText != ''}}
+			i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+			| {{/if}}
 
 
-	| {{else type == "textarea" }}
-	div(class="form-group col-12 {{*:show}}")
-		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		textarea(name="{{:name}}", id="{{*:id}}",class="form-control",{{*:requiredField}}) {{:~originalContent[name]}}
+	| {{else type == "textarea" || type == "richHTML" || type == "codePUG" || type == "codeHTML"}}
+
+	div(class="form-group col-12 {{*:show}}", id="{{:parentID}}",{{:dataAttributesParent}})
+		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "showLabel":"{{:showLabel}}"},'true')
+		| {{if helpText && helpText != ''}}
+		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+		| {{/if}}
+		textarea(name="{{:name}}", id="{{*:id}}",class="form-control {{:type}} {{:classes}}",{{*:requiredField}}, {{:dataAttributes}}) {{:~originalContent[name]}}
 
 	| {{else type == "select" }}
 
-	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}")
-		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		select(name="{{:name}}", id="{{*:id}}", class="form-control",{{*:requiredField}})
+	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", id="{{:parentID}}",{{:dataAttributesParent}})
+		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "showLabel":"{{:showLabel}}"},'true')
+		| {{if helpText && helpText != ''}}
+		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+		| {{/if}}
+
+		select(name="{{:name}}", id="{{*:id}}", class="form-control {{:classes}}",{{*:requiredField}}, {{:dataAttributes}}, data-content="'{{:~originalContent[name]}}'" || false)
 			
 			| {{for options ~na=name}}
 
@@ -55,26 +67,37 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 
 
 	| {{else type == "array" }}
-	.col-12.form-group(class="{{*:show}}")
+	.col-12.form-group(class="{{*:show}}", id="{{:parentID}}", {{:dataAttributesParent}})
 		fieldset(data-form-group="{{:name}}",data-block-type='array')
 			legend {{:label}}
 			.row.position-relative
 				.col-12
-
+					| {{if ~originalContent != ''}}
 					| {{for ~originalContent[name] ~dataContent=arrayContent ~na=name}}
 						
 					.fieldset(data-array-id="{{:#index}}",class="mt-3")
 						.row
 							| {{for ~dataContent ~originalContent = #data tmpl="#templateFormGenerator"/}}
 							
-							div(class="addItem fa fa-plus mr-1")
-							div(class="deleteItem fa fa-minus")
+							div(class="arrayActions")
+								div(class="addItem bg-primary fa fa-plus mr-1")
+								div(class="deleteItem bg-danger fa fa-minus")
 
 					| {{/for}}
 
+					| {{else}}
+					.fieldset(data-array-id="0",class="mt-3")
+						.row
+							| {{for arrayContent ~originalContent = '' tmpl="#templateFormGenerator"/}}
+							div(class="arrayActions")
+								div(class="addItem bg-primary fa fa-plus mr-1")
+								div(class="deleteItem bg-danger fa fa-minus")
+
+					| {{/if}}
+
 
 	| {{else type == "group" }}
-	.col-12.form-group(class="{{*:show}}")
+	.col-12.form-group(class="{{*:show}}", id="{{:parentID}}", {{:dataAttributesParent}})
 		fieldset(data-form-group="{{:name}}")
 			legend {{:label}}
 			.row.position-relative
@@ -84,9 +107,22 @@ script(id="templateFormGenerator",type="text/x-jsrender")
 						.row
 							| {{for content ~originalContent = ~originalContent[name] tmpl="#templateFormGenerator"/}}
 
-	| {{else}}
-	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}})
-		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}"})
-		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control",{{*:requiredField}})
+	| {{else type == "custom" }}
 
+	| {{include  ~originalContent = ~originalContent ~idComponent = ~idComponent tmpl=customView/}}
+
+
+	| {{else}}
+	div(class="form-group col-md-4 col-lg-3 col-12 {{*:show}}", {{*:showState}}, id="{{:parentID}}",{{:dataAttributesParent}})
+		+fragment('fragment-label',{"for":"{{*:id}}", "text":"{{:label}}", "showLabel":"{{:showLabel}}"}, 'true')
+
+		| {{if helpText && helpText != ''}}
+		i(class="fa fa-question-circle text-primary ml-1",data-toggle="tooltip",data-placement="right",title="{{:helpText}}")
+		| {{/if}}
+
+		| {{if ~originalContent != ''}}
+		input(type="{{:type}}",name="{{:name}}",value="{{:~originalContent[name]}}",id="{{*:id}}",class="form-control {{:classes}}",{{*:requiredField}}, {{:dataAttributes}})
+		| {{else}}	
+		input(type="{{:type}}",name="{{:name}}",value="",id="{{*:id}}",class="form-control {{:classes}}",{{*:requiredField}}, {{:dataAttributes}})
+		| {{/if}}
 	| {{/if}}

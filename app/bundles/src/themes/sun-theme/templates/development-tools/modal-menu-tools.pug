@@ -1,5 +1,5 @@
 
-#sidebar-menu-tools.bg-dark.position-fixed.h-100
+#sidebar-menu-tools.bg-dark.position-fixed.h-100.sidebar-menu-tools
 	
 	.card.mb-0
 		.card-header.bg-dark.text-white.border-secondary(id="dropdownSites" data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne")
@@ -20,7 +20,7 @@
 			span.text Componentes
 			i.fa.fa-ellipsis-v.float-right.px-3.py-1
 
-		ul(id="ToolsComponentList" class="collapse list-group list-group-flush" aria-labelledby="dropdownComponents",data-load="true",data-service-data=apiDevelopment + "/component/list",data-method="GET",data-template="#templateComponentListLI",data-target="#ToolsComponentList")
+		ul(id="ToolsComponentList" class="collapse list-group list-group-flush" aria-labelledby="dropdownComponents",data-load="true",data-service-data=apiDevelopment + "/component/list/detail",data-method="GET",data-template="#templateComponentListLI",data-target="#ToolsComponentList")
 
 	.card.mb-0
 		.card-header.bg-dark.text-white.border-secondary(id="dropdownPages" data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree")
@@ -28,10 +28,39 @@
 			i.fa.fa-ellipsis-v.float-right.px-3.py-1
 		
 		ul(id="collapseThree" class="collapse list-group list-group-flush" aria-labelledby="dropdownPages")
-			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-page-add') Añadir Página
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom.p-0(data-toggle="modal" data-target='#modal-page-add')
+				div.p-3 Añadir Página
 
-			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-page-edit') Editar Página
+			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom.p-0(data-toggle="modal" data-target='#modal-page-edit')
+				div.p-3 Editar Página
 			
-			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-delete') Borrar Página
+			li.list-group-item.bg-dark.text-white.p-0.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-delete')
+				div.p-3 Borrar Página
 
-			li.list-group-item.bg-dark.text-white.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-confirm-publish') Publicar Página
+			li.list-group-item.bg-dark.text-white.p-0.border-secondary.border-bottom(data-toggle="modal" data-target='#modal-page-confirm-publish')
+				div.p-3 Publicar Página
+
+			li.list-group-item.bg-dark.text-white.border-secondary.p-0(data-toggle="collapse" data-target="#ToolsPagesList" aria-expanded="false") 
+				div.p-3.border-secondary.border-bottom
+					span Listado de Páginas
+					i.fa.fa-ellipsis-v.float-right.px-3.py-1
+				
+				ul(id="ToolsPagesList" class="list-group list-group-flush collapse w-100 border-secondary border-bottom py-2",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list",data-method="GET",data-template="#templatePageListLI",data-target="#ToolsPagesList")
+
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary(id="dropdownLanguages" data-toggle="collapse" data-target="#ToolsLanguagesList" aria-expanded="true" aria-controls="ToolsLanguagesList")
+			span.text Idiomas
+			i.fa.fa-ellipsis-v.float-right.px-3.py-1
+
+		ul(id="ToolsLanguagesList",class="collapse list-group list-group-flush" aria-labelledby="dropdownComponents")
+			li.list-group-item.bg-dark.text-white.border-secondary(data-toggle="modal" data-target='#modal-locales') Gestionar Idiomas
+
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary
+			a(href="#modal-contents", data-toggle="modal").text.text-white Contenidos
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary
+			a(href="#modal-contentType-list", data-toggle="modal").text.text-white Tipos de  Contenido
+	.card.mb-0
+		.card-header.bg-dark.text-white.border-secondary
+			a(href="#modal-multimedia-list", data-toggle="modal").text.text-white Biblioteca multimedia

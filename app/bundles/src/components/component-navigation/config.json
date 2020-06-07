@@ -4,24 +4,28 @@
 			"label":"Justified",
 			"name":"justified",
 			"type":"checkbox",
-			"value":"true"
+			"value":"true",
+			"helpText":"Show the navigation as a boostrap nav justified."
 		},
 		{
 			"label":"Stacked",
 			"name":"stacked",
 			"type":"checkbox",
-			"value":"true"
+			"value":"true",
+			"helpText":"Show the navigation as a boostrap nav stacked."
 		},
 		{
 			"label":"Fill",
 			"name":"fill",
 			"type":"checkbox",
-			"value":"true"
+			"value":"true",
+			"helpText":"Display the menu taking up all available slot width."
 		},
 		{
 			"label":"View",
 			"name":"view",
 			"type":"select",
+			"helpText":"Choose the display mode.",
 			"options":[
 				{
 					"label":"Listado",
@@ -40,61 +44,73 @@
 		{
 			"label":"Classes",
 			"name":"classes",
-			"type":"text"
+			"type":"text",
+			"helpText":"Additional classes to add to the nav."
 		},
 		{
 			"label":"Pages",
 			"name":"pages",
 			"type":"array",
+			"helpText":"List of links to show. You can add as many as you want.",
 			"arrayContent":[
 				{
 					"label":"Link",
 					"name":"href",
 					"type":"text",
-					"required":true
+					"required":true,
+					"helpText":"Link URL."
 				},
 				{
 					"label":"Text",
 					"name":"text",
 					"type":"text",
-					"required":true
+					"required":true,
+					"helpText":"Link text to be displayed."
+
 				},
 				{
 					"label":"Title",
 					"name":"title",
-					"type":"text"
+					"type":"text",
+					"helpText":"Title attribute of the link."
 				},
 				{
 					"label":"Active",
 					"name":"active",
 					"type":"checkbox",
-					"value":"true"
+					"value":"true",
+					"helpText":"Show the link as activated."
 				},
 				{
 					"label":"Childs",
 					"name":"childs",
 					"type":"array",
+					"helpText":"You can define child pages of the pages.",
 					"arrayContent":[
 						{
 							"label":"Link",
 							"name":"href",
-							"type":"text"
+							"type":"text",
+							"helpText":"Link URL.."
 						},
 						{
 							"label":"Text",
 							"name":"text",
-							"type":"text"
+							"type":"text",
+							"helpText":"Link text to be displayed."
 						},
 						{
 							"label":"Title",
 							"name":"title",
-							"type":"text"
+							"type":"text",
+							"helpText":"Title attribute of the link."
 						},
 						{
 							"label":"Active",
 							"name":"active",
 							"type":"checkbox",
-							"value":"true"
+							"value":"true",
+							"helpText":"Show the link as activated."
 						}
 					]
 				}

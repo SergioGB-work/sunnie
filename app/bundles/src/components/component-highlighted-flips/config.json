@@ -4,31 +4,101 @@
 			"label":"Items",
 			"name":"items",
 			"type":"array",
+			"helpText":"List of items to display. You can define as many as you want.",
 			"arrayContent":[
 				{
 					"label":"Header",
 					"name":"header",
-					"type":"text"
+					"type":"text",
+					"helpText":"Item Header."
 				},
 				{
 					"label":"Icon Type",
 					"name":"iconType",
-					"type":"text"
+					"type":"select",
+					"helpText":"Type of icon you can use. You can choose between using Font Awesome or Material.",
+					"options":[
+						{
+							"label":"Font Awesome",
+							"value":"fontawesome"
+						},
+						{
+							"label":"Material",
+							"value":"material"
+						}
+					]
 				},
 				{
 					"label":"Icon Code",
 					"name":"iconCode",
-					"type":"text"
+					"type":"text",
+					"helpText":"You must add the code of the icon you wish to display. In each of the pages of the previous icon libraries you can see the available codes."
 				},
 				{
 					"label":"Icon Size",
 					"name":"iconSize",
-					"type":"text"
+					"type":"select",
+					"helpText":"Choose icon size",
+					"options":[
+						{
+							"label":"x1",
+							"value":"icon-1x"
+						},
+						{
+							"label":"x2",
+							"value":"icon-2x"
+						},
+						{
+							"label":"x3",
+							"value":"icon-3x"
+						},
+						{
+							"label":"x4",
+							"value":"icon-4x"
+						},
+						{
+							"label":"x5",
+							"value":"icon-5x"
+						},
+						{
+							"label":"x6",
+							"value":"icon-6x"
+						},
+						{
+							"label":"x7",
+							"value":"icon-7x"
+						},
+						{
+							"label":"x8",
+							"value":"icon-8x"
+						},
+						{
+							"label":"x9",
+							"value":"icon-9x"
+						},
+						{
+							"label":"x10",
+							"value":"icon-10x"
+						},
+						{
+							"label":"x11",
+							"value":"icon-11x"
+						},
+						{
+							"label":"x12",
+							"value":"icon-12x"
+						},
+						{
+							"label":"x13",
+							"value":"icon-13x"
+						}
+					]
 				},
 				{
 					"label":"Content",
 					"name":"content",
-					"type":"text"
+					"type":"text",
+					"helpText":"This content will be displayed under the heading."
 				}
 			]
 		}

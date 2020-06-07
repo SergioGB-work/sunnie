@@ -3,3 +3,4 @@ app/public/
 app/build/
 app/plugins/
 app/development/
+package-lock.json

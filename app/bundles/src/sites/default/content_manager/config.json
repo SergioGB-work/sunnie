@@ -1,0 +1,81 @@
+{
+    "config": [
+        {
+            "label":"Configuración",
+            "name":"config",
+            "type":"array",
+            "arrayContent":[
+                {
+                    "label": "Nombre del campo",
+                    "type": "text",
+                    "name": "label"
+                },
+                {
+                    "label": "Tipo de campo",
+                    "type": "select",
+                    "name": "type",
+                    "options":[
+                        {
+                            "label":"Text",
+                            "value":"text"
+                        },
+                        {
+                            "label":"Number",
+                            "value":"number"
+                        },
+                        {
+                            "label":"Email",
+                            "value":"email"
+                        },
+                        {
+                            "label":"Select",
+                            "value":"select"
+                        },
+                        {
+                            "label":"Checkbox",
+                            "value":"checkbox"
+                        },
+                        {
+                            "label":"Radio",
+                            "value":"radio"
+                        },
+                        {
+                            "label":"Textarea",
+                            "value":"textarea"
+                        },
+                        {
+                            "label":"HTML Enriquecido",
+                            "value":"richHTML"
+                        }
+                    ],
+                    "dataAttributes": "data-event='change' data-event-target='#selectValues' data-event-action='show' data-event-value='select'"                 
+
+                },
+                {
+                    "label": "Name del campo",
+                    "type": "text",
+                    "name": "name"
+                },
+                {
+                    "label":"Select Values",
+                    "name":"options",
+                    "type":"array",
+                    "visibility":"hidden",
+                    "parentID":"selectValues",
+                    "arrayContent":[
+                        {
+                            "label":"Text",
+                            "name":"label",
+                            "type":"text"
+                        },
+                        {
+                            "label":"Value",
+                            "name":"value",
+                            "type":"text"
+                        }                       
+                    ]
+                }                
+            ]
+        } 
+    ]
+}

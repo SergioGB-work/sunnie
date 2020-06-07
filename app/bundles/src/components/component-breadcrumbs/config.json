@@ -4,17 +4,21 @@
 			"label":"Pages",
 			"name":"pages",
 			"type":"array",
+			"helpText":"Pages that will form the breadcrumb",
 			"arrayContent":[
 				{
 					"label":"URL",
 					"name":"url",
-					"type":"text"
+					"type":"text",
+					"required":true,
+					"helpText":"URL of the page to which you will redirect when you click"
 				},
 				{
 					"label":"Page Name",
 					"name":"pageName",
 					"type":"text",
-					"required":true
+					"required":true,
+					"helpText":"Page name to show"
 				}
 			]
 		}

@@ -1,0 +1,68 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Administrar idiomas"
+	- var modal_id = "modal-locales"
+	- var modal_size = "modal-full"
+
+block modal-body
+	form(id="form-locales",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/update-locales", data-callback="updateLocalesCallback")
+
+		div(id="locales-block",data-service-data=apiDevelopment + "/site/{idSite}/get-locales",data-method="GET",data-template="#templateLocales",data-target="#locales-block")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Guardar
+
+
+
+	script(id="templateLocales",type="text/x-jsrender")
+
+		| {{if data != ''}}
+
+		fielset(data-block-type='array', data-form-group="locales")
+			legend Custom
+
+			| {{props data}}
+			
+			.row(data-array-id='{{:#index}}')
+
+				div(class="form-group col-md-3 col-12 col-form-label locale-key")
+					| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0);}}
+					.row
+						.col-sm-3.col-12
+							+fragment('fragment-label',{"for":"key{{*:id}}", "text":"Key", "class":"col-form-label text-right col-12"})
+						.col-sm-9.col-12
+							+fragment('fragment-input',{"id":"key{{*:id}}","type":"text", "name":"key", "value":"{{:key}}", "class":"form-control", "required":"required"})
+					.row
+						.col-sm-9.col-12.offset-sm-3
+							small(class="text-muted locale-code") custom.{{>key}}
+
+				div(class="form-group col-md-9 col-12 col-form-label", )
+					.row
+						| {{for prop}}
+
+						| {{props #data}}
+
+						| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0);}}
+						div(class="form-group col-md-4 col-12")
+							.row
+								.col-sm-3
+									+fragment('fragment-label',{"for":"locale{{*:id}}", "text":"{{:key}}", "class":"col-form-label text-right col-12"})
+								.col-sm-9
+									+fragment('fragment-input',{"id":"locale{{*:id}}","type":"text", "name":"{{:key}}", "value":"{{:prop}}", "class":"form-control", "required":"required"})
+								
+									
+						| {{/props}}
+
+						| {{/for}}
+					div(class="arrayActions")
+						div(class="addItem bg-primary fa fa-plus mr-1")
+						div(class="deleteItem bg-danger fa fa-minus")
+
+			| {{/props}}
+		| {{else}}
+
+		div No hay traducciones
+
+		|{{/if}}

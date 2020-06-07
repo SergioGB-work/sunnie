@@ -1,2 +1,10 @@
+if locals.development == true
+	include edit-view.pug
+
 mixin component-html-content(content)
-	div !{content.HTMLcontent}
+	
+	- var contentType = 'content_' + content.contentType
+
+	if content.idContent
+
+		+#{contentType}(content.idContent)

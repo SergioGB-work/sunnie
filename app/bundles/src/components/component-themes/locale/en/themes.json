@@ -10,9 +10,16 @@
   "javascriptList11":"They are libraries that must be loaded first because other libraries can have dependencies with them. For example: jQuery",
   "javascriptList12":"They are the generic libraries of the portal.",
   "javascriptList13":"They are libraries or JS code that must be executed in the initial load of the portal from the <span class='text-primary'>head</span>, without waiting for anything. They are written in pure javascript",
-  "javascriptList14":"Main javascript file. It contains all the generic functions of the portal defined in the <a href='./js-functions.html' title='Go to JS Functions'>javascript page</a>.",
+  "javascriptList14":"Main javascript file. It contains the call to all the generic functions of the portal defined in the <a href='./js-functions.html' title='Go to JS Functions'>javascript page</a>.",
+  "javascriptList15":"It contains all the main functions of the subject. It allows to redefine those functions in a simple way from the children appearance themes to adapt them to the needs of the portal.",
   "javascriptParagraph2":"As a general rule, when you want to add a new library, you must add it to the libs folder.",
   "javascriptParagraph3":"It is not necessary to add the tag <span class = 'text-primary'>&lt;script&gt;</span> in the header or footer of the portal because SunnieJS <span class = 'text-primary'>compiles</span> automatically the libraries that are in these folders in an order to then generate a single <span class = 'text-primary'>miniscript javascript file</span> with all the code.",
+  "javascriptParagraph4":"There are a number of javascript variables that can be used within the javascript files, both of the theme and of the components and that can also be extended.",
+  "javascriptParagraph5":"Listed below are all javascript variables that exist and can be modified:",
+  "javascriptParagraph6":"Variable to store the URL of an API.",
+  "javascriptParagraph7":"Default items to be requested if data is obtained from a service and you are told that it must be paginated but you are not told how many items per page are displayed.",
+  "javascriptParagraph8":"Default image if an image is broken.",
+  "javascriptParagraph9":"Base URL of the site.",
   "imagesParagraph1":"This folder serves as an image store. All the images added here will go directly to the folder <span class = 'text-primary'>public</span> within its corresponding folder of images.",
   "templatesParagraph1":"Templates are functional templates of reusable content. They can be both static and dynamic with JSRender. Thus, by default, we have for example a template for the header, another for manners, another for error messages, etc ...",
   "templatesParagraph2":"The most important to highlight is <span class = 'text-primary'> portal.pug </span> which is responsible for defining the overall structure of the pages (head, body, header, menu, footer). All pages are created based on this template and filled in based on what is configured for each of them at the component and layout level.",
@@ -31,5 +38,6 @@
   "templatesParagraph15":"Heritage",
   "templatesParagraph16":"One of the novelties of SunnieJS 3 is that the themes of appearance that you believe new can take as a base another created one, a father, who serves as a base, so that you can only modify what you need and the rest let it inherit it from the father .",
   "templatesParagraph17":"By default, there is a basic-looking theme called <span class = 'text-primary'> 'sun-theme' </span> from which all custom themes you create inherit, but this inheritance can be modified in the <span file class = 'text-primary'> templates / build.pug </span> so that your theme inherits from another.",
-  "templatesParagraph18":"If you want to modify something in your appearance theme you just have to replicate the path of the file you want to modify within your appearance theme and when it is compiled, the result will be all the father's code except what you have redefined."
+  "templatesParagraph18":"If you want to modify something in your appearance theme you just have to replicate the path of the file you want to modify within your appearance theme and when it is compiled, the result will be all the father's code except what you have redefined.",
+  "templatesParagraph19":"Local URL of the Site Logo"
 }

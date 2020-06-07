@@ -1,0 +1,55 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Crear Nuevo Componente"
+	- var modal_id = "modal-component-create"
+	- var modal_size = "modal-full"
+
+block modal-body
+	form(id="form-component-create",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/component/create", data-callback="createComponent")
+		.row
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"componentCreateName", "text":"Nombre", "helpText":"Solo admite letras y números"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"componentCreateName","name":"name", "required":"required","pattern":"[a-zA-Z][a-zA-Z0-9\s]*"})
+		.row
+			.col-12
+				ul(class="nav nav-tabs" id="myTab" role="tablist")
+					li.nav-item
+						a(class="nav-link active", id="view-tab", data-toggle="tab", href="#view", role="tab", aria-controls="view", aria-selected="true") VIEW(PUG)
+
+					li.nav-item
+						a(class="nav-link", id="css-tab", data-toggle="tab", href="#css", role="tab", aria-controls="css", aria-selected="false") CSS
+
+					li.nav-item
+						a(class="nav-link", id="js-tab", data-toggle="tab", href="#js", role="tab", aria-controls="js", aria-selected="false") Javascript
+					li.nav-item
+						a(class="nav-link", id="js-tab", data-toggle="tab", href="#configView", role="tab", aria-controls="js", aria-selected="false") Config View
+
+		.row.mb-3
+			.col-12
+				div(class="tab-content" id="myTabContent")
+					div(class="tab-pane show active" id="view" role="tabpanel" aria-labelledby="view-tab")
+						p Recuerda que todas las variables de configuración del componente se escriben como <strong>content.NameDelCampoConfig</strong>.
+						label(for="codeVIEW",class="sr-only") Código PUG
+						textarea(type="text",name="componentView",id="codeVIEW",class="form-control codePUG")
+					div(class="tab-pane" id="css" role="tabpanel" aria-labelledby="css-tab")
+						p El componente dispone de una clase especifica para que los estilos que desees añadir estén limitados a dicho componente. Para ello los estilos deben comentar con la clase ".component-NombreDelComponente".
+						label(for="codeCSS",class="sr-only") Código CSS
+						textarea(type="text",name="componentCSS",id="codeCSS",class="form-control codeCSS")
+					div(class="tab-pane" id="js" role="tabpanel" aria-labelledby="js-tab")
+						p Puedes escribir tanto javascript como jQuery.
+						label(for="codeJS",class="sr-only") Código Javascript
+						textarea(type="text",name="componentJS",id="codeJS",class="form-control codeJS")
+
+					div(class="tab-pane" id="configView" role="tabpanel" aria-labelledby="configView-tab")
+						p Esta opción te permite configurar la vista de edición del componente. Todos los campos aquí definidos podras utilizarlos a la hora de pintar la vista del componente a través de las variables de PUG.
+						.row
+							div(id="componentViewConfig",data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/component/generalConfig",data-method="GET",data-template="#templateCreateComponentConfig",data-target="#modal-component-create #componentViewConfig")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Guardar
+
+	script(id="templateCreateComponentConfig",type="text/x-jsrender")
+		| {{for data.config ~originalContent = '' tmpl="#templateFormGenerator"/}}
+

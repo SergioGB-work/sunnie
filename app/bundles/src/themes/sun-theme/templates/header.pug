@@ -1,16 +1,15 @@
-.d-none.d-xl-block
-	+component({'name':'component-logo','content':{'url':fullSiteUrl$1,'title':'SunnisJS','src':fullSiteUrl+'/images/logo.png','alt':'SunnieJS Logo'},'showTitle':'false','full':'true'})
-
+.d-none.d-xl-block.float-left
+	+fragment('fragment-banner',{'href':fullSiteUrl$1,'title':'Go to ' + siteName,'src':logoURL,'alt':siteName+'Logo'})
 div(id="navigation")
 		include navigation.pug
 
 div(id="top-bar")
-	+component({'name':'component-search','id':'id1','showTitle':'false'})
+	+component({'name':'component-search','id':'id1','showTitle':'false', 'enableToolsBar':'false'})
 
-	+component({'name':'component-languageSelector','id':'id1','showTitle':'false', 'classes':'ml-3'})
+	+component({'name':'component-languageSelector','id':'id1','showTitle':'false', 'classes':'ml-3','enableToolsBar':'false'})
 
 	if locals.development == true
-		+component({'name':'component-siteSelector','id':'id1','showTitle':'false'})
+		+component({'name':'component-siteSelector','id':'id1','showTitle':'false','enableToolsBar':'false'})
 
 
 	.component.version-selector

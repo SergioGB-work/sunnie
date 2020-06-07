@@ -1,0 +1,41 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Nuevo Contenido"
+	- var modal_id = "modal-content-add"
+	- var modal_size = "modal-lg"
+
+block modal-body
+
+	form(id="form-add-content",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/add", data-callback="addContentCallback")
+		.row
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"contentName", "text":"Nombre"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"contentName","name":"name", "required":"required"})
+			
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"contentTypeSelector", "text":"Tipo de Contenido"})
+				+fragment('fragment-select',{"class":"form-control", "id":"contentTypeSelector","name":"contentType", "required":"required", "dataAttributes":{"data-service-data":apiDevelopment + "/site/{idSite}/content/contentTypes", "data-method":"GET", "data-template":"#templateOptionsContentType", "data-target":"#form-add-content #contentTypeSelector","data-event":"change","data-event-target":"#add-content-block", "data-event-action":"load-data"}})
+		
+		div(id="add-content-block", data-service-data = apiDevelopment + "/site/{idSite}/content/detail/{contentType}/", data-method="GET", data-template="#templateAddContent",data-target="#add-content-block", data-callback="dataContentLoadedCallback", data-load="false")
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(class="btn btn-default mr-3", data-toggle="modal", data-target="#modal-contents", data-dismiss="modal") Cancelar
+				button(class="btn btn-primary send", type="submit") Guardar
+	
+	script(id="templateAddContent",type="text/x-jsrender")
+
+		.row
+			.col-12
+			| {{for data.config ~originalContent = '' tmpl="#templateFormGenerator"/}}
+
+	script(id="templateOptionsContentType",type="text/x-jsrender")
+		| {{if data.length > 0 }}
+		option(value="") Selecciona un tipo de contenido
+		| {{for data}}
+		option(value="{{:value}}") {{:label}}
+		| {{/for}}
+		| {{else}}
+		option(value="") No hay datos
+		| {{/if}}	

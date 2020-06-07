@@ -3,28 +3,33 @@
 		{
 			"label":"Content",
 			"name":"content",
-			"type":"textarea",
-			"required":true
+			"type":"richHTML",
+			"required":true,
+			"helpText":"Enter the HTML content you want to display in the component."
 		},
 		{
 			"label":"Button",
 			"name":"button",
 			"type":"group",
+			"helpText":"If defined, the button will be displayed next to the previous content.",
 			"content":[
 				{
 					"label":"Href",
 					"name":"href",
-					"type":"text"
+					"type":"text",
+					"helpText":"If defined, a button link will be displayed next to the previous content and when clicked will redirect to the URL defined in this field."
 				},
 				{
 					"label":"Title",
 					"name":"title",
-					"type":"text"
+					"type":"text",
+					"helpText":"Title attribute of the previous link."
 				},
 				{
 					"label":"Text",
 					"name":"text",
-					"type":"text"
+					"type":"text",
+					"helpText":"Text to be displayed inside the button."
 				}
 			]
 		}

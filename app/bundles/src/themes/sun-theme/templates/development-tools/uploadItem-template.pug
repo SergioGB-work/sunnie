@@ -1,0 +1,12 @@
+script(id="uploadItemTemplate",type="text/x-jsrender")
+	.col-lg-2.col-sm-3.col-4.file(data-index="{{:data.index}}", data-filename="{{:data.filename}}.{{:data.extension}}")
+		.card
+			.card-img-top
+				div.actions.position-absolute.px-2.py-1.w-100.text-right.icon-2x.d-block
+					a.action.ml-2.deleteFile
+						i(class="fa fa-times")
+							span.sr-only Eliminar fichero
+				.embed-responsive.embed-responsive-1by1.crop-img
+					img(class="embed-responsive-item",src="{{:data.preview}}")
+			.card-body
+				h3.card-title.icon-1x {{:data.filename}}.{{:data.extension}}

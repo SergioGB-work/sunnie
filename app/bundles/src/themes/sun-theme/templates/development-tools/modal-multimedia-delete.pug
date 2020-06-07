@@ -1,0 +1,15 @@
+extends ../modal_noHeaderNoFooter
+
+block vars
+	- var modal_id = "modal-multimedia-delete"
+	- var modal_size = "modal-md"
+
+block modal-body
+	form(data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/media/delete", data-callback="deleteMultimediaCallback")
+		.row
+			.col-12
+				p ¿Estás seguro que deseas eliminar este fichero?
+				+fragment('fragment-input',{"type":"hidden", "name":"filename", "required":"required"})
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(type="submit",class="btn btn-primary send") Eliminar

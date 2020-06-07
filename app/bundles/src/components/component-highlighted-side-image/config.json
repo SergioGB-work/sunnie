@@ -4,6 +4,8 @@
 			"label":"Position",
 			"name":"position",
 			"type":"select",
+			"required":true,
+			"helpText":"Position where you want to display the image.",
 			"options":[
 				{
 					"label":"Left",
@@ -19,44 +21,54 @@
 			"label":"Image",
 			"name":"image",
 			"type":"group",
+			"helpText":"Imagen a mostrar",
 			"content":[
 				{
 					"label":"SRC",
 					"name":"src",
-					"type":"text"
+					"type":"text",
+					"helpText":"Image URL.",
+					"required":true
 				},
 				{
 					"label":"Alt",
 					"name":"alt",
-					"type":"text"
+					"type":"text",
+					"helpText":"Alternative text of the image. It will be displayed when the image cannot be loaded.",
+					"required":true
 				}
 			]
 		},
 		{
 			"label":"Content",
 			"name":"content",
-			"type":"text",
-			"required":true
+			"type":"codeHTML",
+			"required":true,
+			"helpText":"HTML content to display next to the image."
 		},
 		{
 			"label":"Button",
 			"name":"button",
 			"type":"group",
+			"helpText":"If set it will be displayed next to the image.",
 			"content":[
 				{
 					"label":"Href",
 					"name":"href",
-					"type":"text"
+					"type":"text",
+					"helpText":"Link to which you will redirect if the user clicks on the button."
 				},
 				{
 					"label":"Title",
 					"name":"title",
-					"type":"text"
+					"type":"text",
+					"helpText":"Title attribute of the previous link."
 				},
 				{
 					"label":"Text",
 					"name":"text",
-					"type":"text"
+					"type":"text",
+					"helpText":"Text to be displayed inside the button."
 				}
 			]
 		}

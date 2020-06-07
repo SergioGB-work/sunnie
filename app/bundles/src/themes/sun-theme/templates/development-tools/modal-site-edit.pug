@@ -17,37 +17,197 @@ block modal-body
 
 	script(id="templateEditSite",type="text/x-jsrender")
 
-		.row
-			div(class="form-group col-4")
-				label(for="siteName",class="uppercase") Nombre
-				input(type="text",name="name",id="siteName",class="form-control",value="{{:data.name}}",required)
+		ul.nav.nav-tabs.mb-3(id="edit-site-tabs",role="tablist")
+			li.nav-item
+				a.nav-link.active(id="edit-config-tab",data-toggle="pill" href="#edit-block-site-data" role="tab" aria-controls="edit-block-site-data" aria-selected="true") Configuración
+			li.nav-item
+				a.nav-link(id="edit-manifest-tab",data-toggle="pill" href="#edit-block-site-manifest" role="tab" aria-controls="edit-block-site-manifest" aria-selected="false") Manifest
+			li.nav-item
+				a.nav-link(id="edit-service-worker-tab",data-toggle="pill" href="#edit-block-site-service-worker" role="tab" aria-controls="edit-block-site-service-worker" aria-selected="false") Service Worker
+		#edit-site-content-tabs.tab-content
+			#edit-block-site-data.tab-pane.show.active(role="tabpanel",aria-labelledby="config-tab")
+				.row
+					div(class="form-group col-md-4 col-12")
+						+fragment('fragment-label',{"for":"siteNameEdit", "text":"Nombre"})
+						input(type="text",name="name",id="siteNameEdit",class="form-control",value="{{:data.name}}",required)
 
-			div(class="form-group col-4")
-				label(for="siteURL",class="uppercase") URL
-				input(type="text",name="url",id="siteURL",class="form-control",value="{{:data.url}}",required)
+					div(class="form-group col-md-4 col-12")
+						+fragment('fragment-label',{"for":"siteURLEdit", "text":"URL"})
+						input(type="text",name="url",id="siteURLEdit",class="form-control",value="{{:data.url}}",required)
 
-			div(class="form-group col-md-4 col-12")
+					div(class="form-group col-md-4 col-12")
 
-				| {{if data.enableChatBot && data.enableChatBot == 'true'}}
-				| {{* window.enableChatBot = "checked"}}
-				| {{else}}
-				| {{* window.enableChatBot = "" }}
-				| {{/if}}
+						| {{if data.enableChatBot && data.enableChatBot == 'true'}}
+						| {{* window.enableChatBot = "checked"}}
+						| {{else}}
+						| {{* window.enableChatBot = "" }}
+						| {{/if}}
 
-				| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0) }}
+						| {{* window.id = parseInt(Math.random() * (99999 - 0) + 0) }}
 
-				fielset
-					legend Activar Asistente de Desarrollo(solo desarrollo)
+						fielset
+							legend Activar Asistente de Desarrollo(solo desarrollo)
 
-					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotNo{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
-						label(for="enableChatBotNo{{*:id}}",class="uppercase custom-control-label") No
+							div(class="custom-control custom-radio")
+								input(type="radio",name="enableChatBot",id="enableChatBotNoEdit{{*:id}}",class="form-control custom-control-input",required, value="false", checked)
+								+fragment('fragment-label',{"for":"enableChatBotNoEdit{{*:id}}", "text":"No", "class":"uppercase custom-control-label"},'true')
 
-					div(class="custom-control custom-radio")
-						input(type="radio",name="enableChatBot",id="enableChatBotSi{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
-						label(for="enableChatBotSi{{*:id}}",class="uppercase custom-control-label") Si					
-		
-		.row
-			.col-12
-				h3 Seleciona un tema de apariencia
-		.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-content='"{{:data.theme}}' + '"',data-callback="checkThemeSelected")
+							div(class="custom-control custom-radio")
+								input(type="radio",name="enableChatBot",id="enableChatBotSiEdit{{*:id}}",class="form-control custom-control-input",required,value="true",{{*:enableChatBot}})
+								+fragment('fragment-label',{"for":"enableChatBotSiEdit{{*:id}}", "text":"Si", "class":"uppercase custom-control-label"},'true')
+
+					div(class="form-group col-md-8 col-12")
+						+fragment('fragment-label',{"for":"publishURLEdit", "text":"Publish URL"})
+						input(type="text",name="publishUrl",id="publishURLEdit",class="form-control",value="{{:data.publishUrl}}",required)
+
+					div(class="form-group col-12 col-md-4")
+						+fragment('fragment-label',{"for":"siteLogoEdit", "text":"Logo"})
+						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"siteLogoEdit","name":"siteLogo"})
+						img(src=fullSiteUrl+"{{:data.logo}}",class="border mt-3 bg-light",alt="Site Logo", width=150)
+				.row
+					.col-12
+						h3 Seleciona un tema de apariencia
+				.row(id="themeList",data-load="true",data-service-data=apiDevelopment + "/theme/list",data-method="GET",data-template="#templateThemeList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #themeList",data-checked="{{:data.theme}}",data-checked-target="#modal-site-edit #themeList")
+
+			#edit-block-site-manifest.tab-pane(role="tabpanel",aria-labelledby="manifest-tab")
+				.row
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_nameEdit", "text":"Name"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_nameEdit","name":"manifest_name","value":"{{:data.manifest.name}}"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_short_nameEdit", "text":"Short Name"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_short_nameEdit","name":"manifest_short_name","value":"{{:data.manifest.short_name}}"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_theme_colorEdit", "text":"Theme Color"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_theme_colorEdit","name":"manifest_theme_color","value":"{{:data.manifest.theme_color}}"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_background_colorEdit", "text":"Background Color"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_background_colorEdit","name":"manifest_background_color","value":"{{:data.manifest.background_color}}"})
+
+				.row
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_displayEdit", "text":"Display"})
+						+fragment('fragment-select',{"class":"form-control", "id":"manifest_displayEdit","name":"manifest_display","value":"{{:data.manifest.display}}","options":[{"value":"fullscreen","text":"Fullscreen"},{"value":"standalone","text":"Standalone"},{"value":"minimal-ui","text":"Minimal UI"},{"value":"browser","text":"Browser"}],"dataAttributes":{"data-selected":"{{:data.manifest.display}}","data-selected-target":"#manifest_displayEdit"}})
+
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_orientationEdit", "text":"Orientation"})
+						+fragment('fragment-select',{"class":"form-control", "id":"manifest_orientationEdit","name":"manifest_orientation","value":"{{:data.manifest.orientation}}","options":[{"value":"any","text":"Any"},{"value":"natural","text":"Natural"},{"value":"landscape","text":"Landscape"},{"value":"portrait","text":"Portrait"},{"value":"portrait-primary","text":"Portrait Primary"},{"value":"portrait-secondary","text":"Portrait Secondary"},{"value":"landscape-primary","text":"Landscape Primary"},{"value":"landscape-secondary","text":"Landscape Secondary"}],"dataAttributes":{"data-selected":"{{:data.manifest.orientation}}","data-selected-target":"#manifest_orientationEdit"}})
+
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_scopeEdit", "text":"Scope"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_scopeEdit","name":"manifest_scope","value":"{{:data.manifest.scope}}"})
+
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_descriptionEdit", "text":"Description"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_descriptionEdit","name":"manifest_description","value":"{{:data.manifest.description}}"})
+				.row
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_start_urlEdit", "text":"Start URL"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_start_urlEdit","name":"manifest_start_url","value":"{{:data.manifest.start_url}}"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_langEdit", "text":"Lang"})
+						+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"manifest_langEdit","name":"manifest_lang","value":"{{:data.manifest.lang}}"})
+					div(class="form-group col-3")
+						+fragment('fragment-label',{"for":"manifest_iconEdit", "text":"Icon"})
+						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"manifest_iconEdit","name":"manifest_icon"})
+
+					| {{if data.manifest.icons.length > 0}}	
+					div(class="form-group col-12")
+						h3 Icons
+						p Estos son los iconos asociados al manifest actuales. Si deseas modificarlos tan solo tienes que adjuntar un nuevo archivo en el campo Icons y Guardar. Te recomendamos que utilices una imagen de <strong>512x512</strong> para que los iconos resultantes de la generación automática tengan la calidad adecuada.
+						div(class="row")
+							| {{for data.manifest.icons}}
+							div(class="col-12 col-md-4 col-lg-3 mb-5")
+								h4.h5 {{:sizes}}
+								img(src="{{:src}}" alt="")
+							| {{/for}}
+					| {{/if}}
+
+			#edit-block-site-service-worker.tab-pane(role="tabpanel",aria-labelledby="service-worker-tab")
+				.row
+					div(class="form-group col-8")
+						fieldset
+							legend Elige el tipo de Service Worker
+							div(class="row")
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+
+										| {{if data.serviceWorker.type && data.serviceWorker.type == 'offline'}}
+										| {{* window.checkRadio = "checked"}}
+										| {{else}}
+										| {{* window.checkRadio = "" }}
+										| {{/if}}
+										input(id="sw-offlineEdit",type="radio", name="serviceWorkerType", value="offline",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-offlineEdit", "text":"Offline","class":"custom-control-label"},'true')
+										p This simple but elegant solution pulls a file from your web server called "offline.html" (make sure that file is actually there) and serves the file whenever a network connection can not be made.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										| {{if data.serviceWorker.type && data.serviceWorker.type == 'offline-copy-pages'}}
+										| {{* window.checkRadio = "checked"}}
+										| {{else}}
+										| {{* window.checkRadio = "" }}
+										| {{/if}}
+										input(id="sw-offline-copy-pagesEdit",type="radio", name="serviceWorkerType", value="offline-copy-pages",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-offline-copy-pagesEdit", "text":"Offline copy of pages", "class":"custom-control-label"},'true')
+										p A solution that expands the offline capabilities of your app. A copy of each pages is stored in the cache as your visitors view them. This allows a visitor to load any previously viewed page while they are offline.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										| {{if data.serviceWorker.type && data.serviceWorker.type == 'offline-copy-backup'}}
+										| {{* window.checkRadio = "checked"}}
+										| {{else}}
+										| {{* window.checkRadio = "" }}
+										| {{/if}}
+										input(id="sw-offline-copy-backupEdit",type="radio", name="serviceWorkerType", value="offline-copy-backup",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-offline-copy-backupEdit", "text":"Offline copy with Backup offline page", "class":"custom-control-label"},'true')
+										p A copy of each pages is stored in the cache as your visitors view them. This allows a visitor to load any previously viewed page while they are offline. This then adds the "offline page" that allows you to customize the message and experience if the app is offline, and the page is not in the cache.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										| {{if data.serviceWorker.type && data.serviceWorker.type == 'cache-first-network'}}
+										| {{* window.checkRadio = "checked"}}
+										| {{else}}
+										| {{* window.checkRadio = "" }}
+										| {{/if}}
+										input(id="sw-cacheEdit",type="radio", name="serviceWorkerType", value="cache-first-network",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-cacheEdit", "text":"Cache-first network", "class":"custom-control-label"},'true')
+										p Use this service worker to pre-cache content. The content you add to the "cache-array" will be added immediately to the cache and service from the cache whenever a page requests it. At the same time it will update the cache with the version you have on the server. Configure your file array to include all your site files, or a subset that you want to be served quickly.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										| {{if data.serviceWorker.type && data.serviceWorker.type == 'advance-caching'}}
+										| {{* window.checkRadio = "checked"}}
+										| {{else}}
+										| {{* window.checkRadio = "" }}
+										| {{/if}}
+										input(id="sw-advanced-cachingEdit",type="radio", name="serviceWorkerType", value="advance-caching",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-advanced-cachingEdit", "text":"Advanced caching", "class":"custom-control-label"},'true')
+										p Use this service worker to improve the performance of your app, and make it work offline. The advanced caching service worker allows you to configure files and routes that are cached in different manners (pre-cache, server first, cache first, etc.). The tool can be used to build a lightening fast app (even for dynamic content) that works offline.
+								div(class="col-12")
+									div(class="custom-control custom-radio")
+										| {{if data.serviceWorker.type && data.serviceWorker.type == 'custom'}}
+										| {{* window.checkRadio = "checked"}}
+										| {{else}}
+										| {{* window.checkRadio = "" }}
+										| {{/if}}
+										input(id="sw-customEdit",type="radio", name="serviceWorkerType", value="custom",class="form-control custom-control-input",{{*:checkRadio}})
+										+fragment('fragment-label',{"for":"sw-customEdit", "text":"Custom", "class":"custom-control-label"},'true')
+										p Si lo prefieres, puedes escribir tu propio srevice worker.
+					div(class="form-group col-4")
+						fieldset
+							legend Datos adicionales
+							div(class="row d-none mb-5", data-parent="#modal-site-edit [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="offline,offline-copy-pages,offline-copy-backup,advance-caching")
+								div(class="col-12")
+									p Elige la página que deseas que se muestre si la PWA pierde la conexión con internet.
+									+fragment('fragment-label',{"for":"siteOfflineEdit", "text":"Página offline"})
+									+fragment('fragment-select',{"class":"form-control","id":"siteOfflineEdit","name":"offlinePage", "required":"required","dataAttributes":{"data-load":"true","data-service-data":apiDevelopment + "/site/{idSite}/page/list","data-method":"GET","data-template":"#templatePagesListSRC","data-target":"#modal-site-edit #siteOfflineEdit","data-selected":"{{:data.serviceWorker.offlinePage}}","data-selected-target":"#modal-site-edit #siteOfflineEdit"}})
+
+							div(class="row d-none", data-parent="#modal-site-edit [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="cache-first-network,advance-caching",)
+								
+								div(class="col-12")
+									p Elige las páginas que deseas cachear a través del service worker
+								
+									div(id="pages-to-cache-Edit", data-load="true",data-service-data=apiDevelopment + "/site/{idSite}/page/list", data-method="GET",data-template="#templatePagesChecksList",data-items-per-page="0",data-initial-page="0",data-target="#modal-site-edit #pages-to-cache-Edit",data-checked="{{:data.serviceWorker.cachedPages}}",data-checked-target="#modal-site-edit #pages-to-cache-Edit")
+
+							div(class="row d-none", data-parent="#modal-site-edit [name='serviceWorkerType']" data-parent-event="change", data-parent-event-action="show", data-parent-event-value="custom")
+								div(class="col-12")
+									P Recuerda que el service worker debe estar escrito en javascript.
+									+fragment('fragment-label',{"for":"customServiceWorkerEdit-input", "text":"Custom Service Worker"})
+									+fragment('fragment-textarea',{"class":"form-control codeJS","id":"customServiceWorkerEdit-input","name":"customServiceWorkerContent", "value":"{{:data.serviceWorker.customTemplate}}"})

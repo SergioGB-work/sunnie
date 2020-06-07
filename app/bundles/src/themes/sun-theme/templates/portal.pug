@@ -1,6 +1,6 @@
 include variables.pug
 include generate-attributes.pug
-include layouts.pug
+include ../../layouts/include_layouts.pug
 
 doctype
 html(lang="${{ default.lang }}$")
@@ -8,9 +8,14 @@ html(lang="${{ default.lang }}$")
 		+generate-attributes(attributes)
 		meta(charset="utf-8")
 		meta(name="viewport",content="width=device-width, initial-scale=1.0")
+		meta(name="theme-color", content="#a0ce4e")
 		link(rel="preconnect" href=apiDevelopment)
-		link(rel="shortcut icon",href="favicon.ico")
+		link(rel="shortcut icon",href= fullSiteUrl + "/images/favicon.ico")
+		link(rel="preload" href=fullSiteUrl + "/css/main.min.css" as="style")
+		link(rel="preload" href=fullSiteUrl + "/css/components.min.css" as="style")
 		link(href=fullSiteUrl + "/css/main.min.css",rel="stylesheet",media="all")
+		link(href=fullSiteUrl + "/css/components.min.css",rel="stylesheet",media="all",async)
+		link(rel="manifest" href=fullSiteUrl + "/manifest.json")
 
 		if locals.development == true
 			script(src=fullSiteUrl + "/javascript/priority.js",type="text/javascript")
@@ -23,6 +28,7 @@ html(lang="${{ default.lang }}$")
 
 		include fragment.pug
 		include component.pug
+		include ../../content_manager/include_contents.pug
 
 		div(id="wrapper")
 
@@ -35,13 +41,13 @@ html(lang="${{ default.lang }}$")
 			footer(id="footer")
 				include footer.pug					
 
-		div#loading-mask
+		div#loading-mask.loading-mask
 		include error.pug
 		include development-tools/development-tools.pug
 		include options-template.pug
+		include alert-template.pug
 		link(href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700",rel="stylesheet",media="all",async)
 		link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet",media="all", async)
-		link(href=fullSiteUrl + "/css/components.min.css",rel="stylesheet",media="all",async)
 
 		if locals.development == true
 			script(src=fullSiteUrl + "/javascript/main.js",type="text/javascript")

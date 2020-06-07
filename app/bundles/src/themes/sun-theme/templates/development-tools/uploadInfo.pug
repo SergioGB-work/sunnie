@@ -1,0 +1,19 @@
+div.progressBar-block
+    .row.mt-3.d-flex.align-items-center
+        .col-10
+            .progress.rounded-0
+                div(class="progress-bar", role="progressbar", aria-valuenow="0", aria-valuemin="0", aria-valuemax="100")
+        .col-2
+            .progressInfo.text-left
+                span.font-size-2x.font-weight-bold.percentage 0%
+    .row
+        .col-12    
+            .progressInfo.mt-2
+                p.font-size-1x
+                    span.font-size-2x.font-weight-bold.current 0 
+                    |  de 
+                    span.font-size-2x.font-weight-bold.total 0 
+                    |  Ficheros 
+    .row
+        .col-12
+            .alerts-block  

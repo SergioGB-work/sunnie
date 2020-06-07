@@ -1,0 +1,30 @@
+extends ../modal_noFooter
+
+block vars
+	- var modal_title = "Nuevo Tipo de Contenido"
+	- var modal_id = "modal-contentType-add"
+	- var modal_size = "modal-lg"
+
+block modal-body
+
+	form(id="form-add-contentType",data-toggle="validator",role="form",data-method="POST",data-action=apiDevelopment + "/site/{idSite}/content/contentType/add", data-callback="addContentTypeCallback")
+		.row
+			div(class="form-group col-4")
+				+fragment('fragment-label',{"for":"contentTypeName", "text":"Nombre"})
+				+fragment('fragment-input',{"class":"form-control", "type":"text", "id":"contentTypeName","name":"name", "required":"required"})
+		.row
+			div(id="contentTypeConfig",data-service-data=apiDevelopment + "/site/{idSite}/content/contentType/config",data-method="GET",data-template="#templateAddContentType",data-target="#modal-contentType-add #contentTypeConfig")
+
+		.row
+			div(class="form-group col-12")
+				+fragment('fragment-label',{"for":"contentTypeTemplate", "text":"Plantilla del Contenido(PUG)","helpText":"La plantilla debe estar desarrollada en PUG. Para utilizar uno de los campos anteriormente seleccionados se debe utilizar #{nameDelCampo}"})
+				textarea(name="template", id="contentTypeTemplate",class="form-control codePUG")
+
+
+		.row
+			div(class="form-group col-12 d-flex justify-content-end mb-0")
+				button(class="btn btn-default mr-3", data-toggle="modal", data-target="#modal-contents", data-dismiss="modal") Cancelar
+				button(class="btn btn-primary send", type="submit") Crear
+
+	script(id="templateAddContentType",type="text/x-jsrender")
+		| {{for data.config ~originalContent = '' tmpl="#templateFormGenerator"/}}

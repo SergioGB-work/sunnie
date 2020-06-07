@@ -13,7 +13,7 @@
 		border-left: 1px solid #fff;
 	}
 
-	.component{
+	.component,.fragment{
 		margin:0;
 		padding:0;
 		border:0;
@@ -23,6 +23,21 @@
 		height:$header-height;
 		display:flex;
 		align-items:center;
+	}
+
+	.component-siteSelector,.component-languageSelector{
+		float:right;
+		width:auto;
+
+		.dropdown{
+			button{
+				color:$white;
+			}
+		}
+	}
+
+	img{
+		max-height:$navbar-height - ($grid-gutter-width*2);
 	}
 }
 

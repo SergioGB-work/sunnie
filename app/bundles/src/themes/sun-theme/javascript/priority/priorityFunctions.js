@@ -3,6 +3,20 @@ var cookies = getCookies();
 var getParams = loadParams();
 var oldGetParams = loadParams();
 
+//Rgistro del Service Worker
+if ("serviceWorker" in navigator) {
+  if (navigator.serviceWorker.controller) {
+    console.log("[PWA Builder] active service worker found, no need to register");
+  } else {
+    // Register the service worker
+    navigator.serviceWorker
+      .register("./service-worker.js")
+      .then(function (reg) {
+        console.log("[PWA Builder] Service worker has been registered for scope: " + reg.scope);
+      });
+  }
+}
+
 function getCookies(){
 	var cookies = document.cookie.replace(' ','').split(';');
 	var data = [];

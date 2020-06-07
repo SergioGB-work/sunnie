@@ -1,5 +1,8 @@
 @import 'variables';
 @import '../lib/bootstrap/variables';
+@import '../lib/codemirror/codemirror';
+@import '../lib/codemirror/base16-dark';
+@import '../lib/codemirror/lint';
 
 .sunniejs-tools{
 	right:1em;
@@ -9,7 +12,7 @@
 
 
 /** SIDEBAR MENU **/
-#sidebar-menu-tools{
+.sidebar-menu-tools{
 	width:$sidebar-menu-tools-width;
 	right:-($sidebar-menu-tools-width);
 	top:0;
@@ -21,15 +24,25 @@
 	ul{
 		li{
 			font-size:0.75rem;
+			ul{
+				background:darken($secondary,35%);
+			}	
 		}
 	}
+	a,span{
+		cursor:pointer;
+
+		@include hover-focus-active{
+			text-decoration:none
+		}
+	}	
 }
 
 #wrapper{
 	transition: all .2s linear 0s;
 }
 
-.show-sidebar-menu-tools{
+.show-sidebar-menu-tools,.show-processPanel{
 	#wrapper{
 		padding-right:#{$sidebar-menu-tools-width};
 	}
@@ -37,8 +50,16 @@
 	.sunniejs-tools{
 		right:calc(1rem + #{$sidebar-menu-tools-width});
 	}
+}
 
-	#sidebar-menu-tools{
+.show-sidebar-menu-tools #sidebar-menu-tools{
+	&.sidebar-menu-tools{
+		right:0;
+	}
+}
+
+.show-processPanel #processPanel{
+	&.sidebar-menu-tools{
 		right:0;
 	}
 }
@@ -70,4 +91,52 @@
 			border:1px solid $primary;
 		}		
 	}
+}
+
+.modal{
+	.card{
+		.actions{
+			display:none;
+		}
+
+		@include hover-focus-active{
+			.actions{
+				z-index:9;
+				display:block;			
+				.action{
+					cursor:pointer;
+					@include hover-focus-active{
+						text-decoration:none;
+						color:$gray-300 !important;
+					}
+				}
+			}
+		}
+	}	
+}
+
+.color-tips{
+	padding-top:25%;
+	padding-bottom:25%;
+	font-weight:100;
+	text-transform:capitalize;
+
+	&.bg-1{
+		background:$info;
+	}
+	&.bg-2{
+		background:$warning;
+	}
+	&.bg-3{
+		background:$danger;
+	}
+	&.bg-4{
+		background:$success;
+	}
+	&.bg-5{
+		background:$primary;
+	}
+	&.bg-6{
+		background:$secondary;
+	}		
 }

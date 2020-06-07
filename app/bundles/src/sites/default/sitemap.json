@@ -2,7 +2,17 @@
     "site": {
         "name": "default",
         "url": "/",
-        "enableChatBot": "true"
+        "enableChatBot": "true",
+        "publishUrl": "app/public",
+        "serviceWorker": {
+            "type": "offline",
+            "offlinePage": "home.html",
+            "cachedPages": [
+                "true"
+            ],
+            "customTemplate": ""
+        },
+        "logo": "/media/logo.png"
     },
     "pages": [
         {
@@ -99,7 +109,8 @@
                             "name": "component-html-content",
                             "id": "component-html-content-4537",
                             "content": {
-                                "HTMLcontent": "                <div class=\"row d-flex flex-wrap mb-3\">\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/multisite.jpg\" alt=\"Multisite\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Multisite</h3>\n                                      <p class=\"card-text\"> ${{ default.homeMultisite }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/cms.jpg\" alt=\"${{ default.homeCMSTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeCMSTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeCMS }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/architecture.jpg\" alt=\"${{ default.homeNewStructureTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeNewStructureTitle }}$</h3>\n                                      <p class=\"card-text\"> ${{ default.homeNewStructure }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div> \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card h-100 mb-md-0\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/enviroments.jpg\" alt=\"Entornos\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeEnvTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeEnv }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>\n                <div class=\"row d-flex flex-wrap\">                             \n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/internacionalizacion.jpg\" alt=\"${{ default.homeInterTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">${{ default.homeInterTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeInter }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/code.jpg\" alt=\"${{ default.homeCleanCodeTitle }}$\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title \">${{ default.homeCleanCodeTitle }}$</h3>\n                                      <p class=\"card-text\">${{ default.homeCleanCode }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/shortcodes.jpg\" alt=\"ShortCodes\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">Short Codes</h3>\n                                      <p class=\"card-text\">${{ default.homeShortCodes }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                  <div class=\"col-md-3\">\n                        <div class=\"fragment card mb-md-0 h-100\">\n                          <div class=\"fragment-content\">\n                                <div class=\"thumbnail full\">\n                                    <img src=\"./images/seo.jpg\" alt=\"SEO Friendly\" class=\"card-img-top\">\n                                    <div class=\"card-body\">\n                                      <h3 class=\"card-title\">SEO Friendly</h3>\n                                      <p class=\"card-text\">${{ default.homeSEO }}$</p>\n                                    </div>\n                                </div>\n                          </div>\n                        </div>\n                  </div>\n                </div>"
+                                "idContent": "content_43165",
+                                "contentType": "content"
                             },
                             "title": "component-html-content",
                             "showTitle": "false",
@@ -446,135 +457,153 @@
                             "id": "1",
                             "name": "component-navigation",
                             "content": {
+                                "view": "",
+                                "classes": "",
                                 "pages": [
                                     {
-                                        "text": "${{ default.components }}$",
                                         "href": "#componentes",
-                                        "title": "${{ default.goComponents }}$",
-                                        "active": "true"
+                                        "text": "${{ default.components }}$",
+                                        "title": "${{ default.goComponents }}$"
                                     },
                                     {
-                                        "text": "${{ default.howToUse }}$",
                                         "href": "#uso",
+                                        "text": "${{ default.howToUse }}$",
                                         "title": "${{ default.goHowToUse }}$"
                                     },
                                     {
-                                        "text": "${{ default.componentsList }}$",
                                         "href": "#listado-de-componentes",
-                                        "title": "${{ default.goToComponentsList }}$",
-                                        "childs": []
+                                        "text": "${{ default.componentsList }}$",
+                                        "title": "${{ default.goToComponentsList }}$"
                                     },
                                     {
-                                        "text": "${{ default.examples }}$",
                                         "href": "#ejemplos",
+                                        "text": "${{ default.examples }}$",
                                         "title": "${{ default.goToExamples }}$",
                                         "childs": [
                                             {
-                                                "text": "Login",
                                                 "href": "#componentLogin",
+                                                "text": "Login",
                                                 "title": "${{ default.goToComponent }}$ Login"
                                             },
                                             {
-                                                "text": "Image",
                                                 "href": "#Image",
+                                                "text": "Image",
                                                 "title": "${{ default.goToComponent }}$ Image"
                                             },
                                             {
-                                                "text": "Logo",
                                                 "href": "#componentLogo",
+                                                "text": "Logo",
                                                 "title": "${{ default.goToComponent }}$ Logo"
                                             },
                                             {
-                                                "text": "Banner",
                                                 "href": "#componentBanner",
+                                                "text": "Banner",
                                                 "title": "${{ default.goToComponent }}$ Banner"
                                             },
                                             {
-                                                "text": "Breadcrumbs",
                                                 "href": "#componentBreadcrumbs",
+                                                "text": "Breadcrumbs",
                                                 "title": "${{ default.goToComponent }}$ Breadcrumbs"
                                             },
                                             {
-                                                "text": "Highlighted Banner",
                                                 "href": "#componentHighlightedBanner",
+                                                "text": "Highlighted Banner",
                                                 "title": "${{ default.goToComponent }}$ Highlighted Banner"
                                             },
                                             {
-                                                "text": "Highlighted Content",
                                                 "href": "#componentHighlightedContent",
+                                                "text": "Highlighted Content",
                                                 "title": "${{ default.goToComponent }}$ Highlighted Content"
                                             },
                                             {
-                                                "text": "Highlighted Side Image",
                                                 "href": "#componentHighlightedSideImage",
+                                                "text": "Highlighted Side Image",
                                                 "title": "${{ default.goToComponent }}$ Highlighted Side Image"
                                             },
                                             {
-                                                "text": "Highlighted Flips",
                                                 "href": "#componentHighlightedFlips",
+                                                "text": "Highlighted Flips",
                                                 "title": "Ir a Componente Highlighted Flips"
                                             },
                                             {
-                                                "text": "Cards List Carousel",
                                                 "href": "#componentCardsListCarousel",
+                                                "text": "Cards List Carousel",
                                                 "title": "${{ default.goToComponent }}$ Cards List Carousel"
                                             },
                                             {
-                                                "text": "Slider",
                                                 "href": "#componentSlider",
+                                                "text": "Slider",
                                                 "title": "${{ default.goToComponent }}$ Slider"
                                             },
                                             {
-                                                "text": "Navigation",
                                                 "href": "#componentNavigation",
+                                                "text": "Navigation",
                                                 "title": "${{ default.goToComponent }}$ Navigation"
                                             },
                                             {
-                                                "text": "HTML Content",
                                                 "href": "#componentHTMLContent",
+                                                "text": "HTML Content",
                                                 "title": "${{ default.goToComponent }}$ HTML Content"
                                             },
                                             {
-                                                "text": "Card",
                                                 "href": "#componentCard",
+                                                "text": "Card",
                                                 "title": "${{ default.goToComponent }}$ Card"
                                             },
                                             {
-                                                "text": "Accordion",
                                                 "href": "#componentAccordion",
+                                                "text": "Accordion",
                                                 "title": "${{ default.goToComponent }}$ Accordion"
                                             },
                                             {
-                                                "text": "Social Share",
                                                 "href": "#componentSocialShare",
+                                                "text": "Social Share",
                                                 "title": "${{ default.goToComponent }}$ Social Share"
                                             },
                                             {
-                                                "text": "Data List",
                                                 "href": "#componentDataList",
+                                                "text": "Data List",
                                                 "title": "${{ default.goToComponent }}$ Data List"
                                             },
                                             {
-                                                "text": "Filter Pills",
                                                 "href": "#componentFilterPills",
+                                                "text": "Filter Pills",
                                                 "title": "${{ default.goToComponent }}$ Filter Pills"
                                             },
                                             {
-                                                "text": "Form Filter",
                                                 "href": "#componentFormFilter",
+                                                "text": "Form Filter",
                                                 "title": "${{ default.goToComponent }}$ Form Filter"
                                             },
                                             {
-                                                "text": "Steps",
                                                 "href": "#componentSteps",
+                                                "text": "Steps",
                                                 "title": "${{ default.goToComponent }}$ Steps"
+                                            },
+                                            {
+                                                "href": "#componentLanguageSelector",
+                                                "text": "Language Selector",
+                                                "title": "${{ default.goToComponent }}$ Language Selector"
+                                            },
+                                            {
+                                                "href": "#componentPublisher",
+                                                "text": "Publisher",
+                                                "title": "${{ default.goToComponent }}$ Publisher"
+                                            },
+                                            {
+                                                "href": "#componentSiteSelector",
+                                                "text": "Site Selector",
+                                                "title": "${{ default.goToComponent }}$ Site Selector"
                                             }
                                         ]
                                     }
                                 ]
                             },
                             "showTitle": "false",
-                            "full": "false"
+                            "full": "false",
+                            "title": "component-navigation",
+                            "classes": "",
+                            "new": "false"
                         }
                     ],
                     "column1": [

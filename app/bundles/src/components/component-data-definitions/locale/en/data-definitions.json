@@ -114,5 +114,5 @@
   "dataParentEventTableContainerEventActionDescriptionOption3":"Hide the item if it was shown. If used in conjunction with data-parent-event-value, the item will only be hidden for the defined value and will be displayed for any other value.",
   "dataParentEventTableContainerEventActionDescriptionOption4":"Send the form if the item on which it is applied is within a form",
   "dataParentEventTableContainerEventTargetDescription":"The defined event will be linked to this element. When the event occurs on this element, it will execute the action on the original element.",
-  "dataParentEventTableContainerEventValueDescription":"If defined, the event will only execute the action if the value of the field (applicable to form elements) corresponds to the one defined."
+  "dataParentEventTableContainerEventValueDescription":"If defined, the event will only execute the action if the value of the field (applicable to form elements) corresponds to the one defined. Also, it's possible to define more than one value separating it with ,"
 }

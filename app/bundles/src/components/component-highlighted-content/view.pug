@@ -9,4 +9,5 @@ mixin component-highlighted-content(content)
 				div !{contentHTML}
 
 				.mb-3
-					a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}
+					if button.text != ''
+						a.btn.btn-border-primary(href=button.href, title=button.title) #{button.text}
