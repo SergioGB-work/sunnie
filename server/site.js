@@ -112,8 +112,8 @@ module.exports = (app) => {
 	*/
 	app.post('/site/add',fileUpload(), async function (req, res) {
 		try{
-			var siteName = req.body.name;
-			var siteURL = req.body.url;
+			var siteName = req.body.name.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
+			var siteURL = req.body.url.replace(/[^a-z0-9\s]/gi, '').replace(/[_\s]/g, '-');
 			var enableChatBot = req.body.enableChatBot;
 			var siteTheme = {"theme": req.body.theme};
 			var defaultSiteURL = functions.getURLSite(defaultSite);

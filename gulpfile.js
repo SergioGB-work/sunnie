@@ -1036,7 +1036,6 @@ function createTaskPages(pageID,page,siteName,filename,development){
 	gulp.task('pageBuild' + pageID, () => {
 			
 		let sitemapFile = fs.readFileSync(pathBuild + '/sites/' + siteName +'/sitemap.json');
-		
 		return gulp.src(pathBuild + '/sites/' + siteName + '/theme/templates/portal.pug')
 		.pipe(pug({
 			data: page,

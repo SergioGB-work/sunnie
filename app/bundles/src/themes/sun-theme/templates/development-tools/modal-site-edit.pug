@@ -61,9 +61,9 @@ block modal-body
 						input(type="text",name="publishUrl",id="publishURLEdit",class="form-control",value="{{:data.publishUrl}}",required)
 
 					div(class="form-group col-12 col-md-4")
-						+fragment('fragment-label',{"for":"siteLogoEdit", "text":"Icon"})
+						+fragment('fragment-label',{"for":"siteLogoEdit", "text":"Logo"})
 						+fragment('fragment-input',{"class":"form-control", "type":"file", "id":"siteLogoEdit","name":"siteLogo"})
-						img(src=fullSiteUrl+"{{:data.logo}}",alt="Site Logo", width=150)
+						img(src=fullSiteUrl+"{{:data.logo}}",class="border mt-3 bg-light",alt="Site Logo", width=150)
 				.row
 					.col-12
 						h3 Seleciona un tema de apariencia
