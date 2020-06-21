@@ -1,0 +1,20 @@
+{
+	"paragraph1":"SunnieS has its own <strong> CLI (Command Line Interface) </strong> that will allow you to operate with the platform by initializing it or creating all kinds of elements.",
+	"paragraph2":"To be able to install it, you just have to have Node 10.X installed and install the CLI through the following command:",
+	"initDesc1":"You can initialize the SunnieJS platform by launching the following command on any folder:",
+	"initDesc2":"This will download the latest version of SunnieJS to the folder and create the necessary structure so that you can start working with the platform.",
+	"component":"Component",
+	"componentDesc1":"If you want to create a component, go to the <strong> plugins/components </strong> folder and execute the following:",
+	"componentDesc2":"Once completed, the wizard will create the basic structure of any component and will be ready to be used on any page of your sites.",
+	"layoutDesc1":"If you want to create a layout, go to the <strong>plugins/layouts</strong> folder and execute the following:",
+	"layoutDesc2":"Once the wizard is finished, a new layout will be created with the specifications indicated during the process and will be available for use on any page.",
+	"theme":"Theme",
+	"themeDesc1":"If you want to create an appearance theme, hover over the <strong>plugins/themes</strong> folder and run the following:",
+	"themeDesc2":"Una vez finalizado, el tema de apariencia estará listo para ser aplicado a cualquier site.",
+	"siteDesc1":"If you want to create a layout, go to the <strong>plugins/sites</strong> folder and execute the following:",
+	"siteDesc2":"Once finished, it will be necessary to deploy the site by executing the following command:",
+	"siteDesc3":"After this, the site will be available for viewing.",
+	"page":"Page",
+	"pageDesc1":"If you want to create a new page you must go to the site folder to which you want to add the new page <strong> plugins/site/NameOfSite</strong> and execute the following:",
+	"pageDesc2":"Once finished, the page will be added to the chosen site in the selected position, but it will be necessary to compile the page, so to view it it will be necessary to execute the following command:"
+}

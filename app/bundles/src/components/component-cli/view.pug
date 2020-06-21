@@ -1,0 +1,99 @@
+mixin component-cli(content)
+	.row
+		.col-12
+			.card
+				.card-body
+					h1 CLI
+
+					p ${{ cli.paragraph1 }}$
+
+					p ${{ cli.paragraph2 }}$
+
+					pre
+						| npm install -g sunniejs-cli
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Init
+
+					p ${{ cli.initDesc1 }}$
+
+					pre
+						| sunniejs-cli init
+
+					p ${{ cli.initDesc2 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ cli.component }}$
+
+					p ${{ cli.componentDesc1 }}$
+
+					pre
+						| sunniejs-cli component add
+
+					p ${{ cli.componentDesc2 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Layout
+
+					p ${{ cli.layoutDesc1 }}$
+
+					pre
+						| sunniejs-cli layout add
+
+					p ${{ cli.layoutDesc2 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ cli.theme }}$
+
+					p ${{ cli.themeDesc1 }}$
+
+					pre
+						| sunniejs-cli theme add
+
+					p ${{ cli.themeDesc2 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 Site
+
+					p ${{ cli.siteDesc1 }}$
+
+					pre
+						| sunniejs-cli site add
+
+					p ${{ cli.siteDesc2 }}$
+
+					pre
+						| gulp deploySites --env dev --site NameOfSite
+
+					p ${{ cli.siteDesc3 }}$
+
+	.row
+		.col-12
+			.card
+				.card-body
+					h2 ${{ cli.page }}$
+
+					p ${{ cli.pageDesc1 }}$
+
+					pre
+						| sunniejs-cli page add
+
+					p ${{ cli.pageDesc2 }}$
+
+					pre
+						| gulp deploySites --env dev --site NameOfSite --pag NameOfPage
