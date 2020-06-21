@@ -783,30 +783,27 @@
             "childs": []
         },
         {
-            "id": "resultados-del-tarificador-1111",
-            "name": "Resultados del Tarificador",
-            "url": "/tarificador/resultados",
-            "src": "/resultados-del-tarificador.html",
-            "hidden": "true",
+            "id": "cli-6670",
+            "name": "CLI",
+            "url": "/sunniejs-cli",
+            "src": "/cli.html",
+            "hidden": "false",
             "attributes": {
-                "title": "Resultados del Tarificador",
+                "title": "SunnieJS CLI",
                 "description": "",
                 "keywords": ""
             },
             "layout": {
-                "name": "layout-12",
+                "name": "layout-12-fluid",
                 "content": {
                     "content_upper": [
                         {
-                            "name": "component-html-content",
-                            "id": "component-html-content-8442",
-                            "content": {
-                                "HTMLcontent": "<p class=\"text-center\"><img alt=\"\" src=\"../images/ResultadoSeguro.png\" /></p>\n",
-                                "undefined": "<p class=\"text-center\"><img alt=\"\" src=\"../images/ResultadoSeguro.png\" /></p>\n"
-                            },
-                            "title": "component-html-content",
+                            "name": "component-cli",
+                            "id": "component-cli-7123",
+                            "content": "",
+                            "title": "component-cli",
                             "showTitle": "false",
-                            "full": "true",
+                            "full": "false",
                             "classes": "",
                             "new": "false"
                         }

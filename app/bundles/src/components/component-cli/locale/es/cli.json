@@ -1,0 +1,20 @@
+{
+	"paragraph1":"SunnieJS dispone de su propio <strong>CLI(Command Line Inferface)</strong> que te permitirá operar con la plataforma inicializandola o creando toddo tipo de elementos.",
+	"paragraph2":"Para poder instalarlo tan solo debes tener instalado Node 10.X e instalar el CLI a través del siguiente comando:",
+	"initDesc1":"Puedes inicializar la plataforma de SunnieJS lanzando el siguiente comando sobre cualquier carpeta:",
+	"initDesc2":"Esto descargará sobre la carpeta la última versión de SunnieJS y creará la estructura necesaria para que puedas empezar a trabajar con la plataforma.",
+	"component":"Componente",
+	"componentDesc1":"Si deseas crear un componente, situate sobre la carpeta <strong>plugins/components</strong> y ejecuta lo siguiente:",
+	"componentDesc2":"Una vez finalizado el asistente creará la estructura básica de cualquier componente y estará lista para ser utilizado en cualquier página de tus sites.",
+	"layoutDesc1":"Si deseas crear una layout, situate sobre la carpeta <strong>plugins/layouts</strong> y ejecuta lo siguiente:",
+	"layoutDesc2":"Una vez finalizado el asistente, se creará una nueva layout con las especificaciones indicadas durante el proceso y estará disponible para su uso en cualquier página.",
+	"theme":"Tema de Apariencia",
+	"themeDesc1":"Si deseas crear un tema de apariencia, situate sobre la carpeta <strong>plugins/themes</strong> y ejecuta lo siguiente:",
+	"themeDesc2":"Una vez finalizado, el tema de apariencia estará listo para ser aplicado a cualquier site.",
+	"siteDesc1":"Si deseas crear una layout, situate sobre la carpeta <strong>plugins/sites</strong> y ejecuta lo siguiente:",
+	"siteDesc2":"Una vez finalizado, será necesario desplegar el site ejecutando el siguiente comando:",
+	"siteDesc3":"Tras esto, el site estará disponible para su visualización.",
+	"page":"Página",
+	"pageDesc1":"Si deseas crear una página nueva debes situarte en la carpeta del site al que quieres agregar la nueva página <strong>plugins/site/NameOfSite</strong> y ejecutar lo siguiente:",
+	"pageDesc2":"Una vez finalizado, la página será añadida al site elegido en la posición seleccionada, pero será necesario compilar la página por lo que para visualizarla será necesario ejecutar el siguiente comando:"
+}
