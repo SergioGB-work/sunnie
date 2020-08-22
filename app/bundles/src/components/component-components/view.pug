@@ -520,15 +520,6 @@ mixin component-components(content)
 					ul
 						li <strong>${{ components.name }}$:</strong> "component-languageSelector"
 
-			.card
-				.card-body
-					h3.icon-4x
-						a(href="#componentSiteSelector",title="${{ components.goToComponent }}$ Site Selector") Site Selector
-					p ${{ components.siteSelectorComponentDescription }}$
-					h4.icon-2x ${{ components.params }}$
-					ul
-						li <strong>${{ components.name }}$:</strong> "component-siteSelector"
-
 
 		.col-12.col-sm-6.col-lg-4
 			.card
@@ -824,13 +815,6 @@ mixin component-components(content)
 				.col-12
 					+component({'name':'component-steps','id':'id1','content':{"items": [{"text": "Step1", "current":"true"},{"text": "Step2"},{"text": "Step3"}]},'showTitle':'false','full':'false'})
 
-		.col-12
-			.card
-				.card-body
-					h3(id="componentSiteSelector").m-0 Site Selector
-			.row
-				.col-12.col-md-4.col-lg-2.offset-md-4.offset-lg-5
-					+component({'name':'component-siteSelector','id':'id1','showTitle':'false','full':'false'})
 		.col-12
 			.card
 				.card-body

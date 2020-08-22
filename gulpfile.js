@@ -1109,6 +1109,22 @@ function buildRules(){
 		const pathName = writeStream.path;
 
 		// write each value of the array on the file breaking line
+		writeStream.write(`
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/plain
+	AddOutputFilterByType DEFLATE text/html
+	AddOutputFilterByType DEFLATE text/xml
+	AddOutputFilterByType DEFLATE text/css
+	AddOutputFilterByType DEFLATE application/xml
+	AddOutputFilterByType DEFLATE application/xhtml+xml
+	AddOutputFilterByType DEFLATE application/rss+xml
+	AddOutputFilterByType DEFLATE application/javascript
+	AddOutputFilterByType DEFLATE application/x-javascript
+	AddOutputFilter DEFLATE .shtml
+</IfModule>
+
+
+`);
 		writeStream.write(`RewriteEngine On\n`);
 
 
@@ -1142,6 +1158,38 @@ function buildRules(){
 		});
 
 		rewriteRulesApache.forEach(value => writeStream.write(`RewriteRule ${value}\n`));
+
+		writeStream.write(`
+
+
+<IfModule mod_expires.c>
+
+	ExpiresActive On
+
+	# Images
+	ExpiresByType image/jpeg "access plus 1 year"
+	ExpiresByType image/gif "access plus 1 year"
+	ExpiresByType image/png "access plus 1 year"
+	ExpiresByType image/webp "access plus 1 year"
+	ExpiresByType image/svg+xml "access plus 1 year"
+	ExpiresByType image/x-icon "access plus 1 year"
+	
+	# Video
+	ExpiresByType video/mp4 "access plus 1 year"
+	ExpiresByType video/mpeg "access plus 1 year"
+
+	# CSS, JavaScript
+	ExpiresByType text/css "access plus 1 month"
+	ExpiresByType text/javascript "access plus 1 month"
+	ExpiresByType application/javascript "access plus 1 month"
+
+	# Others
+	ExpiresByType application/pdf "access plus 1 month"
+	ExpiresByType application/x-shockwave-flash "access plus 1 month"
+
+</IfModule>
+
+`);
 
 		// the finish event is emitted when all data has been flushed from the stream
 		writeStream.on('finish', () => {
